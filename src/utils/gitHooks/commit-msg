@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# Update netlify.toml with locally installed version of node and yarn if the commit
+# is a dependency update performed by the repo's owner (according to .env file).
+
+# Get value of IS_OWNER in .env if any.
+IS_OWNER=$(grep IS_OWNER .env | xargs)
+if [ -z "${IS_OWNER}" ]; then
+  echo ".env file does not set a value for IS_OWNER. Skipping commit-msg hook."
+  exit 0
+fi
+IS_OWNER=${IS_OWNER#*=}
+
+update_version_on_netlify() {
+  # Replace version of build tools in netlify.toml.
+  sed -i.bak "s|$1.*|$1 = \"$2\"|" netlify.toml
+}
+
+if $IS_OWNER = true; then
+  commit_msg_file="$1"
+  commit_msg=$(<$commit_msg_file)
+  case $commit_msg in
+    *"upgrade deps"*|*"upgrade dependencies"*|*"update deps"*|*"update dependencies"*)
+
+      # Get current local node and yarn versions.
+      yarn_version="$(yarn -v)"
+      node_version=$(node -v)
+      node_version="${node_version:1}" # Remove first character v from node version output.
+
+      update_version_on_netlify NODE_VERSION $node_version
+      update_version_on_netlify YARN_VERSION $yarn_version
+
+      # Remove backup file.
+      rm netlify.toml.bak
+
+      # Stage netlify.toml for inspection. Can afterwards be added to
+      # current commit by running `git commit --amend --no-edit`.
+      git add netlify.toml
+      echo "[commit-msg hook] Updated netlify.toml (node to $node_version, yarn to $yarn_version)"
+    ;;
+  esac
+fi
