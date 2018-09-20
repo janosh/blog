@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Checks staged .js(x) files for eslint errors.
+# Exits with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+
+# Get all .js(x) files excluding deleted ones (--diff-filter=d).
+files=$(git diff --cached --name-only --diff-filter=d "*.js" "*.jsx")
+
+# Verify that changes conform to eslint rules.
+echo "$files" | xargs ./node_modules/.bin/eslint
+# Prevent commit with non-zero exit code in case of errors.
+if [[ $? != 0 ]]; then
+  echo "-->" eslint error, commit denied!
+  exit 1
+fi

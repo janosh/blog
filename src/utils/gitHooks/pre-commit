@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# Pre-commit hook triggered by every `git commit`.
+# To activate, change git's hook directory and make scripts executable:
+# git config core.hooksPath src/utils/gitHooks
+# chmod -R u+x src/utils/gitHooks
+
+# This hook looks for scripts in ./pre-commit.d directory and executes them in order,
+# passing along stdin. If any script exits with a non-zero status, this script exits.
+# Adapted from https://gist.github.com/mjackson/7e602a7aa357cfe37dadcc016710931b.
+
+hook_dir="$0.d"
+
+if [[ -d $hook_dir ]]; then
+  stdin=$(cat /dev/stdin)
+
+  for hook in $hook_dir/*; do
+    echo "Running $hook hook"
+    echo "$stdin" | $hook "$@"
+
+    exit_code=$?
+
+    if [ $exit_code != 0 ]; then
+      exit $exit_code
+    fi
+  done
+fi
