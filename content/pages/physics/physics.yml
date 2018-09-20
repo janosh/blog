@@ -1,0 +1,38 @@
+description: >
+  This is a compilation of lecture notes and
+  solutions to problem sheets for some of the most
+  exciting physics lectures I took thus far.
+
+  During my studies, I often read the solutions to exercises
+  uploaded by other physics students around the world. They
+  frequently opened up a new perspective or offered a way out
+  when I got stuck on a problem. In the hopes that I might provide
+  similar help to others, I’m uploading some of the solutions I
+  typed up over the years.
+
+lectures:
+  - title: String Theory
+    slug: string-theory
+  - title: Quantum Field Theory
+    slug: quantum-field-theory
+  - title: Advanced Quantum Field Theory
+    slug: advanced-quantum-field-theory
+  - title: General Relativity
+    slug: general-relativity
+  - title: Group Theory
+    slug: group-theory
+  - title: Numerical Simulations
+    slug: numerical-simulations
+  - title: Atomic Physics
+    slug: atomic-physics
+  - title: Statistical Physics
+    slug: statistical-physics
+  - title: Bachelor Thesis
+    slug: bachelor-thesis
+  - title: Master Thesis
+    slug: master-thesis
+
+outreach: >
+  If one of my solutions helped you or you found an error,
+  drop me a line at <a href="mailto:janosh.riebesell@gmail.com">
+  janosh.riebesell@gmail.com</a>.

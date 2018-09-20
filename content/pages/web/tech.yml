@@ -1,0 +1,55 @@
+- title: Algolia
+  url: https://www.algolia.com
+  file: algolia
+
+- title: CSS
+  url: https://developer.mozilla.org/en-US/docs/Web/CSS
+  file: css
+
+- title: Gatsby
+  url: https://www.gatsbyjs.org/
+  file: gatsby
+
+- title: Google Analytics
+  url: https://analytics.google.com/analytics/web/
+  file: google-analytics
+
+- title: GraphQL
+  url: https://graphql.org/
+  file: graphql
+
+- title: HTML
+  url: https://developer.mozilla.org/en-US/docs/Web/HTML
+  file: html
+
+- title: JavaScript
+  url: https://developer.mozilla.org/bm/docs/Web/JavaScript
+  file: js
+
+- title: MongoDB
+  url: https://www.mongodb.com/
+  file: mongodb
+
+- title: Node.js
+  url: https://nodejs.org/en/
+  file: nodejs
+
+- title: React
+  url: https://reactjs.org/
+  file: react
+
+- title: Redis
+  url: https://redis.io/
+  file: redis
+
+- title: Redux
+  url: https://redux.js.org/
+  file: redux
+
+- title: socket.io
+  url: https://socket.io/
+  file: socketio
+
+- title: Webpack
+  url: https://webpack.js.org/
+  file: webpack

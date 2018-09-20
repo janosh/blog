@@ -1,0 +1,1 @@
+A site I created for my dad to promote his newest research project: an ERC Advanced Grant-funded study that aims to assess the economic viability, potential CO<sub>2</sub> sequestration benefits and potential environmental risks of artificially-induced uplift of nutrient-rich deep water to the ocean’s sunlit surface layer.
