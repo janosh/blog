@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Get all files excluding deleted ones (--diff-filter=d).
+files=$(git diff --cached --name-only --diff-filter=d)
+
+# Check for Prettier violations. See https://prettier.io/docs/en/precommit
+# and https://prettier.io/docs/en/cli#--check for details.
+echo "$files" | xargs ./node_modules/.bin/prettier --check --ignore-unknown

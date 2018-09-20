@@ -1,0 +1,11 @@
+copyright: Janosh Riebesell
+
+sourceNote: This site is open <a href="https://github.com/janosh/blog">source</a>
+
+poweredBy:
+  - url: https://gatsbyjs.org
+    title: Gatsby
+  - url: https://github.com/janosh/blog
+    title: Github
+  - url: https://netlify.com
+    title: Netlify
