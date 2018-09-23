@@ -37,6 +37,9 @@ const query = graphql`
         description
       }
     }
+    favicon: file(name: { eq: "favicon" }) {
+      url: publicURL
+    }
   }
 `
 
