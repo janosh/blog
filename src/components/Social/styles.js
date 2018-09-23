@@ -7,18 +7,17 @@ import { FacebookF as Facebook } from 'styled-icons/fa-brands/FacebookF'
 import { Github } from 'styled-icons/fa-brands/Github'
 
 import mediaQuery from '../../utils/mediaQuery'
-import { navLinkStyle } from '../Nav/styles'
 
 export const Wrapper = styled.div`
   position: relative;
 `
 
-const expandOnHover = css`
-  display: grid;
+const collapse = css`
+  grid-gap: 2vh;
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  background: ${props => props.theme.lightGreen};
+  background: ${props => props.theme.mainOrange};
   border-radius: ${props => props.theme.smallBorderRadius};
   padding: 1vmin;
   font-size: 1.8em;
@@ -29,9 +28,10 @@ const expandOnHover = css`
   }
 `
 
-const alwaysShow = css`
+const display = css`
   grid-area: social;
   grid-auto-flow: column;
+  grid-gap: 1.5vw;
   align-items: end;
   grid-auto-columns: max-content;
   ${props => props.css};
@@ -39,26 +39,26 @@ const alwaysShow = css`
 
 export const Container = styled.div`
   display: grid;
-  grid-gap: 1.5vmin;
+  justify-content: center;
   ${mediaQuery.minTablet} {
-    ${alwaysShow};
+    ${display};
   }
   ${mediaQuery.tablet} {
-    ${props => (props.expandOnHover ? expandOnHover : alwaysShow)};
+    ${props => (props.collapse ? collapse : display)};
   }
 `
 
 export const Toggle = styled(Share)`
   cursor: pointer;
   font-size: 1.7em;
-  ${navLinkStyle};
+  ${props => props.css};
   ${mediaQuery.minTablet} {
     display: none !important;
   }
 `
 
 export const Link = styled.a`
-  ${navLinkStyle};
+  ${props => props.css};
 `
 
 export const Icons = {
