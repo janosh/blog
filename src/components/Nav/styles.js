@@ -7,7 +7,7 @@ export const navLinkStyle = css`
   color: ${props => props.theme.mainWhite};
   transition: ${props => props.theme.shortTrans};
   :hover {
-    color: ${props => props.theme.mainOrange};
+    color: ${props => props.theme.lightBlue};
   }
   &.${props => props.activeClassName} {
     color: ${props => props.theme.mainOrange};

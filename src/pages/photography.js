@@ -6,7 +6,7 @@ import PageTitle from '../components/PageTitle'
 const Photography = ({ location }) => {
   const path = location.pathname
   return (
-    <Global layout path={path}>
+    <Global path={path}>
       <PageTitle>
         <h1>Photography</h1>
       </PageTitle>

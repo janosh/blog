@@ -13,9 +13,6 @@ const {
 } = typography
 
 export const GlobalStyle = createGlobalStyle`
-  * {
-    box-sizing: border-box;
-  }
   body {
     margin: 0;
     font-family: ${fonts};
@@ -42,13 +39,13 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     color: ${props => props.theme.mainBlue};
     :hover {
-      color: ${props => props.theme.mainOrange} !important;
+      color: ${props => props.theme.lightBlue};
     }
   }
 `
 
 export const Layout = styled.main`
-  margin-bottom: calc(2em + 4vh);
+  margin-bottom: ${props => props.margin || `calc(3em + 3vh)`};
   display: grid;
   grid-gap: 0 4vw;
   grid-template-columns: 1fr 1fr minmax(auto, ${props => props.theme.maxWidth}) 1fr 1fr;

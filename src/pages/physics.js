@@ -1,28 +1,36 @@
 import React from 'react'
 import { graphql, Link } from 'gatsby'
-import PropTypes from 'prop-types'
+import Img from 'gatsby-image'
 
 import Global from '../components/Global'
-import Particles from '../components/Particles'
+import PageTitle from '../components/PageTitle'
 import Grid from '../components/styles/Grid'
 
-const Physics = ({ location, data: { page } }) => {
+const Physics = ({ location, data: { intro, physics, images } }) => {
   const pageTitle = `Physics`
-  const path = location.pathname
-  const { description, lectures, outreach } = page
   return (
-    <Global pageTitle={pageTitle} path={path} description={description}>
-      <h1>{pageTitle}</h1>
-      <p>{description}</p>
-      <Particles />
-      <Grid>
-        {lectures.map(lecture => (
-          <div key={lecture.title}>
-            <Link to={`physics/` + lecture.slug}>{lecture.title}</Link>
-          </div>
+    <Global
+      pageTitle={pageTitle}
+      path={location.pathname}
+      description={intro.excerpt}
+    >
+      <PageTitle>
+        <h1>{pageTitle}</h1>
+      </PageTitle>
+      <div dangerouslySetInnerHTML={{ __html: intro.html }} />
+      <Grid min="8em" align="center">
+        {physics.lectures.map(lecture => (
+          <Link key={lecture.title} to={`physics/` + lecture.slug}>
+            {lecture.title}
+            <Img
+              fluid={
+                images.edges.find(({ node }) => node.name === lecture.file).node
+                  .img.fluid
+              }
+            />
+          </Link>
         ))}
       </Grid>
-      <p dangerouslySetInnerHTML={{ __html: outreach }} />
     </Global>
   )
 }
@@ -31,31 +39,30 @@ export default Physics
 
 export const query = graphql`
   {
-    page: physicsYaml {
-      description
+    intro: markdownRemark(frontmatter: { purpose: { eq: "physics intro" } }) {
+      html
+      excerpt
+    }
+    physics: physicsYaml {
       lectures {
         title
         slug
+        file
       }
-      outreach
+    }
+    images: allFile(
+      filter: { relativeDirectory: { eq: "pages/physics/images" } }
+    ) {
+      edges {
+        node {
+          name
+          img: childImageSharp {
+            fluid(maxWidth: 500, quality: 100) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
+      }
     }
   }
 `
-
-Physics.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
-  data: PropTypes.shape({
-    page: PropTypes.shape({
-      description: PropTypes.string.isRequired,
-      lectures: PropTypes.arrayOf(
-        PropTypes.shape({
-          title: PropTypes.string.isRequired,
-          slug: PropTypes.string.isRequired,
-        })
-      ).isRequired,
-      outreach: PropTypes.string.isRequired,
-    }),
-  }),
-}

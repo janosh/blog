@@ -11,13 +11,13 @@ import Scroll from '../Scroll'
 
 import { GlobalStyle, Layout } from './styles'
 
-const Global = ({ children, site, layout, transparent, ...rest }) => (
+const Global = ({ children, site, transparent, margin, ...rest }) => (
   <ThemeProvider theme={theme}>
     <Fragment>
       <Helmet site={site.meta} {...rest} />
       <GlobalStyle />
       <Header site={site.meta} transparent={transparent} />
-      {layout ? <Layout>{children}</Layout> : children}
+      <Layout margin={margin}>{children}</Layout>
       <Footer />
       <Scroll to="top" position="fixed" justify="right" showBelow={1000} />
     </Fragment>
@@ -36,6 +36,9 @@ const query = graphql`
         url: siteUrl
         description
       }
+    }
+    favicon: file(name: { eq: "favicon" }) {
+      url: publicURL
     }
   }
 `

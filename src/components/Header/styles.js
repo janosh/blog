@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 import { Link } from 'gatsby'
 
 import mediaQuery from '../../utils/mediaQuery'
-import LogoComp from '../../assets/logo'
 
 const transparent = css`
   position: absolute;
@@ -29,18 +28,9 @@ export const Container = styled.div`
   }
 `
 
-export const SiteTitle = styled(Link)`
+export const Logo = styled(Link)`
   grid-area: title;
-  height: 3em;
-  width: 3em;
-  background: ${props => props.theme.mainWhite};
-`
-
-export const Logo = styled(LogoComp)`
-  height: 3em;
-  width: 3em;
-  object-fit: cover;
-  object-position: top;
-  border-radius: 50%;
-  border: ${({ theme }) => theme.smallBorder + ' solid ' + theme.mainWhite};
+  font-size: 2.4em;
+  color: white;
+  transform: scale(1, 0.85);
 `

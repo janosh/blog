@@ -1,7 +1,30 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import { StaticQuery, graphql } from 'gatsby'
 
-import { Title } from './styles'
+import { Title, Background } from './styles'
 
-const PageTitle = ({ children }) => <Title>{children}</Title>
+const PageTitle = ({ children, file }) => (
+  <Fragment>
+    <Background fluid={file.img.fluid} />
+    <Title>{children}</Title>
+  </Fragment>
+)
 
-export default PageTitle
+const query = graphql`
+  {
+    file(name: { eq: "background" }) {
+      img: childImageSharp {
+        fluid(maxWidth: 2500, quality: 100) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+  }
+`
+
+export default props => (
+  <StaticQuery
+    query={query}
+    render={data => <PageTitle {...data} {...props} />}
+  />
+)

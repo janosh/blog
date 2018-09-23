@@ -2,36 +2,44 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 import Global from '../components/Global'
-import Section from '../components/styles/Section'
+import PageTitle from '../components/PageTitle'
 import Grid from '../components/styles/Grid'
+import Project from '../components/styles/Project'
 
 const Web = ({ data, location }) => {
-  const { techLogos, techNames } = data
-  const techs = techNames.edges.map(({ node: tech }) => {
-    return {
-      ...tech,
-      src: techLogos.edges.find(({ node }) => node.name === tech.file).node
-        .publicURL,
-    }
-  })
+  const title = `Web`
+  const { intro, projects, techLogos, techNames } = data
   return (
-    <Global path={location.pathname}>
-      <Section>
-        <h1>Recent Projects</h1>
-        Things I've worked on recently
-      </Section>
-      <Section>
-        <h1>My Stack</h1>
-        <h2>Technologies I enjoy using:</h2>
-        <Grid min="4em">
-          {techs.map(tech => (
-            <a key={tech.title} href={tech.url}>
-              <p>{tech.title}</p>
-              <img src={tech.src} alt={tech.title} />
-            </a>
-          ))}
-        </Grid>
-      </Section>
+    <Global title={title} path={location.pathname}>
+      <PageTitle>
+        <h1>{title}</h1>
+      </PageTitle>
+      <div dangerouslySetInnerHTML={{ __html: intro.html }} />
+      <h2>Recent Projects</h2>
+      <Grid min="15em">
+        {projects.edges.map(({ node }) => (
+          <Project
+            key={node.id}
+            dangerouslySetInnerHTML={{ __html: node.html }}
+          />
+        ))}
+      </Grid>
+      <h2>Technologies I like to use</h2>
+      <Grid min="4em" align="center">
+        {techNames.edges.map(({ node }) => (
+          <a key={node.title} href={node.url}>
+            <span>{node.title}</span>
+            <img
+              src={
+                techLogos.edges.find(
+                  ({ node: logo }) => logo.name === node.file
+                ).node.publicURL
+              }
+              alt={node.title}
+            />
+          </a>
+        ))}
+      </Grid>
     </Global>
   )
 }
@@ -40,6 +48,19 @@ export default Web
 
 export const query = graphql`
   {
+    intro: markdownRemark(frontmatter: { purpose: { eq: "web intro" } }) {
+      html
+    }
+    projects: allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/pages/web/projects/" } }
+    ) {
+      edges {
+        node {
+          id
+          html
+        }
+      }
+    }
     techLogos: allFile(
       filter: { relativeDirectory: { eq: "pages/web/techLogos" } }
     ) {

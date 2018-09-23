@@ -45,6 +45,7 @@ export default class Nav extends Component {
     events.forEach(event =>
       document.removeEventListener(event, this.handleClickOutside)
     )
+    document.removeEventListener(`scroll`, this.handleScroll)
   }
 
   render() {

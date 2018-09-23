@@ -4,15 +4,17 @@ import PropTypes from 'prop-types'
 
 import { Wrapper, Container, Toggle, Link, Icons } from './styles'
 
-const Social = ({ social, iconSize, expandOnHover }) => (
+const Social = ({ social, size, collapse, css, short }) => (
   <Wrapper>
-    {expandOnHover && <Toggle size={iconSize} />}
-    <Container {...{ expandOnHover }}>
+    {collapse && <Toggle {...{ size, css }} />}
+    <Container {...{ collapse }}>
       {social.map(service => {
+        if (short && [`Facebook`, `Youtube`].includes(service.title))
+          return undefined
         const Icon = Icons[service.title]
         return (
-          <Link key={service.title} href={service.url}>
-            <Icon size={iconSize} />
+          <Link key={service.title} href={service.url} css={css}>
+            <Icon size={size} />
           </Link>
         )
       })}
@@ -49,9 +51,9 @@ Social.propTypes = {
       url: PropTypes.string.isRequired,
     })
   ).isRequired,
-  iconSize: PropTypes.string.isRequired,
+  size: PropTypes.string.isRequired,
 }
 
 Social.defaultProps = {
-  iconSize: `1em`,
+  size: `1em`,
 }

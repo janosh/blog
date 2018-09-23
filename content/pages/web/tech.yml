@@ -10,10 +10,6 @@
   url: https://www.gatsbyjs.org/
   file: gatsby
 
-- title: Google Analytics
-  url: https://analytics.google.com/analytics/web/
-  file: google-analytics
-
 - title: GraphQL
   url: https://graphql.org/
   file: graphql
@@ -50,6 +46,6 @@
   url: https://socket.io/
   file: socketio
 
-- title: Webpack
-  url: https://webpack.js.org/
-  file: webpack
+# - title: Webpack
+#   url: https://webpack.js.org/
+#   file: webpack
