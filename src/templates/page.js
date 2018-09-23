@@ -20,7 +20,7 @@ const PageTemplate = ({ data, location }) => {
       <PageTitle>
         <h1>{title}</h1>
       </PageTitle>
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <article dangerouslySetInnerHTML={{ __html: html }} />
     </Global>
   )
 }
