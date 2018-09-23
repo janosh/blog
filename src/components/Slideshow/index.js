@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { SlideContainer, Slide, Dots, Dot } from './styles'
+import Dots from '../Dots'
+import { SlideContainer, Slide } from './styles'
+
+const dotCss = `
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 1em;
+`
 
 export default class Slideshow extends Component {
   static propTypes = {
@@ -15,22 +23,22 @@ export default class Slideshow extends Component {
 
   state = { current: 0 }
 
-  nextSlide = () => {
+  next = () => {
     this.setState({
       current: (this.state.current + 1) % this.props.children.length,
     })
   }
 
-  setSlide = index => {
+  jumpTo = index => {
     clearInterval(this.interval)
-    this.interval = setInterval(() => this.nextSlide(), this.props.delay * 1000)
+    this.interval = setInterval(() => this.next(), this.props.delay * 1000)
     this.setState({
       current: index,
     })
   }
 
   componentDidMount() {
-    this.interval = setInterval(this.nextSlide, this.props.delay * 1000)
+    this.interval = setInterval(this.next, this.props.delay * 1000)
   }
 
   componentWillUnmount() {
@@ -47,15 +55,12 @@ export default class Slideshow extends Component {
             {child}
           </Slide>
         ))}
-        <Dots>
-          {Array.apply(null, { length: children.length }).map((dot, index) => (
-            <Dot
-              key={index}
-              active={index === current}
-              onClick={() => this.setSlide(index)}
-            />
-          ))}
-        </Dots>
+        <Dots
+          n={children.length}
+          current={current}
+          onClick={this.jumpTo}
+          css={dotCss}
+        />
       </SlideContainer>
     )
   }
