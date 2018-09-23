@@ -32,7 +32,8 @@ exports.createPages = async ({ graphql, actions }) => {
     console.error(response.errors)
     throw new Error(response.errors)
   }
-  response.data.content.edges.forEach(({ node }) => {
+  const { content, categories } = response.data
+  content.edges.forEach(({ node }) => {
     const {
       path,
       frontmatter: { slug, purpose },
@@ -52,7 +53,7 @@ exports.createPages = async ({ graphql, actions }) => {
       })
     }
   })
-  response.data.categories.group.forEach(category => {
+  categories.group.forEach(category => {
     const { title } = category
     createPage({
       path: `/blog/` + title.toLowerCase().replace(` `, `-`),
