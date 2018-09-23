@@ -2,35 +2,41 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
-import { AboutContainer, Next } from './styles'
+import Dots from '../Dots'
+import { AboutContainer, Text, Arrow } from './styles'
 
 class About extends Component {
   static propTypes = {
-    about: PropTypes.array.isRequired,
+    html: PropTypes.string.isRequired,
   }
 
-  state = { current: 0 }
+  state = { current: 0, about: this.props.html.split(`\n`) }
+
+  jumpTo = index => {
+    this.setState({
+      current: index,
+    })
+  }
 
   next = () => {
+    console.log('hi')
     this.setState({
-      current: (this.state.current + 1) % this.props.about.length,
+      current: (this.state.current + 1) % this.state.about.length,
     })
   }
 
   render() {
-    const { current } = this.state
-    const { about } = this.props
+    const { current, about } = this.state
     return (
       <AboutContainer>
-        <p>
-          <span>
-            {current + 1}/{about.length}
-          </span>
-          <Next onClick={this.next}>I</Next>
-          <span
-            dangerouslySetInnerHTML={{ __html: about[current].node.text }}
-          />
-        </p>
+        <Dots
+          n={about.length}
+          current={current}
+          onClick={this.jumpTo}
+          size="0.5em"
+        />
+        <Text dangerouslySetInnerHTML={{ __html: about[current] }} />
+        <Arrow size="4em" onClick={this.next} />
       </AboutContainer>
     )
   }
@@ -38,19 +44,12 @@ class About extends Component {
 
 const query = graphql`
   {
-    about: allAboutYaml {
-      edges {
-        node {
-          text
-        }
-      }
+    about: markdownRemark(frontmatter: { purpose: { eq: "about" } }) {
+      html
     }
   }
 `
 
 export default props => (
-  <StaticQuery
-    query={query}
-    render={data => <About about={data.about.edges} />}
-  />
+  <StaticQuery query={query} render={data => <About {...data.about} />} />
 )
