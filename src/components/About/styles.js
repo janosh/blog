@@ -1,15 +1,35 @@
 import styled from 'styled-components'
-
-import { buttonCss } from '../styles/Button'
+import { KeyboardArrowRight } from 'styled-icons/material/KeyboardArrowRight'
+import mediaQuery from '../../utils/mediaQuery'
 
 export const AboutContainer = styled.div`
-  max-width: 20em;
-  height: 20em;
+  grid-area: about;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  grid-template-areas:
+    'dots'
+    'text'
+    'arrow';
+  ${mediaQuery.minPhone} {
+    grid-template-areas:
+      'dots dots'
+      'text arrow';
+  }
 `
 
-export const Next = styled.span`
-  ${buttonCss};
-  margin-right: 0.5em;
-  cursor: pointer;
-  font-size: 2em;
+export const Text = styled.div`
+  grid-area: text;
+`
+
+export const Arrow = styled(KeyboardArrowRight)`
+  grid-area: arrow;
+  transition: ${props => props.theme.shortTrans};
+  border-radius: ${props => props.theme.smallBorderRadius};
+  :hover {
+    color: ${props => props.theme.mainOrange};
+    background: rgba(0, 0, 0, 0.2);
+  }
 `
