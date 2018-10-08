@@ -44,7 +44,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10em,auto));
+    grid-template-columns: repeat(auto-fill, minmax(8em, auto));
     grid-gap: 1em;
     > * {
       margin: 0;
