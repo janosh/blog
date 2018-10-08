@@ -42,6 +42,17 @@ export const GlobalStyle = createGlobalStyle`
       color: ${props => props.theme.lightBlue};
     }
   }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10em,auto));
+    grid-gap: 1em;
+    > * {
+      margin: 0;
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+  }
 `
 
 export const Layout = styled.main`

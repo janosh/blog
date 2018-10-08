@@ -15,7 +15,7 @@ export const Background = styled(Img)`
   margin-bottom: calc(2em + 2vh);
   z-index: -1;
   grid-row: 1;
-  height: 40vh;
+  height: 60vh;
   top: 0;
   left: 0;
   grid-column: 1 / -1 !important;
