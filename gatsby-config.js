@@ -15,6 +15,7 @@ module.exports = {
           `gatsby-remark-smartypants`,
           `gatsby-remark-embed-video`,
           `gatsby-remark-responsive-iframe`,
+          `gatsby-remark-katex`,
           {
             resolve: `gatsby-remark-images`,
             options: {
