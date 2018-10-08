@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
-const Head = ({ site, pageTitle, path, description, children, favicon }) => {
+const Head = ({ site, pageTitle, path, description, children }) => {
   const title = pageTitle ? `${pageTitle} | ${site.title}` : site.title
   const pageUrl = path ? site.url + path : site.url
   const desc = description || site.description
@@ -14,7 +14,6 @@ const Head = ({ site, pageTitle, path, description, children, favicon }) => {
       <meta property="og:url" content={pageUrl} />
       <meta property="og:description" content={desc} />
       <meta name="description" content={desc} />
-      <link rel="icon" type="image/png" href={favicon.url} />
       {children}
     </Helmet>
   )

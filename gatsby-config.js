@@ -15,6 +15,7 @@ module.exports = {
           `gatsby-remark-smartypants`,
           `gatsby-remark-embed-video`,
           `gatsby-remark-responsive-iframe`,
+          `gatsby-remark-katex`,
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -42,6 +43,12 @@ module.exports = {
       },
     },
     `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-favicon`,
+      options: {
+        logo: './content/favicon.png',
+      },
+    },
     `gatsby-plugin-react-helmet`,
   ],
 }
