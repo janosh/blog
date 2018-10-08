@@ -43,6 +43,12 @@ module.exports = {
       },
     },
     `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-favicon`,
+      options: {
+        logo: './content/favicon.png',
+      },
+    },
     `gatsby-plugin-react-helmet`,
   ],
 }
