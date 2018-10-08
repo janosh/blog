@@ -2,3 +2,8 @@
   from = "https://janosh.netlify.com/*"
   to = "https://janosh.io/:splat"
   force = true
+
+[[redirects]]
+  from = "https://janosh-riebesell.com/*"
+  to = "https://janosh.io/:splat"
+  force = true
