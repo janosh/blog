@@ -46,8 +46,11 @@ export const GlobalStyle = createGlobalStyle`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(8em, auto));
     grid-gap: 1em;
-    > * {
+    p {
       margin: 0;
+      text-align: center;
+    }
+    img {
       border: 1px solid lightgray;
       border-radius: 5px;
       overflow: hidden;
