@@ -1,6 +1,6 @@
 ---
 title: 'Numerical Simulations'
-slug: 'physics/numerical-simulations'
+slug: 'physics/numeric-simulations'
 purpose: 'page'
 ---
 
