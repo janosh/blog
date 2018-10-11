@@ -12,4 +12,4 @@ I'm head of IT for the German student-run non-profit initative [Studenten bilden
 
 I went vegan in April 2014. Never looked back. :)
 
-I used to be a drummer in a band. Nowadays I just play for fun.
+I used to be a drummer in a band. Nowadays I still play for fun occasionally.
