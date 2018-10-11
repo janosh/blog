@@ -22,14 +22,14 @@ If you found an error or have a question, feel free drop me a line at [janosh.ri
 
 [Group Theory ![Group Theory](images/group-theory.png)](/physics/group-theory)
 
-[Numerical Simulations ![Numerical Simulations](images/numerical-simulations.png)](/physics/numerical-simulations)
+[Numeric Simulations ![Numeric Simulations](images/numeric-simulations.png)](/physics/numeric-simulations)
 
 [Atomic Physics ![Atomic Physics](images/atomic-physics.png)](/physics/atomic-physics)
 
 [Statistical Physic ![Statistical Physics](images/statistical-physics.png)](/physics/statistical-physics)
 
-[Bachelor Thesis ![Bachelor Thesis](images/bachelor-thesis.png)](/physics/bachelor-thesis)
+[Bachelor Thesis's ![Bachelor Thesis's](images/bachelors-thesis.png)](/physics/bachelors-thesis)
 
-[Master Thesis ![Master Thesis](images/master-thesis.png)](/physics/master-thesis)
+[Master's Thesis ![Master's Thesis](images/masters-thesis.png)](/physics/masters-thesis)
 
 </div>
