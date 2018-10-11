@@ -1,24 +1,20 @@
 ---
-title: 'Advanced Quantum Field Theory'
-slug: 'physics/advanced-qft'
+title: 'General Relativity'
+slug: 'physics/general-relativity'
 purpose: 'page'
 ---
 
-Advanced quantum field theory was given by [Prof. Jürgen berges](pdfs/http://www.thphys.uni-heidelberg.de/~berges/people.htm) at Heidelberg University in the summer of 2015.
+I attended [Prof. Björn Schäfer](http://www.ita.uni-heidelberg.de/~spirou)'s lecture on General relativity at Heidelberg University in the summer of 2015.
 
-Below is some material I used to prepare for the exam as well as all the assignment sheets and my solutions.
+Below are solutions to the exercises and the mock exam.
 
-## Exam Preparation
+## Exam material
 
 <div class="grid">
 
-[![Plehn exam](thumbnails/plehn-exam.png) Plehn exam](pdfs/plehn-exam.pdf)
-
-[![Plehn exam solution](thumbnails/plehn-exam-sol.png) Plehn exam solution](pdfs/plehn-exam-sol.pdf)
-
 [![Exam sheet](thumbnails/exam-sheet.png) Exam sheet](pdfs/exam-sheet.pdf)
 
-[![Relevant exercises](thumbnails/relevant-exercises.png) Relevant exercises](pdfs/relevant-exercises.pdf)
+[![Mock exam](thumbnails/mock-exam.png) Mock exam](pdfs/mock-exam.pdf)
 
 </div>
 
@@ -48,6 +44,10 @@ Below is some material I used to prepare for the exam as well as all the assignm
 
 [![Exercise 11](thumbnails/ex-11.png) Exercise 11](pdfs/ex-11.pdf)
 
+[![Exercise 12](thumbnails/ex-12.png) Exercise 12](pdfs/ex-12.pdf)
+
+[![Exercise 13](thumbnails/ex-13.png) Exercise 13](pdfs/ex-13.pdf)
+
 [![Solution 1](thumbnails/sol-01.png) Solution 1](pdfs/sol-01.pdf)
 
 [![Solution 2](thumbnails/sol-02.png) Solution 2](pdfs/sol-02.pdf)
@@ -69,5 +69,9 @@ Below is some material I used to prepare for the exam as well as all the assignm
 [![Solution 10](thumbnails/sol-10.png) Solution 10](pdfs/sol-10.pdf)
 
 [![Solution 11](thumbnails/sol-11.png) Solution 11](pdfs/sol-11.pdf)
+
+[![Solution 12](thumbnails/sol-12.png) Solution 12](pdfs/sol-12.pdf)
+
+[![Solution 13](thumbnails/sol-13.png) Solution 13](pdfs/sol-13.pdf)
 
 </div>
