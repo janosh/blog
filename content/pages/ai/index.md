@@ -1,7 +1,7 @@
 ---
-title: 'Artificial Intelligence'
-slug: 'ai'
-purpose: 'page'
+title: Artificial Intelligence
+slug: ai
+purpose: page
 ---
 
 I'm currently working at Cambridge University's Maxwell Centre under the supervision of [Alpha Lee](https://alpha-lee.com) on applications of machine learning in physics.

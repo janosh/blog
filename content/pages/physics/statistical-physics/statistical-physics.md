@@ -1,7 +1,7 @@
 ---
-title: 'Statistical Physics'
-slug: 'physics/statistical-physics'
-purpose: 'page'
+title: Statistical Physics
+slug: physics/statistical-physics
+purpose: page
 ---
 
 I had the pleasure of attending [Prof. Manfred Salmhofer](http://www.thphys.uni-heidelberg.de/~salmhofer)'s lecture on statistical physics at Heidelberg University in the fall of 2016.

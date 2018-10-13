@@ -1,5 +1,5 @@
 ---
-purpose: 'web intro'
+purpose: web intro
 ---
 
 ## My journey
