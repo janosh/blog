@@ -34,25 +34,15 @@ export const query = graphql`
       }
     }
   }
-  fragment postFields on MarkdownRemarkEdge {
-    node {
-      frontmatter {
-        title
-        slug
-        date
-        categories
-      }
-      excerpt
-      timeToRead
-    }
-  }
   {
     posts: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { fileAbsolutePath: { regex: "/content/blog/" } }
     ) {
       edges {
-        ...postFields
+        node {
+          ...postFields
+        }
       }
     }
     ...categories

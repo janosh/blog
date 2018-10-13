@@ -20,17 +20,27 @@ const PostTemplate = ({ data, location }) => {
 export default PostTemplate
 
 export const postQuery = graphql`
+  fragment postFields on MarkdownRemark {
+    frontmatter {
+      title
+      slug
+      date(formatString: "MMMM DD, YYYY")
+      categories
+      cover {
+        img: childImageSharp {
+          fluid(maxWidth: 2500, quality: 100) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+    }
+    timeToRead
+    excerpt
+    html
+  }
   query($slug: String!) {
     post: markdownRemark(frontmatter: { slug: { eq: $slug } }) {
-      frontmatter {
-        title
-        slug
-        date
-        categories
-      }
-      timeToRead
-      excerpt
-      html
+      ...postFields
     }
   }
 `

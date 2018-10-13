@@ -10,6 +10,6 @@ I enjoy photography. You can take a look at some of my shots [right here](/photo
 
 I'm head of IT for the German student-run non-profit initative [Studenten bilden Schüler](https://studenten-bilden-schueler.de/verein/bundesvorstand). We aim to contribute towards more equal educational opportunities for refugees and children from underprivileged families by offering free tutoring.
 
-I went vegan in April 2014. Never looked back. :)
+I decided to become a vegan in April 2014 mainly for ecological reasons. Never looked back. :)
 
 I used to be a drummer in a band. Nowadays I still play for fun occasionally.
