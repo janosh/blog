@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
-import { Article } from './styles'
+import { Article, Img, Title, Excerpt } from './styles'
 import PostMeta from '../PostMeta'
 
 const PostExcerpt = ({ post }) => {
@@ -10,11 +10,12 @@ const PostExcerpt = ({ post }) => {
   const { title, slug } = frontmatter
   return (
     <Article>
-      <h1>
+      <Img fluid={frontmatter.cover.img.fluid} />
+      <Title>
         <Link to={'/blog/' + slug}>{title}</Link>
-      </h1>
+      </Title>
       <PostMeta {...{ ...frontmatter, timeToRead }} />
-      <p dangerouslySetInnerHTML={{ __html: excerpt }} />
+      <Excerpt dangerouslySetInnerHTML={{ __html: excerpt }} />
     </Article>
   )
 }

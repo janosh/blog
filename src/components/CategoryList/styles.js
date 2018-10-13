@@ -15,5 +15,5 @@ export const CategoryLink = styled(Link)`
 export const List = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 1em;
+  margin-bottom: 3em;
 `

@@ -5,6 +5,7 @@ import mediaQuery from '../../utils/mediaQuery'
 const inTitle = css`
   justify-items: center;
   padding: 0.2em 1em;
+  margin: 1.3em 0;
   background: rgba(0, 0, 0, 0.5);
   border-radius: ${props => props.theme.mediumBorderRadius};
   a {
@@ -13,10 +14,10 @@ const inTitle = css`
 `
 
 export const Meta = styled.div`
+  grid-area: postmeta;
   display: grid;
   grid-auto-columns: max-content;
   grid-gap: calc(0.5em + 1vw);
-  margin: 1.3em 0;
   font-size: 0.9em;
   > span {
     display: flex;
