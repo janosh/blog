@@ -7,7 +7,6 @@ const inTitle = css`
   padding: 0.2em 1em;
   background: rgba(0, 0, 0, 0.5);
   border-radius: ${props => props.theme.mediumBorderRadius};
-  margin: 5em 0;
   a {
     color: ${props => props.theme.lightGreen};
   }

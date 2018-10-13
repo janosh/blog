@@ -1,14 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Title } from './styles'
+import { Container, Title, Img } from './styles'
 import PostMeta from '../PostMeta'
 
 const PostTitle = ({ post: { frontmatter, timeToRead } }) => (
-  <Title>
-    <h1>{frontmatter.title}</h1>
+  <Container>
+    <Img fluid={frontmatter.cover.img.fluid} />
+    <Title>{frontmatter.title}</Title>
     <PostMeta inTitle {...{ ...frontmatter, timeToRead }} />
-  </Title>
+  </Container>
 )
 
 export default PostTitle
