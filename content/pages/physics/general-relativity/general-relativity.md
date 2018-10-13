@@ -1,7 +1,7 @@
 ---
-title: 'General Relativity'
-slug: 'physics/general-relativity'
-purpose: 'page'
+title: General Relativity
+slug: physics/general-relativity
+purpose: page
 ---
 
 I attended [Prof. Björn Schäfer](http://www.ita.uni-heidelberg.de/~spirou)'s lecture on General relativity at Heidelberg University in the summer of 2015.

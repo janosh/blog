@@ -1,7 +1,7 @@
 ---
-title: 'Group Theory'
-slug: 'physics/group-theory'
-purpose: 'page'
+title: Group Theory
+slug: physics/group-theory
+purpose: page
 ---
 
 In the summer of 2015, [Prof. Daniel Roggenkamp](http://www.thphys.uni-heidelberg.de/~roggenkamp) gave a small but insightful lecture on group theory and its applications in physics at Heidelberg University.
