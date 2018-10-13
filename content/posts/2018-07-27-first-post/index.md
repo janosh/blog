@@ -5,7 +5,7 @@ date: 2018-07-27
 cover: ./images/gatsby+sc.png
 categories:
   - Testing
-  - Rubbish
+  - WebDev
 ---
 
 Welcome to my blog! This is the first post on this new homepage I wrote and styled myself. It's JavaScript from head to heel using [GatsbyJS](https://www.gatsbyjs.org) as static-site generator and [`styled-components`](https://www.styled-components.com) for the design and layout. The latter relies heavily on CSS grid, by the way.
