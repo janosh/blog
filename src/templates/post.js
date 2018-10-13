@@ -35,7 +35,7 @@ export const postQuery = graphql`
       }
     }
     timeToRead
-    excerpt
+    excerpt(pruneLength: 300)
     html
   }
   query($slug: String!) {
