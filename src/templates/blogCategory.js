@@ -32,7 +32,9 @@ export const blogCategoryQuery = graphql`
       filter: { frontmatter: { categories: { in: [$title] } } }
     ) {
       edges {
-        ...postFields
+        node {
+          ...postFields
+        }
       }
     }
     ...categories
