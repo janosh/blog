@@ -26,11 +26,11 @@ If you found an error or have a question, feel free drop me a line at [janosh.ri
 
 [Atomic Physics ![Atomic Physics](images/atomic-physics.png)](/physics/atomic-physics)
 
-[Statistical Physic ![Statistical Physics](images/statistical-physics.png)](/physics/statistical-physics)
+[Statistical Physics ![Statistical Physics](images/statistical-physics.png)](/physics/statistical-physics)
 
 [Oral exam ![Oral exam](images/oral-exam.png)](/physics/oral-exam)
 
-[Bachelor Thesis's ![Bachelor Thesis's](images/bachelors-thesis.png)](/physics/bachelors-thesis)
+[Bachelor's Thesis ![Bachelor's Thesis](images/bachelors-thesis.png)](/physics/bachelors-thesis)
 
 [Master's Thesis ![Master's Thesis](images/masters-thesis.png)](/physics/masters-thesis)
 
