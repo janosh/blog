@@ -10,7 +10,7 @@ Below are solutions to the exercises and the mock exam.
 
 ## Exam material
 
-<div class="grid">
+<div class="grid docs">
 
 [![Exam sheet](thumbnails/exam-sheet.png) Exam sheet](pdfs/exam-sheet.pdf)
 
@@ -20,7 +20,7 @@ Below are solutions to the exercises and the mock exam.
 
 ## Exercises
 
-<div class="grid">
+<div class="grid docs">
 
 [![Exercise 1](thumbnails/ex-01.png) Exercise 1](pdfs/ex-01.pdf)
 

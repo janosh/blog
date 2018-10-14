@@ -10,7 +10,7 @@ Below are lecture notes and solutions to the exercises.
 
 ## Lecture notes
 
-<div class="grid">
+<div class="grid docs">
 
 [![Lecture 1](thumbnails/lec-01.png) Lecture 1](pdfs/lec-01.pdf)
 
@@ -30,7 +30,7 @@ Below are lecture notes and solutions to the exercises.
 
 ## Exercises
 
-<div class="grid">
+<div class="grid docs">
 
 [![Exercise 1](thumbnails/ex-01.png) Exercise 1](pdfs/ex-01.pdf)
 

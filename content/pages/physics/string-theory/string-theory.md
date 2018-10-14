@@ -8,7 +8,7 @@ This is a collection of notes and solutions I typed up for both the final exam a
 
 ## Exam
 
-<div class="grid">
+<div class="grid docs">
 
 [![Exam solution](thumbnails/exam-sol.png) Exam solution](pdfs/exam-sol.pdf)
 
@@ -18,7 +18,7 @@ This is a collection of notes and solutions I typed up for both the final exam a
 
 ## Exercises
 
-<div class="grid">
+<div class="grid docs">
 
 [![Exercise 1](thumbnails/sol-01.png) Exercise 1](pdfs/sol-01.pdf)
 
