@@ -10,7 +10,7 @@ Below are solutions to all the exercises as well as to the mock and the final ex
 
 ## Exam
 
-<div class="grid">
+<div class="grid docs">
 
 [![Exam solution](thumbnails/exam-sol.png) Exam solution](pdfs/exam-sol.pdf)
 
@@ -22,7 +22,7 @@ Below are solutions to all the exercises as well as to the mock and the final ex
 
 ## Exercises
 
-<div class="grid">
+<div class="grid docs">
 
 [![Exercise 1](thumbnails/sol-01.png) Exercise 1](pdfs/sol-01.pdf)
 

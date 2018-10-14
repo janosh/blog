@@ -10,7 +10,7 @@ Below you can find solutions to all the exercises as well as the final exam. Be 
 
 ## Exam preparation
 
-<div class="grid">
+<div class="grid docs">
 
 [![Mock exam](thumbnails/mock-exam.png) Mock exam](pdfs/mock-exam.pdf)
 
@@ -18,7 +18,7 @@ Below you can find solutions to all the exercises as well as the final exam. Be 
 
 ## Exercises
 
-<div class="grid">
+<div class="grid docs">
 
 [![Exercise 1](thumbnails/sol-01.png) Exercise 1](pdfs/sol-01.pdf)
 

@@ -23,7 +23,7 @@ Each of these features serves as a point of comparison for four different implem
 
 We report partial success with both LDA and modified GGA delivering realistic results in certain areas. We advise to refrain from using GGA and modified LDA on our specific test system of G-hBN as we have shown them to produce grossly under- and overestimated binding, respectively. We expect this behaviour to hold true also for other van der Waals heterostructures.
 
-<div class="grid">
+<div class="grid docs">
 
 [![Thesis](thesis.png) Thesis](thesis.pdf)
 

@@ -10,7 +10,7 @@ Below you can find solutions to all the exercises as well as the final exam.
 
 ## Exam and preparation
 
-<div class="grid">
+<div class="grid docs">
 
 [![Final exam](thumbnails/final-exam.png) Final exam](pdfs/final-exam.pdf)
 
@@ -24,7 +24,7 @@ Below you can find solutions to all the exercises as well as the final exam.
 
 ## Exercises
 
-<div class="grid">
+<div class="grid docs">
 
 [![Exercise 1](thumbnails/sol-01.png) Exercise 1](pdfs/sol-01.pdf)
 

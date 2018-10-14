@@ -10,7 +10,7 @@ Below are four transcripts of past oral exams on similar topics that I used to p
 
 ## Transcript and summaries
 
-<div class="grid">
+<div class="grid docs">
 
 [![Transcript](thumbnails/transcript.png) Transcript](pdfs/transcript.pdf)
 
@@ -22,7 +22,7 @@ Below are four transcripts of past oral exams on similar topics that I used to p
 
 ## Past exams
 
-<div class="grid">
+<div class="grid docs">
 
 [![Berges 2015](thumbnails/berges-2015.png) Berges 2015](pdfs/berges-2015.pdf)
 
