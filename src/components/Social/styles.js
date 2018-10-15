@@ -17,7 +17,8 @@ const collapse = css`
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  background: ${props => props.theme.mainOrange};
+  background: ${props => props.theme.darkGray};
+  border: 1px solid ${props => props.theme.mainWhite};
   border-radius: ${props => props.theme.smallBorderRadius};
   padding: 1vmin;
   font-size: 1.8em;
