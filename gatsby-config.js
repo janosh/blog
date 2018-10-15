@@ -1,3 +1,7 @@
+const queries = require('./src/utils/algolia')
+
+require('dotenv').config()
+
 module.exports = {
   siteMetadata: {
     title: `janosh.io`,
@@ -34,6 +38,7 @@ module.exports = {
         path: `${__dirname}/content`,
       },
     },
+    `gatsby-plugin-offline`,
     `gatsby-transformer-yaml`,
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-styled-components`,
@@ -43,7 +48,15 @@ module.exports = {
         trackingId: 'UA-122970164-1',
       },
     },
-    `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.algoliaAppId,
+        apiKey: process.env.algoliaApiKey,
+        queries,
+        chunkSize: 10000, // default: 1000
+      },
+    },
     {
       resolve: `gatsby-plugin-favicon`,
       options: {
