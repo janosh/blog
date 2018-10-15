@@ -7,7 +7,7 @@ const transparent = css`
   position: absolute;
   background: rgba(0, 0, 0, 0.5);
   width: fill-available;
-  z-index: 2;
+  z-index: 3;
 `
 
 const opaque = css`
@@ -17,14 +17,16 @@ const opaque = css`
 export const Container = styled.div`
   ${props => (props.transparent ? transparent : opaque)};
   display: grid;
-  grid-gap: 5vmin;
+  grid-gap: 3vw;
   align-items: center;
+  justify-items: center;
   justify-content: space-between;
-  grid-template-areas: 'nav title social';
+  grid-template-areas: 'nav title social search';
+  grid-template-columns: auto 1fr auto auto;
   padding: 2vmin 3vmin;
   ${mediaQuery.minPhablet} {
-    grid-template-areas: 'title nav social';
-    grid-template-columns: auto 1fr auto;
+    justify-items: start;
+    grid-template-areas: 'title nav social search';
   }
 `
 
