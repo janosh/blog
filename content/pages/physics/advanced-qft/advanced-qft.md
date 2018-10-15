@@ -10,7 +10,7 @@ Below is some material I used to prepare for the exam as well as all the assignm
 
 ## Exam Preparation
 
-<div class="grid">
+<div class="grid docs">
 
 [![Plehn exam](thumbnails/plehn-exam.png) Plehn exam](pdfs/plehn-exam.pdf)
 
@@ -24,7 +24,7 @@ Below is some material I used to prepare for the exam as well as all the assignm
 
 ## Exercises
 
-<div class="grid">
+<div class="grid docs">
 
 [![Exercise 1](thumbnails/ex-01.png) Exercise 1](pdfs/ex-01.pdf)
 

@@ -8,7 +8,7 @@ This is a collection of mock exams with my solutions and exercise as well as lec
 
 ## Exam material
 
-<div class="grid">
+<div class="grid docs">
 
 [![Berges midterm exam](thumbnails/berges-midterm-exam.png) Berges midterm exam](pdfs/berges-midterm-exam.pdf)
 
