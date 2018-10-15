@@ -1,7 +1,16 @@
-# Project dependencies
-.cache
-node_modules
-yarn-error.log
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Build directory
+# Dependency directories
+node_modules/
+
+# Gatsby directories
+.cache
 /public
+
+# environment variables
+.env
