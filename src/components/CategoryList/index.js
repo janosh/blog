@@ -5,7 +5,7 @@ import { List, CategoryLink } from './styles'
 
 const Category = ({ category }) => {
   const { title, totalCount } = category
-  const link = `/blog/` + title.toLowerCase().replace(` `, `_`)
+  const link = `/blog/` + title.toLowerCase().replace(` `, `-`)
   return (
     <CategoryLink activeClassName="active" to={link}>
       {title} ({totalCount})
