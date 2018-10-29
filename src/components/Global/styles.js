@@ -59,6 +59,20 @@ export const GlobalStyle = createGlobalStyle`
       }
     }
   }
+  .btn {
+    background: ${props => props.theme.mainBlue};
+    color: ${props => props.theme.mainWhite};
+    border-radius: ${props => props.theme.smallBorderRadius};
+    padding: 0.3em 0.6em;
+    transition: ${props => props.theme.shortTrans};
+    display: flex;
+    align-items: center;
+    width: max-content;
+    margin: 0 auto;
+    :hover {
+      background: ${props => props.theme.lightBlue};
+    }
+  }
 `
 
 export const Layout = styled.main`
