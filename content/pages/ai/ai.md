@@ -12,6 +12,10 @@ More specifically, we recently started out on a project that aims to discover hi
 
 To date there has been no statistically robust approach to simultaneously incorporate experimental and model error into machine learning models in a search space with high opportunity cost and high latency (i.e. large time between prediction and validation).
 
-Consequently, searches have been unable to effectively guide experimentalists in the selection of exploring or exploiting new materials when the validation step is inherently low throughput and resource-intensive, such as the case of developing new bulk functional materials like thermoelectrics. This project will realize a holistic pipeline to discover novel thermoelectrics: machine learning is used to predict the $z T$ of a large database of structures together with predicted uncertainty. Candidate structures are then selected, based on maximizing $z T$ subjected to a tolerable level of uncertainty, to proceed to the next stage where expensive experimental synthesis and characterization of high-$z T$ candidates are guided by Bayesian optimization and active machine learning.
+Consequently, searches have been unable to effectively guide experimentalists in the selection of exploring or exploiting new materials when the validation step is inherently low throughput and resource-intensive, such as the case of developing new bulk functional materials like thermoelectrics.
 
-If you're interested, take a look at Alpha's [Github repo](https://github.com/alphaleegroup).
+Our project will realize a holistic pipeline to discover novel thermoelectrics: machine learning is used to predict $z T$ for a large database of structures together with estimated uncertainty. Candidate structures are then selected, based on maximizing $z T$ subject to a tolerable level of uncertainty. The final stage consists of expensive experimental synthesis and characterization of high-$z T$ candidates using Bayesian optimization and active machine learning.
+
+If you're interested, take a look at our Github page:
+
+<a href="https://github.com/Lee-Group" class="btn"><img src="./github.svg" alt="GitHub" width="25px" height="25px">&ensp;Lee Group</a>
