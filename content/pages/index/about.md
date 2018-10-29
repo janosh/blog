@@ -4,7 +4,7 @@ purpose: about
 
 I am a theoretical physicist at Cambridge University trying to solve [physics problems](/physics) with [machine learning](/ai).
 
-I am a would-be but of course full-stack [web](./web) developer.
+I am a would-be but of course full-stack [web](/web) developer.
 
 I'm head of IT for the German student-run non-profit initative [Studenten bilden Schüler](https://studenten-bilden-schueler.de/verein/bundesvorstand). We aim to contribute towards more equal educational opportunities for refugees and children from underprivileged families by offering free tutoring.
 
