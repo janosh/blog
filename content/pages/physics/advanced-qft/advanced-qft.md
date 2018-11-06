@@ -4,7 +4,7 @@ slug: physics/advanced-qft
 purpose: page
 ---
 
-Advanced quantum field theory was given by [Prof. Jürgen berges](pdfs/http://www.thphys.uni-heidelberg.de/~berges/people.htm) at Heidelberg University in the summer of 2015.
+Advanced quantum field theory was given by [Prof. Jürgen Berges](pdfs/http://www.thphys.uni-heidelberg.de/~berges/people.htm) at Heidelberg University in the summer of 2015.
 
 Below is some material I used to prepare for the exam as well as all the assignment sheets and my solutions.
 

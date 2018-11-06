@@ -45,7 +45,7 @@ exports.createPages = async ({ graphql, actions }) => {
         context: { slug },
       })
     }
-    if (/content\/blog/.test(path)) {
+    if (/content\/posts/.test(path)) {
       createPage({
         path: `/blog/` + slug,
         component: postTemplate,
