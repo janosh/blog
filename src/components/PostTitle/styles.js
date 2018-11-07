@@ -2,15 +2,15 @@ import styled from 'styled-components'
 import Image from 'gatsby-image'
 
 export const Container = styled.header`
-  text-align: center;
   grid-column: 1 / -1;
   position: relative;
   color: ${props => props.theme.mainWhite};
-  display: grid;
-  justify-items: center;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   min-height: 50vh;
-  max-height: 60vh;
+  max-height: 70vh;
   margin-bottom: calc(3em + 3vh);
 `
 
@@ -19,8 +19,6 @@ export const Img = styled(Image)`
   z-index: -1;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
 `
 
 export const Title = styled.h1`

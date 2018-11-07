@@ -61,7 +61,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   .btn {
     background: ${props => props.theme.mainBlue};
-    color: ${props => props.theme.mainWhite};
+    color: ${props => props.theme.mainWhite} !important;
     border-radius: ${props => props.theme.smallBorderRadius};
     padding: 0.3em 0.6em;
     transition: ${props => props.theme.shortTrans};
