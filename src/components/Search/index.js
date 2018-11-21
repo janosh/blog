@@ -1,30 +1,26 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import algoliasearch from 'algoliasearch/lite'
 import {
   InstantSearch,
-  SearchBox,
   Index,
   Hits,
-  Stats,
   connectStateResults,
 } from 'react-instantsearch-dom'
 import { Algolia } from 'styled-icons/fa-brands/Algolia'
 
-import { Root, HitsWrapper, Input, Loupe, By } from './styles'
-import PageHit from './PageHit'
-import PostHit from './PostHit'
-
-const searchClient = algoliasearch(
-  'ZOE4SGQ9EG',
-  '14dedbd0f24d124cf32c1c9f9ff3df61'
-)
+import { Root, SearchBox, HitsWrapper, By } from './styles'
+import * as hitComps from './hits'
 
 const events = ['mousedown', 'touchstart']
 
 const Results = connectStateResults(
-  ({ searchState: state, searchResults: results, children }) =>
-    results && results.nbHits ? children : `No results for ${state.query}`
+  ({ searchState: state, searchResults: res, children }) =>
+    res && res.nbHits ? children : `No results for ${state.query}`
+)
+
+const Stats = connectStateResults(
+  ({ searchResults: res }) =>
+    res && `${res.nbHits} Result${res.nbHits !== 1 ? `s` : ``}`
 )
 
 export default class Search extends Component {
@@ -60,39 +56,33 @@ export default class Search extends Component {
   }
 
   render() {
+    const { query, showHits } = this.state
+    const { indices, collapse, hitsAsGrid } = this.props
     return (
       <InstantSearch
-        indexName="Pages"
-        searchClient={searchClient}
+        appId="ZOE4SGQ9EG"
+        apiKey="14dedbd0f24d124cf32c1c9f9ff3df61"
+        indexName={indices[0].name}
         onSearchStateChange={this.updateState}
         root={{ Root }}
         ref={node => (this.node = node)}
       >
-        <Input>
-          <SearchBox
-            translations={{ placeholder: `Search` }}
-            onFocus={this.enableHits}
-          />
-          <Loupe />
-        </Input>
-        <HitsWrapper show={this.state.query.length > 0 && this.state.showHits}>
-          <Stats
-            translations={{
-              stats: n => `${n} Result${n > 1 ? `s` : ``}`,
-            }}
-          />
-          <Index indexName="Pages">
-            <h2>Pages</h2>
-            <Results>
-              <Hits hitComponent={PageHit(this.disableHits)} />
-            </Results>
-          </Index>
-          <Index indexName="Posts">
-            <h2>Posts</h2>
-            <Results>
-              <Hits hitComponent={PostHit(this.disableHits)} />
-            </Results>
-          </Index>
+        <SearchBox collapse={collapse} onFocus={this.enableHits} />
+        <HitsWrapper
+          show={query.length > 0 && showHits}
+          hitsAsGrid={hitsAsGrid}
+        >
+          {indices.map(({ name, title, hitComp }) => (
+            <Index key={name} indexName={name}>
+              <header>
+                {title && <h2>{title}</h2>}
+                <Stats />
+              </header>
+              <Results>
+                <Hits hitComponent={hitComps[hitComp](this.disableHits)} />
+              </Results>
+            </Index>
+          ))}
           <By>
             Powered by{' '}
             <a href="https://www.algolia.com">
