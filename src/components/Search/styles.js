@@ -1,73 +1,74 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Search } from 'styled-icons/fa-solid/Search'
+import Input from './SearchBox'
 
 export const Root = styled.div`
   position: relative;
+  display: grid;
+  grid-gap: 1em;
 `
 
-export const Input = styled.div`
+export const Loupe = styled(Search)`
+  width: 1em;
+  margin: 0.3em;
+  pointer-events: none;
+`
+
+const collapse = css`
+  width: 0;
+  cursor: pointer;
+  color: ${props => props.theme.lightBlue};
+  + ${Loupe} {
+    color: ${props => props.theme.mainWhite};
+  }
+  :focus {
+    background: ${props => props.theme.mainWhite};
+    color: ${props => props.theme.mainGray};
+    cursor: text;
+    width: 5em;
+    + ${Loupe} {
+      color: ${props => props.theme.mainGray};
+    }
+  }
+  ::placeholder {
+    color: ${props => props.theme.mainGray};
+  }
+`
+
+const expand = css`
+  background: ${props => props.theme.lightGray};
+  width: 6em;
+`
+
+export const SearchBox = styled(Input)`
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  color: ${props => props.theme.mainWhite};
-  border-radius: ${props => props.theme.smallBorderRadius};
-  transition: ${props => props.theme.shortTrans};
-  :focus-within {
-    background: ${props => props.theme.mainWhite};
-    color: ${props => props.theme.darkBlue};
-  }
   input {
-    color: ${props => props.theme.darkBlue};
     outline: none;
     border: none;
     font-size: 1em;
-    width: 0;
     background: transparent;
-    appearance: textfield;
     transition: ${props => props.theme.shortTrans};
-    margin-left: -1.8em;
-    padding-left: 1.8em;
-    cursor: pointer;
-    :focus {
-      cursor: text;
-      width: 7em;
-    }
-    ::placeholder {
-      color: ${props => props.theme.darkBlue};
-    }
-    ::-webkit-search-cancel-button {
-      display: none;
-    }
-  }
-  button {
-    display: none;
+    margin-left: -1.6em;
+    padding-left: 1.6em;
+    border-radius: ${props => props.theme.smallBorderRadius};
+    ${props => (props.collapse ? collapse : expand)};
   }
 `
 
-export const HitsWrapper = styled.div`
-  display: ${props => (props.show ? `grid` : `none`)};
+const list = css`
   position: absolute;
   right: 0;
   top: calc(100% + 0.5em);
-  width: calc(5em + 30vw);
+  width: calc(4em + 40vw);
+  max-width: 30em;
+  box-shadow: 0 0 5px 0;
+  padding: 0.7em 1em 0.4em;
   background: ${props => props.theme.mainWhite};
   border-radius: ${props => props.theme.smallBorderRadius};
-  max-height: 80vh;
-  overflow: scroll;
-  padding: 0.7em 1em 0.4em;
-  box-shadow: 0 0 5px 0;
-  * {
-    margin-top: 0;
-    list-style: none;
-    padding: 0;
-  }
-  mark {
-    color: ${props => props.theme.mainWhite};
-    background: ${props => props.theme.darkBlue};
-    font-style: normal;
-  }
   > * + * {
-    padding-top: 1em;
+    padding-top: 1em !important;
     border-top: 2px solid ${props => props.theme.darkGray};
   }
   li + li {
@@ -75,15 +76,47 @@ export const HitsWrapper = styled.div`
     padding-top: 0.7em;
     border-top: 1px solid ${props => props.theme.lightGray};
   }
-  h3 {
-    margin-bottom: 0.3em;
+`
+
+const grid = css`
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+    grid-gap: 1em;
+    li {
+      padding: 0.3em 0.5em;
+      background: ${props => props.theme.veryLightGray};
+      border-radius: ${props => props.theme.smallBorderRadius};
+    }
   }
 `
 
-export const Loupe = styled(Search)`
-  width: 1em;
-  margin: 0.2em 0.4em;
-  pointer-events: none;
+export const HitsWrapper = styled.div`
+  display: ${props => (props.show ? `grid` : `none`)};
+  max-height: 80vh;
+  overflow: scroll;
+  ${props => (props.hitsAsGrid ? grid : list)};
+  * {
+    margin-top: 0;
+    padding: 0;
+  }
+  ul {
+    list-style: none;
+  }
+  mark {
+    color: ${props => props.theme.mainWhite};
+    background: ${props => props.theme.darkBlue};
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+  }
+  h2 {
+    margin: 0 0 0.5em;
+  }
+  h3 {
+    margin-bottom: 0.3em;
+  }
 `
 
 export const By = styled.span`
