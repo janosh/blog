@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Highlight, Snippet } from 'react-instantsearch-dom'
 import { Link } from 'gatsby'
 import { Calendar } from 'styled-icons/octicons/Calendar'
@@ -11,22 +11,22 @@ const PostHit = clickHandler => ({ hit }) => (
         <Highlight attribute="title" hit={hit} tagName="mark" />
       </h3>
     </Link>
-    <p>
+    <div>
       <Calendar size="1em" />
       &nbsp;
       <Highlight attribute="date" hit={hit} tagName="mark" />
       &emsp;
       <Tags size="1em" />
-      {hit.categories.map(category => (
-        <Link
-          key={category}
-          to={`/blog/` + category.toLowerCase().replace(` `, `-`)}
-        >
-          &nbsp;
-          {category}
-        </Link>
+      &nbsp;
+      {hit.categories.map((category, index) => (
+        <Fragment key={category}>
+          {!!index && ', '}
+          <Link to={`blog/` + category.toLowerCase().replace(` `, `-`)}>
+            {category}
+          </Link>
+        </Fragment>
       ))}
-    </p>
+    </div>
     <Snippet attribute="excerpt" hit={hit} tagName="mark" />
   </div>
 )
