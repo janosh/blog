@@ -20,7 +20,7 @@ const Results = connectStateResults(
 
 const Stats = connectStateResults(
   ({ searchResults: res }) =>
-    res && `${res.nbHits} Result${res.nbHits !== 1 ? `s` : ``}`
+    res && res.nbHits > 0 && `${res.nbHits} Result${res.nbHits > 1 ? `s` : ``}`
 )
 
 export default class Search extends Component {
