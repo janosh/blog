@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import Global from '../components/Global'
 import PageTitle from '../components/PageTitle'
 import CategoryList from '../components/CategoryList'
-import PostsList from '../components/PostsList'
+import PostList from '../components/PostList'
 
 const blogCategoryTemplate = ({ data, location }) => {
   const { posts, categories } = data
@@ -17,7 +17,7 @@ const blogCategoryTemplate = ({ data, location }) => {
       </PageTitle>
       <div>
         <CategoryList categories={categories.group} />
-        {posts && <PostsList posts={posts.edges} />}
+        {posts && <PostList posts={posts.edges} />}
       </div>
     </Global>
   )
