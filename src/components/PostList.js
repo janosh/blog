@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import PostExcerpt from './PostExcerpt'
 
-const PostsList = ({ posts }) => (
+const PostList = ({ posts }) => (
   <div>
     {posts.map(({ node: post }) => (
       <PostExcerpt key={post.frontmatter.slug} post={post} />
@@ -11,12 +11,12 @@ const PostsList = ({ posts }) => (
   </div>
 )
 
-export default PostsList
+export default PostList
 
-PostsList.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.object)
+PostList.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object),
 }
 
-PostsList.defaultProps = {
+PostList.defaultProps = {
   posts: [],
 }
