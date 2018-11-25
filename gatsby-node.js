@@ -53,11 +53,15 @@ exports.createPages = async ({ graphql, actions }) => {
       })
     }
   })
-  categories.group.forEach(category => {
-    const { title } = category
+  tags = tags.group.map(({ title }) => ({
+    title,
+    slug: title.toLowerCase().replace(` `, `-`),
+  }))
+  tags.push({ title: `All`, slug: `` })
+  tags.forEach(({ title, slug }) => {
     createPage({
-      path: `/blog/` + title.toLowerCase().replace(` `, `-`),
-      component: categoryTemplate,
+      path: `/blog/` + slug,
+      component: tagTemplate,
       context: { title },
     })
   })
