@@ -14,8 +14,8 @@ const Contact = ({ location }) => {
       <p>You can reach me by email or on any of these platforms.</p>
       <Social size="2em" />
       <p>
-        If you're in the area and want to meet in person, I spend most of my
-        days at the Maxwell Centre. Feel free to drop by.
+        I spend most of my days at the Maxwell Centre. If you're in the area,
+        feel free to drop by.
       </p>
       <iframe
         title="contactMap"
