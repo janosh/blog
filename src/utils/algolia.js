@@ -1,7 +1,7 @@
 const pageQuery = `{
   pages: allMarkdownRemark(
     filter: {
-      fileAbsolutePath: { regex: "/content/pages/" },
+      fileAbsolutePath: { regex: "/pages/" },
       frontmatter: {purpose: {eq: "page"}}
     }
   ) {
@@ -20,7 +20,7 @@ const pageQuery = `{
 
 const postQuery = `{
   posts: allMarkdownRemark(
-    filter: { fileAbsolutePath: { regex: "/content/posts/" } }
+    filter: { fileAbsolutePath: { regex: "/posts/" } }
   ) {
     edges {
       node {
@@ -28,6 +28,7 @@ const postQuery = `{
         frontmatter {
           title
           slug
+          date(formatString: "MMM DD, YYYY")
           tags
         }
         excerpt(pruneLength: 5000)
@@ -36,26 +37,25 @@ const postQuery = `{
   }
 }`
 
+const flatten = arr =>
+  arr.map(({ node: { frontmatter, ...rest } }) => ({
+    ...frontmatter,
+    ...rest,
+  }))
+const settings = { attributesToSnippet: [`excerpt:20`] }
+
 const queries = [
   {
     query: pageQuery,
-    transformer: ({ data }) =>
-      data.pages.edges.map(({ node: { frontmatter, ...rest } }) => ({
-        ...frontmatter,
-        ...rest,
-      })),
+    transformer: ({ data }) => flatten(data.pages.edges),
     indexName: `Pages`,
-    settings: { attributesToSnippet: [`excerpt:20`] },
+    settings,
   },
   {
     query: postQuery,
-    transformer: ({ data }) =>
-      data.posts.edges.map(({ node: { frontmatter, ...rest } }) => ({
-        ...frontmatter,
-        ...rest,
-      })),
+    transformer: ({ data }) => flatten(data.posts.edges),
     indexName: `Posts`,
-    settings: { attributesToSnippet: [`excerpt:20`] },
+    settings,
   },
 ]
 
