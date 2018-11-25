@@ -28,8 +28,7 @@ const postQuery = `{
         frontmatter {
           title
           slug
-          date(formatString: "MMMM DD, YYYY")
-          categories
+          tags
         }
         excerpt(pruneLength: 5000)
       }

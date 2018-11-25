@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 
-export const CategoryLink = styled(Link)`
+export const TagLink = styled(Link)`
   padding: 0 0.5em;
   margin-right: 1em;
   color: ${props => props.theme.darkGray};

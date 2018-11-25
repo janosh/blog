@@ -3,8 +3,7 @@ title: First Post
 slug: first-post
 date: 2018-07-27
 cover: ./images/gatsby+styled-components.png
-categories:
-  - Testing
+tags:
   - Web Development
 ---
 
