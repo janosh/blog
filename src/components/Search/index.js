@@ -11,8 +11,6 @@ import { Algolia } from 'styled-icons/fa-brands/Algolia'
 import { Root, SearchBox, HitsWrapper, By } from './styles'
 import * as hitComps from './hits'
 
-const events = ['mousedown', 'touchstart']
-
 const Results = connectStateResults(
   ({ searchState: state, searchResults: res, children }) =>
     res && res.nbHits ? children : `No results for ${state.query}`
@@ -23,6 +21,7 @@ const Stats = connectStateResults(
     res && res.nbHits > 0 && `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`
 )
 
+const events = ['mousedown', 'touchstart']
 export default class Search extends Component {
   state = { query: ``, showHits: false }
 
