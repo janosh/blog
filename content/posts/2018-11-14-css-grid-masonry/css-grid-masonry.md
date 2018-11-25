@@ -3,9 +3,10 @@ title: Masonry Layout with CSS Grid
 slug: css-grid-masonry
 date: 2018-11-14
 cover: ./images/ocean-artup-blog.png
-categories:
+tags:
   - Design
   - Web Development
+  - Tutorial
 ---
 
 Back in early January, [Wes Bos](https://github.com/wesbos) asked [Rachel Andrew](https://github.com/rachelandrew) the excellent [question](https://github.com/rachelandrew/cssgrid-ama/issues/19) if CSS grid could be used to produce a masonry layout (think Pinterest). Turns out the spec doesn't support it. Makes sense if you think about. A proper masonry layout doesn't have rows and without rows, it's not a grid. Still it would have been cool if CSS grid had you covered, anyway. At least for now though, that is late 2018, almost 2 years after the question. It still doesn't.

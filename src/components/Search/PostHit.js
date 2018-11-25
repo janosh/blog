@@ -18,12 +18,10 @@ const PostHit = clickHandler => ({ hit }) => (
       &emsp;
       <Tags size="1em" />
       &nbsp;
-      {hit.categories.map((category, index) => (
-        <Fragment key={category}>
+      {hit.tags.map((tag, index) => (
+        <Fragment key={tag}>
           {!!index && ', '}
-          <Link to={`blog/` + category.toLowerCase().replace(` `, `-`)}>
-            {category}
-          </Link>
+          <Link to={`blog/` + tag.toLowerCase().replace(` `, `-`)}>{tag}</Link>
         </Fragment>
       ))}
     </div>
