@@ -280,7 +280,7 @@ const Stats = connectStateResults(
 
 Next we define two small connected components. `Results` informs the user that no matches could be found for a query if `searchResults.nbHits == 0`. `Stats` just displays `searchResults.nbHits`.
 
-Now comes the actual `Search` components class. It starts off with a bunch of setup, i.e. initialize state, define handler functions, and finally add event listener. These are all just to make the search input slide out when the user clicks a loupe and make it disappear again when the user clicks anywhere else or starts to scroll.
+Now comes the actual `Search` components class. It starts off with a bunch of setup, i.e. initialize state, define handler functions and make those trigger with event listeners. These are all just to make the search input slide out when the user clicks a loupe and make it disappear again when the user clicks anywhere else or starts to scroll.
 
 ```javascript
 const { indices, collapse, hitsAsGrid } = this.props
