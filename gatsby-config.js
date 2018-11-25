@@ -1,6 +1,6 @@
-const queries = require('./src/utils/algolia')
+const queries = require(`./src/utils/algolia`)
 
-require('dotenv').config()
+require(`dotenv`).config()
 
 module.exports = {
   siteMetadata: {
@@ -34,6 +34,13 @@ module.exports = {
               linkImagesToOriginal: false,
             },
           },
+          {
+            resolve: `gatsby-remark-emojis`,
+            options: {
+              active: true,
+              size: 24,
+            },
+          },
         ],
       },
     },
@@ -51,7 +58,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: 'UA-122970164-1',
+        trackingId: `UA-122970164-1`,
       },
     },
     {
@@ -66,7 +73,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-favicon`,
       options: {
-        logo: './content/favicon.png',
+        logo: `./content/favicon.png`,
       },
     },
     `gatsby-plugin-react-helmet`,
