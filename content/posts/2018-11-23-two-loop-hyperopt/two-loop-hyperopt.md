@@ -3,10 +3,11 @@ title: Two-Loop Hyperoptimization
 slug: two-loop-hyperopt
 date: 2018-11-23
 cover: ./images/bayesian-optimization.png
-categories:
+tags:
   - Machine Learning
   - Data Science
   - Bayesian Methods
+  - Tutorial
 ---
 
 I recently started using [Scikit-Optimize](https://scikit-optimize.github.io/) (or `skopt` for short) for hyperoptimizing several fully-connected neural networks. Overall, it was a very helpful tool! The hyperparameters I wanted to optimize were
