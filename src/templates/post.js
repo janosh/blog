@@ -25,7 +25,7 @@ export const postQuery = graphql`
       title
       slug
       date(formatString: "MMMM DD, YYYY")
-      categories
+      tags
       cover {
         img: childImageSharp {
           fluid(maxWidth: 2500, quality: 100) {
