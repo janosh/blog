@@ -8,6 +8,8 @@ purpose: page
 
 Below are solutions to all the exercises as well as to the mock and the final exam.
 
+The corresponding codes can be found in [this repo](https://github.com/janosh/numeric-simulations).
+
 ## Exam
 
 <div class="grid docs">
