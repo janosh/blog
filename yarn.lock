@@ -12559,10 +12559,10 @@ styled-components@^4.1.2:
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
 
-styled-icons@^5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/styled-icons/-/styled-icons-5.2.1.tgz#6eeaa52f88de64a1b81e54235a24a571d826c6ef"
-  integrity sha512-C5rBMskm/5hATJard26mJoWzbBX8YApOqjgTpjKwHwI//HhXInBFXwVhJWI/TTXbNSiwfVusqX2geZMHBldhuA==
+styled-icons@5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/styled-icons/-/styled-icons-5.1.0.tgz#5b6cd601728b493d6c41902f7ffaf4531436584e"
+  integrity sha512-Pql8xLxAdQ10i0+mwMWvBD0n3DU1+FN73hrIj5UrkMs4qq+HxFhGosMsloxx5ezAToYocvLVIIPkSSqdCh2m/Q==
 
 stylehacks@^4.0.0:
   version "4.0.1"
