@@ -10,7 +10,7 @@ tags:
   - Tutorial
 ---
 
-I recently started using [Scikit-Optimize](https://scikit-optimize.github.io/) (or `skopt` for short) for hyperoptimizing several fully-connected neural networks. Overall, it was a very helpful tool! The hyperparameters I wanted to optimize were
+I recently started using [Scikit-Optimize](https://scikit-optimize.github.io/) (or `skopt` for short) for hyperoptimizing a bunch of fully-connected neural networks. Overall, it's been a very helpful tool! The hyperparameters I wanted to optimize were
 
 - the number of layers $n_\text{l}$
 - the optimizer's learning rate $r_l$
@@ -18,19 +18,21 @@ I recently started using [Scikit-Optimize](https://scikit-optimize.github.io/) (
 - the dropout rate for the Monte Carlo dropout layers inserted after every dense layer $r_{\text{d},i}$
 - each layers activation function $a_i$
 
-where in each case $i \in \{1,\dots,n_\text{l}\}$. And right there I had a use case that `skopt`'s Gaussian process minimization [`gp_minimize`](https://scikit-optimize.github.io/#skopt.gp_minimize) (and for that matter all of its minimization algortihms) doesn't appear to cover - at least not out of the box. The difficulty is that the last three items in the list depend on the value of the first one. That's an ill-posed optimization problem. What you're asking is to minimize a loss function $L$ of some feature matrix $X$ over a domain $\mathcal{D}$ which depends itself on the current parameters $\theta$ of $L$.
+where in each case $i \in \{1,\dots,n_\text{l}\}$. And right there I had a use case that `skopt` doesn't appear to cover - at least not out of the box. The difficulty is that the last three items in the list depend on the value of the first one. That's an ill-posed optimization problem. What that's asking is to minimize a loss function $L_\theta$ of some feature matrix $X$ parametrized by $\theta$ over a domain $\mathcal{D}$ which depends itself on the current parameters $\theta$, i.e.
 
 $$
-\underset{\theta \in \mathcal{D}(\theta)}{\arg \min} \; L_\theta(X)
+\theta_\text{min} = \underset{\theta \in \mathcal{D}(\theta)}{\arg \min} \; L_\theta(X).
 $$
 
-Luckily, there's a simple fix. We just split the problem into two separate minimization problems by pulling everything that doesn't depend on the number of layers $n_\text{l}$ into an outer loop and leave everything else as is. Hence, two-loop hyperoptimization. This gives
+Luckily, there's a simple fix. We just split the problem into two separate minimizations by pulling everything that doesn't depend on the number of layers $n_\text{l}$ into an outer loop. Hence, two-loop hyperoptimization. This yields
 
 $$
-\underset{\theta_1 \in \mathcal{D}_1}{\arg \min} \; \underset{\theta_2 \in \mathcal{D}_2(\theta_1)}{\arg \min} \; L_{\theta_1 \theta_2}(X)
+\theta_\text{min} = \underset{\theta_1 \in \mathcal{D}_1}{\arg \min} \; \underset{\theta_2 \in \mathcal{D}_2(\theta_1)}{\arg \min} \; L_{\theta_1 \theta_2}(X),
 $$
 
-Implemented in Python is doesn't look quite as pretty any more, unfortunately. To some degree that is because `skopt` insists on calling its objective function with a list of the current set of hyperparameters as single argument. That means bringing in any additional arguments as needed in this case to bring in the current parameters of the outer loop into the inner one requires some workaround. I opted for slightly painful and verbose currying. See for yourself:
+where $\theta = (\theta_1,\theta_2)$ with $\theta_1 = (n_\text{l}, r_l)$, $\theta_2 = (n_{\text{n},i}, r_{\text{d},i}, a_i)$.
+
+Implemented in Python it doesn't look quite as pretty any more. To some degree that is because `skopt` insists on calling its objective function with a single argument, namely a list of the current set of hyperparameters. That means bringing in any additional arguments as required in this case to access the current parameters of the outer loop inside the inner one requires some workaround. The best I could come up with is some slightly verbose currying. See for yourself:
 
 ```python
 import keras
@@ -40,7 +42,7 @@ from skopt.space import Categorical, Integer, Real
 
 from .cross_val import cross_val
 
-# iteration counter for the outer and inner minimization loop
+# iteration counter for the current outer and inner minimization loop
 iter_counts = [1, 1]
 
 
@@ -48,12 +50,12 @@ def hyper_opt(model, data, n_calls=(10, 10), methods=["gp"], n_splits=3, verbose
     """
     model: instance of Model class
     data: instance of Data class
-    n_calls: 2-tuple of ints, number of iterations for the inner and outer minimization loop, resp.
+    n_calls: 2-tuple of ints, number of iterations for the (outer, inner) minimization loop
     methods: list of strings containing one or more of gp, dummy, forest
         specifies which of skopt's minimizers to try
     n_splits: int how many cross validations to perform, min=1
     """
-    outer_space = [
+    outer_space = [  # pun intended
         # number of layers
         Integer(1, 5, name="n_layers"),
         # optimizer's learning rate
