@@ -18,7 +18,7 @@ export default class Slideshow extends Component {
   }
 
   static defaultProps = {
-    delay: 4,
+    delay: 6.5,
   }
 
   state = { current: 0 }
