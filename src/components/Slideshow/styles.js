@@ -10,8 +10,8 @@ export const SlideContainer = styled.div`
 
 export const Slide = styled.div`
   grid-area: 1 / 1 / 1 / 1;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   object-fit: cover;
   .gatsby-image-wrapper {
     height: 100%;
