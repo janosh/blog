@@ -17,7 +17,7 @@ const Header = ({ site, transparent }) => (
       JR
     </Logo>
     <Nav />
-    <Social collapse short css={navLinkStyle} />
+    <Social collapse short linkStyle={navLinkStyle} />
     <Search collapse indices={searchIndices} />
   </Container>
 )
