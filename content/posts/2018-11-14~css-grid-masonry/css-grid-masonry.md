@@ -38,16 +38,31 @@ import React, { Component } from 'react'
 import { Parent, Child } from './styles'
 
 export default class Masonry extends Component {
+  static defaultProps = {
+    rowHeight: 40, // in pixels
+    colWidth: `15em`,
+  }
+
   state = { spans: [], ref: React.createRef() }
 
-  componentDidMount() {
-    const node = this.state.ref.current
+  computeSpans = () => {
+    const { rowHeight } = this.props
     const spans = []
-    Array.from(node.children).forEach(child => {
-      console.log(child.clientHeight)
-      spans.push(Math.ceil(child.clientHeight / this.props.rowHeight))
+    Array.from(this.state.ref.current.children).forEach(child => {
+      const span = Math.ceil(child.clientHeight / rowHeight)
+      spans.push(span + 1)
+      child.style.height = span * rowHeight + `px`
     })
     this.setState({ spans })
+  }
+
+  componentDidMount() {
+    this.computeSpans()
+    window.addEventListener('resize', this.computeSpans)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.computeSpans)
   }
 
   render() {
@@ -61,11 +76,6 @@ export default class Masonry extends Component {
       </Parent>
     )
   }
-}
-
-Masonry.defaultProps = {
-  rowHeight: 50, // in pixels
-  colWidth: 15em,
 }
 ```
 
