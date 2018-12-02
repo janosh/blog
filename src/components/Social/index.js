@@ -4,16 +4,16 @@ import PropTypes from 'prop-types'
 
 import { Wrapper, Container, Toggle, Link, Icons } from './styles'
 
-const Social = ({ social, size, collapse, css, short }) => (
+const Social = ({ social, size, collapse, linkStyle, short }) => (
   <Wrapper>
-    {collapse && <Toggle {...{ size, css }} />}
+    {collapse && <Toggle {...{ size, linkStyle }} />}
     <Container {...{ collapse }}>
       {social.map(service => {
         if (short && [`Facebook`, `Youtube`].includes(service.title))
           return undefined
         const Icon = Icons[service.title]
         return (
-          <Link key={service.title} href={service.url} css={css}>
+          <Link key={service.title} href={service.url} css={linkStyle}>
             <Icon size={size} />
           </Link>
         )
