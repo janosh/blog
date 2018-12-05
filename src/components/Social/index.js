@@ -6,14 +6,14 @@ import { Wrapper, Container, Toggle, Link, Icons } from './styles'
 
 const Social = ({ social, size, collapse, linkStyle, short }) => (
   <Wrapper>
-    {collapse && <Toggle {...{ size, linkStyle }} />}
+    {collapse && <Toggle {...{ size, styles: linkStyle }} />}
     <Container {...{ collapse }}>
       {social.map(service => {
         if (short && [`Facebook`, `Youtube`].includes(service.title))
           return undefined
         const Icon = Icons[service.title]
         return (
-          <Link key={service.title} href={service.url} css={linkStyle}>
+          <Link key={service.title} href={service.url} styles={linkStyle}>
             <Icon size={size} />
           </Link>
         )
