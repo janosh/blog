@@ -1,4 +1,4 @@
-![Ocean artUp Homepage](./ocean-artup.png)
+[![Ocean artUp Homepage](./ocean-artup.png)](https://ocean-artup.eu)
 
 ## [Ocean artUp](https://ocean-artup.eu)
 

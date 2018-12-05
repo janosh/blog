@@ -1,4 +1,4 @@
-![Studenten bilden Schüler Homepage](./sbs.png)
+[![Studenten bilden Schüler Homepage](./sbs.png)](https://studenten-bilden-schueler.de)
 
 ## [Studenten bilden Schüler](https://studenten-bilden-schueler.de)
 
