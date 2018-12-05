@@ -15,7 +15,7 @@ No matter though. That just means we have to get a little creative. And indeed, 
 
 I took the liberty to rewrite his approach in more modern JS. That shaved another 4 lines, bringing it down to just 9:
 
-```javascript
+```js
 const numCols = 3
 const colHeights = Array(numCols).fill(0)
 const container = document.getElementById('container')
@@ -31,7 +31,7 @@ However, flexbox gave some trouble. The `flex` items kept disregarding the paren
 
 So I really wanted to make it happen with `grid` instead. If you're using **`react`** and **`styled-components`**, the suggested solution by Rachel Andrews, which is to make the row height $h_\text{r}$ relative to the height of a typical grid item $h_\text{item}$ and make each grid item take up $n = \lceil h_\text{r}/h_\text{item}\rceil$ rows, is quite easy to implement:
 
-```javascript
+```jsx
 // Masonry.js
 import React, { Component } from 'react'
 
@@ -81,7 +81,7 @@ export default class Masonry extends Component {
 
 and the styled components:
 
-```javascript
+```jsx
 // styles.js
 import styled from 'styled-components'
 
@@ -103,7 +103,7 @@ export const Child = styled.div`
 
 There you go. All you need to do, is copy the above two files into your project, change the default props for `rowHeight` and `colWidth` to suit your needs and use the masonry component something like so:
 
-```javascript
+```jsx
 import React from 'react'
 
 import Masonry from '../Masonry'
