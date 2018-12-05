@@ -14,12 +14,12 @@ export const navLinkStyle = css`
   }
 `
 
-export const Container = styled.nav`
-  grid-area: nav;
+export const NavContainer = styled.nav`
   display: grid;
-  grid-gap: 3vw;
+  grid-gap: calc(0.4em + 2vw);
   grid-auto-columns: max-content;
   ${mediaQuery.phablet} {
+    overflow-x: scroll;
     position: fixed;
     right: 100%;
     z-index: 2;
@@ -27,7 +27,7 @@ export const Container = styled.nav`
     padding: 5vh;
     grid-gap: 1em;
     height: 100vh;
-    min-width: 15vw;
+    min-width: 20vw;
     grid-auto-rows: max-content;
     transform: translate(${props => (props.showNav ? `99%` : `0`)});
     transition: ${props => props.theme.mediumTrans};
@@ -37,8 +37,40 @@ export const Container = styled.nav`
   }
 `
 
+export const NavEntry = styled.div`
+  position: relative;
+`
+
 export const NavLink = styled(Link)`
   ${navLinkStyle};
+`
+
+const showSubNav = css`
+  display: grid;
+  visibility: visible;
+  opacity: 1;
+`
+
+export const SubNav = styled.div`
+  display: grid;
+  width: max-content;
+  border-radius: ${props => props.theme.smallBorderRadius};
+  grid-gap: 0.5em;
+  background: ${props => props.theme.mainGray};
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.25s;
+  padding: 0.7em 1em;
+  ${mediaQuery.phablet} {
+    ${props => props.showNav && showSubNav + `position: static;`};
+  }
+  ${mediaQuery.minPhablet} {
+    ${NavEntry}:hover & {
+      left: 0;
+      z-index: 2;
+      ${showSubNav}
+    }
+  }
 `
 
 const inNavToggle = css`

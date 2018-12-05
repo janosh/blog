@@ -1,29 +1,33 @@
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
+import { DownArrow } from 'styled-icons/boxicons-regular/DownArrow'
 
-import { Container, NavLink, Toggle } from './styles'
+import { NavContainer, NavEntry, SubNav, NavLink, Toggle } from './styles'
 
-const events = ['mousedown', 'touchstart']
+const events = [
+  { event: `mousedown`, handler: `handleClickOutside` },
+  { event: `touchstart`, handler: `handleClickOutside` },
+  { event: `scroll`, handler: `handleScroll` },
+]
 
 export default class Nav extends Component {
-  static propTypes = {
-    nav: PropTypes.arrayOf(
-      PropTypes.shape({
-        node: PropTypes.shape({
-          title: PropTypes.string.isRequired,
-          slug: PropTypes.string.isRequired,
-        }),
-      })
-    ),
+  state = {
+    showNav: false,
+    ref: React.createRef(),
+    showSubNav: false,
   }
-  state = { showNav: false }
 
   toggleNav = () => {
-    this.setState({ showNav: !this.state.showNav })
+    this.setState({ showNav: !this.state.showNav, showSubNav: false })
+  }
+
+  toggleSubNav = index => () => {
+    const { showSubNav } = this.state
+    this.setState({ showSubNav: index === showSubNav ? false : index })
   }
 
   handleClickOutside = event => {
-    if (this.node && !this.node.contains(event.target) && this.state.showNav) {
+    const { ref, showNav } = this.state
+    if (!ref.current.contains(event.target) && showNav) {
       this.toggleNav()
     }
   }
@@ -35,43 +39,54 @@ export default class Nav extends Component {
   }
 
   componentDidMount() {
-    events.forEach(event =>
-      document.addEventListener(event, this.handleClickOutside)
+    events.forEach(({ event, handler }) =>
+      document.addEventListener(event, this[handler])
     )
-    document.addEventListener(`scroll`, this.handleScroll)
   }
 
   componentWillUnmount() {
-    events.forEach(event =>
-      document.removeEventListener(event, this.handleClickOutside)
+    events.forEach(({ event, handler }) =>
+      document.removeEventListener(event, this[handler])
     )
-    document.removeEventListener(`scroll`, this.handleScroll)
   }
 
   render() {
+    const { showNav, ref, showSubNav } = this.state
     return (
       <Fragment>
         <Toggle onClick={this.toggleNav}>&#9776;</Toggle>
-        <Container
-          role="navigation"
-          ref={node => (this.node = node)}
-          showNav={this.state.showNav}
-        >
+        <NavContainer role="navigation" ref={ref} showNav={showNav}>
           <Toggle inside onClick={this.toggleNav}>
             &times;
           </Toggle>
-          {this.props.nav.map(item => (
-            <NavLink
-              key={item.slug}
-              activeClassName="active"
-              to={item.slug}
-              title={item.title}
-              onClick={this.toggleNav}
-            >
-              {item.title}
-            </NavLink>
+          {this.props.nav.map(({ url, title, subNav }, index) => (
+            <NavEntry key={url}>
+              <NavLink
+                activeClassName="active"
+                to={url}
+                as={subNav && showNav && showSubNav !== index && `span`}
+                title={title}
+                onClick={this.toggleSubNav(index)}
+              >
+                {title} {subNav && <DownArrow size="0.5em" />}
+              </NavLink>
+              {subNav && (
+                <SubNav showNav={showNav && showSubNav === index}>
+                  {subNav.map(item => (
+                    <NavLink
+                      key={item.url}
+                      to={url + item.url}
+                      title={item.title}
+                      onClick={this.toggleNav}
+                    >
+                      {item.title}
+                    </NavLink>
+                  ))}
+                </SubNav>
+              )}
+            </NavEntry>
           ))}
-        </Container>
+        </NavContainer>
       </Fragment>
     )
   }

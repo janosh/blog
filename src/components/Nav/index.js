@@ -10,7 +10,7 @@ const query = graphql`
       edges {
         node {
           title
-          slug
+          url
         }
       }
     }
@@ -30,7 +30,7 @@ Nav.propTypes = {
   nav: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
     })
   ).isRequired,
 }
