@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component, createRef } from 'react'
 import {
   InstantSearch,
   Index,
@@ -11,6 +10,8 @@ import { Algolia } from 'styled-icons/fa-brands/Algolia'
 import { Root, SearchBox, HitsWrapper, By } from './styles'
 import * as hitComps from './hits'
 
+const events = ['mousedown', 'touchstart']
+
 const Results = connectStateResults(
   ({ searchState: state, searchResults: res, children }) =>
     res && res.nbHits ? children : `No results for ${state.query}`
@@ -21,24 +22,22 @@ const Stats = connectStateResults(
     res && res.nbHits > 0 && `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`
 )
 
-const events = ['mousedown', 'touchstart']
 export default class Search extends Component {
-  state = { query: ``, showHits: false }
+  state = { query: ``, focussed: false, ref: createRef() }
 
   updateState = state => this.setState(state)
 
-  enableHits = () => {
-    this.setState({ showHits: true })
+  focus = () => {
+    this.setState({ focussed: true })
   }
 
   disableHits = () => {
-    this.setState({ showHits: false })
+    this.setState({ focussed: false })
   }
 
   handleClickOutside = event => {
-    const node = ReactDOM.findDOMNode(this.node)
-    if (node && !node.contains(event.target)) {
-      this.setState({ showHits: false })
+    if (!this.state.ref.current.contains(event.target)) {
+      this.setState({ focussed: false })
     }
   }
 
@@ -55,7 +54,7 @@ export default class Search extends Component {
   }
 
   render() {
-    const { query, showHits } = this.state
+    const { query, focussed, ref } = this.state
     const { indices, collapse, hitsAsGrid } = this.props
     return (
       <InstantSearch
@@ -63,18 +62,17 @@ export default class Search extends Component {
         apiKey="14dedbd0f24d124cf32c1c9f9ff3df61"
         indexName={indices[0].name}
         onSearchStateChange={this.updateState}
-        root={{ Root }}
-        ref={node => (this.node = node)}
+        root={{ Root, props: { ref } }}
       >
-        <SearchBox collapse={collapse} onFocus={this.enableHits} />
+        <SearchBox onFocus={this.focus} {...{ collapse, focussed }} />
         <HitsWrapper
-          show={query.length > 0 && showHits}
+          show={query.length > 0 && focussed}
           hitsAsGrid={hitsAsGrid}
         >
           {indices.map(({ name, title, hitComp }) => (
             <Index key={name} indexName={name}>
               <header>
-                {title && <h2>{title}</h2>}
+                <h3>{title}</h3>
                 <Stats />
               </header>
               <Results>
