@@ -1,14 +1,14 @@
 - title: Physics
-  slug: physics
+  url: physics
 
 - title: AI
-  slug: ai
+  url: ai
 
 - title: Web
-  slug: web
+  url: web
 
 - title: Blog
-  slug: blog
+  url: blog
 
 - title: Contact
-  slug: contact
+  url: contact
