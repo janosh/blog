@@ -30,7 +30,7 @@ where $\theta = (\theta_1,\theta_2)$ with $\theta_1 = (n_\text{l}, r_l)$ and $\t
 
 Implemented in Python it doesn't look quite as pretty any more. To some degree that is because `skopt` insists on calling its objective function with a single argument, namely a list of the current set of hyperparameters. That means bringing in any additional arguments as required in this case to access the current parameters of the outer loop inside the inner one requires some workaround. The best I could come up with is some slightly verbose currying. See for yourself:
 
-```python
+```py
 import keras
 import numpy as np
 import skopt
