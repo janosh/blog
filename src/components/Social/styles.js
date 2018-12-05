@@ -35,7 +35,7 @@ const display = css`
   grid-gap: 1.5vw;
   align-items: end;
   grid-auto-columns: max-content;
-  ${props => props.css};
+  ${props => props.styles};
 `
 
 export const Container = styled.div`
@@ -51,15 +51,15 @@ export const Container = styled.div`
 
 export const Toggle = styled(Share)`
   cursor: pointer;
-  font-size: 1.7em;
-  ${props => props.css};
+  font-size: 1.4em;
+  ${props => props.styles};
   ${mediaQuery.minTablet} {
-    display: none !important;
+    display: none;
   }
 `
 
 export const Link = styled.a`
-  ${props => props.css};
+  ${props => props.styles};
 `
 
 export const Icons = {
