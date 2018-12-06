@@ -24,7 +24,7 @@ const Web = ({ data, location }) => {
           />
         ))}
       </Grid>
-      <h2>Technologies I like to use</h2>
+      <h2>My Stack</h2>
       <Grid min="4em" align="center">
         {techNames.edges.map(({ node }) => (
           <a key={node.title} href={node.url}>
