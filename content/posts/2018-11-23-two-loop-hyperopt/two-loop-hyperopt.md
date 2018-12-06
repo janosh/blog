@@ -20,17 +20,21 @@ I recently started using [Scikit-Optimize](https://scikit-optimize.github.io/) (
 
 where in each case $i \in \{1,\dots,n_\text{l}\}$. And right there I had a use case that `skopt` doesn't appear to cover - at least not out of the box. The difficulty is that the last three items in the list depend on the value of the first one. That's an ill-posed optimization problem. What that's asking is to minimize a loss function $L_\theta$ of some feature matrix $X$ parametrized by $\theta$ over a domain $\mathcal{S}$ which depends itself on the current parameters $\theta$, i.e.
 
-$\theta_\text{min} = \underset{\theta \in \mathcal{S}(\theta)}{\arg \min} \; L_\theta(X).$
+$$
+\theta_\text{min} = \underset{\theta \in \mathcal{S}(\theta)}{\arg \min} \; L_\theta(X).
+$$
 
 But of course the search space can't change while we're searching it! Luckily, there's a simple fix. We just split the problem into two separate minimizations by pulling everything that doesn't depend on the number of layers $n_\text{l}$ into an outer loop. Hence, two-loop hyperoptimization. This yields
 
-$\theta_\text{min} = \underset{\theta_1 \in \mathcal{S}_1}{\arg \min} \; \underset{\theta_2 \in \mathcal{S}_2(\theta_1)}{\arg \min} \; L_{\theta_1 \theta_2}(X),$
+$$
+\theta_\text{min} = \underset{\theta_1 \in \mathcal{S}_1}{\arg \min} \; \underset{\theta_2 \in \mathcal{S}_2(\theta_1)}{\arg \min} \; L_{\theta_1 \theta_2}(X),
+$$
 
 where $\theta = (\theta_1,\theta_2)$ with $\theta_1 = (n_\text{l}, r_l)$ and $\theta_{2,i} = (n_{\text{n},i}, r_{\text{d},i}, a_i)$. The full search space is now given by $\mathcal{S} = \mathcal{S}_1 \cup \bigcup_{\theta_1 \in \mathcal{S}_1} \mathcal{S}_2(\theta_1)$.
 
 Implemented in Python it doesn't look quite as pretty any more. To some degree that is because `skopt` insists on calling its objective function with a single argument, namely a list of the current set of hyperparameters. That means bringing in any additional arguments as required in this case to access the current parameters of the outer loop inside the inner one requires some workaround. The best I could come up with is some slightly verbose currying. See for yourself:
 
-```py
+```python
 import keras
 import numpy as np
 import skopt
