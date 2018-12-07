@@ -7,6 +7,7 @@ import Helmet from '../Helmet'
 import Header from '../Header'
 import Footer from '../Footer'
 import theme from '../../utils/theme'
+import Prism from '../../utils/prism'
 import Scroll from '../Scroll'
 
 import { GlobalStyle, Layout } from './styles'
@@ -16,6 +17,7 @@ const Global = ({ children, site, transparent, margin, ...rest }) => (
     <Fragment>
       <Helmet site={site.meta} {...rest} />
       <GlobalStyle />
+      <Prism />
       <Header site={site.meta} transparent={transparent} />
       <Layout margin={margin}>{children}</Layout>
       <Footer />
