@@ -13,4 +13,4 @@ node_modules/
 /public
 
 # environment variables
-.env
+.env*
