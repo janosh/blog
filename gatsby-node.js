@@ -25,19 +25,15 @@ const query = `
   }
 `
 
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
+exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const response = await graphql(query)
   if (response.errors) {
     console.error(response.errors)
     throw new Error(response.errors)
   }
   let { content, tags } = response.data
-  content.edges.forEach(({ node }) => {
-    const {
-      path,
-      frontmatter: { slug, purpose },
-    } = node
+  content.edges.forEach(({ node: { path, frontmatter } }) => {
+    const { slug, purpose } = frontmatter
     if (/content\/pages/.test(path) && purpose === `page`) {
       createPage({
         path: slug,
