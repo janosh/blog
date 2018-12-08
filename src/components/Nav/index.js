@@ -6,12 +6,10 @@ import Nav from './comp'
 
 const query = graphql`
   {
-    nav: allNavYaml {
-      edges {
-        node {
-          title
-          url
-        }
+    nav: file(base: { eq: "nav.yml" }) {
+      children: childrenNavYaml {
+        title
+        url
       }
     }
   }
@@ -20,9 +18,7 @@ const query = graphql`
 export default props => (
   <StaticQuery
     query={query}
-    render={data => (
-      <Nav nav={data.nav.edges.map(({ node }) => node)} {...props} />
-    )}
+    render={data => <Nav nav={data.nav.children} {...props} />}
   />
 )
 
