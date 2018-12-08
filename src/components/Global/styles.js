@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components'
+import 'katex/dist/katex.min.css'
 
 import mediaQuery, { screenSize } from '../../utils/mediaQuery'
 import typography from '../../utils/typography'
