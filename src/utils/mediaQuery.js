@@ -12,16 +12,16 @@ export const screenSize = {
 }
 
 const mediaQuery = {
-  phone: max(screenSize.phone),
-  tablet: max(screenSize.tablet),
-  phablet: max(screenSize.phablet),
-  netbook: max(screenSize.netbook),
-  laptop: max(screenSize.laptop),
-  desktop: max(screenSize.desktop),
+  maxPhone: max(screenSize.phone),
+  maxPhablet: max(screenSize.phablet),
+  maxTablet: max(screenSize.tablet),
+  maxNetbook: max(screenSize.netbook),
+  maxLaptop: max(screenSize.laptop),
+  maxDesktop: max(screenSize.desktop),
 
   minPhone: min(screenSize.phone),
-  minTablet: min(screenSize.tablet),
   minPhablet: min(screenSize.phablet),
+  minTablet: min(screenSize.tablet),
   minNetbook: min(screenSize.netbook),
   minLaptop: min(screenSize.laptop),
   minDesktop: min(screenSize.desktop),
