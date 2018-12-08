@@ -10,27 +10,27 @@ tags:
   - Tutorial
 ---
 
-I recently started using [Scikit-Optimize](https://scikit-optimize.github.io/) (or `skopt` for short) to run Bayesian optimization on the hyperparameters of a bunch of fully-connected neural networks. Overall, it's been a very helpful tool! The hyperparameters I wanted to optimize were
+I recently started using [Scikit-Optimize](https://scikit-optimize.github.io/) (or `skopt` for short) to run Bayesian optimization on the hyperparameters of a bunch of fully-connected neural networks. Overall, it's a very helpful tool! The hyperparameters I optimized are
 
-- the number of layers $n_\text{l}$
+- the number of dense layers $n_\text{l}$
 - the optimizer's learning rate $r_l$
-- the number of nodes per layer $n_{\text{n},i}$
-- the dropout rate for the Monte Carlo dropout layers inserted after every dense layer $r_{\text{d},i}$
-- each layer's activation function $a_i$
+- the numbers of nodes in each layer $N_\text{n} = \{n_{\text{n},i}\}_{i \in I}$
+- the dropout rates for the Monte Carlo dropout layers preceding every dense layer $R_\text{d} = \{r_{\text{d},i}\}_{i \in I}$
+- the activation functions $A = \{a_i\}_{i \in I}$ in each layer
 
-where in each case $i \in \{1,\dots,n_\text{l}\}$. And right there I had a use case that `skopt` doesn't appear to cover - at least not out of the box. The difficulty is that the last three items in the list depend on the value of the first one. That's an ill-posed optimization problem. What that's asking is to minimize a loss function $L_\theta$ of some feature matrix $X$ parametrized by $\theta$ over a domain $\mathcal{S}$ which depends itself on the current parameters $\theta$, i.e.
+where $I = \{1,\dots,n_\text{l}\}$. And right there I had a use case that `skopt` doesn't appear to cover - at least not out of the box. The difficulty is that the last three items in the list depend on the value of the first one. That's an ill-posed optimization problem. We'd be trying to minimize a loss function $L_\theta$ parametrized by the vector $\vec\theta = (n_\text{l}, r_l, N_\text{n}, R_\text{d}, A)$ over a parameter space $\mathcal{S}$ which depends itself on the current parameters $\vec\theta$, i.e.
 
 $$
-\theta_\text{min} = \underset{\theta \in \mathcal{S}(\theta)}{\arg \min} \; L_\theta(X).
+\vec\theta_\text{min} = \underset{\vec\theta \in \mathcal{S}(\vec\theta)}{\arg \min} \; L(\vec\theta).
 $$
 
 But of course the search space can't change while we're searching it! Luckily, there's a simple fix. We just split the problem into two separate minimizations by pulling everything that doesn't depend on the number of layers $n_\text{l}$ into an outer loop. Hence, two-loop hyperoptimization. This yields
 
 $$
-\theta_\text{min} = \underset{\theta_1 \in \mathcal{S}_1}{\arg \min} \; \underset{\theta_2 \in \mathcal{S}_2(\theta_1)}{\arg \min} \; L_{\theta_1 \theta_2}(X),
+\vec\theta_\text{min} = \underset{\vec\theta_1 \in \mathcal{S}_1}{\arg \min} \; \underset{\vec\theta_2 \in \mathcal{S}_2(\vec\theta_1)}{\arg \min} \; L(\vec\theta_1, \vec\theta_2),
 $$
 
-where $\theta = (\theta_1,\theta_2)$ with $\theta_1 = (n_\text{l}, r_l)$ and $\theta_{2,i} = (n_{\text{n},i}, r_{\text{d},i}, a_i)$. The full search space is now given by $\mathcal{S} = \mathcal{S}_1 \cup \bigcup_{\theta_1 \in \mathcal{S}_1} \mathcal{S}_2(\theta_1)$.
+where $\vec\theta = (\vec\theta_1,\vec\theta_2)$ with $\vec\theta_1 = (n_\text{l}, r_l)$ and $\vec\theta_{2,i} = (N_\text{n}, R_\text{d}, A)$. The full search space is then given by $\mathcal{S} = \mathcal{S}_1 \cup \bigcup_{\vec\theta_1 \in \mathcal{S}_1} \mathcal{S}_2(\vec\theta_1)$.
 
 Implemented in Python it doesn't look quite as pretty any more. To some degree that is because `skopt` insists on calling its objective function with a single argument, namely a list of the current set of hyperparameters. That means bringing in any additional arguments as required in this case to access the current parameters of the outer loop inside the inner one requires some workaround. The best I could come up with is some slightly verbose currying. See for yourself:
 
