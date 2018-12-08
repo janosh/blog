@@ -4,8 +4,6 @@ import { graphql } from 'gatsby'
 import Global from '../components/Global'
 import PostTitle from '../components/PostTitle'
 
-import 'katex/dist/katex.min.css'
-
 const PostTemplate = ({ data, location }) => {
   const { frontmatter, excerpt, html } = data.post
   const path = location.pathname
