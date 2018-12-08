@@ -18,7 +18,7 @@ export const NavContainer = styled.nav`
   display: grid;
   grid-gap: calc(0.4em + 2vw);
   grid-auto-columns: max-content;
-  ${mediaQuery.phablet} {
+  ${mediaQuery.maxPhablet} {
     overflow-x: scroll;
     position: fixed;
     right: 100%;
@@ -61,7 +61,7 @@ export const SubNav = styled.div`
   position: absolute;
   transition: opacity 0.25s;
   padding: 0.7em 1em;
-  ${mediaQuery.phablet} {
+  ${mediaQuery.maxPhablet} {
     ${props => props.showNav && showSubNav + `position: static;`};
   }
   ${mediaQuery.minPhablet} {

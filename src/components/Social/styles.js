@@ -44,7 +44,7 @@ export const Container = styled.div`
   ${mediaQuery.minTablet} {
     ${display};
   }
-  ${mediaQuery.tablet} {
+  ${mediaQuery.maxTablet} {
     ${props => (props.collapse ? collapse : display)};
   }
 `
