@@ -4,8 +4,6 @@ import { graphql } from 'gatsby'
 import Global from '../components/Global'
 import PageTitle from '../components/PageTitle'
 
-import 'katex/dist/katex.min.css'
-
 const PageTemplate = ({ data, location }) => {
   const {
     frontmatter: { title },
