@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import { Search } from 'styled-icons/fa-solid/Search'
-import Input from './SearchBox'
 
 export const Root = styled.div`
   position: relative;
@@ -9,8 +8,19 @@ export const Root = styled.div`
 `
 
 export const Loupe = styled(Search)`
-  width: 1.1em;
+  width: 1em;
   pointer-events: none;
+`
+
+const focussed = css`
+  background: ${props => props.theme.mainWhite};
+  color: ${props => props.theme.darkBlue};
+  cursor: text;
+  width: 5em;
+  + ${Loupe} {
+    color: ${props => props.theme.darkBlue};
+    margin: 0.3em;
+  }
 `
 
 const collapse = css`
@@ -20,43 +30,38 @@ const collapse = css`
   + ${Loupe} {
     color: ${props => props.theme.mainWhite};
   }
-  :focus {
-    background: ${props => props.theme.mainWhite};
-    color: ${props => props.theme.mainGray};
-    cursor: text;
-    width: 5em;
-    + ${Loupe} {
-      color: ${props => props.theme.mainGray};
-    }
-  }
+  ${props => props.focussed && focussed}
+  margin-left: ${props => (props.focussed ? `-1.6em` : `-1em`)};
+  padding-left: ${props => (props.focussed ? `1.6em` : `1em`)};
   ::placeholder {
     color: ${props => props.theme.mainGray};
   }
 `
 
 const expand = css`
-  background: ${props => props.theme.lightGray};
+  background: ${props => props.theme.veryLightGray};
   width: 6em;
+  margin-left: -1.6em;
+  padding-left: 1.6em;
+  + ${Loupe} {
+    margin: 0.3em;
+  }
 `
 
-export const SearchBox = styled(Input)`
+export const InputField = styled.input`
+  outline: none;
+  border: none;
+  font-size: 1em;
+  background: transparent;
+  transition: ${props => props.theme.shortTrans};
+  border-radius: ${props => props.theme.smallBorderRadius};
+  ${props => (props.collapse ? collapse : expand)};
+`
+
+export const Form = styled.form`
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  input {
-    outline: none;
-    border: none;
-    font-size: 1em;
-    background: transparent;
-    transition: ${props => props.theme.shortTrans};
-    margin-left: ${props => (props.focussed ? `-1.6em` : `-1em`)};
-    padding-left: ${props => (props.focussed ? `1.6em` : `1em`)};
-    border-radius: ${props => props.theme.smallBorderRadius};
-    ${props => (props.collapse ? collapse : expand)};
-  }
-  input + svg {
-    margin: ${props => props.focussed && `0.3em`};
-  }
 `
 
 const list = css`
