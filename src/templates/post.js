@@ -17,7 +17,7 @@ const PostTemplate = ({ data, location }) => {
 
 export default PostTemplate
 
-export const postQuery = graphql`
+export const query = graphql`
   fragment postFields on MarkdownRemark {
     frontmatter {
       title

@@ -36,7 +36,7 @@ const tagTemplate = ({ data, location, title = `Blog`, pageContext }) => {
 
 export default tagTemplate
 
-export const tagQuery = graphql`
+export const query = graphql`
   {
     posts: allMarkdownRemark(
       filter: { fileAbsolutePath: { regex: "/posts/" } }
