@@ -6,7 +6,7 @@ purpose: page
 
 I'm currently working at Cambridge University's Maxwell Centre under the supervision of [Alpha Lee](https://alpha-lee.com) on applications of machine learning in physics.
 
-![Maxwell Centre](./maxwell-centre.jpg)
+![Maxwell Centre](maxwell-centre.jpg)
 
 More specifically, we recently started out on a project that aims to discover high figure of merit ($zT > 1$) and sustainable (lead-free and rare earth-free) bulk thermoelectrics using machine learning-guided experimentation. The key advance is going beyond 'big data' – both first principles calculations and experimental synthesis and characterisation of bulk thermoelectrics are costly and low throughput – and instead move towards 'optimal data' by developing novel algorithms that optimize thermoelectric performance ($z T$) with minimal number of expensive calculations and experiments.
 
