@@ -6,19 +6,16 @@ import Global from '../components/Global'
 import Slideshow from '../components/Slideshow'
 import LandingTitle from '../components/LandingTitle'
 
-const LandingPage = ({ data, location }) => {
-  const { photos, me } = data
-  return (
-    <Global margin="0" transparent path={location.pathname}>
-      <Slideshow>
-        {photos.edges.map(({ node }) => (
-          <Img key={node.name} fluid={node.img.fluid} alt={node.name} />
-        ))}
-      </Slideshow>
-      <LandingTitle me={me} />
-    </Global>
-  )
-}
+const LandingPage = ({ data: { photos, me }, location }) => (
+  <Global margin="0" transparent path={location.pathname}>
+    <Slideshow>
+      {photos.edges.map(({ node }) => (
+        <Img key={node.name} fluid={node.img.fluid} alt={node.name} />
+      ))}
+    </Slideshow>
+    <LandingTitle me={me} />
+  </Global>
+)
 
 export default LandingPage
 

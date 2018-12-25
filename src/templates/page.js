@@ -27,7 +27,7 @@ const PageTemplate = ({ data, location }) => {
 
 export default PageTemplate
 
-export const pageQuery = graphql`
+export const query = graphql`
   query($slug: String!) {
     page: markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       frontmatter {
