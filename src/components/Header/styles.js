@@ -18,7 +18,6 @@ export const Container = styled.div`
   ${props => (props.transparent ? transparent : opaque)};
   display: grid;
   grid-gap: 3vw;
-  align-items: center;
   justify-items: center;
   justify-content: space-between;
   grid-template-areas: 'nav title social search';
