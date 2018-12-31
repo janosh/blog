@@ -6,11 +6,11 @@ yarn-debug.log*
 yarn-error.log*
 
 # Dependency directories
-node_modules/
+node_modules
 
-# Gatsby directories
+# Gatsby
 .cache
-/public
+public
 
 # environment variables
 .env*
