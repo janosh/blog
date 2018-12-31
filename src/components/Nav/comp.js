@@ -1,4 +1,4 @@
-import React, { Component, Fragment, createRef } from 'react'
+import React, { Component, createRef } from 'react'
 import { DownArrow } from 'styled-icons/boxicons-regular/DownArrow'
 
 import { NavContainer, NavEntry, SubNav, NavLink, Toggle } from './styles'
@@ -53,7 +53,7 @@ export default class Nav extends Component {
   render() {
     const { showNav, ref, showSubNav } = this.state
     return (
-      <Fragment>
+      <>
         <Toggle onClick={this.toggleNav} asMenu />
         <NavContainer role="navigation" ref={ref} showNav={showNav}>
           <Toggle onClick={this.toggleNav} />
@@ -86,7 +86,7 @@ export default class Nav extends Component {
             </NavEntry>
           ))}
         </NavContainer>
-      </Fragment>
+      </>
     )
   }
 }

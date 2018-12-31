@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import { ThemeProvider } from 'styled-components'
 import PropTypes from 'prop-types'
@@ -14,7 +14,7 @@ import { GlobalStyle, Layout } from './styles'
 
 const Global = ({ children, site, transparent, margin, ...rest }) => (
   <ThemeProvider theme={theme}>
-    <Fragment>
+    <>
       <Helmet site={site.meta} {...rest} />
       <GlobalStyle />
       <Prism />
@@ -22,7 +22,7 @@ const Global = ({ children, site, transparent, margin, ...rest }) => (
       <Layout margin={margin}>{children}</Layout>
       <Footer />
       <Scroll to="top" position="fixed" justify="right" showBelow={1000} />
-    </Fragment>
+    </>
   </ThemeProvider>
 )
 

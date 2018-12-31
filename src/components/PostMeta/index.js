@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Meta } from './styles'
@@ -6,7 +6,7 @@ import { Calendar } from 'styled-icons/octicons/Calendar'
 import { Timer } from 'styled-icons/material/Timer'
 
 const PostMeta = ({ date, timeToRead, inTitle, iconSize }) => (
-  <Fragment>
+  <>
     <Meta inTitle={inTitle}>
       <span>
         <Calendar size={iconSize} />
@@ -19,7 +19,7 @@ const PostMeta = ({ date, timeToRead, inTitle, iconSize }) => (
         {timeToRead} min read
       </span>
     </Meta>
-  </Fragment>
+  </>
 )
 
 export default PostMeta
