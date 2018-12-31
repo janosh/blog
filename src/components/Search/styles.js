@@ -13,7 +13,7 @@ export const Loupe = styled(Search)`
 `
 
 const focussed = css`
-  background: ${props => props.theme.mainWhite};
+  background: ${props => props.theme.white};
   color: ${props => props.theme.darkBlue};
   cursor: text;
   width: 5em;
@@ -28,13 +28,13 @@ const collapse = css`
   cursor: pointer;
   color: ${props => props.theme.lightBlue};
   + ${Loupe} {
-    color: ${props => props.theme.mainWhite};
+    color: ${props => props.theme.white};
   }
   ${props => props.focussed && focussed}
   margin-left: ${props => (props.focussed ? `-1.6em` : `-1em`)};
   padding-left: ${props => (props.focussed ? `1.6em` : `1em`)};
   ::placeholder {
-    color: ${props => props.theme.mainGray};
+    color: ${props => props.theme.gray};
   }
 `
 
@@ -72,7 +72,7 @@ const list = css`
   max-width: 30em;
   box-shadow: 0 0 5px 0;
   padding: 0.7em 1em 0.4em;
-  background: ${props => props.theme.mainWhite};
+  background: ${props => props.theme.white};
   border-radius: ${props => props.theme.smallBorderRadius};
   > * + * {
     padding-top: 1em !important;
@@ -119,8 +119,8 @@ export const HitsWrapper = styled.div`
     justify-content: space-between;
     margin-bottom: 0.3em;
     h3 {
-      color: ${props => props.theme.mainWhite};
-      background: ${props => props.theme.mainGray};
+      color: ${props => props.theme.white};
+      background: ${props => props.theme.gray};
       padding: 0.1em 0.4em;
       border-radius: ${props => props.theme.smallBorderRadius};
     }

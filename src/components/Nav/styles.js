@@ -14,11 +14,11 @@ const PartlyActiveLink = props => (
 )
 
 export const navLinkStyle = css`
-  color: ${props => props.theme.mainWhite};
+  color: ${props => props.theme.white};
   transition: ${props => props.theme.shortTrans};
   cursor: pointer;
   &.active {
-    color: ${props => props.theme.mainOrange};
+    color: ${props => props.theme.orange};
   }
   :hover {
     color: ${props => props.theme.lightBlue};
@@ -58,7 +58,7 @@ export const NavEntry = styled.div`
 const subNavVisible = css`
   opacity: 1;
   pointer-events: initial;
-  background: ${props => props.theme.mainGray};
+  background: ${props => props.theme.gray};
   position: static;
 `
 
@@ -87,14 +87,14 @@ export const SubNav = styled.div`
 
 const span = css`
   grid-column: 1/-1;
-  border-top: 1px solid ${props => props.theme.mainWhite};
+  border-top: 1px solid ${props => props.theme.white};
   padding-top: 0.2em;
 `
 
 export const NavLink = styled(PartlyActiveLink)`
   ${navLinkStyle};
   ${SubNav} & {
-    color: ${props => props.theme.mainWhite};
+    color: ${props => props.theme.white};
     :hover {
       color: ${props => props.theme.lightGreen};
     }
@@ -107,7 +107,7 @@ export const NavLink = styled(PartlyActiveLink)`
 
 const subNavToggle = css`
   border-radius: 30% 30% 0 0;
-  background: ${props => props.theme.mainGray};
+  background: ${props => props.theme.gray};
 `
 
 const inNavToggle = css`
