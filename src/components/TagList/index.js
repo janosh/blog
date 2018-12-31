@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { List, TagLink } from './styles'
@@ -10,14 +10,14 @@ const Tag = ({ title, slug, totalCount }) => (
 )
 
 const TagList = ({ title, tags }) => (
-  <Fragment>
+  <>
     <h1>{title}</h1>
     <List>
       {tags.map(tag => (
         <Tag key={tag.slug} {...tag} />
       ))}
     </List>
-  </Fragment>
+  </>
 )
 
 export default TagList
