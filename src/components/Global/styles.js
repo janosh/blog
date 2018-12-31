@@ -74,6 +74,10 @@ export const GlobalStyle = createGlobalStyle`
       background: ${props => props.theme.lightBlue};
     }
   }
+  .gatsby-resp-image-wrapper + em {
+    display: block;
+    text-align: center;
+  } 
 `
 
 export const Layout = styled.main`
