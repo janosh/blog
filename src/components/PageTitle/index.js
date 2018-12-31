@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 
 import { Title, Background } from './styles'
 
 const PageTitle = ({ children, file }) => (
-  <Fragment>
+  <>
     <Background fluid={file.img.fluid} />
     <Title>{children}</Title>
-  </Fragment>
+  </>
 )
 
 const query = graphql`
