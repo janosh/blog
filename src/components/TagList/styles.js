@@ -8,7 +8,7 @@ export const TagLink = styled(Link)`
   background: ${props => props.theme.lightGray};
   border-radius: ${props => props.theme.smallBorderRadius};
   &.${props => props.activeClassName} {
-    background: ${props => props.theme.mainOrange};
+    background: ${props => props.theme.orange};
   }
 `
 

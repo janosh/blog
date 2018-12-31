@@ -5,7 +5,7 @@ import Link from '../Link'
 
 export const buttonCss = css`
   background: ${props => props.theme.darkBlue};
-  color: ${props => props.theme.mainWhite} !important;
+  color: ${props => props.theme.white} !important;
   border-radius: ${props => props.theme.smallBorderRadius};
   padding: 0.1em 0.6em;
   width: max-content;
