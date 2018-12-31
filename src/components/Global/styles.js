@@ -38,7 +38,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   a {
     text-decoration: none;
-    color: ${props => props.theme.mainBlue};
+    color: ${props => props.theme.blue};
     :hover {
       color: ${props => props.theme.lightBlue};
     }
@@ -61,8 +61,8 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   .btn {
-    background: ${props => props.theme.mainBlue};
-    color: ${props => props.theme.mainWhite} !important;
+    background: ${props => props.theme.blue};
+    color: ${props => props.theme.white} !important;
     border-radius: ${props => props.theme.smallBorderRadius};
     padding: 0.3em 0.6em;
     transition: ${props => props.theme.shortTrans};

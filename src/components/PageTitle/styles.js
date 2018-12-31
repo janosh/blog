@@ -6,7 +6,7 @@ export const Title = styled.header`
   grid-column: 2 / -2;
   grid-row: 1;
   text-align: center;
-  color: ${props => props.theme.mainWhite};
+  color: ${props => props.theme.white};
   font-size: calc(1em + 1vw);
   align-self: center;
 `

@@ -17,7 +17,7 @@ const justify = props => {
 const arrow = css`
   z-index: 2;
   background: ${props => props.theme.lightGreen};
-  color: ${props => props.theme.mainWhite};
+  color: ${props => props.theme.white};
   border-radius: 50%;
   transition: ${props => props.theme.shortTrans};
   width: ${props => props.size};
@@ -28,7 +28,7 @@ const arrow = css`
   visibility: ${props => (props.show ? 'visible' : 'hidden')};
   :hover {
     transform: scale(1.15);
-    background: ${props => props.theme.mainOrange};
+    background: ${props => props.theme.orange};
   }
 `
 

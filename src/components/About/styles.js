@@ -29,7 +29,7 @@ export const Arrow = styled(KeyboardArrowRight)`
   transition: ${props => props.theme.shortTrans};
   border-radius: ${props => props.theme.smallBorderRadius};
   :hover {
-    color: ${props => props.theme.mainOrange};
+    color: ${props => props.theme.orange};
     background: rgba(0, 0, 0, 0.2);
   }
 `

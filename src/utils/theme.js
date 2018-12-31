@@ -1,29 +1,27 @@
 const theme = {
-  mainBlue: `#003e90`,
+  blue: `#003e90`,
   darkBlue: `#002b4d`,
   lightBlue: `#279AF1`,
 
-  mainGreen: `#6e9f23`,
+  green: `#6e9f23`,
   darkGreen: `#104F55`,
   lightGreen: `#00d69b`,
 
-  mainTurq: `#23B5D3`,
-
-  mainYellow: `#f9ff00`,
+  yellow: `#f9ff00`,
   darkYellow: `#d0d500`,
   lightYellow: `#fbff6c`,
 
-  mainOrange: `#efbf00`,
+  orange: `#efbf00`,
   darkOrange: `#ff9100`,
   lightOrange: `#ffbe41`,
 
-  mainGray: `#464849`,
+  gray: `#464849`,
   darkGray: `#282828`,
   lightGray: `#ebebeb`,
   veryLightGray: `#f7f7f7`,
 
-  mainWhite: `white`,
-  mainBlack: `black`,
+  white: `white`,
+  black: `black`,
 
   maxWidth: `40em`,
 
