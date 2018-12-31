@@ -5,11 +5,11 @@ import mediaQuery from '../../utils/mediaQuery'
 export const FooterContainer = styled.footer`
   background-color: ${props => props.theme.darkGray};
   padding: 5vh 5vw;
-  color: ${props => props.theme.mainWhite};
+  color: ${props => props.theme.white};
   a {
     color: ${props => props.theme.lightBlue};
     :hover {
-      color: ${props => props.theme.mainOrange};
+      color: ${props => props.theme.orange};
     }
   }
   display: grid;

@@ -4,7 +4,7 @@ import Image from 'gatsby-image'
 export const Container = styled.header`
   grid-column: 1 / -1;
   position: relative;
-  color: ${props => props.theme.mainWhite};
+  color: ${props => props.theme.white};
   display: flex;
   flex-direction: column;
   justify-content: center;
