@@ -5,7 +5,7 @@ export const DotsContainer = styled.div`
   grid-area: dots;
   grid-gap: 1vw;
   grid-auto-flow: column;
-  color: ${props => props.theme.mainWhite};
+  color: ${props => props.theme.white};
   z-index: 3;
   justify-content: center;
   ${props => props.css};
@@ -18,7 +18,7 @@ export const Dot = styled.div`
   background: rgba(0, 0, 0, 0.5);
   background: ${props => props.active && props.theme.lightGreen};
   transition: ${props => props.theme.mediumTrans};
-  border: 1px solid ${props => props.theme.mainWhite};
+  border: 1px solid ${props => props.theme.white};
   :hover {
     color: ${props => props.theme.lightBlue};
     background: ${props => props.theme.darkBlue};
