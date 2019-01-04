@@ -1,20 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { List, TagLink } from './styles'
+import { List, Tag } from './styles'
 
-const Tag = ({ title, slug, totalCount }) => (
-  <TagLink activeClassName="active" to={slug}>
-    {title} ({totalCount})
-  </TagLink>
-)
-
-const TagList = ({ title, tags }) => (
+const TagList = ({ title = `Tags`, tags }) => (
   <>
     <h1>{title}</h1>
     <List>
-      {tags.map(tag => (
-        <Tag key={tag.slug} {...tag} />
+      {tags.map(({ title, slug, totalCount }) => (
+        <Tag key={slug} activeClassName="active" to={slug}>
+          {title} ({totalCount})
+        </Tag>
       ))}
     </List>
   </>
@@ -30,8 +26,4 @@ TagList.propTypes = {
       totalCount: PropTypes.number.isRequired,
     })
   ),
-}
-
-TagList.defaultProps = {
-  title: `Tags`,
 }
