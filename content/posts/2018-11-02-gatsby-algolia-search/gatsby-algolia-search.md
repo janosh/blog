@@ -1,5 +1,5 @@
 ---
-title: Custom Algolia search with Gatsby
+title: Custom search with Algolia in Gatsby
 slug: gatsby-algolia-search
 date: 2018-11-02
 cover: ./images/gatsby+algolia.png
@@ -29,14 +29,13 @@ module.exports = {
     title: `Gatsby+Algolia`,
     description: `How to setup Algolia search in Gatsby`,
     author: `Janosh Riebesell`,
-    siteUrl: `https://janosh.io`,
   },
   plugins: [
     {
       resolve: `gatsby-plugin-algolia`,
       options: {
-        appId: process.env.algoliaAppId,
-        apiKey: process.env.algoliaApiKey,
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
         queries,
         chunkSize: 10000, // default: 1000
       },
@@ -47,18 +46,25 @@ module.exports = {
 
 Notice that we're loading `queries` from a file at `./src/utils/algolia.js` (you can of course put it wherever you like) and our Algolia ID and key from `.env` so let's add those files.
 
-```js
+```env
 // .env
-algoliaAppId = KA4OJA9KAS
-algoliaApiKey = lksa09sadkj1230asd09dfvj12309ajl
+GATSBY_ALGOLIA_APP_ID = KA4OJA9KAS
+GATSBY_ALGOLIA_SEARCH_KEY=lkjas987ef923ohli9asj213k12n59ad
+ALGOLIA_ADMIN_KEY = lksa09sadkj1230asd09dfvj12309ajl
 ```
 
-I inserted random character sequences here but yours should be the same length. Also, it's good practice to commit a `.env.example` to version control so that if someone forks your repo, they know immediately which environment variables they need to supply.
+I inserted random character sequences here but yours should be the same length. Also, it's good practice to commit a `.env.example` to version control so that if someone forks your repo, they know which environment variables they need to supply.
 
-```js
+```env
 // .env.example
-algoliaAppId = insertValue
-algoliaApiKey = insertValue
+# rename this file to .env and supply the listed values
+# also make sure they are available to the build tool (e.g. netlify)
+# warning: variables prexifed with GATSBY_ will be made available to client-side code,
+#   be careful not to expose sensitive data (in this case your Algolia admin key)
+
+GATSBY_ALGOLIA_APP_ID=insertValue
+GATSBY_ALGOLIA_SEARCH_KEY=insertValue
+ALGOLIA_ADMIN_KEY=insertValue
 ```
 
 And here are the `queries`.
@@ -143,8 +149,7 @@ The first step is to create the main component file.
 
 ```jsx
 // src/components/Search/index.js
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component, createRef } from 'react'
 import {
   InstantSearch,
   Index,
@@ -153,7 +158,8 @@ import {
 } from 'react-instantsearch-dom'
 import { Algolia } from 'styled-icons/fa-brands/Algolia'
 
-import { Root, SearchBox, HitsWrapper, By } from './styles'
+import { Root, HitsWrapper, By } from './styles'
+import Input from './Input'
 import * as hitComps from './hits'
 
 const events = ['mousedown', 'touchstart']
@@ -169,22 +175,21 @@ const Stats = connectStateResults(
 )
 
 export default class Search extends Component {
-  state = { query: ``, showHits: false }
+  state = { query: ``, focussed: false, ref: createRef() }
 
   updateState = state => this.setState(state)
 
-  enableHits = () => {
-    this.setState({ showHits: true })
+  focus = () => {
+    this.setState({ focussed: true })
   }
 
   disableHits = () => {
-    this.setState({ showHits: false })
+    this.setState({ focussed: false })
   }
 
   handleClickOutside = event => {
-    const node = ReactDOM.findDOMNode(this.node)
-    if (node && !node.contains(event.target)) {
-      this.setState({ showHits: false })
+    if (!this.state.ref.current.contains(event.target)) {
+      this.setState({ focussed: false })
     }
   }
 
@@ -201,26 +206,25 @@ export default class Search extends Component {
   }
 
   render() {
-    const { query, showHits } = this.state
+    const { query, focussed, ref } = this.state
     const { indices, collapse, hitsAsGrid } = this.props
     return (
       <InstantSearch
-        appId="KA4OJA9KAS"
-        apiKey="ljhba0981kbed0adskj1230asdj123lj"
+        appId={process.env.GATSBY_ALGOLIA_APP_ID}
+        apiKey={process.env.GATSBY_ALGOLIA_SEARCH_KEY}
         indexName={indices[0].name}
         onSearchStateChange={this.updateState}
-        root={{ Root }}
-        ref={node => (this.node = node)}
+        root={{ Root, props: { ref } }}
       >
-        <SearchBox collapse={collapse} onFocus={this.enableHits} />
+        <Input onFocus={this.focus} {...{ collapse, focussed }} />
         <HitsWrapper
-          show={query.length > 0 && showHits}
+          show={query.length > 0 && focussed}
           hitsAsGrid={hitsAsGrid}
         >
           {indices.map(({ name, title, hitComp }) => (
             <Index key={name} indexName={name}>
               <header>
-                {title && <h2>{title}</h2>}
+                <h3>{title}</h3>
                 <Stats />
               </header>
               <Results>
@@ -302,12 +306,11 @@ Finally, the `render` function takes a dynamic array of `indices` passed as a pr
 
 ```jsx
 <InstantSearch
-  appId="ZOE4SGQ9EG"
-  apiKey="14dedbd0f24d124cf32c1c9f9ff3df61"
+  appId={process.env.GATSBY_ALGOLIA_APP_ID}
+  apiKey={process.env.GATSBY_ALGOLIA_SEARCH_KEY}
   indexName={indices[0].name}
   onSearchStateChange={this.updateState}
-  root={{ Root }}
-  ref={node => (this.node = node)}
+  root={{ Root, props: { ref } }}
 >
 ```
 
@@ -558,4 +561,4 @@ const Header = ({ site, transparent }) => (
 export default Header
 ```
 
-Note that this is where define our array of search indices and pass it as a prop to `Search`. If everything works as expected, running `gatsby develop` should now give you some instant search magic in your site's header! How cool is that? :sunglasses:
+Note that this is where we define our array of search indices and pass it as a prop to `Search`. If everything works as expected, running `gatsby develop` should now give you some instant search magic in your site's header! How cool is that?! :sunglasses:
