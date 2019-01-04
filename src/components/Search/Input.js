@@ -1,11 +1,11 @@
 import React from 'react'
 import { connectSearchBox } from 'react-instantsearch-dom'
 
-import { Loupe, Form, InputField } from './styles'
+import { Loupe, Form, Input } from './styles'
 
 export default connectSearchBox(({ refine, ...rest }) => (
   <Form>
-    <InputField
+    <Input
       type="text"
       placeholder="Suche"
       aria-label="Suche"
