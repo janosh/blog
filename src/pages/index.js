@@ -6,7 +6,7 @@ import Global from '../components/Global'
 import Slideshow from '../components/Slideshow'
 import LandingTitle from '../components/LandingTitle'
 
-const LandingPage = ({ data: { photos, me }, location }) => (
+const IndexPage = ({ data: { photos, me }, location }) => (
   <Global margin="0" transparent path={location.pathname}>
     <Slideshow>
       {photos.edges.map(({ node }) => (
@@ -17,7 +17,7 @@ const LandingPage = ({ data: { photos, me }, location }) => (
   </Global>
 )
 
-export default LandingPage
+export default IndexPage
 
 export const query = graphql`
   {
