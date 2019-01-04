@@ -5,7 +5,7 @@ require(`dotenv`).config()
 module.exports = {
   siteMetadata: {
     title: `janosh.io`,
-    description: `Mostly physics, machine learning, web development, the outdoors... oh and not to forget breaking conventions`,
+    description: `Personal blog and portfolio of Janosh Riebesell. Mostly physics, machine learning and web development but really anything related to nature, science and technology.`,
     author: `Janosh Riebesell`,
     siteUrl: `https://janosh.io`,
   },
@@ -58,14 +58,14 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: process.env.GATrackingId,
+        trackingId: process.env.GA_TRACKING_ID,
       },
     },
     {
       resolve: `gatsby-plugin-algolia`,
       options: {
-        appId: process.env.algoliaAppId,
-        apiKey: process.env.algoliaApiKey,
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
         queries,
         chunkSize: 10000, // default: 1000
       },
