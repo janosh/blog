@@ -5,11 +5,8 @@ import Global from '../components/Global'
 import PageTitle from '../components/PageTitle'
 
 const PageTemplate = ({ data, location }) => {
-  const {
-    frontmatter: { title },
-    html,
-    excerpt,
-  } = data.page
+  const { frontmatter, html, excerpt } = data.page
+  const { title } = frontmatter
   return (
     <Global
       layout
