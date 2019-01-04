@@ -10,6 +10,7 @@ import mediaQuery from '../../utils/mediaQuery'
 
 export const Wrapper = styled.div`
   position: relative;
+  align-self: center;
 `
 
 const collapse = css`
@@ -17,11 +18,10 @@ const collapse = css`
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  background: ${props => props.theme.darkGray};
-  border: 1px solid ${props => props.theme.white};
+  background: ${props => props.theme.black};
   border-radius: ${props => props.theme.smallBorderRadius};
   padding: 1vmin;
-  font-size: 1.8em;
+  font-size: 1.6em;
   transition: ${props => props.theme.shortTrans};
   ${Wrapper}:hover & {
     visibility: visible;
@@ -30,28 +30,25 @@ const collapse = css`
 `
 
 const display = css`
-  grid-area: social;
   grid-auto-flow: column;
   grid-gap: 1.5vw;
-  align-items: end;
-  grid-auto-columns: max-content;
   ${props => props.styles};
 `
 
 export const Container = styled.div`
   display: grid;
   justify-content: center;
-  ${mediaQuery.minTablet} {
-    ${display};
-  }
   ${mediaQuery.maxTablet} {
     ${props => (props.collapse ? collapse : display)};
+  }
+  ${mediaQuery.minTablet} {
+    ${display};
   }
 `
 
 export const Toggle = styled(Share)`
   cursor: pointer;
-  font-size: 1.4em;
+  font-size: 1.3em;
   ${props => props.styles};
   ${mediaQuery.minTablet} {
     display: none;
@@ -60,11 +57,19 @@ export const Toggle = styled(Share)`
 
 export const Link = styled.a`
   ${props => props.styles};
+  svg {
+    display: block;
+  }
 `
 
 export const Icons = {
-  Email,
-  Youtube,
+  Email: styled(Email)`
+    vertical-align: -0.15em;
+    transform: scale(1, 1.15);
+  `,
+  Youtube: styled(Youtube)`
+    transform: scale(1, 1.15);
+  `,
   Linkedin,
   Facebook,
   Github,
