@@ -16,22 +16,22 @@ export const FooterContainer = styled.footer`
   justify-items: center;
   align-items: center;
   grid-template-areas:
-    'cpr'
+    'copyright'
     'source'
     'poweredBy';
   grid-gap: 4vh 6vw;
   ${mediaQuery.minPhone} {
     grid-template-areas:
-      'cpr source'
+      'copyright source'
       'poweredBy poweredBy';
   }
   ${mediaQuery.minTablet} {
-    grid-template-areas: 'cpr source poweredBy';
+    grid-template-areas: 'copyright source poweredBy';
   }
 `
 
-export const Cpr = styled.span`
-  grid-area: cpr;
+export const Copyright = styled.span`
+  grid-area: copyright;
 `
 
 export const Source = styled.span`
@@ -42,7 +42,6 @@ export const PoweredBy = styled.div`
   grid-area: poweredBy;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: max-content;
   grid-gap: 1em;
   a {
     height: 1.5em;
