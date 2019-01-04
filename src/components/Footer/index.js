@@ -2,15 +2,15 @@ import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import PropTypes from 'prop-types'
 
-import { FooterContainer, Cpr, Source, PoweredBy } from './styles'
+import { FooterContainer, Copyright, Source, PoweredBy } from './styles'
 
 const Footer = ({ footer, logos }) => {
   const { copyright, sourceNote, poweredBy } = footer
   return (
     <FooterContainer>
-      <Cpr>
+      <Copyright>
         © {new Date().getFullYear()} - {copyright}
-      </Cpr>
+      </Copyright>
       <Source dangerouslySetInnerHTML={{ __html: sourceNote }} />
       <PoweredBy>
         Powered by
