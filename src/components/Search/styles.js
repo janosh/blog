@@ -48,7 +48,7 @@ const expand = css`
   }
 `
 
-export const InputField = styled.input`
+export const Input = styled.input`
   outline: none;
   border: none;
   font-size: 1em;
