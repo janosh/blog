@@ -6,11 +6,12 @@ import { Menu } from 'styled-icons/feather/Menu'
 
 import mediaQuery from '../../utils/mediaQuery'
 
-const partlyActive = className => ({ isPartiallyCurrent }) =>
-  isPartiallyCurrent ? { className: className + ' active' } : null
+const partlyActive = className => ({ isPartiallyCurrent }) => ({
+  className: className + (isPartiallyCurrent ? ` active` : ``),
+})
 
-const PartlyActiveLink = props => (
-  <Link getProps={partlyActive(props.className)} {...props} />
+const PartlyActiveLink = ({ className, ...rest }) => (
+  <Link getProps={partlyActive(className)} {...rest} />
 )
 
 export const navLinkStyle = css`
