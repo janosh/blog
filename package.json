@@ -10,38 +10,38 @@
   "license": "MIT",
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.0",
-    "gatsby": "2.0.76",
-    "gatsby-image": "2.0.25",
+    "gatsby": "2.0.91",
+    "gatsby-image": "2.0.26",
     "gatsby-plugin-algolia": "^0.3.0",
     "gatsby-plugin-catch-links": "2.0.9",
     "gatsby-plugin-favicon": "^3.1.5",
-    "gatsby-plugin-google-analytics": "2.0.8",
-    "gatsby-plugin-manifest": "2.0.12",
-    "gatsby-plugin-offline": "2.0.20",
+    "gatsby-plugin-google-analytics": "2.0.9",
+    "gatsby-plugin-manifest": "2.0.13",
+    "gatsby-plugin-offline": "2.0.21",
     "gatsby-plugin-react-helmet": "3.0.5",
-    "gatsby-plugin-sharp": "2.0.16",
+    "gatsby-plugin-sharp": "2.0.17",
     "gatsby-plugin-styled-components": "3.0.4",
     "gatsby-remark-copy-linked-files": "^2.0.8",
     "gatsby-remark-embed-video": "1.7.0",
     "gatsby-remark-emojis": "^0.2.3",
     "gatsby-remark-images": "3.0.1",
     "gatsby-remark-katex": "^3.0.1",
-    "gatsby-remark-prismjs": "^3.1.4",
+    "gatsby-remark-prismjs": "^3.2.0",
     "gatsby-remark-responsive-iframe": "2.0.8",
     "gatsby-remark-smartypants": "2.0.7",
-    "gatsby-source-filesystem": "2.0.12",
-    "gatsby-transformer-remark": "2.1.17",
-    "gatsby-transformer-sharp": "2.1.9",
-    "gatsby-transformer-yaml": "2.1.6",
+    "gatsby-source-filesystem": "2.0.16",
+    "gatsby-transformer-remark": "2.2.0",
+    "gatsby-transformer-sharp": "2.1.10",
+    "gatsby-transformer-yaml": "2.1.7",
     "katex": "^0.10.0",
     "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react": "^16.8.0-alpha.1",
+    "react-dom": "^16.8.0-alpha.1",
     "react-helmet": "^5.2.0",
     "react-instantsearch-dom": "^5.3.2",
     "styled-components": "^4.1.3",
-    "styled-icons": "5.8.0"
+    "styled-icons": "6.4.0"
   },
   "keywords": [
     "janosh riebesell",
@@ -54,5 +54,9 @@
     "nature",
     "gatsby",
     "styled-components"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-plugin-react": "^7.12.4"
+  }
 }
