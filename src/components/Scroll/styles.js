@@ -4,11 +4,11 @@ import { ArrowDownCircle } from 'styled-icons/feather/ArrowDownCircle'
 
 const justify = props => {
   switch (props.justify) {
-    case 'left':
+    case `left`:
       return `left: 1em;`
-    case 'right':
+    case `right`:
       return `right: 1em;`
-    case 'center':
+    case `center`:
     default:
       return `left: calc(50vw - ${props.size} / 2);`
   }
@@ -25,7 +25,7 @@ const arrow = css`
   bottom: 1em;
   ${props => justify(props)};
   opacity: ${props => (props.show ? 1 : 0)};
-  visibility: ${props => (props.show ? 'visible' : 'hidden')};
+  visibility: ${props => (props.show ? `visible` : `hidden`)};
   :hover {
     transform: scale(1.15);
     background: ${props => props.theme.orange};

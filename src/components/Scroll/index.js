@@ -40,11 +40,11 @@ export default class Scroll extends Component {
 
   componentDidMount() {
     if (this.props.showBelow)
-      window.addEventListener('scroll', this.handleScroll)
+      window.addEventListener(`scroll`, this.handleScroll)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener(`scroll`, this.handleScroll)
   }
 
   render() {
