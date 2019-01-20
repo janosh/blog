@@ -19,7 +19,6 @@ class About extends Component {
   }
 
   next = () => {
-    console.log('hi')
     this.setState({
       current: (this.state.current + 1) % this.state.about.length,
     })
@@ -27,14 +26,10 @@ class About extends Component {
 
   render() {
     const { current, about } = this.state
+    const dotProps = { current, n: about.length, onClick: this.jumpTo }
     return (
       <AboutContainer>
-        <Dots
-          n={about.length}
-          current={current}
-          onClick={this.jumpTo}
-          size="0.5em"
-        />
+        <Dots {...dotProps} size="0.5em" />
         <Text dangerouslySetInnerHTML={{ __html: about[current] }} />
         <Arrow size="4em" onClick={this.next} />
       </AboutContainer>
@@ -51,5 +46,8 @@ const query = graphql`
 `
 
 export default props => (
-  <StaticQuery query={query} render={data => <About {...data.about} />} />
+  <StaticQuery
+    query={query}
+    render={data => <About {...data.about} {...props} />}
+  />
 )
