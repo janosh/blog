@@ -40,17 +40,20 @@ import { Parent, Child } from './styles'
 export default class Masonry extends Component {
   static defaultProps = {
     rowHeight: 40, // in pixels
-    colWidth: `15em`,
+    colWidth: `17em`,
   }
 
   state = { spans: [] }
-  ref = createRef()
+  ref: createRef()
+  // sums up the heights of all child nodes for each grid item
+  sumUp = (acc, node) => acc + node.scrollHeight
 
   computeSpans = () => {
     const { rowHeight } = this.props
     const spans = []
     Array.from(this.ref.current.children).forEach(child => {
-      const span = Math.ceil(child.clientHeight / rowHeight)
+      const childHeight = Array.from(child.children).reduce(this.sumUp, 0)
+      const span = Math.ceil(childHeight / rowHeight)
       spans.push(span + 1)
       child.style.height = span * rowHeight + `px`
     })
