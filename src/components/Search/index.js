@@ -11,7 +11,7 @@ import { Root, HitsWrapper, By } from './styles'
 import Input from './Input'
 import * as hitComps from './hits'
 
-const events = ['mousedown', 'touchstart']
+const events = [`mousedown`, `touchstart`]
 
 const Results = connectStateResults(
   ({ searchState: state, searchResults: res, children }) =>
@@ -82,7 +82,7 @@ export default class Search extends Component {
             </Index>
           ))}
           <By>
-            Powered by{' '}
+            Powered by{` `}
             <a href="https://www.algolia.com">
               <Algolia size="1em" /> Algolia
             </a>

@@ -1,8 +1,8 @@
-const path = require('path')
+const path = require(`path`)
 
-const pageTemplate = path.resolve('./src/templates/page.js')
-const postTemplate = path.resolve('./src/templates/post.js')
-const tagTemplate = path.resolve('./src/templates/tag.js')
+const pageTemplate = path.resolve(`./src/templates/page.js`)
+const postTemplate = path.resolve(`./src/templates/post.js`)
+const tagTemplate = path.resolve(`./src/templates/tag.js`)
 
 const query = `
   {
@@ -27,10 +27,7 @@ const query = `
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const response = await graphql(query)
-  if (response.errors) {
-    console.error(response.errors)
-    throw new Error(response.errors)
-  }
+  if (response.errors) throw new Error(response.errors)
   let { content, tags } = response.data
   content.edges.forEach(({ node: { path, frontmatter } }) => {
     const { slug, purpose } = frontmatter
@@ -40,8 +37,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         component: pageTemplate,
         context: { slug },
       })
-    }
-    if (/content\/posts/.test(path)) {
+    } else if (/content\/posts/.test(path)) {
       createPage({
         path: `/blog/` + slug,
         component: postTemplate,
