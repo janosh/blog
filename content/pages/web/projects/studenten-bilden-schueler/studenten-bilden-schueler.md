@@ -1,6 +1,17 @@
-[![Studenten bilden Schüler Homepage](sbs.png)](https://studenten-bilden-schueler.de)
-
-## [Studenten bilden Schüler](https://studenten-bilden-schueler.de)
+---
+title: Studenten bilden Schüler
+slug: web/projects/studenten-bilden-schueler
+cover: studenten-bilden-schueler.png
+url: https://studenten-bilden-schueler.eu
+repo: https://github.com/StudentenBildenSchueler/homepage
+date: 2018-06-23
+tech:
+  - Gatsby
+  - Contentful
+  - Algolia
+  - styled-components
+  - React
+---
 
 A German student-run nonprofit initiative that I co-run. SbS has about 1000 active members providing free tuition to children from underprivileged families as well as - more recently - refugees in over 20 university towns all over Germany. Our goal is to thereby contribute to more equal educational opportunities for all disadvantaged memebers of society.
 
