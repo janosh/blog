@@ -12,7 +12,7 @@ const PostExcerpt = ({ post }) => {
     <Article>
       <Img fluid={frontmatter.cover.img.fluid} />
       <Title>
-        <Link to={'/blog/' + slug}>{title}</Link>
+        <Link to={`blog/` + slug}>{title}</Link>
       </Title>
       <PostMeta {...{ ...frontmatter, timeToRead }} />
       <Excerpt dangerouslySetInnerHTML={{ __html: excerpt }} />
