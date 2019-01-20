@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import Global from '../components/Global'
 import PageTitle from '../components/PageTitle'
 import Grid from '../components/styles/Grid'
-import Project from '../components/styles/Project'
+import Projects from '../components/Projects'
 
 const Web = ({ data, location }) => {
   const title = `Web`
@@ -16,14 +16,7 @@ const Web = ({ data, location }) => {
       </PageTitle>
       <div dangerouslySetInnerHTML={{ __html: intro.html }} />
       <h2>Recent Projects</h2>
-      <Grid min="15em">
-        {projects.edges.map(({ node }) => (
-          <Project
-            key={node.id}
-            dangerouslySetInnerHTML={{ __html: node.html }}
-          />
-        ))}
-      </Grid>
+      <Projects {...projects} />
       <h2>My Stack</h2>
       <Grid min="4em" align="center">
         {techNames.edges.map(({ node }) => (
@@ -53,11 +46,26 @@ export const query = graphql`
     }
     projects: allMarkdownRemark(
       filter: { fileAbsolutePath: { regex: "/pages/web/projects/" } }
+      sort: { fields: frontmatter___date, order: DESC }
     ) {
-      edges {
+      projects: edges {
         node {
-          id
           html
+          frontmatter {
+            title
+            slug
+            date(formatString: "MMM DD, YYYY")
+            url
+            repo
+            tech
+            cover {
+              img: childImageSharp {
+                fluid(maxWidth: 2500, quality: 100) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
         }
       }
     }
