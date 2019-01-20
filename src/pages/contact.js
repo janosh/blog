@@ -14,16 +14,17 @@ const Contact = ({ location }) => {
       <p>You can reach me by email or on any of these platforms.</p>
       <Social size="2em" />
       <p>
-        I spend most of my days at the Maxwell Centre. If you're in the area,
+        I spend most of my days at the Maxwell Centre. If you‘re in the area,
         feel free to drop by.
       </p>
       <iframe
         title="contactMap"
         width="100%"
         height="600px"
-        frameborder="0"
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCMyrqYg_pCL5vvX1hPEUCd6lh_6UzNq8U
-    &q=Maxwell+Centre,Cambridge,UK"
+        frameBorder="0"
+        src={`https://www.google.com/maps/embed/v1/place?key=${
+          process.env.GATSBY_GOOGLE_MAPS_API_KEY
+        }&q=Maxwell+Centre,Cambridge,UK`}
       />
     </Global>
   )
