@@ -4,13 +4,6 @@ import PropTypes from 'prop-types'
 import Dots from '../Dots'
 import { SlideContainer, Slide } from './styles'
 
-const dotCss = `
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%);
-  bottom: 1em;
-`
-
 export default class Slideshow extends Component {
   static propTypes = {
     children: PropTypes.array.isRequired,
@@ -48,6 +41,7 @@ export default class Slideshow extends Component {
   render() {
     const { current } = this.state
     const { children, delay } = this.props
+    const dotProps = { current, n: children.length, onClick: this.jumpTo }
     return (
       <SlideContainer>
         {children.map((child, index) => (
@@ -55,12 +49,7 @@ export default class Slideshow extends Component {
             {child}
           </Slide>
         ))}
-        <Dots
-          n={children.length}
-          current={current}
-          onClick={this.jumpTo}
-          css={dotCss}
-        />
+        <Dots {...dotProps} position="bottom" />
       </SlideContainer>
     )
   }
