@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 import { DotsContainer, Dot } from './styles'
 
-const Dots = ({ n, current, onClick, size, css }) => (
-  <DotsContainer css={css}>
+const Dots = ({ n, current, onClick, size, ...rest }) => (
+  <DotsContainer {...rest}>
     {Array.apply(null, { length: n }).map((dot, index) => (
       <Dot
         key={index}
