@@ -65,7 +65,7 @@ export const Link = styled.a`
 export const Icons = {
   Email: styled(Email)`
     vertical-align: -0.15em;
-    transform: scale(1, 1.15);
+    transform: scale(1, 1.1);
   `,
   Youtube: styled(Youtube)`
     transform: scale(1, 1.15);
