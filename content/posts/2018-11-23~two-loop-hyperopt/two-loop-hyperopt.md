@@ -2,7 +2,9 @@
 title: Two-Loop Hyperoptimization
 slug: two-loop-hyperopt
 date: 2018-11-23
-cover: ./images/bayesian-optimization.png
+cover: bayesian-optimization.png
+coverCredit: Ramraj Chandradevan
+coverUrl: https://towardsdatascience.com/shallow-understanding-on-bayesian-optimization-324b6c1f7083
 tags:
   - Machine Learning
   - Data Science
