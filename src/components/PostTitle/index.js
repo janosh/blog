@@ -1,14 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Container, Title, Img } from './styles'
+import { Container, Title, Img, CoverCredit } from './styles'
 import PostMeta from '../PostMeta'
 
-const PostTitle = ({ post: { frontmatter, timeToRead } }) => (
+const PostTitle = ({ cover, coverCredit, coverUrl, title, ...rest }) => (
   <Container>
-    <Img fluid={frontmatter.cover.img.fluid} />
-    <Title>{frontmatter.title}</Title>
-    <PostMeta inTitle {...{ ...frontmatter, timeToRead }} />
+    <Img fluid={cover.img.fluid} />
+    <Title>{title}</Title>
+    <PostMeta inTitle {...rest} />
+    {coverCredit && (
+      <CoverCredit>
+        Credit: <a href={coverUrl}>{coverCredit}</a>
+      </CoverCredit>
+    )}
   </Container>
 )
 
