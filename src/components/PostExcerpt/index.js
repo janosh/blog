@@ -7,10 +7,10 @@ import PostMeta from '../PostMeta'
 
 const PostExcerpt = ({ post }) => {
   const { frontmatter, excerpt, timeToRead } = post
-  const { title, slug } = frontmatter
+  const { title, slug, cover } = frontmatter
   return (
     <Article>
-      <Img fluid={frontmatter.cover.img.fluid} />
+      {cover && <Img fluid={cover.img.fluid} />}
       <Title>
         <Link to={`blog/` + slug}>{title}</Link>
       </Title>

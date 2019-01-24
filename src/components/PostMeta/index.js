@@ -6,20 +6,18 @@ import { Calendar } from 'styled-icons/octicons/Calendar'
 import { Timer } from 'styled-icons/material/Timer'
 
 const PostMeta = ({ date, timeToRead, inTitle, iconSize }) => (
-  <>
-    <Meta inTitle={inTitle}>
-      <span>
-        <Calendar size={iconSize} />
-        &ensp;
-        {date}
-      </span>
-      <span>
-        <Timer size={iconSize} />
-        &ensp;
-        {timeToRead} min read
-      </span>
-    </Meta>
-  </>
+  <Meta inTitle={inTitle}>
+    <span>
+      <Calendar size={iconSize} />
+      &ensp;
+      {date}
+    </span>
+    <span>
+      <Timer size={iconSize} />
+      &ensp;
+      {timeToRead} min read
+    </span>
+  </Meta>
 )
 
 export default PostMeta
