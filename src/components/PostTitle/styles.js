@@ -26,3 +26,29 @@ export const Title = styled.h1`
   border-radius: ${props => props.theme.mediumBorderRadius};
   padding: 0.1em 0.5em;
 `
+
+export const CoverCredit = styled.span`
+  position: absolute;
+  bottom: 0;
+  right: 1em;
+  font-size: 0.8em;
+  transition: ${props => props.theme.shortTrans};
+  color: ${props => props.theme.white};
+  visibility: hidden;
+  opacity: 0;
+  padding: 0.1em 0.5em;
+  border-radius: ${props => (props.theme.mediumBorderRadius + ` `).repeat(2)} 0
+    0;
+  a {
+    color: ${props => props.theme.lightBlue};
+    transition: ${props => props.theme.shortTrans};
+    :hover {
+      color: ${props => props.theme.orange};
+    }
+  }
+  ${Container}:hover & {
+    visibility: visible;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.7);
+  }
+`
