@@ -5,11 +5,14 @@ import Global from '../components/Global'
 import PostTitle from '../components/PostTitle'
 
 const PostTemplate = ({ data, location }) => {
-  const { frontmatter, excerpt, html } = data.post
-  const path = location.pathname
+  const { frontmatter, excerpt, html, ...rest } = data.post
   return (
-    <Global pageTitle={frontmatter.title} path={path} description={excerpt}>
-      <PostTitle post={data.post} />
+    <Global
+      pageTitle={frontmatter.title}
+      path={location.pathname}
+      description={excerpt}
+    >
+      <PostTitle {...frontmatter} {...rest} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </Global>
   )
@@ -31,6 +34,8 @@ export const query = graphql`
           }
         }
       }
+      coverCredit
+      coverUrl
     }
     timeToRead
     excerpt(pruneLength: 300)
