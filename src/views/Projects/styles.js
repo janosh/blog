@@ -5,7 +5,7 @@ import { Package } from 'styled-icons/feather/Package'
 import { Github } from 'styled-icons/icomoon/Github'
 import { Link } from 'styled-icons/boxicons-regular/Link'
 
-export const Project = styled.div`
+export const ProjectExcerpt = styled.div`
   border-radius: ${props => props.theme.mediumBorderRadius};
   overflow: hidden;
   display: grid;
