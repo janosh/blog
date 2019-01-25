@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from "styled-components"
 
-import mediaQuery from '../../utils/mediaQuery'
+import mediaQuery from "../../utils/mediaQuery"
 
 const inTitle = css`
   justify-items: center;
@@ -14,7 +14,6 @@ const inTitle = css`
 `
 
 export const Meta = styled.div`
-  grid-area: postmeta;
   display: grid;
   grid-auto-columns: max-content;
   grid-gap: calc(0.5em + 1vw);

@@ -1,7 +1,7 @@
-import React, { Component, createRef } from 'react'
-import { DownArrow } from 'styled-icons/boxicons-regular/DownArrow'
+import React, { Component, createRef } from "react"
+import { DownArrow } from "styled-icons/boxicons-regular/DownArrow"
 
-import { NavContainer, NavEntry, SubNav, NavLink, Toggle } from './styles'
+import { NavContainer, NavEntry, SubNav, NavLink, Toggle } from "./styles"
 
 const events = [
   { event: `mousedown`, handler: `handleClickOutside` },
@@ -60,7 +60,6 @@ export default class Nav extends Component {
           {this.props.nav.map(({ url, title, subNav }, index) => (
             <NavEntry key={url}>
               <NavLink
-                activeClassName="active"
                 to={url || subNav[0].url}
                 as={subNav && showNav && showSubNav !== index && `span`}
                 title={title}
