@@ -28,14 +28,16 @@ export const query = graphql`
       date(formatString: "MMMM DD, YYYY")
       tags
       cover {
-        img: childImageSharp {
-          fluid(maxWidth: 2500, quality: 100) {
-            ...GatsbyImageSharpFluid_withWebp
+        img {
+          sharp: childImageSharp {
+            fluid(maxWidth: 2500, quality: 100) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
           }
         }
+        credit
+        url
       }
-      coverCredit
-      coverUrl
     }
     timeToRead
     excerpt(pruneLength: 300)
