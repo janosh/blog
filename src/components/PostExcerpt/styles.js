@@ -1,31 +1,27 @@
-import styled from 'styled-components'
-import Image from 'gatsby-image'
+import styled from "styled-components"
+import Img from "gatsby-image"
 
-export const Article = styled.article`
+export const Post = styled.article`
+  height: 100%;
   display: grid;
-  grid-template-areas:
-    'cover title'
-    'cover postmeta'
-    'cover .'
-    'excerpt excerpt';
-  grid-gap: calc(0.5em + 1vh) calc(1em + 1vw);
-  & + & {
-    margin-top: 3em;
+  background: ${props => props.theme.veryLightGray};
+  border-radius: ${props => props.theme.mediumBorderRadius};
+  border: 1px solid ${props => props.theme.lightGray};
+  overflow: hidden;
+  > main {
+    display: grid;
+    grid-gap: 0.5em;
+    padding: 0.7em 1em;
+    h3,
+    p {
+      margin: 0;
+    }
+  }
+  a:first-child {
+    height: min-content;
   }
 `
 
-export const Title = styled.h1`
-  grid-area: title;
-  margin: 0;
-  font-size: 2em;
-`
-
-export const Img = styled(Image)`
-  grid-area: cover;
-  border-radius: ${props => props.theme.mediumBorderRadius};
-`
-
-export const Excerpt = styled.p`
-  grid-area: excerpt;
-  margin: 0;
+export const Cover = styled(Img)`
+  height: calc(10em + 4vh);
 `
