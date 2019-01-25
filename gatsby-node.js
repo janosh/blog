@@ -39,7 +39,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       })
     } else if (/content\/posts/.test(path)) {
       createPage({
-        path: `/blog/` + slug,
+        path: `blog/` + slug,
         component: postTemplate,
         context: { slug },
       })
@@ -52,7 +52,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   tags.push({ title: `All`, slug: `` })
   tags.forEach(({ title, slug }) => {
     createPage({
-      path: `/blog/` + slug,
+      path: `blog/` + slug,
       component: tagTemplate,
       context: { title },
     })
