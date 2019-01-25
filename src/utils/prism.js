@@ -1,8 +1,38 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components"
+
+const langExtColor = [
+  { lang: `javascript`, ext: `js`, color: `#f7df1e` },
+  { lang: `js`, ext: `js`, color: `#f7df1e` },
+  { lang: `jsx`, ext: `jsx`, color: `#61dafb` },
+  { lang: `graphql`, ext: `GraphQL`, color: `#E10098` },
+  { lang: `gql`, ext: `GraphQL`, color: `#E10098` },
+  { lang: `html`, ext: `html`, color: `#005A9C` },
+  { lang: `css`, ext: `css`, color: `#ff9800` },
+  { lang: `shell`, ext: `shell`, color: `white` },
+  { lang: `sh`, ext: `sh`, color: `white` },
+  { lang: `bash`, ext: `bash`, color: `white` },
+  { lang: `yml`, ext: `yml`, color: `linen` },
+  { lang: `yaml`, ext: `yaml`, color: `linen` },
+  { lang: `markdown`, ext: `md`, color: `#e6ffed` },
+  { lang: `json`, ext: `json`, color: `#fff` },
+  { lang: `diff`, ext: `diff`, color: `#E8BD36` },
+  { lang: `text`, ext: `text`, color: `gray` },
+]
+
+const languageTags = langExtColor
+  .map(
+    ({ lang, ext, color }) =>
+      `.gatsby-highlight pre[class='language-${lang}']::before {
+        content: '${ext}';
+        background: ${color};
+      }`
+  )
+  .join(`\n`)
 
 export default createGlobalStyle`
   code[class*='language-'],
   pre[class*='language-'] {
+    position: relative;
     overflow: hidden;
     color: white;
     background: none;
@@ -45,11 +75,10 @@ export default createGlobalStyle`
 
   /* Inline code */
   :not(pre) > code[class*='language-'] {
-    border-radius: 0.3em;
-    background: rgba(255, 229, 100, 0.2);
-    color: #1a1a1a;
+    border-radius: 0.2em;
+    background: ${props => props.theme.lightGray};
+    color: ${props => props.theme.black};
     padding: 0.15em 0.2em 0.05em;
-    white-space: normal;
   }
 
   .token.attr-name {
@@ -125,10 +154,26 @@ export default createGlobalStyle`
     margin-left: -1em;
     padding-right: 1em;
     padding-left: 0.75em;
-    border-left: 0.25em solid #ffa7c4;
+    border-left: 0.25em solid ${props => props.theme.lightBlue};
   }
 
   .gatsby-highlight {
     overflow: auto;
   }
+
+  .gatsby-highlight pre[class*='language-']::before {
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    right: 2em;
+    padding: 0.1em 0.5em;
+    font-size: 0.7em;
+    text-align: right;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 0 0 0.2em 0.2em;
+    background: #ddd;
+  }
+  ${languageTags}
 `
