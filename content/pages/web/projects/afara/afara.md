@@ -1,7 +1,8 @@
 ---
 title: Afara
 slug: web/projects/afara
-cover: afara.png
+cover:
+  img: afara.png
 url: https://afara.foundation
 repo: https://github.com/janosh/afara
 date: 2019-01-02
