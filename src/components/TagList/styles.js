@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { Link } from 'gatsby'
+import styled from "styled-components"
+import { Link } from "gatsby"
 
 export const Tag = styled(Link)`
   padding: 0 0.5em;
@@ -16,5 +16,7 @@ export const Tag = styled(Link)`
 export const List = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 3em;
+  margin: 2em 0;
+  grid-column: 2 / -2;
+  justify-content: center;
 `

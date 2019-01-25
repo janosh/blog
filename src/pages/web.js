@@ -1,10 +1,10 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from "react"
+import { graphql } from "gatsby"
 
-import Global from '../components/Global'
-import PageTitle from '../components/PageTitle'
-import Grid from '../components/styles/Grid'
-import Projects from '../components/Projects'
+import Global from "../components/Global"
+import PageTitle from "../components/PageTitle"
+import Grid from "../components/styles/Grid"
+import Projects from "../views/Projects"
 
 const Web = ({ data, location }) => {
   const title = `Web`
@@ -18,7 +18,7 @@ const Web = ({ data, location }) => {
       <h2>Recent Projects</h2>
       <Projects {...projects} />
       <h2>My Stack</h2>
-      <Grid min="4em" align="center">
+      <Grid minWidth="4em" align="center">
         {techNames.edges.map(({ node }) => (
           <a key={node.title} href={node.url}>
             <span>{node.title}</span>
@@ -59,9 +59,11 @@ export const query = graphql`
             repo
             tech
             cover {
-              img: childImageSharp {
-                fluid(maxWidth: 2500, quality: 100) {
-                  ...GatsbyImageSharpFluid_withWebp
+              img {
+                sharp: childImageSharp {
+                  fluid(maxWidth: 2500, quality: 100) {
+                    ...GatsbyImageSharpFluid_withWebp
+                  }
                 }
               }
             }
