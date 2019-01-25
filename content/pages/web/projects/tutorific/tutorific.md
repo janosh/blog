@@ -1,7 +1,8 @@
 ---
 title: Tutorific
 slug: web/projects/tutorific
-cover: tutorific.png
+cover:
+  img: tutorific.png
 url: https://github.com/janosh/tutorific-frontend
 repo: https://github.com/janosh/tutorific-backend
 date: 2018-04-18

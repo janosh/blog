@@ -1,7 +1,8 @@
 ---
 title: Gatsby Source for Google Scholar
 slug: web/projects/gatsby-source-google-scholar
-cover: package-homepage.png
+cover:
+  img: package-homepage.png
 url: https://gatsby-source-google-scholar.netlify.com
 repo: https://github.com/janosh/gatsby-source-google-scholar
 date: 2018-12-22
