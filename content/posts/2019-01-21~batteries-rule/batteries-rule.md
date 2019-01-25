@@ -2,9 +2,10 @@
 title: Batteries + Solar Rule!
 slug: batteries-rule
 date: 2019-01-21
-cover: tesla-battery.jpg
-coverCredit: Hornsdale Power Reserve
-coverUrl: https://hornsdalepowerreserve.com.au
+cover:
+  img: tesla-battery.jpg
+  credit: Hornsdale Power Reserve
+  url: https://hornsdalepowerreserve.com.au
 tags:
   - Technology
   - Future

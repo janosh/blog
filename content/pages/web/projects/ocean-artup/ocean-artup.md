@@ -1,7 +1,8 @@
 ---
 title: Ocean artUp
 slug: web/projects/ocean-artup
-cover: ocean-artup.png
+cover:
+  img: ocean-artup.png
 url: https://ocean-artup.eu
 repo: https://github.com/janosh/ocean-artup
 date: 2018-07-13

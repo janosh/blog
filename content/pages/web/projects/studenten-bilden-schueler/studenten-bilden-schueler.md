@@ -1,7 +1,8 @@
 ---
 title: Studenten bilden Schüler
 slug: web/projects/studenten-bilden-schueler
-cover: studenten-bilden-schueler.png
+cover:
+  img: studenten-bilden-schueler.png
 url: https://studenten-bilden-schueler.eu
 repo: https://github.com/StudentenBildenSchueler/homepage
 date: 2018-06-23
