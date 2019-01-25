@@ -2,7 +2,8 @@
 title: Brave new world
 slug: brave-new-world
 date: 2018-07-27
-cover: gatsby+styled-components.png
+cover:
+  img: gatsby+styled-components.png
 tags:
   - Web Development
 ---
