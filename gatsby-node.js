@@ -2,7 +2,6 @@ const path = require(`path`)
 
 const pageTemplate = path.resolve(`./src/templates/page.js`)
 const postTemplate = path.resolve(`./src/templates/post.js`)
-const tagTemplate = path.resolve(`./src/templates/tag.js`)
 
 const query = `
   {
@@ -17,18 +16,13 @@ const query = `
         }
       }
     }
-    tags: allMarkdownRemark {
-      group(field: frontmatter___tags) {
-        title: fieldValue
-      }
-    }
   }
 `
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const response = await graphql(query)
   if (response.errors) throw new Error(response.errors)
-  let { content, tags } = response.data
+  const { content } = response.data
   content.edges.forEach(({ node: { path, frontmatter } }) => {
     const { slug, purpose } = frontmatter
     if (/content\/pages/.test(path) && purpose === `page`) {
@@ -44,17 +38,5 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         context: { slug },
       })
     }
-  })
-  tags = tags.group.map(({ title }) => ({
-    title,
-    slug: title.toLowerCase().replace(` `, `-`),
-  }))
-  tags.push({ title: `All`, slug: `` })
-  tags.forEach(({ title, slug }) => {
-    createPage({
-      path: `blog/` + slug,
-      component: tagTemplate,
-      context: { title },
-    })
   })
 }
