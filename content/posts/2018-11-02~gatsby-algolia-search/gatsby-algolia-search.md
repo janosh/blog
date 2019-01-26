@@ -361,6 +361,7 @@ Note that we feed `InstantSearch` with the same app ID we specified in our `.env
 Now we come to the styled components. Of course, design is something that will be very different from one site to the next so I only list them here for completeness and because it might save some time to simply copy and customize them.
 
 ```js
+// src/components/Search/styles.js
 import styled, { css } from 'styled-components'
 import { Search } from 'styled-icons/fa-solid/Search'
 
