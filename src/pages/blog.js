@@ -1,30 +1,27 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 
 import Global from "../components/Global"
 import PageTitle from "../components/PageTitle"
+import TagList from "../components/TagList"
 import PostList from "../views/PostList"
 
-const tagTemplate = ({ data, location, title = `Blog`, pageContext }) => {
-  let { posts, tags } = data
-  const tagTitle = pageContext.title
-  const postCount = posts.edges.length
-  if (tagTitle !== `All`) {
-    posts.edges = posts.edges.filter(({ node }) =>
-      node.frontmatter.tags.includes(tagTitle)
-    )
-  }
-  tags = tags.group.map(tag => ({
-    ...tag,
-    slug: `blog/` + tag.title.toLowerCase().replace(` `, `-`),
-  }))
-  tags.unshift({ title: `All`, slug: `blog`, count: postCount })
+const tagTemplate = ({ data, location, title = `Blog` }) => {
+  const { posts, tags } = data
+  const [tag, setTag] = useState(`All`)
+  const filteredPosts =
+    tag === `All`
+      ? posts.edges
+      : posts.edges.filter(({ node }) => node.frontmatter.tags.includes(tag))
+  if (!tags.group.map(tag => tag.title).includes(`All`))
+    tags.group.unshift({ title: `All`, count: posts.edges.length })
   return (
     <Global pageTitle={title} path={location.pathname}>
       <PageTitle>
         <h1>{title}</h1>
       </PageTitle>
-      <PostList posts={posts.edges} tags={tags} />
+      <TagList tags={tags.group} activeTag={tag} setTag={setTag} />
+      <PostList posts={filteredPosts} />
     </Global>
   )
 }
