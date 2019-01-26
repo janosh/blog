@@ -3,10 +3,14 @@ import PropTypes from "prop-types"
 
 import { List, Tag } from "./styles"
 
-const TagList = ({ tags }) => (
+const TagList = ({ tags, activeTag, setTag }) => (
   <List>
-    {tags.map(({ title, slug, count }) => (
-      <Tag key={slug} activeClassName="active" to={slug}>
+    {tags.map(({ title, count }) => (
+      <Tag
+        key={title}
+        active={activeTag === title}
+        onClick={() => setTag(title)}
+      >
         {title} ({count})
       </Tag>
     ))}
@@ -16,7 +20,8 @@ const TagList = ({ tags }) => (
 export default TagList
 
 TagList.propTypes = {
-  title: PropTypes.string,
+  activeTag: PropTypes.string.isRequired,
+  setTag: PropTypes.func.isRequired,
   tags: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
