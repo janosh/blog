@@ -1,16 +1,16 @@
 import styled from "styled-components"
-import { Link } from "gatsby"
 
-export const Tag = styled(Link)`
-  padding: 0 0.5em;
+export const Tag = styled.button`
+  font-size: 1em;
+  outline: none;
+  cursor: pointer;
+  padding: 0.1em 0.5em 0.2em;
   margin: 0 1em 1em 0;
   white-space: nowrap;
   color: ${props => props.theme.darkGray};
-  background: ${props => props.theme.lightGray};
   border-radius: ${props => props.theme.smallBorderRadius};
-  &.active {
-    background: ${props => props.theme.orange};
-  }
+  background: ${({ active, theme }) =>
+    active ? theme.orange : theme.lightGray};
 `
 
 export const List = styled.div`
