@@ -9,8 +9,5 @@ export default styled.div`
   );
   grid-gap: ${props => props.gap || `calc(1em + 2vh) calc(1em + 2vw)`};
   text-align: ${props => props.align};
-  justify-items: center;
-  > * {
-    max-width: ${props => props.maxWidth};
-  }
+  max-width: ${props => props.children.length === 1 && props.maxWidth};
 `
