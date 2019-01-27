@@ -21,7 +21,7 @@ const PostHit = clickHandler => ({ hit }) => (
       {hit.tags.map((tag, index) => (
         <Fragment key={tag}>
           {!!index && `, `}
-          <Link to={`blog/` + tag.toLowerCase().replace(` `, `-`)}>{tag}</Link>
+          {tag}
         </Fragment>
       ))}
     </div>
