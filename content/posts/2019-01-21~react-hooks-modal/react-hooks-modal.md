@@ -7,9 +7,8 @@ cover:
   credit: Hornsdale Power Reserve
   url: https://hornsdalepowerreserve.com.au
 tags:
-  - Technology
-  - Future
-  - Sustainability
+  - Web Development
+  - Tutorial
 ---
 
 What to do on a cold January weekend with bad weather? My choice fell on checking out the new [React Alpha (16.8)](https://reactjs.org/blog/2018/11/27/react-16-roadmap.html#react-16x-q1-2019-the-one-with-hooks). **The one with hooks** as it's come to be called.
