@@ -1,3 +1,15 @@
+/*
+#!/bin/sh
+#
+# Pre-commit hook called by "git commit" with no arguments.
+# Checks staged .js(x) files for eslint errors.
+# Exits with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+# Place in {projectRoot}/.git/hooks/pre-commit
+
+git diff --diff-filter=d --cached --name-only | grep "\.js.\?$" | xargs ./node_modules/.bin/eslint
+*/
+
 module.exports = {
   env: {
     browser: true,
