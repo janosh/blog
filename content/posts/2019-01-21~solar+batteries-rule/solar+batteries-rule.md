@@ -36,7 +36,7 @@ Once we start collecting the sun's light in space, the new ceiling for max solar
 ![Dyson Sphere](dyson-sphere.jpg)
 _Artist's rendition of a Dyson sphere. Credit: [Danielle Futeslaar](https://www.abc.net.au/news/2015-12-10/artists-representation-of-dyson-sphere-surrounding-star/7019336)_
 
-Just to demonstrate the long term scalability of the sun as an energy source, looking again at the plot of the world's energy consumption over time, we can see that it increased from $E_{1950} \approx 100 \mathrm{Exa \, J} = 10^{20} \mathrm J$ to $E_{2000} \approx 420 \mathrm{Exa \, J} = 4.2 \cdot 10^{20} \mathrm J$, i.e. a 4.2-fold increase over a period of $t = 50$ years. That equates to an average annual increase in human energy consumption $c$ of
+Just to demonstrate the long term scalability of the sun as an energy source, looking again at the plot of the world's energy consumption over time, we can see that it increased from $E_{1950} \approx 100 \, \mathrm{E J} = 10^{20} \, \mathrm J$ to $E_{2000} \approx 420 \, \mathrm{EJ} = 4.2 \cdot 10^{20} \, \mathrm J$, i.e. a 4.2-fold increase over a period of $t = 50$ years. That equates to an average annual increase in human energy consumption $c$ of
 
 $$
 E_{1950} \cdot (1 + c)^t = E_{2000}
@@ -44,7 +44,7 @@ E_{1950} \cdot (1 + c)^t = E_{2000}
 c = \exp\biggl(\frac{1}{t}\ln\bigl(E_{2000}/E_{1950}\bigr)\biggr) - 1 \approx 0.0327124199
 $$
 
-i.e. roughly 3.3 percent. Projecting this growth rate and the world's total energy consumption in 2013 estimated to be $E_{2013} = 5.67 \cdot 10^{20} \mathrm J$ ([source](https://en.wikipedia.org/wiki/World_energy_consumption)) in to the future, the time it would take us to reach a consumption equaling the sun's output of about $E_\odot \approx 1.21 \cdot 10^{34} \mathrm J$ is
+i.e. roughly 3.3 %. Projecting this growth rate and the world's total energy consumption in 2013 estimated to be $E_{2013} = 5.67 \cdot 10^{20} \mathrm J$ ([source](https://en.wikipedia.org/wiki/World_energy_consumption)) into the future, the time it would take us to reach a consumption equaling the sun's output of about $E_\odot \approx 1.21 \cdot 10^{34} \mathrm J$ is
 
 $$
 E_{2013} (1 + c)^T = E_\odot
@@ -52,7 +52,7 @@ E_{2013} (1 + c)^T = E_\odot
 T = \frac{\ln\bigl(E_\odot/E_{2013}\bigr)}{\ln(1 + c)} \approx 947
 $$
 
-It would take us close to a thousand years of continuing the period of strongest increase in human energy consumption to consume as much energy as can be harnessed from the sun.
+It would take us close to a thousand years of continuing the period of strongest increase in human power consumption to reach the sun's total energy output.
 
 But I digress. Basically my point is that solar energy is obviously by far the best long-term solution for all our energy needs and (perhaps slightly less obviously) - here comes the core message of this blog post - the best short term solution as well when combined with large-scale batteries.
 
