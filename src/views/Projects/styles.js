@@ -1,9 +1,10 @@
-import styled, { css } from 'styled-components'
-import Image from 'gatsby-image'
-import { Calendar } from 'styled-icons/octicons/Calendar'
-import { Package } from 'styled-icons/feather/Package'
-import { Github } from 'styled-icons/icomoon/Github'
-import { Link } from 'styled-icons/boxicons-regular/Link'
+import styled, { css } from "styled-components"
+import Image from "gatsby-image"
+import { Calendar } from "styled-icons/octicons/Calendar"
+import { Package } from "styled-icons/feather/Package"
+import { Github } from "styled-icons/icomoon/Github"
+import { Npm } from "styled-icons/fa-brands/Npm"
+import { Link } from "styled-icons/boxicons-regular/Link"
 
 export const ProjectExcerpt = styled.div`
   border-radius: ${props => props.theme.mediumBorderRadius};
@@ -52,6 +53,12 @@ export const Date = styled(Calendar)`
 
 export const GitHub = styled(Github)`
   ${iconCss}
+`
+
+export const NPM = styled(Npm)`
+  ${iconCss};
+  width: 1.7em;
+  vertical-align: -0.7em;
 `
 
 export const Tech = styled(Package)`
