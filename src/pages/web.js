@@ -57,6 +57,7 @@ export const query = graphql`
             date(formatString: "MMM DD, YYYY")
             url
             repo
+            npm
             tech
             cover {
               img {
