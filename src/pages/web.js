@@ -6,7 +6,7 @@ import PageTitle from "../components/PageTitle"
 import Grid from "../components/styles/Grid"
 import Projects from "../views/Projects"
 
-const Web = ({ data, location }) => {
+const WebPage = ({ data, location }) => {
   const title = `Web`
   const { intro, projects, techLogos, techNames } = data
   return (
@@ -37,7 +37,7 @@ const Web = ({ data, location }) => {
   )
 }
 
-export default Web
+export default WebPage
 
 export const query = graphql`
   {
