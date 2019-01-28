@@ -4,7 +4,7 @@ import Global from '../components/Global'
 import PageTitle from '../components/PageTitle'
 import Social from '../components/Social'
 
-const Contact = ({ location }) => {
+const ContactPage = ({ location }) => {
   const path = location.pathname
   return (
     <Global path={path}>
@@ -30,4 +30,4 @@ const Contact = ({ location }) => {
   )
 }
 
-export default Contact
+export default ContactPage

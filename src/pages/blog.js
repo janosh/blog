@@ -6,7 +6,7 @@ import PageTitle from "../components/PageTitle"
 import TagList from "../components/TagList"
 import PostList from "../views/PostList"
 
-const tagTemplate = ({ data, location, title = `Blog` }) => {
+const BlogPage = ({ data, location, title = `Blog` }) => {
   const { posts, tags } = data
   const [tag, setTag] = useState(`All`)
   const filteredPosts =
@@ -26,7 +26,7 @@ const tagTemplate = ({ data, location, title = `Blog` }) => {
   )
 }
 
-export default tagTemplate
+export default BlogPage
 
 export const query = graphql`
   {
