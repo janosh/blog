@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from "react"
 
-import { Img, Meta, Date, Tech, GitHub, Homepage } from './styles'
+import { Img, Meta, Date, Tech, GitHub, NPM, Homepage } from "./styles"
 
-const Project = ({ title, cover, date, url, repo, tech, html }) => (
+const Project = ({ title, cover, date, url, repo, npm, tech, html }) => (
   <>
     <h2>
       <a href={url}>{title}</a>
@@ -21,6 +21,11 @@ const Project = ({ title, cover, date, url, repo, tech, html }) => (
         <a href={repo}>
           <GitHub />
           Repo
+        </a>
+      )}
+      {npm && (
+        <a href={npm}>
+          <NPM />
         </a>
       )}
       <br />
