@@ -58,5 +58,10 @@
   "devDependencies": {
     "eslint": "^5.12.1",
     "eslint-plugin-react": "^7.12.4"
-  }
+  },
+  "eslintIgnore": [
+    "node_modules",
+    ".cache",
+    "public"
+  ]
 }
