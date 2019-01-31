@@ -9,7 +9,11 @@ tags:
   - Tutorial
 ---
 
-In this post I'll explain how to setup [Algolia search](https://www.algolia.com) on a [Gatsby](https://gatsbyjs.org) site. You can see the result in action by clicking on the loupe in the top right corner of this page.
+In this post I'll explain how to setup a custom search experience powered by [Algolia](https://www.algolia.com) on a [Gatsby](https://gatsbyjs.org) site. You can see the result in action by clicking on the loupe in the top right corner of this page.
+
+Before, we begin I should mention that if you're looking to add search to a documentation site, then you can let Algolia handle most of the steps outlined below for you by using their excellent [Docsearch](https://community.algolia.com/docsearch) functionality. For other types of sites and more fine-grained control over exactly what data should be indexed, read on.
+
+## Backend
 
 First, you'll need to add [`gatsby-plugin-algolia`](https://github.com/algolia/gatsby-plugin-algolia) and [`react-instantsearch-dom`](https://github.com/algolia/react-instantsearch) to your project. With `react-instantsearch` Algolia provides an extensive library of off-the-shelf React components that we can simply import to save ourselves a lot of work. If you're not using it already, also install [`dotenv`](https://github.com/motdotla/dotenv) while you're at it. We're going to need it to specify your Algolia app ID and both the search and admin API keys without commiting them to version control.
 
@@ -68,7 +72,7 @@ GATSBY_ALGOLIA_SEARCH_KEY=insertValue
 ALGOLIA_ADMIN_KEY=insertValue
 ```
 
-Now come the `queries`.
+The `queries` allow you to grab the data you want Algolia to index directly from Gatsby's GraphQL layer by exporting from `src/utils/algolia.js` an array of objects, each containing a GraphQL query and (optionally) an index name, a transformer function and a settings object.
 
 ```js
 // src/utils/algolia.js
@@ -136,15 +140,17 @@ const queries = [
 module.exports = queries
 ```
 
-It might look a little initmidating at first, but really these are just GraphQl queries that `gatsby-plugin-algolia` runs to get the data with which to populate your indices on Algolia's servers. I'm using separate one's for my posts and pages to keep things organized but you could have all your data in one index.
+It might look a little initmidating at first, but basically you're just letting `gatsby-plugin-algolia` know how to acquire the data with which to populate your indices on Algolia's servers. The example above uses separate queries passing data to separate indices for pages and blog posts.
 
-Notice also that you can run transformers on the data returned by the queries to bring it into a format ready for searching. All I'm doing here is 'flattening' my posts and pages to 'unnest' the frontmatter but transformers could do much more for you if necessary. Whoever, came up with this intermediate step for index construction, props to you! This makes the whole process really flexible and much more powerful. You could for instance filter the results of your queries here, format or even add new fields based on content type, merge entries and so on.
+Notice also that you can run transformers on the data returned by the queries to bring it into a format ready for searching. All we're doing here is 'flattening' posts and pages to 'unnest' the frontmatter but transformers could do much more for you if required. This makes the whole process of indexing your data really flexible and powerful. You could for instance filter the results of your queries here, format fields or even add ones, merge entries and so on.
 
-If you've come this far, then the "backend" is done. You can now run `gatsby build` to see your indices in Algolia's webinterface flooded with all your data (provided the build runs without errors, of course).
+If you've come this far, then the "backend" is done. You can now run `gatsby build` to see your indices in Algolia's webinterface flooded with all your data (provided the build throws no errors).
 
-What remains to be done now is to add a user-facing search interface to your site. It needs a way for the user to enter a search string, then send that string to Algolia, receive matching results from your indices and finally display those to the user. This is the part that took me much longer to get looking and working the way I wanted but (hopefully) it will be much quicker with a little guidance. So let's dive right in.
+## Frontend
 
-We're going to assemble everything we need into a React `Search` component that we call from anywhere on our site where we want the user to be able to search.
+What remains to be done now is to add a user-facing search interface to your site. It needs a way for the user to enter a search string, send that string to Algolia, receive matching results from your indices and finally display those to the user. Let's dive right in.
+
+We're going to assemble everything we need into a React `Search` component that we call from anywhere on our site where we want the user to be able to search. Even though design varies strongly from site to site, we'll also go through the styles in this guide since working out the CSS transitions to have the search field slide out as the user clicks on it and the results pane to appear once Algolia returns some matches can take some time. We'll implement this functionality with `styled-components` but of course, you can use any styling method you like and the CSS should remain mostly the same.
 
 The first step is to create the main component file.
 
@@ -257,27 +263,27 @@ import {
 } from 'react-instantsearch-dom'
 ```
 
-`InstantSearch` imported from [`react-instantsearch-dom`](https://community.algolia.com/react-instantsearch) is Algolia's main off-the-shelf React component that allows your whole search experience to connect to their service. As the name suggests, `Index` allows you to connect to an individual index and `Hits` provides you with the data returned for a user's search input. Finally `connectStateResults` gives some high-level stats about the current search state such as the query, the number of results and how long it took to fetch them.
+`InstantSearch` imported from [`react-instantsearch-dom`](https://community.algolia.com/react-instantsearch) is Algolia's main off-the-shelf React component that allows your whole search experience to connect to their service. As the name suggests, `Index` allows you to tap into an individual index and `Hits` provides you with the data returned for a user's search input. Finally [`connectStateResults`](https://community.algolia.com/react-instantsearch/connectors/connectStateResults.html) provides high-level stats about the current search state such as the query, the number of results and how long it took to fetch them.
+
+Next we import the styled components that make up the UI.
 
 ```js
 import { Algolia } from 'styled-icons/fa-brands/Algolia'
-```
-
-Since I'm using Algolia's generous free tier, I import their logo from [`styled-icons`](https://styled-icons.js.org) to show a little `Powered by Algolia` acknowledgement with their icon below the search results. Algolia also provides a [`PoweredBy` component](https://community.algolia.com/react-instantsearch/widgets/PoweredBy.html) for that but I preferred to build and style my own.
-
-```js
 import { Root, SearchBox, HitsWrapper, By } from './styles'
 ```
 
-I used [`styled-components`](https://www.styled-components.com) to all parts of `Search`. Those styled components are imported next. I'll get back to them once we're done with this file.
+Notice that we're importing the Algolia logo from `styled-icons`. That's because if you're using Algolia's generous free tier, they ask you to acknowledge them with a little `Powered by Algolia` link below the search results. `react-instantsearch-dom` provides a [`PoweredBy` component](https://community.algolia.com/react-instantsearch/widgets/PoweredBy.html) for that but you can of course build and style your own (as done here).
+
+We'll get back to those styled components once we're done with `index.js`. For now, let's move on.
 
 ```js
 import Input from './Input'
 ```
 
-The Input component is where the user enters the search string. It is quite short since the grunt work is again by one of Algolia's components called [`connectSearchBox`](https://community.algolia.com/react-instantsearch/connectors/connectSearchBox.html):
+The Input component is where the user enters the search string. It is quite short since the grunt work is done by one of Algolia's components called [`connectSearchBox`](https://community.algolia.com/react-instantsearch/connectors/connectSearchBox.html):
 
 ```jsx
+// src/components/Search/Input.js
 import React from 'react'
 import { connectSearchBox } from 'react-instantsearch-dom'
 
@@ -297,7 +303,7 @@ export default connectSearchBox(({ refine, ...rest }) => (
 ))
 ```
 
-Let's again worry about the styled components later.
+Let's again worry about the styled components `Loupe`, `Form`, `Input` later.
 
 The next line imports hit components for every type of result we want to display to the user. The hit component determines how attributes of matching results such as author and title in the case of a blog post are displayed to the user.
 
@@ -305,14 +311,15 @@ The next line imports hit components for every type of result we want to display
 import * as hitComps from './hits'
 ```
 
-`./hits` itself just bundles the exports from all hit components. We'll get to `PageHit` and `PostHit` in the end.
+`hits.js` itself just bundles the exports from all hit components. We'll get to `PageHit` and `PostHit` in the end.
 
 ```js
+// src/components/Search/hits.js
 export { default as PageHit } from './PageHit'
 export { default as PostHit } from './PostHit'
 ```
 
-Next we define two tiny connected components. `Results` informs the user that no matches could be found for a query if `searchResults.nbHits == 0`. `Stats` just displays `searchResults.nbHits`.
+Next we define two tiny connected components. `Results` informs the user that no matches could be found for a query if there were no matches, i.e. `searchResults.nbHits == 0`. `Stats` just displays `searchResults.nbHits`.
 
 ```js
 const Results = connectStateResults(
@@ -328,7 +335,9 @@ const Stats = connectStateResults(
 
 Now comes the actual `Search` component class. It starts off with a bunch of boilerplate to initialize state, define handler functions and make those trigger with event listeners. All they do is make the search input slide out when the user clicks a loupe icon and make it disappear again when the user clicks anywhere else or starts to scroll.
 
-The `render` function takes a dynamic array of `indices` passed as a prop. This allows you to have search boxes in different places of your site query different Algolia indices. For example, besides your main search in the header used for finding pages and/or posts, your site might have a wiki and you want to offer your visitors a search that only displays results for that.
+The `render` function takes a dynamic array of `indices` passed as a prop. Each array item should be an object with keys `name`, `title`, `hitComp` that specifies the name of the index in your Algolia account that should be queried, the title to display aboe the results shown to the user and the component `hitComp` that renders the data returned for each match.
+
+Passing this `indices` array as a prop allows you to reuse the same `Search` component in differnt parts of your site and have each of them query different Algolia indices. As an example, besides a primary search box in the header used for finding pages and/or posts, your site might have a wiki and you want to offer your visitors a second search box that displays results only for that part of your site.
 
 ```jsx
 const { indices, collapse, hitsAsGrid } = this.props
@@ -346,7 +355,7 @@ const { indices, collapse, hitsAsGrid } = this.props
 ))}
 ```
 
-Note that we feed `InstantSearch` with the same app ID we specified in our `.env` file and with our search-only API key. _Don't paste in your admin API key here!_ `InstantSearch` only needs to _read_ your indices. Pasting your admin key here would allow others to obtain it once your site is deployed. They could then start messing with your indexed data on Algolia.
+Note below that we feed `InstantSearch` with the same app ID we specified in our `.env` file and used in `src/utils/algolia.js` as well as with our search-only API key. _Don't paste in your admin API key here!_ `InstantSearch` only needs to _read_ your indices. Pasting your admin key here would allow others to obtain it once your site is deployed. They could then start messing with your indexed data on Algolia.
 
 ```jsx
 <InstantSearch
@@ -358,7 +367,7 @@ Note that we feed `InstantSearch` with the same app ID we specified in our `.env
 >
 ```
 
-Now we come to the styled components. Of course, design is something that will be very different from one site to the next so I only list them here for completeness and because it might save some time to simply copy and customize them.
+Now we come to the styled components. Of course, the design will be very different from one site to the next so we only list them here for completeness and because it might save some time to simply copy and customize them.
 
 ```js
 // src/components/Search/styles.js
@@ -504,9 +513,7 @@ export const By = styled.span`
 `
 ```
 
-Now we're almost done. 2 small steps remain. First, we need to put together a hit component for every type of result we want to display. In my case, these are blog posts and pages. And second, we need to call our `Search` component on at least one of our pages.
-
-So first up, here are the post and page hit components
+Now we're almost done. 2 small steps remain. First, we need to put together a hit component for every type of result we want to display. In our example, these are blog posts and pages. And second, we need to call our `Search` component somewhere on our site. Here are the post and page hit components.
 
 ```jsx
 // src/components/Search/PageHit.js
