@@ -1,29 +1,31 @@
 import { createGlobalStyle } from "styled-components"
 
 const langExtColor = [
-  { lang: `javascript`, ext: `js`, color: `#f7df1e` },
-  { lang: `js`, ext: `js`, color: `#f7df1e` },
-  { lang: `jsx`, ext: `jsx`, color: `#61dafb` },
-  { lang: `graphql`, ext: `GraphQL`, color: `#E10098` },
-  { lang: `gql`, ext: `GraphQL`, color: `#E10098` },
-  { lang: `html`, ext: `html`, color: `#005A9C` },
-  { lang: `css`, ext: `css`, color: `#ff9800` },
-  { lang: `shell`, ext: `shell`, color: `white` },
-  { lang: `sh`, ext: `sh`, color: `white` },
-  { lang: `bash`, ext: `bash`, color: `white` },
-  { lang: `yml`, ext: `yml`, color: `linen` },
-  { lang: `yaml`, ext: `yaml`, color: `linen` },
-  { lang: `markdown`, ext: `md`, color: `#e6ffed` },
-  { lang: `json`, ext: `json`, color: `#fff` },
-  { lang: `diff`, ext: `diff`, color: `#E8BD36` },
-  { lang: `text`, ext: `text`, color: `gray` },
+  { lang: `javascript`, tag: `js`, color: `#f7df1e` },
+  { lang: `js`, tag: `js`, color: `#f7df1e` },
+  { lang: `jsx`, tag: `jsx`, color: `#61dafb` },
+  { lang: `python`, tag: `py`, color: `#61da84` },
+  { lang: `py`, tag: `py`, color: `#61da84` },
+  { lang: `graphql`, tag: `graphql`, color: `#E10098` },
+  { lang: `gql`, tag: `graphql`, color: `#E10098` },
+  { lang: `html`, tag: `html`, color: `#005A9C` },
+  { lang: `css`, tag: `css`, color: `#ff9800` },
+  { lang: `shell`, tag: `shell`, color: `white` },
+  { lang: `sh`, tag: `sh`, color: `white` },
+  { lang: `bash`, tag: `bash`, color: `white` },
+  { lang: `yml`, tag: `yml`, color: `linen` },
+  { lang: `yaml`, tag: `yaml`, color: `linen` },
+  { lang: `markdown`, tag: `md`, color: `#e6ffed` },
+  { lang: `json`, tag: `json`, color: `#fff` },
+  { lang: `diff`, tag: `diff`, color: `#E8BD36` },
+  { lang: `text`, tag: `text`, color: `gray` },
 ]
 
 const languageTags = langExtColor
   .map(
-    ({ lang, ext, color }) =>
+    ({ lang, tag, color }) =>
       `.gatsby-highlight pre[class='language-${lang}']::before {
-        content: '${ext}';
+        content: '${tag}';
         background: ${color};
       }`
   )
@@ -36,7 +38,7 @@ export default createGlobalStyle`
     overflow: hidden;
     color: white;
     background: none;
-    font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace;
+    font-family: Consolas, Menlo, Monaco, source-code-pro, 'Courier New', monospace;
     text-align: left;
     white-space: pre;
     word-spacing: normal;
