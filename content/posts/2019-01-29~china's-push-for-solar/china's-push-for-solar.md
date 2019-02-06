@@ -1,6 +1,6 @@
 ---
 title: China's Push for Solar
-slug: china-will-rule
+slug: china's-push-for-solar
 date: 2019-01-29
 cover:
   img: solar-panda.jpg
@@ -23,7 +23,7 @@ _Annual solar panel production in megawatts by country. Credit: [Kurzweil Networ
 
 It was hard to find recent data but at least until 2013 this discrepancy only appears to have increased. According to data compiled by CleanTechnica, by 2013 China was able to extend their lead from 160 % to 200 % of the rest of the world's solar cell production, all while many of the other counrties were busy ramping up their output as well.
 
-![Solar Production By Country Pie Chart](solar-production-by-country-pie-chart.jpg)
+![Solar Production By Country Pie Chart](solar-production-by-country-pie-chart.png)
 _Share of solar panel production by country. Credit: [Clean Technica](https://cleantechnica.com/2014/10/17/top-solar-charts-iea-solar-pv-report)_
 
 These numbers are frankly impressive. I find them very inspiring considering that the biggest economy on Earth which 20 years ago seemed dead set on powering its rise and upholding its claim to that position mostly with coal power - the dirtiest energy source of them all - is now on the fast track to becoming sustainable and dragging the entire rest of the world with them.
