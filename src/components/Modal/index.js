@@ -1,16 +1,32 @@
 import React from 'react'
 
-import { ModelBehind, ModelDiv, Close } from './styles'
+import { ModalBehind, ModalDiv, Close, Next, Previous } from './styles'
 
-const Modal = ({ open, closeModal, children }) => {
-  return (
-    <ModelBehind open={open} onClick={closeModal}>
-      <ModelDiv onClick={(event) => event.stopPropagation()}>
-        <Close onClick={closeModal} />
-        {children}
-      </ModelDiv>
-    </ModelBehind>
-  )
-}
+const Modal = ({
+  open,
+  modal,
+  setModal,
+  children,
+  navigation,
+  white,
+  className,
+}) => (
+  <ModalBehind open={open} onClick={setModal}>
+    <ModalDiv
+      onClick={(event) => event.stopPropagation()}
+      className={className}
+    >
+      <Close onClick={setModal} white={white} />
+      {children}
+      {navigation && (
+        <>
+          <Next onClick={() => setModal(modal + 1)} white={white} />
+          <Previous onClick={() => setModal(modal - 1)} white={white} />
+        </>
+      )}
+      {children}
+    </ModalDiv>
+  </ModalBehind>
+)
 
 export default Modal
