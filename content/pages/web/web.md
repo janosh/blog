@@ -1,5 +1,7 @@
 ---
 purpose: web intro
+cover:
+  img: vscode.jpg
 ---
 
 ## My journey
