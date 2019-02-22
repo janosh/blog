@@ -2,13 +2,15 @@
 title: Physics
 slug: /physics
 purpose: page
+cover:
+  img: images/star-trails.jpg
 ---
 
-This is a compilation of notes and solutions to problem sheets for some of my most interesting physics lectures.
+This is a compilation of notes and solutions to problem sheets for some of the physics lectures I took, most of them in Heidelberg.
 
-During my studies, I often read the solutions to exercises uploaded by other physics students around the world. They frequently opened up a new perspective or offered a way out when I got stuck on a problem. In the hopes that I might provide similar help to others, I’m uploading some of the solutions I typed up over the years.
+During my studies, I often read the solutions to exercises uploaded by other physics students around the world. They usually opened up a new perspective or provided a way forward when I got stuck on a problem. In the hopes that I might provide similar help to others, I’m uploading some of the solutions I typed up over the years.
 
-If you found an error or have a question, feel free drop me a line at [janosh.riebesell@gmail.com](mailto:janosh.riebesell@gmail.com).
+If you find an error or have a question, feel free drop me a line at [janosh.riebesell@gmail.com](mailto:janosh.riebesell@gmail.com).
 
 <div class="grid">
 
