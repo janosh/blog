@@ -7,7 +7,7 @@ import TagList from "../components/TagList"
 import PostList from "../views/PostList"
 
 const BlogPage = ({ data, location, title = `Blog` }) => {
-  const { posts, tags } = data
+  const { posts, tags, img } = data
   const [tag, setTag] = useState(`All`)
   const filteredPosts =
     tag === `All`
@@ -17,7 +17,7 @@ const BlogPage = ({ data, location, title = `Blog` }) => {
     tags.group.unshift({ title: `All`, count: posts.edges.length })
   return (
     <Global pageTitle={title} path={location.pathname}>
-      <PageTitle>
+      <PageTitle img={img.sharp}>
         <h1>{title}</h1>
       </PageTitle>
       <TagList tags={tags.group} activeTag={tag} setTag={setTag} />
@@ -44,6 +44,13 @@ export const query = graphql`
       group(field: frontmatter___tags) {
         title: fieldValue
         count: totalCount
+      }
+    }
+    img: file(name: { eq: "blog-cover" }) {
+      sharp: childImageSharp {
+        fluid(quality: 100, maxWidth: 2000) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
       }
     }
   }
