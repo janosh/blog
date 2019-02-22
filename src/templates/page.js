@@ -1,20 +1,15 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from "react"
+import { graphql } from "gatsby"
 
-import Global from '../components/Global'
-import PageTitle from '../components/PageTitle'
+import Global from "../components/Global"
+import PageTitle from "../components/PageTitle"
 
 const PageTemplate = ({ data, location }) => {
   const { frontmatter, html, excerpt } = data.page
-  const { title } = frontmatter
+  const { title, cover } = frontmatter
   return (
-    <Global
-      layout
-      pageTitle={title}
-      path={location.pathname}
-      description={excerpt}
-    >
-      <PageTitle>
+    <Global pageTitle={title} path={location.pathname} description={excerpt}>
+      <PageTitle img={cover.img.sharp}>
         <h1>{title}</h1>
       </PageTitle>
       <article dangerouslySetInnerHTML={{ __html: html }} />
@@ -29,6 +24,15 @@ export const query = graphql`
     page: markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       frontmatter {
         title
+        cover {
+          img {
+            sharp: childImageSharp {
+              fluid(quality: 100, maxWidth: 2000) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+        }
       }
       html
       excerpt
