@@ -1,7 +1,9 @@
 ---
-title: Artificial Intelligence
-slug: ai
+title: Machine Learning
+slug: ml
 purpose: page
+cover:
+  img: tech-circle.jpg
 ---
 
 I'm currently working at Cambridge University's Maxwell Centre under the supervision of [Alpha Lee](https://alpha-lee.com) on applications of machine learning in physics.
