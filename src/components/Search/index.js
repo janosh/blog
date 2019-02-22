@@ -1,15 +1,16 @@
-import React, { Component, createRef } from 'react'
+import React, { Component, createRef } from "react"
 import {
   InstantSearch,
   Index,
   Hits,
   connectStateResults,
-} from 'react-instantsearch-dom'
-import { Algolia } from 'styled-icons/fa-brands/Algolia'
+} from "react-instantsearch-dom"
+import algoliasearch from "algoliasearch/lite"
+import { Algolia } from "styled-icons/fa-brands/Algolia"
 
-import { Root, HitsWrapper, By } from './styles'
-import Input from './Input'
-import * as hitComps from './hits'
+import { Root, HitsWrapper, By } from "./styles"
+import Input from "./Input"
+import * as hitComps from "./hits"
 
 const events = [`mousedown`, `touchstart`]
 
@@ -25,6 +26,10 @@ const Stats = connectStateResults(
 
 export default class Search extends Component {
   state = { query: ``, focussed: false, ref: createRef() }
+  searchClient = algoliasearch(
+    process.env.GATSBY_ALGOLIA_APP_ID,
+    process.env.GATSBY_ALGOLIA_SEARCH_KEY
+  )
 
   updateState = state => this.setState(state)
 
@@ -59,8 +64,7 @@ export default class Search extends Component {
     const { indices, collapse, hitsAsGrid } = this.props
     return (
       <InstantSearch
-        appId={process.env.GATSBY_ALGOLIA_APP_ID}
-        apiKey={process.env.GATSBY_ALGOLIA_SEARCH_KEY}
+        searchClient={this.searchClient}
         indexName={indices[0].name}
         onSearchStateChange={this.updateState}
         root={{ Root, props: { ref } }}
