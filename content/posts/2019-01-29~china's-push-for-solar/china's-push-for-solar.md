@@ -32,6 +32,10 @@ If you're interested in what a tremendous disservice Donald Trump in contrast is
 
 `youtube:cD0c-AlO_i4`
 
-And this video by Coldfusion on solar power plants is also well worth watching.
+These videos by Coldfusion on solar power plants
 
 `youtube:crAgssqpgQQ`
+
+and by Joe Scott on comparing wind and solar are also well worth watching.
+
+`youtube:yGhr9wNOcdI`
