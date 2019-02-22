@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { Close as Cross } from "styled-icons/material/Close"
 import { NavigateNext } from "styled-icons/material/NavigateNext"
 import { NavigateBefore } from "styled-icons/material/NavigateBefore"
@@ -30,29 +30,40 @@ export const ModelDiv = styled.div`
   box-shadow: 0 0 3em ${props => props.theme.black};
 `
 
-export const Close = styled(Cross).attrs({ size: `2em` })`
+const controlsCss = css`
   position: absolute;
-  top: 0.5em;
-  right: 0.4em;
   cursor: pointer;
   z-index: 1;
   color: ${props => props.white && `white`};
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 0.1em;
+  transition: ${props => props.theme.shortTrans};
+  :hover {
+    transform: scale(1.07);
+  }
+`
+
+export const Close = styled(Cross).attrs({ size: `2em` })`
+  ${controlsCss};
+  top: 0.5em;
+  right: 0.4em;
 `
 
 export const Next = styled(NavigateNext).attrs({ size: `2em` })`
-  position: absolute;
+  ${controlsCss};
   top: 50%;
   right: 0.4em;
-  cursor: pointer;
-  z-index: 1;
-  color: ${props => props.white && `white`};
+  path {
+    transform: translateX(0.03em);
+  }
 `
 
 export const Previous = styled(NavigateBefore).attrs({ size: `2em` })`
-  position: absolute;
+  ${controlsCss};
   top: 50%;
   left: 0.4em;
-  cursor: pointer;
-  z-index: 1;
-  color: ${props => props.white && `white`};
+  path {
+    transform: translateX(-0.03em);
+  }
 `
