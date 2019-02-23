@@ -3,7 +3,8 @@ title: Physics
 slug: /physics
 purpose: page
 cover:
-  img: images/star-trails.jpg
+  img: star-trails.jpg
+  caption: Star trails
 ---
 
 This is a compilation of notes and solutions to problem sheets for some of the physics lectures I took, most of them in Heidelberg.
@@ -14,26 +15,26 @@ If you find an error or have a question, feel free drop me a line at [janosh.rie
 
 <div class="grid">
 
-[String Theory ![String Theory](images/string-theory.png)](/physics/string-theory)
+[String Theory ![Cross section of the quintic Calabi–Yau manifold](/string-theory/calabi-yau.png)](/physics/string-theory)
 
-[QFT ![QFT](images/qft.png)](/physics/qft)
+[QFT ![Feynman diagram of electron-quark scattering](/qft/electron-quark-scattering.png)](/physics/qft)
 
-[Advanced QFT ![Advanced QFT](images/advanced-qft.png)](/physics/advanced-qft)
+[Advanced QFT ![Standard model interactions](/advanced-qft/standard-model-interactions.png)](/physics/advanced-qft)
 
-[General Relativity ![General Relativity](images/general-relativity.png)](/physics/general-relativity)
+[General Relativity ![Cosmic microwave background](/general-relativity/cosmic-microwave-background.png)](/physics/general-relativity)
 
-[Group Theory ![Group Theory](images/group-theory.png)](/physics/group-theory)
+[Group Theory ![Rubik's cube](/group-theory/rubik's-cube.png)](/physics/group-theory)
 
-[Numeric Simulations ![Numeric Simulations](images/numeric-simulations.png)](/physics/numeric-simulations)
+[Numeric Simulations ![Double pendulum](/numerical-simulations/double-pendulum.jpg)](/physics/numeric-simulations)
 
-[Atomic Physics ![Atomic Physics](images/atomic-physics.png)](/physics/atomic-physics)
+[Atomic Physics ![Electron excitations in an atomic shell](/atomic-physics/excited-electrons.png)](/physics/atomic-physics)
 
-[Statistical Physics ![Statistical Physics](images/statistical-physics.png)](/physics/statistical-physics)
+[Statistical Physics ![Phase space trajectory](/statistical-physics/phase-space-trajectory.png)](/physics/statistical-physics)
 
-[Oral exam ![Oral exam](images/oral-exam.png)](/physics/oral-exam)
+[Oral exam ![Keep calm](/oral-exam/keep-calm.png)](/physics/oral-exam)
 
-[Bachelor's Thesis ![Bachelor's Thesis](images/bachelors-thesis.png)](/physics/bachelors-thesis)
+[Bachelor's Thesis ![Graphene band structure](/bachelors-thesis/graphene-band-structure.png)](/physics/bachelors-thesis)
 
-[Master's Thesis ![Master's Thesis](images/masters-thesis.png)](/physics/masters-thesis)
+[Master's Thesis ![Absolute value of Bose-Einstein distribution over complex plane](masters-thesis/complex-bose-einstein-distribution.png)](/physics/masters-thesis)
 
 </div>

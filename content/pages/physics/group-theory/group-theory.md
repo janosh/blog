@@ -1,7 +1,9 @@
 ---
 title: Group Theory
-slug: physics/group-theory
+slug: /physics/group-theory
 purpose: page
+cover:
+  img: symmetric-fern.jpg
 ---
 
 In the summer of 2015, [Prof. Daniel Roggenkamp](http://www.thphys.uni-heidelberg.de/~roggenkamp) gave a small but insightful lecture on group theory and its applications in physics at Heidelberg University.
