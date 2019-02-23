@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { graphql } from "gatsby"
 
 import Global from "../components/Global"
-import PageTitle from "../components/PageTitle"
+import PageHeader from "../components/PageHeader"
 import TagList from "../components/TagList"
 import PostList from "../views/PostList"
 
@@ -17,9 +17,9 @@ const BlogPage = ({ data, location, title = `Blog` }) => {
     tags.group.unshift({ title: `All`, count: posts.edges.length })
   return (
     <Global pageTitle={title} path={location.pathname}>
-      <PageTitle img={img.sharp}>
+      <PageHeader img={img && img.sharp}>
         <h1>{title}</h1>
-      </PageTitle>
+      </PageHeader>
       <TagList tags={tags.group} activeTag={tag} setTag={setTag} />
       <PostList posts={filteredPosts} />
     </Global>
@@ -36,7 +36,7 @@ export const query = graphql`
     ) {
       edges {
         node {
-          ...postFields
+          ...post
         }
       }
     }
