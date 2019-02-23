@@ -2,6 +2,11 @@
 title: Bachelor's Thesis
 slug: /physics/bachelors-thesis
 purpose: page
+cover:
+  img: graphene.jpg
+  credit: Wikipedia
+  url: https://en.wikipedia.org/wiki/Graphene#/media/File:Graphen.jpg
+  caption: Graphene lattice
 ---
 
 I wrote my bachelor's thesis under the supervision of [Prof. Alexander Lichtenstein](https://theorie.physnet.uni-hamburg.de/group_magno/?page_id=43) at ITP Hamburg.

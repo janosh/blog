@@ -2,9 +2,14 @@
 title: Master's Thesis
 slug: /physics/masters-thesis
 purpose: page
+cover:
+  img: heidelberg-castle-at-night.jpg
+  credit: Alex Meyer
+  url: https://www.locationscout.net/germany/3596-philosophenweg-heidelberg
+  caption: Heidelberg castle at night
 ---
 
-I wrote my bachelor's thesis under the supervision of [Stefan Flörchinger](http://www.thphys.uni-heidelberg.de/~floerchinger), [Michael Scherer](http://www.thp.uni-koeln.de/~scherer) and [Christof Wetterich](http://www.thphys.uni-heidelberg.de/~wetterich) at ITP Heidelberg.
+I wrote my master's thesis under the supervision of [Stefan Flörchinger](http://www.thphys.uni-heidelberg.de/~floerchinger), [Michael Scherer](http://www.thp.uni-koeln.de/~scherer) and [Christof Wetterich](http://www.thphys.uni-heidelberg.de/~wetterich) at ITP Heidelberg.
 
 ## Topic
 

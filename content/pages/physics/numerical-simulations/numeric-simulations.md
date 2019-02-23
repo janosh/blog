@@ -1,7 +1,9 @@
 ---
 title: Numerical Simulations
-slug: physics/numeric-simulations
+slug: /physics/numeric-simulations
 purpose: page
+cover:
+  img: droplet.jpg
 ---
 
 [Numerical Simulations](https://www.h-its.org/mbm-teaching/fundamentals-simulation-methods) was a particularly enjoyable course given by [Prof. Volker Springel](https://www.imprs-astro.mpg.de/content/prof-dr-volker-springel.html) in the winter term 2015/16 at Heidelberg University.
