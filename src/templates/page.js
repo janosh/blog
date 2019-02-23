@@ -2,16 +2,17 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Global from "../components/Global"
-import PageTitle from "../components/PageTitle"
+import PageHeader from "../components/PageHeader"
 
 const PageTemplate = ({ data, location }) => {
   const { frontmatter, html, excerpt } = data.page
   const { title, cover } = frontmatter
+  if (cover) cover.fluid = cover.img.sharp.fluid
   return (
     <Global pageTitle={title} path={location.pathname} description={excerpt}>
-      <PageTitle img={cover.img.sharp}>
+      <PageHeader img={cover}>
         <h1>{title}</h1>
-      </PageTitle>
+      </PageHeader>
       <article dangerouslySetInnerHTML={{ __html: html }} />
     </Global>
   )
@@ -24,15 +25,7 @@ export const query = graphql`
     page: markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       frontmatter {
         title
-        cover {
-          img {
-            sharp: childImageSharp {
-              fluid(quality: 100, maxWidth: 2000) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
+        ...cover
       }
       html
       excerpt
