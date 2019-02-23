@@ -1,6 +1,6 @@
 ---
 title: Writing a Modal with React Hooks
-slug: react-hooks-modal
+slug: /react-hooks-modal
 date: 2019-01-13
 cover:
   img: react-hooks-modal.png

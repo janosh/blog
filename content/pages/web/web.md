@@ -1,4 +1,5 @@
 ---
+title: Web
 purpose: web intro
 cover:
   img: vscode.jpg
