@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { Search } from 'styled-icons/fa-solid/Search'
+import styled, { css } from "styled-components"
+import { Search } from "styled-icons/fa-solid/Search"
 
 export const Root = styled.div`
   position: relative;
@@ -102,6 +102,7 @@ export const HitsWrapper = styled.div`
   display: ${props => (props.show ? `grid` : `none`)};
   max-height: 80vh;
   overflow: scroll;
+  z-index: 2;
   ${props => (props.hitsAsGrid ? grid : list)};
   * {
     margin-top: 0;
