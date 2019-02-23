@@ -1,6 +1,6 @@
 ---
 title: China's Push for Solar
-slug: china's-push-for-solar
+slug: /china's-push-for-solar
 date: 2019-01-29
 cover:
   img: solar-panda.jpg

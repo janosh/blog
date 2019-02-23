@@ -1,6 +1,6 @@
 ---
 title: Masonry Layout with CSS Grid
-slug: css-grid-masonry
+slug: /css-grid-masonry
 date: 2018-11-14
 cover:
   img: ocean-artup-blog.png

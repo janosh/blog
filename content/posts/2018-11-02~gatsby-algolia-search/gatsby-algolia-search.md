@@ -1,6 +1,6 @@
 ---
 title: Custom search with Algolia in Gatsby
-slug: gatsby-algolia-search
+slug: /gatsby-algolia-search
 date: 2018-11-02
 cover:
   img: gatsby+algolia.png
@@ -550,7 +550,7 @@ import { Tags } from 'styled-icons/fa-solid/Tags'
 
 const PostHit = clickHandler => ({ hit }) => (
   <div>
-    <Link to={`/blog/` + hit.slug} onClick={clickHandler}>
+    <Link to={`/blog` + hit.slug} onClick={clickHandler}>
       <h3>
         <Highlight attribute="title" hit={hit} tagName="mark" />
       </h3>
@@ -565,7 +565,7 @@ const PostHit = clickHandler => ({ hit }) => (
       {hit.tags.map((tag, index) => (
         <Fragment key={tag}>
           {!!index && ', '}
-          <Link to={`blog/` + tag.toLowerCase().replace(` `, `-`)}>{tag}</Link>
+          <Link to={`/blog` + tag.toLowerCase().replace(` `, `-`)}>{tag}</Link>
         </Fragment>
       ))}
     </div>

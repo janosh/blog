@@ -1,6 +1,6 @@
 ---
 title: Brave new world
-slug: brave-new-world
+slug: /brave-new-world
 date: 2018-07-27
 cover:
   img: gatsby+styled-components.png
