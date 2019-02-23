@@ -7,7 +7,7 @@ const Project = ({ title, cover, date, url, repo, npm, tech, html }) => (
     <h2>
       <a href={url}>{title}</a>
     </h2>
-    <Img fluid={cover.img.sharp.fluid} />
+    {cover && <Img fluid={cover.img.sharp.fluid} />}
     <Meta>
       <Homepage />
       <a href={url}>{url.split(`//`).pop()}</a>
