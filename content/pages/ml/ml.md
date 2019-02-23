@@ -1,6 +1,6 @@
 ---
 title: Machine Learning
-slug: ml
+slug: /ml
 purpose: page
 cover:
   img: tech-circle.jpg
