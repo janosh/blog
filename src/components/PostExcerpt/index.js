@@ -10,13 +10,13 @@ const PostExcerpt = ({ post }) => {
   return (
     <Post>
       {cover && cover.img && (
-        <Link to={`blog/` + slug}>
+        <Link to={`/blog` + slug}>
           <Cover fluid={cover.img.sharp.fluid} />
         </Link>
       )}
       <main>
         <h3>
-          <Link to={`blog/` + slug}>{title}</Link>
+          <Link to={`/blog` + slug}>{title}</Link>
         </h3>
         <PostMeta {...{ ...frontmatter, timeToRead }} />
         <p dangerouslySetInnerHTML={{ __html: excerpt }} />
