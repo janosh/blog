@@ -2,18 +2,18 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Global from "../components/Global"
-import PageTitle from "../components/PageTitle"
+import PageHeader from "../components/PageHeader"
 import Grid from "../components/styles/Grid"
 import Projects from "../views/Projects"
 
 const WebPage = ({ data, location }) => {
-  const title = `Web`
   const { intro, projects, techLogos, techNames } = data
+  const { title, cover } = intro.frontmatter
   return (
     <Global title={title} path={location.pathname}>
-      <PageTitle>
+      <PageHeader img={cover && cover.img && cover.img.sharp}>
         <h1>{title}</h1>
-      </PageTitle>
+      </PageHeader>
       <div dangerouslySetInnerHTML={{ __html: intro.html }} />
       <h2>Recent Projects</h2>
       <Projects {...projects} />
@@ -42,6 +42,10 @@ export default WebPage
 export const query = graphql`
   {
     intro: markdownRemark(frontmatter: { purpose: { eq: "web intro" } }) {
+      frontmatter {
+        title
+        ...cover
+      }
       html
     }
     projects: allMarkdownRemark(
@@ -59,15 +63,7 @@ export const query = graphql`
             repo
             npm
             tech
-            cover {
-              img {
-                sharp: childImageSharp {
-                  fluid(maxWidth: 2500, quality: 100) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
-              }
-            }
+            ...cover
           }
         }
       }
