@@ -35,7 +35,7 @@ const controlsCss = css`
   cursor: pointer;
   z-index: 1;
   color: ${props => props.white && `white`};
-  background: rgba(0, 0, 0, 0.5);
+  background: ${props => props.white && `rgba(0, 0, 0, 0.5)`};
   border-radius: 50%;
   padding: 0.1em;
   transition: ${props => props.theme.shortTrans};
