@@ -14,10 +14,10 @@ const Projects = ({ projects }) => {
         return (
           <Fragment key={title}>
             <ProjectExcerpt onClick={() => setModal(index)}>
-              <Img fluid={cover.img.sharp.fluid} />
+              {cover && <Img fluid={cover.img.sharp.fluid} />}
               <h3>{title}</h3>
             </ProjectExcerpt>
-            <Modal open={index === modal} closeModal={setModal}>
+            <Modal open={index === modal} setModal={setModal}>
               <Project {...node.frontmatter} html={node.html} />
             </Modal>
           </Fragment>
