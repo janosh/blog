@@ -1,6 +1,6 @@
 ---
 title: Two-Loop Hyperoptimization
-slug: two-loop-hyperopt
+slug: /two-loop-hyperopt
 date: 2018-11-23
 cover:
   img: bayesian-optimization.png
@@ -9,7 +9,7 @@ cover:
 tags:
   - Machine Learning
   - Data Science
-  - Bayesian Methods
+  - Bayesian
   - Tutorial
 ---
 
