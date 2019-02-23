@@ -1,7 +1,13 @@
 ---
 title: Oral Exam
-slug: physics/oral-exam
+slug: /physics/oral-exam
 purpose: page
+cover:
+  img: string-theory-blackboard.jpg
+  credit: National University of Singapore
+  url: http://news.nus.edu.sg/highlights/worlds-top-theorists-take-theory-everything
+  caption: String theory blackboard
+  backdrop: true
 ---
 
 In May 2016, I had my oral exam on string theory and advanced quantum field theory with [Prof. Timo Weigand](https://www.thphys.uni-heidelberg.de/~weigand).

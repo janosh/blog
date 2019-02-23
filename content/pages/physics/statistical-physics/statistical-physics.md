@@ -1,7 +1,12 @@
 ---
 title: Statistical Physics
-slug: physics/statistical-physics
+slug: /physics/statistical-physics
 purpose: page
+cover:
+  img: bose-einstein-condensate.png
+  credit: Wikipedia
+  url: https://commons.wikimedia.org/wiki/File:Bose_Einstein_condensate.png
+  caption: Bose-Einstein condensate
 ---
 
 I had the pleasure of attending [Prof. Manfred Salmhofer](http://www.thphys.uni-heidelberg.de/~salmhofer)'s lecture on statistical physics at Heidelberg University in the fall of 2016.
