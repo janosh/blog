@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import Image from 'gatsby-image'
+import styled, { css } from "styled-components"
+import Image from "gatsby-image"
 
 export const Container = styled.header`
   grid-column: 1 / -1;
@@ -9,9 +9,25 @@ export const Container = styled.header`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 50vh;
-  max-height: 70vh;
+  min-height: 60vh;
   margin-bottom: calc(3em + 3vh);
+`
+
+const backdrop = css`
+  > * {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: ${props => props.theme.smallBorderRadius};
+    justify-self: center;
+    padding: 0.1em 0.4em;
+  }
+`
+
+export const Title = styled.div`
+  grid-column: 2 / -2;
+  grid-row: 1;
+  text-align: center;
+  font-size: calc(1em + 0.5vw);
+  ${props => props.backdrop && backdrop};
 `
 
 export const Img = styled(Image)`
@@ -19,15 +35,15 @@ export const Img = styled(Image)`
   z-index: -1;
   width: 100%;
   height: 100%;
+  background: linear-gradient(
+    28deg,
+    rgba(255, 113, 0, 1) 0%,
+    rgba(9, 9, 121, 1) 50%,
+    rgba(0, 212, 255, 1) 100%
+  );
 `
 
-export const Title = styled.h1`
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: ${props => props.theme.mediumBorderRadius};
-  padding: 0.1em 0.5em;
-`
-
-export const CoverCredit = styled.span`
+export const Caption = styled.span`
   position: absolute;
   bottom: 0;
   right: 1em;
