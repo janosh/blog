@@ -16,7 +16,7 @@ const events = [`mousedown`, `touchstart`]
 
 const Results = connectStateResults(
   ({ searchState: state, searchResults: res, children }) =>
-    res && res.nbHits ? children : `No results for ${state.query}`
+    res && res.nbHits ? children : `No results for '${state.query}'`
 )
 
 const Stats = connectStateResults(
