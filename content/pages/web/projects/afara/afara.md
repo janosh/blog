@@ -1,6 +1,6 @@
 ---
 title: Afara
-slug: web/projects/afara
+slug: /web/projects/afara
 cover:
   img: afara.png
 url: https://afara.foundation

@@ -1,6 +1,6 @@
 ---
 title: Batteries + Solar Rule!
-slug: batteries-rule
+slug: /batteries-rule
 date: 2019-01-21
 cover:
   img: tesla-battery.jpg

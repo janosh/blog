@@ -1,6 +1,6 @@
 ---
 title: Ocean artUp
-slug: web/projects/ocean-artup
+slug: /web/projects/ocean-artup
 cover:
   img: ocean-artup.png
 url: https://ocean-artup.eu
