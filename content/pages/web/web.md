@@ -5,6 +5,4 @@ cover:
   img: vscode.jpg
 ---
 
-## My journey
-
-... as a web developer began not so long ago in February 2018 when I moved to Barcelona, Spain for three months to participate in the JavaScript bootcamp offered by [Codeworks](https://codeworks.me). I had a great time and lot a lot in what appears to me as a way short amount of time. I've been hooked on web technologies ever since. Read on to see which one's I enjoy most and what I've been up to lately.
+I started learning web development in February 2018 when I moved to Barcelona for three months to participate in a JavaScript bootcamp at [Codeworks](https://codeworks.me). I had a great time, learned a lot and have been hooked on web technologies ever since. Below is a list of some recent projects and the technologies I enjoy using the most.
