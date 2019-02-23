@@ -1,4 +1,5 @@
 import React, { useEffect } from "react"
+import PropTypes from "prop-types"
 
 import { ModalBehind, ModalDiv, Close, Next, Previous } from './styles'
 
@@ -27,7 +28,6 @@ const Modal = ({
         className={className}
       >
         <Close onClick={setModal} white={white} />
-        {children}
         {navigation && (
           <>
             <Next onClick={() => setModal(modal + 1)} white={white} />
@@ -41,3 +41,7 @@ const Modal = ({
 }
 
 export default Modal
+
+Modal.propTypes = {
+  setModal: PropTypes.func.isRequired,
+}
