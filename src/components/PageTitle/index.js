@@ -1,9 +1,9 @@
 import React from "react"
 
-import { Container, Title, Img, Caption } from "./styles"
+import { PageTitleContainer, Title, Img, Caption } from "./styles"
 
-const PageHeader = ({ children, img, backdrop }) => (
-  <Container>
+const PageTitle = ({ children, img, backdrop }) => (
+  <PageTitleContainer>
     <Img fluid={img && img.fluid} as={(!img || !img.fluid) && `div`} />
     <Title backdrop={backdrop || (img && img.backdrop)}>{children}</Title>
     {(img.caption || img.credit) && (
@@ -17,7 +17,7 @@ const PageHeader = ({ children, img, backdrop }) => (
         )}
       </Caption>
     )}
-  </Container>
+  </PageTitleContainer>
 )
 
-export default PageHeader
+export default PageTitle

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components"
 import Image from "gatsby-image"
 
-export const Container = styled.header`
+export const PageTitleContainer = styled.hgroup`
   grid-column: 1 / -1;
   position: relative;
   color: ${props => props.theme.white};
@@ -10,7 +10,6 @@ export const Container = styled.header`
   justify-content: center;
   align-items: center;
   min-height: 60vh;
-  margin-bottom: calc(3em + 3vh);
 `
 
 const backdrop = css`
@@ -62,7 +61,7 @@ export const Caption = styled.span`
       color: ${props => props.theme.orange};
     }
   }
-  ${Container}:hover & {
+  ${PageTitleContainer}:hover & {
     visibility: visible;
     opacity: 1;
     background: rgba(0, 0, 0, 0.7);
