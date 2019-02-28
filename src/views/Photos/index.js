@@ -8,7 +8,7 @@ import { Thumbnail, LargeImg, Caption } from "./styles"
 const Photos = ({ photos }) => {
   const [modal, setModal] = useState()
   return (
-    <Grid minWidth="10em" height="10em" css="grid-column: 2/-2;">
+    <Grid minWidth="10em" height="10em">
       {photos.map(({ node }, index) => (
         <Fragment key={node.title}>
           <div onClick={() => setModal(index)}>
