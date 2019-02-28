@@ -1,8 +1,8 @@
-import styled, { createGlobalStyle } from 'styled-components'
-import 'katex/dist/katex.min.css'
+import { createGlobalStyle } from "styled-components"
+import "katex/dist/katex.min.css"
 
-import mediaQuery, { screenSize } from '../../utils/mediaQuery'
-import typography from '../../utils/typography'
+import mediaQuery, { screenSize } from "../../utils/mediaQuery"
+import typography from "../../utils/typography"
 
 const { phone, desktop } = screenSize
 const {
@@ -27,10 +27,14 @@ export const GlobalStyle = createGlobalStyle`
       font-size: ${maxFontSize}em;
       line-height: ${maxLineHeight}em;
     }
-    > * > * {
+    /* ensure full height page even if unsufficient content */
+    div[role="group"][tabindex] {
       min-height: 100vh;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
+      display: flex;
+      flex-direction: column;
+      main {
+        flex: 1;
+      }
     }
   }
   h1, h2, h3, h4, h5, h6 {
@@ -78,15 +82,4 @@ export const GlobalStyle = createGlobalStyle`
     display: block;
     text-align: center;
   } 
-`
-
-export const Layout = styled.main`
-  margin-bottom: ${props => props.margin || `calc(3em + 3vh)`};
-  display: grid;
-  grid-gap: 0 4vw;
-  grid-template-columns: 1fr 1fr minmax(auto, ${props => props.theme.maxWidth}) 1fr 1fr;
-  grid-auto-rows: max-content;
-  > * {
-    grid-column: 3;
-  }
 `
