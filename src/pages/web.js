@@ -2,7 +2,8 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Global from "../components/Global"
-import PageHeader from "../components/PageHeader"
+import PageTitle from "../components/PageTitle"
+import PageBody from "../components/styles/PageBody"
 import Grid from "../components/styles/Grid"
 import Projects from "../views/Projects"
 
@@ -11,28 +12,30 @@ const WebPage = ({ data, location }) => {
   const { title, cover } = intro.frontmatter
   return (
     <Global title={title} path={location.pathname}>
-      <PageHeader img={cover && cover.img && cover.img.sharp}>
+      <PageTitle img={cover && cover.img && cover.img.sharp}>
         <h1>{title}</h1>
-      </PageHeader>
-      <div dangerouslySetInnerHTML={{ __html: intro.html }} />
-      <h2>Recent Projects</h2>
-      <Projects {...projects} />
-      <h2>My Stack</h2>
-      <Grid minWidth="4em" align="center">
-        {techNames.edges.map(({ node }) => (
-          <a key={node.title} href={node.url}>
-            <span>{node.title}</span>
-            <img
-              src={
-                techLogos.edges.find(
-                  ({ node: logo }) => logo.name === node.file
-                ).node.publicURL
-              }
-              alt={node.title}
-            />
-          </a>
-        ))}
-      </Grid>
+      </PageTitle>
+      <PageBody>
+        <div dangerouslySetInnerHTML={{ __html: intro.html }} />
+        <h2>Recent Projects</h2>
+        <Projects {...projects} />
+        <h2>My Stack</h2>
+        <Grid minWidth="4em" align="center">
+          {techNames.edges.map(({ node }) => (
+            <a key={node.title} href={node.url}>
+              <span>{node.title}</span>
+              <img
+                src={
+                  techLogos.edges.find(
+                    ({ node: logo }) => logo.name === node.file
+                  ).node.publicURL
+                }
+                alt={node.title}
+              />
+            </a>
+          ))}
+        </Grid>
+      </PageBody>
     </Global>
   )
 }
