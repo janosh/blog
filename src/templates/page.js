@@ -2,7 +2,8 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Global from "../components/Global"
-import PageHeader from "../components/PageHeader"
+import PageTitle from "../components/PageTitle"
+import PageBody from "../components/styles/PageBody"
 
 const PageTemplate = ({ data, location }) => {
   const { frontmatter, html, excerpt } = data.page
@@ -10,10 +11,10 @@ const PageTemplate = ({ data, location }) => {
   if (cover) cover.fluid = cover.img.sharp.fluid
   return (
     <Global pageTitle={title} path={location.pathname} description={excerpt}>
-      <PageHeader img={cover}>
+      <PageTitle img={cover}>
         <h1>{title}</h1>
-      </PageHeader>
-      <article dangerouslySetInnerHTML={{ __html: html }} />
+      </PageTitle>
+      <PageBody dangerouslySetInnerHTML={{ __html: html }} />
     </Global>
   )
 }
