@@ -1,25 +1,25 @@
-import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
-import { ThemeProvider } from 'styled-components'
-import PropTypes from 'prop-types'
+import React from "react"
+import { StaticQuery, graphql } from "gatsby"
+import { ThemeProvider } from "styled-components"
+import PropTypes from "prop-types"
 
-import Helmet from '../Helmet'
-import Header from '../Header'
-import Footer from '../Footer'
-import theme from '../../utils/theme'
-import Prism from '../../utils/prism'
-import Scroll from '../Scroll'
+import Helmet from "../Helmet"
+import Header from "../Header"
+import Footer from "../Footer"
+import theme from "../../utils/theme"
+import Prism from "../../utils/prism"
+import Scroll from "../Scroll"
 
-import { GlobalStyle, Layout } from './styles'
+import { GlobalStyle } from "./styles"
 
-const Global = ({ children, site, transparent, margin, ...rest }) => (
+const Global = ({ children, site, ...rest }) => (
   <ThemeProvider theme={theme}>
     <>
       <Helmet site={site.meta} {...rest} />
       <GlobalStyle />
       <Prism />
-      <Header site={site.meta} transparent={transparent} />
-      <Layout margin={margin}>{children}</Layout>
+      <Header site={site.meta} />
+      {children}
       <Footer />
       <Scroll to="top" position="fixed" justify="right" showBelow={1000} />
     </>
