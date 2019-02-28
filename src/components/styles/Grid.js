@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 export default styled.div`
-  margin: 1em 0;
   display: grid;
   grid-template-columns: repeat(
     auto-fit,
