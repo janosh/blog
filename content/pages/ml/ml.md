@@ -6,7 +6,7 @@ cover:
   img: tech-circle.jpg
 ---
 
-I'm currently working at Cambridge University's Maxwell Centre under the supervision of [Alpha Lee](https://alpha-lee.com) on applications of machine learning in physics.
+I'm currently working at [Cambridge University's Maxwell Centre](https://www.maxwell.cam.ac.uk) under the supervision of [Alpha Lee](https://alpha-lee.com) on applications of machine learning in materials discovery.
 
 ![Lee group](lee-group.jpg)
 
