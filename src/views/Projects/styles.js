@@ -10,6 +10,8 @@ export const ProjectExcerpt = styled.div`
   border-radius: ${props => props.theme.mediumBorderRadius};
   overflow: hidden;
   display: grid;
+  width: 100%;
+  height: 100%;
   h3 {
     grid-area: 1 / 1;
     z-index: 1;
