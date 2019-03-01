@@ -1,17 +1,17 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
-import { Link } from 'gatsby'
-import { Close } from 'styled-icons/material/Close'
-import { Menu } from 'styled-icons/feather/Menu'
+import React from "react"
+import styled, { css } from "styled-components"
+import { Link } from "gatsby"
+import { Close } from "styled-icons/material/Close"
+import { Menu } from "styled-icons/feather/Menu"
 
-import mediaQuery from '../../utils/mediaQuery'
+import mediaQuery from "../../utils/mediaQuery"
 
-const partlyActive = className => ({ isPartiallyCurrent }) => ({
+const PartiallyActive = className => ({ isPartiallyCurrent }) => ({
   className: className + (isPartiallyCurrent ? ` active` : ``),
 })
 
-const PartlyActiveLink = ({ className, ...rest }) => (
-  <Link getProps={partlyActive(className)} {...rest} />
+const PartiallyActiveLink = ({ className, ...rest }) => (
+  <Link getProps={PartiallyActive(className)} {...rest} />
 )
 
 export const navLinkStyle = css`
@@ -92,7 +92,7 @@ const span = css`
   padding-top: 0.2em;
 `
 
-export const NavLink = styled(PartlyActiveLink)`
+export const NavLink = styled(PartiallyActiveLink)`
   ${navLinkStyle};
   ${SubNav} & {
     color: ${props => props.theme.white};
