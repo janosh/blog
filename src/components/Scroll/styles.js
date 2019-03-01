@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components'
-import { ArrowUpCircle } from 'styled-icons/feather/ArrowUpCircle'
-import { ArrowDownCircle } from 'styled-icons/feather/ArrowDownCircle'
+import styled from "styled-components"
+import { ArrowDownCircle as Down } from "styled-icons/feather/ArrowDownCircle"
+import { ArrowUpCircle as Up } from "styled-icons/feather/ArrowUpCircle"
 
-const justify = props => {
-  switch (props.justify) {
+const align = props => {
+  switch (props.align) {
     case `left`:
       return `left: 1em;`
     case `right`:
@@ -14,16 +14,18 @@ const justify = props => {
   }
 }
 
-const arrow = css`
+export const Arrow = styled(Down).attrs(({ direction, size }) => ({
+  as: { up: Up }[direction],
+  size,
+}))`
   z-index: 2;
   background: ${props => props.theme.lightGreen};
   color: ${props => props.theme.white};
   border-radius: 50%;
   transition: ${props => props.theme.shortTrans};
-  width: ${props => props.size};
   position: ${props => props.position};
   bottom: 1em;
-  ${props => justify(props)};
+  ${props => align(props)};
   opacity: ${props => (props.show ? 1 : 0)};
   visibility: ${props => (props.show ? `visible` : `hidden`)};
   :hover {
@@ -31,16 +33,3 @@ const arrow = css`
     background: ${props => props.theme.orange};
   }
 `
-
-export const UpArrow = styled(ArrowUpCircle)`
-  ${arrow};
-`
-
-export const DownArrow = styled(ArrowDownCircle)`
-  ${arrow};
-`
-
-export const Arrows = {
-  up: UpArrow,
-  down: DownArrow,
-}
