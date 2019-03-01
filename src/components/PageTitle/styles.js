@@ -10,6 +10,7 @@ export const PageTitleContainer = styled.hgroup`
   justify-content: center;
   align-items: center;
   min-height: 60vh;
+  flex: 1; /* for filling height between header and footer on 404 page */
 `
 
 const backdrop = css`
