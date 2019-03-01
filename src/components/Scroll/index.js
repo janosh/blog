@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 
-import { Arrows } from './styles'
+import { Arrow } from "./styles"
 
 export default class Scroll extends Component {
   static propTypes = {
-    dir: PropTypes.string,
-    to: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    direction: PropTypes.string,
+    to: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     by: PropTypes.number,
     size: PropTypes.string,
   }
@@ -21,8 +21,8 @@ export default class Scroll extends Component {
     window[`scroll` + mode]({ top: to, behavior: `smooth` })
 
   handleClick = () => {
-    const { dir, to, by } = this.props
-    const sign = dir === `top` ? 1 : -1
+    const { direction, to, by } = this.props
+    const sign = direction === `top` ? 1 : -1
     if (to === `top`) this.scroll({ mode: `To`, to: 0 })
     else if (to === `bottom`)
       this.scroll({ mode: `To`, to: document.body.scrollHeight })
@@ -48,12 +48,14 @@ export default class Scroll extends Component {
   }
 
   render() {
-    let { dir, to } = this.props
-    if (!dir) {
-      if (to === `top`) dir = `up`
-      else if (to === `bottom`) dir = `down`
-    }
-    const Arrow = Arrows[dir]
-    return <Arrow onClick={this.handleClick} {...this.props} {...this.state} />
+    const { to, direction = { top: `up`, bottom: `down` }[to] } = this.props
+    return (
+      <Arrow
+        onClick={this.handleClick}
+        direction={direction}
+        {...this.props}
+        {...this.state}
+      />
+    )
   }
 }
