@@ -5,10 +5,10 @@ import Project from "./Project"
 import Grid from "../../components/styles/Grid"
 import Modal from "../../components/Modal"
 
-const Projects = ({ projects }) => {
+const Projects = ({ projects, className }) => {
   const [modal, setModal] = useState()
   return (
-    <Grid minWidth="15em" gap="1em">
+    <Grid minWidth="15em" gap="1em" className={className}>
       {projects.map(({ node }, index) => {
         const { title, cover } = node.frontmatter
         return (
