@@ -3,6 +3,7 @@ import Img from "gatsby-image"
 
 export const Post = styled.article`
   height: 100%;
+  width: 100%;
   display: grid;
   background: ${props => props.theme.veryLightGray};
   border-radius: ${props => props.theme.mediumBorderRadius};
