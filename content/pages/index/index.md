@@ -1,5 +1,5 @@
 ---
-title: Nature | Physics | ML | Web
+title: Nature, Physics, ML, Web
 purpose: landing intro
 cover:
   img: oeschinensee.jpg
