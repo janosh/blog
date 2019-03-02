@@ -73,26 +73,6 @@ export const query = graphql`
         }
       }
     }
-    projects: allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: "/pages/web/projects/" } }
-      sort: { fields: frontmatter___date, order: DESC }
-      limit: 5
-    ) {
-      projects: edges {
-        node {
-          html
-          frontmatter {
-            title
-            slug
-            date(formatString: "MMM DD, YYYY")
-            url
-            repo
-            npm
-            tech
-            ...cover
-          }
-        }
-      }
-    }
+    ...projects
   }
 `
