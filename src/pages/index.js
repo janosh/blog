@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
+import styled from 'styled-components'
 
 import Global from '../components/Global'
 import PageTitle from '../components/PageTitle'
@@ -8,6 +9,31 @@ import Scroll from '../components/Scroll'
 import PageBody from '../components/styles/PageBody'
 import PostList from '../views/PostList'
 import Projects from '../views/Projects'
+import mediaQuery from '../utils/mediaQuery'
+
+const Title = styled.h1`
+  border: 1px solid white;
+  padding: 0.4em;
+  background: rgba(0, 0, 0, 0.4);
+  display: grid;
+  span {
+    padding: 0.4em;
+    ${mediaQuery.maxPhone} {
+      & + span {
+        border-top: 0.5px solid rgba(255, 255, 255, 0.9);
+      }
+    }
+  }
+  ${mediaQuery.minPhone} {
+    grid-template-columns: 1fr 1fr;
+    span {
+      :nth-child(2),
+      :nth-child(3) {
+        background: rgba(0, 0, 0, 0.6);
+      }
+    }
+  }
+`
 
 const IndexPage = ({ data, location }) => {
   const { md, janosh, posts, projects } = data
@@ -18,9 +44,11 @@ const IndexPage = ({ data, location }) => {
   return (
     <Global margin="0" transparent path={location.pathname}>
       <PageTitle img={img} fillToBottom>
-        <h1 css="border: 1px solid white; padding: 1em; background: rgba(0,0,0,0.3);">
-          {md.frontmatter.title}
-        </h1>
+        <Title>
+          {md.frontmatter.title.split(`, `).map(str => (
+            <span key={str}>{str}</span>
+          ))}
+        </Title>
         <Scroll direction="down" to={1} align="center" position="absolute" />
       </PageTitle>
       <PageBody>
