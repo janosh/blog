@@ -5,7 +5,7 @@ export const query = graphql`
     frontmatter {
       title
       slug
-      date(formatString: "MMMM DD, YYYY")
+      date(formatString: "MMM DD, YYYY")
       tags
       ...cover
     }
