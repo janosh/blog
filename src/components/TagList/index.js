@@ -5,6 +5,7 @@ import { List, Tag } from "./styles"
 
 const TagList = ({ tags, activeTag, setTag }) => (
   <List>
+    <h2>Tags</h2>
     {tags.map(({ title, count }) => (
       <Tag
         key={title}
