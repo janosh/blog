@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { graphql, navigate } from "gatsby"
+import { graphql } from "gatsby"
 
 import Global from "../components/Global"
 import PageTitle from "../components/PageTitle"
@@ -8,27 +8,45 @@ import TagList from "../components/TagList"
 import PostList from "../views/PostList"
 import { paramCase, titleCase } from "../utils/case"
 
+const handleTagClick = setTag => tag => {
+  setTag(tag)
+  history.replaceState(
+    { activeTag: tag },
+    `active tag: ${tag}`,
+    tag === `All` ? `/blog` : `/blog?tag=${paramCase(tag)}`
+  )
+}
+
+const insertAllTag = (tags, count) => {
+  if (!tags.group.map(tag => tag.title).includes(`All`))
+    tags.group.unshift({ title: `All`, count })
+}
+
+const filterPostsByTag = (tag, posts) =>
+  tag === `All`
+    ? posts
+    : posts.filter(({ node }) => node.frontmatter.tags.includes(tag))
+
+const readActiveTagFromUrl = urlParams =>
+  titleCase(urlParams.replace(/.*tag=([^&]+).*/, `$1`))
+
 const BlogPage = ({ data, location }) => {
   const { posts, tags, img } = data
-  const urlTag = titleCase(location.search.replace(/.*tag=([^&]+).*/, `$1`))
+  const urlTag = readActiveTagFromUrl(location.search)
   const [tag, setTag] = useState(urlTag || `All`)
-  const filteredPosts =
-    tag === `All`
-      ? posts.edges
-      : posts.edges.filter(({ node }) => node.frontmatter.tags.includes(tag))
-  if (!tags.group.map(tag => tag.title).includes(`All`))
-    tags.group.unshift({ title: `All`, count: posts.edges.length })
-  const handleTagClick = tag => {
-    setTag(tag)
-    navigate(tag === `All` ? `/blog` : `/blog?tag=${paramCase(tag)}`)
-  }
+  const filteredPosts = filterPostsByTag(tag, posts.edges)
+  insertAllTag(tags, posts.edges.length)
   return (
     <Global pageTitle="Blog" path={location.pathname}>
       <PageTitle img={img && img.sharp}>
         <h1>Blog</h1>
       </PageTitle>
-      <PageBody cols="2/-2">
-        <TagList tags={tags.group} activeTag={tag} setTag={handleTagClick} />
+      <PageBody>
+        <TagList
+          tags={tags.group}
+          activeTag={tag}
+          setTag={handleTagClick(setTag)}
+        />
         <PostList posts={filteredPosts} />
       </PageBody>
     </Global>
