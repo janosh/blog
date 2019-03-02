@@ -7,11 +7,11 @@
   file: css
 
 - title: Gatsby
-  url: https://www.gatsbyjs.org/
+  url: https://www.gatsbyjs.org
   file: gatsby
 
 - title: GraphQL
-  url: https://graphql.org/
+  url: https://graphql.org
   file: graphql
 
 - title: HTML
@@ -23,29 +23,33 @@
   file: js
 
 - title: MongoDB
-  url: https://www.mongodb.com/
+  url: https://www.mongodb.com
   file: mongodb
 
 - title: Node.js
-  url: https://nodejs.org/en/
+  url: https://nodejs.org/en
   file: nodejs
 
 - title: React
-  url: https://reactjs.org/
+  url: https://reactjs.org
   file: react
 
 - title: Redis
-  url: https://redis.io/
+  url: https://redis.io
   file: redis
 
 - title: Redux
-  url: https://redux.js.org/
+  url: https://redux.js.org
   file: redux
 
 - title: socket.io
-  url: https://socket.io/
+  url: https://socket.io
   file: socketio
 
-# - title: Webpack
-#   url: https://webpack.js.org/
-#   file: webpack
+- title: stycomp
+  url: https://www.styled-components.com
+  file: styled-components
+
+- title: Webpack
+  url: https://webpack.js.org
+  file: webpack
