@@ -1,7 +1,7 @@
 import { graphql } from "gatsby"
 
 export const query = graphql`
-  fragment cover on frontmatter_2 {
+  fragment cover on frontmatter_4 {
     cover {
       credit
       url
