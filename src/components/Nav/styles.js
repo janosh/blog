@@ -29,7 +29,7 @@ export const navLinkStyle = css`
 export const NavContainer = styled.nav`
   grid-area: nav;
   display: grid;
-  grid-gap: 2vw;
+  grid-gap: calc(1em + 1vw);
   ${mediaQuery.maxPhablet} {
     overflow-y: scroll;
     position: fixed;
