@@ -19,13 +19,11 @@ const ContactPage = ({ data, location }) => (
         feel free to drop by.
       </p>
       <iframe
-        title="contactMap"
-        width="100%"
-        height="600px"
-        frameBorder="0"
+        title="Contact Map"
         src={`https://www.google.com/maps/embed/v1/place?key=${
           process.env.GATSBY_GOOGLE_MAPS_API_KEY
         }&q=Maxwell+Centre,Cambridge,UK`}
+        css="height: 80vh; width: 100%; border: 0;"
       />
     </PageBody>
   </Global>
