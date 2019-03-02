@@ -2,11 +2,9 @@ import styled, { css } from "styled-components"
 import Image from "gatsby-image"
 
 export const PageTitleContainer = styled.hgroup`
-  grid-column: 1 / -1;
   position: relative;
   color: ${props => props.theme.white};
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 60vh;
@@ -23,10 +21,9 @@ const backdrop = css`
 `
 
 export const Title = styled.div`
-  grid-column: 2 / -2;
-  grid-row: 1;
   text-align: center;
   font-size: calc(1em + 0.5vw);
+  margin: 1em;
   ${props => props.backdrop && backdrop};
 `
 
