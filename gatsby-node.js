@@ -5,13 +5,26 @@ const postTemplate = path.resolve(`./src/templates/post.js`)
 
 const query = `
   {
-    content: allMarkdownRemark {
+    pages: allMarkdownRemark(
+      filter: {frontmatter: {purpose: {eq: "page"}}}
+    ) {
       edges {
         node {
-          path: fileAbsolutePath
           frontmatter {
             slug
-            purpose
+          }
+        }
+      }
+    }
+    posts: allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/posts/" } }
+      sort: { fields: frontmatter___date, order: DESC }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            title
+            slug
           }
         }
       }
@@ -22,21 +35,22 @@ const query = `
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const response = await graphql(query)
   if (response.errors) throw new Error(response.errors)
-  const { content } = response.data
-  content.edges.forEach(({ node: { path, frontmatter } }) => {
-    const { slug, purpose } = frontmatter
-    if (/content\/pages/.test(path) && purpose === `page`) {
-      createPage({
-        path: slug,
-        component: pageTemplate,
-        context: { slug },
-      })
-    } else if (/content\/posts/.test(path)) {
-      createPage({
-        path: `/blog` + slug,
-        component: postTemplate,
-        context: { slug },
-      })
-    }
+  const { pages, posts } = response.data
+  pages.edges.forEach(({ node }) =>
+    createPage({
+      path: node.frontmatter.slug,
+      component: pageTemplate,
+      context: { slug: node.frontmatter.slug },
+    })
+  )
+  posts.edges.forEach(({ node }, index, arr) => {
+    const previous = index === arr.length - 1 ? null : arr[index + 1].node
+    const next = index === 0 ? null : arr[index - 1].node
+    const slug = node.frontmatter.slug
+    createPage({
+      path: `/blog` + slug,
+      component: postTemplate,
+      context: { slug, previous, next },
+    })
   })
 }
