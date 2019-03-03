@@ -39,15 +39,17 @@ _Artist's rendition of a Dyson sphere. Credit: [Danielle Futeslaar](https://www.
 Just to demonstrate the long term scalability of the sun as an energy source, looking again at the plot of the world's energy consumption over time, we can see that it increased from $E_{1950} \approx 100 \, \mathrm{E J} = 10^{20} \, \mathrm J$ to $E_{2000} \approx 420 \, \mathrm{EJ} = 4.2 \cdot 10^{20} \, \mathrm J$, i.e. a 4.2-fold increase over a period of $t = 50$ years. Since $E_{1950} \cdot (1 + c)^t = E_{2000}$ this results in an average annual increase in human energy consumption $c$ of
 
 $$
-c = \exp\biggl(\frac{1}{t}\ln\bigl(E_{2000}/E_{1950}\bigr)\biggr) - 1 \approx 0.0327124199
+c = \exp\biggl(\frac{1}{t}\ln\bigl(E_{2000}/E_{1950}\bigr)\biggr) - 1 \approx 0.0327
 $$
 
-or about 3.3 %. Projecting this growth rate and the world's total energy consumption in 2013 estimated to be $E_{2013} = 5.67 \cdot 10^{20} \mathrm J$ ([source](https://en.wikipedia.org/wiki/World_energy_consumption)) into the future, the time it would take us to reach a consumption equaling the sun's output of about $E_\odot \approx 1.21 \cdot 10^{34} \mathrm J$ is
+or about 3.3 %. Projecting this growth rate and the world's total energy consumption in 2013 estimated to be $E_{2013} = 5.67 \cdot 10^{20} \mathrm J$ ([source](https://en.wikipedia.org/wiki/World_energy_consumption)) into the future, the time in years it would take us to reach a consumption equaling the sun's output of about $E_\odot \approx 1.21 \cdot 10^{34} \mathrm J$ is
 
 $$
-E_{2013} (1 + c)^T = E_\odot
-\quad\Rightarrow\quad
-T = \frac{\ln\bigl(E_\odot/E_{2013}\bigr)}{\ln(1 + c)} \approx 947
+\begin{aligned}
+  &E_{2013} (1 + c)^T = E_\odot\\[2ex]
+  &\Rightarrow\quad
+  T = \frac{\ln\bigl(E_\odot/E_{2013}\bigr)}{\ln(1 + c)} \approx 947
+\end{aligned}
 $$
 
 It would take us close to a thousand years of continuing the period of strongest increase in human power consumption to reach the sun's total energy output.
