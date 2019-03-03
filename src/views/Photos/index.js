@@ -1,9 +1,10 @@
 import React, { useState, Fragment } from "react"
 
 import Grid from "../../components/styles/Grid"
+import Caption from "../../components/styles/Caption"
 import Modal from "../../components/Modal"
 
-import { Thumbnail, LargeImg, Caption } from "./styles"
+import { Thumbnail, LargeImg } from "./styles"
 
 const Photos = ({ photos }) => {
   const [modal, setModal] = useState()
@@ -23,7 +24,9 @@ const Photos = ({ photos }) => {
             css="padding: 0; max-width: 80vw;"
           >
             <LargeImg alt={node.title} fluid={node.img.sharp.fluid} />
-            <Caption>{node.title}</Caption>
+            <Caption>
+              <h3 css="margin: 0;">{node.title}</h3>
+            </Caption>
           </Modal>
         </Fragment>
       ))}
