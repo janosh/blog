@@ -1,29 +1,23 @@
 ---
-title: Writing a Modal with React Hooks
+title: React Hooks Modal
 slug: /react-hooks-modal
 date: 2019-01-13
 cover:
   img: react-hooks-modal.png
-  credit: Hornsdale Power Reserve
-  url: https://hornsdalepowerreserve.com.au
 tags:
   - Web Development
   - Tutorial
 ---
 
-What to do on a cold January weekend with bad weather? My choice fell on checking out the new [React Alpha (16.8)](https://reactjs.org/blog/2018/11/27/react-16-roadmap.html#react-16x-q1-2019-the-one-with-hooks). **The one with hooks** as it's come to be called.
+What to do on a cold January weekend with bad weather? Why not check out the new [React alpha (16.8)](https://reactjs.org/blog/2018/11/27/react-16-roadmap.html#react-16x-q1-2019-the-one-with-hooks). **The one with hooks** as it's come to be called.
 
-All it took was a little skimming through [the docs](https://reactjs.org/docs/hooks-intro.html), followed by
+All it took was a little skimming through [the docs](https://reactjs.org/docs/hooks-intro.html), followed by updating to `react@next` and `react-dom@next`
 
 ```sh
 yarn add react@next react-dom@next
 ```
 
-inside the project folder. That's it. I was ready to start coding.
-
-But what to do first? One thing that seemed a good fit for hooks are modals. I'd implemented them once or twice before and in both cases came away with the feeling that writing an entire class with all the boilerplate that goes with it is overkill considering the tiny bit of state management required for modal functionality.
-
-Let's get straight to the code. This is what I ended up with.
+That's it. Ready to start coding. But what to do first? One thing that seemed a good fit for hooks are modals. I'd implemented them once or twice before and in both cases came away with the feeling that a component class with all its boilerplate is overkill considering the tiny bit of state management required for modal functionality. As expected, using hooks I was to boil it down quite considerably. This is what I ended up with.
 
 ```jsx
 // components/modal/index.js
@@ -87,7 +81,7 @@ export const Close = styled(Cross).attrs({ size: `2em` })`
 `
 ```
 
-As you can see, the styles are way longer than the component itself. That's also where most of my time went. Figuring out how to use React hooks took minutes. Props to the React team (pun intended) for the excellent onboarding experience! Getting the css right probably took 10 times longer. Anyways, regarding usage, notice that the modal component doesn't actually handle it's own state. That's done by the parent component. As an example here's my list of [web projects](/web) projects on this very site.
+As you can see, the styles are way longer than the component itself. That's also where most of my time went. Figuring out how to use React hooks took minutes. Props to the React team (pun intended) for the excellent onboarding experience! Getting the css right probably took 5 times longer. Anyways, regarding usage, notice that the modal component doesn't actually handle it's own state. That's done by the parent component. As an example here's my list of [web projects](/web) projects on this very site.
 
 ```jsx{1,9,16,20}
 import React, { useState, Fragment } from 'react'
@@ -122,7 +116,7 @@ const Projects = ({ projects }) => {
 export default Projects
 ```
 
-Essentially only 4 lines of code suffice to control the list of modals and 3 of those do other things as well. All in all a big win for React hooks I'd say. Just compare to how much code the class implementation needed.
+So basically just 4 lines of code to control the list of modals (and 3 of those do other things as well). All in all a big win for React hooks I'd say. For comparison, this is how much code the class implementation needed.
 
 ```jsx
 import React from 'react'
@@ -132,6 +126,13 @@ import { toggleModal } from '../redux/actions'
 import './Modal.css'
 
 class Modal extends React.Component {
+  handleClickOutside = event => {
+    if (this.node && !this.node.contains(event.target)) {
+      const { dispatch, name } = this.props
+      dispatch(toggleModal(name))
+    }
+  }
+
   componentWillMount() {
     this.props.closeOnClickOutside &&
       document.addEventListener('mousedown', this.handleClickOutside)
@@ -139,13 +140,6 @@ class Modal extends React.Component {
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside)
-  }
-
-  handleClickOutside = event => {
-    if (this.node && !this.node.contains(event.target)) {
-      const { dispatch, name } = this.props
-      dispatch(toggleModal(name))
-    }
   }
 
   render() {
@@ -173,16 +167,16 @@ const mapStateToProps = (state, { name }) => {
 export default connect(mapStateToProps)(Modal)
 ```
 
-Admittedly this component is bloated even further by using Redux but even without, this component is less readable and less maintainable. So thank you everyone involved for hooks.
+Admittedly this component is bloated even further by using Redux but even without it, it's less readable and less maintainable. So thank you everyone involved for hooks.
 
-One thing I should mention for future readers: Once Chrome's new [`<dialog>` html tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) gets wider [browser support](https://caniuse.com/#feat=dialog), it would certainly be a good idea semantics' sake to use it for the modal container, i.e.
+One thing I should mention for future readers who actually want to use this `Modal` component: Once Chrome's new [`<dialog>` tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) gets wider [browser support](https://caniuse.com/#feat=dialog), it would certainly improve semantics to use it for the modal container, i.e.
 
 ```js
 - export const ModalDiv = styled.div`
 + export const ModalDiv = styled.dialog`
 ```
 
-and then marbe use the `::backdrop` pseudo-element for the modal background.
+and then maybe use the `::backdrop` pseudo-element for the modal background.
 
 ```js
 - export const ModalBehind = styled.div`
@@ -194,4 +188,74 @@ and then marbe use the `::backdrop` pseudo-element for the modal background.
   `
 ```
 
-However, `::backdrop` would make it much difficult to close the modal on clicks outside of it, i.e. on the background since as of now, React is unable to attach the `onClick` prop to pseudo-elements. Not sure if that's going to change. If not, a workaround would be to instantiate an event listener with the new `useEffect` hook, but that would complicate things quite a bit, since the listener would have to trigger on all clicks and check that the modal doesn't include the target before closing.
+However, bear in mind that using `::backdrop` would make it much more difficult to close the modal on clicks outside of it, i.e. on the background. This is because (as of now) React is unable to attach the `onClick` prop to pseudo-elements. Perhaps that will change down to the road. If not, a workaround would be to use the new `useRef` and `useEffect` hook to create an event listener on the browser's `window` object that checks for the target of the `click` event. But that would complicate things quite a bit, since the listener would have to trigger on all clicks and check that the modal doesn't include the target before closing.
+
+```jsx
+// components/modal/index.js
+import React, { useRef, useEffect } from 'react'
+
+import { ModalBehind, ModalDiv, Close } from './styles'
+
+const handleClickOutside = (node, closeModal) => event => {
+  if (node && !node.contains(event.target)) closeModal()
+}
+
+const Modal = ({ open, closeModal, children }) => {
+  const ref = useRef()
+  useEffect(() => {
+    const handler = handleClickOutside(ref.current, closeModal)
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  })
+  return (
+    <ModalDiv ref={ref} open={open}>
+      <Close onClick={closeModal} />
+      {children}
+    </ModalDiv>
+  )
+}
+
+export default Modal
+```
+
+## Update
+
+If you have a list of modals and you'd like users to be able to go to the next or previous modal using the arrow keys, you can again add an event listener for this with the `useEffect` hook as follows.
+
+```jsx{5-8,12-16,25-30}
+import React, { useEffect } from 'react'
+
+import { ModalBehind, ModalDiv, Close, Next, Prev } from './styles'
+
+const handleArrowKeys = (modal, setModal) => event => {
+  if (event.key === `ArrowRight`) setModal(modal + 1)
+  else if (event.key === `ArrowLeft`) setModal(modal - 1)
+}
+
+const Modal = ({ open, modal, setModal, children, navigation, className }) => {
+  if (open) {
+    useEffect(() => {
+      const handler = handleArrowKeys(modal, setModal)
+      document.addEventListener(`keydown`, handler)
+      return () => document.removeEventListener(`keydown`, handler)
+    })
+    return (
+      // passing setModal without arguments will close the modal when triggered
+      <ModalBehind open={open} onClick={setModal}>
+        <ModalDiv onClick={event => event.stopPropagation()} className={className}>
+          <Close onClick={setModal} />
+          {navigation && (
+            <>
+              <Next onClick={() => setModal(modal + 1)} />
+              <Prev onClick={() => setModal(modal - 1)} />
+            </>
+          )}
+          {children}
+        </ModalDiv>
+      </ModalBehind>
+    )
+  } else return null
+}
+
+export default Modal
+```
