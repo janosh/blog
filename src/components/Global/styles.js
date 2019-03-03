@@ -78,8 +78,13 @@ export const GlobalStyle = createGlobalStyle`
       background: ${props => props.theme.lightBlue};
     }
   }
+  /* center image captions */
   .gatsby-resp-image-wrapper + em {
     display: block;
     text-align: center;
-  } 
+  }
+  /* prevent wide equations from breaking layout */
+  .katex-display {
+    overflow-x: scroll;
+  }
 `
