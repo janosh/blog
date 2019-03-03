@@ -1,11 +1,12 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import { DiscussionEmbed } from "disqus-react"
 
 import Global from "../components/Global"
 import PageTitle from "../components/PageTitle"
 import PageBody from "../components/styles/PageBody"
 import PostMeta from "../components/PostMeta"
+import PrevNext from "../components/PrevNext"
 
 const PostTemplate = ({ data, location, pageContext }) => {
   const { frontmatter, excerpt, html, timeToRead } = data.post
@@ -25,25 +26,13 @@ const PostTemplate = ({ data, location, pageContext }) => {
       </PageTitle>
       <PageBody>
         <div dangerouslySetInnerHTML={{ __html: html }} />
-        <div css="display: flex; justify-content: space-between; flex-wrap: wrap; margin: 2em 0;">
-          {previous && (
-            <div css="margin-bottom: 1em;">
-              <h4 css="margin: 0;">Previous post</h4>
-              <Link to={`/blog` + previous.frontmatter.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            </div>
-          )}
-          {next && (
-            <div css="margin-left: auto; padding-left: 1em; text-align: right;">
-              <h4 css="margin: 0;">Next post</h4>
-              <Link to={`/blog` + next.frontmatter.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            </div>
-          )}
-        </div>
-        <DiscussionEmbed {...disqusConfig} css="margin-top: 5em;" />
+        <PrevNext
+          prev={previous.frontmatter}
+          next={next.frontmatter}
+          slugPrefix="/blog"
+          label="post"
+        />
+        <DiscussionEmbed {...disqusConfig} />
       </PageBody>
     </Global>
   )
