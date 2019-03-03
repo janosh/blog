@@ -60,10 +60,7 @@ const IndexPage = ({ data, location }) => {
         <h1 css="justify-self: center;">Recent posts</h1>
         <PostList asRow posts={posts.edges} />
         <h1 css="justify-self: center;">Recent projects</h1>
-        <Projects
-          {...projects}
-          css="grid-column: 2/-2; grid-auto-flow: column; overflow: scroll;"
-        />
+        <Projects asRow {...projects} />
       </PageBody>
     </Global>
   )
