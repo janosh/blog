@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 
 import { Link } from "gatsby"
 
@@ -24,3 +25,7 @@ const PrevNext = ({ prev, next, label, slugPrefix = `` }) => (
 )
 
 export default PrevNext
+
+PrevNext.propTypes = {
+  label: PropTypes.string.isRequired,
+}
