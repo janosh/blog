@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react"
 
-import { PageTitleContainer, Title, Img, Caption } from "./styles"
+import Caption from "../styles/Caption"
+import { PageTitleContainer, Title, Img } from "./styles"
 
 const PageTitle = ({ children, img, backdrop, className, fillToBottom }) => {
   const ref = useRef()
@@ -19,7 +20,7 @@ const PageTitle = ({ children, img, backdrop, className, fillToBottom }) => {
       <Img fluid={img && img.fluid} as={(!img || !img.fluid) && `div`} />
       <Title backdrop={backdrop || (img && img.backdrop)}>{children}</Title>
       {(img.caption || img.credit) && (
-        <Caption>
+        <Caption showOnHoverParent={PageTitleContainer}>
           <span dangerouslySetInnerHTML={{ __html: img.caption }} />
           {img.caption && img.credit && ` | `}
           {img.credit && (
