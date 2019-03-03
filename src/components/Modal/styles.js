@@ -59,7 +59,7 @@ export const Next = styled(NavigateNext).attrs({ size: `2em` })`
   }
 `
 
-export const Previous = styled(NavigateBefore).attrs({ size: `2em` })`
+export const Prev = styled(NavigateBefore).attrs({ size: `2em` })`
   ${controlsCss};
   top: 50%;
   left: 0.4em;
