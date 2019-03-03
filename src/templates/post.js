@@ -27,8 +27,8 @@ const PostTemplate = ({ data, location, pageContext }) => {
       <PageBody>
         <div dangerouslySetInnerHTML={{ __html: html }} />
         <PrevNext
-          prev={previous.frontmatter}
-          next={next.frontmatter}
+          prev={previous && previous.frontmatter}
+          next={next && next.frontmatter}
           slugPrefix="/blog"
           label="post"
         />
