@@ -6,7 +6,19 @@ import { Github } from "styled-icons/icomoon/Github"
 import { Npm } from "styled-icons/fa-brands/Npm"
 import { Link } from "styled-icons/boxicons-regular/Link"
 
-export const ProjectExcerpt = styled.div`
+import Grid from "../../components/styles/Grid"
+
+export const ProjectGrid = styled(Grid)`
+  ${props =>
+    props.asRow &&
+    css`
+      grid-column: 2/-2;
+      grid-auto-flow: column;
+      overflow: scroll;
+    `};
+`
+
+export const Thumbnail = styled.div`
   border-radius: ${props => props.theme.mediumBorderRadius};
   overflow: hidden;
   display: grid;
