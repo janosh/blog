@@ -58,10 +58,7 @@ const IndexPage = ({ data, location }) => {
         />
         <p dangerouslySetInnerHTML={{ __html: md.html }} />
         <h1 css="justify-self: center;">Recent posts</h1>
-        <PostList
-          posts={posts.edges}
-          css="grid-column: 2/-2; grid-auto-flow: column; overflow: scroll;"
-        />
+        <PostList asRow posts={posts.edges} />
         <h1 css="justify-self: center;">Recent projects</h1>
         <Projects
           {...projects}
