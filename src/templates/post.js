@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
+import { DiscussionEmbed } from "disqus-react"
 
 import Global from "../components/Global"
 import PageTitle from "../components/PageTitle"
@@ -8,10 +9,14 @@ import PostMeta from "../components/PostMeta"
 
 const PostTemplate = ({ data, location, pageContext }) => {
   const { frontmatter, excerpt, html, timeToRead } = data.post
-  const { title, date, cover } = frontmatter
+  const { title, slug, date, cover } = frontmatter
   if (cover) cover.fluid = cover.img.sharp.fluid
   const meta = { date, timeToRead }
   const { next, previous } = pageContext
+  const disqusConfig = {
+    shortname: process.env.GATSBY_DISQUS_NAME,
+    config: { identifier: slug, title },
+  }
   return (
     <Global pageTitle={title} path={location.pathname} description={excerpt}>
       <PageTitle img={cover} backdrop>
@@ -20,7 +25,7 @@ const PostTemplate = ({ data, location, pageContext }) => {
       </PageTitle>
       <PageBody>
         <div dangerouslySetInnerHTML={{ __html: html }} />
-        <div css="display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 2em;">
+        <div css="display: flex; justify-content: space-between; flex-wrap: wrap; margin: 2em 0;">
           {previous && (
             <div css="margin-bottom: 1em;">
               <h4 css="margin: 0;">Previous post</h4>
@@ -38,6 +43,7 @@ const PostTemplate = ({ data, location, pageContext }) => {
             </div>
           )}
         </div>
+        <DiscussionEmbed {...disqusConfig} css="margin-top: 5em;" />
       </PageBody>
     </Global>
   )
