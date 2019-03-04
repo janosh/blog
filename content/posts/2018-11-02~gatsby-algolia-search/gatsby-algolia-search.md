@@ -3,7 +3,7 @@ title: Custom search with Algolia in Gatsby
 slug: /gatsby-algolia-search
 date: 2018-11-02
 cover:
-  img: gatsby+algolia.png
+  img: gatsby+algolia.svg
 tags:
   - Web Development
   - Tutorial
