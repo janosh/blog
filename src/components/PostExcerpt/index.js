@@ -7,13 +7,15 @@ import PostMeta from "../PostMeta"
 const PostExcerpt = ({ post }) => {
   const { frontmatter, excerpt, timeToRead } = post
   const { title, slug, cover } = frontmatter
+  if (cover && cover.img) {
+    if (cover.img.sharp) cover.fluid = cover.img.sharp.fluid
+    if (cover.img.src) cover.src = cover.img.src
+  }
   return (
     <Post>
-      {cover && cover.img && (
-        <Link to={`/blog` + slug}>
-          <Cover fluid={cover.img.sharp.fluid} />
-        </Link>
-      )}
+      <Link to={`/blog` + slug}>
+        <Cover {...cover} />
+      </Link>
       <main>
         <h3>
           <Link to={`/blog` + slug}>{title}</Link>
