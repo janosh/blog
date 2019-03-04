@@ -12,6 +12,7 @@ export const query = graphql`
             ...GatsbyImageSharpFluid_withWebp
           }
         }
+        src: publicURL
       }
       backdrop
     }
