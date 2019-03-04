@@ -4,6 +4,7 @@ const langExtColor = [
   { lang: `javascript`, tag: `js`, color: `#f7df1e` },
   { lang: `js`, tag: `js`, color: `#f7df1e` },
   { lang: `jsx`, tag: `jsx`, color: `#61dafb` },
+  { lang: `env`, tag: `env`, color: `#6162fb`, textColor: `#cceffb` },
   { lang: `python`, tag: `py`, color: `#61da84` },
   { lang: `py`, tag: `py`, color: `#61da84` },
   { lang: `graphql`, tag: `graphql`, color: `#E10098` },
@@ -23,10 +24,11 @@ const langExtColor = [
 
 const languageTags = langExtColor
   .map(
-    ({ lang, tag, color }) =>
+    ({ lang, tag, color, textColor }) =>
       `.gatsby-highlight pre[class='language-${lang}']::before {
         content: '${tag}';
         background: ${color};
+        color: ${textColor};
       }`
   )
   .join(`\n`)
