@@ -28,7 +28,7 @@ const WebPage = ({ data, location }) => {
                 src={
                   techLogos.edges.find(
                     ({ node: logo }) => logo.name === node.file
-                  ).node.publicURL
+                  ).node.src
                 }
                 alt={node.title}
               />
@@ -58,7 +58,7 @@ export const query = graphql`
       edges {
         node {
           name
-          publicURL
+          src: publicURL
         }
       }
     }
