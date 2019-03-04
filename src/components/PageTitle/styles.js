@@ -27,7 +27,9 @@ export const Title = styled.div`
   ${props => props.backdrop && backdrop};
 `
 
-export const Img = styled(Image)`
+export const Img = styled(Image).attrs(
+  ({ fluid, src }) => !fluid && { as: (src && `img`) || `div` }
+)`
   position: absolute !important;
   z-index: -1;
   width: 100%;
@@ -38,4 +40,5 @@ export const Img = styled(Image)`
     rgba(9, 9, 121, 1) 50%,
     rgba(0, 212, 255, 1) 100%
   );
+  object-fit: cover;
 `
