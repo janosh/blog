@@ -17,9 +17,9 @@ const PageTitle = ({ children, img, backdrop, className, fillToBottom }) => {
   }
   return (
     <PageTitleContainer ref={ref} className={className}>
-      <Img fluid={img && img.fluid} as={(!img || !img.fluid) && `div`} />
+      <Img {...img} />
       <Title backdrop={backdrop || (img && img.backdrop)}>{children}</Title>
-      {(img.caption || img.credit) && (
+      {img && (img.caption || img.credit) && (
         <Caption showOnHoverParent={PageTitleContainer}>
           <span dangerouslySetInnerHTML={{ __html: img.caption }} />
           {img.caption && img.credit && ` | `}
