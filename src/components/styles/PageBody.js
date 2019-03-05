@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+import mediaQuery from "../../utils/mediaQuery"
+
 export default styled.main`
   margin: calc(3em + 3vh) 0;
   display: grid;
@@ -8,5 +10,10 @@ export default styled.main`
   grid-auto-rows: max-content;
   > * {
     grid-column: ${props => props.cols || 3};
+  }
+  ${mediaQuery.minPhablet} {
+    > p {
+      text-align: justify;
+    }
   }
 `
