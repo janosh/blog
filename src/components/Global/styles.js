@@ -16,6 +16,7 @@ const {
 export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
+    hyphens: auto;
     font-family: ${fonts};
     font-size: ${minFontSize}em;
     line-height: ${minLineHeight}em;
