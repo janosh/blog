@@ -67,7 +67,7 @@ Here are the steps to bring Disqus comments to your own blog:
 
    where `identifier` must be a string or number that uniquely identifies the post. Finally, add the `DiscussionEmbed` component to the returned JSX of your post template component:
 
-   ```jsx
+   ```jsx{6}
    return (
      <Global>
        ...
