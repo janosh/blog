@@ -1,6 +1,6 @@
 ---
 title: What is renormalization?
-slug: what-is-renormalization
+slug: /what-is-renormalization
 date: 2019-02-23
 cover:
   img: microscope.jpg

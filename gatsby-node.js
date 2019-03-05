@@ -36,13 +36,14 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const response = await graphql(query)
   if (response.errors) throw new Error(response.errors)
   const { pages, posts } = response.data
-  pages.edges.forEach(({ node }) =>
+  pages.edges.forEach(({ node }) => {
+    const { slug } = node.frontmatter
     createPage({
-      path: node.frontmatter.slug,
+      path: slug,
       component: pageTemplate,
-      context: { slug: node.frontmatter.slug },
+      context: { slug },
     })
-  )
+  })
   posts.edges.forEach(({ node }, index, arr) => {
     const previous = index === arr.length - 1 ? null : arr[index + 1].node
     const next = index === 0 ? null : arr[index - 1].node

@@ -4,7 +4,7 @@ const langExtColor = [
   { lang: `javascript`, tag: `js`, color: `#f7df1e` },
   { lang: `js`, tag: `js`, color: `#f7df1e` },
   { lang: `jsx`, tag: `jsx`, color: `#61dafb` },
-  { lang: `env`, tag: `env`, color: `#6162fb`, textColor: `#cceffb` },
+  { lang: `env`, tag: `env`, color: `#ff89d3` },
   { lang: `python`, tag: `py`, color: `#61da84` },
   { lang: `py`, tag: `py`, color: `#61da84` },
   { lang: `graphql`, tag: `graphql`, color: `#E10098` },
@@ -24,24 +24,39 @@ const langExtColor = [
 
 const languageTags = langExtColor
   .map(
-    ({ lang, tag, color, textColor }) =>
-      `.gatsby-highlight pre[class='language-${lang}']::before {
+    ({ lang, tag, color }) =>
+      `.gatsby-highlight[data-language="${lang}"]::before {
         content: '${tag}';
         background: ${color};
-        color: ${textColor};
       }`
   )
   .join(`\n`)
 
 export default createGlobalStyle`
+  .gatsby-highlight {
+    overflow: auto;
+    position: relative;
+    margin: 1em 0;
+  }
+
+  .gatsby-highlight[data-language]::before {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 2em;
+    padding: 0.2em 0.5em;
+    font-size: 0.6em;
+    font-weight: bold;
+    line-height: initial;
+    text-transform: uppercase;
+    border-radius: 0 0 0.2em 0.2em;
+  }
+  ${languageTags}
+
   code[class*='language-'],
   pre[class*='language-'] {
-    position: relative;
-    overflow: hidden;
     color: white;
-    background: none;
     font-family: Consolas, Menlo, Monaco, source-code-pro, 'Courier New', monospace;
-    text-align: left;
     white-space: pre;
     word-spacing: normal;
     word-break: normal;
@@ -50,6 +65,7 @@ export default createGlobalStyle`
     font-size: 0.9em;
     tab-size: 4;
     hyphens: none;
+    margin: 0;
   }
 
   pre[class*='language-'],
@@ -154,30 +170,8 @@ export default createGlobalStyle`
   .gatsby-highlight-code-line {
     background-color: hsla(207, 95%, 15%, 1);
     display: block;
-    margin-right: -1em;
-    margin-left: -1em;
-    padding-right: 1em;
-    padding-left: 0.75em;
+    margin: 0 -1em;
+    padding: 0 1em 0 0.75em;
     border-left: 0.25em solid ${props => props.theme.lightBlue};
   }
-
-  .gatsby-highlight {
-    overflow: auto;
-  }
-
-  .gatsby-highlight pre[class*='language-']::before {
-    position: absolute;
-    z-index: 1;
-    top: 0px;
-    right: 2em;
-    padding: 0.1em 0.5em;
-    font-size: 0.7em;
-    text-align: right;
-    color: black;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 0 0 0.2em 0.2em;
-    background: #ddd;
-  }
-  ${languageTags}
 `
