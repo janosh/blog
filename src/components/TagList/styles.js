@@ -1,5 +1,18 @@
 import styled from "styled-components"
 import mediaQuery from "../../utils/mediaQuery"
+export { Tags as TagsIcon } from "styled-icons/fa-solid/Tags"
+import { Grid } from "styled-icons/boxicons-regular/Grid"
+import { Web } from "styled-icons/material/Web"
+import { ChalkboardTeacher } from "styled-icons/fa-solid/ChalkboardTeacher"
+import { Python } from "styled-icons/fa-brands/Python"
+import { Database } from "styled-icons/fa-solid/Database"
+import { WeatherSunny } from "styled-icons/typicons/WeatherSunny"
+import { Lab } from "styled-icons/icomoon/Lab"
+import { Atom } from "styled-icons/fa-solid/Atom"
+import { ColorLens } from "styled-icons/material/ColorLens"
+import { Cpu } from "styled-icons/feather/Cpu"
+import { Robot } from "styled-icons/fa-solid/Robot"
+import { Graph } from "styled-icons/octicons/Graph"
 
 export const Tag = styled.button`
   font-size: 1em;
@@ -17,7 +30,7 @@ export const Tag = styled.button`
   }
 `
 
-export const List = styled.div`
+export const TagList = styled.div`
   display: grid;
   grid-gap: 1em;
   grid-column: -3;
@@ -38,3 +51,18 @@ export const List = styled.div`
     }
   }
 `
+
+export const tagIcons = {
+  All: Grid,
+  "Web Development": Web,
+  Tutorial: ChalkboardTeacher,
+  "Machine Learning": Python,
+  "Data Science": Database,
+  Sustainability: WeatherSunny,
+  Science: Lab,
+  Physics: Atom,
+  Design: ColorLens,
+  Technology: Cpu,
+  Future: Robot,
+  Bayesian: Graph,
+}
