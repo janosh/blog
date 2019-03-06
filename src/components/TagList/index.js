@@ -1,24 +1,31 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import { List, Tag } from "./styles"
+import { TagList, Tag, TagsIcon, tagIcons } from "./styles"
 
-const TagList = ({ tags, activeTag, setTag }) => (
-  <List>
-    <h2>Tags</h2>
-    {tags.map(({ title, count }) => (
-      <Tag
-        key={title}
-        active={activeTag === title}
-        onClick={() => setTag(title)}
-      >
-        {title} ({count})
-      </Tag>
-    ))}
-  </List>
+const TagListComp = ({ tags, activeTag, setTag }) => (
+  <TagList>
+    <h2>
+      <TagsIcon size="1em" />
+      &nbsp; Tags
+    </h2>
+    {tags.map(({ title, count }) => {
+      const TagIcon = tagIcons[title]
+      return (
+        <Tag
+          key={title}
+          active={activeTag === title}
+          onClick={() => setTag(title)}
+        >
+          {TagIcon && <TagIcon size="1em" />}
+          &nbsp; {title} ({count})
+        </Tag>
+      )
+    })}
+  </TagList>
 )
 
-export default TagList
+export default TagListComp
 
 TagList.propTypes = {
   activeTag: PropTypes.string.isRequired,
