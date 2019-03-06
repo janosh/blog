@@ -48,6 +48,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     const previous = index === arr.length - 1 ? null : arr[index + 1].node
     const next = index === 0 ? null : arr[index - 1].node
     const slug = node.frontmatter.slug
+    if (!slug.startsWith(`/`)) throw Error(`Post slugs must start with a forward slash!`)
     createPage({
       path: `/blog` + slug,
       component: postTemplate,
