@@ -7,3 +7,8 @@ export const titleCase = str =>
       .map(word => word[0].toUpperCase() + word.substr(1).toLowerCase())
       .join(` `)
     : str
+
+export const disqusConfig = ({ slug, title }) => ({
+  shortname: process.env.GATSBY_DISQUS_NAME,
+  config: { identifier: slug, title },
+})
