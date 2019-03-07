@@ -7,6 +7,7 @@ import PageTitle from "../components/PageTitle"
 import PageBody from "../components/styles/PageBody"
 import PostMeta from "../components/PostMeta"
 import PrevNext from "../components/PrevNext"
+import { disqusConfig } from "../utils/misc"
 
 const PostTemplate = ({ data, location, pageContext }) => {
   const { frontmatter, excerpt, html, timeToRead } = data.post
@@ -15,17 +16,12 @@ const PostTemplate = ({ data, location, pageContext }) => {
     if (cover.img.sharp) cover.fluid = cover.img.sharp.fluid
     if (cover.img.src) cover.src = cover.img.src
   }
-  const meta = { date, timeToRead }
   const { next, previous } = pageContext
-  const disqusConfig = {
-    shortname: process.env.GATSBY_DISQUS_NAME,
-    config: { identifier: slug, title },
-  }
   return (
     <Global pageTitle={title} path={location.pathname} description={excerpt}>
       <PageTitle img={cover} backdrop>
         <h1>{title}</h1>
-        <PostMeta inTitle {...meta} />
+        <PostMeta inTitle {...{ title, slug, date, timeToRead }} />
       </PageTitle>
       <PageBody>
         <div dangerouslySetInnerHTML={{ __html: html }} />
@@ -35,7 +31,7 @@ const PostTemplate = ({ data, location, pageContext }) => {
           slugPrefix="/blog"
           label="post"
         />
-        <DiscussionEmbed {...disqusConfig} />
+        <DiscussionEmbed {...disqusConfig({ slug, title })} />
       </PageBody>
     </Global>
   )
