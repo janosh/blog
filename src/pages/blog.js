@@ -6,16 +6,7 @@ import PageTitle from "../components/PageTitle"
 import PageBody from "../components/styles/PageBody"
 import TagList from "../components/TagList"
 import PostList from "../views/PostList"
-import { paramCase, titleCase } from "../utils/case"
-
-const handleTagClick = setTag => tag => {
-  setTag(tag)
-  history.replaceState(
-    { activeTag: tag },
-    `active tag: ${tag}`,
-    tag === `All` ? `/blog` : `/blog?tag=${paramCase(tag)}`
-  )
-}
+import { paramCase, titleCase } from "../utils/misc"
 
 const insertAllTag = (tags, count) => {
   if (!tags.group.map(tag => tag.title).includes(`All`))
@@ -36,17 +27,23 @@ const BlogPage = ({ data, location }) => {
   const [tag, setTag] = useState(urlTag || `All`)
   const filteredPosts = filterPostsByTag(tag, posts.edges)
   insertAllTag(tags, posts.edges.length)
+
+  const handleTagClick = tag => {
+    setTag(tag)
+    history.replaceState(
+      { activeTag: tag },
+      `active tag: ${tag}`,
+      tag === `All` ? `/blog` : `/blog?tag=${paramCase(tag)}`
+    )
+  }
+
   return (
     <Global pageTitle="Blog" path={location.pathname}>
       <PageTitle img={img && img.sharp}>
         <h1>Blog</h1>
       </PageTitle>
       <PageBody>
-        <TagList
-          tags={tags.group}
-          activeTag={tag}
-          setTag={handleTagClick(setTag)}
-        />
+        <TagList tags={tags.group} activeTag={tag} setTag={handleTagClick} />
         <PostList inBlog posts={filteredPosts} />
       </PageBody>
     </Global>
