@@ -1,6 +1,7 @@
 import styled from "styled-components"
-import mediaQuery from "../../utils/mediaQuery"
 export { Tags as TagsIcon } from "styled-icons/fa-solid/Tags"
+import { ToggleOff } from "styled-icons/fa-solid/ToggleOff"
+import { ToggleOn } from "styled-icons/fa-solid/ToggleOn"
 import { Grid } from "styled-icons/boxicons-regular/Grid"
 import { Web } from "styled-icons/material/Web"
 import { ChalkboardTeacher } from "styled-icons/fa-solid/ChalkboardTeacher"
@@ -14,23 +15,9 @@ import { Cpu } from "styled-icons/feather/Cpu"
 import { Robot } from "styled-icons/fa-solid/Robot"
 import { Graph } from "styled-icons/octicons/Graph"
 
-export const Tag = styled.button`
-  font-size: 1em;
-  outline: none;
-  cursor: pointer;
-  width: max-content;
-  white-space: nowrap;
-  color: ${props => props.theme.darkGray};
-  border-radius: ${props => props.theme.smallBorderRadius};
-  background: ${({ active, theme }) =>
-    active ? theme.orange : theme.lightGray};
-  ${mediaQuery.maxPhablet} {
-    padding: 0.1em 0.5em 0.2em;
-    margin: 0 1em 1em 0;
-  }
-`
+import mediaQuery from "../../utils/mediaQuery"
 
-export const TagList = styled.div`
+export const TagGrid = styled.div`
   display: grid;
   grid-gap: 1em;
   grid-column: -3;
@@ -49,6 +36,37 @@ export const TagList = styled.div`
       margin-bottom: 1em;
       text-align: center;
     }
+  }
+`
+
+export const Tag = styled.button`
+  font-size: 1em;
+  outline: none;
+  cursor: pointer;
+  width: max-content;
+  white-space: nowrap;
+  color: ${props => props.theme.darkGray};
+  border-radius: ${props => props.theme.smallBorderRadius};
+  background: ${({ active, theme }) =>
+    active ? theme.orange : theme.lightGray};
+  ${mediaQuery.maxPhablet} {
+    padding: 0.1em 0.5em 0.2em;
+    margin: 0 1em 1em 0;
+    transition: ${props => props.theme.mediumTrans};
+    visibility: ${props => (props.open ? `visible` : `hidden`)};
+    margin-bottom: ${props => (props.open ? `1em` : `-2em`)};
+    opacity: ${props => (props.open ? 1 : 0)};
+  }
+`
+
+export const Toggle = styled(ToggleOff).attrs(props => ({
+  as: props.open && ToggleOn,
+  size: `1em`,
+}))`
+  margin-left: 0.5em;
+  cursor: pointer;
+  ${mediaQuery.minPhablet} {
+    display: none;
   }
 `
 
