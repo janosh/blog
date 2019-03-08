@@ -11,7 +11,7 @@ import { disqusConfig } from "../utils/misc"
 
 const PostTemplate = ({ data, location, pageContext }) => {
   const { frontmatter, excerpt, html, timeToRead } = data.post
-  const { title, slug, date, cover } = frontmatter
+  const { title, slug, cover } = frontmatter
   if (cover && cover.img) {
     if (cover.img.sharp) cover.fluid = cover.img.sharp.fluid
     if (cover.img.src) cover.src = cover.img.src
@@ -21,7 +21,7 @@ const PostTemplate = ({ data, location, pageContext }) => {
     <Global pageTitle={title} path={location.pathname} description={excerpt}>
       <PageTitle img={cover} backdrop>
         <h1>{title}</h1>
-        <PostMeta inTitle {...{ title, slug, date, timeToRead }} />
+        <PostMeta inTitle {...{ ...frontmatter, timeToRead }} />
       </PageTitle>
       <PageBody>
         <div dangerouslySetInnerHTML={{ __html: html }} />
