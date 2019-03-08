@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import { Post, Cover } from "./styles"
 import PostMeta from "../PostMeta"
 
-const PostExcerpt = ({ post }) => {
+const PostExcerpt = ({ post, noText }) => {
   const { frontmatter, excerpt, timeToRead } = post
   const { title, slug, cover } = frontmatter
   if (cover && cover.img) {
@@ -16,13 +16,11 @@ const PostExcerpt = ({ post }) => {
       <Link to={`/blog` + slug}>
         <Cover {...cover} />
       </Link>
-      <main>
-        <h3>
-          <Link to={`/blog` + slug}>{title}</Link>
-        </h3>
-        <PostMeta {...{ ...frontmatter, timeToRead }} />
-        <p dangerouslySetInnerHTML={{ __html: excerpt }} />
-      </main>
+      <h3 css="margin: 0.8em auto 0.5em;">
+        <Link to={`/blog` + slug}>{title}</Link>
+      </h3>
+      <PostMeta {...{ ...frontmatter, timeToRead }} />
+      {!noText && <span dangerouslySetInnerHTML={{ __html: excerpt }} />}
     </Post>
   )
 }
