@@ -71,7 +71,7 @@ export const Toggle = styled(ToggleOff).attrs(props => ({
 
 export const tagIcons = {
   All: Grid,
-  "Web Development": Web,
+  WebDev: Web,
   Tutorial: ChalkboardTeacher,
   "Machine Learning": Python,
   "Data Science": Database,
