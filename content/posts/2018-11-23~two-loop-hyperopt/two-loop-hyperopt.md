@@ -9,7 +9,6 @@ cover:
 tags:
   - Machine Learning
   - Data Science
-  - Bayesian
   - Tutorial
 ---
 
