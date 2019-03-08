@@ -13,7 +13,6 @@ import { Atom } from "styled-icons/fa-solid/Atom"
 import { ColorLens } from "styled-icons/material/ColorLens"
 import { Cpu } from "styled-icons/feather/Cpu"
 import { Robot } from "styled-icons/fa-solid/Robot"
-import { Graph } from "styled-icons/octicons/Graph"
 
 import mediaQuery from "../../utils/mediaQuery"
 
@@ -82,5 +81,4 @@ export const tagIcons = {
   Design: ColorLens,
   Technology: Cpu,
   Future: Robot,
-  Bayesian: Graph,
 }
