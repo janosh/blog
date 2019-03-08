@@ -5,7 +5,7 @@ date: 2019-03-03
 cover:
   img: gatsby+disqus.svg
 tags:
-  - Web Development
+  - WebDev
   - Tutorial
 ---
 
