@@ -6,7 +6,7 @@ cover:
   img: ocean-artup-blog.png
 tags:
   - Design
-  - Web Development
+  - WebDev
   - Tutorial
 ---
 
