@@ -7,6 +7,8 @@ const asRow = css`
   grid-column: 2/-2;
   grid-auto-flow: column;
   overflow: scroll;
+  grid-auto-columns: 18em;
+  padding: 1em;
 `
 const inBlog = css`
   ${mediaQuery.maxPhablet} {
