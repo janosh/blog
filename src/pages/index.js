@@ -1,7 +1,10 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+import { ArrowLeft } from 'styled-icons/fa-solid/ArrowLeft'
+import { ArrowRight } from 'styled-icons/fa-solid/ArrowRight'
 
 import Global from '../components/Global'
 import PageTitle from '../components/PageTitle'
@@ -10,6 +13,39 @@ import PageBody from '../components/styles/PageBody'
 import PostList from '../views/PostList'
 import Projects from '../views/Projects'
 import mediaQuery from '../utils/mediaQuery'
+
+const IndexPage = ({ data, location }) => {
+  const { md, janosh, posts, projects } = data
+  const img = {
+    ...md.frontmatter.cover,
+    fluid: md.frontmatter.cover.img.sharp.fluid,
+  }
+  return (
+    <Global margin="0" transparent path={location.pathname}>
+      <PageTitle img={img} fillToBottom>
+        <Title>
+          {md.frontmatter.title.split(`, `).map(str => (
+            <span key={str}>{str}</span>
+          ))}
+        </Title>
+        <Scroll direction="down" to={1} align="center" position="absolute" />
+      </PageTitle>
+      <PageBody>
+        <Img
+          fixed={janosh.img.fixed}
+          css="border-radius: 50%; justify-self: center;"
+        />
+        <p dangerouslySetInnerHTML={{ __html: md.html }} />
+        <H>Recent posts</H>
+        <PostList asRow noText posts={posts.edges} />
+        <H>Recent projects</H>
+        <Projects asRow {...projects} />
+      </PageBody>
+    </Global>
+  )
+}
+
+export default IndexPage
 
 const Title = styled.h1`
   border: 1px solid white;
@@ -35,38 +71,19 @@ const Title = styled.h1`
   }
 `
 
-const IndexPage = ({ data, location }) => {
-  const { md, janosh, posts, projects } = data
-  const img = {
-    ...md.frontmatter.cover,
-    fluid: md.frontmatter.cover.img.sharp.fluid,
-  }
-  return (
-    <Global margin="0" transparent path={location.pathname}>
-      <PageTitle img={img} fillToBottom>
-        <Title>
-          {md.frontmatter.title.split(`, `).map(str => (
-            <span key={str}>{str}</span>
-          ))}
-        </Title>
-        <Scroll direction="down" to={1} align="center" position="absolute" />
-      </PageTitle>
-      <PageBody>
-        <Img
-          fixed={janosh.img.fixed}
-          css="border-radius: 50%; justify-self: center;"
-        />
-        <p dangerouslySetInnerHTML={{ __html: md.html }} />
-        <h1 css="justify-self: center;">Recent posts</h1>
-        <PostList asRow posts={posts.edges} />
-        <h1 css="justify-self: center;">Recent projects</h1>
-        <Projects asRow {...projects} />
-      </PageBody>
-    </Global>
-  )
-}
+const iconCss = css`
+  width: 0.6em;
+  vertical-align: 0;
+  margin: 0 0.4em;
+`
 
-export default IndexPage
+const H = ({ children, as }) => (
+  <h1 as={as} css="text-align: center;">
+    <ArrowLeft css={iconCss} />
+    {children}
+    <ArrowRight css={iconCss} />
+  </h1>
+)
 
 export const query = graphql`
   {
