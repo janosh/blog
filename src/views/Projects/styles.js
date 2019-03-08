@@ -15,6 +15,8 @@ export const ProjectGrid = styled(Grid)`
       grid-column: 2/-2;
       grid-auto-flow: column;
       overflow: scroll;
+      padding: 1em;
+      grid-auto-columns: 15em;
     `};
 `
 
@@ -24,6 +26,9 @@ export const Thumbnail = styled.div`
   display: grid;
   width: 100%;
   height: 100%;
+  border: 1px solid ${props => props.theme.lightGray};
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.3);
+  transition: 0.5s;
   h3 {
     grid-area: 1 / 1;
     z-index: 1;
@@ -31,18 +36,14 @@ export const Thumbnail = styled.div`
     align-self: center;
     justify-self: center;
     background: rgba(0, 0, 0, 0.6);
-    font-size: 1.6em;
     padding: 0.3em 0.7em;
     text-align: center;
     border-radius: 1em;
+    width: max-content;
     max-width: 70%;
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.5s;
   }
-  &:hover h3 {
-    visibility: visible;
-    opacity: 1;
+  &:hover {
+    transform: scale(1.03);
   }
 `
 export const Img = styled(Image)`
