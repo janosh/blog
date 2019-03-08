@@ -1,10 +1,18 @@
 import React from "react"
 import PropTypes from "prop-types"
+import styled from "styled-components"
 
 import { Link } from "gatsby"
 
+const PreviousNext = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 2em 0;
+`
+
 const PrevNext = ({ prev, next, label, slugPrefix = `` }) => (
-  <div css="display: flex; justify-content: space-between; flex-wrap: wrap; margin: 2em 0;">
+  <PreviousNext>
     {prev && (
       <div css="margin-bottom: 1em;">
         <h4 css="margin: 0;">Previous {label}</h4>
@@ -21,7 +29,7 @@ const PrevNext = ({ prev, next, label, slugPrefix = `` }) => (
         </Link>
       </div>
     )}
-  </div>
+  </PreviousNext>
 )
 
 export default PrevNext
