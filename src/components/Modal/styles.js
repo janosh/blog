@@ -28,6 +28,7 @@ export const ModelDiv = styled.div`
   padding: 2em;
   border-radius: ${props => props.theme.mediumBorderRadius};
   box-shadow: 0 0 3em ${props => props.theme.black};
+  margin: calc(0.5em + 2vw);
 `
 
 const controlsCss = css`
