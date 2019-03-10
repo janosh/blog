@@ -6,25 +6,24 @@ import { Tag } from "styled-icons/fa-solid/Tag"
 const inTitle = css`
   margin: 1.3em auto;
   width: max-content;
+  justify-content: center;
+  max-width: 80vw;
   a {
     color: ${props => props.theme.lightGreen};
-  }
-  grid-template-columns: repeat(3, auto);
-  justify-items: center;
-  span.tags {
-    grid-column: 1/-1;
   }
 `
 
 export const Meta = styled.div`
-  display: grid;
-  grid-gap: 0.2em 1em;
+  display: flex;
+  flex-wrap: wrap;
   font-size: 0.8em;
-  grid-template-columns: repeat(auto-fill, minmax(8em, max-content));
-  margin-bottom: 0.5em;
+  margin: 0.5em 0;
   > * {
     display: flex;
     align-items: center;
+  }
+  > :not(:last-child) {
+    margin-right: 1em;
   }
   ${props => props.inTitle && inTitle};
 `
@@ -33,7 +32,7 @@ export const TagList = ({ tags }) => (
   <span className="tags">
     <Tags
       as={tags.length === 1 && Tag}
-      css="margin-right: 0.5em; min-width: 1.1em;"
+      css="margin-right: 0.5em; width: 1.1em; min-width: 1.1em;"
     />
     {tags.map((tag, index) => (
       <Fragment key={tag}>
