@@ -17,6 +17,7 @@ export const ProjectGrid = styled(Grid)`
       overflow: scroll;
       padding: 1em;
       grid-auto-columns: 15em;
+      -webkit-overflow-scrolling: touch;
     `};
 `
 
