@@ -72,7 +72,7 @@ export const query = graphql`
     }
     img: file(name: { eq: "blog-cover" }) {
       sharp: childImageSharp {
-        fluid(quality: 100, maxWidth: 2000) {
+        fluid(maxWidth: 1800) {
           ...GatsbyImageSharpFluid_withWebp
         }
       }
