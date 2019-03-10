@@ -1,61 +1,53 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
+import React, { useState, useEffect } from "react"
 
 import { Arrow } from "./styles"
 
-export default class Scroll extends Component {
-  static propTypes = {
-    direction: PropTypes.string,
-    to: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    by: PropTypes.number,
-    size: PropTypes.string,
-  }
+const Scroll = ({
+  direction = `up`,
+  by,
+  to,
+  showBelow,
+  className,
+  size = `1.7em`,
+}) => {
+  if (![`up`, `down`].includes(direction))
+    throw TypeError(
+      `Scroll component's direction prop must be either 'up' or 'down'`
+    )
+  if (to && (typeof to !== `number` || to <= 0))
+    throw TypeError(`Scroll component's to prop must be a positive number`)
+  if (by && typeof by !== `number`)
+    throw TypeError(`Scroll component's by prop must be a number`)
 
-  static defaultProps = {
-    size: `1.7em`,
-  }
+  const [show, setShow] = useState(showBelow ? false : true)
 
-  state = { show: this.props.showBelow ? false : true }
-
-  scroll = ({ mode, to }) =>
+  const scroll = ({ mode, to }) =>
     window[`scroll` + mode]({ top: to, behavior: `smooth` })
 
-  handleClick = () => {
-    const { direction, to, by } = this.props
-    const sign = direction === `top` ? 1 : -1
-    if (to === `top`) this.scroll({ mode: `To`, to: 0 })
-    else if (to === `bottom`)
-      this.scroll({ mode: `To`, to: document.body.scrollHeight })
-    else if (to) this.scroll({ mode: `To`, to: to * window.innerHeight })
-    else this.scroll({ mode: `By`, to: sign * by * window.innerHeight })
-  }
-
-  handleScroll = () => {
-    if (window.pageYOffset > this.props.showBelow) {
-      if (!this.state.show) this.setState({ show: true })
+  const handleScroll = () => {
+    if (window.pageYOffset > showBelow) {
+      if (!show) setShow(true)
     } else {
-      if (this.state.show) this.setState({ show: false })
+      if (show) setShow(false)
     }
   }
 
-  componentDidMount() {
-    if (this.props.showBelow)
-      window.addEventListener(`scroll`, this.handleScroll)
+  const handleClick = () => {
+    if (to) scroll({ mode: `To`, to: to * window.innerHeight })
+    else if (by) scroll({ mode: `By`, to: by * window.innerHeight })
+    else if (direction === `up`) scroll({ mode: `To`, to: 0 })
+    else scroll({ mode: `To`, to: document.body.scrollHeight })
   }
 
-  componentWillUnmount() {
-    window.removeEventListener(`scroll`, this.handleScroll)
-  }
+  useEffect(() => {
+    if (showBelow) {
+      window.addEventListener(`scroll`, handleScroll)
+      return () => window.removeEventListener(`scroll`, handleScroll)
+    }
+  })
 
-  render() {
-    const { to, direction = { top: `up`, bottom: `down` }[to] } = this.props
-    return (
-      <Arrow
-        onClick={this.handleClick}
-        direction={direction}
-        {...this.props}
-        {...this.state}
-      />
-    )
-  }
+  const arrowProps = { show, direction, className, size }
+  return <Arrow onClick={handleClick} {...arrowProps} />
 }
+
+export default Scroll

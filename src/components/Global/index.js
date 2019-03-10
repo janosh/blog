@@ -21,7 +21,10 @@ const Global = ({ children, site, ...rest }) => (
       <Header site={site.meta} />
       {children}
       <Footer />
-      <Scroll to="top" position="fixed" align="right" showBelow={1000} />
+      <Scroll
+        showBelow={1500}
+        css="position: fixed; right: 1.5em; bottom: 1em;"
+      />
     </>
   </ThemeProvider>
 )
