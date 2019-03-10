@@ -9,14 +9,14 @@ import PostMeta from "../components/PostMeta"
 import PrevNext from "../components/PrevNext"
 import { disqusConfig } from "../utils/misc"
 
-const PostTemplate = ({ data, location, pageContext }) => {
-  const { frontmatter, excerpt, html, timeToRead } = data.post
+const PostTemplate = ({ data, location }) => {
+  const { post, next, prev } = data
+  const { frontmatter, excerpt, html, timeToRead } = post
   const { title, slug, cover } = frontmatter
   if (cover && cover.img) {
     if (cover.img.sharp) cover.fluid = cover.img.sharp.fluid
     if (cover.img.src) cover.src = cover.img.src
   }
-  const { next, previous } = pageContext
   return (
     <Global pageTitle={title} path={location.pathname} description={excerpt}>
       <PageTitle img={cover} backdrop>
@@ -25,13 +25,13 @@ const PostTemplate = ({ data, location, pageContext }) => {
       </PageTitle>
       <PageBody>
         <div dangerouslySetInnerHTML={{ __html: html }} />
+        <DiscussionEmbed {...disqusConfig({ slug, title })} />
         <PrevNext
-          prev={previous && previous.frontmatter}
+          prev={prev && prev.frontmatter}
           next={next && next.frontmatter}
           slugPrefix="/blog"
           label="post"
         />
-        <DiscussionEmbed {...disqusConfig({ slug, title })} />
       </PageBody>
     </Global>
   )
@@ -40,8 +40,14 @@ const PostTemplate = ({ data, location, pageContext }) => {
 export default PostTemplate
 
 export const query = graphql`
-  query($slug: String!) {
+  query($slug: String!, $prevSlug: String!, $nextSlug: String!) {
     post: markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+      ...post
+    }
+    next: markdownRemark(frontmatter: { slug: { eq: $nextSlug } }) {
+      ...post
+    }
+    prev: markdownRemark(frontmatter: { slug: { eq: $prevSlug } }) {
       ...post
     }
   }
