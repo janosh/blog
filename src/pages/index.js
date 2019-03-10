@@ -28,7 +28,7 @@ const IndexPage = ({ data, location }) => {
             <span key={str}>{str}</span>
           ))}
         </Title>
-        <Scroll direction="down" to={1} align="center" position="absolute" />
+        <Scroll direction="down" to={1} />
       </PageTitle>
       <PageBody>
         <Img
