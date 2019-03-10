@@ -6,7 +6,7 @@ const postTemplate = path.resolve(`./src/templates/post.js`)
 const query = `
   {
     pages: allMarkdownRemark(
-      filter: {frontmatter: {purpose: {eq: "page"}}}
+      filter: { frontmatter: { purpose: { eq: "page" } } }
     ) {
       edges {
         node {
@@ -23,7 +23,6 @@ const query = `
       edges {
         node {
           frontmatter {
-            title
             slug
           }
         }
@@ -36,6 +35,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const response = await graphql(query)
   if (response.errors) throw new Error(response.errors)
   const { pages, posts } = response.data
+
   pages.edges.forEach(({ node }) => {
     const { slug } = node.frontmatter
     createPage({
@@ -44,15 +44,18 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       context: { slug },
     })
   })
+
   posts.edges.forEach(({ node }, index, arr) => {
-    const previous = index === arr.length - 1 ? null : arr[index + 1].node
-    const next = index === 0 ? null : arr[index - 1].node
+    const nextSlug = index === 0 ? `` : arr[index - 1].node.frontmatter.slug
+    const prevSlug =
+      index === arr.length - 1 ? `` : arr[index + 1].node.frontmatter.slug
     const slug = node.frontmatter.slug
-    if (!slug.startsWith(`/`)) throw Error(`Post slugs must start with a forward slash!`)
+    if (!slug.startsWith(`/`))
+      throw Error(`Post slugs must start with a forward slash!`)
     createPage({
       path: `/blog` + slug,
       component: postTemplate,
-      context: { slug, previous, next },
+      context: { slug, nextSlug, prevSlug },
     })
   })
 }
