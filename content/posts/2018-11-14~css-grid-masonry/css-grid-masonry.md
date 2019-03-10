@@ -45,7 +45,7 @@ export default class Masonry extends Component {
   }
 
   state = { spans: [] }
-  ref: createRef()
+  ref = createRef()
   // sums up the heights of all child nodes for each grid item
   sumUp = (acc, node) => acc + node.scrollHeight
 
