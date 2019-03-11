@@ -19,12 +19,13 @@ const Modal = ({
 }) => {
   if (open) {
     useEffect(() => {
+      document.body.style.overflowY = `hidden`
       const handler = handleArrowKeys(modal, setModal)
       document.addEventListener(`keydown`, handler)
       return () => document.removeEventListener(`keydown`, handler)
     })
     return (
-      // passing setModal without arguments will close the modal when triggered
+      // passing setModal to onClick without arguments will close the modal when triggered
       <ModalBehind open={open} onClick={setModal}>
         <ModalDiv
           onClick={event => event.stopPropagation()}
@@ -41,7 +42,11 @@ const Modal = ({
         </ModalDiv>
       </ModalBehind>
     )
-  } else return null
+  } else {
+    typeof document !== `undefined` &&
+      document.body.style.removeProperty(`overflow-y`)
+    return null
+  }
 }
 
 export default Modal
