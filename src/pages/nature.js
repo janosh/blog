@@ -8,7 +8,7 @@ import Photos from "../views/Photos"
 
 const NaturePage = ({ data, location }) => {
   const { photos } = data
-  const photo = photos.edges[Math.round(Math.random() * photos.edges.length)]
+  const photo = photos.edges[Math.floor(Math.random() * photos.edges.length)]
   return (
     <Global path={location.pathname}>
       <PageTitle img={photo.node.img.sharp}>
