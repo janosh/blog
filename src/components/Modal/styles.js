@@ -14,7 +14,7 @@ export const ModalBackground = styled.div`
   visibility: ${props => (props.open ? `visible` : `hidden`)};
   opacity: ${props => (props.open ? `1` : `0`)};
   transition: 0.5s;
-  z-index: 1;
+  z-index: 2;
 `
 
 export const ModalContainer = styled.div`
