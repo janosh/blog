@@ -99,8 +99,7 @@ And you're done. You should now see the Disqus comment form appear beneath your 
 
 If you'd like your blog post previews to show a count of the number of comments each post received, simply import `disqus-react`'s `CommentCount` in the relevant component and provide it the exact same config object as `DiscussionEmbed`.
 
-```jsx{4,21-23}
-// src/components/PostMeta/index.js
+```jsx{4,21-23}:title=src/components/postMeta/index.js
 import React from 'react'
 import { Link } from 'gatsby'
 import { CommentCount } from 'disqus-react'
@@ -133,8 +132,7 @@ export default PostMeta
 
 where the config object now comes from the utility function `disqusConfig()` defined as
 
-```js
-// src/utils/misc.js
+```js:title=src/utils/misc.js
 export const disqusConfig = ({ slug, title }) => ({
   shortname: process.env.GATSBY_DISQUS_NAME,
   config: { identifier: slug, title },
