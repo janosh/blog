@@ -10,7 +10,11 @@ export const Thumbnail = styled(Img)`
   }
 `
 
-export const LargeImg = styled(Img)`
+export const LargeImg = styled(Img).attrs({
+  imgStyle: { objectFit: `contain` },
+})`
   width: 80vw;
-  height: 80vh;
+  background: rgba(0, 0, 0, 0.9);
+  height: max-content;
+  max-height: 80vh;
 `
