@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react"
 
-import Grid from "../../components/styles/Grid"
+import Masonry from "../../components/Masonry"
 import Caption from "../../components/styles/Caption"
 import Modal from "../../components/Modal"
 
@@ -9,7 +9,7 @@ import { Thumbnail, LargeImg } from "./styles"
 const Photos = ({ photos }) => {
   const [modal, setModal] = useState()
   return (
-    <Grid minWidth="10em" height="10em">
+    <Masonry>
       {photos.map(({ node }, index) => (
         <Fragment key={node.title}>
           <div onClick={() => setModal(index)}>
@@ -30,7 +30,7 @@ const Photos = ({ photos }) => {
           </Modal>
         </Fragment>
       ))}
-    </Grid>
+    </Masonry>
   )
 }
 
