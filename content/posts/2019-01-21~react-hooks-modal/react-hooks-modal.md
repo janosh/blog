@@ -19,8 +19,7 @@ yarn add react@next react-dom@next
 
 That's it. Ready to start coding. But what to do first? One thing that seemed a good fit for hooks are modals. I'd implemented them once or twice before and in both cases came away with the feeling that a component class with all its boilerplate is overkill considering the tiny bit of state management required for modal functionality. As expected, using hooks I was to boil it down quite considerably. This is what I ended up with.
 
-```jsx
-// components/modal/index.js
+```jsx:title=components/modal/index.js
 import React from 'react'
 
 import { ModalBackground, ModalContainer, Close } from './styles'
@@ -41,8 +40,7 @@ export default Modal
 
 And as for the styles:
 
-```js
-// components/modal/styles.js
+```js:title=components/modal/styles.js
 import styled from 'styled-components'
 import { Close as Cross } from 'styled-icons/material/Close'
 
@@ -190,8 +188,7 @@ and then maybe use the `::backdrop` pseudo-element for the modal background.
 
 However, bear in mind that using `::backdrop` would make it much more difficult to close the modal on clicks outside of it, i.e. on the background. This is because (as of now) React is unable to attach the `onClick` prop to pseudo-elements. Perhaps that will change down to the road. If not, a workaround would be to use the new `useRef` and `useEffect` hook to create an event listener on the browser's `window` object that checks for the target of the `click` event. But that would complicate things quite a bit, since the listener would have to trigger on all clicks and check that the modal doesn't include the target before closing.
 
-```jsx
-// components/modal/index.js
+```jsx:title=components/modal/index.js
 import React, { useRef, useEffect } from 'react'
 
 import { ModalBackground, ModalContainer, Close } from './styles'
