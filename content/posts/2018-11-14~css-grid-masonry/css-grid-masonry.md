@@ -32,8 +32,7 @@ However, flexbox gave me some trouble. The `flex` items kept disregarding the pa
 
 So I really wanted to make it happen with `grid` instead. If you're using **`react`** and **`styled-components`**, the suggested solution by Rachel Andrews is quite easy to implement. She proposed to have lots of small rows of height $h_\text{r}$, where small means $h_\text{r} \ll h_\text{item}$ with $h_\text{item}$ the typical grid item height, and then manage how many rows each grid item should span. In other words, we compute the smallest integer $n$ that when multiplied with the row height $h_\text{r}$ exceeds the current grid item's height $h_\text{item}$, $n = \lceil h_\text{r}/h_\text{item}\rceil$ and then tell `grid` to make that item span $n$ rows. Here's the implementation:
 
-```jsx
-// masonry/index.js
+```jsx:title=masonry/index.js
 import React, { Component, createRef } from 'react'
 
 import { Parent, Child } from './styles'
@@ -86,8 +85,7 @@ export default class Masonry extends Component {
 
 and the styled components:
 
-```js
-// masonry/styles.js
+```js:title=masonry/styles.js
 import styled from 'styled-components'
 
 export const Parent = styled.div`
