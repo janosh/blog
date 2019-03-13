@@ -5,7 +5,7 @@ require(`dotenv`).config()
 module.exports = {
   siteMetadata: {
     title: `janosh.io`,
-    description: `Personal blog and portfolio of Janosh Riebesell. Mostly physics, machine learning and web development but really anything related to nature, science and technology.`,
+    description: `Personal blog and portfolio of Janosh Riebesell. Mostly physics, machine learning and web development.`,
     author: `Janosh Riebesell`,
     siteUrl: `https://janosh.io`,
   },
@@ -21,6 +21,7 @@ module.exports = {
           `gatsby-remark-responsive-iframe`,
           `gatsby-remark-katex`,
           `gatsby-remark-copy-linked-files`,
+          `gatsby-remark-code-titles`,
           `gatsby-remark-prismjs`,
           {
             resolve: `gatsby-remark-images`,
@@ -47,7 +48,6 @@ module.exports = {
         path: `${__dirname}/content`,
       },
     },
-    `gatsby-plugin-offline`,
     `gatsby-transformer-yaml`,
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-styled-components`,
@@ -73,5 +73,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-netlify-cache`,
   ],
 }

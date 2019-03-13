@@ -33,10 +33,25 @@ const languageTags = langExtColor
   .join(`\n`)
 
 export default createGlobalStyle`
+  .gatsby-code-title {
+    background: ${props => props.theme.orange};
+    padding: 0.2em 0.4em;
+    width: max-content;
+    margin: 1em 0 -2em 1em;
+    border-radius: 0.3em;
+    position: relative;
+    z-index: 1;
+    font-weight: lighter;
+    font-size: 0.8em;
+    line-height: initial;
+  }
+
   .gatsby-highlight {
     overflow: auto;
     position: relative;
     margin: 1em 0;
+    background: #011627;
+    border-radius: ${props => props.theme.mediumBorderRadius};
   }
 
   .gatsby-highlight[data-language]::before {
@@ -68,14 +83,8 @@ export default createGlobalStyle`
     margin: 0;
   }
 
-  pre[class*='language-'],
-  :not(pre) > code[class*='language-'] {
-    background: #011627;
-  }
-
   /* Code blocks */
   pre[class*='language-'] {
-    border-radius: ${props => props.theme.mediumBorderRadius};
     overflow: auto;
     padding: 1em;
   }
@@ -86,9 +95,9 @@ export default createGlobalStyle`
   }
 
   pre[class*='language-']::selection,
-  pre[class*='language-'] ::selection,
+  pre[class*='language-']::selection,
   code[class*='language-']::selection,
-  code[class*='language-'] ::selection {
+  code[class*='language-']::selection {
     text-shadow: none;
     background: hsla(0, 0%, 93%, 0.15);
   }
