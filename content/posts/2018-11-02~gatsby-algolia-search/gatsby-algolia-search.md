@@ -23,8 +23,7 @@ yarn add gatsby-plugin-algolia react-instantsearch-dom dotenv
 
 Next, add `gatsby-plugin-algolia` to your `gatsby-config.js`.
 
-```js
-// gatsby-config.js
+```js:title=gatsby-config.js
 const queries = require('./src/utils/algolia')
 
 require('dotenv').config()
@@ -51,8 +50,7 @@ module.exports = {
 
 Notice that we're loading `queries` from a file at `./src/utils/algolia.js` (you can of course put it wherever you like) and our Algolia ID and API key from `.env` so let's add those files.
 
-```env
-// .env
+```env:title=.env
 GATSBY_ALGOLIA_APP_ID = KA4OJA9KAS
 GATSBY_ALGOLIA_SEARCH_KEY=lkjas987ef923ohli9asj213k12n59ad
 ALGOLIA_ADMIN_KEY = lksa09sadkj1230asd09dfvj12309ajl
@@ -60,8 +58,7 @@ ALGOLIA_ADMIN_KEY = lksa09sadkj1230asd09dfvj12309ajl
 
 I inserted random character sequences here but yours should be the same length. Also, it's good practice to commit a `.env.example` to version control so that if someone forks your repo, they know which environment variables they need to supply.
 
-```env
-// .env.example
+```env:title=.env.example
 # rename this file to .env and supply the listed values
 # also make sure they are available to the build tool (e.g. netlify)
 # warning: variables prexifed with GATSBY_ will be made available to client-side code,
@@ -74,8 +71,7 @@ ALGOLIA_ADMIN_KEY=insertValue
 
 The `queries` allow you to grab the data you want Algolia to index directly from Gatsby's GraphQL layer by exporting from `src/utils/algolia.js` an array of objects, each containing a GraphQL query and (optionally) an index name, a transformer function and a settings object.
 
-```js
-// src/utils/algolia.js
+```js:title=src/utils/algolia.js
 const pageQuery = `{
   pages: allMarkdownRemark(
     filter: {
@@ -154,8 +150,7 @@ We're going to assemble everything we need into a React `Search` component that 
 
 The first step is to create the main component file.
 
-```jsx
-// src/components/Search/index.js
+```jsx:title=src/components/Search/index.js
 import React, { Component, createRef } from 'react'
 import {
   InstantSearch,
@@ -282,8 +277,7 @@ import Input from './Input'
 
 The Input component is where the user enters the search string. It is quite short since the grunt work is done by one of Algolia's components called [`connectSearchBox`](https://community.algolia.com/react-instantsearch/connectors/connectSearchBox.html):
 
-```jsx
-// src/components/Search/Input.js
+```jsx:title=src/components/Search/Input.js
 import React from 'react'
 import { connectSearchBox } from 'react-instantsearch-dom'
 
@@ -313,8 +307,7 @@ import * as hitComps from './hits'
 
 `hits.js` itself just bundles the exports from all hit components. We'll get to `PageHit` and `PostHit` in the end.
 
-```js
-// src/components/Search/hits.js
+```js:title=src/components/Search/hits.js
 export { default as PageHit } from './PageHit'
 export { default as PostHit } from './PostHit'
 ```
@@ -369,8 +362,7 @@ Note below that we feed `InstantSearch` with the same app ID we specified in our
 
 Now we come to the styled components. Of course, the design will be very different from one site to the next so we only list them here for completeness and because it might save some time to simply copy and customize them.
 
-```js
-// src/components/Search/styles.js
+```js:title=src/components/Search/styles.js
 import styled, { css } from 'styled-components'
 import { Search } from 'styled-icons/fa-solid/Search'
 
@@ -515,8 +507,7 @@ export const By = styled.span`
 
 Now we're almost done. 2 small steps remain. First, we need to put together a hit component for every type of result we want to display. In our example, these are blog posts and pages. And second, we need to call our `Search` component somewhere on our site. Here are the post and page hit components.
 
-```jsx
-// src/components/Search/PageHit.js
+```jsx:title=src/components/Search/PageHit.js
 import React from 'react'
 import { Highlight, Snippet } from 'react-instantsearch-dom'
 import { Link } from 'gatsby'
@@ -535,8 +526,7 @@ const PageHit = clickHandler => ({ hit }) => (
 export default PageHit
 ```
 
-```jsx
-// src/components/Search/PostHit.js
+```jsx:title=src/components/Search/PostHit.js
 import React from 'react'
 import { Highlight, Snippet } from 'react-instantsearch-dom'
 import { Link } from 'gatsby'
@@ -578,8 +568,7 @@ export default PostHit
 
 Now all we need to do is import `Search` somewhere. The obvious place is the `Header` component so let's add it there.
 
-```jsx
-// src/components/Header/index.js
+```jsx:title=src/components/Header/index.js
 import React from 'react'
 
 import { Container, Logo } from './styles'
