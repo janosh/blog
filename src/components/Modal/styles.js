@@ -55,16 +55,10 @@ export const Next = styled(NavigateNext).attrs({ size: `2em` })`
   ${controlsCss};
   top: 50%;
   right: 0.4em;
-  path {
-    transform: translateX(0.03em);
-  }
 `
 
 export const Prev = styled(NavigateBefore).attrs({ size: `2em` })`
   ${controlsCss};
   top: 50%;
   left: 0.4em;
-  path {
-    transform: translateX(-0.03em);
-  }
 `
