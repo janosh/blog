@@ -88,4 +88,10 @@ export const GlobalStyle = createGlobalStyle`
   .katex-display {
     overflow-x: scroll;
   }
+  blockquote {
+    border-left: 0.25em solid ${props => props.theme.lightBlue};
+    background: rgba(0, 0, 0, 0.03);
+    padding: 0.1em 0 0.1em 1em;
+    margin: 0;
+  }
 `
