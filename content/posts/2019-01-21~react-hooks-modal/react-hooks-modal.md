@@ -9,7 +9,7 @@ tags:
   - Tutorial
 ---
 
-What to do on a cold January weekend with bad weather? Why not check out the new [React alpha (16.8)](https://reactjs.org/blog/2018/11/27/react-16-roadmap.html#react-16x-q1-2019-the-one-with-hooks). **The one with hooks** as it's come to be called.
+What to do on a cold January weekend with bad weather? Why not check out the new [React alpha (16.8)](https://reactjs.org/blog/2018/11/27/react-16-roadmap.html#react-16x-q1-2019-the-one-with-hooks). **The one with Hooks** as it's come to be called.
 
 All it took was a little skimming through [the docs](https://reactjs.org/docs/hooks-intro.html), followed by updating to `react@next` and `react-dom@next`
 
@@ -17,9 +17,9 @@ All it took was a little skimming through [the docs](https://reactjs.org/docs/ho
 yarn add react@next react-dom@next
 ```
 
-That's it. Ready to start coding. But what to do first? One thing that seemed a good fit for hooks are modals. I'd implemented them once or twice before and in both cases came away with the feeling that a component class with all its boilerplate is overkill considering the tiny bit of state management required for modal functionality. As expected, using hooks I was to boil it down quite considerably. This is what I ended up with.
+That's it. Ready to start coding. But what to do first? One thing that seemed a good fit for hooks are modals. I'd implemented them once or twice before and in both cases came away with the feeling that a class component with all its boilerplate is overkill considering the tiny bit of state management required for modal functionality. As expected, using hooks I was able to boil it down quite considerably. This is what I ended up with.
 
-```jsx:title=components/modal/index.js
+```jsx:title=src/components/modal/index.js
 import React from 'react'
 
 import { ModalBackground, ModalContainer, Close } from './styles'
@@ -38,9 +38,9 @@ const Modal = ({ open, closeModal, children }) => {
 export default Modal
 ```
 
-And as for the styles:
+And here are the styled components imported on line 3.
 
-```js:title=components/modal/styles.js
+```js:title=src/components/modal/styles.js
 import styled from 'styled-components'
 import { Close as Cross } from 'styled-icons/material/Close'
 
@@ -61,14 +61,14 @@ export const ModalBackground = styled.div`
 export const ModalContainer = styled.div`
   align-self: center;
   justify-self: center;
-  background: ${props => props.theme.white};
+  background: white;
   max-width: ${props => props.theme.maxWidth};
   max-height: 80vh;
   position: relative;
   overflow: scroll;
   padding: 2em;
-  border-radius: ${props => props.theme.mediumBorderRadius};
-  box-shadow: 0 0 3em ${props => props.theme.black};
+  border-radius: 1em;
+  box-shadow: 0 0 3em black;
 `
 
 export const Close = styled(Cross).attrs({ size: `2em` })`
@@ -79,42 +79,38 @@ export const Close = styled(Cross).attrs({ size: `2em` })`
 `
 ```
 
-As you can see, the styles are way longer than the component itself. That's also where most of my time went. Figuring out how to use React hooks took minutes. Props to the React team (pun intended) for the excellent onboarding experience! Getting the css right probably took 5 times longer. Anyways, regarding usage, notice that the modal component doesn't actually handle it's own state. That's done by the parent component. As an example here's my list of [web projects](/web) projects on this very site.
+As you can see, the styles are longer than the component itself. That's what took most of the time too. Figuring out how to use React hooks took mere minutes. Props to the React team (pun intended) for the excellent onboarding experience! Anyways, regarding usage, notice that the modal component doesn't actually handle it's own state. That's done by the parent component. As an example here's a [list of photos](/nature) that when clicked enter a higher-resolution modal view.
 
-```jsx{1,9,16,20}
+```jsx{1,9,15,19}
 import React, { useState, Fragment } from 'react'
 
-import { ProjectExcerpt, Img } from './styles'
-import Project from './Project'
-import Grid from '../../components/styles/Grid'
+import Masonry from '../../components/Masonry'
 import Modal from '../../components/Modal'
 
-const Projects = ({ projects }) => {
+import { Thumbnail, LargeImg } from './styles'
+
+export default function Photos({ photos }) {
   const [modal, setModal] = useState()
   return (
-    <Grid min="15em" gap="1em">
-      {projects.map(({ node }, index) => {
-        const { title, cover } = node.frontmatter
-        return (
-          <Fragment key={title}>
-            <ProjectExcerpt onClick={() => setModal(index)}>
-              <Img fluid={cover.img.sharp.fluid} />
-              <h3>{title}</h3>
-            </ProjectExcerpt>
-            <Modal open={index === modal} closeModal={setModal}>
-              <Project {...node.frontmatter} html={node.html} />
-            </Modal>
-          </Fragment>
-        )
-      })}
-    </Grid>
+    <Masonry>
+      {photos.map((img, index) => (
+        <Fragment key={img.title}>
+          <Thumbnail
+            onClick={() => setModal(index)}
+            alt={img.title}
+            src={img.src}
+          />
+          <Modal {...{ open: index === modal, modal, setModal }}>
+            <LargeImg alt={img.title} src={img.src} />
+          </Modal>
+        </Fragment>
+      ))}
+    </Masonry>
   )
 }
-
-export default Projects
 ```
 
-So basically just 4 lines of code to control the list of modals (and 3 of those do other things as well). All in all a big win for React hooks I'd say. For comparison, this is how much code the class implementation needed.
+So basically just 4 lines of code to control the list of modals (and 2 of those do other things as well). I have to say, I was pretty impressed by that. For comparison, this is how much code the class implementation needed (just the JS, no styles yet).
 
 ```jsx
 import React from 'react'
@@ -165,9 +161,11 @@ const mapStateToProps = (state, { name }) => {
 export default connect(mapStateToProps)(Modal)
 ```
 
-Admittedly this component is bloated even further by using Redux but even without it, it's less readable and less maintainable. So thank you everyone involved for hooks.
+Admittedly this component is bloated even further by using Redux but even without it, it's less readable and less maintainable. So it's definitely a massive win for React Hooks!
 
-One thing I should mention for future readers who actually want to use this `Modal` component: Once Chrome's new [`<dialog>` tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) gets wider [browser support](https://caniuse.com/#feat=dialog), it would certainly improve semantics to use it for the modal container, i.e.
+## Semantic HTML
+
+One thing I should mention for future readers who want to use this `Modal` component: Once Chrome's new [`<dialog>` tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) gets wider [browser support](https://caniuse.com/#feat=dialog), it would certainly improve semantics to use it for the modal container, i.e.
 
 ```js
 - export const ModalContainer = styled.div`
@@ -186,7 +184,7 @@ and then maybe use the `::backdrop` pseudo-element for the modal background.
   `
 ```
 
-However, bear in mind that using `::backdrop` would make it much more difficult to close the modal on clicks outside of it, i.e. on the background. This is because (as of now) React is unable to attach the `onClick` prop to pseudo-elements. Perhaps that will change down to the road. If not, a workaround would be to use the new `useRef` and `useEffect` hook to create an event listener on the browser's `window` object that checks for the target of the `click` event. But that would complicate things quite a bit, since the listener would have to trigger on all clicks and check that the modal doesn't include the target before closing.
+However, bear in mind that using `::backdrop` would make it more difficult to close the modal on clicks outside of it, i.e. on the background. This is because React is unable to attach `onClick` event handlers to pseudo-elements and it seems unlikely this will change down the road. A workaround would be to use the new `useRef` and `useEffect` hook to create an event listener on the browser's `window` object that checks for the target of the `click` event. That would complicate things a little, though, since the listener would have to trigger on _all_ clicks and check that the modal doesn't include the target before closing. Something like so:
 
 ```jsx:title=components/modal/index.js
 import React, { useRef, useEffect } from 'react'
@@ -215,11 +213,11 @@ const Modal = ({ open, closeModal, children }) => {
 export default Modal
 ```
 
-## Update
+## Keyboard controls
 
-If you have a list of modals and you'd like users to be able to go to the next or previous modal using the arrow keys, you can again add an event listener for this with the `useEffect` hook as follows.
+If you have a list of modals and you'd like users to be able to go to the next or previous modal using the arrow keys, you can add an event listener with the `useEffect` hook for this as well.
 
-```jsx{5-8,12-16,25-30}
+```jsx{5-8,12-16,25-30}:title=src/components/model/index.js
 import React, { useEffect } from 'react'
 
 import { ModalBackground, ModalContainer, Close, Next, Prev } from './styles'
@@ -259,3 +257,47 @@ const Modal = ({ open, modal, setModal, children, navigation, className }) => {
 
 export default Modal
 ```
+
+The new styled components `Next` and `Prev` share most of their CSS with `Close` so it makes sense to reuse that with `styled-components` `css` API:
+
+```js:title=src/components/model/styles.js
+import styled, { css } from 'styled-components'
+
+import { Close as Cross } from 'styled-icons/material/Close'
+import { NavigateNext } from 'styled-icons/material/NavigateNext'
+import { NavigateBefore } from 'styled-icons/material/NavigateBefore'
+
+const controlsCss = css`
+  position: absolute;
+  cursor: pointer;
+  z-index: 1;
+  color: ${props => props.white && `white`};
+  background: ${props => props.white && `rgba(0, 0, 0, 0.5)`};
+  border-radius: 50%;
+  padding: 0.1em;
+  transition: ${props => props.theme.shortTrans};
+  :hover {
+    transform: scale(1.07);
+  }
+`
+
+export const Close = styled(Cross).attrs({ size: `2em` })`
+  ${controlsCss};
+  top: 0.5em;
+  right: 0.4em;
+`
+
+export const Next = styled(NavigateNext).attrs({ size: `2em` })`
+  ${controlsCss};
+  top: 50%;
+  right: 0.4em;
+`
+
+export const Prev = styled(NavigateBefore).attrs({ size: `2em` })`
+  ${controlsCss};
+  top: 50%;
+  left: 0.4em;
+`
+```
+
+For the full and most up to date implementation of this component, check out [this site's Github repo](https://github.com/janosh/janosh.io/tree/master/src/components/Modal).
