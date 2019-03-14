@@ -10,6 +10,8 @@ tags:
   - Tutorial
 ---
 
+> This is no longer a good way to implement a modal in React. With the recent introduction of React Hooks, [I wrote a new Masonry component](/blog/react-hooks-masonry) that's simpler and more robust.
+
 Back in early January, [Wes Bos](https://github.com/wesbos) asked [Rachel Andrew](https://github.com/rachelandrew) the excellent [question](https://github.com/rachelandrew/cssgrid-ama/issues/19) if CSS grid could be used to produce a masonry layout (think Pinterest). Turns out the spec doesn't support it. Makes sense really. A masonry layout may have columns, but no rows and without rows, it's not a grid. Still it would have been cool if CSS grid had you covered. At least for now though (late 2018, almost 2 years after the question was asked), it doesn't.
 
 But no matter. That just means we have to get a little creative. And indeed, that's exactly what [Jamie Perkins](https://github.com/inorganik) did. In the above linked GitHub issue, he [presents a neat flexbox solution](https://codepen.io/inorganik/pen/pREYPJ) that requires just 13 lines of JavaScript.
