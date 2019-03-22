@@ -65,7 +65,7 @@ export const GlobalStyle = createGlobalStyle`
       }
     }
   }
-  .btn {
+  .button {
     background: ${props => props.theme.blue};
     color: ${props => props.theme.white} !important;
     border-radius: ${props => props.theme.smallBorderRadius};
