@@ -103,6 +103,7 @@ export const HitsWrapper = styled.div`
   max-height: 80vh;
   overflow: scroll;
   z-index: 2;
+  -webkit-overflow-scrolling: touch;
   ${props => (props.hitsAsGrid ? grid : list)};
   * {
     margin-top: 0;
