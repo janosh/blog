@@ -21,11 +21,10 @@ export const ModelDiv = styled.div`
   align-self: center;
   justify-self: center;
   background: ${props => props.theme.white};
-  max-width: ${props => props.maxWidth || props.theme.maxWidth};
-  max-height: ${props => props.maxHeight || `80vh`};
+  max-width: ${props => props.theme.maxWidth};
+  max-height: 80vh;
   position: relative;
   overflow: scroll;
-  padding: 2em;
   border-radius: ${props => props.theme.mediumBorderRadius};
   box-shadow: 0 0 3em ${props => props.theme.black};
   margin: calc(0.5em + 2vw);

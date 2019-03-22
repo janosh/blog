@@ -22,7 +22,10 @@ const Modal = ({
       document.body.style.overflowY = `hidden`
       const handler = handleArrowKeys(modal, setModal)
       document.addEventListener(`keydown`, handler)
-      return () => document.removeEventListener(`keydown`, handler)
+      return () => {
+        document.removeEventListener(`keydown`, handler)
+        document.body.style.removeProperty(`overflow-y`)
+      }
     })
     return (
       // passing setModal to onClick without arguments will close the modal when triggered
