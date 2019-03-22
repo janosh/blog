@@ -20,4 +20,4 @@ Our project will realize a holistic pipeline to discover novel thermoelectrics: 
 
 If you're interested, take a look at our Github page:
 
-<a href="https://github.com/Lee-Group" class="btn"><img src="./github.svg" alt="GitHub" width="25px" height="25px">&ensp;Lee Group</a>
+<a href="https://github.com/Lee-Group" class="button"><img src="./github.svg" alt="GitHub" width="25px" height="25px">&ensp;Lee Group</a>
