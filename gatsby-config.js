@@ -1,4 +1,5 @@
 const queries = require(`./src/utils/algolia`)
+const macros = require(`./src/utils/katex`)
 
 require(`dotenv`).config()
 
@@ -19,10 +20,13 @@ module.exports = {
           `gatsby-remark-smartypants`,
           `gatsby-remark-embed-video`,
           `gatsby-remark-responsive-iframe`,
-          `gatsby-remark-katex`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-code-titles`,
           `gatsby-remark-prismjs`,
+          {
+            resolve: `gatsby-remark-katex`,
+            options: { macros },
+          },
           {
             resolve: `gatsby-remark-images`,
             options: {
