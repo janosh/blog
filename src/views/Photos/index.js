@@ -1,36 +1,70 @@
-import React, { useState, Fragment } from "react"
+import React, { useMemo } from "react"
+import MarkerClusterer from "@google/markerclustererplus"
 
 import Masonry from "../../components/Masonry"
 import Caption from "../../components/styles/Caption"
 import Modal from "../../components/Modal"
+import Map from "../../components/Map"
 
 import { Thumbnail, LargeImg } from "./styles"
 
-const Photos = ({ photos }) => {
-  const [modal, setModal] = useState()
+const addMarkers = (photos, setModal) => map => {
+  const markers = photos.map((photo, index) => {
+    const marker = new window.google.maps.Marker({
+      map,
+      position: photo.gps,
+      label: `${index + 1}`,
+      title: photo.title,
+    })
+    marker.addListener(`click`, () => setModal(index))
+    return marker
+  })
+  new MarkerClusterer(map, markers)
+}
+
+const mapProps = (...args) => ({
+  options: {
+    center: { lat: 40, lng: 10 },
+    zoom: 3,
+  },
+  onMount: addMarkers(...args),
+})
+
+const Photos = ({ tab, photos, modal, setModal }) => {
+  const MemoMap = useMemo(() => <Map {...mapProps(photos, setModal)} />, [])
+  photos = photos.filter(photo => photo.iptc)
   return (
-    <Masonry>
-      {photos.map(({ node }, index) => (
-        <Fragment key={node.title}>
-          <div onClick={() => setModal(index)}>
-            <Thumbnail alt={node.title} fluid={node.img.sharp.fluid} />
-          </div>
-          <Modal
-            open={index === modal}
-            modal={modal}
-            setModal={setModal}
-            navigation
-            white
-            css="padding: 0; max-width: 80vw;"
-          >
-            <LargeImg alt={node.title} fluid={node.img.sharp.fluid} />
-            <Caption>
-              <h3 css="margin: 0;">{node.title}</h3>
-            </Caption>
-          </Modal>
-        </Fragment>
-      ))}
-    </Masonry>
+    <>
+      {tab === `list` ? (
+        <Masonry>
+          {photos.map((photo, index) => (
+            <div onClick={() => setModal(index)} key={photo.iptc.headline}>
+              <Thumbnail alt={photo.iptc.headline} fluid={photo.fluid} />
+            </div>
+          ))}
+        </Masonry>
+      ) : (
+        MemoMap
+      )}
+      {modal >= 0 && modal < photos.length && (
+        <Modal
+          open={true}
+          modal={modal}
+          setModal={setModal}
+          navigation
+          white
+          css="max-width: 80vw;"
+        >
+          <LargeImg
+            alt={photos[modal].iptc.headline}
+            fluid={photos[modal].fluid}
+          />
+          <Caption>
+            <h3 css="margin: 0;">{photos[modal].iptc.headline}</h3>
+          </Caption>
+        </Modal>
+      )}
+    </>
   )
 }
 

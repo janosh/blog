@@ -10,9 +10,12 @@ export const Thumbnail = styled(Img)`
   }
 `
 
-export const LargeImg = styled(Img).attrs({
-  imgStyle: { objectFit: `contain` },
-})`
+export const LargeImg = styled(Img).attrs(
+  props =>
+    props.fluid.aspectRatio < 1.45 && {
+      imgStyle: { objectFit: `contain` },
+    }
+)`
   width: 80vw;
   background: rgba(0, 0, 0, 0.9);
   height: max-content;
