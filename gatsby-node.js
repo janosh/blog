@@ -1,7 +1,6 @@
 const path = require(`path`)
 const fs = require(`fs`)
-const fastExif = require(`fast-exif`)
-const iptc = require(`node-iptc`)
+const ExifReader = require(`exifreader`)
 
 const pageTemplate = path.resolve(`./src/templates/page.js`)
 const postTemplate = path.resolve(`./src/templates/post.js`)
@@ -63,32 +62,21 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   })
 }
 
-const latLngReducer = (acc, val, index) => acc + val / Math.pow(60, index)
-
-exports.onCreateNode = async ({ node, actions }) => {
+exports.onCreateNode = ({ node, actions }) => {
   if (node.dir && node.dir.includes(`content/photos`) && node.ext === `.jpg`) {
-    await fs.readFile(node.absolutePath, (err, img) => {
+    fs.readFile(node.absolutePath, (err, data) => {
       if (err) throw err
+      const tags = ExifReader.load(data.buffer)
+      const meta = {
+        lat: tags.GPSLatitude.description,
+        lng: tags.GPSLongitude.description,
+        caption: tags.Headline.description,
+      }
       actions.createNodeField({
         node,
-        name: `iptc`,
-        value: iptc(img),
+        name: `meta`,
+        value: meta,
       })
     })
-    fastExif
-      .read(node.absolutePath)
-      .then(exifData => {
-        if (exifData && exifData.gps) {
-          const lat = exifData.gps.GPSLatitude.reduce(latLngReducer, 0)
-          const lng = exifData.gps.GPSLongitude.reduce(latLngReducer, 0)
-          actions.createNodeField({
-            node,
-            name: `gps`,
-            value: { lat, lng },
-          })
-        }
-      })
-      // eslint-disable-next-line no-console
-      .catch(console.error)
   }
 }
