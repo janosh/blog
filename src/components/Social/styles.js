@@ -1,32 +1,27 @@
-import styled, { css } from 'styled-components'
-import { Share } from 'styled-icons/material/Share'
-import { Email } from 'styled-icons/material/Email'
-import { Youtube } from 'styled-icons/fa-brands/Youtube'
-import { LinkedinIn as Linkedin } from 'styled-icons/fa-brands/LinkedinIn'
-import { FacebookF as Facebook } from 'styled-icons/fa-brands/FacebookF'
-import { Github } from 'styled-icons/fa-brands/Github'
+import styled, { css } from "styled-components"
+import { Share } from "styled-icons/material/Share"
+import { Email } from "styled-icons/material/Email"
+import { Youtube } from "styled-icons/fa-brands/Youtube"
+import { LinkedinIn as Linkedin } from "styled-icons/fa-brands/LinkedinIn"
+import { FacebookF as Facebook } from "styled-icons/fa-brands/FacebookF"
+import { Github } from "styled-icons/fa-brands/Github"
 
-import mediaQuery from '../../utils/mediaQuery'
+import mediaQuery from "../../utils/mediaQuery"
+import { fadeInOnHoverParent } from "../styles"
 
 export const Wrapper = styled.div`
   position: relative;
-  align-self: center;
 `
 
 const collapse = css`
   grid-gap: 2vh;
-  visibility: hidden;
-  opacity: 0;
   position: absolute;
   background: ${props => props.theme.black};
   border-radius: ${props => props.theme.smallBorderRadius};
   padding: 1vmin;
   font-size: 1.6em;
   transition: ${props => props.theme.shortTrans};
-  ${Wrapper}:hover & {
-    visibility: visible;
-    opacity: 1;
-  }
+  ${fadeInOnHoverParent(Wrapper)};
 `
 
 const display = css`
