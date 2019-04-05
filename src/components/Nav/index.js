@@ -1,8 +1,18 @@
-import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
-import PropTypes from 'prop-types'
+import React from "react"
+import { StaticQuery, graphql } from "gatsby"
+import PropTypes from "prop-types"
 
-import Nav from './comp'
+import MobileNav from "./Mobile"
+import DesktopNav from "./Desktop"
+
+export { navLinkStyle, NavLink } from "./styles"
+
+const Nav = props => (
+  <>
+    <MobileNav {...props} />
+    <DesktopNav {...props} />
+  </>
+)
 
 const query = graphql`
   {
@@ -18,7 +28,7 @@ const query = graphql`
 export default props => (
   <StaticQuery
     query={query}
-    render={data => <Nav {...data.nav} {...props} />}
+    render={data => <Nav {...data.nav} {...props} role="navigation" />}
   />
 )
 
