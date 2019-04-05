@@ -4,7 +4,7 @@ import { DiscussionEmbed } from "disqus-react"
 
 import Global from "../components/Global"
 import PageTitle from "../components/PageTitle"
-import PageBody from "../components/styles/PageBody"
+import { PageBody } from "../components/styles"
 import PostMeta from "../components/PostMeta"
 import PrevNext from "../components/PrevNext"
 import { disqusConfig } from "../utils/misc"

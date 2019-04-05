@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 
 import Global from "../components/Global"
 import PageTitle from "../components/PageTitle"
-import PageBody from "../components/styles/PageBody"
+import { PageBody } from "../components/styles"
 
 const PageTemplate = ({ data, location }) => {
   const { frontmatter, html, excerpt } = data.page
