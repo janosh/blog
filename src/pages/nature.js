@@ -10,7 +10,7 @@ const NaturePage = ({ data, location }) => {
   const [modal, setModal] = useState()
   const [tab, setTab] = useState(`list`)
   const photos = data.photos.edges.map(({ node }) => ({
-    ...node.fields,
+    ...(node.fields && node.fields.meta),
     ...node.img,
   }))
   const photoProps = { tab, modal, setModal, photos }
@@ -44,13 +44,10 @@ export const query = graphql`
       edges {
         node {
           fields {
-            gps {
+            meta {
+              caption
               lat
               lng
-            }
-            iptc {
-              copyright_notice
-              headline
             }
           }
           img: childImageSharp {
