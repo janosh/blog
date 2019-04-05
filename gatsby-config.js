@@ -50,6 +50,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content`,
+        ignore: process.env.NODE_ENV === `production` && [`**/drafts/**`],
       },
     },
     `gatsby-transformer-yaml`,
