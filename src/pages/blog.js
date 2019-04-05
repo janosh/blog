@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 
 import Global from "../components/Global"
 import PageTitle from "../components/PageTitle"
-import PageBody from "../components/styles/PageBody"
+import { PageBody } from "../components/styles"
 import TagList from "../components/TagList"
 import PostList from "../views/PostList"
 import { paramCase, titleCase } from "../utils/misc"

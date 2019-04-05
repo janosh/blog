@@ -6,7 +6,7 @@ import { Github } from "styled-icons/icomoon/Github"
 import { Npm } from "styled-icons/fa-brands/Npm"
 import { Link } from "styled-icons/boxicons-regular/Link"
 
-import Grid from "../../components/styles/Grid"
+import { Grid } from "../../components/styles"
 
 export const ProjectGrid = styled(Grid)`
   ${props =>
