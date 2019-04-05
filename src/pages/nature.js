@@ -3,8 +3,7 @@ import { graphql } from "gatsby"
 
 import Global from "../components/Global"
 import PageTitle from "../components/PageTitle"
-import PageBody from "../components/styles/PageBody"
-import ButtonGroup from "../components/styles/ButtonGroup"
+import { PageBody, ButtonGroup } from "../components/styles"
 import Photos from "../views/Photos"
 
 const NaturePage = ({ data, location }) => {
