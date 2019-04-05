@@ -46,7 +46,7 @@
   url: https://socket.io
   file: socketio
 
-- title: stycomp
+- title: sty-comps
   url: https://www.styled-components.com
   file: styled-components
 
