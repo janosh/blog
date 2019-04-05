@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useCallback } from "react"
 import MarkerClusterer from "@google/markerclustererplus"
 
 import Masonry from "../../components/Masonry"
@@ -9,12 +9,12 @@ import Map from "../../components/Map"
 import { Thumbnail, LargeImg } from "./styles"
 
 const addMarkers = (photos, setModal) => map => {
-  const markers = photos.map((photo, index) => {
+  const markers = photos.map(({ caption, lat, lng }, index) => {
     const marker = new window.google.maps.Marker({
       map,
-      position: photo.gps,
+      position: { lat, lng },
       label: `${index + 1}`,
-      title: photo.title,
+      title: caption,
     })
     marker.addListener(`click`, () => setModal(index))
     return marker
@@ -31,15 +31,14 @@ const mapProps = (...args) => ({
 })
 
 const Photos = ({ tab, photos, modal, setModal }) => {
-  const MemoMap = useMemo(() => <Map {...mapProps(photos, setModal)} />, [])
-  photos = photos.filter(photo => photo.iptc)
+  const MemoMap = useCallback(<Map {...mapProps(photos, setModal)} />, [])
   return (
     <>
       {tab === `list` ? (
         <Masonry>
           {photos.map((photo, index) => (
-            <div onClick={() => setModal(index)} key={photo.iptc.headline}>
-              <Thumbnail alt={photo.iptc.headline} fluid={photo.fluid} />
+            <div onClick={() => setModal(index)} key={photo.caption}>
+              <Thumbnail alt={photo.caption} fluid={photo.fluid} />
             </div>
           ))}
         </Masonry>
@@ -55,12 +54,9 @@ const Photos = ({ tab, photos, modal, setModal }) => {
           white
           css="max-width: 80vw;"
         >
-          <LargeImg
-            alt={photos[modal].iptc.headline}
-            fluid={photos[modal].fluid}
-          />
+          <LargeImg alt={photos[modal].caption} fluid={photos[modal].fluid} />
           <Caption>
-            <h3 css="margin: 0;">{photos[modal].iptc.headline}</h3>
+            <h3 css="margin: 0;">{photos[modal].caption}</h3>
           </Caption>
         </Modal>
       )}
