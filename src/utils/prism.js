@@ -171,6 +171,14 @@ export default createGlobalStyle`
     color: rgb(178, 204, 214);
   }
 
+  .token.deleted {
+    color: #f05f70;
+  }
+
+  .token.inserted {
+    color: ${props => props.theme.lightGreen};
+  }
+
   pre[data-line] {
     padding: 1em 0 1em 3em;
     position: relative;
