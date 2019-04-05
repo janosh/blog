@@ -3,8 +3,7 @@ import { graphql } from "gatsby"
 
 import Global from "../components/Global"
 import PageTitle from "../components/PageTitle"
-import PageBody from "../components/styles/PageBody"
-import Grid from "../components/styles/Grid"
+import { PageBody, Grid } from "../components/styles"
 import Projects from "../views/Projects"
 
 const WebPage = ({ data, location }) => {
@@ -20,7 +19,7 @@ const WebPage = ({ data, location }) => {
         <h2>Recent Projects</h2>
         <Projects {...projects} />
         <h2>My Stack</h2>
-        <Grid minWidth="4em" align="center">
+        <Grid minWidth="4.5em" align="center">
           {techNames.edges.map(({ node }) => (
             <a key={node.title} href={node.url}>
               <span>{node.title}</span>

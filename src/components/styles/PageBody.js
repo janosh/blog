@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 import mediaQuery from "../../utils/mediaQuery"
 
-export default styled.main`
+export const PageBody = styled.main`
   margin: calc(3em + 3vh) 0;
   display: grid;
   grid-gap: 0 4vw;
