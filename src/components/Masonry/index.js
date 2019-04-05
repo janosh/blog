@@ -2,13 +2,13 @@ import React, { useRef, useState, useEffect } from "react"
 
 import { MasonryDiv, Col } from "./styles"
 
-export default function Masonry({ children, gap, minWidth = 300 }) {
+export default function Masonry({ children, gap, minWidth = 500 }) {
   const cols = []
   const ref = useRef()
   const [numCols, setNumCols] = useState(3)
 
   const calcNumCols = () =>
-    setNumCols(Math.floor(ref.current.offsetWidth / minWidth))
+    setNumCols(Math.ceil(ref.current.offsetWidth / minWidth))
 
   const createCols = () => {
     for (let i = 0; i < numCols; i++) cols[i] = []
