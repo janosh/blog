@@ -7,7 +7,9 @@ export const HeaderContainer = styled.header`
   background: ${props => props.theme.darkBlue};
   display: grid;
   grid-gap: 3vw;
+  z-index: 2;
   justify-items: center;
+  align-items: center;
   justify-content: space-between;
   grid-template-areas: "nav title social search";
   grid-template-columns: auto 1fr auto auto;

@@ -4,7 +4,7 @@ import { HeaderContainer, Logo } from "./styles"
 import Nav from "../Nav"
 import Social from "../Social"
 import Search from "../Search"
-import { navLinkStyle } from "../Nav/styles"
+import { navLinkStyle } from "../Nav"
 
 const searchIndices = [
   { name: `Pages`, title: `Pages`, hitComp: `PageHit` },
