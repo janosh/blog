@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react"
 
-import Caption from "../styles/Caption"
+import { Caption } from "../styles"
 import { PageTitleContainer, Title, Img } from "./styles"
 
 const PageTitle = ({ children, img, backdrop, className, fillToBottom }) => {

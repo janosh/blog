@@ -1,6 +1,8 @@
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
-const Caption = styled.figcaption`
+import { fadeInOnHoverParent } from "./"
+
+export const Caption = styled.figcaption`
   position: absolute;
   bottom: 0;
   right: 1em;
@@ -19,15 +21,5 @@ const Caption = styled.figcaption`
     }
   }
   ${props =>
-    props.showOnHoverParent &&
-    css`
-      visibility: hidden;
-      opacity: 0;
-      ${props.showOnHoverParent}:hover & {
-        visibility: visible;
-        opacity: 1;
-      }
-    `}
+    props.showOnHoverParent && fadeInOnHoverParent(props.showOnHoverParent)};
 `
-
-export default Caption
