@@ -4,6 +4,7 @@ export const query = graphql`
   fragment post on MarkdownRemark {
     frontmatter {
       title
+      subtitle
       slug
       date(formatString: "MMM DD, YYYY")
       tags
