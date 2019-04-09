@@ -6,7 +6,7 @@ import PageTitle from "../components/PageTitle"
 import { PageBody } from "../components/styles"
 import TagList from "../components/TagList"
 import PostList from "../views/PostList"
-import { paramCase, titleCase } from "../utils/misc"
+import { paramCase, titleCase } from "../utils"
 
 const insertAllTag = (tags, count) => {
   if (!tags.group.map(tag => tag.title).includes(`All`))

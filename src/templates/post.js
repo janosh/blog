@@ -7,7 +7,7 @@ import PageTitle from "../components/PageTitle"
 import { PageBody } from "../components/styles"
 import PostMeta from "../components/PostMeta"
 import PrevNext from "../components/PrevNext"
-import { disqusConfig } from "../utils/misc"
+import { disqusConfig } from "../utils"
 
 const PostTemplate = ({ data, location }) => {
   const { post, next, prev } = data
