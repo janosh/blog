@@ -9,9 +9,21 @@ import PostMeta from "../components/PostMeta"
 import PrevNext from "../components/PrevNext"
 import { disqusConfig } from "../utils"
 
+const PostTitle = ({ title, subtitle }) =>
+  subtitle ? (
+    <div css="padding: 0.3em 1em;">
+      <h1 css="margin: 0;">{title}</h1>
+      <hr css="margin: 0.3em 0;" />
+      <h2 css="margin: 0;">{subtitle}</h2>
+    </div>
+  ) : (
+    <h1>{title}</h1>
+  )
+
 const PostTemplate = ({ data, location }) => {
   const { post, next, prev } = data
   const { frontmatter, excerpt, html, timeToRead } = post
+  const meta = { ...frontmatter, timeToRead }
   const { title, slug, cover } = frontmatter
   if (cover && cover.img) {
     if (cover.img.sharp) cover.fluid = cover.img.sharp.fluid
@@ -20,8 +32,8 @@ const PostTemplate = ({ data, location }) => {
   return (
     <Global pageTitle={title} path={location.pathname} description={excerpt}>
       <PageTitle img={cover} backdrop>
-        <h1>{title}</h1>
-        <PostMeta inTitle {...{ ...frontmatter, timeToRead }} />
+        <PostTitle {...frontmatter} />
+        <PostMeta inTitle {...meta} />
       </PageTitle>
       <PageBody>
         <div dangerouslySetInnerHTML={{ __html: html }} />
