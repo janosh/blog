@@ -6,7 +6,7 @@ import { Item, Children, Icons, MobileNavDiv, Menu, NavLink } from "./styles"
 
 export const useSize = (ref, quantity) => {
   const [size, setSize] = useState(0)
-  // useState for performance, otherwise ResizeObserver will be invoked on every rerender
+  // useState for performance, prevents ResizeObserver from being invoked on every rerender
   const [observer] = useState(
     new ResizeObserver(([entry]) => setSize(entry.contentRect[quantity]))
   )

@@ -1,6 +1,5 @@
 import styled from "styled-components"
 
-import mediaQuery from "../../../utils/mediaQuery"
 import { fadeInOnHoverParent } from "../../styles"
 
 export { NavLink } from ".."
@@ -13,9 +12,6 @@ export const DesktopNavDiv = styled.nav`
   grid-auto-flow: column;
   grid-auto-columns: max-content;
   justify-self: start;
-  ${mediaQuery.maxPhablet} {
-    display: none;
-  }
 `
 
 export const NavEntry = styled.div`
