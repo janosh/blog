@@ -6,7 +6,6 @@ import { KeyboardArrowUp as Less } from "styled-icons/material/KeyboardArrowUp"
 import { KeyboardArrowDown as More } from "styled-icons/material/KeyboardArrowDown"
 import { KeyboardArrowRight as Arrow } from "styled-icons/material/KeyboardArrowRight"
 
-import mediaQuery from "../../../utils/mediaQuery"
 import { NavLink } from "../styles"
 
 export { NavLink }
@@ -33,10 +32,8 @@ export const MobileNavDiv = styled.nav`
   grid-auto-rows: max-content;
   transform: translate(${props => (props.open ? `99%` : `0`)});
   transition: ${props => props.theme.shortTrans};
-  ${mediaQuery.minPhablet} {
-    display: none;
-  }
 `
+
 export const Item = styled.div`
   a {
     color: white;
@@ -71,7 +68,4 @@ export const Menu = styled(NavLink).attrs({
   cursor: pointer;
   transform: scale(1.7, 1.3);
   margin: 0 0.3em;
-  ${mediaQuery.minPhablet} {
-    display: none;
-  }
 `
