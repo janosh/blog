@@ -7,7 +7,7 @@ import { Meta, TagList } from "./styles"
 import { Calendar } from "styled-icons/octicons/Calendar"
 import { Timer } from "styled-icons/material/Timer"
 import { Comments } from "styled-icons/fa-solid/Comments"
-import { disqusConfig } from "../../utils/misc"
+import { disqusConfig } from "../../utils"
 
 const PostMeta = ({ title, slug, date, timeToRead, tags, inTitle = false }) => (
   <Meta inTitle={inTitle}>
