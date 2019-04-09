@@ -1,10 +1,10 @@
 import { createGlobalStyle } from "styled-components"
 import "katex/dist/katex.min.css"
 
-import mediaQuery, { screenSize } from "../../utils/mediaQuery"
+import mediaQuery from "../../utils/mediaQuery"
 import typography from "../../utils/typography"
 
-const { phone, desktop } = screenSize
+const { phone, desktop } = mediaQuery.screens
 const {
   fonts,
   minFontSize,
@@ -81,6 +81,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   /* center image captions */
   .gatsby-resp-image-wrapper + em {
+    margin-top: 0.3em;
     display: block;
     text-align: center;
   }
