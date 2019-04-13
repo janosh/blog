@@ -1,7 +1,9 @@
-import styled, { css } from "styled-components"
-import { Close as Cross } from "styled-icons/material/Close"
-import { NavigateNext } from "styled-icons/material/NavigateNext"
-import { NavigateBefore } from "styled-icons/material/NavigateBefore"
+import styled, { css } from 'styled-components'
+import { Close as Cross } from 'styled-icons/material/Close'
+import { NavigateNext } from 'styled-icons/material/NavigateNext'
+import { NavigateBefore } from 'styled-icons/material/NavigateBefore'
+import { Fullscreen } from 'styled-icons/boxicons-regular/Fullscreen'
+import { ExitFullscreen } from 'styled-icons/boxicons-regular/ExitFullscreen'
 
 export const ModalBehind = styled.div`
   position: fixed;
@@ -17,47 +19,71 @@ export const ModalBehind = styled.div`
   z-index: 2;
 `
 
-export const ModelDiv = styled.div`
+const fullscreen = css`
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  border-radius: 0;
+`
+
+export const ModalDiv = styled.div`
+  box-sizing: border-box;
   align-self: center;
   justify-self: center;
   background: ${props => props.theme.white};
-  max-width: ${props => props.theme.maxWidth};
-  max-height: 80vh;
+  height: 80vh;
+  width: 80vw;
   position: relative;
   overflow: scroll;
   border-radius: ${props => props.theme.mediumBorderRadius};
+  transition: ${props => props.theme.shortTrans};
   box-shadow: 0 0 3em ${props => props.theme.black};
   margin: calc(0.5em + 2vw);
+  ${props => props.fullscreen && fullscreen}
 `
 
 const controlsCss = css`
   position: absolute;
   cursor: pointer;
   z-index: 1;
-  color: ${props => props.white && `white`};
-  background: ${props => props.white && `rgba(0, 0, 0, 0.5)`};
-  border-radius: 50%;
+  color: ${props => props.theme.whiteControls && `white`};
+  background: ${props => props.theme.whiteControls && `rgba(0, 0, 0, 0.5)`};
   padding: 0.1em;
   transition: ${props => props.theme.shortTrans};
+  width: 1.6em;
   :hover {
     transform: scale(1.07);
   }
 `
 
-export const Close = styled(Cross).attrs({ size: `2em` })`
+const FullscreenToggle = styled(Fullscreen).attrs(props => ({
+  as: props.fullscreen && ExitFullscreen,
+}))`
   ${controlsCss};
+  border-radius: 0.4em;
   top: 0.5em;
-  right: 0.4em;
+  right: 2.8em;
 `
 
-export const Next = styled(NavigateNext).attrs({ size: `2em` })`
+const Close = styled(Cross)`
   ${controlsCss};
-  top: 50%;
-  right: 0.4em;
+  border-radius: 0.4em;
+  top: 0.5em;
+  right: 0.5em;
 `
 
-export const Prev = styled(NavigateBefore).attrs({ size: `2em` })`
+const Next = styled(NavigateNext)`
   ${controlsCss};
+  border-radius: 50%;
   top: 50%;
-  left: 0.4em;
+  right: 0.3em;
 `
+
+const Prev = styled(NavigateBefore)`
+  ${controlsCss};
+  border-radius: 50%;
+  top: 50%;
+  left: 0.3em;
+`
+
+export const controls = { FullscreenToggle, Close, Next, Prev }
