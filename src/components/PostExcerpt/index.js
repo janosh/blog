@@ -4,12 +4,13 @@ import { Link } from "gatsby"
 import { Post, Cover } from "./styles"
 import PostMeta from "../PostMeta"
 
-const PostExcerpt = ({ post, noText }) => {
+export default function PostExcerpt({ post, noText }) {
   const { frontmatter, excerpt, timeToRead } = post
   const { title, slug, cover } = frontmatter
   if (cover && cover.img) {
-    if (cover.img.sharp) cover.fluid = cover.img.sharp.fluid
-    if (cover.img.src) cover.src = cover.img.src
+    const img = cover.thumbnail || cover.img
+    if (img.sharp) cover.fluid = img.sharp.fluid
+    if (img.src) cover.src = img.src
   }
   return (
     <Post>
@@ -24,5 +25,3 @@ const PostExcerpt = ({ post, noText }) => {
     </Post>
   )
 }
-
-export default PostExcerpt
