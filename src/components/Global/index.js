@@ -3,7 +3,7 @@ import { StaticQuery, graphql } from "gatsby"
 import { ThemeProvider } from "styled-components"
 import PropTypes from "prop-types"
 
-import Helmet from "../Helmet"
+import Seo from "../Seo"
 import Header from "../Header"
 import Footer from "../Footer"
 import theme from "../../utils/theme"
@@ -15,7 +15,7 @@ import { GlobalStyle } from "./styles"
 const Global = ({ children, site, ...rest }) => (
   <ThemeProvider theme={theme}>
     <>
-      <Helmet site={site.meta} {...rest} />
+      <Seo site={site.meta} {...rest} />
       <GlobalStyle />
       <Prism />
       <Header site={site.meta} />
