@@ -14,7 +14,7 @@ const langExtColor = [
   { lang: `shell`, tag: `shell`, color: `white` },
   { lang: `sh`, tag: `sh`, color: `white` },
   { lang: `bash`, tag: `bash`, color: `white` },
-  { lang: `yml`, tag: `yml`, color: `linen` },
+  { lang: `yml`, tag: `yaml`, color: `linen` },
   { lang: `yaml`, tag: `yaml`, color: `linen` },
   { lang: `markdown`, tag: `md`, color: `#e6ffed` },
   { lang: `json`, tag: `json`, color: `#fff` },
@@ -52,6 +52,7 @@ export default createGlobalStyle`
     margin: 1em 0;
     background: #011627;
     border-radius: ${props => props.theme.mediumBorderRadius};
+    -webkit-overflow-scrolling: touch;
   }
 
   .gatsby-highlight[data-language]::before {
