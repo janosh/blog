@@ -6,7 +6,7 @@ import { Caption } from "../../components/styles"
 import Modal from "../../components/Modal"
 import Map from "../../components/Map"
 
-import { Thumbnail, LargeImg } from "./styles"
+import { Thumbnail, Img } from "./styles"
 
 const addMarkers = (photos, setModal) => map => {
   const markers = photos.map(({ caption, lat, lng }, index) => {
@@ -30,8 +30,9 @@ const mapProps = (...args) => ({
   onMount: addMarkers(...args),
 })
 
-const Photos = ({ tab, photos, modal, setModal }) => {
+export default function Photos({ tab, photos, modal, setModal }) {
   const MemoMap = useCallback(<Map {...mapProps(photos, setModal)} />, [])
+  const currentPhoto = modal >= 0 && modal < photos.length && photos[modal]
   return (
     <>
       {tab === `list` ? (
@@ -45,23 +46,23 @@ const Photos = ({ tab, photos, modal, setModal }) => {
       ) : (
         MemoMap
       )}
-      {modal >= 0 && modal < photos.length && (
-        <Modal
-          open={true}
-          modal={modal}
-          setModal={setModal}
-          navigation
-          white
-          css="max-width: 80vw;"
-        >
-          <LargeImg alt={photos[modal].caption} fluid={photos[modal].fluid} />
-          <Caption>
-            <h3 css="margin: 0;">{photos[modal].caption}</h3>
-          </Caption>
-        </Modal>
-      )}
+      <Modal
+        open={currentPhoto}
+        {...{ modal, setModal }}
+        whiteControls
+        fullScreenDefault
+        css="background: black; display: grid; align-items: center;"
+      >
+        <Img
+          alt={currentPhoto.caption}
+          fluid={currentPhoto.fluid}
+          // imgStyle={{ objectFit: `contain` }}
+          css="max-height: 100vh; width: initial;"
+        />
+        <Caption>
+          <h3 css="margin: 0;">{currentPhoto.caption}</h3>
+        </Caption>
+      </Modal>
     </>
   )
 }
-
-export default Photos
