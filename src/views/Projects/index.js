@@ -6,7 +6,7 @@ import Modal from "../../components/Modal"
 
 const Projects = ({ projects, ...rest }) => {
   const [modal, setModal] = useState()
-  const project = modal >= 0 && projects[modal].node
+  const project = modal >= 0 && modal < projects.length && projects[modal].node
   return (
     <ProjectGrid minWidth="15em" gap="1em" {...rest}>
       {projects.map(({ node }, index) => {
@@ -18,11 +18,13 @@ const Projects = ({ projects, ...rest }) => {
           </Thumbnail>
         )
       })}
-      {project && (
-        <Modal open={project} setModal={setModal} css="padding: 2em;">
-          <Project {...project.frontmatter} html={project.html} />
-        </Modal>
-      )}
+      <Modal
+        open={project}
+        {...{ modal, setModal }}
+        css="padding: 2em; max-width: 40em;"
+      >
+        <Project {...project.frontmatter} html={project.html} />
+      </Modal>
     </ProjectGrid>
   )
 }
