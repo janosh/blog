@@ -1,23 +1,20 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
+import { ThemeProvider } from "styled-components"
 
-import { ModalBackground, ModalContainer, Close, Next, Prev } from "./styles"
+import { ModalBackground, ModalContainer, controls } from "./styles"
+
+const { Close, Next, Prev, FullscreenToggle } = controls
 
 const handleArrowKeys = (modal, setModal) => event => {
   if (event.key === `ArrowRight`) setModal(modal + 1)
   else if (event.key === `ArrowLeft`) setModal(modal - 1)
 }
 
-const Modal = ({
-  open,
-  modal,
-  setModal,
-  children,
-  navigation,
-  className,
-  white,
-}) => {
+export default function Modal({ open, modal, setModal, children, ...rest }) {
   if (open) {
+    const { showControls = true, className, whiteControls } = rest
+    const [fullscreen, setFullscreen] = useState(rest.fullScreenDefault)
     useEffect(() => {
       document.body.style.overflowY = `hidden`
       const handler = handleArrowKeys(modal, setModal)
@@ -28,19 +25,25 @@ const Modal = ({
       }
     })
     return (
-      // passing setModal to onClick without arguments will close the modal when triggered
+      // calling setModal without arguments will close the modal
       <ModalBackground open={open} onClick={setModal}>
         <ModalContainer
           onClick={event => event.stopPropagation()}
-          className={className}
+          {...{ className, fullscreen }}
         >
-          <Close onClick={setModal} white={white} />
-          {navigation && (
-            <>
-              <Next onClick={() => setModal(modal + 1)} white={white} />
-              <Prev onClick={() => setModal(modal - 1)} white={white} />
-            </>
-          )}
+          <ThemeProvider theme={{ whiteControls }}>
+            {showControls && (
+              <>
+                <Close onClick={setModal} />
+                <FullscreenToggle
+                  onClick={() => setFullscreen(!fullscreen)}
+                  {...{ fullscreen }}
+                />
+                <Next onClick={() => setModal(modal + 1)} />
+                <Prev onClick={() => setModal(modal - 1)} />
+              </>
+            )}
+          </ThemeProvider>
           {children}
         </ModalContainer>
       </ModalBackground>
@@ -51,8 +54,6 @@ const Modal = ({
     return null
   }
 }
-
-export default Modal
 
 Modal.propTypes = {
   setModal: PropTypes.func.isRequired,
