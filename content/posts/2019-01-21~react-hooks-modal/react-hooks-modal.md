@@ -9,9 +9,9 @@ tags:
   - Tutorial
 ---
 
-What to do on a cold January weekend with bad weather? Why not check out the new [React alpha (16.8)](https://reactjs.org/blog/2018/11/27/react-16-roadmap.html#react-16x-q1-2019-the-one-with-hooks). **The one with Hooks** as it's come to be called.
+What to do on a cold and wet January weekend? Why not check out the new [React alpha (16.8)](https://reactjs.org/blog/2018/11/27/react-16-roadmap.html#react-16x-q1-2019-the-one-with-hooks). **The one with Hooks** as it's come to be called.
 
-All it took was a little skimming through [the docs](https://reactjs.org/docs/hooks-intro.html), followed by updating to `react@next` and `react-dom@next`
+All it took was a little skimming through [the docs](https://reactjs.org/docs/hooks-intro.html), followed by updating `react` and `react-dom`.
 
 ```sh
 yarn add react@next react-dom@next
@@ -79,7 +79,9 @@ export const Close = styled(Cross).attrs({ size: `2em` })`
 `
 ```
 
-As you can see, the styles are longer than the component itself. That's what took most of the time too. Figuring out how to use React hooks took mere minutes. Props to the React team (pun intended) for the excellent onboarding experience! Anyways, regarding usage, notice that the modal component doesn't actually handle it's own state. That's done by the parent component. As an example here's a [list of photos](/nature) that when clicked enter a higher-resolution modal view.
+As you can see, the styles are longer than the component itself. That's where I spent most of my time too. Figuring out how to use React hooks took mere minutes. Props to the React team (pun intended) for the excellent onboarding experience!
+
+Anyways, regarding usage, notice that the modal component doesn't actually handle it's own state. That's done by the parent component. As an example here's a [list of photos](/nature) that when clicked enter a higher-resolution modal view.
 
 ```jsx{1,9,15,19}
 import React, { useState, Fragment } from 'react'
@@ -161,11 +163,11 @@ const mapStateToProps = (state, { name }) => {
 export default connect(mapStateToProps)(Modal)
 ```
 
-Admittedly this component is bloated even further by using Redux but even without it, it's less readable and less maintainable. So it's definitely a massive win for React Hooks!
+Admittedly this component is bloated further by using Redux but even without it, it's much harder to read and maintain. I'd call this use case a definite win for React Hooks!
 
 ## Semantic HTML
 
-One thing I should mention for future readers who want to use this `Modal` component: Once Chrome's new [`<dialog>` tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) gets wider [browser support](https://caniuse.com/#feat=dialog), it would certainly improve semantics to use it for the modal container, i.e.
+One thing I should mention for future readers who want to use this `Modal` component: Once Chrome's new [`<dialog>` tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) gets better [browser support](https://caniuse.com/#feat=dialog), it would improve semantics to use it for the modal container, i.e.
 
 ```js
 - export const ModalContainer = styled.div`
@@ -195,7 +197,7 @@ const handleClickOutside = (node, closeModal) => event => {
   if (node && !node.contains(event.target)) closeModal()
 }
 
-const Modal = ({ open, closeModal, children }) => {
+export default function Modal({ open, closeModal, children }) {
   const ref = useRef()
   useEffect(() => {
     const handler = handleClickOutside(ref.current, closeModal)
@@ -209,15 +211,13 @@ const Modal = ({ open, closeModal, children }) => {
     </ModalContainer>
   )
 }
-
-export default Modal
 ```
 
 ## Keyboard controls
 
 If you have a list of modals and you'd like users to be able to go to the next or previous modal using the arrow keys, you can add an event listener with the `useEffect` hook for this as well.
 
-```jsx{5-8,12-16,25-30}:title=src/components/model/index.js
+```jsx{5-8,12-16,25-30}:title=src/components/modal/index.js
 import React, { useEffect } from 'react'
 
 import { ModalBackground, ModalContainer, Close, Next, Prev } from './styles'
@@ -258,9 +258,9 @@ const Modal = ({ open, modal, setModal, children, navigation, className }) => {
 export default Modal
 ```
 
-The new styled components `Next` and `Prev` share most of their CSS with `Close` so it makes sense to reuse that with `styled-components` `css` API:
+The new styled components `Next` and `Prev` share most of their CSS with `Close` so it makes sense to reuse that:
 
-```js:title=src/components/model/styles.js
+```js:title=src/components/modal/styles.js
 import styled, { css } from 'styled-components'
 
 import { Close as Cross } from 'styled-icons/material/Close'
