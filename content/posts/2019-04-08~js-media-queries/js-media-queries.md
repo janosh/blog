@@ -4,7 +4,8 @@ subtitle: And how to hook into them
 slug: /js-media-queries
 date: 2019-04-08
 cover:
-  img: matchMedia.svg
+  img: responsive.svg
+  thumbnail: matchMedia.svg
 tags:
   - WebDev
   - Tutorial
