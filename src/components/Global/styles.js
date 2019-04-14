@@ -1,8 +1,8 @@
-import { createGlobalStyle } from "styled-components"
-import "katex/dist/katex.min.css"
+import { createGlobalStyle } from 'styled-components'
+import 'katex/dist/katex.min.css'
 
-import mediaQuery from "../../utils/mediaQuery"
-import typography from "../../utils/typography"
+import mediaQuery from '../../utils/mediaQuery'
+import typography from '../../utils/typography'
 
 const { phone, desktop } = mediaQuery.screens
 const {
@@ -67,7 +67,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   .button {
     background: ${props => props.theme.blue};
-    color: ${props => props.theme.white} !important;
+    color: white !important;
     border-radius: ${props => props.theme.smallBorderRadius};
     padding: 0.3em 0.6em;
     transition: ${props => props.theme.shortTrans};
