@@ -20,9 +20,6 @@ const theme = {
   lightGray: `#ebebeb`,
   veryLightGray: `#f7f7f7`,
 
-  white: `white`,
-  black: `black`,
-
   maxWidth: `40em`,
 
   smallBorder: `0.1em`,

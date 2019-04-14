@@ -20,7 +20,7 @@ export const Dot = styled.div`
   background: rgba(0, 0, 0, 0.5);
   background: ${props => props.active && props.theme.lightGreen};
   transition: ${props => props.theme.mediumTrans};
-  border: 1px solid ${props => props.theme.white};
+  border: 1px solid white;
   :hover {
     color: ${props => props.theme.lightBlue};
     background: ${props => props.theme.darkBlue};
