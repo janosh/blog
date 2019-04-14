@@ -30,14 +30,14 @@ export const ModalDiv = styled.div`
   box-sizing: border-box;
   align-self: center;
   justify-self: center;
-  background: ${props => props.theme.white};
+  background: white;
   height: 80vh;
   width: 80vw;
   position: relative;
   overflow: scroll;
   border-radius: ${props => props.theme.mediumBorderRadius};
   transition: ${props => props.theme.shortTrans};
-  box-shadow: 0 0 3em ${props => props.theme.black};
+  box-shadow: 0 0 3em black;
   margin: calc(0.5em + 2vw);
   ${props => props.fullscreen && fullscreen}
 `
