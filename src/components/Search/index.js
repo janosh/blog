@@ -1,18 +1,15 @@
-import React, { Component, createRef } from "react"
+import React, { useState, useEffect, createRef } from 'react'
 import {
   InstantSearch,
   Index,
   Hits,
   connectStateResults,
-} from "react-instantsearch-dom"
-import algoliasearch from "algoliasearch/lite"
-import { Algolia } from "styled-icons/fa-brands/Algolia"
+} from 'react-instantsearch-dom'
+import algoliasearch from 'algoliasearch/lite'
 
-import { Root, HitsWrapper, By } from "./styles"
-import Input from "./Input"
-import * as hitComps from "./hits"
-
-const events = [`mousedown`, `touchstart`]
+import { Root, HitsWrapper, PoweredBy } from './styles'
+import Input from './Input'
+import * as hitComps from './hits'
 
 const Results = connectStateResults(
   ({ searchState: state, searchResults: res, children }) =>
@@ -24,75 +21,50 @@ const Stats = connectStateResults(
     res && res.nbHits > 0 && `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`
 )
 
-export default class Search extends Component {
-  state = { query: ``, focussed: false, ref: createRef() }
-  searchClient = algoliasearch(
+export default function Search({ indices, collapse, hitsAsGrid }) {
+  const ref = createRef()
+  const [query, setQuery] = useState(``)
+  const [focus, setFocus] = useState(false)
+  const searchClient = algoliasearch(
     process.env.GATSBY_ALGOLIA_APP_ID,
     process.env.GATSBY_ALGOLIA_SEARCH_KEY
   )
 
-  updateState = state => this.setState(state)
+  const handleClickOutside = event =>
+    !ref.current.contains(event.target) && setFocus(false)
 
-  focus = () => {
-    this.setState({ focussed: true })
-  }
-
-  disableHits = () => {
-    this.setState({ focussed: false })
-  }
-
-  handleClickOutside = event => {
-    if (!this.state.ref.current.contains(event.target)) {
-      this.setState({ focussed: false })
-    }
-  }
-
-  componentDidMount() {
-    events.forEach(event =>
-      document.addEventListener(event, this.handleClickOutside)
+  useEffect(() => {
+    [`mousedown`, `touchstart`].forEach(event =>
+      document.addEventListener(event, handleClickOutside)
     )
-  }
+    return () =>
+      [`mousedown`, `touchstart`].forEach(event =>
+        document.removeEventListener(event, handleClickOutside)
+      )
+  })
 
-  componentWillUnmount() {
-    events.forEach(event =>
-      document.removeEventListener(event, this.handleClickOutside)
-    )
-  }
-
-  render() {
-    const { query, focussed, ref } = this.state
-    const { indices, collapse, hitsAsGrid } = this.props
-    return (
-      <InstantSearch
-        searchClient={this.searchClient}
-        indexName={indices[0].name}
-        onSearchStateChange={this.updateState}
-        root={{ Root, props: { ref } }}
-      >
-        <Input onFocus={this.focus} {...{ collapse, focussed }} />
-        <HitsWrapper
-          show={query.length > 0 && focussed}
-          hitsAsGrid={hitsAsGrid}
-        >
-          {indices.map(({ name, title, hitComp }) => (
-            <Index key={name} indexName={name}>
-              <header>
-                <h3>{title}</h3>
-                <Stats />
-              </header>
-              <Results>
-                <Hits hitComponent={hitComps[hitComp](this.disableHits)} />
-              </Results>
-            </Index>
-          ))}
-          <By>
-            Powered by{` `}
-            <a href="https://www.algolia.com">
-              <Algolia size="1em" /> Algolia
-            </a>
-          </By>
-        </HitsWrapper>
-      </InstantSearch>
-    )
-  }
+  return (
+    <InstantSearch
+      searchClient={searchClient}
+      indexName={indices[0].name}
+      onSearchStateChange={({ query }) => setQuery(query)}
+      root={{ Root, props: { ref } }}
+    >
+      <Input onFocus={() => setFocus(true)} {...{ collapse, focus }} />
+      <HitsWrapper show={query.length > 0 && focus} asGrid={hitsAsGrid}>
+        {indices.map(({ name, title, hitComp }) => (
+          <Index key={name} indexName={name}>
+            <header>
+              <h3>{title}</h3>
+              <Stats />
+            </header>
+            <Results>
+              <Hits hitComponent={hitComps[hitComp](() => setFocus(false))} />
+            </Results>
+          </Index>
+        ))}
+        <PoweredBy />
+      </HitsWrapper>
+    </InstantSearch>
+  )
 }
