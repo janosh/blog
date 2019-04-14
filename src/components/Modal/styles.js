@@ -1,9 +1,9 @@
-import styled, { css } from "styled-components"
-import { Close as Cross } from "styled-icons/material/Close"
-import { NavigateNext } from "styled-icons/material/NavigateNext"
-import { NavigateBefore } from "styled-icons/material/NavigateBefore"
-import { Fullscreen } from "styled-icons/boxicons-regular/Fullscreen"
-import { ExitFullscreen } from "styled-icons/boxicons-regular/ExitFullscreen"
+import styled, { css } from 'styled-components'
+import { Close as Cross } from 'styled-icons/material/Close'
+import { NavigateNext } from 'styled-icons/material/NavigateNext'
+import { NavigateBefore } from 'styled-icons/material/NavigateBefore'
+import { Fullscreen } from 'styled-icons/boxicons-regular/Fullscreen'
+import { ExitFullscreen } from 'styled-icons/boxicons-regular/ExitFullscreen'
 
 export const ModalBackground = styled.div`
   position: fixed;
@@ -30,14 +30,14 @@ export const ModalContainer = styled.div`
   box-sizing: border-box;
   align-self: center;
   justify-self: center;
-  background: ${props => props.theme.white};
+  background: white;
   height: 80vh;
   width: 80vw;
   position: relative;
   overflow: scroll;
   border-radius: ${props => props.theme.mediumBorderRadius};
   transition: ${props => props.theme.shortTrans};
-  box-shadow: 0 0 3em ${props => props.theme.black};
+  box-shadow: 0 0 3em black;
   margin: calc(0.5em + 2vw);
   ${props => props.fullscreen && fullscreen}
 `
