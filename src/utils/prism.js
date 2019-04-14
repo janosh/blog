@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from 'styled-components'
 
 const langExtColor = [
   { lang: `javascript`, tag: `js`, color: `#f7df1e` },
@@ -107,7 +107,7 @@ export default createGlobalStyle`
   :not(pre) > code[class*='language-'] {
     border-radius: 0.2em;
     background: ${props => props.theme.lightGray};
-    color: ${props => props.theme.black};
+    color: black;
     padding: 0.15em 0.2em 0.05em;
   }
 

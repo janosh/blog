@@ -1,6 +1,6 @@
-import styled from "styled-components"
-import { ArrowDownCircle as Down } from "styled-icons/feather/ArrowDownCircle"
-import { ArrowUpCircle as Up } from "styled-icons/feather/ArrowUpCircle"
+import styled from 'styled-components'
+import { ArrowDownCircle as Down } from 'styled-icons/feather/ArrowDownCircle'
+import { ArrowUpCircle as Up } from 'styled-icons/feather/ArrowUpCircle'
 
 export const Arrow = styled(Down).attrs(({ direction, size }) => ({
   as: direction === `up` && Up,
@@ -9,7 +9,7 @@ export const Arrow = styled(Down).attrs(({ direction, size }) => ({
   ${({ theme, show, size }) => `
   z-index: 2;
   background: ${theme.lightGreen};
-  color: ${theme.white};
+  color: white;
   border-radius: 50%;
   transition: ${theme.shortTrans};
   position: absolute;
