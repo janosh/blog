@@ -1,7 +1,7 @@
 import React from "react"
 import { connectSearchBox } from "react-instantsearch-dom"
 
-import { Loupe, Form, Input } from "./styles"
+import { SearchIcon, Form, Input } from "./styles"
 
 export default connectSearchBox(({ refine, ...rest }) => (
   <Form>
@@ -12,6 +12,6 @@ export default connectSearchBox(({ refine, ...rest }) => (
       onChange={e => refine(e.target.value)}
       {...rest}
     />
-    <Loupe />
+    <SearchIcon />
   </Form>
 ))
