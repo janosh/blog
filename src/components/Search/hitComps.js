@@ -4,7 +4,18 @@ import { Link } from "gatsby"
 import { Calendar } from "styled-icons/octicons/Calendar"
 import { Tags } from "styled-icons/fa-solid/Tags"
 
-const PostHit = clickHandler => ({ hit }) => (
+export const PageHit = clickHandler => ({ hit }) => (
+  <div>
+    <Link to={hit.slug} onClick={clickHandler}>
+      <h4>
+        <Highlight attribute="title" hit={hit} tagName="mark" />
+      </h4>
+    </Link>
+    <Snippet attribute="excerpt" hit={hit} tagName="mark" />
+  </div>
+)
+
+export const PostHit = clickHandler => ({ hit }) => (
   <div>
     <Link to={`/blog` + hit.slug} onClick={clickHandler}>
       <h4>
@@ -20,7 +31,7 @@ const PostHit = clickHandler => ({ hit }) => (
       &nbsp;
       {hit.tags.map((tag, index) => (
         <Fragment key={tag}>
-          {!!index && `, `}
+          {index > 0 && `, `}
           {tag}
         </Fragment>
       ))}
@@ -28,5 +39,3 @@ const PostHit = clickHandler => ({ hit }) => (
     <Snippet attribute="excerpt" hit={hit} tagName="mark" />
   </div>
 )
-
-export default PostHit
