@@ -1,9 +1,9 @@
-import React, { useState } from "react"
-import PropTypes from "prop-types"
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
-import { TagGrid, Toggle, Tag, TagsIcon, tagIcons } from "./styles"
+import { TagGrid, Toggle, Tag, TagsIcon, tagIcons } from './styles'
 
-const TagList = ({ tags, activeTag, setTag }) => {
+export default function TagList({ tags, activeTag, setTag }) {
   const [open, setOpen] = useState(false)
   return (
     <TagGrid open={open}>
@@ -29,8 +29,6 @@ const TagList = ({ tags, activeTag, setTag }) => {
     </TagGrid>
   )
 }
-
-export default TagList
 
 TagList.propTypes = {
   activeTag: PropTypes.string.isRequired,
