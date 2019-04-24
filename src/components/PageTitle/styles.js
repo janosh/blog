@@ -25,6 +25,8 @@ export const Title = styled.div`
   font-size: calc(1em + 0.5vw);
   margin: 1em;
   ${props => props.backdrop && backdrop};
+  display: grid;
+  justify-content: center;
 `
 
 export const Img = styled(Image).attrs(
