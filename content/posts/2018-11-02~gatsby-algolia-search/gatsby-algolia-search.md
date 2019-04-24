@@ -7,6 +7,7 @@ cover:
 tags:
   - WebDev
   - Tutorial
+  - JS
 ---
 
 This post is a guide on how to write a React component that implements custom search powered by [Algolia](https://www.algolia.com) on a [Gatsby](https://gatsbyjs.org) site. You can see the result in action by clicking on the search icon in the top right of this page. The complete code is on [GitHub](https://github.com/janosh/janosh.io/tree/master/src/components/Search). Also, check out Algolia's own CodeSandbox on how to use their [React Instantsearch](https://codesandbox.io/s/github/algolia/create-instantsearch-app/tree/templates/react-instantsearch) library.
@@ -252,7 +253,7 @@ import Input from './Input'
 The last thing we need for the `Search` component to work are hit components for every type of result we want to display to the user. The hit component determines how attributes of matching results (such as author, date, tags and title in the case of a blog post) are displayed to the user.
 
 ```js
-import * as hitComps from './hits'
+import * as hitComps from './hitComps'
 ```
 
 Next we define two connected components. `Results` informs the user that no matches could be found for a query unless the number of hits is positive, i.e. `searchResults.nbHits > 0`. `Stats` just displays `searchResults.nbHits`.
