@@ -1,20 +1,22 @@
-import styled from "styled-components"
-export { Tags as TagsIcon } from "styled-icons/fa-solid/Tags"
-import { ToggleOff } from "styled-icons/fa-solid/ToggleOff"
-import { ToggleOn } from "styled-icons/fa-solid/ToggleOn"
-import { Grid } from "styled-icons/boxicons-regular/Grid"
-import { Web } from "styled-icons/material/Web"
-import { ChalkboardTeacher } from "styled-icons/fa-solid/ChalkboardTeacher"
-import { Python } from "styled-icons/fa-brands/Python"
-import { Database } from "styled-icons/fa-solid/Database"
-import { WeatherSunny } from "styled-icons/typicons/WeatherSunny"
-import { Lab } from "styled-icons/icomoon/Lab"
-import { Atom } from "styled-icons/fa-solid/Atom"
-import { ColorLens } from "styled-icons/material/ColorLens"
-import { Cpu } from "styled-icons/feather/Cpu"
-import { Robot } from "styled-icons/fa-solid/Robot"
+import styled from 'styled-components'
+export { Tags as TagsIcon } from 'styled-icons/fa-solid/Tags'
+import { ToggleOff } from 'styled-icons/fa-solid/ToggleOff'
+import { ToggleOn } from 'styled-icons/fa-solid/ToggleOn'
+import { Grid } from 'styled-icons/boxicons-regular/Grid'
+import { Web } from 'styled-icons/material/Web'
+import { ChalkboardTeacher } from 'styled-icons/fa-solid/ChalkboardTeacher'
+import { Python } from 'styled-icons/fa-brands/Python'
+import { Database } from 'styled-icons/fa-solid/Database'
+import { WeatherSunny } from 'styled-icons/typicons/WeatherSunny'
+import { Lab } from 'styled-icons/icomoon/Lab'
+import { Atom } from 'styled-icons/fa-solid/Atom'
+import { ColorLens } from 'styled-icons/material/ColorLens'
+import { Cpu } from 'styled-icons/feather/Cpu'
+import { Robot } from 'styled-icons/fa-solid/Robot'
+import { JsSquare } from 'styled-icons/fa-brands/JsSquare'
+import { Brain } from 'styled-icons/fa-solid/Brain'
 
-import mediaQuery from "../../utils/mediaQuery"
+import mediaQuery from '../../utils/mediaQuery'
 
 export const TagGrid = styled.aside`
   display: grid;
@@ -73,12 +75,14 @@ export const tagIcons = {
   All: Grid,
   WebDev: Web,
   Tutorial: ChalkboardTeacher,
-  "Machine Learning": Python,
-  "Data Science": Database,
+  'Machine Learning': Brain,
+  'Data Science': Database,
   Sustainability: WeatherSunny,
   Science: Lab,
   Physics: Atom,
   Design: ColorLens,
   Technology: Cpu,
   Future: Robot,
+  JS: JsSquare,
+  Python,
 }
