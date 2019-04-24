@@ -9,6 +9,7 @@ cover:
 tags:
   - WebDev
   - Tutorial
+  - JS
 ---
 
 > Note: This post assumes you're using React (16.8 or later).
