@@ -1,10 +1,10 @@
-import React, { useState } from "react"
-import { graphql } from "gatsby"
+import React, { useState } from 'react'
+import { graphql } from 'gatsby'
 
-import Global from "../components/Global"
-import PageTitle from "../components/PageTitle"
-import { PageBody, ButtonGroup } from "../components/styles"
-import Photos from "../views/Photos"
+import Global from '../components/Global'
+import PageTitle from '../components/PageTitle'
+import { PageBody, ButtonGroup } from '../components/styles'
+import Photos from '../views/Photos'
 
 const NaturePage = ({ data, location }) => {
   const [modal, setModal] = useState()
@@ -51,7 +51,7 @@ export const query = graphql`
             }
           }
           img: childImageSharp {
-            fluid(maxWidth: 1800) {
+            fluid(maxWidth: 2000) {
               ...GatsbyImageSharpFluid_withWebp
             }
           }
