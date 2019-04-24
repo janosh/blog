@@ -8,7 +8,7 @@ cover:
   url: https://towardsdatascience.com/shallow-understanding-on-bayesian-optimization-324b6c1f7083
 tags:
   - Machine Learning
-  - Data Science
+  - Python
   - Tutorial
 ---
 

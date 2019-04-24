@@ -7,6 +7,7 @@ cover:
 tags:
   - WebDev
   - Tutorial
+  - JS
 ---
 
 Kyle Mathews who created Gatsby [started a dicussion](https://github.com/gatsbyjs/gatsby/issues/25) about how to exclude files during the build process for the production version of a site. You might want to do this if you have some blog posts lying around that are in a draft state and not ready for primetime yet. The question was asked way back in Sep 2015 but hasn't resulted in a canonical solution, unfortunately.

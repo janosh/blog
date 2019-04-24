@@ -7,6 +7,7 @@ cover:
 tags:
   - WebDev
   - Tutorial
+  - JS
 ---
 
 Had to share this one since it's so nice and simple. If you're looking for a drop-in, zero-dependency Google Maps React component, look no further. Here it is:

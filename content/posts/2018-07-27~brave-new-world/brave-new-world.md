@@ -6,6 +6,7 @@ cover:
   img: gatsby+styled-components.svg
 tags:
   - WebDev
+  - JS
 ---
 
 Welcome to my _new_ blog! Gone is my former WordPress site at janosh-riebesell.com. This is the first post on a new site I created myself. It's JavaScript from head to heel using the amazing site generator [Gatsby](https://www.gatsbyjs.org) and [`styled-components`](https://www.styled-components.com) for the design and layout. The latter relies heavily on the awesome CSS grid, by the way.
