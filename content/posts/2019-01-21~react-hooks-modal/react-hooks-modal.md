@@ -7,6 +7,7 @@ cover:
 tags:
   - WebDev
   - Tutorial
+  - JS
 ---
 
 What to do on a cold and wet January weekend? Why not check out the new [React alpha (16.8)](https://reactjs.org/blog/2018/11/27/react-16-roadmap.html#react-16x-q1-2019-the-one-with-hooks). **The one with Hooks** as it's come to be called.
