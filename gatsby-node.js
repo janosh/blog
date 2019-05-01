@@ -64,19 +64,17 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
 exports.onCreateNode = ({ node, actions }) => {
   if (node.dir && node.dir.includes(`content/photos`) && node.ext === `.jpg`) {
-    fs.readFile(node.absolutePath, (err, data) => {
-      if (err) throw err
-      const tags = ExifReader.load(data.buffer)
-      const meta = {
-        lat: tags.GPSLatitude.description,
-        lng: tags.GPSLongitude.description,
-        caption: tags.Headline.description,
-      }
-      actions.createNodeField({
-        node,
-        name: `meta`,
-        value: meta,
-      })
+    const buffer = fs.readFileSync(node.absolutePath)
+    const tags = ExifReader.load(buffer)
+    const meta = {
+      lat: tags.GPSLatitude.description,
+      lng: tags.GPSLongitude.description,
+      caption: tags.Headline.description,
+    }
+    actions.createNodeField({
+      node,
+      name: `meta`,
+      value: meta,
     })
   }
 }
