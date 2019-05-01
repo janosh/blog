@@ -80,14 +80,19 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   /* center image captions */
-  .gatsby-resp-image-wrapper + em {
+  .gatsby-resp-image-wrapper + em, img + em {
     margin-top: 0.3em;
     display: block;
     text-align: center;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.95em;
   }
   /* prevent wide equations from breaking layout */
   .katex-display {
     overflow-x: scroll;
+    overflow-y: hidden;
   }
   blockquote {
     border-left: 0.25em solid ${props => props.theme.lightBlue};
