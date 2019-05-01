@@ -125,5 +125,3 @@ const PostList = ({ posts }) => (
 
 export default PostList
 ```
-
-You can see the result in the wild [here](https://ocean-artup.eu/blog) and [here](https://studenten-bilden-schueler.de/blog).
