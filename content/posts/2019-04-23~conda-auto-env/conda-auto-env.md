@@ -29,7 +29,7 @@ Assuming that's how you ended up reading this post, let me suggest the following
 
 precmd() {
   FILE="$(find -E . -maxdepth 1 -regex '.*(env(ironment)?|requirements)\.ya?ml' -print -quit)"
-  if [ -e $FILE ]; then
+  if [[ -e $FILE ]]; then
     ENV=$(sed -n 's/name: //p' $FILE)
     # check if env already active
     if [[ $CONDA_DEFAULT_ENV != $ENV ]]; then
