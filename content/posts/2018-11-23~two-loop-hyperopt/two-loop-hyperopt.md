@@ -20,19 +20,19 @@ I recently started using [Scikit-Optimize](https://scikit-optimize.github.io/) (
 - the dropout rates for the Monte Carlo dropout layers preceding every dense layer $R_\text{d} = \{r_{\text{d},i}\}_{i=1}^{n_L}$
 - the activation functions $A = \{a_i\}_{i=1}^{n_L}$ for each layer
 
-Right there I had a use case that `skopt` doesn't appear to cover - at least not out of the box. The difficulty is that the last three items in the list depend on the value of the first one. That's an ill-posed optimization problem. We'd be trying to minimize a loss function $L_\theta$ -- in this case the mean squared error over the validation set -- parametrized by the vector $\vec\theta = (n_L, r_l, N_\text{n}, R_\text{d}, A)$ over a parameter space $\mathcal{S}$ which depends itself on the current parameters $\vec\theta$, i.e.
+Right there I had a use case that `skopt` doesn't appear to cover - at least not out of the box. The difficulty is that the last three items in the list depend on the value of the first one. That's an ill-posed optimization problem. We'd be trying to minimize a loss function $L_\theta$ -- in this case the mean squared error over the validation set -- parametrized by the vector $\vec\theta = (n_L, r_l, N_\text{n}, R_\text{d}, A)$ over a parameter space $\Scal$ which depends itself on the current parameters $\vec\theta$, i.e.
 
 $$
-\vec\theta_\text{min} = \argmin_{\vec\theta \in \mathcal{S}(\vec\theta)} \; L(\vec\theta).
+\vec\theta_\text{min} = \argmin_{\vec\theta \in \Scal(\vec\theta)} \; L(\vec\theta).
 $$
 
 But of course the search space can't change while we're searching it! Luckily, there's a simple fix. We just split the problem into two separate minimizations by pulling everything that doesn't depend on the number of layers $n_L$ into an outer loop. Hence, two-loop hyperoptimization. This yields
 
 $$
-\vec\theta_\text{min} = \argmin_{\vec\theta_1 \in \mathcal{S}_1} \; \argmin_{\vec\theta_2 \in \mathcal{S}_2(\vec\theta_1)} \; L(\vec\theta_1, \vec\theta_2),
+\vec\theta_\text{min} = \argmin_{\vec\theta_1 \in \Scal_1} \; \argmin_{\vec\theta_2 \in \Scal_2(\vec\theta_1)} \; L(\vec\theta_1, \vec\theta_2),
 $$
 
-where $\vec\theta = (\vec\theta_1,\vec\theta_2)$ with $\vec\theta_1 = (n_L, r_l)$ and $\vec\theta_{2,i} = (N_\text{n}, R_\text{d}, A)$. The full search space is then given by $\mathcal{S} = \mathcal{S}_1 \cup \bigcup_{\vec\theta_1 \in \mathcal{S}_1} \mathcal{S}_2(\vec\theta_1)$.
+where $\vec\theta = (\vec\theta_1,\vec\theta_2)$ with $\vec\theta_1 = (n_L, r_l)$ and $\vec\theta_{2,i} = (N_\text{n}, R_\text{d}, A)$. The full search space is then given by $\Scal = \Scal_1 \cup \bigcup_{\vec\theta_1 \in \Scal_1} \Scal_2(\vec\theta_1)$.
 
 Implemented in Python it doesn't look quite as pretty any more. To some degree that is because `skopt` insists on calling its objective function with a single argument, namely a list of the current set of hyperparameters. That means bringing in any additional arguments as required in this case to access the current parameters of the outer loop inside the inner one requires some workaround. The best I could come up with is some slightly verbose currying. See for yourself:
 
