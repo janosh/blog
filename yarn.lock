@@ -5311,6 +5311,17 @@ gatsby-react-router-scroll@^2.0.7:
     scroll-behavior "^0.9.9"
     warning "^3.0.0"
 
+gatsby-remark-autolink-headers@^2.0.16:
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-autolink-headers/-/gatsby-remark-autolink-headers-2.0.16.tgz#90060b04eab9788f63cfeab9559f88ff0bab4474"
+  integrity sha512-8y79jScAcPk8eZqCFTtrDsDy0c9VAy/jYPgfW4w+bvD4iOf/39RGT3RVlRiM9S8223sQkil/TA9xwYkTHjeGTQ==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    github-slugger "^1.1.1"
+    lodash "^4.17.11"
+    mdast-util-to-string "^1.0.2"
+    unist-util-visit "^1.3.0"
+
 gatsby-remark-code-titles@^1.1.0-rc.0:
   version "1.1.0-rc.0"
   resolved "https://registry.yarnpkg.com/gatsby-remark-code-titles/-/gatsby-remark-code-titles-1.1.0-rc.0.tgz#8992211d9799edae21f597aa3dcf28a97d882654"
@@ -5401,6 +5412,13 @@ gatsby-remark-smartypants@2.0.9:
     retext "^5.0.0"
     retext-smartypants "^3.0.0"
     unist-util-visit "^1.3.0"
+
+gatsby-remark-sub-sup@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-sub-sup/-/gatsby-remark-sub-sup-1.0.0.tgz#18fddeb5dde62c939e06c6cd2f107ba4f60a1499"
+  integrity sha1-GP3etd3mLJOeBsbNLxB7pPYKFJk=
+  dependencies:
+    remark-sub-super "^1.0.11"
 
 gatsby-source-filesystem@2.0.29:
   version "2.0.29"
@@ -10391,6 +10409,11 @@ remark-stringify@^5.0.0:
     stringify-entities "^1.0.1"
     unherit "^1.0.4"
     xtend "^4.0.1"
+
+remark-sub-super@^1.0.11:
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/remark-sub-super/-/remark-sub-super-1.0.18.tgz#2def11755c8214cdb8768cdd811340716ed5d4ae"
+  integrity sha512-5O9FImn3zSy8zfO6a1GAAz13h8bAj+GKgOJ2bSrDsTpDcUbMk0NSIeT9pyTzVxRC/cTi4nnUly7C0bhDl5ROGw==
 
 remark@^9.0.0:
   version "9.0.0"
