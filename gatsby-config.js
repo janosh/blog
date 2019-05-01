@@ -6,7 +6,7 @@ require(`dotenv`).config()
 module.exports = {
   siteMetadata: {
     title: `janosh.io`,
-    description: `Personal blog and portfolio of Janosh Riebesell. Mostly physics, machine learning and web development.`,
+    description: `Physics, machine learning, sustainability and web development.`,
     author: `Janosh Riebesell`,
     siteUrl: `https://janosh.io`,
   },
@@ -22,7 +22,16 @@ module.exports = {
           `gatsby-remark-responsive-iframe`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-code-titles`,
-          `gatsby-remark-prismjs`,
+          `gatsby-remark-sub-sup`,
+          `gatsby-remark-autolink-headers`,
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              aliases: { sh: `shell`, bash: `shell`, env: `text` },
+              showLineNumbers: false,
+              inlineCodeMarker: `›`,
+            },
+          },
           {
             resolve: `gatsby-remark-katex`,
             options: { macros },
@@ -50,7 +59,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content`,
-        ignore: process.env.NODE_ENV === `production` && [`posts/drafts`],
+        ignore: process.env.NODE_ENV === `production` && [`**/posts/drafts`],
       },
     },
     `gatsby-transformer-yaml`,
