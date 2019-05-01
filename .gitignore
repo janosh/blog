@@ -8,9 +8,12 @@ yarn-error.log*
 # Dependency directories
 node_modules
 
-# Gatsby
+# builds
 .cache
 public
+
+# local config
+.netlify
 
 # environment variables
 .env*
