@@ -1,5 +1,5 @@
 const macros = {
-  '\\dif': `\\mathrm d`,
+  '\\dif': `\\operatorname d`,
   '\\vec': `{\\boldsymbol{#1}}`,
   '\\mat': `{\\boldsymbol{#1}}`,
   '\\reals': `{\\mathbb{R}}`,
@@ -7,10 +7,11 @@ const macros = {
   '\\ints': `{\\mathbb{Z}}`,
   '\\expec': `\\mathbb{E}`,
   '\\varexpec': `\\langle #1\\rangle`,
+  '\\var': `\\operatorname{var}`,
 }
 
-for (let i = `A`.charCodeAt(); i <= `Z`.charCodeAt(); i++) {
-  const letter = String.fromCharCode(i)
+for (let index = `A`.charCodeAt(); index <= `Z`.charCodeAt(); index++) {
+  const letter = String.fromCharCode(index)
   macros[`\\${letter}cal`] = `\\mathcal{${letter}}`
   macros[`\\${letter}bb`] = `\\mathbb{${letter}}`
 }
