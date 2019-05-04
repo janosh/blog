@@ -15,7 +15,7 @@ If you're like me, you'll have gotten tired pretty quickly of manually having to
 
 Assuming that's how you ended up reading this post, let me suggest the following solution that's served me well for several months now. It's a spin-off of [Christine Doig](https://github.com/chdoig)'s [`conda-auto-env`](https://github.com/chdoig/conda-auto-env).
 
-```shell:title=conda_auto_env
+```sh:title=conda_auto_env
 #!/bin/bash
 
 # automatically activates conda environments when entering directories
@@ -55,13 +55,13 @@ precmd() {
 
 To use this script, simply source it in your `.bashrc` or `.bashprofile`. For instance, say you have a `~/scripts` directory where you keep custom scripts like this one, to add this script to your path, you simply run
 
-```shell
+```sh
 ln -s "~/scripts/conda_auto_env" /usr/local/bin
 ```
 
 and then append the following line to your `.bashrc`.
 
-```shell:title=.bashrc
+```sh:title=.bashrc
 source conda_auto_env
 ```
 
