@@ -1,55 +1,59 @@
 - title: Algolia
   url: https://www.algolia.com
-  file: algolia
+  logo: logos/algolia.svg
 
 - title: CSS
   url: https://developer.mozilla.org/en-US/docs/Web/CSS
-  file: css
+  logo: logos/css.svg
 
 - title: Gatsby
   url: https://www.gatsbyjs.org
-  file: gatsby
+  logo: logos/gatsby.svg
 
 - title: GraphQL
   url: https://graphql.org
-  file: graphql
+  logo: logos/graphql.svg
 
 - title: HTML
   url: https://developer.mozilla.org/en-US/docs/Web/HTML
-  file: html
+  logo: logos/html.svg
 
 - title: JavaScript
   url: https://developer.mozilla.org/bm/docs/Web/JavaScript
-  file: js
+  logo: logos/js.svg
 
 - title: MongoDB
   url: https://www.mongodb.com
-  file: mongodb
+  logo: logos/mongodb.svg
 
 - title: Node.js
   url: https://nodejs.org/en
-  file: nodejs
+  logo: logos/nodejs.svg
 
 - title: React
   url: https://reactjs.org
-  file: react
+  logo: logos/react.svg
+
+- title: react-spring
+  url: https://react-spring.surge.sh
+  logo: logos/react-spring.svg
 
 - title: Redis
   url: https://redis.io
-  file: redis
+  logo: logos/redis.svg
 
 - title: Redux
   url: https://redux.js.org
-  file: redux
+  logo: logos/redux.svg
 
 - title: socket.io
   url: https://socket.io
-  file: socketio
+  logo: logos/socketio.svg
 
-- title: sty-comps
+- title: styled-comps
   url: https://www.styled-components.com
-  file: styled-components
+  logo: logos/styled-components.svg
 
 - title: Webpack
   url: https://webpack.js.org
-  file: webpack
+  logo: logos/webpack.svg

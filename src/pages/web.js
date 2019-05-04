@@ -1,13 +1,15 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React from 'react'
+import { graphql } from 'gatsby'
 
-import Global from "../components/Global"
-import PageTitle from "../components/PageTitle"
-import { PageBody, Grid } from "../components/styles"
-import Projects from "../views/Projects"
+import Global from '../components/Global'
+import PageTitle from '../components/PageTitle'
+import { PageBody, Grid } from '../components/styles'
+import Projects from '../views/Projects'
+
+const techLinkCss = `transition: 0.4s; :hover {transform: scale(1.05);}`
 
 const WebPage = ({ data, location }) => {
-  const { intro, projects, techLogos, techNames } = data
+  const { intro, projects, tech } = data
   const { title, cover } = intro.frontmatter
   return (
     <Global title={title} path={location.pathname}>
@@ -19,18 +21,11 @@ const WebPage = ({ data, location }) => {
         <h2>Recent Projects</h2>
         <Projects {...projects} />
         <h2>My Stack</h2>
-        <Grid minWidth="4.5em" align="center">
-          {techNames.edges.map(({ node }) => (
-            <a key={node.title} href={node.url}>
-              <span>{node.title}</span>
-              <img
-                src={
-                  techLogos.edges.find(
-                    ({ node: logo }) => logo.name === node.file
-                  ).node.src
-                }
-                alt={node.title}
-              />
+        <Grid minWidth="5em" align="center">
+          {tech.edges.map(({ node: { title, url, logo } }) => (
+            <a key={title} href={url} css={techLinkCss}>
+              <span css="font-size: 0.85em;">{title}</span>
+              <img src={logo.src} alt={title} />
             </a>
           ))}
         </Grid>
@@ -51,22 +46,14 @@ export const query = graphql`
       html
     }
     ...projects
-    techLogos: allFile(
-      filter: { relativeDirectory: { eq: "pages/web/techLogos" } }
-    ) {
-      edges {
-        node {
-          name
-          src: publicURL
-        }
-      }
-    }
-    techNames: allTechYaml {
+    tech: allTechYaml {
       edges {
         node {
           title
           url
-          file
+          logo {
+            src: publicURL
+          }
         }
       }
     }
