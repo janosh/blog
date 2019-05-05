@@ -24,14 +24,7 @@ module.exports = {
           `gatsby-remark-code-titles`,
           `gatsby-remark-sub-sup`,
           `gatsby-remark-autolink-headers`,
-          {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              aliases: { sh: `shell`, bash: `shell`, env: `text` },
-              showLineNumbers: false,
-              inlineCodeMarker: `›`,
-            },
-          },
+          `gatsby-remark-vscode`,
           {
             resolve: `gatsby-remark-katex`,
             options: { macros },
