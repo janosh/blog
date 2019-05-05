@@ -45,13 +45,13 @@ Here are the steps for adding Disqus comments to your own blog:
    ```
 
 3. Add the shortname from step 1 as something like `GATSBY_DISQUS_NAME` to your `.env` and `.env.example` files so that people forking your repo will know that they need to supply this value to get comments to work. (You need to prefix the environment variable with `GATSBY_` in order to [make it available to client side code](https://www.gatsbyjs.org/docs/environment-variables/#client-side-javascript).)
-   ```env
+   ```sh
    // .env.example
    ...
    # enables Disqus comments below blog posts
    GATSBY_DISQUS_NAME=insertValue
    ```
-   ```env
+   ```sh
    // .env
    ...
    GATSBY_DISQUS_NAME=yourOwnSiteShortname

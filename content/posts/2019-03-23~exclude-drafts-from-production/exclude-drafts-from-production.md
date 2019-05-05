@@ -34,7 +34,7 @@ An advantage to this approach is that it works with both files and folders. If y
 
 You can then also prevent those files from cluttering up your `git` tracker by adding this directory to your `.gitignore`.
 
-```text:title=.gitignore
+```sh:title=.gitignore
 # draft posts
 posts/drafts
 ```
