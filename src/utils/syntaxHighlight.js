@@ -1,0 +1,84 @@
+import { createGlobalStyle } from 'styled-components'
+
+const langTagColor = [
+  { lang: `javascript`, tag: `js`, color: `#f7df1e` },
+  { lang: `js`, tag: `js`, color: `#f7df1e` },
+  { lang: `jsx`, tag: `jsx`, color: `#61dafb` },
+  { lang: `env`, tag: `env`, color: `#ff89d3` },
+  { lang: `python`, tag: `py`, color: `#61da84` },
+  { lang: `py`, tag: `py`, color: `#61da84` },
+  { lang: `graphql`, tag: `graphql`, color: `#E10098` },
+  { lang: `gql`, tag: `graphql`, color: `#E10098` },
+  { lang: `html`, tag: `html`, color: `#005A9C` },
+  { lang: `css`, tag: `css`, color: `#ff9800` },
+  { lang: `shell`, tag: `shell`, color: `white` },
+  { lang: `sh`, tag: `sh`, color: `white` },
+  { lang: `bash`, tag: `bash`, color: `white` },
+  { lang: `yml`, tag: `yaml`, color: `linen` },
+  { lang: `yaml`, tag: `yaml`, color: `linen` },
+  { lang: `markdown`, tag: `md`, color: `#e6ffed` },
+  { lang: `json`, tag: `json`, color: `#fff` },
+  { lang: `diff`, tag: `diff`, color: `#E8BD36` },
+  { lang: `text`, tag: `text`, color: `gray` },
+]
+
+const languageTags = langTagColor
+  .map(
+    ({ lang, tag, color }) =>
+      `pre.vscode-highlight[data-language="${lang}"]::before {
+        content: '${tag}';
+        background: ${color};
+      }`
+  )
+  .join(`\n`)
+
+export default createGlobalStyle`
+  ${languageTags}
+
+  pre.vscode-highlight {
+    position: relative;
+    background: #050431;
+    border-radius: ${props => props.theme.mediumBorderRadius};
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  pre.vscode-highlight[data-language]::before {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 2em;
+    padding: 0.2em 0.5em;
+    font-size: 0.6em;
+    font-weight: bold;
+    line-height: initial;
+    text-transform: uppercase;
+    border-radius: 0 0 0.2em 0.2em;
+    color: black;
+  }
+
+  .gatsby-code-title {
+    background: ${props => props.theme.orange};
+    padding: 0.2em 0.4em;
+    width: max-content;
+    margin: 1em 0 -2em 1em;
+    border-radius: 0.3em;
+    position: relative;
+    z-index: 1;
+    font-weight: lighter;
+    font-size: 0.8em;
+    line-height: initial;
+  }
+  
+  /* highlighted lines */
+  .vscode-highlight .vscode-highlight-line-highlighted {
+    background: rgba(255, 255, 255, 0.15);
+    border-left: 0.25em solid ${props => props.theme.lightBlue};
+  }
+
+  /* inline code */
+  :not(pre) > code {
+    border-radius: 0.2em;
+    background: ${props => props.theme.lightGray};
+    padding: 0.15em 0.2em;
+  }
+`
