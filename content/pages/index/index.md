@@ -2,7 +2,7 @@
 title: Nature, Physics, ML, Web
 purpose: landing intro
 cover:
-  img: oeschinensee.jpg
+  img: oeschinen-lake.jpg
   caption: 'Location: <a href="https://en.wikipedia.org/wiki/Oeschinen_Lake">Oeschinen Lake</a>'
 ---
 
