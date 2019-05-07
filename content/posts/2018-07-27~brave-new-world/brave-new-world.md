@@ -5,7 +5,7 @@ date: 2018-07-27
 cover:
   img: gatsby+styled-components.svg
 tags:
-  - WebDev
+  - Web Dev
   - JS
 ---
 

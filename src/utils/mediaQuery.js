@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"
-import { titleCase } from "."
+import { useState, useEffect } from 'react'
+import { startCase } from 'lodash'
 
 const min = width => `only screen and (min-width: ${width}em)`
 const max = width => `only screen and (max-width: ${width}em)`
@@ -17,7 +17,7 @@ const mediaQuery = {
 }
 
 for (const key of Object.keys(mediaQuery.screens)) {
-  const Key = titleCase(key)
+  const Key = startCase(key)
   for (const [func, name] of [[min, `min`], [max, `max`]]) {
     // css query
     const query = func(mediaQuery.screens[key])

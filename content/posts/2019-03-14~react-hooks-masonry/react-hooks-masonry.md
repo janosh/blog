@@ -6,7 +6,7 @@ cover:
   img: nature-photos-masonry.png
 tags:
   - Design
-  - WebDev
+  - Web Dev
   - Tutorial
   - JS
 ---

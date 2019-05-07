@@ -5,7 +5,7 @@ date: 2019-01-13
 cover:
   img: react-hooks-modal.png
 tags:
-  - WebDev
+  - Web Dev
   - Tutorial
   - JS
 ---
