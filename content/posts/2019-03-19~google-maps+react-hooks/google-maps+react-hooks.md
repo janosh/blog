@@ -5,7 +5,7 @@ date: 2019-03-19
 cover:
   img: google-maps+react-hooks.svg
 tags:
-  - WebDev
+  - Web Dev
   - Tutorial
   - JS
 ---
