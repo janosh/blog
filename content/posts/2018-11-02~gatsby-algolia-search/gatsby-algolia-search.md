@@ -5,7 +5,7 @@ date: 2018-11-02
 cover:
   img: gatsby+algolia.svg
 tags:
-  - WebDev
+  - Web Dev
   - Tutorial
   - JS
 ---
