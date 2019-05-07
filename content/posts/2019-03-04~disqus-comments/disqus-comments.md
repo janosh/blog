@@ -5,7 +5,7 @@ date: 2019-03-03
 cover:
   img: gatsby+disqus.svg
 tags:
-  - WebDev
+  - Web Dev
   - Tutorial
   - JS
 ---
@@ -33,7 +33,7 @@ The other services seemed excellent as well, though, and are well worth checking
 
 Of course, in return you have the disadvantage of increased manual setup including putting together the comment form and hooking it up to Staticman. Depending on your use case, this degree of customizability may well be an advantage. In my case, though, I just wanted something fast with as little manual configuration and setup as possible. Disqus turned out to perfect in this regard.
 
-## Implementing Disqus
+## Installing Disqus
 
 Here are the steps for adding Disqus comments to your own blog:
 
@@ -45,21 +45,16 @@ Here are the steps for adding Disqus comments to your own blog:
    ```
 
 3. Add the shortname from step 1 as something like `GATSBY_DISQUS_NAME` to your `.env` and `.env.example` files so that people forking your repo will know that they need to supply this value to get comments to work. (You need to prefix the environment variable with `GATSBY_` in order to [make it available to client side code](https://www.gatsbyjs.org/docs/environment-variables/#client-side-javascript).)
-   ```sh
-   // .env.example
-   ...
+   ```sh:title=.env.example
    # enables Disqus comments below blog posts
    GATSBY_DISQUS_NAME=insertValue
    ```
-   ```sh
-   // .env
-   ...
+   ```sh:title=.env
    GATSBY_DISQUS_NAME=yourOwnSiteShortname
    ```
 4. Go to your template file for blog post (in my case `src/templates/post.js`) and import the `DiscussionEmbed` React component.
 
-   ```js{3}
-   // src/templates/post.js
+   ```js{3}:title=src/templates/post.js
    import React from 'react'
    import { graphql } from 'gatsby'
    import { DiscussionEmbed } from 'disqus-react'
@@ -77,8 +72,7 @@ Here are the steps for adding Disqus comments to your own blog:
 
    where `identifier` must be a string or number that uniquely identifies the post. Finally, add `DiscussionEmbed` to the JSX of your post template.
 
-   ```jsx{6}
-   // src/templates/post.js
+   ```jsx{6}:title=src/templates/post.js
    return (
      <Global>
        ...
