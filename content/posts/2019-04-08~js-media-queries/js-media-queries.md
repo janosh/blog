@@ -7,7 +7,7 @@ cover:
   img: responsive.svg
   thumbnail: matchMedia.svg
 tags:
-  - WebDev
+  - Web Dev
   - Tutorial
   - JS
 ---

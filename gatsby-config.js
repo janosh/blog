@@ -79,6 +79,7 @@ module.exports = {
         logo: `./content/favicon.png`,
       },
     },
+    `gatsby-plugin-lodash`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-offline`,
     `gatsby-plugin-netlify-cache`,
