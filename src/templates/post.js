@@ -1,20 +1,21 @@
-import React from "react"
-import { graphql } from "gatsby"
-import { DiscussionEmbed } from "disqus-react"
+import React from 'react'
+import { graphql } from 'gatsby'
+import { DiscussionEmbed } from 'disqus-react'
 
-import Global from "../components/Global"
-import PageTitle from "../components/PageTitle"
-import { PageBody } from "../components/styles"
-import PostMeta from "../components/PostMeta"
-import PrevNext from "../components/PrevNext"
-import { disqusConfig } from "../utils"
+import Global from '../components/Global'
+import PageTitle from '../components/PageTitle'
+import { PageBody } from '../components/styles'
+import PostMeta from '../components/PostMeta'
+import PrevNext from '../components/PrevNext'
+import Toc from '../components/Toc'
+import { disqusConfig } from '../utils'
 
 const PostTitle = ({ title, subtitle }) =>
   subtitle ? (
-    <div css="padding: 0.3em 1em;">
-      <h1 css="margin: 0;">{title}</h1>
+    <div css="padding: 0.3em 1em; > * { margin: 0;}">
+      <h1>{title}</h1>
       <hr css="margin: 0.3em 0;" />
-      <h2 css="margin: 0;">{subtitle}</h2>
+      <h2>{subtitle}</h2>
     </div>
   ) : (
     <h1>{title}</h1>
@@ -22,9 +23,9 @@ const PostTitle = ({ title, subtitle }) =>
 
 const PostTemplate = ({ data, location }) => {
   const { post, next, prev } = data
-  const { frontmatter, excerpt, html, timeToRead } = post
+  const { frontmatter, excerpt, html, timeToRead, headings, toc } = post
   const meta = { ...frontmatter, timeToRead }
-  const { title, slug, cover } = frontmatter
+  const { title, slug, cover, showToc } = frontmatter
   if (cover && cover.img) {
     if (cover.img.sharp) cover.fluid = cover.img.sharp.fluid
     if (cover.img.src) cover.src = cover.img.src
@@ -36,6 +37,7 @@ const PostTemplate = ({ data, location }) => {
         <PostMeta inTitle {...meta} />
       </PageTitle>
       <PageBody>
+        {showToc && <Toc {...{ headings, toc }} />}
         <div dangerouslySetInnerHTML={{ __html: html }} />
         <DiscussionEmbed {...disqusConfig({ slug, title })} />
         <PrevNext
