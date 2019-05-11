@@ -38,8 +38,8 @@ export default createGlobalStyle`
   pre.vscode-highlight {
     position: relative;
     background: #050431;
+    font-size: 0.95em;
     border-radius: ${props => props.theme.mediumBorderRadius};
-    -webkit-overflow-scrolling: touch;
   }
   
   pre.vscode-highlight[data-language]::before {
@@ -72,7 +72,7 @@ export default createGlobalStyle`
   /* highlighted lines */
   .vscode-highlight .vscode-highlight-line-highlighted {
     background: rgba(255, 255, 255, 0.15);
-    border-left: 0.25em solid ${props => props.theme.lightBlue};
+    box-shadow: inset 0.3em 0 0 0 ${props => props.theme.lightBlue};
   }
 
   /* inline code */
