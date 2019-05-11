@@ -1,5 +1,5 @@
 const macros = {
-  '\\dif': `\\operatorname d`,
+  '\\dif': `\\mathrm d`,
   '\\vec': `{\\boldsymbol{#1}}`,
   '\\mat': `{\\boldsymbol{#1}}`,
   '\\reals': `{\\mathbb{R}}`,
