@@ -1,4 +1,4 @@
-import { graphql } from "gatsby"
+import { graphql } from 'gatsby'
 
 export const query = graphql`
   fragment post on MarkdownRemark {
@@ -6,12 +6,18 @@ export const query = graphql`
       title
       subtitle
       slug
-      date(formatString: "MMM DD, YYYY")
+      date(formatString: "MMM D, YYYY")
       tags
+      showToc
       ...cover
     }
     timeToRead
     excerpt(pruneLength: 200)
+    headings(pathToSlugField: "frontmatter.slug", slugPrefix: "/blog") {
+      value
+      depth
+      slug
+    }
     html
   }
 `
