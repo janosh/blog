@@ -22,9 +22,9 @@ module.exports = {
           `gatsby-remark-responsive-iframe`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-code-titles`,
+          `gatsby-remark-vscode`,
           `gatsby-remark-sub-sup`,
           `gatsby-remark-autolink-headers`,
-          `gatsby-remark-vscode`,
           {
             resolve: `gatsby-remark-katex`,
             options: { macros },
@@ -34,6 +34,7 @@ module.exports = {
             options: {
               maxWidth: 1200,
               linkImagesToOriginal: false,
+              sizeByPixelDensity: true,
               wrapperStyle: `border-radius: 0.5em; overflow: hidden;`,
             },
           },
