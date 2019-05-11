@@ -53,6 +53,17 @@
     "styled-components": "^4.2.0",
     "styled-icons": "7.11.0"
   },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.13.0",
+    "prop-types": "^15.7.2"
+  },
+  "scripts": {
+    "deploy": "gatsby build && netlify deploy",
+    "fresh": "gatsby clean && gatsby build",
+    "view": "gatsby build && gatsby serve -o",
+    "dev": "gatsby develop -H 0.0.0.0"
+  },
   "keywords": [
     "janosh riebesell",
     "personal blog",
@@ -65,11 +76,6 @@
     "gatsby",
     "styled-components"
   ],
-  "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-plugin-react": "^7.13.0",
-    "prop-types": "^15.7.2"
-  },
   "eslintIgnore": [
     "node_modules",
     ".cache",
