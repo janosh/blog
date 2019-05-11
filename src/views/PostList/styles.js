@@ -1,7 +1,7 @@
-import styled, { css } from "styled-components"
+import styled, { css } from 'styled-components'
 
-import { Grid } from "../../components/styles"
-import mediaQuery from "../../utils/mediaQuery"
+import { Grid } from '../../components/styles'
+import mediaQuery from '../../utils/mediaQuery'
 
 const asRow = css`
   grid-column: 2/-2;
@@ -18,7 +18,6 @@ const inBlog = css`
     justify-self: center;
   }
   ${mediaQuery.minPhablet} {
-    grid-row: 1;
     grid-column: 2/-3;
   }
 `
