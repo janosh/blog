@@ -1,4 +1,4 @@
-import { graphql } from "gatsby"
+import { graphql } from 'gatsby'
 
 export const query = graphql`
   fragment projects on Query {
@@ -12,7 +12,7 @@ export const query = graphql`
           frontmatter {
             title
             slug
-            date(formatString: "MMM DD, YYYY")
+            date(formatString: "MMM D, YYYY")
             url
             repo
             npm
