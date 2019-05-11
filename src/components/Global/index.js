@@ -23,7 +23,7 @@ const Global = ({ children, site, ...rest }) => (
       <Footer />
       <Scroll
         showBelow={1500}
-        css="position: fixed; right: 1.5em; bottom: 1em;"
+        css="position: fixed; right: 1em; bottom: 1em;"
       />
     </>
   </ThemeProvider>
