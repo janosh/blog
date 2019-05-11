@@ -6,7 +6,7 @@ The site is fully responsive, has [fluid typography](https://css-tricks.com/snip
 
 - [**styled-components**](https://styled-components.com) for design
 - [**KaTeX**](https://katex.org) for typesetting math
-- [**Prism**](https://prismjs.com) for syntax highlighting
+- [**gatsby-remark-vscode**](https://www.gatsbyjs.org/packages/gatsby-remark-vscode) for syntax highlighting
 - [**Disqus**](https://disqus.com) for blog post comments
 - [**Algolia**](https://www.algolia.com) for custom search
 - [**react-spring**](https://www.react-spring.io) for animations
@@ -15,7 +15,7 @@ Feel free to reuse the whole or any part of this repo to create your own Gatsby 
 
 ## Installation
 
-To get this site running locally, you need installed [`git`](https://git-scm.com), [`gatsby-cli`](https://www.gatsbyjs.org/packages/gatsby-cli) and [`yarn`](https://yarnpkg.com) (or [`npm`](https://www.npmjs.com)). Then follow these steps:
+To get this site running locally, you need [`git`](https://git-scm.com), [`gatsby-cli`](https://www.gatsbyjs.org/packages/gatsby-cli) and [`yarn`](https://yarnpkg.com) (or [`npm`](https://www.npmjs.com)). Then follow these steps:
 
 1. Clone the repo to your machine and change into its directory.
 
@@ -29,7 +29,7 @@ To get this site running locally, you need installed [`git`](https://git-scm.com
     yarn
     ```
 
-3. Start the dev server.
+3. Start the dev server. This may take a while on initial compilation since the site uses quite a lot of images which Gatsby creates thumbnails of and then caches.
 
     ```sh
     gatsby develop
