@@ -10,6 +10,7 @@ cover:
 tags:
   - Physics
   - Machine Learning
+showToc: true
 ---
 
 > This post is without original content, providing merely a summary of the first 3 sections of Michael Betancourt's excellent [introduction to Hamiltonian Monte Carlo](https://arxiv.org/abs/1701.02434). All images are taken from there with only slight modifications for web-display.
@@ -144,9 +145,9 @@ Because of its conceptual simplicity and ease of implementation, RWM is still po
 
 Consequently, if we want to scale MCMC to high-dimensional probability distributions, we need a better way of exploring the typical set, one that uses available knowledge about the geometry of the typical set to traverse it efficiently.
 
-### 3. Hamiltonian Monte Carlo
+## 3. Hamiltonian Monte Carlo
 
-In order to make large jumps away from the current point, we need Markov transitions that can follow the contours of the typical set with high probability mass. Hamiltonian Monte Carlo is the unique procedure for automatically generating this coherent exploration for sufficiently well-behaved target distributions. This section will provide some intuition on how we can generate the desired transitions by carefully exploiting the differential structure of the target density and then explain how to construct the Hamiltonian Markov transition.
+In order to make large jumps away from the current point, we need Markov transitions that can follow the contours of the typical set with high probability mass. Hamiltonian Monte Carlo is the unique procedure for automatically generating this coherent exploration for sufficiently well-behaved target distributions. This section will provide some intuition on how we can generate the desired transitions by carefully exploiting the differential structure of the target density and then explain how to construct the Markov transition.
 
 ### 3.1&nbsp; Informing Markov Transitions
 
@@ -174,8 +175,7 @@ Conservation of phase space volume can be ensured by making these auxiliary mome
 $$
 \pi(\vec q,\vec p) = \pi(\vec p\,|\,\vec q) \, \pi(\vec q).
 $$
-Thus, to lift an initial point in parameter space into one in phase space we simply sample
-from the conditional distribution over the momenta. Assuming the initial point was in the typical set of the target distribution, this guarantees that the lift will also fall into the typical set in phase space. Moreover, it ensures that by marginalizing out the momenta we always recover the target density. But most importantly, it guarantees that any trajectories exploring the typical set in phase space will project down to trajectories exploring the typical set in target space as shown below.
+Thus, to lift an initial point in parameter space into one in phase space we simply sample from the conditional distribution $\pi(\vec p\,|\,\vec q)$ over the momenta. Assuming the initial point was in the typical set of the target distribution, this guarantees that the lift will also fall into the typical set in phase space. Moreover, it ensures that by marginalizing out the momenta we always recover the target density. But most importantly, it makes certain that any trajectories exploring the typical set in phase space will project down to trajectories exploring the typical set in target space as shown below.
 
 ![Projection from phase space to target space](projection.svg)
 *Trajectories exploring the typical set of a probability distribution in phase space that marginalizes to the target distribution project to that distribution's typical set.*
@@ -195,7 +195,7 @@ $$
 \begin{aligned}
 \frac{\dif\vec q}{\dif t}
 &= +\frac{\partial H}{\partial\vec p}
-= \frac{\partial K}{\partial\vec p}
+= +\frac{\partial K}{\partial\vec p}
 \\
 \frac{\dif\vec p}{\dif t}
 &= -\frac{\partial H}{\partial\vec q}
@@ -203,3 +203,53 @@ $$
 \end{aligned}
 $$
 Following this Hamiltonian vector field for some time $t$ generates trajectories $\phi_t(\vec q, \vec p)$, that rapidly move through phase space while being constrained to the typical set. Projecting these trajectories back down to the target space yields the efficient exploration of the target typical that we want!
+
+
+<!-- 
+## 4. Efficient HMC
+
+Now that we have the foundations of HMC in place, we need to address the choices and difficulties involved in actually constructing the algorithm. An immediate complication is that with this groundwork, we are faced not with a unique Markov transition but rather an infinity of them. Every choice of kinetic energy and integration time yields a new Hamiltonian transition that will interact differently with a given target distribution. Unfortunately, all but a few of these choices usually lead to suboptimal performance, leaving us with a delicate tuning problem. If these degrees of freedom are well-chosen, the resulting HMC implementation will perform well even on challenging, high-dimensional problems of applied interest. If chosen poorly, however, the performance suffers dramatically.
+
+To ensure robust performance, we need to exploit the latent geometry of HMC itself. In particular, the problem becomes much easier by adopting a certain view of phase space. -->
+
+
+
+## 4. HMC in Practice
+
+This section combines content from the [Stan Reference Manual](https://mc-stan.org/docs/2_19/reference-manual/hamiltonian-monte-carlo) and Betancourt's introduction to HMC. It looks at how to implement approximate Hamiltonian dynamics using numerical integration. This would over time incur an accumulating numerical error which we can prevent by correcting with a Metropolis acceptance step.
+
+In most implementations of HMC, the auxiliary density $\pi(\vec p \,|\, \vec q)$ for the momenta is a multivariate Gaussian that does not actually depend on the parameters $\vec q$, i.e.
+$$
+\vec p \sim \pi(\vec p) = \Ncal(0, \mat\Sigma).
+$$
+The $d \times d$-dimensional covariance matrix $\mat\Sigma$ acts as a Euclidean metric to rotate and scale the target distribution. In most applications, this matrix is either the identity matrix (i.e., unit diagonal) or estimated from warmup draws and optionally restricted to a diagonal matrix. The inverse $\mat\Sigma^{-1}$ is the mass matrix, and will be a unit matrix, diagonal, or dense if $\mat\Sigma$ is.
+
+Generating a transition from the current position in sample space $\vec q$ requires two stages and is then subject to a Metropolis accept step.
+
+1. First, we sample values for the momenta $\vec p \sim \Ncal(0, \mat\Sigma)$ (independently of the current position). This is what allows us to move between different level sets since we start with a new energy completely indepedent from the previous transition at every step. This also ensures that lower energy sets are more likely since the Gaussian has a higher density for small values of $|\vec p|$. Next, the joint system $(\vec q, \vec p)$ made up of the current coordinates and momenta is evolved via Hamilton’s equations which, since $K(\vec p,\cancel{\vec q}) = -\log\pi(\vec p)$ is independent of position, simplify to
+    $$
+    \frac{\dif\vec q}{\dif t}
+    = \frac{\partial K}{\partial\vec p},
+    \qquad
+    \frac{\dif\vec p}{\dif t}
+    = -\frac{\partial V}{\partial\vec q}.
+    $$
+2. This leaves a differential equation with $2d$ variables to solve. Most HMC implementations use the leapfrog integrator to advance this system in time. Due to its symplectic nature, leapfrog is particularlu well-suited to provide stable results for Hamiltonian systems. The leapfrog algorithm takes small discrete steps of time $\epsilon$ and alternates between half-step updates of the momenta and full-step updates of the coordinates.
+    $$
+    \begin{aligned}
+      &\vec p(t + \epsilon/2) = \vec p(t) - \frac{\epsilon}{2} \frac{\partial V}{\partial \vec q}\biggr|_{\vec q(t)}\\[1em]
+      &\vec q(t + \epsilon) = \vec q(t) + \epsilon \, \frac{\partial K}{\partial \vec p}\biggr|_{\vec p(t + \epsilon/2)}\\[1em]
+      &\vec p(t + \epsilon) = \vec p(t + \epsilon/2) - \frac{\epsilon}{2} \frac{\partial V}{\partial \vec q}\biggr|_{\vec q(t + \epsilon)}
+    \end{aligned}
+    $$
+By computing $L$ leapfrog steps, we evolve the system by a total time of $L \, \epsilon$. Since every step of the leapfrog integrator incurs an error proportional to $\epsilon^3$, the global error after $L$ steps is of order $\epsilon^2$.
+3. If the leapfrog integrator were perfect, there would be no need to do any additional randomization per transition beyond generating a random momenta. Instead, what is done in practice to account for numerical errors during integration is to apply a **Metropolis acceptance step**, where the probability of keeping the proposal is
+    $$
+    \min\Bigl(1, \exp\bigl(H(\vec q_\text{i},\vec p_\text{i}) - H(\vec q_\text{f},\vec p_\text{f})\bigr)\Bigr),
+    $$
+where $\vec q_\text{i} = \vec q(t)$ and $\vec q_\text{f} = \vec q(t + L \, \epsilon)$ and likewise for $\vec p$. If a proposal is rejected, the previous parameter value $\vec q_\text{i}$ is returned and reused to initialize the next iteration.
+
+
+## Further reading
+
+The go-to paper for a more in-depth and more theory-heavy introduction to Hamiltonian Monte Carlo is [MCMC using Hamiltonian dynamics](https://arxiv.org/abs/1206.1901) from 2011 by Radford Neal.
