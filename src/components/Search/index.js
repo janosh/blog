@@ -1,15 +1,16 @@
-import React, { useState, useEffect, createRef } from "react"
+import React, { useState, createRef } from 'react'
 import {
   InstantSearch,
   Index,
   Hits,
   connectStateResults,
-} from "react-instantsearch-dom"
-import algoliasearch from "algoliasearch/lite"
+} from 'react-instantsearch-dom'
+import algoliasearch from 'algoliasearch/lite'
 
-import { Root, HitsWrapper, PoweredBy } from "./styles"
-import Input from "./Input"
-import * as hitComps from "./hitComps"
+import { useClickOutside } from '../../utils/hooks'
+import { Root, HitsWrapper, PoweredBy } from './styles'
+import Input from './Input'
+import * as hitComps from './hitComps'
 
 const Results = connectStateResults(
   ({ searchState: state, searchResults: res, children }) =>
@@ -29,20 +30,7 @@ export default function Search({ indices, collapse, hitsAsGrid }) {
     process.env.GATSBY_ALGOLIA_APP_ID,
     process.env.GATSBY_ALGOLIA_SEARCH_KEY
   )
-
-  const handleClickOutside = event =>
-    !ref.current.contains(event.target) && setFocus(false)
-
-  useEffect(() => {
-    [`mousedown`, `touchstart`].forEach(event =>
-      document.addEventListener(event, handleClickOutside)
-    )
-    return () =>
-      [`mousedown`, `touchstart`].forEach(event =>
-        document.removeEventListener(event, handleClickOutside)
-      )
-  })
-
+  useClickOutside(ref, () => setFocus(false))
   return (
     <InstantSearch
       searchClient={searchClient}

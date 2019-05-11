@@ -109,7 +109,7 @@ const postQuery = `{
         frontmatter {
           title
           slug
-          date(formatString: "MMM DD, YYYY")
+          date(formatString: "MMM D, YYYY")
           tags
         }
         excerpt(pruneLength: 5000)
@@ -190,6 +190,20 @@ const Stats = connectStateResults(
     res && res.nbHits > 0 && `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`
 )
 
+const useClickOutside = (ref, handler, events) => {
+  if (!events) events = [`mousedown`, `touchstart`]
+  const detectClickOutside = event =>
+    !ref.current.contains(event.target) && handler()
+  useEffect(() => {
+    for (const event of events)
+      document.addEventListener(event, detectClickOutside)
+    return () => {
+      for (const event of events)
+        document.removeEventListener(event, detectClickOutside)
+    }
+  })
+}
+
 export default function Search({ indices, collapse, hitsAsGrid }) {
   const ref = createRef()
   const [query, setQuery] = useState(``)
@@ -198,20 +212,7 @@ export default function Search({ indices, collapse, hitsAsGrid }) {
     process.env.GATSBY_ALGOLIA_APP_ID,
     process.env.GATSBY_ALGOLIA_SEARCH_KEY
   )
-
-  const handleClickOutside = event =>
-    !ref.current.contains(event.target) && setFocus(false)
-
-  useEffect(() => {
-    [`mousedown`, `touchstart`].forEach(event =>
-      document.addEventListener(event, handleClickOutside)
-    )
-    return () =>
-      [`mousedown`, `touchstart`].forEach(event =>
-        document.removeEventListener(event, handleClickOutside)
-      )
-  })
-
+  useClickOutside(ref, () => setFocus(false))
   return (
     <InstantSearch
       searchClient={searchClient}
