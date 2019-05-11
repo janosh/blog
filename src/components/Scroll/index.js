@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react'
 
-import { Arrow } from "./styles"
+import { Arrow } from './styles'
 
 export default function Scroll({ direction = `up`, by, to, ...rest }) {
-  const { showBelow, className, size = `1.7em` } = rest
+  const { showBelow, className, size = `calc(0.6em + 30px)` } = rest
   if (![`up`, `down`].includes(direction))
     throw TypeError(
       `Scroll component's direction prop must be either 'up' or 'down'`
