@@ -18,16 +18,13 @@ export const MobileNavDiv = styled.nav`
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   height: 100%;
-  border-radius: 0 20em/1em 0;
   background: rgba(0, 0, 0, 0.85);
-  padding: 8vmin 8vmin 8vmin 6vmin;
-  box-sizing: border-box;
-  font-size: calc(1em + 2vmin);
+  padding: 6vmin;
+  font-size: 1.6em;
   color: white;
   right: 100%;
   display: grid;
   grid-gap: 1em;
-  min-width: 20vw;
   grid-auto-columns: max-content;
   grid-auto-rows: max-content;
   transform: translate(${props => (props.open ? `99%` : `0`)});
