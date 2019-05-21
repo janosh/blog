@@ -143,7 +143,7 @@ const queries = [
 module.exports = queries
 ```
 
-It might look a little initmidating at first, but basically you're just letting `gatsby-plugin-algolia` know how to acquire the data with which to populate your indices on their servers. The example above uses separate queries passing data to separate indices for pages and blog posts.
+It might look a little intimidating at first, but basically you're just letting `gatsby-plugin-algolia` know how to acquire the data with which to populate your indices on their servers. The example above uses separate queries passing data to separate indices for pages and blog posts.
 
 Transformers allow you to modify the data returned by the queries to bring it into a format ready for searching. All we're doing here is 'flattening' posts and pages to 'unnest' the frontmatter fields (such as `author`, `date`, `tags`) but transformers could do much more for you if required. This makes the whole process of indexing your data really flexible and powerful. You could for instance use them to filter the results of your queries, format fields, add or merge them, etc.
 
@@ -166,7 +166,7 @@ There's quite a lot happening in these files so let's break them down one by one
 
 ### `index.js`
 
-```jsx:title=src/components/search/index.js
+```js:title=src/components/search/index.js
 import React, { useState, useEffect, createRef } from 'react'
 import {
   InstantSearch,
@@ -273,7 +273,7 @@ const Stats = connectStateResults(
 
 Now comes the actual `Search` component. It starts off with some state initialization, defining handler functions and event listeners to trigger them. All they do is make the search input slide out when the user clicks a search icon and disappear again when the user clicks or touches (on mobile) anywhere.
 
-```jsx
+```js
 export default function Search({ indices, collapse, hitsAsGrid }) {
   const ref = createRef()
   const [query, setQuery] = useState(``)
@@ -299,7 +299,7 @@ export default function Search({ indices, collapse, hitsAsGrid }) {
 
 `Search` returns JSX that renders a dynamic array of `indices` passed as a prop. Each array item should be an object with keys `name`, `title`, `hitComp` that specifies the name of the index in your Algolia account to be queried, the title to display above the results shown to the user and the component `hitComp` that renders the data returned for each match.
 
-```jsx
+```js
   return (
     <InstantSearch
       searchClient={searchClient}
@@ -334,7 +334,7 @@ Note that we fed `algoliasearch` with the same app ID we specified in our `.env`
 
 ## `input.js`
 
-```jsx
+```js
 import React from 'react'
 import { connectSearchBox } from 'react-instantsearch-dom'
 
@@ -361,7 +361,7 @@ Now let's look at the styled components `SearchIcon`, `Form`, `Input` as well as
 
 ## `styled.js`
 
-```jsx:title=src/components/search/styles.js
+```js:title=src/components/search/styles.js
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Search } from 'styled-icons/fa-solid/Search'
@@ -501,7 +501,7 @@ Now we're almost done. 2 small steps remain. First, we need to put together a hi
 
 ## `hitComps.js`
 
-```jsx:title=src/components/Search/hitComps.js
+```js:title=src/components/Search/hitComps.js
 import React, { Fragment } from 'react'
 import { Highlight, Snippet } from 'react-instantsearch-dom'
 import { Link } from 'gatsby'
@@ -551,7 +551,7 @@ export const PostHit = clickHandler => ({ hit }) => (
 
 Now all we need to do is import `Search` somewhere. The obvious place is the `Header` component so let's add it there.
 
-```jsx:title=src/components/Header/index.js
+```js:title=src/components/Header/index.js
 import React from 'react'
 
 import { Container, Logo } from './styles'

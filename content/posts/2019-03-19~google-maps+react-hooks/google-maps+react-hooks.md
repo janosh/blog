@@ -12,7 +12,7 @@ tags:
 
 Had to share this one since it's so nice and simple. If you're looking for a drop-in, zero-dependency Google Maps React component, look no further. Here it is:
 
-```jsx:title=src/components/map.js
+```js:title=src/components/map.js
 import React, { useEffect, useRef } from 'react'
 
 export default function Map({ options, onMount, className }) {
@@ -53,7 +53,7 @@ To use it, simply grab a free Google Maps API key from [Google's cloud console](
 
 Then simply drop in the above `Map` component wherever you'd like to display a Google map.
 
-```jsx{7}:title=src/app.js
+```js{7}:title=src/app.js
 import React from 'react'
 import Map from './components/map.js'
 
@@ -67,7 +67,7 @@ export default () => (
 
 To change the area shown by the map and its zoom level, pass it an `options` object containing the keys `center` and `zoom`.
 
-```jsx
+```js
 mapProps = {
   options: {
     center: { lat: 20, lng: 40 },
@@ -80,7 +80,7 @@ mapProps = {
 
 If you'd like to do something more fancy, for instance add some markers to the map, you can also pass in an `onMount` function:
 
-```jsx{17}
+```js{17}
 const addMarkers = links => map => {
   links.forEach((link, index) => {
     const marker = new window.google.maps.Marker({
@@ -111,7 +111,7 @@ Note that the `onMount` function must be curried since the `Map` component itsel
 
 By default, when using the `Map` component inside another functional component it will rerender whenever the parent component rerenders. Not only does this waste computational ressources since there's no need to rerender the map if the changed props do not pertain to it, it also ruins the user experience since the map will jump back to its initial zoom level and center on every rerender. To prevent this, you can easily create a memoized map with the `useCallback` hook:
 
-```jsx{1,4,9}:title=src/app.js
+```js{1,4,9}:title=src/app.js
 import React, { useCallback } from 'react'
 import Map from './components/map.js'
 

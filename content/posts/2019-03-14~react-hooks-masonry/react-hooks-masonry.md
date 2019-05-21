@@ -15,7 +15,7 @@ Now that we have React Hooks, so many components can (and probably should [despi
 
 The new implementation uses ony 36 lines of codes and is about as plug-and-play as components get.
 
-```jsx:title=src/components/masonry/index.js
+```js:title=src/components/masonry/index.js
 import React, { useRef, useState, useEffect } from 'react'
 
 import { MasonryDiv, Col } from './styles'
@@ -74,7 +74,7 @@ export const Col = styled.div`
 
 Using `Masonry` is as simple as wrapping it around an array of child elements. For example, here's how you'd use it to display a [list of image thumbnails](/nature) in a masonry layout.
 
-```jsx{3,11,24}
+```js{3,11,24}
 import React, { useState, Fragment } from 'react'
 
 import Masonry from '../../components/Masonry'
