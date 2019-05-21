@@ -72,7 +72,7 @@ Here are the steps for adding Disqus comments to your own blog:
 
    where `identifier` must be a string or number that uniquely identifies the post. Finally, add `DiscussionEmbed` to the JSX of your post template.
 
-   ```jsx{6}:title=src/templates/post.js
+   ```js{6}:title=src/templates/post.js
    return (
      <Global>
        ...
@@ -94,7 +94,7 @@ And you're done. You should now see the Disqus comment form appear beneath your 
 
 If you'd like your blog post previews to show a count of the number of comments each post received, simply import `disqus-react`'s `CommentCount` in the relevant component and provide it the exact same config object as `DiscussionEmbed`.
 
-```jsx{4,21-23}:title=src/components/postMeta/index.js
+```js{4,21-23}:title=src/components/postMeta/index.js
 import React from 'react'
 import { Link } from 'gatsby'
 import { CommentCount } from 'disqus-react'
