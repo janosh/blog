@@ -75,7 +75,7 @@ _[`window.matchMedia` browser support](https://caniuse.com/#search=matchMedia)_
 
 To use it in a React function component, simply throw in the following code snippet.
 
-```jsx{3,6-13}
+```js{3,6-13}
 import React, { useState, useEffect } from "react"
 
 const maxPhone = `screen and (max-width: 30em)`
@@ -96,7 +96,7 @@ Note that we needed to remove the `@media` prefix of CSS media queries from `max
 
 If you're using server-side rendering, you'll need to wrap this code in a `if` statement that checks that the `window` object is defined.
 
-```jsx{6,15}
+```js{6,15}
 import React, { useState, useEffect } from "react"
 
 const maxPhone = `screen and (max-width: 30em)`
@@ -191,7 +191,7 @@ export const useMediaQuery = cond => {
 
 And this is how I use that hook on this site to switch between `MobileNav` and `DesktopNav`
 
-```jsx{4,9-14}
+```js{4,9-14}
 import React from "react"
 import { StaticQuery, graphql } from "gatsby"
 
