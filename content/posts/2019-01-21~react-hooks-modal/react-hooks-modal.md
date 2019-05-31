@@ -25,7 +25,7 @@ import React from 'react'
 
 import { ModalBackground, ModalContainer, Close } from './styles'
 
-const Modal = ({ open, closeModal, children }) => {
+export default function Modal({ open, closeModal, children }) {
   return (
     <ModalBackground open={open} onClick={closeModal}>
       <ModalContainer onClick={event => event.stopPropagation()}>
@@ -35,8 +35,6 @@ const Modal = ({ open, closeModal, children }) => {
     </ModalBackground>
   )
 }
-
-export default Modal
 ```
 
 And here are the styled components imported on line 3.
@@ -228,15 +226,17 @@ const handleArrowKeys = (modal, setModal) => event => {
   else if (event.key === `ArrowLeft`) setModal(modal - 1)
 }
 
-const Modal = ({ open, modal, setModal, children, navigation, className }) => {
+export default function Modal({ open, modal, setModal, ...rest }) {
   if (open) {
+    const { navigation, className, children } = rest
     useEffect(() => {
       const handler = handleArrowKeys(modal, setModal)
       document.addEventListener(`keydown`, handler)
       return () => document.removeEventListener(`keydown`, handler)
     })
     return (
-      // passing setModal without arguments will close the modal when triggered
+      // passing setModal to onClick without arguments implicitly
+      // passes undefined and thus closes the modal when triggered
       <ModalBackground open={open} onClick={setModal}>
         <ModalContainer
           onClick={event => event.stopPropagation()}
@@ -255,8 +255,6 @@ const Modal = ({ open, modal, setModal, children, navigation, className }) => {
     )
   } else return null
 }
-
-export default Modal
 ```
 
 The new styled components `Next` and `Prev` share most of their CSS with `Close` so it makes sense to reuse that:
