@@ -1,12 +1,12 @@
-import styled, { css } from 'styled-components'
-import Image from 'gatsby-image'
-import { Calendar } from 'styled-icons/octicons/Calendar'
-import { Package } from 'styled-icons/feather/Package'
-import { Github } from 'styled-icons/icomoon/Github'
-import { Npm } from 'styled-icons/fa-brands/Npm'
-import { Link } from 'styled-icons/boxicons-regular/Link'
+import styled, { css } from "styled-components"
+import Image from "gatsby-image"
+import { Calendar } from "styled-icons/octicons/Calendar"
+import { PackageIcon } from "styled-icons/feather/PackageIcon"
+import { Github } from "styled-icons/icomoon/Github"
+import { Npm } from "styled-icons/fa-brands/Npm"
+import { Link } from "styled-icons/boxicons-regular/Link"
 
-import { Grid } from '../../components/styles'
+import { Grid } from "../../components/styles"
 
 export const ProjectGrid = styled(Grid)`
   ${props =>
@@ -77,7 +77,7 @@ export const NPM = styled(Npm)`
   vertical-align: -0.7em;
 `
 
-export const Tech = styled(Package)`
+export const Tech = styled(PackageIcon)`
   ${iconCss}
 `
 
