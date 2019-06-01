@@ -14,7 +14,7 @@ import PostList from "../views/PostList"
 import Projects from "../views/Projects"
 import mediaQuery from "../utils/mediaQuery"
 
-const IndexPage = ({ data, location }) => {
+export default function IndexPage({ data, location }) {
   const { md, janosh, posts, projects } = data
   const img = {
     ...md.frontmatter.cover,
@@ -22,7 +22,7 @@ const IndexPage = ({ data, location }) => {
   }
   return (
     <Global margin="0" transparent path={location.pathname}>
-      <PageTitle img={img} fillToBottom>
+      <PageTitle img={img} fillToBottom backdrop={false}>
         <Title>
           {md.frontmatter.title.split(`, `).map(str => (
             <span key={str}>{str}</span>
@@ -44,8 +44,6 @@ const IndexPage = ({ data, location }) => {
     </Global>
   )
 }
-
-export default IndexPage
 
 const Title = styled.h1`
   border: 1px solid white;
