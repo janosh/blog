@@ -17,7 +17,7 @@ tags:
 One thing I like about `styled-components` is that it enables concise and programmable media queries. On this site, I'm have a file that exports the following `mediaQuery` object.
 
 ```js:title=src/utils/mediaQuery.js
-import { titleCase } from "."
+import { titleCase } from '.'
 
 const mediaQuery = {
   screens: {
@@ -52,7 +52,7 @@ To get consistent media queries all over your site, you simply import that objec
 ```js:title=someStyledComponent.js
 import styled from 'styled-components'
 
-import mediaQuery from "src/utils/mediaQuery.js"
+import mediaQuery from 'src/utils/mediaQuery.js'
 
 const { minPhone, maxPhone } = mediaQuery
 
@@ -76,7 +76,7 @@ _[`window.matchMedia` browser support](https://caniuse.com/#search=matchMedia)_
 Here's how you use it in React:
 
 ```js{3,6-13}
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react'
 
 const maxPhone = `screen and (max-width: 30em)`
 
@@ -94,12 +94,10 @@ export default function ResponsiveComponent(props) {
 
 Note that we needed to remove the `@media` prefix of CSS media queries from `maxPhone`. `window.matchMedia(maxPhone)` then turns that string into the object `query` which becomes the JavaScript equivalent of `@media screen and (max-width: 30em)`. We then call `useState` to manage whether or not the query _currently_ matches the screen size, followed by `useEffect` which creates an event listener that updates the query status on window resizes. Finally, we return the `Mobile` or `Desktop` implementation of `ResponsiveComponent`, depending on the state of the query.
 
-If you're using server-side rendering (SSR), you'll need to wrap this code in a `if` statement that checks that the `window` object is defined.
-
 If you're using server-side rendering, you'll need to wrap this code in a `if` statement that checks that the `window` object is defined.
 
 ```js{6,15}
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react'
 
 const maxPhone = `screen and (max-width: 30em)`
 
@@ -139,7 +137,7 @@ export const useMediaQuery = cond => {
 
 In my case, I export that hook from the same file that holds the above `mediaQuery` object. In fact, since I use the same queries all over my site, I decided to couple that hook to the `mediaQuery` object so that it only needs to be passed the key of the desired query. To that end, you'll have to modify `src/utils/mediaQuery.js` to contain each media query both in its CSS and JS variant, i.e. with and without the `@media` prefix.
 
-```diff:title=src/utils/mediaQuery.js
+```js:title=src/utils/mediaQuery.js
 import { titleCase } from "."
 
 const mediaQuery = {
@@ -194,13 +192,13 @@ export const useMediaQuery = cond => {
 As an example, here's how this site calls `useScreenQuery` to switch between `MobileNav` and `DesktopNav`.
 
 ```js{4,9-14}
-import React from "react"
-import { StaticQuery, graphql } from "gatsby"
+import React from 'react'
+import { StaticQuery, graphql } from 'gatsby'
 
-import { useMediaQuery } from "../../utils/mediaQuery"
+import { useMediaQuery } from '../../utils/mediaQuery'
 
-import MobileNav from "./Mobile"
-import DesktopNav from "./Desktop"
+import MobileNav from './Mobile'
+import DesktopNav from './Desktop'
 
 const Nav = props =>
   useMediaQuery(`maxTablet`) ? (
