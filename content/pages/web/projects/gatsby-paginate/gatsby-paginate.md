@@ -12,7 +12,7 @@ tech:
   - React
 ---
 
-Originally developed by [Rob Gilbert](https://pixelstew.co.uk), I am now one of the maintainers of `gatsby-paginate`.
+Originally developed by [Rob Gilbert](https://pixelstew.co.uk), I now maintain [`gatsby-paginate`](https://gatsbyjs.org/packages/gatsby-paginate).
 
 Available on [NPM](https://www.npmjs.com/package/gatsby-paginate). Install via
 

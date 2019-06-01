@@ -20,9 +20,10 @@ Hamiltonian Monte Carlo (HMC) was originally developed by [Duane et al.](https:/
 Over the ensuing decades, HMC made a rather reluctant entry into modern statistics. This is mostly due to two reasons:
 
 - We have only recently begun to understand why HMC works well in practice, particularly on difficult, high-dimensional problems.
-- Unlike many popular techniques in machine learning, HMC does not appeal to fragile heuristics. Rather it is built upon a firm theoretical foundation of differential geometry. This being an advanced field of mathematics not included in statistical training meant it was a difficult algorithm to approach for the majority of both theoretical and applied statisticians. As a result, its dissemenation into applied research was inhibited.
+- Unlike many popular techniques in machine learning, HMC does not appeal to fragile heuristics. Rather it is built upon a firm theoretical foundation of differential geometry. This being an advanced field of mathematics not included in statistical training meant it was a difficult algorithm to approach for the majority of both theoretical and applied statisticians. As a result, its dissemination into applied research was inhibited.
 
 To understand how modern problems in statistics naturally lead to the use of a formalism like HMC, we first need to take a look at the geometry of high-dimensional probability distributions and how they cripple even advanced statistical algorithms such as Markov chain Monte Carlo (MCMC) which are highly efficient in lower dimensions. From this perspective, we can identify parts of MCMC that require increased sophistication or replacement to scale to high-dimensional problems.
+
 
 ## 1. Computing Expectations
 
@@ -43,7 +44,7 @@ This intuition is implemented by several earlier methods for statistical paramet
 Expectation values are determined by accumulating the integrand $\pi(\vec q) \, f(\vec q)$ over *the volume* $\dif \vec q$ of parameter space. One of the unintuitive characteristics of high-dimensional spaces is that there is always much more volume on the outside of any given neighborhood than the inside.
 
 ![Volume scaling](volume-scaling.svg)
-*To illustrate the distribution of volume in increasing dimensions, consider a rectangular partitioning centered around a distinguished point such as the mode. The relative weight of the center partition is __(a)__ 1/3 in one dimension, __(b)__ 1/9 in two dimensions , __(c)__ and only 1/27 in three dimensions. In $d$ dimensions there are $3^{d-1}$ neighboring partitions. Very quickly the volume in the center partition becomes negligible compared to the neighboring volume. This effect only amplifies if we consider larger regions around the mode, i.e. partitions beyond the nearest neighbors. For instance, for next-to-nearest neighbours, the base would be $5^{d-1}$.*
+*To illustrate the distribution of volume in increasing dimensions, consider a rectangular partitioning centered around a distinguished point such as the mode. The relative weight of the center partition is __(a)__ 1/3 in one dimension, __(b)__ 1/9 in two dimensions , __(c)__ and only 1/27 in three dimensions. In $d$ dimensions there are $3^{d-1}$ neighboring partitions. Very quickly the volume in the center partition becomes negligible compared to the neighboring volume. This effect only amplifies if we consider larger regions around the mode, i.e. partitions beyond the nearest neighbors. For instance, for next-to-nearest neighbors, the base would be $5^{d-1}$.*
 
 This is irrespective of the parametrization we choose and can, for instance, also be seen in spherical coordinates.
 
@@ -145,6 +146,7 @@ Because of its conceptual simplicity and ease of implementation, RWM is still po
 
 Consequently, if we want to scale MCMC to high-dimensional probability distributions, we need a better way of exploring the typical set, one that uses available knowledge about the geometry of the typical set to traverse it efficiently.
 
+
 ## 3. Hamiltonian Monte Carlo
 
 In order to make large jumps away from the current point, we need Markov transitions that can follow the contours of the typical set with high probability mass. Hamiltonian Monte Carlo is the unique procedure for automatically generating this coherent exploration for sufficiently well-behaved target distributions. This section will provide some intuition on how we can generate the desired transitions by carefully exploiting the differential structure of the target density and then explain how to construct the Markov transition.
@@ -188,7 +190,7 @@ Appealing to the physical analogy, the value of the Hamiltonian at any point in 
 $$
 H(\vec q,\vec p) = -\log\pi(\vec p\,|\,\vec q) - \log\pi(\vec q) \equiv K(\vec p,\vec q) + V(\vec q),
 $$
-which -- again following the physical analogy -- we can interprete as the kinetic and potential density of the target distribution, respectively. The potential energy is completely determined by the target distribution while the kinetic energy is unconstrained and must be specified by the HMC implementation.
+which -- again following the physical analogy -- we can interpret as the kinetic and potential density of the target distribution, respectively. The potential energy is completely determined by the target distribution while the kinetic energy is unconstrained and must be specified by the HMC implementation.
 
 Now, to gather the fruits of this entire introduction, because the Hamiltonian captures the geometry of the typical set, we can use it to generate the vector field aligned with the typical set of the canonical distribution and, ultimately, the trajectories we are after. The equations that give rise to this vector field are known as **Hamilton’s equations**,
 $$
@@ -203,15 +205,6 @@ $$
 \end{aligned}
 $$
 Following this Hamiltonian vector field for some time $t$ generates trajectories $\phi_t(\vec q, \vec p)$, that rapidly move through phase space while being constrained to the typical set. Projecting these trajectories back down to the target space yields the efficient exploration of the target typical that we want!
-
-
-<!-- 
-## 4. Efficient HMC
-
-Now that we have the foundations of HMC in place, we need to address the choices and difficulties involved in actually constructing the algorithm. An immediate complication is that with this groundwork, we are faced not with a unique Markov transition but rather an infinity of them. Every choice of kinetic energy and integration time yields a new Hamiltonian transition that will interact differently with a given target distribution. Unfortunately, all but a few of these choices usually lead to suboptimal performance, leaving us with a delicate tuning problem. If these degrees of freedom are well-chosen, the resulting HMC implementation will perform well even on challenging, high-dimensional problems of applied interest. If chosen poorly, however, the performance suffers dramatically.
-
-To ensure robust performance, we need to exploit the latent geometry of HMC itself. In particular, the problem becomes much easier by adopting a certain view of phase space. -->
-
 
 
 ## 4. HMC in Practice
@@ -234,7 +227,7 @@ Generating a transition from the current position in sample space $\vec q$ requi
     \frac{\dif\vec p}{\dif t}
     = -\frac{\partial V}{\partial\vec q}.
     $$
-2. This leaves a differential equation with $2d$ variables to solve. Most HMC implementations use the leapfrog integrator to advance this system in time. Due to its symplectic nature, leapfrog is particularlu well-suited to provide stable results for Hamiltonian systems. The leapfrog algorithm takes small discrete steps of time $\epsilon$ and alternates between half-step updates of the momenta and full-step updates of the coordinates.
+2. This leaves a differential equation with $2d$ variables to solve. Most HMC implementations use the leapfrog integrator to advance this system in time. Due to its symplectic nature, leapfrog is particularly well-suited to provide stable results for Hamiltonian systems. The leapfrog algorithm takes small discrete steps of time $\epsilon$ and alternates between half-step updates of the momenta and full-step updates of the coordinates.
     $$
     \begin{aligned}
       &\vec p(t + \epsilon/2) = \vec p(t) - \frac{\epsilon}{2} \frac{\partial V}{\partial \vec q}\biggr|_{\vec q(t)}\\[1em]

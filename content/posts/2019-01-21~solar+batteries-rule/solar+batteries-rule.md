@@ -23,7 +23,7 @@ Humanity could continue to advance and increase its energy consumption at the cu
 ![World energy consumption by source](world-energy-consumption-by-source.png)
 _World energy consumption by source. Credit: [The Oil Drum](http://www.theoildrum.com/node/9023)_
 
-Even if our energy demands should exceed the amount of sun light reaching the Earth, i.e. increase by more than a factor of the number of hours in a year ($24 \cdot 365 = 8760$), all we'd have to do is start harnessing solar radation from space. This has a number of advantages anyway.
+Even if our energy demands should exceed the amount of sun light reaching the Earth, i.e. increase by more than a factor of the number of hours in a year ($24 \cdot 365 = 8760$), all we'd have to do is start harnessing solar radiation from space. This has a number of advantages anyway.
 
 1. We avoid losing energy to light scattering in our atmosphere.
 2. Solar cells in space could receive sunlight all day every day by placing them on one of the Lagrange points for instance.
