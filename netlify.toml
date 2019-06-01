@@ -2,3 +2,6 @@
   from = "https://janosh.netlify.com/*"
   to = "https://janosh.io/:splat"
   force = true
+
+[Settings]
+  ID = "381086b2-b8d3-4c28-bee1-e4a9fd588044"
