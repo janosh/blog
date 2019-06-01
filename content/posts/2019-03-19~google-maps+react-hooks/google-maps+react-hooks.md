@@ -49,7 +49,7 @@ Map.defaultProps = {
 }
 ```
 
-To use it, simply grab a free Google Maps API key from [Google's cloud console](https://console.cloud.google.com) ([here's a guide for that](https://developers.google.com/maps/documentation/javascript/get-api-key)) and either add it to your `.env` file or paste it in directly for `GOOGLE_MAPS_API_KEY`.
+To use it, simply grab a free Google Maps API key from [Google's cloud console](https://console.cloud.google.com) ([here's a guide for that](https://developers.google.com/maps/documentation/javascript/get-api-key)) and either add it to your `.env` file or paste it in directly for `process.env.GOOGLE_MAPS_API_KEY`.
 
 Then simply drop in the above `Map` component wherever you'd like to display a Google map.
 
@@ -109,7 +109,7 @@ Note that the `onMount` function must be curried since the `Map` component itsel
 
 ## Optimization
 
-By default, when using the `Map` component inside another functional component it will rerender whenever the parent component rerenders. Not only does this waste computational ressources since there's no need to rerender the map if the changed props do not pertain to it, it also ruins the user experience since the map will jump back to its initial zoom level and center on every rerender. To prevent this, you can easily create a memoized map with the `useCallback` hook:
+By default, when using the `Map` component inside another function component it will rerender whenever the parent component rerenders. Not only does this waste computational resources since there's no need to rerender the map if its props didn't change, it also ruins the user experience since the map will jump back to its initial `center` and `zoom` on every rerender. To prevent this, you can easily create a memoized map with the `useCallback` hook:
 
 ```js{1,4,9}:title=src/app.js
 import React, { useCallback } from 'react'
@@ -125,9 +125,9 @@ export default () => (
 )
 ```
 
-In fact, you may want to make this part of the `Map` vomponent by default, i.e.
+In fact, you may want to make this part of the `Map` component by default, i.e.
 
-```diff{36}:title=src/components/map.js
+```js{36}:title=src/components/map.js
 - export default function Map({ options, onMount, className }) {
 + function Map({ options, onMount, className }) {
   ...
