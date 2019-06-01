@@ -7,7 +7,6 @@ cover:
   credit: Wikipedia
   url: https://en.wikipedia.org/wiki/Atomic_orbital#/media/File:Hydrogen_Density_Plots.png
   caption: Hydrogen wave functions
-  backdrop: true
 ---
 
 Atomic physics was a bachelor-level lecture jointly held by [Prof. Klaus Sengstock](http://photon.physnet.uni-hamburg.de/ilp/sengstock/team/prof-dr-klaus-sengstock) and [Prof. Dr. Henning Moritz](http://photon.physnet.uni-hamburg.de/en/ilp/moritz/team/henning-moritz) at Hamburg University in the summer of 2014.

@@ -7,7 +7,6 @@ cover:
   credit: Australia's Science Channel
   url: https://australiascience.tv/why-the-general-theory-of-relativity-is-not-just-for-physicists
   caption: Artist's impression of bended spacetime due to the sun and Earth's gravity
-  backdrop: true
 ---
 
 I attended [Prof. Björn Schäfer](http://www.ita.uni-heidelberg.de/~spirou)'s lecture on General relativity at Heidelberg University in the summer of 2015.
