@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 export const query = graphql`
   fragment sharpSrc on File {
     sharp: childImageSharp {
-      fluid(maxWidth: 1800) {
+      fluid(maxWidth: 2200) {
         ...GatsbyImageSharpFluid_withWebp
       }
     }
@@ -20,7 +20,6 @@ export const query = graphql`
       thumbnail {
         ...sharpSrc
       }
-      backdrop
     }
   }
 `

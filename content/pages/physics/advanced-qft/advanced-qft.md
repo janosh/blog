@@ -7,7 +7,6 @@ cover:
   credit: Quantamagazine
   url: https://www.quantamagazine.org/strange-numbers-found-in-particle-collisions-20161115
   caption: Particle collision
-  backdrop: true
 ---
 
 Advanced quantum field theory was given by [Prof. Jürgen Berges](pdfs/http://www.thphys.uni-heidelberg.de/~berges/people.htm) at Heidelberg University in the summer of 2015.
