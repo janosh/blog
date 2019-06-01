@@ -11,7 +11,7 @@ tags:
   - Python
 ---
 
-If you're like me, you'll have gotten tired of manually having to activate your `conda` environment every time you switch between Python projects pretty quickly. Since you're reading this, you may even have started googling for a solution that could take care of this automatically. The following shell script has served me very well for this prupose for several months now. It's a spin-off of [Christine Doig](https://github.com/chdoig)'s [`conda-auto-env`](https://github.com/chdoig/conda-auto-env).
+If you're like me, you'll have gotten tired of manually having to activate your `conda` environment every time you switch between Python projects pretty quickly. Since you're reading this, you may even have started googling for a solution that could take care of this automatically. The following shell script has served me very well for this purpose for several months now. It's a spin-off of [Christine Doig](https://github.com/chdoig)'s [`conda-auto-env`](https://github.com/chdoig/conda-auto-env).
 
 ```sh:title=conda_auto_env
 #!/bin/bash
@@ -68,4 +68,4 @@ and then append the following line to your `.bashrc`.
 source conda_auto_env
 ```
 
-That's it. Now, everytime you open a shell prompt in a directory that contains a `conda` environment file named one of `env(ironment).y(a)ml`, `requirements.y(a)ml`, `conda_auto_env` will automatically read the name of the corresponding environment from that file and activate it. Similarly, when you exit that directory, the environment will be deactivated again and if the environment doesn't exist yet when you first enter the directory, `conda_auto_env` will generate it and install all specified dependencies.
+That's it. Now, every time you open a shell prompt in a directory that contains a `conda` environment file named one of `env(ironment).y(a)ml`, `requirements.y(a)ml`, `conda_auto_env` will automatically read the name of the corresponding environment from that file and activate it. Similarly, when you exit that directory, the environment will be deactivated again and if the environment doesn't exist yet when you first enter the directory, `conda_auto_env` will generate it and install all specified dependencies.

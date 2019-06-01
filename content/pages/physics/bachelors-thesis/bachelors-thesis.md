@@ -26,7 +26,7 @@ Each of these features serves as a point of comparison for four different implem
 - In a second step, we add Grimme et al.’s dispersion correction and repeat all calculations.
   Subsequently, results are compared among each other and with experiment when possible. Otherwise, we fall back on theoretical findings obtained with highly accurate but much more expensive calculations in the non-local random phase approximation (RPA).
 
-We report partial success with both LDA and modified GGA delivering realistic results in certain areas. We advise to refrain from using GGA and modified LDA on our specific test system of G-hBN as we have shown them to produce grossly under- and overestimated binding, respectively. We expect this behaviour to hold true also for other van der Waals heterostructures.
+We report partial success with both LDA and modified GGA delivering realistic results in certain areas. We advise to refrain from using GGA and modified LDA on our specific test system of G-hBN as we have shown them to produce grossly under- and overestimated binding, respectively. We expect this behavior to hold true also for other van der Waals heterostructures.
 
 <div class="grid docs">
 
