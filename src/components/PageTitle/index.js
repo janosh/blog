@@ -3,7 +3,8 @@ import React, { useRef, useEffect } from "react"
 import { Caption } from "../styles"
 import { PageTitleContainer, Title, Img } from "./styles"
 
-const PageTitle = ({ children, img, backdrop, className, fillToBottom }) => {
+export default function PageTitle({ children, img, className, ...rest }) {
+  const { backdrop = true, fillToBottom } = rest
   const ref = useRef()
   if (fillToBottom) {
     const fillAvailHeight = () =>
@@ -16,9 +17,9 @@ const PageTitle = ({ children, img, backdrop, className, fillToBottom }) => {
     })
   }
   return (
-    <PageTitleContainer ref={ref} className={className}>
+    <PageTitleContainer {...{ ref, className }}>
       <Img {...img} />
-      <Title backdrop={backdrop || (img && img.backdrop)}>{children}</Title>
+      <Title backdrop={backdrop}>{children}</Title>
       {img && (img.caption || img.credit) && (
         <Caption showOnHoverParent={PageTitleContainer}>
           <span dangerouslySetInnerHTML={{ __html: img.caption }} />
@@ -33,5 +34,3 @@ const PageTitle = ({ children, img, backdrop, className, fillToBottom }) => {
     </PageTitleContainer>
   )
 }
-
-export default PageTitle

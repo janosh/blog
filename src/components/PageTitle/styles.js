@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import Image from 'gatsby-image'
+import styled, { css } from "styled-components"
+import Image from "gatsby-image"
 
 export const PageTitleContainer = styled.hgroup`
   position: relative;
@@ -10,8 +10,7 @@ export const PageTitleContainer = styled.hgroup`
   min-height: 60vh;
   flex: 1; /* for filling height between header and footer on 404 page */
 `
-
-const backdrop = css`
+const backdropCss = css`
   > * {
     background: rgba(0, 0, 0, 0.7);
     border-radius: ${props => props.theme.smallBorderRadius};
@@ -24,13 +23,13 @@ export const Title = styled.div`
   text-align: center;
   font-size: calc(1em + 0.5vw);
   margin: 1em;
-  ${props => props.backdrop && backdrop};
   display: grid;
   justify-content: center;
+  ${props => props.backdrop && backdropCss};
 `
 
 export const Img = styled(Image).attrs(
-  ({ fluid, src }) => !fluid && { as: (src && `img`) || `div` }
+  ({ fluid, src }) => !fluid && { as: src ? `img` : `div` }
 )`
   position: absolute !important;
   z-index: -1;
