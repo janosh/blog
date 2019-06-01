@@ -1,16 +1,16 @@
-import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
-import { ThemeProvider } from 'styled-components'
-import PropTypes from 'prop-types'
+import React from "react"
+import { StaticQuery, graphql } from "gatsby"
+import { ThemeProvider } from "styled-components"
+import PropTypes from "prop-types"
 
-import Seo from '../Seo'
-import Header from '../Header'
-import Footer from '../Footer'
-import theme from '../../utils/theme'
-import SyntaxHighlight from '../../utils/syntaxHighlight'
-import Scroll from '../Scroll'
+import Seo from "../Seo"
+import Header from "../Header"
+import Footer from "../Footer"
+import theme from "../../utils/theme"
+import SyntaxHighlight from "../../utils/syntaxHighlight"
+import Scroll from "../Scroll"
 
-import { GlobalStyle } from './styles'
+import { GlobalStyle } from "./styles"
 
 const Global = ({ children, site, ...rest }) => (
   <ThemeProvider theme={theme}>
@@ -38,7 +38,7 @@ const query = graphql`
     site {
       meta: siteMetadata {
         title
-        url: siteUrl
+        url
         description
       }
     }
