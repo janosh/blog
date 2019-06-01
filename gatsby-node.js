@@ -71,10 +71,6 @@ exports.onCreateNode = ({ node, actions }) => {
       lng: tags.GPSLongitude.description,
       caption: tags.Headline.description,
     }
-    actions.createNodeField({
-      node,
-      name: `meta`,
-      value: meta,
-    })
+    actions.createNodeField({ node, name: `meta`, value: meta })
   }
 }

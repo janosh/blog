@@ -8,7 +8,7 @@ module.exports = {
     title: `janosh.io`,
     description: `Physics, machine learning, sustainability and web development.`,
     author: `Janosh Riebesell`,
-    siteUrl: `https://janosh.io`,
+    url: `https://janosh.io`,
   },
   plugins: [
     `gatsby-transformer-sharp`,
@@ -34,7 +34,6 @@ module.exports = {
             options: {
               maxWidth: 1200,
               linkImagesToOriginal: false,
-              sizeByPixelDensity: true,
               wrapperStyle: `border-radius: 0.5em; overflow: hidden;`,
             },
           },
