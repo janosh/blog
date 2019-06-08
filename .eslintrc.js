@@ -33,6 +33,7 @@ module.exports = {
     "linebreak-style": ["error", "unix"],
     "react/prop-types": "off",
     "react/display-name": "off",
+    "no-console": ["error", { allow: ["warn", "error"] }],
   },
   settings: {
     react: {
