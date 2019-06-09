@@ -1,11 +1,16 @@
-const theme = {
+const colors = {
   blue: `#2202a9`,
-  darkBlue: `#002b4d`,
-  lightBlue: `#279AF1`,
+  darkBlue: `#190c65`,
+  darkerBlue: `#150956`,
+  darkestBlue: `#0f073b`,
+  lightBlue: `#1f59cd`,
+  lighterBlue: `#279AF1`,
+  lightestBlue: `#83aaff`,
 
-  green: `#6e9f23`,
-  darkGreen: `#104F55`,
+  green: `#3f7912`,
+  darkGreen: `#0c511a`,
   lightGreen: `#00d69b`,
+  paleDarkGreen: `#104F55`,
 
   yellow: `#f9ff00`,
   darkYellow: `#d0d500`,
@@ -16,10 +21,15 @@ const theme = {
   lightOrange: `#ffbe41`,
 
   gray: `#464849`,
-  darkGray: `#282828`,
-  lightGray: `#ebebeb`,
-  veryLightGray: `#f7f7f7`,
+  darkGray: `#3d3d3d`,
+  darkerGray: `#1a1d23`,
+  darkestGray: `#060606`,
+  lightGray: `#bcbcbc`,
+  lighterGray: `#e5e5e5`,
+  lightestGray: `#f7f7f7`,
+}
 
+const measures = {
   maxWidth: `40em`,
 
   smallBorder: `0.1em`,
@@ -35,4 +45,51 @@ const theme = {
   longTrans: `1s`,
 }
 
-export default theme
+const theme = { ...colors, ...measures }
+
+const lightTheme = {
+  background: `white`,
+  textColor: `black`,
+  quoteBg: theme.lightestGray,
+
+  links: theme.blue,
+  hoveredLinks: theme.orange,
+
+  shadowColor: theme.lighterGray,
+  borderColor: theme.lighterGray,
+
+  headerBg: theme.darkerBlue,
+  footerBg: theme.darkGray,
+
+  buttonBg: theme.blue,
+  hoveredButtonBg: theme.lightBlue,
+  grayButtonBg: theme.lightestGray,
+  grayHoveredButtonBg: theme.orange,
+
+  inlineCodeColor: theme.lighterGray,
+}
+
+const darkTheme = {
+  background: theme.darkerGray,
+  textColor: theme.lighterGray,
+  quoteBg: theme.darkestGray,
+
+  links: theme.lighterBlue,
+  hoveredLinks: theme.orange,
+
+  shadowColor: `black`,
+  borderColor: `black`,
+
+  headerBg: theme.darkestBlue,
+  footerBg: theme.darkestGray,
+
+  buttonBg: theme.darkGreen,
+  hoveredButtonBg: theme.green,
+  grayButtonBg: theme.darkGray,
+  grayHoveredButtonBg: theme.orange,
+
+  inlineCodeColor: theme.darkGray,
+}
+
+export default darkMode =>
+  darkMode ? { ...theme, ...darkTheme } : { ...theme, ...lightTheme }

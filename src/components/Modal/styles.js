@@ -30,7 +30,7 @@ export const ModalDiv = styled.div`
   box-sizing: border-box;
   align-self: center;
   justify-self: center;
-  background: white;
+  background: ${props => props.theme.background};
   height: 80vh;
   width: 80vw;
   position: relative;
