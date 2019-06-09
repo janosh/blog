@@ -1,10 +1,31 @@
 import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
 
 import { FooterContainer, PoweredBy } from "./styles"
-import query from "./query"
 
-const Footer = () => {
-  const { footer, logos } = query()
+export default function Footer() {
+  const { footer, logos } = useStaticQuery(graphql`
+    {
+      footer: footerYaml {
+        copyright
+        sourceNote
+        poweredBy {
+          url
+          title
+        }
+      }
+      logos: allFile(
+        filter: { dir: { regex: "/footer/logos/" } }
+        sort: { fields: name }
+      ) {
+        edges {
+          node {
+            src: publicURL
+          }
+        }
+      }
+    }
+  `)
   const { copyright, sourceNote, poweredBy } = footer
   return (
     <FooterContainer>
@@ -26,5 +47,3 @@ const Footer = () => {
     </FooterContainer>
   )
 }
-
-export default Footer
