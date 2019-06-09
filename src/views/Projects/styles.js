@@ -27,8 +27,7 @@ export const Thumbnail = styled.div`
   display: grid;
   width: 100%;
   height: 100%;
-  border: 1px solid ${props => props.theme.lightGray};
-  box-shadow: 0 0 1em rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 1em ${props => props.theme.shadowColor};
   transition: 0.5s;
   h3 {
     grid-area: 1 / 1;

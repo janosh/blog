@@ -1,8 +1,8 @@
-import { createGlobalStyle } from 'styled-components'
-import 'katex/dist/katex.min.css'
+import { createGlobalStyle } from "styled-components"
+import "katex/dist/katex.min.css"
 
-import mediaQuery from '../../utils/mediaQuery'
-import typography from '../../utils/typography'
+import mediaQuery from "../../utils/mediaQuery"
+import typography from "../../utils/typography"
 
 const { phone, desktop } = mediaQuery.screens
 const {
@@ -37,16 +37,20 @@ export const GlobalStyle = createGlobalStyle`
         flex: 1;
       }
     }
+    /* below rules enable dark mode */
+    will-change: color, background;
+    background: ${props => props.theme.background};
+    color: ${props => props.theme.textColor};
+    a {
+      text-decoration: none;
+      color: ${props => props.theme.links};
+      :hover {
+        color: ${props => props.theme.hoveredLinks};
+      }
+    }
   }
   h1, h2, h3, h4, h5, h6 {
     line-height: initial;
-  }
-  a {
-    text-decoration: none;
-    color: ${props => props.theme.blue};
-    :hover {
-      color: ${props => props.theme.lightBlue};
-    }
   }
   .grid {
     display: grid;
@@ -66,7 +70,7 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   .button {
-    background: ${props => props.theme.blue};
+    background: ${props => props.theme.buttonBg};
     color: white !important;
     border-radius: ${props => props.theme.smallBorderRadius};
     padding: 0.3em 0.6em;
@@ -76,7 +80,7 @@ export const GlobalStyle = createGlobalStyle`
     width: max-content;
     margin: 0 auto;
     :hover {
-      background: ${props => props.theme.lightBlue};
+      background: ${props => props.theme.hoveredButtonBg};
     }
   }
   /* center image captions */
@@ -95,8 +99,8 @@ export const GlobalStyle = createGlobalStyle`
     overflow-y: hidden;
   }
   blockquote {
-    border-left: 0.25em solid ${props => props.theme.lightBlue};
-    background: rgba(0, 0, 0, 0.03);
+    border-left: 0.25em solid ${props => props.theme.lighterBlue};
+    background: ${props => props.theme.quoteBg};
     padding: 0.1em 0 0.1em 1em;
     margin: 0;
   }

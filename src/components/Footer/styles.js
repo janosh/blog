@@ -1,32 +1,29 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
-import mediaQuery from '../../utils/mediaQuery'
+import mediaQuery from "../../utils/mediaQuery"
 
 export const FooterContainer = styled.footer`
-  background-color: ${props => props.theme.darkGray};
+  background-color: ${props => props.theme.footerBg};
   padding: 5vh 5vw;
   color: white;
   a {
-    color: ${props => props.theme.lightBlue};
-    :hover {
-      color: ${props => props.theme.orange};
-    }
+    color: ${props => props.theme.lighterBlue};
   }
   display: grid;
   justify-items: center;
   align-items: center;
   grid-template-areas:
-    'copyright'
-    'source'
-    'poweredBy';
+    "copyright"
+    "source"
+    "poweredBy";
   grid-gap: 4vh 6vw;
   ${mediaQuery.minPhone} {
     grid-template-areas:
-      'copyright source'
-      'poweredBy poweredBy';
+      "copyright source"
+      "poweredBy poweredBy";
   }
   ${mediaQuery.minTablet} {
-    grid-template-areas: 'copyright source poweredBy';
+    grid-template-areas: "copyright source poweredBy";
   }
 `
 
