@@ -6,8 +6,8 @@ export const Post = styled.article`
   width: 100%;
   display: grid;
   border-radius: ${props => props.theme.mediumBorderRadius};
-  border: 1px solid ${props => props.theme.lightGray};
-  box-shadow: 0 0 1em ${props => props.theme.lightGray};
+  border: 1px solid ${props => props.theme.borderColor};
+  box-shadow: 0 0 1em ${props => props.theme.shadowColor};
   overflow: hidden;
   > :not(:first-child) {
     margin-left: 20px;

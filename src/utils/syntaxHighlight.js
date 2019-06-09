@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components"
 
 const langTagColor = [
   { lang: `javascript`, tag: `js`, color: `#f7df1e` },
@@ -58,13 +58,13 @@ export default createGlobalStyle`
 
   .gatsby-code-title {
     background: ${props => props.theme.orange};
+    color: black;
     padding: 0.2em 0.4em;
     width: max-content;
     margin: 1em 0 -2em 1em;
     border-radius: 0.3em;
     position: relative;
     z-index: 1;
-    font-weight: lighter;
     font-size: 0.8em;
     line-height: initial;
   }
@@ -72,13 +72,13 @@ export default createGlobalStyle`
   /* highlighted lines */
   .vscode-highlight .vscode-highlight-line-highlighted {
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: inset 0.3em 0 0 0 ${props => props.theme.lightBlue};
+    box-shadow: inset 0.3em 0 0 0 ${props => props.theme.lighterBlue};
   }
 
   /* inline code */
   :not(pre) > code {
     border-radius: 0.2em;
-    background: ${props => props.theme.lightGray};
+    background: ${props => props.theme.inlineCodeColor};
     padding: 0.15em 0.2em;
   }
 `
