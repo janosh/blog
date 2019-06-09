@@ -56,8 +56,8 @@ export default function Photos({ tab, photos, modal, setModal }) {
         <Img
           alt={currentPhoto.caption}
           fluid={currentPhoto.fluid}
-          // imgStyle={{ objectFit: `contain` }}
-          css="max-height: 100vh; width: initial;"
+          imgStyle={{ objectFit: `contain` }}
+          css="height: fill-available;"
         />
         <Caption>
           <h3 css="margin: 0;">{currentPhoto.caption}</h3>
