@@ -1,22 +1,8 @@
-import React, { memo, useEffect, useRef, useState } from "react"
+import React, { memo, useRef, useState } from "react"
 import { animated, useSpring } from "react-spring"
-import ResizeObserver from "resize-observer-polyfill"
 
-import { useClickOutside } from "../../../utils/hooks"
+import { useClickOutside, useSize } from "../../../hooks"
 import { Children, Icons, Item, Menu, MobileNavDiv, NavLink } from "./styles"
-
-export const useSize = (ref, quantity) => {
-  const [size, setSize] = useState(0)
-  // useState for performance, prevents ResizeObserver from being invoked on every rerender
-  const [observer] = useState(
-    new ResizeObserver(([entry]) => setSize(entry.contentRect[quantity]))
-  )
-  useEffect(() => {
-    if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [])
-  return size
-}
 
 const Tree = memo(({ text, url, children }) => {
   const ref = useRef()

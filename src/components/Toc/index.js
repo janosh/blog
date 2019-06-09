@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from "react"
 
-import { useClickOutside } from '../../utils/hooks'
-import { TocDiv, TocLink, TocIcon, Title, Toggle } from './styles'
+import { useClickOutside } from "../../hooks"
+import { TocDiv, TocLink, TocIcon, Title, Toggle } from "./styles"
 
 export default function Toc({ headings, title = `Contents` }) {
   const [open, setOpen] = useState(false)
