@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
 export const ButtonGroup = styled.div`
   margin: 2em auto;
@@ -15,10 +15,10 @@ export const ButtonGroup = styled.div`
     font-size: ${props => props.size};
     transition: ${props => props.theme.shortTrans};
     :hover {
-      background: ${props => props.theme.lightBlue};
+      background: ${props => props.theme.lighterBlue};
     }
     &.active {
-      background: ${props => props.theme.darkBlue};
+      background: ${props => props.theme.darkerBlue};
       box-shadow: inset 0 0 0.3em black;
     }
   }

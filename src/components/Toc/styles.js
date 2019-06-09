@@ -1,16 +1,16 @@
-import styled, { css } from 'styled-components'
-import { Link } from 'gatsby'
+import styled, { css } from "styled-components"
+import { Link } from "gatsby"
 
-import { Close as Cross } from 'styled-icons/material/Close'
-import { BookContent } from 'styled-icons/boxicons-regular/BookContent'
+import { Close as Cross } from "styled-icons/material/Close"
+import { BookContent } from "styled-icons/boxicons-regular/BookContent"
 
-import mediaQuery from '../../utils/mediaQuery'
+import mediaQuery from "../../utils/mediaQuery"
 
 const openTocDiv = css`
   background: white;
   padding: 0.7em 1.2em;
   border-radius: 0.5em;
-  border: 1px solid ${props => props.theme.lightGray};
+  border: 1px solid ${props => props.theme.lighterGray};
 `
 
 export const TocDiv = styled.div`
@@ -53,7 +53,7 @@ export const TocLink = styled(Link)`
   display: block;
   margin-left: ${props => props.depth + `em`};
   border-top: ${props =>
-    props.depth === 0 && `1px solid ` + props.theme.lightGray};
+    props.depth === 0 && `1px solid ` + props.theme.lighterGray};
 `
 
 export const TocIcon = styled(BookContent)`
@@ -68,7 +68,7 @@ const openerCss = `
 `
 
 const closerCss = css`
-  background: ${props => props.theme.lightGray};
+  background: ${props => props.theme.lighterGray};
   border-radius: 50%;
 `
 

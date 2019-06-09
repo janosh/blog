@@ -7,9 +7,6 @@ export const PreviousNext = styled.div`
   flex-wrap: wrap;
   margin-top: 3em;
   position: relative;
-  h3 {
-    color: black;
-  }
 `
 
 export const Thumbnail = styled.div`
