@@ -1,7 +1,7 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
-import { Search } from 'styled-icons/fa-solid/Search'
-import { Algolia } from 'styled-icons/fa-brands/Algolia'
+import React from "react"
+import styled, { css } from "styled-components"
+import { Search } from "styled-icons/fa-solid/Search"
+import { Algolia } from "styled-icons/fa-brands/Algolia"
 
 export const Root = styled.div`
   position: relative;
@@ -16,11 +16,11 @@ export const SearchIcon = styled(Search)`
 
 const focus = css`
   background: white;
-  color: ${props => props.theme.darkBlue};
+  color: ${props => props.theme.darkerBlue};
   cursor: text;
   width: 5em;
   + ${SearchIcon} {
-    color: ${props => props.theme.darkBlue};
+    color: ${props => props.theme.darkerBlue};
     margin: 0.3em;
   }
 `
@@ -28,7 +28,7 @@ const focus = css`
 const collapse = css`
   width: 0;
   cursor: pointer;
-  color: ${props => props.theme.lightBlue};
+  color: ${props => props.theme.lighterBlue};
   + ${SearchIcon} {
     color: white;
   }
@@ -41,7 +41,7 @@ const collapse = css`
 `
 
 const expand = css`
-  background: ${props => props.theme.veryLightGray};
+  background: ${props => props.theme.lighterGray};
   width: 6em;
   margin-left: -1.6em;
   padding-left: 1.6em;
@@ -74,7 +74,6 @@ const hitsList = css`
   max-width: 30em;
   box-shadow: 0 0 5px 0;
   padding: 0.7em 1em 0.4em;
-  background: white;
   border-radius: ${props => props.theme.smallBorderRadius};
   > * + * {
     padding-top: 1em !important;
@@ -83,7 +82,7 @@ const hitsList = css`
   li + li {
     margin-top: 0.7em;
     padding-top: 0.7em;
-    border-top: 1px solid ${props => props.theme.lightGray};
+    border-top: 1px solid ${props => props.theme.lighterGray};
   }
 `
 
@@ -94,7 +93,7 @@ const hitsGrid = css`
     grid-gap: 1em;
     li {
       padding: 0.3em 0.5em;
-      background: ${props => props.theme.veryLightGray};
+      background: ${props => props.theme.lighterGray};
       border-radius: ${props => props.theme.smallBorderRadius};
     }
   }
@@ -102,6 +101,7 @@ const hitsGrid = css`
 
 export const HitsWrapper = styled.div`
   display: ${props => (props.show ? `grid` : `none`)};
+  background: ${props => props.theme.background};
   max-height: 80vh;
   overflow: scroll;
   z-index: 2;
@@ -115,8 +115,8 @@ export const HitsWrapper = styled.div`
     list-style: none;
   }
   mark {
-    color: ${props => props.theme.lightBlue};
-    background: ${props => props.theme.darkBlue};
+    color: ${props => props.theme.lighterBlue};
+    background: ${props => props.theme.darkerBlue};
   }
   header {
     display: flex;

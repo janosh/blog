@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { Link } from 'gatsby'
+import styled, { css } from "styled-components"
+import { Link } from "gatsby"
 
 export const navLinkStyle = css`
   color: white;
@@ -8,7 +8,7 @@ export const navLinkStyle = css`
     color: ${props => props.theme.orange};
   }
   :hover {
-    color: ${props => props.theme.lightBlue};
+    color: ${props => props.theme.lighterBlue};
   }
 `
 

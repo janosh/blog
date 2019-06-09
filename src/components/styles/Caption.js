@@ -14,7 +14,7 @@ export const Caption = styled.figcaption`
   border-radius: ${props => (props.theme.mediumBorderRadius + ` `).repeat(2)} 0
     0;
   a {
-    color: ${props => props.theme.lightBlue};
+    color: ${props => props.theme.lighterBlue};
     transition: ${props => props.theme.shortTrans};
     :hover {
       color: ${props => props.theme.orange};
