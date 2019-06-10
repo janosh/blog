@@ -8,6 +8,7 @@ export { Caption } from "./Caption"
 export const fadeInOnHoverParent = parent => css`
   opacity: 0;
   visibility: hidden;
+  transition: ${props => props.theme.shortTrans};
   pointer-events: none;
   ${parent}:hover & {
     opacity: 1;

@@ -20,7 +20,6 @@ const collapse = css`
   border-radius: ${props => props.theme.smallBorderRadius};
   padding: 1vmin;
   font-size: 1.6em;
-  transition: ${props => props.theme.shortTrans};
   ${fadeInOnHoverParent(Wrapper)};
 `
 

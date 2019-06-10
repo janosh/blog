@@ -73,7 +73,7 @@ export const GitHub = styled(Github)`
 export const NPM = styled(Npm)`
   ${iconCss};
   width: 1.7em;
-  vertical-align: -0.7em;
+  vertical-align: middle;
 `
 
 export const Tech = styled(PackageIcon)`
