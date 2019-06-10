@@ -1,13 +1,12 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
-import { fadeInOnHoverParent } from './'
+import { fadeInOnHoverParent } from "./"
 
 export const Caption = styled.figcaption`
   position: absolute;
   bottom: 0;
   right: 1em;
   font-size: 0.8em;
-  transition: ${props => props.theme.shortTrans};
   color: white;
   padding: 0.1em 0.5em;
   background: rgba(0, 0, 0, 0.7);

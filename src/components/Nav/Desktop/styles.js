@@ -24,7 +24,6 @@ export const SubNav = styled.div`
   border-radius: ${props => props.theme.smallBorderRadius};
   grid-gap: 0.2em 0.5em;
   position: absolute;
-  transition: ${props => props.theme.shortTrans};
   padding: 0.5em 0.7em;
   grid-template-columns: ${props =>
     props.children.length >= 10 ? `1fr 1fr` : `1fr`};
