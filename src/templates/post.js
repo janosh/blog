@@ -23,7 +23,7 @@ const PostTitle = ({ title, subtitle }) =>
 
 const PostTemplate = ({ data, location }) => {
   const { post, next, prev } = data
-  const { frontmatter, excerpt, html, timeToRead, headings, toc } = post
+  const { frontmatter, excerpt, html, timeToRead } = post
   const { title, slug, cover, showToc } = frontmatter
   if (cover && cover.img) {
     if (cover.img.sharp) cover.fluid = cover.img.sharp.fluid
@@ -35,9 +35,9 @@ const PostTemplate = ({ data, location }) => {
         <PostTitle {...frontmatter} />
         <PostMeta inTitle {...{ ...frontmatter, timeToRead }} />
       </PageTitle>
-      <PageBody>
-        {showToc && <Toc {...{ headings, toc }} />}
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+      <PageBody as="div">
+        {showToc && <Toc />}
+        <main dangerouslySetInnerHTML={{ __html: html }} />
         <DiscussionEmbed {...disqusConfig({ slug, title })} />
         <PrevNext
           prev={prev && prev.frontmatter}
