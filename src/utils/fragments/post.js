@@ -1,4 +1,4 @@
-import { graphql } from 'gatsby'
+import { graphql } from "gatsby"
 
 export const query = graphql`
   fragment post on MarkdownRemark {
@@ -13,11 +13,6 @@ export const query = graphql`
     }
     timeToRead
     excerpt(pruneLength: 200)
-    headings(pathToSlugField: "frontmatter.slug", slugPrefix: "/blog") {
-      value
-      depth
-      slug
-    }
     html
   }
 `
