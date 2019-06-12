@@ -22,23 +22,21 @@ const langTagColor = [
   { lang: `text`, tag: `text`, color: `gray` },
 ]
 
-const languageTags = langTagColor
-  .map(
-    ({ lang, tag, color }) =>
-      `pre.vscode-highlight[data-language="${lang}"]::before {
+const languageTags = langTagColor.map(
+  ({ lang, tag, color }) =>
+    `pre.vscode-highlight[data-language="${lang}"]::before {
         content: '${tag}';
         background: ${color};
       }`
-  )
-  .join(`\n`)
+)
 
 export default createGlobalStyle`
-  ${languageTags}
+  ${languageTags.join(`\n`)}
 
   pre.vscode-highlight {
     position: relative;
     background: #050431;
-    font-size: 0.95em;
+    font-size: 0.9em;
     border-radius: ${props => props.theme.mediumBorderRadius};
   }
   
@@ -61,7 +59,7 @@ export default createGlobalStyle`
     color: black;
     padding: 0.2em 0.4em;
     width: max-content;
-    margin: 1em 0 -2em 1em;
+    margin: 1em 0 -1.6em 1em;
     border-radius: 0.3em;
     position: relative;
     z-index: 1;

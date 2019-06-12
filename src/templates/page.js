@@ -5,7 +5,7 @@ import Global from "../components/Global"
 import PageTitle from "../components/PageTitle"
 import { PageBody } from "../components/styles"
 
-const PageTemplate = ({ data, location }) => {
+export default function PageTemplate({ data, location }) {
   const { frontmatter, html, excerpt } = data.page
   const { title, cover } = frontmatter
   if (cover) cover.fluid = cover.img.sharp.fluid
@@ -18,8 +18,6 @@ const PageTemplate = ({ data, location }) => {
     </Global>
   )
 }
-
-export default PageTemplate
 
 export const query = graphql`
   query($slug: String!) {
