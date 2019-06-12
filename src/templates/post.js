@@ -21,7 +21,7 @@ const PostTitle = ({ title, subtitle }) =>
     <h1>{title}</h1>
   )
 
-const PostTemplate = ({ data, location }) => {
+export default function PostTemplate({ data, location }) {
   const { post, next, prev } = data
   const { frontmatter, excerpt, html, timeToRead } = post
   const { title, slug, cover, showToc } = frontmatter
@@ -49,8 +49,6 @@ const PostTemplate = ({ data, location }) => {
     </Global>
   )
 }
-
-export default PostTemplate
 
 export const query = graphql`
   query($slug: String!, $prevSlug: String!, $nextSlug: String!) {
