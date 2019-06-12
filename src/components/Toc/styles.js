@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components"
-import { Link } from "gatsby"
 
 import { Close as Cross } from "styled-icons/material/Close"
 import { BookContent } from "styled-icons/boxicons-regular/BookContent"
@@ -7,10 +6,12 @@ import { BookContent } from "styled-icons/boxicons-regular/BookContent"
 import mediaQuery from "../../utils/mediaQuery"
 
 const openTocDiv = css`
-  background: white;
+  background: ${props => props.theme.background};
+  color: ${props => props.theme.textColor};
   padding: 0.7em 1.2em;
   border-radius: 0.5em;
-  border: 1px solid ${props => props.theme.lighterGray};
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
+  border: 1px solid ${props => props.theme.borderColor};
 `
 
 export const TocDiv = styled.div`
@@ -42,6 +43,7 @@ export const TocDiv = styled.div`
 `
 
 export const Title = styled.h2`
+  margin: 0;
   padding-bottom: 0.5em;
   display: grid;
   grid-auto-flow: column;
@@ -49,7 +51,8 @@ export const Title = styled.h2`
   grid-template-columns: auto auto 1fr;
 `
 
-export const TocLink = styled(Link)`
+export const TocLink = styled.a`
+  color: ${({ theme, active }) => (active ? theme.linkColor : theme.textColor)};
   display: block;
   margin-left: ${props => props.depth + `em`};
   border-top: ${props =>
@@ -61,20 +64,28 @@ export const TocIcon = styled(BookContent)`
   margin-right: 0.2em;
 `
 
-const openerCss = `
+const openerCss = css`
   position: fixed;
   bottom: 1em;
-  left: 1em;
+  left: 0;
+  padding: 0.5em 0.6em 0.5em 0.3em;
+  background: ${props => props.theme.background};
+  z-index: 1;
+  box-shadow: 0 0 1em ${props => props.theme.shadowColor};
+  border: 1px solid ${props => props.theme.borderColor};
+  border-radius: 0 50% 50% 0;
+  transform: translate(${props => (props.open ? `-100%` : 0)});
 `
 
 const closerCss = css`
-  background: ${props => props.theme.lighterGray};
+  margin-left: 1em;
+  border: 1px solid ${props => props.theme.borderColor};
   border-radius: 50%;
 `
 
 export const Toggle = styled(Cross).attrs(props => ({
   as: props.opener && BookContent,
-  size: props.size || `1.4em`,
+  size: props.size || `1.2em`,
 }))`
   transition: ${props => props.theme.shortTrans};
   justify-self: end;
