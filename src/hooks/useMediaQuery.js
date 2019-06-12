@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useState, useEffect } from "react"
 
 import mediaQuery from "../utils/mediaQuery"
@@ -5,13 +6,13 @@ import mediaQuery from "../utils/mediaQuery"
 // React hook for JS media queries
 export const useMediaQuery = query => {
   if (typeof window !== `undefined`) {
-    query = window.matchMedia(query)
-    const [match, setMatch] = useState(query.matches)
+    const mediaQuery = window.matchMedia(query)
+    const [match, setMatch] = useState(mediaQuery.matches)
     useEffect(() => {
       const handleMatch = q => setMatch(q.matches)
-      query.addListener(handleMatch)
-      return () => query.removeListener(handleMatch)
-    })
+      mediaQuery.addListener(handleMatch)
+      return () => mediaQuery.removeListener(handleMatch)
+    }, [mediaQuery])
     return match
   }
 }
