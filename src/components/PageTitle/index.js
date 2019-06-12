@@ -6,16 +6,16 @@ import { PageTitleContainer, Title, Img } from "./styles"
 export default function PageTitle({ children, img, className, ...rest }) {
   const { backdrop = true, fillToBottom } = rest
   const ref = useRef()
-  if (fillToBottom) {
-    const fillAvailHeight = () =>
-      (ref.current.style.height =
-        window.innerHeight - ref.current.offsetTop + `px`)
-    useEffect(() => {
+  useEffect(() => {
+    if (fillToBottom) {
+      const fillAvailHeight = () =>
+        (ref.current.style.minHeight =
+          window.innerHeight - ref.current.offsetTop + `px`)
       fillAvailHeight()
       window.addEventListener(`resize`, fillAvailHeight)
       return () => window.removeEventListener(`resize`, fillAvailHeight)
-    })
-  }
+    }
+  }, [fillToBottom])
   return (
     <PageTitleContainer {...{ ref, className }}>
       <Img {...img} />

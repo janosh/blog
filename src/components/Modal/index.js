@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { ThemeProvider } from "styled-components"
@@ -23,7 +24,7 @@ export default function Modal({ open, modal, setModal, children, ...rest }) {
         document.removeEventListener(`keydown`, handler)
         document.body.style.removeProperty(`overflow-y`)
       }
-    })
+    }, [modal, setModal])
     return (
       // calling setModal without arguments will close the modal
       <ModalBehind open={open} onClick={setModal}>
