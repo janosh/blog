@@ -1,4 +1,4 @@
-export * from "./useClickOutside"
+export * from "./useOnClickOutside"
 export * from "./useLocalStorage"
 export * from "./useMediaQuery"
 export * from "./useDarkMode"
