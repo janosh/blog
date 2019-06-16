@@ -3,7 +3,7 @@ title: Sticky Active Smooth Responsive ToC
 slug: /sticky-active-smooth-responsive-toc
 date: 2019-06-11
 cover:
-  img: hmc-toc.jpg
+  img: desk-toc.jpg
 tags:
   - Design
   - JS
@@ -14,34 +14,34 @@ showToc: true
 
 ## Intro
 
-In this post, I'll walk you through how to implement a sticky, active, smooth and responsive table of contents in less than 100 lines of JavaScript (excluding the styles) using [React](https://reactjs.org) and [styled-components](https://styled-components.com). This component is particularly useful on longer pages where it allows visitors to both see where on the page they currently are as well as quickly jump to other sections. This post is too short for it to make a lot of sense here but I added it for the purposes of demonstration anyway. If you want to see a post where it's more at home, check out [this introduction to Hamiltonian Monte Carlo](/blog/hmc-intro).
+In this post, I'll walk you through how to implement a sticky, active, smooth and responsive table of contents in less than 100 lines of JavaScript (excluding the styles) using [React](https://reactjs.org) and [styled-components](https://styled-components.com). This component is particularly useful on longer pages where it allows visitors to both see where in the document they currently are as well as quickly jump to other sections. This post is too short for it to make much sense. It's just here for the purposes of demonstration. If you want to see a post where it's more at home, check out [this introduction to Hamiltonian Monte Carlo](/blog/hmc-intro).
 
 [![HMC Intro](/hmc-toc.png)](/blog/hmc-intro)
 
 Just so we're on the same page, here are two important points.
 
-1. Firstly the component assumes that all the headings you want to list in the ToC can be targeted by a CSS selector or array of CSS selectors which is passed into [`document.querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll). By default it uses ``[`main h1`, `main h2`, ..., `main h6`]``. Also, you should be able to write a `getDepth` function to compute the depth of a heading given it's DOM node. This is not essential as you could just have a flat ToC, i.e. without indenting nested headings if you prefer. The default value for `getDepth` is `node => Number(node.nodeName[1])`.
+1. Firstly the component assumes that all the headings you want to list in the ToC can be targeted by one or several CSS selectors which the component passes into [`document.querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll). By default it uses `` [`main h1`, `main h2`, ..., `main h6`] ``. Also, you should be able to write a `getDepth` function to compute the depth of a heading given it's DOM node. This is not essential, however, as you could just have a flat ToC, i.e. without indenting nested headings if you prefer. The default value for `getDepth` is `node => Number(node.nodeName[1])` (given the above CSS selector, `nodeName` would be one of `H(1-6)`).
 2. Secondly, this is what each of the words in the unwieldy title mean:
 
-    - **Responsive**: The ToC is displayed in a column to the right of the text if the screen width permits and as a small book icon in the lower left corner on narrow screens such as phones and small tablets. In that case, it expands to show the full ToC when clicked.
-    - **Sticky**: The ToC scrolls with the viewport below a certain threshold on the page to always remain easily accessible as you progress through the document.
-    - **Active**: The ToC highlights the heading that's closest to the reader's current position to show where in the document as a whole you're currently at.
-    - **Smooth**: When a user clicks a heading in the ToC, the viewport smoothly scrolls to that heading (without adding to the browser history, i.e. clicking the back button will always send you back to the previous page).
+   - **Responsive**: The ToC is displayed in a column to the right of the text if the screen width permits and as a small book icon in the lower left corner on narrow screens like phones and small tablets. In that case, the component expands to show the full ToC when the icon is clicked.
+   - **Sticky**: The ToC scrolls with the viewport below a certain threshold on the page to always remain easily accessible as you progress through the document.
+   - **Active**: The ToC highlights the heading that's closest to the reader's current position to act sort of like a progress bar and give an idea where in the document you're currently at.
+   - **Smooth**: When a user clicks a heading in the ToC, the viewport smoothly scrolls to that heading (without adding to the browser history, i.e. clicking the back button will always send the reader back to the previous page).
 
 Alright, I can hear you saying "enough talk, show me the code already". Here it is.
 
 ## Implementation
 
 ```js:title=src/components/toc/index.js
-import React, { useRef, useState, useEffect } from "react"
-import { throttle } from "lodash"
+import React, { useRef, useState, useEffect } from 'react'
+import { throttle } from 'lodash'
 
 // A hook to close the ToC if it's currently in an open state
 // (only used on small screens) and close it, when the user clicks
 // or touches somewhere outside the component.
-import { useClickOutside } from "../../hooks"
+import { useOnClickOutside } from '../../hooks'
 // styled components (see below)
-import { TocDiv, TocLink, TocIcon, Title, Toggle } from "./styles"
+import { TocDiv, TocLink, TocIcon, Title, Toggle } from './styles'
 
 // Used to calculate each heading's offset from the top of the page.
 // This will be compared to window.scrollY to determine which heading
@@ -60,7 +60,7 @@ export default function Toc({
   // array of strings would target the all the headings you want.
   headingSelector = Array.from({ length: 6 }, (_, i) => `main h` + (i + 1)),
   title = `Contents`,
-  getDepth = node => Number(node.nodeName[1])
+  getDepth = node => Number(node.nodeName[1]),
 }) {
   const [headings, setHeadings] = useState({
     titles: [],
@@ -74,7 +74,7 @@ export default function Toc({
   // The ref is attached to the top-level div (TocDiv) and is
   // used to determine if the user clicked outside the ToC.
   const ref = useRef()
-  useClickOutside(ref, () => setOpen(false))
+  useOnClickOutside(ref, () => setOpen(false))
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll(headingSelector))
     const titles = nodes.map(node => ({
@@ -136,12 +136,12 @@ export default function Toc({
 }
 ```
 
-And here's the `useClickOutside` hook (which I reexport from `src/hooks/index.js` in order to import it as above).
+And here's the `useOnClickOutside` hook.
 
-```js:title=src/hooks/useClickOutside.js
-import { useEffect } from "react"
+```js:title=src/hooks/useOnClickOutside.js
+import { useEffect } from 'react'
 
-export const useClickOutside = (ref, handler, events) => {
+export const useOnClickOutside = (ref, handler, events) => {
   if (!events) events = [`mousedown`, `touchstart`]
   useEffect(() => {
     const detectClickOutside = event =>
@@ -158,15 +158,15 @@ export const useClickOutside = (ref, handler, events) => {
 
 ## Styles
 
-I include the styles here mostly for completeness and in case you're also using `styled-components`. You can boil these down quite a bit if you don't need the component to be responsive or if your site doesn't have a dark theme.
+I include the styles here mostly for completeness and in case you're also using `styled-components`. You can boil these down some if you don't need the component to be responsive or adjust to your site's dark theme.
 
 ```js:title=src/components/toc/styles.js
-import styled, { css } from "styled-components"
+import styled, { css } from 'styled-components'
 
-import { Close as Cross } from "styled-icons/material/Close"
-import { BookContent } from "styled-icons/boxicons-regular/BookContent"
+import { Close as Cross } from 'styled-icons/material/Close'
+import { BookContent } from 'styled-icons/boxicons-regular/BookContent'
 
-import mediaQuery from "../../utils/mediaQuery"
+import mediaQuery from '../../utils/mediaQuery'
 
 const openTocDiv = css`
   background: ${props => props.theme.background};
@@ -262,6 +262,6 @@ export const Toggle = styled(Cross).attrs(props => ({
 `
 ```
 
-And that's it. It took quite a bit less code than I expected when I started writing this component considering the long list of requirements I had in mind for it. I guess that's another testament to the hooks API which makes React even more modular, composable and compact.
+And that's it. It took quite a bit less code than I expected when I started writing this component considering the long list of requirements I had in mind for it. I guess that's another testament to the hooks API. I think it's been a big step towards making React even more modular, composable and compact.
 
-Let me know in the comments if the component works for you or if you have questions!
+Let me know in the comments how the component works for you or if you have questions!

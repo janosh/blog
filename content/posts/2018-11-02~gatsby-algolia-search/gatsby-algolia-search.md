@@ -151,7 +151,7 @@ If you've come this far, then the "backend" is done. You should now be able to r
 
 ## Frontend
 
-What remains is a user-facing search interface for your site. It needs a way for the user to enter a search string, send that string to Algolia, receive matching results (*hits* in Algolia speak) from your indices and finally display those to the user. Let's dive right in.
+What remains is a user-facing search interface for your site. It needs a way for the user to enter a search string, send that string to Algolia, receive matching results (_hits_ in Algolia speak) from your indices and finally display those to the user. Let's dive right in.
 
 We're going to assemble everything we need into a React `Search` component that we call from anywhere on our site where we want the user to be able to search. Even though design varies strongly from site to site, I'll also go through the styles implemented with [`styled-components`](https://styled-components.com) in this guide since working out the CSS transitions to have the search field slide out as the user clicks on it and the results pane to appear once Algolia returns matches took some time.
 
@@ -160,7 +160,7 @@ The `Search` components is made up of the following files:
 - [**`index.js`**: the main component](https://github.com/janosh/janosh.io/tree/master/src/components/Search/index.js)
 - [**`input.js`**: the text input field](https://github.com/janosh/janosh.io/tree/master/src/components/Search/Input.js)
 - [**`hitComps.js`**: the components that will render matching posts/pages](https://github.com/janosh/janosh.io/tree/master/src/components/Search/hitComps.js)
-- [**`styles.js`**: the styled components]( https://github.com/janosh/janosh.io/tree/master/src/components/Search/styles.js)
+- [**`styles.js`**: the styled components](https://github.com/janosh/janosh.io/tree/master/src/components/Search/styles.js)
 
 There's quite a lot happening in these files so let's break them down one by one and piece by piece.
 
@@ -190,7 +190,7 @@ const Stats = connectStateResults(
     res && res.nbHits > 0 && `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`
 )
 
-const useClickOutside = (ref, handler, events) => {
+const useOnClickOutside = (ref, handler, events) => {
   if (!events) events = [`mousedown`, `touchstart`]
   const detectClickOutside = event =>
     !ref.current.contains(event.target) && handler()
@@ -212,7 +212,7 @@ export default function Search({ indices, collapse, hitsAsGrid }) {
     process.env.GATSBY_ALGOLIA_APP_ID,
     process.env.GATSBY_ALGOLIA_SEARCH_KEY
   )
-  useClickOutside(ref, () => setFocus(false))
+  useOnClickOutside(ref, () => setFocus(false))
   return (
     <InstantSearch
       searchClient={searchClient}
@@ -331,7 +331,6 @@ Passing this `indices` array as a prop allows you to reuse the same `Search` com
 
 Note that we fed `algoliasearch` with the same app ID we specified in our `.env` file and used in `src/utils/algolia.js` as well as with our search-only API key to generate a search client which connects to our backend. _Don't paste in your Algolia admin API key here!_ `algoliasearch` only needs to _read_ your indices. Pasting your admin key here would allow others to obtain it once your site is deployed. They could then start messing with your indexed data on Algolia.
 
-
 ## `input.js`
 
 ```js
@@ -357,7 +356,6 @@ export default connectSearchBox(({ refine, ...rest }) => (
 The `Input` component is where the user enters the search string. It is quite short since the grunt work is done by Algolia's [`connectSearchBox`](https://community.algolia.com/react-instantsearch/connectors/connectSearchBox.html) function.
 
 Now let's look at the styled components `SearchIcon`, `Form`, `Input` as well as the ones imported in `index.js`.
-
 
 ## `styled.js`
 
