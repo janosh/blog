@@ -1,7 +1,7 @@
 import React, { memo, useRef, useState } from "react"
 import { animated, useSpring } from "react-spring"
 
-import { useClickOutside, useSize } from "../../../hooks"
+import { useOnClickOutside, useSize } from "../../../hooks"
 import { Children, Icons, Item, Menu, MobileNavDiv, NavLink } from "./styles"
 
 const Tree = memo(({ text, url, children }) => {
@@ -35,7 +35,7 @@ const Tree = memo(({ text, url, children }) => {
 export default function MobileNav({ nav }) {
   const ref = useRef()
   const [open, setOpen] = useState(false)
-  useClickOutside(ref, () => open && setOpen(false))
+  useOnClickOutside(ref, () => open && setOpen(false))
   return (
     <>
       <Menu onClick={() => setOpen(!open)} />
