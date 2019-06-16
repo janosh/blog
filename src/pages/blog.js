@@ -1,56 +1,50 @@
-import React, { useState } from 'react'
-import { graphql } from 'gatsby'
+import React from "react"
+import { graphql } from "gatsby"
 
-import Global from '../components/Global'
-import PageTitle from '../components/PageTitle'
-import { PageBody } from '../components/styles'
-import TagList from '../components/TagList'
-import PostList from '../views/PostList'
-import { startCase, kebabCase } from 'lodash'
+import Global from "../components/Global"
+import PageTitle from "../components/PageTitle"
+import { PageBody } from "../components/styles"
+import TagList from "../components/TagList"
+import PostList from "../views/PostList"
+import { useQueryParam } from "../hooks"
+import { kebabCase } from "lodash"
 
-const insertAllTag = (tags, count) => {
-  if (!tags.group.map(tag => tag.title).includes(`All`))
-    tags.group.unshift({ title: `All`, count })
-}
+const addSlugs = tags =>
+  tags.map(tag => ({
+    slug: kebabCase(tag.title),
+    ...tag,
+  }))
+
+const insertAllTag = (tags, count) =>
+  !tags.map(tag => tag.title).includes(`All`)
+    ? [{ title: `All`, slug: null, count }, ...addSlugs(tags)]
+    : tags
 
 const filterPostsByTag = (tag, posts) =>
-  tag === `All`
-    ? posts
-    : posts.filter(({ node }) => node.frontmatter.tags.includes(tag))
+  tag && tag.slug
+    ? posts.filter(({ node }) => node.frontmatter.tags.includes(tag.title))
+    : posts
 
-const readActiveTagFromUrl = urlParams =>
-  startCase(urlParams.replace(/.*tag=([^&]+).*/, `$1`))
-
-const BlogPage = ({ data, location }) => {
+export default function BlogPage({ data, location }) {
   const { posts, tags, img } = data
-  const urlTag = readActiveTagFromUrl(location.search)
-  const [tag, setTag] = useState(urlTag || `All`)
-  const filteredPosts = filterPostsByTag(tag, posts.edges)
-  insertAllTag(tags, posts.edges.length)
-
-  const handleTagClick = tag => {
-    setTag(tag)
-    history.replaceState(
-      { activeTag: tag },
-      `active tag: ${tag}`,
-      tag === `All` ? `/blog` : `/blog?tag=${kebabCase(tag)}`
-    )
-  }
-
+  const [activeTag, setActiveTag] = useQueryParam(`tag`)
+  const allTags = insertAllTag(tags.group, posts.edges.length)
+  const filteredPosts = filterPostsByTag(
+    allTags.find(tag => tag.slug === activeTag),
+    posts.edges
+  )
   return (
     <Global pageTitle="Blog" path={location.pathname}>
       <PageTitle img={img && img.sharp}>
         <h1>Blog</h1>
       </PageTitle>
       <PageBody>
-        <TagList tags={tags.group} activeTag={tag} setTag={handleTagClick} />
+        <TagList {...{ tags: allTags, activeTag, setActiveTag }} />
         <PostList inBlog posts={filteredPosts} />
       </PageBody>
     </Global>
   )
 }
-
-export default BlogPage
 
 export const query = graphql`
   {
