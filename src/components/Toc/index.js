@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react"
 import { throttle } from "lodash"
 
-import { useClickOutside } from "../../hooks"
+import { useOnClickOutside } from "../../hooks"
 import { TocDiv, TocLink, TocIcon, Title, Toggle } from "./styles"
 
 const accumulateOffsetTop = (el, totalOffset = 0) => {
@@ -25,7 +25,7 @@ export default function Toc({
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState()
   const ref = useRef()
-  useClickOutside(ref, () => setOpen(false))
+  useOnClickOutside(ref, () => setOpen(false))
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll(headingSelector))
     const titles = nodes.map(node => ({

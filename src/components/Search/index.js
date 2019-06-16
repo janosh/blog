@@ -7,7 +7,7 @@ import {
 } from "react-instantsearch-dom"
 import algoliasearch from "algoliasearch/lite"
 
-import { useClickOutside } from "../../hooks"
+import { useOnClickOutside } from "../../hooks"
 import { Root, HitsWrapper, PoweredBy } from "./styles"
 import Input from "./Input"
 import * as hitComps from "./hitComps"
@@ -30,7 +30,7 @@ export default function Search({ indices, collapse, hitsAsGrid }) {
     process.env.GATSBY_ALGOLIA_APP_ID,
     process.env.GATSBY_ALGOLIA_SEARCH_KEY
   )
-  useClickOutside(ref, () => setFocus(false))
+  useOnClickOutside(ref, () => setFocus(false))
   return (
     <InstantSearch
       searchClient={searchClient}
