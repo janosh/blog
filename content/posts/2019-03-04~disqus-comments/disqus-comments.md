@@ -29,7 +29,7 @@ I ended up going with Disqus for the following reasons.
 - Its commenting interface has a distinct but unobtrusive look that many users will instantly recognize and trust.
 - All Disqus components are lazy-loaded, meaning they won't negatively impact the load times of your posts.
 
-The other services seemed excellent as well, though, and are well worth checking out. Staticman, for instance, took an interesting approach. Essentially, you set up your own HTML form for writing comments, let it send a POST request on submission to one of their endpoints. From this Staticman will automatically submit a pull request to your site's repo which you can accept or deny. If that isn't a geeky way of doing comment moderation, I don't know what is. This has the big advantage of keeping everything static (hence the name). All your data is in one place (your repo) as opposed to having to be loaded through JavaScript embeds or iframes on the fly. It will remain there even if Staticman is ever discontinued. With the other services, you depend on an external platform to deliver your comments.
+The other services seemed excellent as well, though, and are well worth checking out. Staticman, for instance, took an interesting approach. Essentially, you set up your own HTML form for writing comments, let it send a POST request on submission to one of their endpoints. From this Staticman will automatically submit a pull request to your site's repo which you can accept or deny. If that isn't a geeky way of doing comment moderation, I don't know what is. This has the big advantage of keeping everything static (hence the name). All your data is in one place (your repo) as opposed to having to be loaded through JavaScript embeds or iframes (short for [inline frame](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)) on the fly. It will remain there even if Staticman is ever discontinued. With the other services, you depend on an external platform to deliver your comments.
 
 Of course, in return you have the disadvantage of increased manual setup including putting together the comment form and hooking it up to Staticman. Depending on your use case, this degree of customizability may well be an advantage. In my case, though, I just wanted something fast with as little manual configuration and setup as possible. Disqus turned out to perfect in this regard.
 
@@ -88,7 +88,7 @@ And you're done. You should now see the Disqus comment form appear beneath your 
 
 ---
 
-# Update
+## Update
 
 ## Adding comment counts to your blog post previews
 
