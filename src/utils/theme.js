@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
   blue: `#2202a9`,
   darkBlue: `#190c65`,
   darkerBlue: `#150956`,
@@ -29,7 +29,7 @@ const colors = {
   lightestGray: `#f7f7f7`,
 }
 
-const measures = {
+export const measures = {
   maxWidth: `40em`,
 
   smallBorder: `0.1em`,
@@ -45,9 +45,9 @@ const measures = {
   longTrans: `1s`,
 }
 
-const theme = { ...colors, ...measures }
+export const theme = { ...colors, ...measures }
 
-const lightTheme = {
+export const lightTheme = {
   background: `white`,
   textColor: `black`,
   quoteBg: theme.lightestGray,
@@ -59,7 +59,7 @@ const lightTheme = {
   borderColor: theme.lighterGray,
 
   headerBg: theme.darkerBlue,
-  footerBg: theme.darkGray,
+  footerBg: theme.darkerGray,
 
   buttonBg: theme.blue,
   hoveredButtonBg: theme.lightBlue,
@@ -69,7 +69,7 @@ const lightTheme = {
   inlineCodeColor: theme.lighterGray,
 }
 
-const darkTheme = {
+export const darkTheme = {
   background: theme.darkerGray,
   textColor: theme.lighterGray,
   quoteBg: theme.darkestGray,
