@@ -9,7 +9,7 @@ export const ButtonGroup = styled.div`
     border: none;
     outline: none;
     background: ${props => props.theme.blue};
-    color: white !important;
+    color: white;
     padding: 0.2em 0.6em;
     width: max-content;
     font-size: ${props => props.size};
