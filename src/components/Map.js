@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react"
+import { isEqual, omit, functions } from "lodash"
 
-export default function Map({ options, onMount, className }) {
+function Map({ options, onMount, className }) {
   const divProps = { ref: useRef(), className }
 
   useEffect(() => {
@@ -12,7 +13,7 @@ export default function Map({ options, onMount, className }) {
       const script = document.createElement(`script`)
       script.type = `text/javascript`
       script.src =
-        `https://maps.google.com/maps/api/js?key=` +
+        `https://maps.googleapis.com/maps/api/js?key=` +
         process.env.GATSBY_GOOGLE_MAPS_API_KEY
       const headScript = document.getElementsByTagName(`script`)[0]
       headScript.parentNode.insertBefore(script, headScript)
@@ -28,6 +29,17 @@ export default function Map({ options, onMount, className }) {
     />
   )
 }
+
+const shouldUpdate = (prevProps, nextProps) => {
+  delete prevProps.options.mapTypeId
+  const [prevFuncs, nextFuncs] = [functions(prevProps), functions(nextProps)]
+  return (
+    isEqual(omit(prevProps, prevFuncs), omit(nextProps, nextFuncs)) &&
+    prevFuncs.every(fn => prevProps[fn].toString() === nextProps[fn].toString())
+  )
+}
+
+export default React.memo(Map, shouldUpdate)
 
 Map.defaultProps = {
   options: {

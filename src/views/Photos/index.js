@@ -1,4 +1,4 @@
-import React, { useCallback } from "react"
+import React from "react"
 import MarkerClusterer from "@google/markerclustererplus"
 
 import Masonry from "../../components/Masonry"
@@ -22,16 +22,7 @@ const addMarkers = (photos, setModal) => map => {
   new MarkerClusterer(map, markers)
 }
 
-const mapProps = (...args) => ({
-  options: {
-    center: { lat: 40, lng: 10 },
-    zoom: 3,
-  },
-  onMount: addMarkers(...args),
-})
-
 export default function Photos({ tab, photos, modal, setModal }) {
-  const MemoMap = useCallback(<Map {...mapProps(photos, setModal)} />, [])
   const currentPhoto = modal >= 0 && modal < photos.length && photos[modal]
   return (
     <>
@@ -44,7 +35,10 @@ export default function Photos({ tab, photos, modal, setModal }) {
           ))}
         </Masonry>
       ) : (
-        MemoMap
+        <Map
+          options={{ center: { lat: 40, lng: 10 }, zoom: 3 }}
+          onMount={addMarkers(photos, setModal)}
+        />
       )}
       <Modal
         open={currentPhoto}
