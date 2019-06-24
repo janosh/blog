@@ -1,9 +1,9 @@
 import { css } from "styled-components"
 
-export { ButtonGroup } from "./ButtonGroup"
-export { PageBody } from "./PageBody"
-export { Grid } from "./Grid"
-export { Caption } from "./Caption"
+export * from "./ButtonGroup"
+export * from "./PageBody"
+export * from "./Grid"
+export * from "./Caption"
 
 export const fadeInOnHoverParent = parent => css`
   opacity: 0;

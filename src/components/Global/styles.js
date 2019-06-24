@@ -38,7 +38,6 @@ export const GlobalStyle = createGlobalStyle`
       }
     }
     /* below rules enable dark mode */
-    will-change: color, background;
     background: ${props => props.theme.background};
     color: ${props => props.theme.textColor};
     a {
@@ -71,7 +70,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   .button {
     background: ${props => props.theme.buttonBg};
-    color: white !important;
+    color: white;
     border-radius: ${props => props.theme.smallBorderRadius};
     padding: 0.3em 0.6em;
     transition: ${props => props.theme.shortTrans};
