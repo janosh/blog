@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
+import { theme } from "../utils/theme"
 import Global from "../components/Global"
 import PageTitle from "../components/PageTitle"
 
@@ -8,9 +9,9 @@ const PageNotFound = ({ data, location }) => (
   <Global margin="0" transparent path={location.pathname}>
     <PageTitle img={data.file.img}>
       <h2>Oops, this page doesn&apos;t exist</h2>
-      <h3>
-        <Link to="/">Back to landing page</Link>
-      </h3>
+      <Link to="/" css={`color:` + theme.orange}>
+        Back to landing page
+      </Link>
     </PageTitle>
   </Global>
 )
