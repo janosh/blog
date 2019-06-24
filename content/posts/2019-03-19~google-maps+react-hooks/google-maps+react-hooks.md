@@ -109,7 +109,7 @@ Note that the `onMount` function must be curried since the `Map` component itsel
 
 ## Optimization
 
-By default, when using the `Map` component inside another function component it will rerender whenever the parent component rerenders. Not only does this waste computational resources since there's no need to rerender the map if its props didn't change, it also ruins the user experience since the map will jump back to its initial `center` and `zoom` on every rerender. To prevent this, you can easily create a memoized map with the `useCallback` hook:
+By default, when using the `Map` component it will rerender whenever the parent component rerenders. Not only does this waste computation since there's no need to rerender the map if its props didn't change, even more importantly, it also ruins the user experience since the map will jump back to its initial `center` and `zoom` on every rerender. To prevent this, you can easily create a memoized map with the `useCallback` hook:
 
 ```js{1,4,9}:title=src/app.js
 import React, { useCallback } from 'react'
@@ -125,13 +125,34 @@ export default () => (
 )
 ```
 
-In fact, you may want to make this part of the `Map` component by default, i.e.
+In fact, you may want to make memoization part of the `Map` component itself by replacing
 
-```js{36}:title=src/components/map.js
-- export default function Map({ options, onMount, className }) {
-+ function Map({ options, onMount, className }) {
+```js
+export default function Map({ options, onMount, className }) {
+  ...
+}
+```
+
+with
+
+```js{7,15}:title=src/components/map.js
+import { isEqual, omit, functions } from "lodash"
+
+function Map({ options, onMount, className }) {
   ...
 }
 
-+ export default props => useCallback(<Map {...props} />, [])
+const shouldUpdate = (prevProps, nextProps) => {
+  const [prevFuncs, nextFuncs] = [functions(prevProps), functions(nextProps)]
+  return (
+    isEqual(omit(prevProps, prevFuncs), omit(nextProps, nextFuncs)) &&
+    prevFuncs.every(fn => prevProps[fn].toString() === nextProps[fn].toString())
+  )
+}
+
+export default React.memo(Map, shouldUpdate)
 ```
+
+[`React.memo`](https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-shouldcomponentupdate) shallowly compares props and only rerenders a function component if the comparison returns false. It's the function component equivalent to `PureComponent` for class components. For components that receive objects, arrays and functions as props which can be referentially different on every render, the default behavior of shallow prop comparison can be overriden by passing a custom comparison function as second argument. It takes the next and previous props as input and returns true if the update should be skipped or false if the component should rerender.
+
+The above `shouldUpdate` function uses the `functions` and `omit` utilities imported from [`lodash`](https://lodash.com) to first identify and remove all (top-level) functions from `prevProps` and `nextProps` (in the above example, this only handles the `onMount` function but you may use additional functions in the future that would automatically be handled correctly by `shouldUpdate`). It then deep-compares the remaining props using `isEqual` followed by comparing the string representations of all omitted functions. If both comparisons return true, it skips the rerender and the user gets to keep the map's current position and zoom level.
