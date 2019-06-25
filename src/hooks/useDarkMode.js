@@ -1,19 +1,22 @@
-import { useMediaQuery, useLocalStorage } from "."
+import { useLocalStorage, useMediaQuery } from '.'
 
-export const useDarkMode = () => {
-  const [darkMode, setDarkMode] = useLocalStorage(`darkMode`)
+export const useDarkMode = (initialValue = `noPreference`) => {
+  const [colorScheme, setColorScheme] = useLocalStorage(
+    `colorScheme`,
+    initialValue
+  )
   const setter = value => {
     // Add color and background transition to body here to prevent
     // flashing from light to dark on initial page load.
     document.body.style.transition = `color 0.5s, background 0.5s`
-    setDarkMode(value)
+    setColorScheme(value)
   }
 
-  // Check if user has an OS preference for dark mode.
+  // Check if the user has an OS preference for dark mode.
   const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: dark)`)
 
-  // If darkMode was found in local storage use it, else fallback to prefersDarkMode.
-  // Allows user to override OS setting.
-  const enabled = typeof darkMode !== `undefined` ? darkMode : prefersDarkMode
-  return [enabled, setter]
+  // Dark mode is enabled if either the color scheme was set to dark
+  // by the user or the media query `prefers-color-scheme: dark` is true.
+  const darkModeEnabled = colorScheme === `dark` || prefersDarkMode
+  return [darkModeEnabled, colorScheme, setter]
 }

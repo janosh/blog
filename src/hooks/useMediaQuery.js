@@ -1,18 +1,18 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { useState, useEffect } from "react"
-
-import mediaQuery from "../utils/mediaQuery"
+import { useEffect, useState } from 'react'
+import mediaQuery from '../utils/mediaQuery'
 
 // React hook for JS media queries
 export const useMediaQuery = query => {
   if (typeof window !== `undefined`) {
-    const mediaQuery = window.matchMedia(query)
-    const [match, setMatch] = useState(mediaQuery.matches)
+    query = window.matchMedia(query)
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [match, setMatch] = useState(query.matches)
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       const handleMatch = q => setMatch(q.matches)
-      mediaQuery.addListener(handleMatch)
-      return () => mediaQuery.removeListener(handleMatch)
-    }, [mediaQuery])
+      query.addListener(handleMatch)
+      return () => query.removeListener(handleMatch)
+    }, [query])
     return match
   }
 }
