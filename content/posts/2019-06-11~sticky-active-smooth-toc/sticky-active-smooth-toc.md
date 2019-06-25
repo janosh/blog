@@ -14,18 +14,18 @@ showToc: true
 
 ## Intro
 
-In this post, I'll walk you through how to implement a sticky, active, smooth and responsive table of contents in less than 100 lines of JavaScript (excluding the styles) using [React](https://reactjs.org) and [styled-components](https://styled-components.com). This component is particularly useful on longer pages where it allows visitors to both see where in the document they currently are as well as quickly jump to other sections. This post is too short for it to make much sense. It's just here for the purposes of demonstration. If you want to see a post where it's more at home, check out [this introduction to Hamiltonian Monte Carlo](/blog/hmc-intro).
+In this post, I'll walk you through how to implement a sticky, active, smooth and responsive table of contents in just 80 lines of JavaScript (styles excluded) using [React](https://reactjs.org) and [styled-components](https://styled-components.com). This component is particularly useful on longer pages with lots of headings where it allows visitors to both see where in the document they currently are as well as quickly jump to other sections. This post is too short for it to make much sense. I added it anyway for the purposes of demonstration. If you want to see a post where it's more at home, check out [this introduction to Hamiltonian Monte Carlo](/blog/hmc-intro).
 
 [![HMC Intro](/hmc-toc.png)](/blog/hmc-intro)
 
 Just so we're on the same page, here are two important points.
 
-1. Firstly the component assumes that all the headings you want to list in the ToC can be targeted by one or several CSS selectors which the component passes into [`document.querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll). By default it uses `` [`main h1`, `main h2`, ..., `main h6`] ``. Also, you should be able to write a `getDepth` function to compute the depth of a heading given it's DOM node. This is not essential, however, as you could just have a flat ToC, i.e. without indenting nested headings if you prefer. The default value for `getDepth` is `node => Number(node.nodeName[1])` (given the above CSS selector, `nodeName` would be one of `H(1-6)`).
+1. Firstly the component assumes that all headings you want to list in the ToC can be targeted by one or several CSS selectors which the component passes into [`document.querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll). By default it uses `` [`main h1`, `main h2`, ..., `main h6`] ``. Also, you should be able to provide `getTitle` and `getDepth` functions to obtain the title and depth of a heading given it's DOM node. (The latter is not essential if you're happy with a flat ToC, i.e. one that doesn't indent lower-level headings.) The default values are `getTitle = node => node.innerText` and `getDepth = node => Number(node.nodeName[1])` (since `nodeName` will be probably be one of `H(1-6)`).
 2. Secondly, this is what each of the words in the unwieldy title mean:
 
    - **Responsive**: The ToC is displayed in a column to the right of the text if the screen width permits and as a small book icon in the lower left corner on narrow screens like phones and small tablets. In that case, the component expands to show the full ToC when the icon is clicked.
    - **Sticky**: The ToC scrolls with the viewport below a certain threshold on the page to always remain easily accessible as you progress through the document.
-   - **Active**: The ToC highlights the heading that's closest to the reader's current position to act sort of like a progress bar and give an idea where in the document you're currently at.
+   - **Active**: The ToC highlights the heading that's closest to the reader's current position to act as a progress bar and give an idea how far through the document the user has read.
    - **Smooth**: When a user clicks a heading in the ToC, the viewport smoothly scrolls to that heading (without adding to the browser history, i.e. clicking the back button will always send the reader back to the previous page).
 
 Alright, I can hear you saying "enough talk, show me the code already". Here it is.
@@ -33,15 +33,15 @@ Alright, I can hear you saying "enough talk, show me the code already". Here it 
 ## Implementation
 
 ```js:title=src/components/toc/index.js
-import React, { useRef, useState, useEffect } from 'react'
-import { throttle } from 'lodash'
+import React, { useRef, useState, useEffect } from "react"
+import { throttle } from "lodash"
 
 // A hook to close the ToC if it's currently in an open state
-// (only used on small screens) and close it, when the user clicks
-// or touches somewhere outside the component.
-import { useOnClickOutside } from '../../hooks'
-// styled components (see below)
-import { TocDiv, TocLink, TocIcon, Title, Toggle } from './styles'
+// and close it, when the user clicks or touches somewhere
+// outside the component (only used on small screens).
+import { useOnClickOutside } from "../../hooks"
+// Import styled components (see the Styles section below).
+import { TocDiv, TocLink, TocIcon, Title, Toggle } from "./styles"
 
 // Used to calculate each heading's offset from the top of the page.
 // This will be compared to window.scrollY to determine which heading
@@ -54,14 +54,12 @@ const accumulateOffsetTop = (el, totalOffset = 0) => {
   return totalOffset
 }
 
-export default function Toc({
-  // The default selector targets all headings (h1, h2, ..., h6)
-  // inside a main element. You can pass in whatever string or
-  // array of strings would target the all the headings you want.
-  headingSelector = Array.from({ length: 6 }, (_, i) => `main h` + (i + 1)),
-  title = `Contents`,
-  getDepth = node => Number(node.nodeName[1]),
-}) {
+export default function Toc({ headingSelector, getTitle, getDepth, tocTitle }) {
+  // headingSelector: string or array of strings
+  // getTitle: function
+  // getDepth: function
+  // tocTitle: string
+  // All Toc props optional.
   const [headings, setHeadings] = useState({
     titles: [],
     nodes: [],
@@ -75,23 +73,38 @@ export default function Toc({
   // used to determine if the user clicked outside the ToC.
   const ref = useRef()
   useOnClickOutside(ref, () => setOpen(false))
+  // Read heading titles, depths and nodes from the DOM.
   useEffect(() => {
-    const nodes = Array.from(document.querySelectorAll(headingSelector))
+    // Fallback to sensible defaults for headingSelector, getTitle and getDepth
+    // inside useEffect rather than specifying them as Toc default props to avoid
+    // the need for useMemo and useCallback, resp.
+    // Otherwise, these would change on every render and since this effect calls
+    // setHeadings which triggers a rerender, it would cause an infinite loop.
+
+    // The default selector targets all headings (h1, h2, ..., h6) inside
+    // a main element. You can pass in whatever string or array of strings
+    // targets all the headings you want to appear in the ToC.
+    const selector =
+      headingSelector || Array.from({ length: 6 }, (_, i) => `main h` + (i + 1))
+    const nodes = Array.from(document.querySelectorAll(selector))
     const titles = nodes.map(node => ({
-      title: node.innerText,
-      depth: getDepth(node),
+      title: getTitle ? getTitle(node) : node.innerText,
+      depth: getDepth ? getDepth(node) : Number(node.nodeName[1]),
     }))
-    // Compute the minimum heading depth. This will subtracted
-    // from each heading's depth to determine the indentation
-    // of that heading in the ToC.
+    // Compute the minimum heading depth. Will be subtracted from each heading's
+    // depth to determine the indentation of that heading in the ToC.
     const minDepth = Math.min(...titles.map(h => h.depth))
     setHeadings({ titles, nodes, minDepth })
+  }, [headingSelector, getTitle, getDepth])
 
-    // Throttling the scrollHandler saves resources and your reader's battery life.
+  // Add scroll event listener to update currently active heading.
+  useEffect(() => {
+    // Throttling the scrollHandler saves computation and hence battery life.
     const scrollHandler = throttle(() => {
-      // Offsets need to be recomputed because lazily-loaded content
-      // increases increases offsets as user scrolls down.
-      const offsets = headings.nodes.map(el => accumulateOffsetTop(el))
+      const { titles, nodes } = headings
+      // Offsets need to be recomputed inside scrollHandler because
+      // lazily-loaded content increases offsets as user scrolls down.
+      const offsets = nodes.map(el => accumulateOffsetTop(el))
       const activeIndex = offsets.findIndex(
         offset => offset > window.scrollY + 0.8 * window.innerHeight
       )
@@ -100,7 +113,7 @@ export default function Toc({
 
     window.addEventListener(`scroll`, scrollHandler)
     return () => window.removeEventListener(`scroll`, scrollHandler)
-  }, [headingSelector, headings])
+  }, [headings])
 
   return (
     <>
@@ -108,7 +121,7 @@ export default function Toc({
       <TocDiv ref={ref} open={open}>
         <Title>
           <TocIcon />
-          {title}
+          {tocTitle || `Contents`}
           <Toggle closer onClick={() => setOpen(false)} />
         </Title>
         <nav>
@@ -152,7 +165,7 @@ export const useOnClickOutside = (ref, handler, events) => {
       for (const event of events)
         document.removeEventListener(event, detectClickOutside)
     }
-  }, [events, handler, ref])
+  }, [ref, handler, events])
 }
 ```
 
@@ -262,6 +275,6 @@ export const Toggle = styled(Cross).attrs(props => ({
 `
 ```
 
-And that's it. It took quite a bit less code than I expected when I started writing this component considering the long list of requirements I had in mind for it. I guess that's another testament to the hooks API. I think it's been a big step towards making React even more modular, composable and compact.
+And that's it. It took quite a bit less code than I expected when I started writing this component considering the long list of requirements I had in mind for it. I guess that's another testament to the hooks API. It's been a big step towards making React even more modular, composable and compact.
 
 Let me know in the comments how the component works for you or if you have questions!
