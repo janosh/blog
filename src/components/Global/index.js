@@ -14,7 +14,7 @@ import { GlobalStyle } from "./styles"
 import { useDarkMode } from "../../hooks"
 
 export default function Global({ children, ...rest }) {
-  const [darkMode, setDarkMode] = useDarkMode()
+  const darkMode = useDarkMode()[0]
   const { site } = useStaticQuery(graphql`
     {
       site {
@@ -32,7 +32,7 @@ export default function Global({ children, ...rest }) {
         <Seo {...site} {...rest} />
         <GlobalStyle />
         <SyntaxHighlight />
-        <Header {...site} {...{ darkMode, setDarkMode }} />
+        <Header {...site} />
         {children}
         <Footer />
         <Scroll
