@@ -7,7 +7,7 @@ cover:
   caption: Atlas detector at the LHC
 ---
 
-This is a collection of mock exams with my solutions and exercise as well as lecture revisions I used to prepare for the exam in [QFT I](pdfs/http://www.thphys.uni-heidelberg.de/~berges/teaching.htm). The lecture was given by [Prof. Jürgen Berges](pdfs/http://www.thphys.uni-heidelberg.de/~berges/people.htm) at Heidelberg University in the winter of 2014/15.
+This is a collection of mock exams with my solutions and exercise as well as lecture revisions I used to prepare for the exam in [QFT I](https://www.thphys.uni-heidelberg.de/~berges/teaching.htm). The lecture was given by [Prof. Jürgen Berges](https://www.thphys.uni-heidelberg.de/~berges/people.htm) at Heidelberg University in the winter of 2014/15.
 
 ## Exam material
 
