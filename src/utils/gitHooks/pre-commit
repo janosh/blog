@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# Pre-commit hook called by "git commit" with no arguments.
+# Checks staged .js(x) files for eslint errors.
+# Exits with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+# To activate, place this script in {projectRoot}/.git/hooks/pre-commit
+# or better yet keep it checked in version control by leaving it here and
+# changing git's hook directory to point here:
+# git config core.hooksPath src/utils/gitHooks
+
+git diff --diff-filter=d --cached --name-only | grep "\.js.\?$" | xargs ./node_modules/.bin/eslint
