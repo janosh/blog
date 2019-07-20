@@ -1,8 +1,7 @@
-import styled from "styled-components"
+import styled from 'styled-components'
+import { fadeInOnHoverParent } from '../../styles'
 
-import { fadeInOnHoverParent } from "../../styles"
-
-export { NavLink } from ".."
+export { NavLink } from '..'
 
 export const DesktopNavDiv = styled.nav`
   display: grid;

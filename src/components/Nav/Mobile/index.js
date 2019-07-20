@@ -1,8 +1,7 @@
-import React, { memo, useRef, useState } from "react"
-import { animated, useSpring } from "react-spring"
-
-import { useOnClickOutside, useSize } from "../../../hooks"
-import { Children, Icons, Item, Menu, MobileNavDiv, NavLink } from "./styles"
+import React, { memo, useRef, useState } from 'react'
+import { animated, useSpring } from 'react-spring'
+import { useOnClickOutside, useSize } from '../../../hooks'
+import { Children, Icons, Item, Menu, MobileNavDiv, NavLink } from './styles'
 
 const Tree = memo(({ text, url, children }) => {
   const ref = useRef()

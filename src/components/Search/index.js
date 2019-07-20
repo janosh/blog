@@ -1,16 +1,15 @@
-import React, { useState, createRef } from "react"
+import algoliasearch from 'algoliasearch/lite'
+import React, { createRef, useState } from 'react'
 import {
-  InstantSearch,
-  Index,
-  Hits,
   connectStateResults,
-} from "react-instantsearch-dom"
-import algoliasearch from "algoliasearch/lite"
-
-import { useOnClickOutside } from "../../hooks"
-import { Root, HitsWrapper, PoweredBy } from "./styles"
-import Input from "./Input"
-import * as hitComps from "./hitComps"
+  Hits,
+  Index,
+  InstantSearch,
+} from 'react-instantsearch-dom'
+import { useOnClickOutside } from '../../hooks'
+import * as hitComps from './hitComps'
+import Input from './Input'
+import { HitsWrapper, PoweredBy, Root } from './styles'
 
 const Results = connectStateResults(
   ({ searchState: state, searchResults: res, children }) =>

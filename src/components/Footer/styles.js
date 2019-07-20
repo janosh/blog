@@ -1,6 +1,5 @@
-import styled from "styled-components"
-
-import mediaQuery from "../../utils/mediaQuery"
+import styled from 'styled-components'
+import mediaQuery from '../../utils/mediaQuery'
 
 export const FooterContainer = styled.footer`
   background-color: ${props => props.theme.footerBg};
@@ -13,17 +12,17 @@ export const FooterContainer = styled.footer`
   justify-items: center;
   align-items: center;
   grid-template-areas:
-    "copyright"
-    "source"
-    "poweredBy";
+    'copyright'
+    'source'
+    'poweredBy';
   grid-gap: 4vh 6vw;
   ${mediaQuery.minPhone} {
     grid-template-areas:
-      "copyright source"
-      "poweredBy poweredBy";
+      'copyright source'
+      'poweredBy poweredBy';
   }
   ${mediaQuery.minTablet} {
-    grid-template-areas: "copyright source poweredBy";
+    grid-template-areas: 'copyright source poweredBy';
   }
 `
 

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from 'styled-components'
 
 const langTagColor = [
   { lang: `javascript`, tag: `js`, color: `#f7df1e` },
@@ -7,9 +7,9 @@ const langTagColor = [
   { lang: `env`, tag: `env`, color: `#ff89d3` },
   { lang: `python`, tag: `py`, color: `#61da84` },
   { lang: `py`, tag: `py`, color: `#61da84` },
-  { lang: `graphql`, tag: `graphql`, color: `#E10098` },
-  { lang: `gql`, tag: `graphql`, color: `#E10098` },
-  { lang: `html`, tag: `html`, color: `#005A9C` },
+  { lang: `graphql`, tag: `graphql`, color: `#e10098` },
+  { lang: `gql`, tag: `graphql`, color: `#e10098` },
+  { lang: `html`, tag: `html`, color: `#005a9c` },
   { lang: `css`, tag: `css`, color: `#ff9800` },
   { lang: `shell`, tag: `shell`, color: `white` },
   { lang: `sh`, tag: `sh`, color: `white` },
@@ -18,7 +18,7 @@ const langTagColor = [
   { lang: `yaml`, tag: `yaml`, color: `linen` },
   { lang: `markdown`, tag: `md`, color: `#e6ffed` },
   { lang: `json`, tag: `json`, color: `#fff` },
-  { lang: `diff`, tag: `diff`, color: `#E8BD36` },
+  { lang: `diff`, tag: `diff`, color: `#e8bd36` },
   { lang: `text`, tag: `text`, color: `gray` },
 ]
 

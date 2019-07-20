@@ -1,7 +1,6 @@
-import styled from "styled-components"
-import { Link } from "gatsby"
-
-import mediaQuery from "../../utils/mediaQuery"
+import { Link } from 'gatsby'
+import styled from 'styled-components'
+import mediaQuery from '../../utils/mediaQuery'
 
 export const HeaderContainer = styled.header`
   background: ${props => props.theme.headerBg};
@@ -11,12 +10,12 @@ export const HeaderContainer = styled.header`
   justify-items: center;
   align-items: center;
   justify-content: space-between;
-  grid-template-areas: "nav title toggle social search";
+  grid-template-areas: 'nav title toggle social search';
   grid-template-columns: auto 1fr auto auto;
   padding: 2vmin 3vmin;
   ${mediaQuery.minPhablet} {
     justify-items: start;
-    grid-template-areas: "title nav toggle social search";
+    grid-template-areas: 'title nav toggle social search';
   }
 `
 

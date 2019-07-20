@@ -1,4 +1,4 @@
-import { startCase } from "lodash"
+import { startCase } from 'lodash'
 
 const min = width => `only screen and (min-width: ${width}em)`
 const max = width => `only screen and (max-width: ${width}em)`

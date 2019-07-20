@@ -1,14 +1,13 @@
-import React from "react"
-import { graphql } from "gatsby"
-import { DiscussionEmbed } from "disqus-react"
-
-import Global from "../components/Global"
-import PageTitle from "../components/PageTitle"
-import { PageBody } from "../components/styles"
-import PostMeta from "../components/PostMeta"
-import PrevNext from "../components/PrevNext"
-import Toc from "../components/Toc"
-import { disqusConfig } from "../utils"
+import { DiscussionEmbed } from 'disqus-react'
+import { graphql } from 'gatsby'
+import React from 'react'
+import Global from '../components/Global'
+import PageTitle from '../components/PageTitle'
+import PostMeta from '../components/PostMeta'
+import PrevNext from '../components/PrevNext'
+import { PageBody } from '../components/styles'
+import Toc from '../components/Toc'
+import { disqusConfig } from '../utils'
 
 const PostTitle = ({ title, subtitle }) =>
   subtitle ? (

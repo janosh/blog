@@ -1,12 +1,10 @@
-import styled from "styled-components"
-import { animated } from "react-spring"
-import { ThMenu } from "styled-icons/typicons/ThMenu"
-
-import { KeyboardArrowUp as Less } from "styled-icons/material/KeyboardArrowUp"
-import { KeyboardArrowDown as More } from "styled-icons/material/KeyboardArrowDown"
-import { KeyboardArrowRight as Arrow } from "styled-icons/material/KeyboardArrowRight"
-
-import { NavLink } from "../styles"
+import { animated } from 'react-spring'
+import styled from 'styled-components'
+import { KeyboardArrowDown as More } from 'styled-icons/material/KeyboardArrowDown'
+import { KeyboardArrowRight as Arrow } from 'styled-icons/material/KeyboardArrowRight'
+import { KeyboardArrowUp as Less } from 'styled-icons/material/KeyboardArrowUp'
+import { ThMenu } from 'styled-icons/typicons/ThMenu'
+import { NavLink } from '../styles'
 
 export { NavLink }
 

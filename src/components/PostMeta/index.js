@@ -1,13 +1,12 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { Link } from "gatsby"
-import { CommentCount } from "disqus-react"
-
-import { Meta, TagList } from "./styles"
-import { Calendar } from "styled-icons/octicons/Calendar"
-import { Timer } from "styled-icons/material/Timer"
-import { Comments } from "styled-icons/fa-solid/Comments"
-import { disqusConfig } from "../../utils"
+import { CommentCount } from 'disqus-react'
+import { Link } from 'gatsby'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { Comments } from 'styled-icons/fa-solid/Comments'
+import { Timer } from 'styled-icons/material/Timer'
+import { Calendar } from 'styled-icons/octicons/Calendar'
+import { disqusConfig } from '../../utils'
+import { Meta, TagList } from './styles'
 
 const PostMeta = ({ title, slug, date, timeToRead, tags, inTitle = false }) => (
   <Meta inTitle={inTitle}>

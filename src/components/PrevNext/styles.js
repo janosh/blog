@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import Image from "gatsby-image"
+import Image from 'gatsby-image'
+import styled from 'styled-components'
 
 export const PreviousNext = styled.div`
   display: flex;
