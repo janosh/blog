@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-
 import { Grid } from '../../components/styles'
 import mediaQuery from '../../utils/mediaQuery'
 

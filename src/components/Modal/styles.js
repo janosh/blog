@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
-import { Close as Cross } from 'styled-icons/material/Close'
-import { NavigateNext } from 'styled-icons/material/NavigateNext'
-import { NavigateBefore } from 'styled-icons/material/NavigateBefore'
-import { Fullscreen } from 'styled-icons/boxicons-regular/Fullscreen'
 import { ExitFullscreen } from 'styled-icons/boxicons-regular/ExitFullscreen'
+import { Fullscreen } from 'styled-icons/boxicons-regular/Fullscreen'
+import { Close as Cross } from 'styled-icons/material/Close'
+import { NavigateBefore } from 'styled-icons/material/NavigateBefore'
+import { NavigateNext } from 'styled-icons/material/NavigateNext'
 
 export const ModalBehind = styled.div`
   position: fixed;

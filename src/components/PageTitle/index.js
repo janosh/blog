@@ -1,7 +1,6 @@
-import React, { useRef, useEffect } from "react"
-
-import { Caption } from "../styles"
-import { PageTitleContainer, Title, Img } from "./styles"
+import React, { useEffect, useRef } from 'react'
+import { Caption } from '../styles'
+import { Img, PageTitleContainer, Title } from './styles'
 
 export default function PageTitle({ children, img, className, ...rest }) {
   const { backdrop = true, fillToBottom } = rest

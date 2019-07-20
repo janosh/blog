@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import ResizeObserver from "resize-observer-polyfill"
+import { useEffect, useState } from 'react'
+import ResizeObserver from 'resize-observer-polyfill'
 
 export const useSize = (ref, quantity) => {
   const [size, setSize] = useState(0)

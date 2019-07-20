@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components"
-import Image from "gatsby-image"
+import Image from 'gatsby-image'
+import styled, { css } from 'styled-components'
 
 export const PageTitleContainer = styled.hgroup`
   position: relative;

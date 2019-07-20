@@ -1,8 +1,7 @@
-import React, { useState } from "react"
-
-import { ProjectGrid, Thumbnail, Img } from "./styles"
-import Project from "./Project"
-import Modal from "../../components/Modal"
+import React, { useState } from 'react'
+import Modal from '../../components/Modal'
+import Project from './Project'
+import { Img, ProjectGrid, Thumbnail } from './styles'
 
 const Projects = ({ projects, ...rest }) => {
   const [modal, setModal] = useState()

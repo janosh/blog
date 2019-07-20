@@ -1,16 +1,14 @@
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import { ThemeProvider } from "styled-components"
-
-import Seo from "../Seo"
-import Header from "../Header"
-import Footer from "../Footer"
-import theme from "../../utils/theme"
-import SyntaxHighlight from "../../utils/syntaxHighlight"
-import Scroll from "../Scroll"
-
-import { GlobalStyle } from "./styles"
-import { useDarkMode } from "../../hooks"
+import { graphql, useStaticQuery } from 'gatsby'
+import React from 'react'
+import { ThemeProvider } from 'styled-components'
+import { useDarkMode } from '../../hooks'
+import SyntaxHighlight from '../../utils/syntaxHighlight'
+import theme from '../../utils/theme'
+import Footer from '../Footer'
+import Header from '../Header'
+import Scroll from '../Scroll'
+import Seo from '../Seo'
+import { GlobalStyle } from './styles'
 
 export default function Global({ children, ...rest }) {
   const darkMode = useDarkMode()[0]

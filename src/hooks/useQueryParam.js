@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useState } from "react"
+import { useState } from 'react'
 
 const handleParam = (key, value, options = {}) => {
   const { historyState = `replace`, nullDeletes = true } = options
