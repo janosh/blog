@@ -37,7 +37,10 @@ export default function Map({ options, onMount, className }) {
   })
 
   return (
-    <div {...props} style={{height: `70vh` margin: `1em 0`, borderRadius: `0.5em` }} />
+    <div
+      {...props}
+      style={{ height: `70vh`, margin: `1em 0`, borderRadius: `0.5em` }}
+    />
   )
 }
 
@@ -136,7 +139,7 @@ export default function Map({ options, onMount, className }) {
 with
 
 ```js{7,15}:title=src/components/map.js
-import { isEqual, omit, functions } from "lodash"
+import { isEqual, omit, functions } from 'lodash'
 
 function Map({ options, onMount, className }) {
   ...

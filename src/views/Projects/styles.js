@@ -1,12 +1,11 @@
-import styled, { css } from "styled-components"
-import Image from "gatsby-image"
-import { Calendar } from "styled-icons/octicons/Calendar"
-import { PackageIcon } from "styled-icons/feather/PackageIcon"
-import { Github } from "styled-icons/icomoon/Github"
-import { Npm } from "styled-icons/fa-brands/Npm"
-import { Link } from "styled-icons/boxicons-regular/Link"
-
-import { Grid } from "../../components/styles"
+import Image from 'gatsby-image'
+import styled, { css } from 'styled-components'
+import { Link } from 'styled-icons/boxicons-regular/Link'
+import { Npm } from 'styled-icons/fa-brands/Npm'
+import { PackageIcon } from 'styled-icons/feather/PackageIcon'
+import { Github } from 'styled-icons/icomoon/Github'
+import { Calendar } from 'styled-icons/octicons/Calendar'
+import { Grid } from '../../components/styles'
 
 export const ProjectGrid = styled(Grid)`
   ${props =>

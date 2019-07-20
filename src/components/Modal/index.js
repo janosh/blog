@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useState } from "react"
-import PropTypes from "prop-types"
-import { ThemeProvider } from "styled-components"
-
-import { ModalBackground, ModalContainer, controls } from "./styles"
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
+import { ThemeProvider } from 'styled-components'
+import { controls, ModalBackground, ModalContainer } from './styles'
 
 const { Close, Next, Prev, FullscreenToggle } = controls
 
