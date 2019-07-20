@@ -20,7 +20,8 @@ In this post, I'll walk you through how to implement a sticky, active, smooth an
 
 Just so we're on the same page, here are two important points.
 
-1. Firstly the component assumes that all headings you want to list in the ToC can be targeted by one or several CSS selectors which the component passes into [`document.querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll). By default it uses `` [`main h1`, `main h2`, ..., `main h6`] ``. Also, you should be able to provide `getTitle` and `getDepth` functions to obtain the title and depth of a heading given it's DOM node. (The latter is not essential if you're happy with a flat ToC, i.e. one that doesn't indent lower-level headings.) The default values are `getTitle = node => node.innerText` and `getDepth = node => Number(node.nodeName[1])` (since `nodeName` will be probably be one of `H(1-6)`).
+1. Firstly the component assumes that all headings you want to list in the ToC can be targeted by one or several CSS selectors which the component passes into [`document.querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll). By default it uses `` [`main h1`, `main h2`, ..., `main h6`] ``. Also, you should be able to provide `getTitle` and `getDepth` functions to obtain the title and depth of a heading given it's DOM node. (The latter is not essential if you're happy with a flat ToC, i.e. one that doesn't indent lower-level headings.) The default values are `getTitle = node => node.innerText` and `getDepth = node => Number(node.nodeName[1])` (since with the default CSS selector, `nodeName` will be one of `H(1-6)`).
+
 2. Secondly, this is what each of the words in the unwieldy title mean:
 
    - **Responsive**: The ToC is displayed in a column to the right of the text if the screen width permits and as a small book icon in the lower left corner on narrow screens like phones and small tablets. In that case, the component expands to show the full ToC when the icon is clicked.
@@ -33,15 +34,15 @@ Alright, I can hear you saying "enough talk, show me the code already". Here it 
 ## Implementation
 
 ```js:title=src/components/toc/index.js
-import React, { useRef, useState, useEffect } from "react"
-import { throttle } from "lodash"
+import React, { useRef, useState, useEffect } from 'react'
+import { throttle } from 'lodash'
 
 // A hook to close the ToC if it's currently in an open state
 // and close it, when the user clicks or touches somewhere
 // outside the component (only used on small screens).
-import { useOnClickOutside } from "../../hooks"
+import { useOnClickOutside } from '../../hooks'
 // Import styled components (see the Styles section below).
-import { TocDiv, TocLink, TocIcon, Title, Toggle } from "./styles"
+import { TocDiv, TocLink, TocIcon, Title, Toggle } from './styles'
 
 // Used to calculate each heading's offset from the top of the page.
 // This will be compared to window.scrollY to determine which heading
@@ -54,7 +55,8 @@ const accumulateOffsetTop = (el, totalOffset = 0) => {
   return totalOffset
 }
 
-export default function Toc({ headingSelector, getTitle, getDepth, tocTitle }) {
+export default function Toc({ headingSelector, getTitle, getDepth, ...rest }) {
+  const { throttleTime = 200, tocTitle= `Contents` } = rest
   // headingSelector: string or array of strings
   // getTitle: function
   // getDepth: function
@@ -109,7 +111,7 @@ export default function Toc({ headingSelector, getTitle, getDepth, tocTitle }) {
         offset => offset > window.scrollY + 0.8 * window.innerHeight
       )
       setActive(activeIndex === -1 ? titles.length - 1 : activeIndex - 1)
-    }, 500)
+    }, throttleTime)
 
     window.addEventListener(`scroll`, scrollHandler)
     return () => window.removeEventListener(`scroll`, scrollHandler)
