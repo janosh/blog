@@ -1,9 +1,7 @@
-import styled, { css } from "styled-components"
-
-import { Close as Cross } from "styled-icons/material/Close"
-import { BookContent } from "styled-icons/boxicons-regular/BookContent"
-
-import mediaQuery from "../../utils/mediaQuery"
+import styled, { css } from 'styled-components'
+import { BookContent } from 'styled-icons/boxicons-regular/BookContent'
+import { Close as Cross } from 'styled-icons/material/Close'
+import mediaQuery from '../../utils/mediaQuery'
 
 const openTocDiv = css`
   background: ${props => props.theme.background};
@@ -53,6 +51,7 @@ export const Title = styled.h2`
 
 export const TocLink = styled.a`
   color: ${({ theme, active }) => (active ? theme.linkColor : theme.textColor)};
+  font-weight: ${props => props.active && `bold`};
   display: block;
   margin-left: ${props => props.depth + `em`};
   border-top: ${props =>
