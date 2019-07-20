@@ -1,9 +1,8 @@
-import React from "react"
-import { graphql } from "gatsby"
-
-import Global from "../components/Global"
-import PageTitle from "../components/PageTitle"
-import { PageBody } from "../components/styles"
+import { graphql } from 'gatsby'
+import React from 'react'
+import Global from '../components/Global'
+import PageTitle from '../components/PageTitle'
+import { PageBody } from '../components/styles'
 
 export default function PageTemplate({ data, location }) {
   const { frontmatter, html, excerpt } = data.page

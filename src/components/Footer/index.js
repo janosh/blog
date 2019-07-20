@@ -1,7 +1,6 @@
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-
-import { FooterContainer, PoweredBy } from "./styles"
+import { graphql, useStaticQuery } from 'gatsby'
+import React from 'react'
+import { FooterContainer, PoweredBy } from './styles'
 
 export default function Footer() {
   const { footer, logos } = useStaticQuery(graphql`

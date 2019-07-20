@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-
 import { fadeInOnHoverParent } from './'
 
 export const Caption = styled.figcaption`

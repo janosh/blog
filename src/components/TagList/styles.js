@@ -1,22 +1,21 @@
-import styled from "styled-components"
-export { Tags as TagsIcon } from "styled-icons/fa-solid/Tags"
-import { ToggleOff } from "styled-icons/fa-solid/ToggleOff"
-import { ToggleOn } from "styled-icons/fa-solid/ToggleOn"
-import { Grid } from "styled-icons/boxicons-regular/Grid"
-import { Web } from "styled-icons/material/Web"
-import { ChalkboardTeacher } from "styled-icons/fa-solid/ChalkboardTeacher"
-import { Python } from "styled-icons/fa-brands/Python"
-import { Database } from "styled-icons/fa-solid/Database"
-import { WeatherSunny } from "styled-icons/typicons/WeatherSunny"
-import { Lab } from "styled-icons/icomoon/Lab"
-import { Atom } from "styled-icons/fa-solid/Atom"
-import { ColorLens } from "styled-icons/material/ColorLens"
-import { Cpu } from "styled-icons/feather/Cpu"
-import { Robot } from "styled-icons/fa-solid/Robot"
-import { JsSquare } from "styled-icons/fa-brands/JsSquare"
-import { Brain } from "styled-icons/fa-solid/Brain"
-
-import mediaQuery from "../../utils/mediaQuery"
+import styled from 'styled-components'
+import { Grid } from 'styled-icons/boxicons-regular/Grid'
+import { JsSquare } from 'styled-icons/fa-brands/JsSquare'
+import { Python } from 'styled-icons/fa-brands/Python'
+import { Atom } from 'styled-icons/fa-solid/Atom'
+import { Brain } from 'styled-icons/fa-solid/Brain'
+import { ChalkboardTeacher } from 'styled-icons/fa-solid/ChalkboardTeacher'
+import { Database } from 'styled-icons/fa-solid/Database'
+import { Robot } from 'styled-icons/fa-solid/Robot'
+import { ToggleOff } from 'styled-icons/fa-solid/ToggleOff'
+import { ToggleOn } from 'styled-icons/fa-solid/ToggleOn'
+import { Cpu } from 'styled-icons/feather/Cpu'
+import { Lab } from 'styled-icons/icomoon/Lab'
+import { ColorLens } from 'styled-icons/material/ColorLens'
+import { Web } from 'styled-icons/material/Web'
+import { WeatherSunny } from 'styled-icons/typicons/WeatherSunny'
+import mediaQuery from '../../utils/mediaQuery'
+export { Tags as TagsIcon } from 'styled-icons/fa-solid/Tags'
 
 export const TagGrid = styled.div`
   display: grid;
@@ -75,10 +74,10 @@ export const Toggle = styled(ToggleOff).attrs(props => ({
 
 export const tagIcons = {
   All: Grid,
-  "Web Dev": Web,
+  'Web Dev': Web,
   Tutorial: ChalkboardTeacher,
-  "Machine Learning": Brain,
-  "Data Science": Database,
+  'Machine Learning': Brain,
+  'Data Science': Database,
   Sustainability: WeatherSunny,
   Science: Lab,
   Physics: Atom,

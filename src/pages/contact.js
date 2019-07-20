@@ -1,10 +1,9 @@
-import React from "react"
-import { graphql } from "gatsby"
-
-import Global from "../components/Global"
-import PageTitle from "../components/PageTitle"
-import { PageBody } from "../components/styles"
-import Social from "../components/Social"
+import { graphql } from 'gatsby'
+import React from 'react'
+import Global from '../components/Global'
+import PageTitle from '../components/PageTitle'
+import Social from '../components/Social'
+import { PageBody } from '../components/styles'
 
 const ContactPage = ({ data, location }) => (
   <Global path={location.pathname}>

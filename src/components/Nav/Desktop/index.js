@@ -1,7 +1,6 @@
-import React from "react"
-import { DownArrow } from "styled-icons/boxicons-regular/DownArrow"
-
-import { NavEntry, SubNav, NavLink, DesktopNavDiv } from "./styles"
+import React from 'react'
+import { DownArrow } from 'styled-icons/boxicons-regular/DownArrow'
+import { DesktopNavDiv, NavEntry, NavLink, SubNav } from './styles'
 
 export default ({ nav }) => (
   <DesktopNavDiv>

@@ -1,8 +1,7 @@
-import { createGlobalStyle } from "styled-components"
-import "katex/dist/katex.min.css"
-
-import mediaQuery from "../../utils/mediaQuery"
-import typography from "../../utils/typography"
+import 'katex/dist/katex.min.css'
+import { createGlobalStyle } from 'styled-components'
+import mediaQuery from '../../utils/mediaQuery'
+import typography from '../../utils/typography'
 
 const { phone, desktop } = mediaQuery.screens
 const {

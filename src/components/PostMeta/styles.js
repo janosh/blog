@@ -1,7 +1,7 @@
-import React, { Fragment } from "react"
-import styled, { css } from "styled-components"
-import { Tags } from "styled-icons/fa-solid/Tags"
-import { Tag } from "styled-icons/fa-solid/Tag"
+import React, { Fragment } from 'react'
+import styled, { css } from 'styled-components'
+import { Tag } from 'styled-icons/fa-solid/Tag'
+import { Tags } from 'styled-icons/fa-solid/Tags'
 
 const inTitle = css`
   margin: 1.3em auto;
