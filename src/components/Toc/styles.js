@@ -1,9 +1,7 @@
-import styled, { css } from "styled-components"
-
-import { Close as Cross } from "styled-icons/material/Close"
-import { BookContent } from "styled-icons/boxicons-regular/BookContent"
-
-import mediaQuery from "../../utils/mediaQuery"
+import styled, { css } from 'styled-components'
+import { BookContent } from 'styled-icons/boxicons-regular/BookContent'
+import { Close as Cross } from 'styled-icons/material/Close'
+import mediaQuery from '../../utils/mediaQuery'
 
 const openTocDiv = css`
   background: ${props => props.theme.background};
@@ -19,10 +17,16 @@ export const TocDiv = styled.div`
   max-height: 80vh;
   overflow-y: scroll;
   z-index: 1;
-  line-height: 2.2em;
+  line-height: 2em;
   -webkit-overflow-scrolling: touch;
+  right: 1em;
+  max-width: 20em;
+  nav {
+    max-height: 78vh;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
   ${mediaQuery.maxLaptop} {
-    max-width: 16em;
     position: fixed;
     bottom: 1em;
     left: 1em;
@@ -33,12 +37,10 @@ export const TocDiv = styled.div`
     transition: ${props => props.theme.shortTrans};
   }
   ${mediaQuery.minLaptop} {
-    max-width: 15em;
     font-size: 0.85em;
     grid-column: 4 / -1;
     position: sticky;
     top: 2em;
-    right: 2em;
   }
 `
 
@@ -53,6 +55,7 @@ export const Title = styled.h2`
 
 export const TocLink = styled.a`
   color: ${({ theme, active }) => (active ? theme.linkColor : theme.textColor)};
+  font-weight: ${props => props.active && `bold`};
   display: block;
   margin-left: ${props => props.depth + `em`};
   border-top: ${props =>
@@ -64,7 +67,7 @@ export const TocIcon = styled(BookContent)`
   margin-right: 0.2em;
 `
 
-const openerCss = css`
+const openedCss = css`
   position: fixed;
   bottom: 1em;
   left: 0;
@@ -77,7 +80,7 @@ const openerCss = css`
   transform: translate(${props => (props.open ? `-100%` : 0)});
 `
 
-const closerCss = css`
+const closedCss = css`
   margin-left: 1em;
   border: 1px solid ${props => props.theme.borderColor};
   border-radius: 50%;
@@ -95,5 +98,5 @@ export const Toggle = styled(Cross).attrs(props => ({
   ${mediaQuery.minLaptop} {
     display: none;
   }
-  ${props => (props.opener ? openerCss : closerCss)};
+  ${props => (props.opener ? openedCss : closedCss)};
 `
