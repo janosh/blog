@@ -1,8 +1,7 @@
-import React, { useRef, useState, useEffect } from "react"
-import { throttle } from "lodash"
-
-import { useOnClickOutside } from "../../hooks"
-import { TocDiv, TocLink, TocIcon, Title, Toggle } from "./styles"
+import { throttle } from 'lodash'
+import React, { useEffect, useRef, useState } from 'react'
+import { useOnClickOutside } from '../../hooks'
+import { Title, TocDiv, TocIcon, TocLink, Toggle } from './styles'
 
 const accumulateOffsetTop = (el, totalOffset = 0) => {
   while (el) {
@@ -12,7 +11,8 @@ const accumulateOffsetTop = (el, totalOffset = 0) => {
   return totalOffset
 }
 
-export default function Toc({ headingSelector, getTitle, getDepth, tocTitle }) {
+export default function Toc({ headingSelector, getTitle, getDepth, ...rest }) {
+  const { throttleTime = 200, tocTitle = `Contents` } = rest
   const [headings, setHeadings] = useState({
     titles: [],
     nodes: [],
@@ -50,11 +50,11 @@ export default function Toc({ headingSelector, getTitle, getDepth, tocTitle }) {
         offset => offset > window.scrollY + 0.8 * window.innerHeight
       )
       setActive(activeIndex === -1 ? titles.length - 1 : activeIndex - 1)
-    }, 500)
+    }, throttleTime)
 
     window.addEventListener(`scroll`, scrollHandler)
     return () => window.removeEventListener(`scroll`, scrollHandler)
-  }, [headings])
+  }, [headings, throttleTime])
 
   return (
     <>
@@ -62,7 +62,7 @@ export default function Toc({ headingSelector, getTitle, getDepth, tocTitle }) {
       <TocDiv ref={ref} open={open}>
         <Title>
           <TocIcon />
-          {tocTitle || `Contents`}
+          {tocTitle}
           <Toggle closer onClick={() => setOpen(false)} />
         </Title>
         <nav>
