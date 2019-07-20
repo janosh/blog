@@ -1,8 +1,7 @@
-import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
+import { graphql, StaticQuery } from 'gatsby'
 import PropTypes from 'prop-types'
-
-import { Wrapper, Container, Toggle, Link, Icons } from './styles'
+import React from 'react'
+import { Container, Icons, Link, Toggle, Wrapper } from './styles'
 
 const Social = ({ social, size, collapse, linkStyle, short }) => (
   <Wrapper>

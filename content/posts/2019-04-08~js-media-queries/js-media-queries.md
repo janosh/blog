@@ -138,7 +138,7 @@ export const useMediaQuery = cond => {
 In my case, I export that hook from the same file that holds the above `mediaQuery` object. In fact, since I use the same queries all over my site, I decided to couple that hook to the `mediaQuery` object so that it only needs to be passed the key of the desired query. To that end, you'll have to modify `src/utils/mediaQuery.js` to contain each media query both in its CSS and JS variant, i.e. with and without the `@media` prefix.
 
 ```js:title=src/utils/mediaQuery.js
-import { titleCase } from "."
+import { titleCase } from '.'
 
 const mediaQuery = {
   screens: {

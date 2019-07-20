@@ -1,11 +1,10 @@
 import styled, { css } from 'styled-components'
-import { Share } from 'styled-icons/material/Share'
-import { Email } from 'styled-icons/material/Email'
-import { Youtube } from 'styled-icons/fa-brands/Youtube'
-import { LinkedinIn as Linkedin } from 'styled-icons/fa-brands/LinkedinIn'
-import { FacebookF as Facebook } from 'styled-icons/fa-brands/FacebookF'
+import { FacebookF } from 'styled-icons/fa-brands/FacebookF'
 import { Github } from 'styled-icons/fa-brands/Github'
-
+import { LinkedinIn } from 'styled-icons/fa-brands/LinkedinIn'
+import { Youtube } from 'styled-icons/fa-brands/Youtube'
+import { Email } from 'styled-icons/material/Email'
+import { Share } from 'styled-icons/material/Share'
 import mediaQuery from '../../utils/mediaQuery'
 import { fadeInOnHoverParent } from '../styles'
 
@@ -44,6 +43,7 @@ export const Container = styled.div`
 export const Toggle = styled(Share)`
   cursor: pointer;
   font-size: 1.3em;
+  vertical-align: text-bottom;
   ${props => props.styles};
   ${mediaQuery.minTablet} {
     display: none;
@@ -65,7 +65,7 @@ export const Icons = {
   Youtube: styled(Youtube)`
     transform: scale(1, 1.15);
   `,
-  Linkedin,
-  Facebook,
+  LinkedIn: LinkedinIn,
+  Facebook: FacebookF,
   Github,
 }

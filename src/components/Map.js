@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react"
-import { isEqual, omit, functions } from "lodash"
+import { functions, isEqual, omit } from 'lodash'
+import React, { useEffect, useRef } from 'react'
 
 function Map({ options, onMount, className }) {
   const divProps = { ref: useRef(), className }

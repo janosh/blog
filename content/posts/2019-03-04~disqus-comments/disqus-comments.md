@@ -19,10 +19,10 @@ If you're running a Gatsby blog (or any React-powered blog for that matter) and 
 - [TalkYard](https://www.talkyard.io) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTUxNjMzMzM5MTU5NA==)]
 - [Gitalk](https://gitalk.github.io) [[mention](https://github.com/gatsbyjs/gatsby/issues/12209#issuecomment-471165136)]
 
-I ended up going with Disqus for the following reasons.
+I ended up going with Disqus for the following reasons:
 
 - It [seems to be by far the most widely used service](https://www.datanyze.com/market-share/comment-systems/disqus-market-share).
-- It is low maintenance, meaning [moderating your comments and maintaining your forum](https://help.disqus.com/moderation/moderating-101) is easy.
+- It is low maintenance. [Moderating your comments and maintaining your forum](https://help.disqus.com/moderation/moderating-101) is easy.
 - It provides official [React support](https://github.com/disqus/disqus-react).
 - It offers a [generous free tier](https://disqus.com/pricing).
 - It’s easy to comment: Disqus has a large existing user base and the onboarding experience for new users is fast since you can register with your Google, Facebook or Twitter account. You can also easily share your review about the post through those channels.
@@ -45,13 +45,16 @@ Here are the steps for adding Disqus comments to your own blog:
    ```
 
 3. Add the shortname from step 1 as something like `GATSBY_DISQUS_NAME` to your `.env` and `.env.example` files so that people forking your repo will know that they need to supply this value to get comments to work. (You need to prefix the environment variable with `GATSBY_` in order to [make it available to client side code](https://www.gatsbyjs.org/docs/environment-variables/#client-side-javascript).)
+
    ```sh:title=.env.example
    # enables Disqus comments below blog posts
    GATSBY_DISQUS_NAME=insertValue
    ```
+
    ```sh:title=.env
    GATSBY_DISQUS_NAME=yourOwnSiteShortname
    ```
+
 4. Go to your template file for blog post (in my case `src/templates/post.js`) and import the `DiscussionEmbed` React component.
 
    ```js{3}:title=src/templates/post.js

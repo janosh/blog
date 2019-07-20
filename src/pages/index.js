@@ -1,18 +1,16 @@
-import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
+import React from 'react'
 import styled, { css } from 'styled-components'
-
 import { ArrowLeft } from 'styled-icons/fa-solid/ArrowLeft'
 import { ArrowRight } from 'styled-icons/fa-solid/ArrowRight'
-
 import Global from '../components/Global'
 import PageTitle from '../components/PageTitle'
 import Scroll from '../components/Scroll'
 import { PageBody } from '../components/styles'
+import mediaQuery from '../utils/mediaQuery'
 import PostList from '../views/PostList'
 import Projects from '../views/Projects'
-import mediaQuery from '../utils/mediaQuery'
 
 export default function IndexPage({ data, location }) {
   const { md, janosh, posts, projects } = data

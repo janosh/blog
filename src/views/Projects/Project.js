@@ -1,6 +1,5 @@
-import React, { Fragment } from "react"
-
-import { Img, Meta, Date, Tech, GitHub, NPM, Homepage } from "./styles"
+import React, { Fragment } from 'react'
+import { Date, GitHub, Homepage, Img, Meta, NPM, Tech } from './styles'
 
 const Project = ({ title, cover, date, url, repo, npm, tech, html }) => (
   <>
