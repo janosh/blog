@@ -13,6 +13,8 @@ export const HeaderContainer = styled.header`
   grid-template-areas: 'nav title toggle social search';
   grid-template-columns: auto 1fr auto auto;
   padding: 2vmin 3vmin;
+  color: white;
+  font-size: 1.2em;
   ${mediaQuery.minPhablet} {
     justify-items: start;
     grid-template-areas: 'title nav toggle social search';
@@ -22,6 +24,6 @@ export const HeaderContainer = styled.header`
 export const Logo = styled(Link)`
   grid-area: title;
   font-size: 2.4em;
-  color: white;
   transform: scale(1, 0.85);
+  color: inherit;
 `
