@@ -2,7 +2,7 @@ import { Link } from 'gatsby'
 import styled, { css } from 'styled-components'
 
 export const navLinkStyle = css`
-  color: white;
+  color: inherit;
   transition: ${props => props.theme.shortTrans};
   &.active {
     color: ${props => props.theme.orange};
