@@ -167,7 +167,7 @@ There's quite a lot happening in these files so let's break them down one by one
 ### `index.js`
 
 ```js:title=src/components/search/index.js
-import React, { useState, useEffect, createRef } from 'react'
+import React, { useState, useEffect, useMemo, createRef } from 'react'
 import {
   InstantSearch,
   Index,
@@ -208,9 +208,13 @@ export default function Search({ indices, collapse, hitsAsGrid }) {
   const ref = createRef()
   const [query, setQuery] = useState(``)
   const [focus, setFocus] = useState(false)
-  const searchClient = algoliasearch(
-    process.env.GATSBY_ALGOLIA_APP_ID,
-    process.env.GATSBY_ALGOLIA_SEARCH_KEY
+  // useMemo prevents the searchClient from being recreated on every render.
+  // Avoids unnecessary XHR requests (see https://tinyurl.com/yyj93r2s).
+  const searchClient = useMemo(
+    () => algoliasearch(
+      process.env.GATSBY_ALGOLIA_APP_ID,
+      process.env.GATSBY_ALGOLIA_SEARCH_KEY
+    ), []
   )
   useOnClickOutside(ref, () => setFocus(false))
   return (

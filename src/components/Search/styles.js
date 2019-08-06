@@ -7,6 +7,7 @@ export const Root = styled.div`
   position: relative;
   display: grid;
   grid-gap: 1em;
+  color: ${props => props.theme.textColor};
 `
 
 export const SearchIcon = styled(Search)`
@@ -66,13 +67,19 @@ export const Form = styled.form`
   align-items: center;
 `
 
-const hitsList = css`
+export const HitsWrapper = styled.div`
+  display: ${props => (props.show ? `grid` : `none`)};
+  background: ${props => props.theme.background};
+  max-height: 80vh;
+  overflow: scroll;
+  z-index: 2;
+  -webkit-overflow-scrolling: touch;
   position: absolute;
   right: 0;
   top: calc(100% + 0.5em);
   width: 80vw;
   max-width: 30em;
-  box-shadow: 0 0 5px 0;
+  box-shadow: 0 0 5px 0 black;
   padding: 0.7em 1em 0.4em;
   border-radius: ${props => props.theme.smallBorderRadius};
   > * + * {
@@ -84,29 +91,6 @@ const hitsList = css`
     padding-top: 0.7em;
     border-top: 1px solid ${props => props.theme.lighterGray};
   }
-`
-
-const hitsGrid = css`
-  ul {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
-    grid-gap: 1em;
-    li {
-      padding: 0.3em 0.5em;
-      background: ${props => props.theme.lighterGray};
-      border-radius: ${props => props.theme.smallBorderRadius};
-    }
-  }
-`
-
-export const HitsWrapper = styled.div`
-  display: ${props => (props.show ? `grid` : `none`)};
-  background: ${props => props.theme.background};
-  max-height: 80vh;
-  overflow: scroll;
-  z-index: 2;
-  -webkit-overflow-scrolling: touch;
-  ${props => (props.asGrid ? hitsGrid : hitsList)};
   * {
     margin-top: 0;
     padding: 0;
