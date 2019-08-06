@@ -20,7 +20,10 @@ To get this site running locally, you need [`git`](https://git-scm.com), [`gatsb
 1. Clone the repo to your machine and change into its directory.
 
     ```sh
-    git clone https://github.com/janosh/janosh.io && cd janosh.io
+    git clone https://github.com/janosh/janosh.io
+    && cd janosh.io
+    && git config core.hooksPath src/utils/gitHooks
+    && chmod +x src/utils/gitHooks/pre-commit
     ```
 
 2. Install dependencies.
