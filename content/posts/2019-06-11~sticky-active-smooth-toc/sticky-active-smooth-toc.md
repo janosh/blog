@@ -14,22 +14,22 @@ showToc: true
 
 ## Intro
 
-In this post, I'll walk you through how to implement a sticky, active, smooth and responsive table of contents in just 80 lines of JavaScript (styles excluded) using [React](https://reactjs.org) and [styled-components](https://styled-components.com). This component is particularly useful on longer pages with lots of headings where it allows visitors to both see where in the document they currently are as well as quickly jump to other sections. This post is too short for it to make much sense. I added it anyway for the purposes of demonstration. If you want to see a post where it's more at home, check out [this introduction to Hamiltonian Monte Carlo](/blog/hmc-intro).
+This is a guide on how to implement a sticky, active, smooth and responsive table of contents (ToC) in a mere 80 lines of JavaScript (styles excluded) using [React](https://reactjs.org) and [styled-components](https://styled-components.com). A ToC is particularly useful for longer pages with lots of headings where it allows readers to see their place in the document and quickly jump to other sections. This post is too short for it to make much sense. I added it anyway just to demonstrate. If you want to try it out in a setting where it's more at home, check out [this introduction to Hamiltonian Monte Carlo](/blog/hmc-intro).
 
 [![HMC Intro](/hmc-toc.png)](/blog/hmc-intro)
 
 Just so we're on the same page, here are two important points.
 
-1. Firstly the component assumes that all headings you want to list in the ToC can be targeted by one or several CSS selectors which the component passes into [`document.querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll). By default it uses `` [`main h1`, `main h2`, ..., `main h6`] ``. Also, you should be able to provide `getTitle` and `getDepth` functions to obtain the title and depth of a heading given it's DOM node. (The latter is not essential if you're happy with a flat ToC, i.e. one that doesn't indent lower-level headings.) The default values are `getTitle = node => node.innerText` and `getDepth = node => Number(node.nodeName[1])` (since with the default CSS selector, `nodeName` will be one of `H(1-6)`).
+1. The component assumes that all headings you want to list in the ToC can be targeted by one or several CSS selectors which the component passes into [`document.querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll). By default it uses `['main h1', 'main h2', ..., 'main h6']`. Also, you should be able to provide `getTitle` and `getDepth` functions to obtain the title and depth of a heading given it's DOM node. (The latter is not essential if you're happy with a flat ToC, i.e. one that doesn't indent lower-level headings.) The default values are `getTitle = node => node.innerText` and `getDepth = node => Number(node.nodeName[1])` (since with the default CSS selector, `nodeName` will be one of `H[1-6]`).
 
-2. Secondly, this is what each of the words in the unwieldy title mean:
+2. This is what each of the words in the unwieldy title mean:
 
-   - **Responsive**: The ToC is displayed in a column to the right of the text if the screen width permits and as a small book icon in the lower left corner on narrow screens like phones and small tablets. In that case, the component expands to show the full ToC when the icon is clicked.
+   - **Responsive**: The ToC is displayed in a column to the right of the text if the screen width permits or as a small book icon in the lower left corner on narrow screens. In that case, the component expands to show the full ToC when that icon is clicked.
    - **Sticky**: The ToC scrolls with the viewport below a certain threshold on the page to always remain easily accessible as you progress through the document.
-   - **Active**: The ToC highlights the heading that's closest to the reader's current position to act as a progress bar and give an idea how far through the document the user has read.
-   - **Smooth**: When a user clicks a heading in the ToC, the viewport smoothly scrolls to that heading (without adding to the browser history, i.e. clicking the back button will always send the reader back to the previous page).
+   - **Active**: The ToC highlights the heading that's closest to the reader's current position to act as a "progress bar", i.e. give an idea how far through the document you've progressed.
+   - **Smooth**: When a user clicks a heading in the ToC, the viewport smoothly scrolls there (without adding to the browser history, i.e. clicking the back button will always send the reader back to the previous page).
 
-Alright, I can hear you saying "enough talk, show me the code already". Here it is.
+Alright, enough talking! Here comes the code.
 
 ## Implementation
 
@@ -56,7 +56,7 @@ const accumulateOffsetTop = (el, totalOffset = 0) => {
 }
 
 export default function Toc({ headingSelector, getTitle, getDepth, ...rest }) {
-  const { throttleTime = 200, tocTitle= `Contents` } = rest
+  const { throttleTime = 200, tocTitle = `Contents` } = rest
   // headingSelector: string or array of strings
   // getTitle: function
   // getDepth: function
@@ -177,11 +177,9 @@ I include the styles here mostly for completeness and in case you're also using 
 
 ```js:title=src/components/toc/styles.js
 import styled, { css } from 'styled-components'
-
-import { Close as Cross } from 'styled-icons/material/Close'
 import { BookContent } from 'styled-icons/boxicons-regular/BookContent'
-
-import mediaQuery from '../../utils/mediaQuery'
+import { Close as Cross } from 'styled-icons/material/Close'
+import mediaQuery from 'utils/mediaQuery'
 
 const openTocDiv = css`
   background: ${props => props.theme.background};
@@ -197,10 +195,16 @@ export const TocDiv = styled.div`
   max-height: 80vh;
   overflow-y: scroll;
   z-index: 1;
-  line-height: 2.2em;
+  line-height: 2em;
   -webkit-overflow-scrolling: touch;
+  right: 1em;
+  max-width: 20em;
+  nav {
+    max-height: 78vh;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
   ${mediaQuery.maxLaptop} {
-    max-width: 16em;
     position: fixed;
     bottom: 1em;
     left: 1em;
@@ -211,12 +215,10 @@ export const TocDiv = styled.div`
     transition: ${props => props.theme.shortTrans};
   }
   ${mediaQuery.minLaptop} {
-    max-width: 15em;
     font-size: 0.85em;
     grid-column: 4 / -1;
     position: sticky;
     top: 2em;
-    right: 2em;
   }
 `
 
@@ -231,6 +233,7 @@ export const Title = styled.h2`
 
 export const TocLink = styled.a`
   color: ${({ theme, active }) => (active ? theme.linkColor : theme.textColor)};
+  font-weight: ${props => props.active && `bold`};
   display: block;
   margin-left: ${props => props.depth + `em`};
   border-top: ${props =>
@@ -242,29 +245,31 @@ export const TocIcon = styled(BookContent)`
   margin-right: 0.2em;
 `
 
-const openerCss = css`
+const openedCss = css`
   position: fixed;
-  bottom: 1em;
+  bottom: calc(1vh + 4em);
+  ${mediaQuery.minPhablet} {
+    bottom: calc(1vh + 1em);
+  }
   left: 0;
   padding: 0.5em 0.6em 0.5em 0.3em;
   background: ${props => props.theme.background};
-  z-index: 1;
-  box-shadow: 0 0 1em ${props => props.theme.shadowColor};
-  border: 1px solid ${props => props.theme.borderColor};
+  border: 2px solid ${props => props.theme.borderColor};
   border-radius: 0 50% 50% 0;
   transform: translate(${props => (props.open ? `-100%` : 0)});
 `
 
-const closerCss = css`
+const closedCss = css`
   margin-left: 1em;
   border: 1px solid ${props => props.theme.borderColor};
   border-radius: 50%;
 `
 
-export const Toggle = styled(Cross).attrs(props => ({
+export const TocToggle = styled(Cross).attrs(props => ({
   as: props.opener && BookContent,
-  size: props.size || `1.2em`,
+  size: props.size || `1.6em`,
 }))`
+  z-index: 2;
   transition: ${props => props.theme.shortTrans};
   justify-self: end;
   :hover {
@@ -273,10 +278,14 @@ export const Toggle = styled(Cross).attrs(props => ({
   ${mediaQuery.minLaptop} {
     display: none;
   }
-  ${props => (props.opener ? openerCss : closerCss)};
+  ${props => (props.opener ? openedCss : closedCss)};
 `
 ```
 
-And that's it. It took quite a bit less code than I expected when I started writing this component considering the long list of requirements I had in mind for it. I guess that's another testament to the hooks API. It's been a big step towards making React even more modular, composable and compact.
+## Closing Remarks
+
+That's all. It took quite a bit less code than I expected when I started writing this component considering the list of requirements I wanted to implement. I think that's another testament to the hooks API. It's been a big step towards making React even more modular, composable and compact.
+
+As implemented, the ToC does not update when adding new headings to a page after the page has loaded. In most cases, pages are static once the user has loaded them so there's no point in wasting CPU cycles on a DOM observer. But just in case your ToC should update to include new headings even while the user is viewing a page, you might want to take a look the [MutationObserver](https://developer.mozilla.org/docs/Web/API/MutationObserver) ([with excellent browser support](https://caniuse.com/#feat=mutationobserver)).
 
 Let me know in the comments how the component works for you or if you have questions!
