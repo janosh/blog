@@ -12,7 +12,7 @@ tags:
 showToc: true
 ---
 
-All the cool kids these days have websites with a dark color scheme. The really cool kids even have a dark *and* a light mode and allow you, the valued reader, to choose. In an attempt to make it easier for everyone to attain the status of really cool kid, I'll share my implementation of a dark mode for this very site. You can try it out by clicking the sun/moon icon in the header above.
+All the cool kids these days have websites with a dark color scheme. The really cool kids even have a dark _and_ a light mode and allow you, the valued reader, to choose. In an attempt to make it easier for everyone to attain the status of really cool kid, I'll share my implementation of a dark mode for this very site. You can try it out by clicking the sun/moon icon in the header above.
 
 In fact we'll even go a step further and use the new [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) media query which just [recently landed in Safari, Firefox, Chrome and Edge](https://caniuse.com/#search=prefers-color-scheme). It will allow us to query the user's OS for a color scheme preference. So if the user's device is set to dark mode, your site will automatically respect that and display in dark mode as well.
 
@@ -42,22 +42,19 @@ It also displays a little notification with the name of the mode for one second 
 
 ```js:title=src/components/DarkMode/index.js
 import React from 'react'
-import { animated, useTransition } from 'react-spring'
-import { useDarkMode } from '../../hooks'
-import { Box, Icons, Notification } from './styles'
+import { useTransition } from 'react-spring'
+import { useDarkMode } from 'hooks'
+import { Box, Div, SunIcon, MoonIcon, SunMoonIcon, Notification } from './styles'
+import { Link } from 'gatsby'
 
 export default function DarkMode() {
-  const [colorScheme, setColorScheme] = useDarkMode().slice(1)
+  const [colorMode, setColorMode] = useDarkMode().slice(1)
   const Modes = {
-    light: { Icon: Icons.light, title: `Light Mode`, nextMode: `dark` },
-    dark: { Icon: Icons.dark, title: `Dark Mode`, nextMode: `noPreference` },
-    noPreference: {
-      Icon: Icons.noPref,
-      title: `Use OS setting`,
-      nextMode: `light`,
-    },
+    light: { Icon: SunIcon, title: `Light Mode`, nextMode: `dark` },
+    dark: { Icon: MoonIcon, title: `Dark Mode`, nextMode: `noPreference` },
+    noPreference: { Icon: SunMoonIcon, title: `Use OS setting`, nextMode: `light` },
   }
-  const transitions = useTransition(colorScheme, null, {
+  const transitions = useTransition(colorMode, null, {
     initial: null,
     from: { opacity: 0, transform: `translateX(100%)` },
     enter: { opacity: 1, transform: `translateX(0%)` },
@@ -68,12 +65,10 @@ export default function DarkMode() {
       {transitions.map(({ item, props, key }) => {
         const { Icon, title, nextMode } = Modes[item]
         return (
-          <animated.div key={key} style={props}>
-            <Icon title={title} onClick={() => setColorScheme(nextMode)} />
-            <Notification>
-              {title}
-            </Notification>
-          </animated.div>
+          <Div key={key} style={props}>
+            <Icon title={title} onClick={() => setColorMode(nextMode)} />
+            <Notification>{title}</Notification>
+          </Div>
         )
       })}
     </Box>
@@ -85,10 +80,10 @@ The index file imports the following styled components:
 
 ```js:title=src/components/DarkMode/styles.js
 import React from 'react'
+import { animated } from 'react-spring'
 import styled from 'styled-components'
 import { Moon } from 'styled-icons/fa-solid/Moon'
 import { Sun } from 'styled-icons/fa-solid/Sun'
-import { Info } from 'styled-icons/icomoon/Info'
 
 export const Box = styled.div`
   display: grid;
@@ -99,6 +94,9 @@ export const Box = styled.div`
   }
 `
 
+// Needed as a selector in Notification below.
+export const Div = styled(animated.div)``
+
 export const Notification = styled.div`
   position: absolute;
   top: calc(100% + 1em);
@@ -108,61 +106,46 @@ export const Notification = styled.div`
   border-radius: 0.2em;
   left: 50%;
   transform: translateX(-50%);
-  animation: fade-in-out 2s forwards;
-  &:hover {
-    animation-play-state: paused;
-  }
-  @keyframes fade-in-out {
-    0% {
-      opacity: 0;
-    }
-    25% {
-      opacity: 1;
-    }
-    75% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
+  opacity: 0;
+  transition: 0.5s;
+  ${Div}:hover & {
+    opacity: 1;
   }
 `
 
 const SunSlashMoon = props => (
-  <svg
-    viewBox="0 0 512 512"
-    {...props}
-    fill="currentColor"
-    style={{ transform: `scale(1.2)`, height: `1em` }}
-  >
-    <path
-      d="m283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23-15.429-2.845-31.086-4.278-46.775-4.28-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"
-      transform="matrix(.556976 0 0 .499999 241.983 256)"
-    />
-    <path
-      d="m256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7-100.5-33.5c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0s-49.9-131.1 0-181 131.1-49.9 181 0 49.9 131.1 0 181z"
-      transform="matrix(.550782 0 0 .550782 -.000096 -.000096)"
-    />
-    <path
-      d="m384.097 72.796c0-1.543-1.579-2.796-3.524-2.796h-7.049c-1.945 0-3.524 1.253-3.524 2.796v407.408c0 1.543 1.579 2.796 3.524 2.796h7.049c1.945 0 3.524-1.253 3.524-2.796z"
-      transform="matrix(1.25716 1.25716 -.891126 .891126 38.3872 -454.406)"
-    />
+  <svg {...props} viewBox="0 0 512 512" fill="currentColor">
+    <g>
+      <path
+        d="m283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23-15.429-2.845-31.086-4.278-46.775-4.28-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"
+        transform="matrix(.556976 0 0 .499999 241.983 256)"
+      />
+      <path
+        d="m256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7-100.5-33.5c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0s-49.9-131.1 0-181 131.1-49.9 181 0 49.9 131.1 0 181z"
+        transform="matrix(.550782 0 0 .550782 -.000096 -.000096)"
+      />
+      <path
+        d="m384.097 72.796c0-1.543-1.579-2.796-3.524-2.796h-7.049c-1.945 0-3.524 1.253-3.524 2.796v407.408c0 1.543 1.579 2.796 3.524 2.796h7.049c1.945 0 3.524-1.253 3.524-2.796z"
+        transform="matrix(.871418 .871418 -.891126 .891126 183.83 -308.963)"
+      />
+    </g>
   </svg>
 )
 
-const iconProps = {
-  size: `1em`,
-  css: `cursor: pointer;`,
-}
+export const SunIcon = styled(Sun).attrs({ size: `1em` })`
+  cursor: pointer;
+`
 
-export const Icons = {
-  light: props => <Sun {...iconProps} {...props} />,
-  dark: props => <Moon {...iconProps} {...props} />,
-  noPref: props => <SunSlashMoon {...iconProps} {...props} />,
-  info: props => (
-    <Info size="1em" css="margin-left: 0.3em; color: white;" {...props} />
-  ),
-}
+export const MoonIcon = styled(Moon).attrs({ size: `1em` })`
+  transform: scale(0.9);
+  cursor: pointer;
+`
+
+export const SunMoonIcon = styled(SunSlashMoon)`
+  cursor: pointer;
+  transform: scale(1.2);
+  height: 1em;
+`
 ```
 
 ## `useDarkMode`
@@ -173,8 +156,8 @@ The `useDarkMode` hook imported in `DarkMode/index.js` reads as follows.
 import { useLocalStorage, useMediaQuery } from '.'
 
 export const useDarkMode = (initialValue = `noPreference`) => {
-  const [colorScheme, setColorScheme] = useLocalStorage(
-    `colorScheme`,
+  const [colorMode, setColorMode] = useLocalStorage(
+    `colorMode`,
     initialValue
   )
   const setter = value => {
@@ -182,7 +165,7 @@ export const useDarkMode = (initialValue = `noPreference`) => {
     // properties here rather than in CSS to prevent flashing from
     // light to dark on initial page load.
     document.body.style.transition = `color 0.5s, background 0.5s`
-    setColorScheme(value)
+    setColorMode(value)
   }
 
   // Check if the user has an OS preference for dark mode.
@@ -190,8 +173,8 @@ export const useDarkMode = (initialValue = `noPreference`) => {
 
   // Dark mode is enabled if either the color scheme was set to dark
   // by the user or the media query `prefers-color-scheme: dark` is true.
-  const darkModeEnabled = colorScheme === `dark` || prefersDarkMode
-  return [darkModeEnabled, colorScheme, setter]
+  const darkModeEnabled = colorMode === `dark` || prefersDarkMode
+  return [darkModeEnabled, colorMode, setter]
 }
 ```
 
@@ -199,9 +182,9 @@ It in turn imports the `useLocalStorage` and `useMediaQuery` hooks.
 
 ## `useLocalStorage`
 
-The `useLocalStorage` hook looks a little complicated at first but that's mostly just because it contains some event dispatching and listening that makes it (and by extension `useDarkMode`) global. By global I mean that all invocations of `useLocalStorage` with the same `key` will stay in sync. If one changes the value associated with `key` at one call site, all others will update to this value as well.
+The `useLocalStorage` hook looks a little complicated at first but that's mostly just because it contains some event dispatching and listening that makes it (and by extension `useDarkMode`) global. By global I mean that all invocations of `useLocalStorage` with the same `key` will stay in sync. If you change the value associated with `key` at one call site, all others will update to this value as well.
 
-This is quite useful for implementing dark mode (and probably other use cases) because the component that controls the site's color scheme might be much further up the component tree than the user-facing component `DarkMode` which actually changes the color scheme setting. This way you don't have to use [React's Context API](https://reactjs.org/docs/context.html) or pass the value and setter function for `colorScheme` down a component chain.
+This is quite useful for implementing dark mode (and probably other use cases) because the component that controls the site's color scheme might be much further up the component tree than the user-facing component `DarkMode` which actually changes the color scheme setting. This way you don't have to use [React's Context API](https://reactjs.org/docs/context.html) or pass the value and setter function for `colorMode` down a component chain.
 
 ```js:title=src/hooks/useLocalStorage.js
 import { useState } from 'react'
@@ -249,7 +232,7 @@ export const useLocalStorage = (key, initialValue, options = {}) => {
 
 Last but not least in our list of hooks is `useMediaQuery`. It uses the [`window.matchMedia` API](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) to parse the `query` string and turn it into a [`MediaQueryList`](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList) object. It then calls `useState` to instantiate a boolean `match` indicating whether the query currently matches and registers an event listener to update that variable whenever the state of the `query` changes.
 
-The check ``typeof window !== `undefined` `` is just there to ensure this hook plays nicely with server-side rendering where `window` will be unavailable. If you don't need SSR, just get rid of it.
+The check `` typeof window !== `undefined` `` is just there to ensure this hook plays nicely with server-side rendering where `window` will be unavailable. If you don't need SSR, just get rid of it.
 
 ```js:title=src/hooks/useLocalStorage.js
 import { useEffect, useState } from 'react'
@@ -277,15 +260,15 @@ So much for the all of the infrastructure. All we need to do now is call `useDar
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
-import { useDarkMode } from '../../hooks'
-import theme from '../../utils/theme'
-import App from '../App'
+import { useDarkMode } from 'hooks' // highlight-line
+import theme from 'utils/theme' // highlight-line
+import App from 'components/App'
 import { GlobalStyle } from './styles'
 
 export default function Global() {
-  const darkMode = useDarkMode()[0]
+  const [darkMode] = useDarkMode() // highlight-line
   return (
-    <ThemeProvider theme={theme(darkMode)}>
+    <ThemeProvider theme={theme(darkMode)}> // highlight-line
       <>
         <GlobalStyle />
         <App />
@@ -297,15 +280,14 @@ export default function Global() {
 
 The `theme` function is very simple.
 
-```js:title=src/utils/theme.js
-
+```js
 export default darkMode =>
   darkMode ? { ...theme, ...darkTheme } : { ...theme, ...lightTheme }
 ```
 
 with the objects `theme`, `lightTheme` and `darkTheme` looking something like this
 
-```js
+```js:title=src/utils/theme.js
 export const theme = {
   blue: `#2202a9`,
   darkBlue: `#190c65`,
@@ -380,11 +362,15 @@ export const darkTheme = {
 
   inlineCodeColor: theme.darkGray,
 }
+
+export default darkMode =>
+  darkMode ? { ...theme, ...darkTheme } : { ...theme, ...lightTheme }
+
 ```
 
-As you can see, they each specify different values for parts of the site that are color-scheme dependent. Thanks to [`styled-components`'s ThemeProvider](https://www.styled-components.com/docs/api#themeprovider) any part of your site below `Global` in the component tree can then simply consume this theme. For instance the `GlobalStyle` component above does this as follows.
+`lightTheme` and `darkTheme` each specify different values for parts of the site that are color-scheme dependent. Thanks to [`styled-components`'s ThemeProvider](https://styled-components.com/docs/api#themeprovider) any part of your site below `Global` in the component tree can then simply consume this theme. For instance the `GlobalStyle` component above does this as follows.
 
-```js
+```js:title=src/components/Global/styles.js
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
@@ -407,4 +393,4 @@ export const GlobalStyle = createGlobalStyle`
 
 ## Conclusion
 
-So there you have it. Implementing a dark mode using React hooks and styled-components from start to finish. To be honest, this took more work and thought than I had originally anticipated but all the more reason to write this up in a blog post, right? I hope this makes it easier for other's in the future. Definitely let me know in the comments if anything is unclear and and could do with some further explanation.
+To be honest, implementing a dark mode using React hooks and styled-components from start to finish took longer and was more work than I had originally anticipated. All the more reason to write this up in a blog post, right? Hopefully this is helpful to other's in the future. If you have questions or you think I was unclear anywhere, let me know in the comments.
