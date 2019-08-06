@@ -12,7 +12,7 @@ tags:
 showToc: true
 ---
 
-All the cool kids these days have websites with a dark color scheme. The really cool kids even have a dark *and* a light mode and allow you, the valued reader, to choose. In an attempt to make it easier for everyone to attain the status of really cool kid, I'll share my implementation of a dark mode for this very site. You can try it out by clicking the sun/moon icon in the header above.
+All the cool kids these days have websites with a dark color scheme. The really cool kids even have a dark _and_ a light mode and allow you, the valued reader, to choose. In an attempt to make it easier for everyone to attain the status of really cool kid, I'll share my implementation of a dark mode for this very site. You can try it out by clicking the sun/moon icon in the header above.
 
 In fact we'll even go a step further and use the new [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) media query which just [recently landed in Safari, Firefox, Chrome and Edge](https://caniuse.com/#search=prefers-color-scheme). It will allow us to query the user's OS for a color scheme preference. So if the user's device is set to dark mode, your site will automatically respect that and display in dark mode as well.
 
@@ -42,9 +42,9 @@ It also displays a little notification with the name of the mode for one second 
 
 ```js:title=src/components/DarkMode/index.js
 import React from 'react'
-import { animated, useTransition } from 'react-spring'
+import { useTransition } from 'react-spring'
 import { useDarkMode } from '../../hooks'
-import { Box, Icons, Notification } from './styles'
+import { Box, Div, Icons, Notification } from './styles'
 
 export default function DarkMode() {
   const [colorScheme, setColorScheme] = useDarkMode().slice(1)
@@ -68,12 +68,10 @@ export default function DarkMode() {
       {transitions.map(({ item, props, key }) => {
         const { Icon, title, nextMode } = Modes[item]
         return (
-          <animated.div key={key} style={props}>
+          <Div key={key} style={props}>
             <Icon title={title} onClick={() => setColorScheme(nextMode)} />
-            <Notification>
-              {title}
-            </Notification>
-          </animated.div>
+            <Notification>{title}</Notification>
+          </Div>
         )
       })}
     </Box>
@@ -85,6 +83,7 @@ The index file imports the following styled components:
 
 ```js:title=src/components/DarkMode/styles.js
 import React from 'react'
+import { animated } from 'react-spring'
 import styled from 'styled-components'
 import { Moon } from 'styled-icons/fa-solid/Moon'
 import { Sun } from 'styled-icons/fa-solid/Sun'
@@ -99,6 +98,8 @@ export const Box = styled.div`
   }
 `
 
+export const Div = styled(animated.div)``
+
 export const Notification = styled.div`
   position: absolute;
   top: calc(100% + 1em);
@@ -108,23 +109,10 @@ export const Notification = styled.div`
   border-radius: 0.2em;
   left: 50%;
   transform: translateX(-50%);
-  animation: fade-in-out 2s forwards;
-  &:hover {
-    animation-play-state: paused;
-  }
-  @keyframes fade-in-out {
-    0% {
-      opacity: 0;
-    }
-    25% {
-      opacity: 1;
-    }
-    75% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
+  opacity: 0;
+  transition: 0.5s;
+  ${Div}:hover & {
+    opacity: 1;
   }
 `
 
@@ -249,7 +237,7 @@ export const useLocalStorage = (key, initialValue, options = {}) => {
 
 Last but not least in our list of hooks is `useMediaQuery`. It uses the [`window.matchMedia` API](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) to parse the `query` string and turn it into a [`MediaQueryList`](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList) object. It then calls `useState` to instantiate a boolean `match` indicating whether the query currently matches and registers an event listener to update that variable whenever the state of the `query` changes.
 
-The check ``typeof window !== `undefined` `` is just there to ensure this hook plays nicely with server-side rendering where `window` will be unavailable. If you don't need SSR, just get rid of it.
+The check `` typeof window !== `undefined` `` is just there to ensure this hook plays nicely with server-side rendering where `window` will be unavailable. If you don't need SSR, just get rid of it.
 
 ```js:title=src/hooks/useLocalStorage.js
 import { useEffect, useState } from 'react'
@@ -298,7 +286,6 @@ export default function Global() {
 The `theme` function is very simple.
 
 ```js:title=src/utils/theme.js
-
 export default darkMode =>
   darkMode ? { ...theme, ...darkTheme } : { ...theme, ...lightTheme }
 ```
