@@ -1,4 +1,5 @@
-// These settings are used in a git pre-commit hook in src/utils/gitHooks.
+// These settings are used by a git pre-commit hook in src/utils/gitHooks
+// which ensures eslint compliance before allowing commits.
 
 module.exports = {
   env: {
