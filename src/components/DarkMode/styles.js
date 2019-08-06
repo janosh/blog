@@ -1,4 +1,5 @@
 import React from 'react'
+import { animated } from 'react-spring'
 import styled from 'styled-components'
 import { Moon } from 'styled-icons/fa-solid/Moon'
 import { Sun } from 'styled-icons/fa-solid/Sun'
@@ -13,6 +14,8 @@ export const Box = styled.div`
   }
 `
 
+export const Div = styled(animated.div)``
+
 export const Notification = styled.div`
   position: absolute;
   top: calc(100% + 1em);
@@ -22,23 +25,10 @@ export const Notification = styled.div`
   border-radius: 0.2em;
   left: 50%;
   transform: translateX(-50%);
-  animation: fade-in-out 2s forwards;
-  &:hover {
-    animation-play-state: paused;
-  }
-  @keyframes fade-in-out {
-    0% {
-      opacity: 0;
-    }
-    25% {
-      opacity: 1;
-    }
-    75% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
+  opacity: 0;
+  transition: 0.5s;
+  ${Div}:hover & {
+    opacity: 1;
   }
 `
 

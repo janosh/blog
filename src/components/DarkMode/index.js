@@ -1,7 +1,7 @@
 import React from 'react'
-import { animated, useTransition } from 'react-spring'
+import { useTransition } from 'react-spring'
 import { useDarkMode } from '../../hooks'
-import { Box, Icons, Notification } from './styles'
+import { Box, Div, Icons, Notification } from './styles'
 
 export default function DarkMode() {
   const [colorScheme, setColorScheme] = useDarkMode().slice(1)
@@ -25,7 +25,7 @@ export default function DarkMode() {
       {transitions.map(({ item, props, key }) => {
         const { Icon, title, nextMode } = Modes[item]
         return (
-          <animated.div key={key} style={props}>
+          <Div key={key} style={props}>
             <Icon title={title} onClick={() => setColorScheme(nextMode)} />
             <Notification>
               {title}
@@ -35,7 +35,7 @@ export default function DarkMode() {
                 </a>
               )}
             </Notification>
-          </animated.div>
+          </Div>
         )
       })}
     </Box>
