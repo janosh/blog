@@ -13,6 +13,7 @@ export const Box = styled.div`
   }
 `
 
+// Needed as a selector in Notification below.
 export const Div = styled(animated.div)``
 
 export const Notification = styled.div`

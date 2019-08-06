@@ -11,7 +11,7 @@ import Seo from '../Seo'
 import { GlobalStyle } from './styles'
 
 export default function Global({ children, ...rest }) {
-  const darkMode = useDarkMode()[0]
+  const [darkMode] = useDarkMode()
   const { site } = useStaticQuery(graphql`
     {
       site {
