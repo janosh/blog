@@ -88,7 +88,7 @@ export const darkTheme = {
   grayButtonBg: theme.darkGray,
   grayHoveredButtonBg: theme.orange,
 
-  inlineCodeColor: theme.darkGray,
+  inlineCodeColor: theme.darkestGray,
 }
 
 export default darkMode =>
