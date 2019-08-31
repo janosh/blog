@@ -7,7 +7,11 @@ import PostMeta from '../components/PostMeta'
 import PrevNext from '../components/PrevNext'
 import { PageBody } from '../components/styles'
 import Toc from '../components/Toc'
-import { disqusConfig } from '../utils'
+
+export const disqusConfig = ({ slug, title }) => ({
+  shortname: process.env.GATSBY_DISQUS_NAME,
+  config: { identifier: slug, title },
+})
 
 const PostTitle = ({ title, subtitle }) =>
   subtitle ? (
