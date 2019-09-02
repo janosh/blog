@@ -1,4 +1,5 @@
 import { graphql } from 'gatsby'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import Global from '../components/Global'
 import PageTitle from '../components/PageTitle'
@@ -16,7 +17,7 @@ export default function WebPage({ data, location }) {
         <h1>{title}</h1>
       </PageTitle>
       <PageBody>
-        <div dangerouslySetInnerHTML={{ __html: intro.html }} />
+        <MDXRenderer>{mdx.body}</MDXRenderer>
         <h2>Recent Projects</h2>
         <Projects {...projects} />
         <h2>My Stack</h2>
@@ -35,12 +36,12 @@ export default function WebPage({ data, location }) {
 
 export const query = graphql`
   {
-    intro: markdownRemark(frontmatter: { purpose: { eq: "web intro" } }) {
+    mdx(frontmatter: { purpose: { eq: "web intro" } }) {
       frontmatter {
         title
         ...cover
       }
-      html
+      body
     }
     ...projects
     tech: allTechYaml {

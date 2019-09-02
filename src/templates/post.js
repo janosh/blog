@@ -1,5 +1,6 @@
 import { DiscussionEmbed } from 'disqus-react'
 import { graphql } from 'gatsby'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import Global from '../components/Global'
 import PageTitle from '../components/PageTitle'
@@ -26,7 +27,7 @@ const PostTitle = ({ title, subtitle }) =>
 
 export default function PostTemplate({ data, location }) {
   const { post, next, prev } = data
-  const { frontmatter, excerpt, html, timeToRead } = post
+  const { frontmatter, excerpt, body, timeToRead } = post
   const { title, slug, cover, showToc } = frontmatter
   if (cover && cover.img) {
     if (cover.img.sharp) cover.fluid = cover.img.sharp.fluid
@@ -40,12 +41,13 @@ export default function PostTemplate({ data, location }) {
       </PageTitle>
       <PageBody as="div">
         {showToc && <Toc />}
-        <main dangerouslySetInnerHTML={{ __html: html }} />
+        <main>
+          <MDXRenderer>{body}</MDXRenderer>
+        </main>
         <DiscussionEmbed {...disqusConfig({ slug, title })} />
         <PrevNext
           prev={prev && prev.frontmatter}
           next={next && next.frontmatter}
-          slugPrefix="/blog"
           label="post"
         />
       </PageBody>
@@ -55,13 +57,13 @@ export default function PostTemplate({ data, location }) {
 
 export const query = graphql`
   query($slug: String!, $prevSlug: String!, $nextSlug: String!) {
-    post: markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+    post: mdx(frontmatter: { slug: { eq: $slug } }) {
       ...post
     }
-    next: markdownRemark(frontmatter: { slug: { eq: $nextSlug } }) {
+    next: mdx(frontmatter: { slug: { eq: $nextSlug } }) {
       ...post
     }
-    prev: markdownRemark(frontmatter: { slug: { eq: $prevSlug } }) {
+    prev: mdx(frontmatter: { slug: { eq: $prevSlug } }) {
       ...post
     }
   }

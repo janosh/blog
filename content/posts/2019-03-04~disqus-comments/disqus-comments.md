@@ -124,7 +124,7 @@ const PostMeta = ({ title, slug, date, timeToRead, tags }) => (
     </span>
     <span>
       <Comments size="1.2em" />
-      <Link to={`/blog` + slug + `#disqus_thread`}>
+      <Link to={slug + `#disqus_thread`}>
         <CommentCount {...disqusConfig({ slug, title })} />
       </Link>
     </span>
