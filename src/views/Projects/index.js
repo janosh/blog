@@ -22,7 +22,7 @@ const Projects = ({ projects, ...rest }) => {
         {...{ modal, setModal }}
         css="padding: 2em; max-width: 40em;"
       >
-        <Project {...project.frontmatter} html={project.html} />
+        <Project {...project.frontmatter} body={project.body} />
       </Modal>
     </ProjectGrid>
   )

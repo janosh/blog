@@ -23,7 +23,7 @@ const PostMeta = ({ title, slug, date, timeToRead, tags, inTitle = false }) => (
     <span>
       <Comments size="1.2em" />
       &ensp;
-      <Link to={`/blog` + slug + `#disqus_thread`}>
+      <Link to={slug + `#disqus_thread`}>
         <CommentCount {...disqusConfig({ slug, title })} />
       </Link>
     </span>

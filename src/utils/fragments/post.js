@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby'
 
 export const query = graphql`
-  fragment post on MarkdownRemark {
+  fragment post on Mdx {
     frontmatter {
       title
       subtitle
@@ -13,6 +13,6 @@ export const query = graphql`
     }
     timeToRead
     excerpt(pruneLength: 200)
-    html
+    body
   }
 `

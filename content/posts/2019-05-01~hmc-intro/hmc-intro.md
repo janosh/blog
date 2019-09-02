@@ -280,3 +280,6 @@ Generating a transition from the current position in sample space $\vec q$ requi
 - There are also some interesting HMC questions on StackExchange:
   - [HMC: Intuition and justification behind a Gaussian-distributed momentum variable?](https://stats.stackexchange.com/questions/320200)
   - [HMC Mass Matrix Terminology](https://stats.stackexchange.com/questions/229106)
+
+If this post got you excited about HMC and asymptotically exact posterior inference even in high-dimensional distributions and you want to start getting your own hands dirty, I highly recommend the post ["A tour of probabilistic programming language APIs"](https://colcarroll.github.io/ppl-api) by Colin Carroll where he compares many (all?) of the currently available frameworks that implement HMC-sampling and what they each have to offer.
+

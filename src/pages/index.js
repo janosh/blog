@@ -1,5 +1,6 @@
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { ArrowLeft } from 'styled-icons/fa-solid/ArrowLeft'
@@ -13,16 +14,16 @@ import PostList from '../views/PostList'
 import Projects from '../views/Projects'
 
 export default function IndexPage({ data, location }) {
-  const { md, janosh, posts, projects } = data
+  const { mdx, janosh, posts, projects } = data
   const img = {
-    ...md.frontmatter.cover,
-    fluid: md.frontmatter.cover.img.sharp.fluid,
+    ...mdx.frontmatter.cover,
+    fluid: mdx.frontmatter.cover.img.sharp.fluid,
   }
   return (
     <Global margin="0" transparent path={location.pathname}>
       <PageTitle img={img} fillToBottom backdrop={false}>
         <Title>
-          {md.frontmatter.title.split(`, `).map(str => (
+          {mdx.frontmatter.title.split(`, `).map(str => (
             <span key={str}>{str}</span>
           ))}
         </Title>
@@ -33,7 +34,7 @@ export default function IndexPage({ data, location }) {
           fixed={janosh.img.fixed}
           css="border-radius: 50%; justify-self: center;"
         />
-        <p dangerouslySetInnerHTML={{ __html: md.html }} />
+        <MDXRenderer>{mdx.body}</MDXRenderer>
         <H>Recent posts</H>
         <PostList asRow noText posts={posts.edges} />
         <H>Recent projects</H>
@@ -83,12 +84,12 @@ const H = ({ children, as }) => (
 
 export const query = graphql`
   {
-    md: markdownRemark(fileAbsolutePath: { regex: "/landing.md/" }) {
+    mdx(fileAbsolutePath: { regex: "/landing.md/" }) {
       frontmatter {
         title
         ...cover
       }
-      html
+      body
     }
     janosh: file(name: { eq: "janosh" }) {
       img: childImageSharp {
@@ -97,7 +98,7 @@ export const query = graphql`
         }
       }
     }
-    posts: allMarkdownRemark(
+    posts: allMdx(
       filter: { fileAbsolutePath: { regex: "/posts/" } }
       sort: { fields: frontmatter___date, order: DESC }
       limit: 5

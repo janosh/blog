@@ -4,24 +4,24 @@ import { Highlight, Snippet } from 'react-instantsearch-dom'
 import { Tags } from 'styled-icons/fa-solid/Tags'
 import { Calendar } from 'styled-icons/octicons/Calendar'
 
-export const PageHit = clickHandler => ({ hit }) => (
+const Root = ({ hit, clickHandler, children }) => (
   <div>
     <Link to={hit.slug} onClick={clickHandler}>
       <h4>
         <Highlight attribute="title" hit={hit} tagName="mark" />
       </h4>
     </Link>
+    {children}
     <Snippet attribute="excerpt" hit={hit} tagName="mark" />
   </div>
 )
 
+export const PageHit = clickHandler => ({ hit }) => (
+  <Root {...{ clickHandler, hit }} />
+)
+
 export const PostHit = clickHandler => ({ hit }) => (
-  <div>
-    <Link to={`/blog` + hit.slug} onClick={clickHandler}>
-      <h4>
-        <Highlight attribute="title" hit={hit} tagName="mark" />
-      </h4>
-    </Link>
+  <Root {...{ clickHandler, hit }}>
     <div>
       <Calendar size="1em" />
       &nbsp;
@@ -36,6 +36,5 @@ export const PostHit = clickHandler => ({ hit }) => (
         </Fragment>
       ))}
     </div>
-    <Snippet attribute="excerpt" hit={hit} tagName="mark" />
-  </div>
+  </Root>
 )

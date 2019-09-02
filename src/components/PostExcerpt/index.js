@@ -13,11 +13,11 @@ export default function PostExcerpt({ post, noText }) {
   }
   return (
     <Post>
-      <Link to={`/blog` + slug}>
+      <Link to={slug}>
         <Cover {...cover} />
       </Link>
       <h3 css="margin: 0.8em auto 0.5em;">
-        <Link to={`/blog` + slug}>{title}</Link>
+        <Link to={slug}>{title}</Link>
       </h3>
       <PostMeta {...{ ...frontmatter, timeToRead }} />
       {!noText && <span dangerouslySetInnerHTML={{ __html: excerpt }} />}

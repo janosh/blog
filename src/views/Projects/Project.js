@@ -1,7 +1,8 @@
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { Fragment } from 'react'
 import { Date, GitHub, Homepage, Img, Meta, NPM, Tech } from './styles'
 
-const Project = ({ title, cover, date, url, repo, npm, tech, html }) => (
+const Project = ({ title, cover, date, url, repo, npm, tech, body }) => (
   <>
     <h2>
       <a href={url}>{title}</a>
@@ -40,7 +41,7 @@ const Project = ({ title, cover, date, url, repo, npm, tech, html }) => (
         </>
       )}
     </Meta>
-    <p dangerouslySetInnerHTML={{ __html: html }} />
+    <MDXRenderer>{body}</MDXRenderer>
   </>
 )
 

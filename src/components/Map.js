@@ -1,6 +1,8 @@
 import { functions, isEqual, omit } from 'lodash'
 import React, { useEffect, useRef } from 'react'
 
+const apiKey = process.env.GATSBY_GOOGLE_MAPS_API_KEY
+
 function Map({ options, onMount, className }) {
   const divProps = { ref: useRef(), className }
 
@@ -12,9 +14,7 @@ function Map({ options, onMount, className }) {
     if (!window.google) {
       const script = document.createElement(`script`)
       script.type = `text/javascript`
-      script.src =
-        `https://maps.googleapis.com/maps/api/js?key=` +
-        process.env.GATSBY_GOOGLE_MAPS_API_KEY
+      script.src = `https://maps.googleapis.com/maps/api/js?key=` + apiKey
       const headScript = document.getElementsByTagName(`script`)[0]
       headScript.parentNode.insertBefore(script, headScript)
       script.addEventListener(`load`, onLoad)
@@ -24,7 +24,7 @@ function Map({ options, onMount, className }) {
 
   return (
     <div
-      css="height: 70vh; margin: 1em 0; border-radius: 0.5em;"
+      css="height: 35em; max-height: 70vh; margin: 1em 0; border-radius: 0.5em;"
       {...divProps}
     />
   )
@@ -47,3 +47,12 @@ Map.defaultProps = {
     zoom: 5,
   },
 }
+
+// https://github.com/gatsbyjs/gatsby/issues/17341
+export const MapEmbed = ({ place, ...rest }) => (
+  <iframe
+    src={`https://google.com/maps/embed/v1/place?q=${place}&key=${apiKey}`}
+    css="height: 35em; max-height: 70vh; width: 100%; border: 0; border-radius: 0.3em;"
+    {...rest}
+  />
+)
