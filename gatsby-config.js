@@ -3,6 +3,36 @@ const macros = require(`./src/utils/katex`)
 
 require(`dotenv`).config()
 
+const gatsbyRemarkPlugins = [
+  `gatsby-remark-smartypants`,
+  `gatsby-remark-embed-video`,
+  `gatsby-remark-responsive-iframe`,
+  `gatsby-remark-copy-linked-files`,
+  `gatsby-remark-code-titles`,
+  `gatsby-remark-vscode`,
+  `gatsby-remark-sub-sup`,
+  `gatsby-remark-autolink-headers`,
+  {
+    resolve: `gatsby-remark-katex`,
+    options: { macros },
+  },
+  {
+    resolve: `gatsby-remark-images`,
+    options: {
+      maxWidth: 1200,
+      linkImagesToOriginal: false,
+      wrapperStyle: `border-radius: 0.5em; overflow: hidden;`,
+    },
+  },
+  {
+    resolve: `gatsby-remark-emojis`,
+    options: {
+      active: true,
+      size: 24,
+    },
+  },
+]
+
 module.exports = {
   siteMetadata: {
     title: `janosh.io`,
@@ -11,42 +41,15 @@ module.exports = {
     url: `https://janosh.io`,
   },
   plugins: [
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
-          `gatsby-remark-smartypants`,
-          `gatsby-remark-embed-video`,
-          `gatsby-remark-responsive-iframe`,
-          `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-code-titles`,
-          `gatsby-remark-vscode`,
-          `gatsby-remark-sub-sup`,
-          `gatsby-remark-autolink-headers`,
-          {
-            resolve: `gatsby-remark-katex`,
-            options: { macros },
-          },
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 1200,
-              linkImagesToOriginal: false,
-              wrapperStyle: `border-radius: 0.5em; overflow: hidden;`,
-            },
-          },
-          {
-            resolve: `gatsby-remark-emojis`,
-            options: {
-              active: true,
-              size: 24,
-            },
-          },
-        ],
+        gatsbyRemarkPlugins,
+        extensions: [`.mdx`, `.md`],
       },
     },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     `gatsby-transformer-yaml`,
     {
       resolve: `gatsby-source-filesystem`,

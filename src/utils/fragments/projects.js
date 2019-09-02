@@ -2,13 +2,13 @@ import { graphql } from 'gatsby'
 
 export const query = graphql`
   fragment projects on Query {
-    projects: allMarkdownRemark(
+    projects: allMdx(
       filter: { fileAbsolutePath: { regex: "/pages/web/projects/" } }
       sort: { fields: frontmatter___date, order: DESC }
     ) {
       projects: edges {
         node {
-          html
+          body
           frontmatter {
             title
             slug

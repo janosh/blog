@@ -2,3 +2,7 @@
   from = "https://janosh.netlify.com/*"
   to = "https://janosh.io/:splat"
   force = true
+
+[build.environment]
+  NODE_VERSION = v12.9.1
+  YARN_VERSION = 1.17.3
