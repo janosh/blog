@@ -232,7 +232,7 @@ export const useLocalStorage = (key, initialValue, options = {}) => {
 
 Last but not least in our list of hooks is `useMediaQuery`. It uses the [`window.matchMedia` API](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) to parse the `query` string and turn it into a [`MediaQueryList`](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList) object. It then calls `useState` to instantiate a boolean `match` indicating whether the query currently matches and registers an event listener to update that variable whenever the state of the `query` changes.
 
-The check `` typeof window !== `undefined` `` is just there to ensure this hook plays nicely with server-side rendering where `window` will be unavailable. If you don't need SSR, just get rid of it.
+The check `typeof window !== 'undefined'` is just there to ensure this hook plays nicely with server-side rendering where `window` will be unavailable. If you don't need SSR, just get rid of it.
 
 ```js:title=src/hooks/useLocalStorage.js
 import { useEffect, useState } from 'react'

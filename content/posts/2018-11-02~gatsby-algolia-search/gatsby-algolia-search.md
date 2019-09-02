@@ -211,10 +211,12 @@ export default function Search({ indices, collapse, hitsAsGrid }) {
   // useMemo prevents the searchClient from being recreated on every render.
   // Avoids unnecessary XHR requests (see https://tinyurl.com/yyj93r2s).
   const searchClient = useMemo(
-    () => algoliasearch(
-      process.env.GATSBY_ALGOLIA_APP_ID,
-      process.env.GATSBY_ALGOLIA_SEARCH_KEY
-    ), []
+    () =>
+      algoliasearch(
+        process.env.GATSBY_ALGOLIA_APP_ID,
+        process.env.GATSBY_ALGOLIA_SEARCH_KEY
+      ),
+    []
   )
   useOnClickOutside(ref, () => setFocus(false))
   return (
@@ -523,7 +525,7 @@ export const PageHit = clickHandler => ({ hit }) => (
 
 export const PostHit = clickHandler => ({ hit }) => (
   <div>
-    <Link to={`/blog` + hit.slug} onClick={clickHandler}>
+    <Link to={hit.slug} onClick={clickHandler}>
       <h4>
         <Highlight attribute="title" hit={hit} tagName="mark" />
       </h4>

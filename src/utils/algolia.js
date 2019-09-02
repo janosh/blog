@@ -1,5 +1,5 @@
 const pageQuery = `{
-  pages: allMarkdownRemark(
+  pages: allMdx(
     filter: {
       fileAbsolutePath: { regex: "/pages/" },
       frontmatter: {purpose: {eq: "page"}}
@@ -19,7 +19,7 @@ const pageQuery = `{
 }`
 
 const postQuery = `{
-  posts: allMarkdownRemark(
+  posts: allMdx(
     filter: { fileAbsolutePath: { regex: "/posts/" } }
   ) {
     edges {
