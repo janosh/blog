@@ -1,13 +1,12 @@
-import React from "react"
-import { graphql } from "gatsby"
-
-import Global from "../components/Global"
-import PageTitle from "../components/PageTitle"
-import { PageBody } from "../components/styles"
-import TagList from "../components/TagList"
-import PostList from "../views/PostList"
-import { useQueryParam } from "../hooks"
-import { kebabCase } from "lodash"
+import { graphql } from 'gatsby'
+import { kebabCase } from 'lodash'
+import React from 'react'
+import Global from '../components/Global'
+import PageTitle from '../components/PageTitle'
+import { PageBody } from '../components/styles'
+import TagList from '../components/TagList'
+import { useQueryParam } from '../hooks'
+import PostList from '../views/PostList'
 
 const addSlugs = tags =>
   tags.map(tag => ({
@@ -48,7 +47,7 @@ export default function BlogPage({ data, location }) {
 
 export const query = graphql`
   {
-    posts: allMarkdownRemark(
+    posts: allMdx(
       filter: { fileAbsolutePath: { regex: "/posts/" } }
       sort: { fields: frontmatter___date, order: DESC }
     ) {
@@ -58,7 +57,7 @@ export const query = graphql`
         }
       }
     }
-    tags: allMarkdownRemark {
+    tags: allMdx {
       group(field: frontmatter___tags) {
         title: fieldValue
         count: totalCount

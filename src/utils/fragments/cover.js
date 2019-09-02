@@ -9,7 +9,7 @@ export const query = graphql`
     }
     src: publicURL
   }
-  fragment cover on MarkdownRemarkFrontmatter {
+  fragment cover on MdxFrontmatter {
     cover {
       credit
       url
