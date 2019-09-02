@@ -7,7 +7,7 @@ const postTemplate = path.resolve(`./src/templates/post.js`)
 
 const query = `
   {
-    pages: allMarkdownRemark(
+    pages: allMdx(
       filter: { frontmatter: { purpose: { eq: "page" } } }
     ) {
       edges {
@@ -18,7 +18,7 @@ const query = `
         }
       }
     }
-    posts: allMarkdownRemark(
+    posts: allMdx(
       filter: { fileAbsolutePath: { regex: "/posts/" } }
       sort: { fields: frontmatter___date, order: DESC }
     ) {
@@ -52,10 +52,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     const prevSlug =
       index === arr.length - 1 ? `` : arr[index + 1].node.frontmatter.slug
     const slug = node.frontmatter.slug
-    if (!slug.startsWith(`/`))
-      throw Error(`Post slugs must start with a forward slash!`)
     createPage({
-      path: `/blog` + slug,
+      path: slug,
       component: postTemplate,
       context: { slug, nextSlug, prevSlug },
     })
@@ -72,5 +70,11 @@ exports.onCreateNode = ({ node, actions }) => {
       caption: tags.Headline.description,
     }
     actions.createNodeField({ node, name: `meta`, value: meta })
+  }
+  if (
+    node.internal.type === `Mdx` &&
+    node.fileAbsolutePath.includes(`content/posts`)
+  ) {
+    node.frontmatter.slug = `/blog` + node.frontmatter.slug
   }
 }

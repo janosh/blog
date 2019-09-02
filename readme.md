@@ -4,6 +4,7 @@ This repo powers the [Gatsby](https://gatsbyjs.org) site [janosh.io](https://jan
 
 The site is fully responsive, has [fluid typography](https://css-tricks.com/snippets/css/fluid-typography), relies heavily on [React Hooks](https://reactjs.org/docs/hooks-intro) for stateful components and CSS grid for layout. It uses the following libraries:
 
+- [**MDX**](https://mdxjs.com) for immersive, interactive content
 - [**styled-components**](https://styled-components.com) for design
 - [**KaTeX**](https://katex.org) for typesetting math
 - [**gatsby-remark-vscode**](https://www.gatsbyjs.org/packages/gatsby-remark-vscode) for syntax highlighting
