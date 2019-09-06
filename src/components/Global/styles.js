@@ -82,7 +82,7 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   /* center image captions */
-  .gatsby-resp-image-wrapper + em, img + em {
+  .gatsby-resp-image-wrapper + em, img + em, .js-plotly-plot + p > em {
     margin-top: 0.3em;
     display: block;
     text-align: center;
