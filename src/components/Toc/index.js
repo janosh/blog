@@ -1,6 +1,6 @@
 import { throttle } from 'lodash'
 import React, { useEffect, useRef, useState } from 'react'
-import { useOnClickOutside } from '../../hooks'
+import { useEventListener, useOnClickOutside } from '../../hooks'
 import { Title, TocDiv, TocIcon, TocLink, Toggle } from './styles'
 
 const accumulateOffsetTop = (el, totalOffset = 0) => {
@@ -40,21 +40,17 @@ export default function Toc({ headingSelector, getTitle, getDepth, ...rest }) {
     setHeadings({ titles, nodes, minDepth })
   }, [headingSelector, getTitle, getDepth])
 
-  useEffect(() => {
-    const scrollHandler = throttle(() => {
-      const { titles, nodes } = headings
-      // Offsets need to be recomputed because lazily-loaded
-      // content increases offsets as user scrolls down.
-      const offsets = nodes.map(el => accumulateOffsetTop(el))
-      const activeIndex = offsets.findIndex(
-        offset => offset > window.scrollY + 0.8 * window.innerHeight
-      )
-      setActive(activeIndex === -1 ? titles.length - 1 : activeIndex - 1)
-    }, throttleTime)
-
-    window.addEventListener(`scroll`, scrollHandler)
-    return () => window.removeEventListener(`scroll`, scrollHandler)
-  }, [headings, throttleTime])
+  const scrollHandler = throttle(() => {
+    const { titles, nodes } = headings
+    // Offsets need to be recomputed because lazily-loaded
+    // content increases offsets as user scrolls down.
+    const offsets = nodes.map(el => accumulateOffsetTop(el))
+    const activeIndex = offsets.findIndex(
+      offset => offset > window.scrollY + 0.8 * window.innerHeight
+    )
+    setActive(activeIndex === -1 ? titles.length - 1 : activeIndex - 1)
+  }, throttleTime)
+  useEventListener(`scroll`, scrollHandler)
 
   return (
     <>

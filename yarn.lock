@@ -15457,10 +15457,10 @@ styled-components@^4.2.1:
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
 
-styled-icons@8.4.0:
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/styled-icons/-/styled-icons-8.4.0.tgz#7dbdbc2a42cefc1689b3644c134c48785d45be5e"
-  integrity sha512-zPHF/qRBbYyBGAZVsuB2lE0/0lKnk5pHPUv708K6XS5QWG0OON/9g9oayAQFGGKOh3orah3vwJMTS0jeHaYbMw==
+styled-icons@8.3:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/styled-icons/-/styled-icons-8.3.0.tgz#c57daa2b02218c99a37715c5e88b86065dd4c58b"
+  integrity sha512-6qCrJzaaDQjdIOsXeMA6Wc8oA0vu2dzMfgTo0TxolCJJwUE0vQoJGnfU0NdJkic+MaHPKa2j5F7Gqm+baW6wkw==
   dependencies:
     "@emotion/is-prop-valid" "^0.8.2"
     tslib "^1.9.3"
