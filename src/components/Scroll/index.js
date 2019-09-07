@@ -1,5 +1,6 @@
 import { throttle } from 'lodash'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import { useEventListener } from '../../hooks'
 import { Arrow } from './styles'
 
 export default function Scroll({ direction = `up`, by, to, ...rest }) {
@@ -19,12 +20,14 @@ export default function Scroll({ direction = `up`, by, to, ...rest }) {
     window[`scroll` + mode]({ top: to, behavior: `smooth` })
 
   const handleScroll = throttle(() => {
+    if (!showBelow) return
     if (window.scrollY > showBelow) {
       if (!show) setShow(true)
     } else {
       if (show) setShow(false)
     }
   }, 300)
+  useEventListener(`scroll`, handleScroll)
 
   const handleClick = () => {
     if (to) scroll({ mode: `To`, to: to * window.innerHeight })
@@ -32,13 +35,6 @@ export default function Scroll({ direction = `up`, by, to, ...rest }) {
     else if (direction === `up`) scroll({ mode: `To`, to: 0 })
     else scroll({ mode: `To`, to: document.body.scrollHeight })
   }
-
-  useEffect(() => {
-    if (showBelow) {
-      window.addEventListener(`scroll`, handleScroll)
-      return () => window.removeEventListener(`scroll`, handleScroll)
-    }
-  }, [handleScroll, showBelow])
 
   const arrowProps = { show, direction, className, size }
   return <Arrow onClick={handleClick} {...arrowProps} />
