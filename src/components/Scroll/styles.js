@@ -5,7 +5,6 @@ import { ArrowUpCircle as Up } from 'styled-icons/feather/ArrowUpCircle'
 export const Arrow = styled(Down).attrs(props => ({
   as: props.direction === `up` && Up,
 }))`
-  z-index: 2;
   background: ${props => props.theme.lightGreen};
   color: white;
   border-radius: 50%;
