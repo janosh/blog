@@ -1,20 +1,17 @@
 import React, { useEffect, useRef } from 'react'
+import { useEventListener } from '../../hooks'
 import { Caption } from '../styles'
 import { Img, PageTitleContainer, Title } from './styles'
 
 export default function PageTitle({ children, img, className, ...rest }) {
   const { backdrop = true, fillToBottom } = rest
   const ref = useRef()
-  useEffect(() => {
-    if (fillToBottom) {
-      const fillAvailHeight = () =>
-        (ref.current.style.minHeight =
-          window.innerHeight - ref.current.offsetTop + `px`)
-      fillAvailHeight()
-      window.addEventListener(`resize`, fillAvailHeight)
-      return () => window.removeEventListener(`resize`, fillAvailHeight)
-    }
-  }, [fillToBottom])
+  const fillAvailHeight = () =>
+    fillToBottom &&
+    (ref.current.style.minHeight =
+      window.innerHeight - ref.current.offsetTop + `px`)
+  useEventListener(`resize`, fillAvailHeight)
+  useEffect(fillAvailHeight, [])
   return (
     <PageTitleContainer {...{ ref, className }}>
       <Img {...img} />
