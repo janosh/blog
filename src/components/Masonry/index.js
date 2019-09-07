@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from "react"
-
-import { MasonryDiv, Col } from "./styles"
+import React, { useEffect, useRef, useState } from 'react'
+import { useEventListener } from '../../hooks'
+import { Col, MasonryDiv } from './styles'
 
 const createCols = (children, cols, numCols) => {
   for (let i = 0; i < numCols; i++) cols[i] = []
@@ -13,13 +13,10 @@ export default function Masonry({ children, gap, minWidth = 500 }) {
   const [numCols, setNumCols] = useState(3)
   createCols(children, cols, numCols)
 
-  useEffect(() => {
-    const calcNumCols = () =>
-      setNumCols(Math.ceil(ref.current.offsetWidth / minWidth))
-    calcNumCols()
-    window.addEventListener(`resize`, calcNumCols)
-    return () => window.removeEventListener(`resize`, calcNumCols)
-  }, [minWidth])
+  const resizeHandler = () =>
+    setNumCols(Math.ceil(ref.current.offsetWidth / minWidth))
+  useEffect(resizeHandler, [])
+  useEventListener(`resize`, resizeHandler)
 
   return (
     <MasonryDiv ref={ref} gap={gap}>

@@ -20,6 +20,8 @@ export const useMediaQuery = query => {
 // React hook for JS screen queries
 export const useScreenQuery = cond => {
   if (!mediaQuery[cond + `Js`])
-    throw `useMediaQuery's condition should be one of (min|max)(Phone|Phablet|Tablet|etc.)`
+    throw new TypeError(
+      `useMediaQuery's condition should be one of (min|max)(Phone|Phablet|Tablet|etc.)`
+    )
   return useMediaQuery(mediaQuery[cond + `Js`])
 }
