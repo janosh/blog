@@ -33,4 +33,7 @@ module.exports = {
       version: 'detect',
     },
   },
+  globals: {
+    globalThis: false, // false means it is not writeable. See https://github.com/eslint/eslint/issues/11553.
+  },
 }
