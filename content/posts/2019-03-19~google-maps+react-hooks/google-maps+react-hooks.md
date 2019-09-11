@@ -8,21 +8,22 @@ tags:
   - Web Dev
   - Tutorial
   - JS
+showToc: true
 ---
 
-Had to share this one since it's so nice and simple. If you're looking for a drop-in, zero-dependency Google Maps React component, look no further. Here it is:
+Had to share this one since it's so nice and simple. If you're looking for a drop-in, zero-dependency Google Maps React component, look no further.
 
 ```js:title=src/components/map.js
 import React, { useEffect, useRef } from 'react'
 
 export default function Map({ options, onMount, className }) {
-  const props = { ref: useRef(), className }
-  const onLoad = () => {
-    const map = new window.google.maps.Map(props.ref.current, options)
-    onMount && onMount(map)
-  }
+  const divProps = { ref: useRef(), className }
 
   useEffect(() => {
+    const onLoad = () => {
+      const map = new window.google.maps.Map(divProps.ref.current, options)
+      onMount && onMount(map)
+    }
     if (!window.google) {
       const script = document.createElement(`script`)
       script.type = `text/javascript`
@@ -34,12 +35,12 @@ export default function Map({ options, onMount, className }) {
       script.addEventListener(`load`, onLoad)
       return () => script.removeEventListener(`load`, onLoad)
     } else onLoad()
-  })
+  }, [divProps.ref, onMount, options])
 
   return (
     <div
-      {...props}
-      style={{ height: `70vh`, margin: `1em 0`, borderRadius: `0.5em` }}
+      css="height: 70vh; margin: 1em 0; border-radius: 0.5em;"
+      {...divProps}
     />
   )
 }
@@ -68,7 +69,9 @@ export default () => (
 )
 ```
 
-To change the area shown by the map and its zoom level, pass it an `options` object containing the keys `center` and `zoom`.
+## Customization
+
+To change the area shown by the map and its zoom level, pass an `options` object containing the keys `center` and `zoom`.
 
 ```js
 mapProps = {
@@ -81,7 +84,7 @@ mapProps = {
 <Map {...mapProps} />
 ```
 
-If you'd like to do something more fancy, for instance add some markers to the map, you can also pass in an `onMount` function:
+If you'd like to do something more fancy, for instance add some markers to the map, you can also pass an `onMount` function:
 
 ```js{17}
 const addMarkers = links => map => {
@@ -108,11 +111,11 @@ mapProps = {
 
 `link.coords` should be an object of the same structure as `center`, i.e. with `lat` and `lng` keys for the latitude and longitude at which to display each marker.
 
-Note that the `onMount` function must be curried since the `Map` component itself passes in the `map` object on which to apply `onMount`.
+Note that the `onMount` function must be [curried](https://en.wikipedia.org/wiki/Currying) since the `Map` component itself passes in the `map` object on which to apply `onMount`.
 
 ## Optimization
 
-By default, when using the `Map` component it will rerender whenever the parent component rerenders. Not only does this waste computation since there's no need to rerender the map if its props didn't change, even more importantly, it also ruins the user experience since the map will jump back to its initial `center` and `zoom` on every rerender. To prevent this, you can easily create a memoized map with the `useCallback` hook:
+By default, the `Map` component will rerender whenever the parent component rerenders. There are two problems with this. First, it wastes computation since there's no need to rerender the map if its props didn't change. Second and even more importantly, it ruins the user experience since the map will jump back to its initial `center` and `zoom` on every rerender. To prevent this, you can easily create a memoized map with the `useCallback` hook:
 
 ```js{1,4,9}:title=src/app.js
 import React, { useCallback } from 'react'
@@ -156,6 +159,62 @@ const shouldUpdate = (prevProps, nextProps) => {
 export default React.memo(Map, shouldUpdate)
 ```
 
-[`React.memo`](https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-shouldcomponentupdate) shallowly compares props and only rerenders a function component if the comparison returns false. It's the function component equivalent to `PureComponent` for class components. For components that receive objects, arrays and functions as props which can be referentially different on every render, the default behavior of shallow prop comparison can be overridden by passing a custom comparison function as second argument. It takes the next and previous props as input and returns true if the update should be skipped or false if the component should rerender.
+[`React.memo`](https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-shouldcomponentupdate) shallowly compares props and only rerenders a function component if the comparison returns false. It's the equivalent of `PureComponent` for class components. For components that receive objects, arrays and functions as props which are often referentially different on every render, the default behavior of shallow prop comparison can be overridden by passing a custom comparison function as second argument. It takes the next and previous props as input and returns true if the update should be skipped or false if the component should rerender.
 
 The above `shouldUpdate` function uses the `functions` and `omit` utilities imported from [`lodash`](https://lodash.com) to first identify and remove all (top-level) functions from `prevProps` and `nextProps` (in the above example, this only handles the `onMount` function but you may use additional functions in the future that would automatically be handled correctly by `shouldUpdate`). It then deep-compares the remaining props using `isEqual` followed by comparing the string representations of all omitted functions. If both comparisons return true, it skips the rerender and the user gets to keep the map's current position and zoom level.
+
+## Final Implementation
+
+Putting all of the above together, here's the full component that I use in production.
+
+```js:title=src/components/map.js
+import { functions, isEqual, omit } from 'lodash'
+import React, { useEffect, useRef } from 'react'
+
+function Map({ options, onMount, className }) {
+  const divProps = { ref: useRef(), className }
+
+  useEffect(() => {
+    const onLoad = () => {
+      const map = new window.google.maps.Map(divProps.ref.current, options)
+      onMount && onMount(map)
+    }
+    if (!window.google) {
+      const script = document.createElement(`script`)
+      script.type = `text/javascript`
+      script.src =
+        `https://maps.googleapis.com/maps/api/js?key=` +
+        process.env.GOOGLE_MAPS_API_KEY
+      const headScript = document.getElementsByTagName(`script`)[0]
+      headScript.parentNode.insertBefore(script, headScript)
+      script.addEventListener(`load`, onLoad)
+      return () => script.removeEventListener(`load`, onLoad)
+    } else onLoad()
+  }, [divProps.ref, onMount, options])
+
+  return (
+    <div
+      css="height: 70vh; margin: 1em 0; border-radius: 0.5em;"
+      {...divProps}
+    />
+  )
+}
+
+const shouldUpdate = (prevProps, nextProps) => {
+  delete prevProps.options.mapTypeId
+  const [prevFuncs, nextFuncs] = [functions(prevProps), functions(nextProps)]
+  return (
+    isEqual(omit(prevProps, prevFuncs), omit(nextProps, nextFuncs)) &&
+    prevFuncs.every(fn => prevProps[fn].toString() === nextProps[fn].toString())
+  )
+}
+
+export default React.memo(Map, shouldUpdate)
+
+Map.defaultProps = {
+  options: {
+    center: { lat: 48, lng: 8 },
+    zoom: 5,
+  },
+}
+```
