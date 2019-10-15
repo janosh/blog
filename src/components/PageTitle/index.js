@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { useEventListener } from '../../hooks'
+import { useEventListener } from 'hooks'
 import { Caption } from '../styles'
 import { Img, PageTitleContainer, Title } from './styles'
 

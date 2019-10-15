@@ -1,8 +1,8 @@
 import { graphql, Link } from 'gatsby'
 import React from 'react'
-import Global from '../components/Global'
-import PageTitle from '../components/PageTitle'
-import { theme } from '../utils/theme'
+import Global from 'components/Global'
+import PageTitle from 'components/PageTitle'
+import { theme } from 'utils/theme'
 
 const PageNotFound = ({ data, location }) => (
   <Global margin="0" transparent path={location.pathname}>

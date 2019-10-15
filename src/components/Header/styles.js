@@ -1,6 +1,6 @@
 import { Link } from 'gatsby'
 import styled from 'styled-components'
-import mediaQuery from '../../utils/mediaQuery'
+import mediaQuery from 'utils/mediaQuery'
 
 export const HeaderContainer = styled.header`
   background: ${props => props.theme.headerBg};

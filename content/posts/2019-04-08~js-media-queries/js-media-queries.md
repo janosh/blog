@@ -195,7 +195,7 @@ And this is how I use that hook on this site to switch between `MobileNav` and `
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 
-import { useMediaQuery } from '../../utils/mediaQuery'
+import { useMediaQuery } from 'utils/mediaQuery'
 
 import MobileNav from './Mobile'
 import DesktopNav from './Desktop'

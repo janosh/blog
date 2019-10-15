@@ -2,12 +2,12 @@ import { DiscussionEmbed } from 'disqus-react'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import Global from '../components/Global'
-import PageTitle from '../components/PageTitle'
-import PostMeta from '../components/PostMeta'
-import PrevNext from '../components/PrevNext'
-import { PageBody } from '../components/styles'
-import Toc from '../components/Toc'
+import Global from 'components/Global'
+import PageTitle from 'components/PageTitle'
+import PostMeta from 'components/PostMeta'
+import PrevNext from 'components/PrevNext'
+import { PageBody } from 'components/styles'
+import Toc from 'components/Toc'
 
 export const disqusConfig = ({ slug, title }) => ({
   shortname: process.env.GATSBY_DISQUS_NAME,

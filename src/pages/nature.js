@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 
-import Global from '../components/Global'
-import PageTitle from '../components/PageTitle'
-import { PageBody, ButtonGroup } from '../components/styles'
-import Photos from '../views/Photos'
+import Global from 'components/Global'
+import PageTitle from 'components/PageTitle'
+import { PageBody, ButtonGroup } from 'components/styles'
+import Photos from 'views/Photos'
 
-const NaturePage = ({ data, location }) => {
+export default function NaturePage({ data, location }) {
   const [modal, setModal] = useState()
   const [tab, setTab] = useState(`list`)
   const photos = data.photos.edges.map(({ node }) => ({
@@ -33,8 +33,6 @@ const NaturePage = ({ data, location }) => {
     </Global>
   )
 }
-
-export default NaturePage
 
 export const query = graphql`
   {
