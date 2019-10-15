@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { Grid } from '../../components/styles'
-import mediaQuery from '../../utils/mediaQuery'
+import { Grid } from 'components/styles'
+import mediaQuery from 'utils/mediaQuery'
 
 const asRow = css`
   grid-column: 2/-2;

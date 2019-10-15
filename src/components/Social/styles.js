@@ -5,7 +5,7 @@ import { LinkedinIn } from 'styled-icons/fa-brands/LinkedinIn'
 import { Youtube } from 'styled-icons/fa-brands/Youtube'
 import { Email } from 'styled-icons/material/Email'
 import { Share } from 'styled-icons/material/Share'
-import mediaQuery from '../../utils/mediaQuery'
+import mediaQuery from 'utils/mediaQuery'
 import { fadeInOnHoverParent } from '../styles'
 
 export const Wrapper = styled.div`

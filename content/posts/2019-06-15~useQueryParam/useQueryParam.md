@@ -67,12 +67,12 @@ Here's an example of how to use this hook to filter a list of posts on a blog pa
 import React from 'react'
 import { kebabCase } from 'lodash'
 
-import Global from '../components/Global'
-import PageTitle from '../components/PageTitle'
-import { PageBody } from '../components/styles'
-import TagList from '../components/TagList'
-import PostList from '../views/PostList'
-import { useQueryParam } from '../hooks'
+import Global from 'components/Global'
+import PageTitle from 'components/PageTitle'
+import { PageBody } from 'components/styles'
+import TagList from 'components/TagList'
+import PostList from 'views/PostList'
+import { useQueryParam } from 'hooks'
 
 const addSlugs = tags =>
   tags.map(tag => ({

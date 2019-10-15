@@ -1,6 +1,6 @@
 import { throttle } from 'lodash'
 import React, { useState } from 'react'
-import { useEventListener } from '../../hooks'
+import { useEventListener } from 'hooks'
 import { Arrow } from './styles'
 
 export default function Scroll({ direction = `up`, by, to, ...rest }) {

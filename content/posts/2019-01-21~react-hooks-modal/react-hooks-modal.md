@@ -85,8 +85,8 @@ Anyways, regarding usage, notice that the modal component doesn't actually handl
 ```js{1,9,15,19}
 import React, { useState, Fragment } from 'react'
 
-import Masonry from '../../components/Masonry'
-import Modal from '../../components/Modal'
+import Masonry from 'components/Masonry'
+import Modal from 'components/Modal'
 
 import { Thumbnail, LargeImg } from './styles'
 

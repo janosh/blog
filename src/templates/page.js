@@ -1,9 +1,9 @@
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import Global from '../components/Global'
-import PageTitle from '../components/PageTitle'
-import { PageBody } from '../components/styles'
+import Global from 'components/Global'
+import PageTitle from 'components/PageTitle'
+import { PageBody } from 'components/styles'
 
 export default function PageTemplate({ data, location }) {
   const { frontmatter, body, excerpt } = data.page
