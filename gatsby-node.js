@@ -33,14 +33,14 @@ const query = `
   }
 `
 
-exports.createPages = async ({ graphql, actions: { createPage } }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const response = await graphql(query)
   if (response.errors) throw new Error(response.errors)
   const { pages, posts } = response.data
 
   pages.edges.forEach(({ node }) => {
     const { slug } = node.frontmatter
-    createPage({
+    actions.createPage({
       path: slug,
       component: pageTemplate,
       context: { slug },
@@ -52,7 +52,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     const prevSlug =
       index === arr.length - 1 ? `` : arr[index + 1].node.frontmatter.slug
     const slug = node.frontmatter.slug
-    createPage({
+    actions.createPage({
       path: slug,
       component: postTemplate,
       context: { slug, nextSlug, prevSlug },
@@ -77,4 +77,14 @@ exports.onCreateNode = ({ node, actions }) => {
   ) {
     node.frontmatter.slug = `/blog` + node.frontmatter.slug
   }
+}
+
+// Enable absolute imports from `src`.
+// See https://gatsbyjs.org/docs/add-custom-webpack-config#absolute-imports.
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      modules: [path.resolve(__dirname, `src`), `node_modules`],
+    },
+  })
 }

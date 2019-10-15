@@ -195,7 +195,7 @@ As an example, here's how this site calls `useScreenQuery` to switch between `Mo
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 
-import { useMediaQuery } from '../../utils/mediaQuery'
+import { useMediaQuery } from 'utils/mediaQuery'
 
 import MobileNav from './Mobile'
 import DesktopNav from './Desktop'

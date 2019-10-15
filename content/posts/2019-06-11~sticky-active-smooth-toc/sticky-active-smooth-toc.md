@@ -40,7 +40,7 @@ import { throttle } from 'lodash'
 // A hook to close the ToC if it's currently in an open state
 // and close it, when the user clicks or touches somewhere
 // outside the component (only used on small screens).
-import { useOnClickOutside } from '../../hooks'
+import { useOnClickOutside } from 'hooks'
 // Import styled components (see the Styles section below).
 import { TocDiv, TocLink, TocIcon, Title, Toggle } from './styles'
 

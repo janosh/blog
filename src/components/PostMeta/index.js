@@ -5,7 +5,7 @@ import React from 'react'
 import { Comments } from 'styled-icons/fa-solid/Comments'
 import { Timer } from 'styled-icons/material/Timer'
 import { Calendar } from 'styled-icons/octicons/Calendar'
-import { disqusConfig } from '../../templates/post'
+import { disqusConfig } from 'templates/post'
 import { Meta, TagList } from './styles'
 
 const PostMeta = ({ title, slug, date, timeToRead, tags, inTitle = false }) => (
