@@ -6,7 +6,7 @@ import {
   Index,
   InstantSearch,
 } from 'react-instantsearch-dom'
-import { useOnClickOutside } from '../../hooks'
+import { useOnClickOutside } from 'hooks'
 import * as hitComps from './hitComps'
 import Input from './Input'
 import { HitsWrapper, PoweredBy, Root } from './styles'

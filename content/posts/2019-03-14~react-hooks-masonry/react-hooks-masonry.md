@@ -77,8 +77,8 @@ Using `Masonry` is as simple as wrapping it around an array of child elements. F
 ```js{3,11,24}
 import React, { useState, Fragment } from 'react'
 
-import Masonry from '../../components/Masonry'
-import Modal from '../../components/Modal'
+import Masonry from 'components/Masonry'
+import Modal from 'components/Modal'
 
 import { Thumbnail, LargeImg } from './styles'
 

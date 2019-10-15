@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import { ThemeProvider } from 'styled-components'
-import { useEventListener } from '../../hooks'
+import { useEventListener } from 'hooks'
 import { controls, ModalBehind, ModalDiv } from './styles'
 
 const { Close, Next, Prev, FullscreenToggle } = controls

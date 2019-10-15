@@ -1,9 +1,9 @@
 import MarkerClusterer from '@google/markerclustererplus'
 import React from 'react'
-import Map from '../../components/Map'
-import Masonry from '../../components/Masonry'
-import Modal from '../../components/Modal'
-import { Caption } from '../../components/styles'
+import Map from 'components/Map'
+import Masonry from 'components/Masonry'
+import Modal from 'components/Modal'
+import { Caption } from 'components/styles'
 import { Img, Thumbnail } from './styles'
 
 const addMarkers = (photos, setModal) => map => {

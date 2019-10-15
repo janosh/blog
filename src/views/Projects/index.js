@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Modal from '../../components/Modal'
+import Modal from 'components/Modal'
 import Project from './Project'
 import { Img, ProjectGrid, Thumbnail } from './styles'
 

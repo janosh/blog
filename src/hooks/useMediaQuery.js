@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import mediaQuery from '../utils/mediaQuery'
+import mediaQuery from 'utils/mediaQuery'
 
 // React hook for JS media queries
 export const useMediaQuery = query => {

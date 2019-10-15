@@ -1,7 +1,7 @@
 import { graphql, StaticQuery } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useScreenQuery } from '../../hooks/useMediaQuery'
+import { useScreenQuery } from 'hooks/useMediaQuery'
 import DesktopNav from './Desktop'
 import MobileNav from './Mobile'
 

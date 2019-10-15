@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useEventListener } from '../../hooks'
+import { useEventListener } from 'hooks'
 import { Col, MasonryDiv } from './styles'
 
 const createCols = (children, cols, numCols) => {

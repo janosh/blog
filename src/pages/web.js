@@ -1,10 +1,10 @@
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import Global from '../components/Global'
-import PageTitle from '../components/PageTitle'
-import { Grid, PageBody } from '../components/styles'
-import Projects from '../views/Projects'
+import Global from 'components/Global'
+import PageTitle from 'components/PageTitle'
+import { Grid, PageBody } from 'components/styles'
+import Projects from 'views/Projects'
 
 const techLinkCss = `transition: 0.4s; :hover {transform: scale(1.05);}`
 

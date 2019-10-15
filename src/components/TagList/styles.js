@@ -14,7 +14,7 @@ import { Lab } from 'styled-icons/icomoon/Lab'
 import { ColorLens } from 'styled-icons/material/ColorLens'
 import { Web } from 'styled-icons/material/Web'
 import { WeatherSunny } from 'styled-icons/typicons/WeatherSunny'
-import mediaQuery from '../../utils/mediaQuery'
+import mediaQuery from 'utils/mediaQuery'
 export { Tags as TagsIcon } from 'styled-icons/fa-solid/Tags'
 
 export const TagGrid = styled.aside`
