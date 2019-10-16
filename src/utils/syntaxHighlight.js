@@ -17,6 +17,8 @@ const langTagColor = [
   { lang: `yml`, tag: `yaml`, color: `linen` },
   { lang: `yaml`, tag: `yaml`, color: `linen` },
   { lang: `markdown`, tag: `md`, color: `#e6ffed` },
+  { lang: `md`, tag: `md`, color: `#e6ffed` },
+  { lang: `mdx`, tag: `mdx`, color: `#55d179` },
   { lang: `json`, tag: `json`, color: `#fff` },
   { lang: `diff`, tag: `diff`, color: `#e8bd36` },
   { lang: `text`, tag: `text`, color: `gray` },
@@ -36,17 +38,17 @@ export default createGlobalStyle`
   pre.vscode-highlight {
     position: relative;
     background: #050431;
-    font-size: 0.9em;
+    font-size: 0.92em;
     border-radius: ${props => props.theme.mediumBorderRadius};
+    line-height: 1.5em
   }
-  
+
   pre.vscode-highlight[data-language]::before {
     position: absolute;
-    z-index: 1;
     top: 0;
     right: 2em;
     padding: 0.2em 0.5em;
-    font-size: 0.6em;
+    font-size: 0.8em;
     font-weight: bold;
     line-height: initial;
     text-transform: uppercase;
@@ -66,7 +68,7 @@ export default createGlobalStyle`
     font-size: 0.8em;
     line-height: initial;
   }
-  
+
   /* highlighted lines */
   .vscode-highlight .vscode-highlight-line-highlighted {
     background: rgba(255, 255, 255, 0.15);
