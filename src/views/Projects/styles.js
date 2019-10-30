@@ -51,8 +51,7 @@ export const Img = styled(Image)`
 
 export const Meta = styled.div`
   margin: 1em 0;
-  border-left: ${({ theme }) =>
-    `${theme.largeBorder} solid ${theme.lightGreen}`};
+  border-left: ${({ theme }) => `${theme.largeBorder} solid ${theme.lightGreen}`};
 `
 
 const iconCss = css`
