@@ -34,6 +34,7 @@ module.exports = {
     },
   },
   globals: {
-    globalThis: false, // false means it is not writeable. See https://github.com/eslint/eslint/issues/11553.
+    globalThis: false, // false means it is not writeable.
+    // See https://github.com/eslint/eslint/issues/11553.
   },
 }

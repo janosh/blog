@@ -8,8 +8,7 @@ export default function PageTitle({ children, img, className, ...rest }) {
   const ref = useRef()
   const fillAvailHeight = () => {
     if (fillToBottom)
-      ref.current.style.minHeight =
-        window.innerHeight - ref.current.offsetTop + `px`
+      ref.current.style.minHeight = window.innerHeight - ref.current.offsetTop + `px`
   }
   useEventListener(`resize`, fillAvailHeight)
   useEffect(fillAvailHeight, [])

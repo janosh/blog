@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
 export const ButtonGroup = styled.div`
   margin: 2em auto;

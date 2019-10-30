@@ -39,10 +39,7 @@ export default function Global({ children, ...rest }) {
         <Header {...site} />
         {children}
         <Footer />
-        <Scroll
-          showBelow={1500}
-          css="position: fixed; right: 1em; bottom: 1em;"
-        />
+        <Scroll showBelow={1500} css="position: fixed; right: 1em; bottom: 1em;" />
       </MDXProvider>
     </ThemeProvider>
   )
