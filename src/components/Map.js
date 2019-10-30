@@ -23,10 +23,7 @@ function Map({ options, onMount, className }) {
   }, [divProps.ref, onMount, options])
 
   return (
-    <div
-      css="height: 70vh; margin: 1em 0; border-radius: 0.5em;"
-      {...divProps}
-    />
+    <div css="height: 70vh; margin: 1em 0; border-radius: 0.5em;" {...divProps} />
   )
 }
 
