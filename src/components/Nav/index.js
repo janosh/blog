@@ -8,11 +8,7 @@ import MobileNav from './Mobile'
 export { NavLink, navLinkStyle } from './styles'
 
 const Nav = props =>
-  useScreenQuery(`maxPhablet`) ? (
-    <MobileNav {...props} />
-  ) : (
-    <DesktopNav {...props} />
-  )
+  useScreenQuery(`maxPhablet`) ? <MobileNav {...props} /> : <DesktopNav {...props} />
 
 const query = graphql`
   {

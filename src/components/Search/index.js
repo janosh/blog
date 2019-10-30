@@ -1,6 +1,11 @@
 import algoliasearch from 'algoliasearch/lite'
 import React, { createRef, useMemo, useState } from 'react'
-import { connectStateResults, Hits, Index, InstantSearch } from 'react-instantsearch-dom'
+import {
+  connectStateResults,
+  Hits,
+  Index,
+  InstantSearch,
+} from 'react-instantsearch-dom'
 import { useOnClickOutside } from 'hooks'
 import * as hitComps from './hitComps'
 import Input from './Input'
@@ -24,7 +29,10 @@ export default function Search({ indices, collapse, hitsAsGrid }) {
   const searchKey = process.env.GATSBY_ALGOLIA_SEARCH_KEY
   // useMemo prevents the searchClient from being recreated on every render.
   // Avoids unnecessary XHR requests (see https://tinyurl.com/yyj93r2s).
-  const searchClient = useMemo(() => algoliasearch(appId, searchKey), [appId, searchKey])
+  const searchClient = useMemo(() => algoliasearch(appId, searchKey), [
+    appId,
+    searchKey,
+  ])
   useOnClickOutside(ref, () => setFocus(false))
   return (
     <Root ref={ref}>

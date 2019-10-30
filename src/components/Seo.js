@@ -8,8 +8,7 @@ export default function Seo({ site, pageTitle, path = ``, ...rest }) {
   const pageUrl = site.url + path
   const desc = description || site.description
   return (
-    <Helmet>
-      <title>{title}</title>
+    <Helmet title={title}>
       <meta property="og:type" content="website" />
       <html lang="en" />
       {pageTitle && <meta property="og:title" content={pageTitle} />}
