@@ -18,11 +18,11 @@ import { FoldingSpinner } from 'components/Spinners'
 
 The possibilities and authoring experience when creating content for the web have advanced by leaps and bounds in recent years. MDX -- the latest in a long line of game-changing innovations -- allows writers to sprinkle snippets of JSX directly into their markdown content (hence MDX). Think WordPress shortcodes but fancier. Not only does this open up seemingly endless possibilities in terms of more interactive and engaging content, it also facilitates the clear separation of code and content (i.e. no more need to write text directly into `.js` files).
 
-There are plenty of excellent guides already on how to use MDX with a [few different site generators like Gatsby and Next.js](https://mdxjs.com/getting-started). What I couldn't find was a guide on how to create interactive research-grade 2d and 3d plots displayed alongside regular markdown content. This is my attempt at providing one. Assuming you're starting out from a Gatsby site that's already up and running, what follows are step-by-step instructions on how to combine [MDX](https://mdxjs.com), [Gatsby](https://www.gatsbyjs.org) and [Plotly](https://plot.ly/javascript) -- the latter being the tough guy in this three-way marriage.
+There are plenty of excellent guides already on how to use MDX with a [few different site generators like Gatsby and Next.js](https://mdxjs.com/getting-started). What I couldn't find was a guide on how to create interactive research-grade 2d and 3d plots displayed alongside regular markdown content. This is my attempt at providing one. Assuming you're starting out from a Gatsby site that's already up and running, what follows are step-by-step instructions on how to combine [MDX](https://mdxjs.com), [Gatsby](https://gatsbyjs.org) and [Plotly](https://plot.ly/javascript) -- the latter being the tough guy in this three-way marriage.
 
 ## Setting up MDX
 
-The first step is to equip your existing site with MDX-support. Gatsby provides an [official and excellent guide on how to do that](https://www.gatsbyjs.org/docs/mdx). The process has gotten much simpler in recent months and by now is pretty much reduced to adding [`mdx`](https://github.com/mdx-js/mdx) and [`gatsby-plugin-mdx`](https://www.gatsbyjs.org/packages/gatsby-plugin-mdx) to your dependencies,
+The first step is to equip your existing site with MDX-support. Gatsby provides an [official and excellent guide on how to do that](https://gatsbyjs.org/docs/mdx). The process has gotten much simpler in recent months and by now is pretty much reduced to adding [`mdx`](https://github.com/mdx-js/mdx) and [`gatsby-plugin-mdx`](https://gatsbyjs.org/packages/gatsby-plugin-mdx) to your dependencies,
 
 ```sh
 yarn add gatsby-plugin-mdx @mdx-js/mdx @mdx-js/react
@@ -39,7 +39,7 @@ module.exports = {
 }
 ```
 
-That's the most basic setup. Just like that, you can start adding `.mdx` files to your `src/pages` folder and they'll be automatically converted to HTML pages including any React components you import. Once you've started getting the hang of [MDX's capabilities](https://www.gatsbyjs.org/docs/mdx/writing-pages) you'll probably want to look into how to create MDX pages programmatically in `gatsby-node.js`. There's an entire section on that in the [Gatsby docs](https://www.gatsbyjs.org/docs/mdx/programmatically-creating-pages).
+That's the most basic setup. Just like that, you can start adding `.mdx` files to your `src/pages` folder and they'll be automatically converted to HTML pages including any React components you import. Once you've started getting the hang of [MDX's capabilities](https://gatsbyjs.org/docs/mdx/writing-pages) you'll probably want to look into how to create MDX pages programmatically in `gatsby-node.js`. There's an entire section on that in the [Gatsby docs](https://gatsbyjs.org/docs/mdx/programmatically-creating-pages).
 
 ## Setting up Plotly
 

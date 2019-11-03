@@ -3,9 +3,9 @@ copyright: Janosh Riebesell
 sourceNote: This site is open <a href="https://github.com/janosh/janosh.io">source</a>
 
 poweredBy:
-  - url: https://www.gatsbyjs.org
+  - url: https://gatsbyjs.org
     title: Gatsby
-  - url: https://www.github.com/janosh/janosh.io
+  - url: https://github.com/janosh/janosh.io
     title: Github
-  - url: https://www.netlify.com
+  - url: https://netlify.com
     title: Netlify

@@ -19,9 +19,9 @@ There are many options out there for adding comment functionality, several of th
 
 - [Disqus](https://disqus.com) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTUxMTIzMDE0NjY2MQ==)]
 - [Staticman](https://staticman.net) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTUzNDkxODUxMDk4OA==)]
-- [Facebook comments](https://www.npmjs.com/package/react-facebook) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTU0MTEwNTQyNDI1MA==)]
-- [JustComments](https://just-comments.com) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTU0MTQ0MzcxMTgxMQ==)] (has a [Gatsby plugin](https://www.gatsbyjs.org/packages/gatsby-plugin-just-comments))
-- [TalkYard](https://www.talkyard.io) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTUxNjMzMzM5MTU5NA==)]
+- [Facebook comments](https://npmjs.com/package/react-facebook) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTU0MTEwNTQyNDI1MA==)]
+- [JustComments](https://just-comments.com) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTU0MTQ0MzcxMTgxMQ==)] (has a [Gatsby plugin](https://gatsbyjs.org/packages/gatsby-plugin-just-comments))
+- [TalkYard](https://talkyard.io) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTUxNjMzMzM5MTU5NA==)]
 - [Gitalk](https://gitalk.github.io) [[mention](https://github.com/gatsbyjs/gatsby/issues/12209#issuecomment-471165136)]
 
 All of these are worth checking out. Staticman, for instance, took an interesting approach. Essentially, you set up your own HTML form for writing comments, let it send a POST request on submission to one of their endpoints. From this Staticman will automatically submit a pull request to your site's repo which you can accept or deny. If that isn't a nerdy way of doing comment moderation, I don't know what is. It's just a gimmick though. This has the big advantage of keeping everything static (hence the name). All your data is in one place (your repo) as opposed to having to be loaded through JavaScript embeds or iframes (short for [inline frame](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)) on the fly. It will remain there even if Staticman is ever discontinued. With the other services, you depend on an external platform to deliver your comments.
@@ -30,7 +30,7 @@ Of course, in return you have the disadvantage of increased manual setup includi
 
 For this reason, I ended up going with Disqus. It has a number of other advantages as well.
 
-- It [seems to be by far the most widely used service](https://www.datanyze.com/market-share/comment-systems/disqus-market-share) with a market share of 66% (as of this writing), twice that of the runner up Facebook Comments with 32%.
+- It [seems to be by far the most widely used service](https://datanyze.com/market-share/comment-systems/disqus-market-share) with a market share of 66% (as of this writing), twice that of the runner up Facebook Comments with 32%.
 - It is low maintenance. [Moderating your comments and maintaining your forum](https://help.disqus.com/moderation/moderating-101) is easy.
 - It provides official [React support](https://github.com/disqus/disqus-react).
 - It offers a [generous free tier](https://disqus.com/pricing).
@@ -51,7 +51,7 @@ Here are the steps for adding Disqus comments to your own blog:
    yarn add disqus-react
    ```
 
-3. Add the shortname from step 1 to your `.env` and `.env.example` files and call it something like `GATSBY_DISQUS_NAME` so that people forking your repo will know that they need to supply this value to get comments to work. (You need to prefix the environment variable with `GATSBY_` in order to [make it available to client side code](https://www.gatsbyjs.org/docs/environment-variables/#client-side-javascript).)
+3. Add the shortname from step 1 to your `.env` and `.env.example` files and call it something like `GATSBY_DISQUS_NAME` so that people forking your repo will know that they need to supply this value to get comments to work. (You need to prefix the environment variable with `GATSBY_` in order to [make it available to client side code](https://gatsbyjs.org/docs/environment-variables/#client-side-javascript).)
 
    ```sh:title=.env.example
    # enables Disqus comments below blog posts
