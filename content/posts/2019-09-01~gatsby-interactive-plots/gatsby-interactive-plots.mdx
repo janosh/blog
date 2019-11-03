@@ -34,7 +34,7 @@ followed by including it in your `gatsby-config.js`
 module.exports = {
   plugins: [
     // ....
-    `gatsby-plugin-mdx`,
+    `gatsby-plugin-mdx`, // highlight-line
   ],
 }
 ```
@@ -213,18 +213,22 @@ Finally, to make the `LazyPlot` globally available in all your MDX files, wrap y
 
 ```js:title=src/components/App.js
 import React from 'react'
-import { MDXProvider } from '@mdx-js/react'
+import { MDXProvider } from '@mdx-js/react' // highlight-line
 import { LazyPlot } from './Plotly'
 
+// highlight-start
 const components = {
   LazyPlot,
 }
+// highlight-end
 
 export default function App(props) {
   return (
+    // highlight-start
     <MDXProvider components={components}>
       <main {...props} />
     </MDXProvider>
+    // highlight-end
   )
 }
 ```

@@ -83,8 +83,8 @@ As you can see, the styles are longer than the component itself. That's where I 
 
 Anyways, regarding usage, notice that the modal component doesn't actually handle it's own state. That's done by the parent component. As an example here's a [list of photos](/nature) that when clicked enter a higher-resolution modal view.
 
-```jsx{1,9,15,19}
-import React, { useState, Fragment } from 'react'
+```js
+import React, { useState, Fragment } from 'react' // highlight-line
 
 import Masonry from 'components/Masonry'
 import Modal from 'components/Modal'
@@ -92,17 +92,17 @@ import Modal from 'components/Modal'
 import { Thumbnail, LargeImg } from './styles'
 
 export default function Photos({ photos }) {
-  const [modal, setModal] = useState()
+  const [modal, setModal] = useState() // highlight-line
   return (
     <Masonry>
       {photos.map((img, index) => (
         <Fragment key={img.title}>
           <Thumbnail
-            onClick={() => setModal(index)}
+            onClick={() => setModal(index)} // highlight-line
             alt={img.title}
             src={img.src}
           />
-          <Modal {...{ open: index === modal, modal, setModal }}>
+          <Modal {...{ open: index === modal, modal, setModal }}> // highlight-line
             <LargeImg alt={img.title} src={img.src} />
           </Modal>
         </Fragment>
@@ -217,34 +217,41 @@ export default function Modal({ open, closeModal, children }) {
 
 If you have a list of modals and you'd like users to be able to go to the next or previous modal using the arrow keys, you can add an event listener with the `useEffect` hook for this as well.
 
-```jsx{5-8,12-16,25-30}:title=src/components/modal/index.js
+```js:title=src/components/modal/index.js
 import React, { useEffect } from 'react'
 
 import { ModalBehind, ModalDiv, Close, Next, Prev } from './styles'
 
+// highlight-start
 const handleArrowKeys = (modal, setModal) => event => {
   if (event.key === `ArrowRight`) setModal(modal + 1)
   else if (event.key === `ArrowLeft`) setModal(modal - 1)
 }
+// highlight-end
 
 const Modal = ({ open, modal, setModal, children, navigation, className }) => {
   if (open) {
+    // highlight-start
+    const { navigation, className, children } = rest
     useEffect(() => {
       const handler = handleArrowKeys(modal, setModal)
       document.addEventListener(`keydown`, handler)
       return () => document.removeEventListener(`keydown`, handler)
     })
+    // highlight-end
     return (
       // passing setModal without arguments will close the modal when triggered
       <ModalBehind open={open} onClick={setModal}>
         <ModalDiv onClick={event => event.stopPropagation()} className={className}>
           <Close onClick={setModal} />
+          // highlight-start
           {navigation && (
             <>
               <Next onClick={() => setModal(modal + 1)} />
               <Prev onClick={() => setModal(modal - 1)} />
             </>
           )}
+          // highlight-end
           {children}
         </ModalDiv>
       </ModalBehind>
