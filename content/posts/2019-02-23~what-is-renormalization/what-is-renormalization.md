@@ -9,7 +9,7 @@ tags:
   - Science
 ---
 
-I want to give an intuitive understanding of the process of **renormalization** and why its useful. But to that, I first need to introduce the context in which the need for renormalization arose: **quantum field theory**, or QFT for short. For that I'll be [borrowing heavily from the always excellent David Tong](http://www.damtp.cam.ac.uk/user/tong/whatisqft.html).
+I want to give an intuitive understanding of the process of **renormalization** and why its useful. But to that, I first need to introduce the context in which the need for renormalization arose: **quantum field theory**, or QFT for short. For that I'll be [borrowing heavily from the always excellent David Tong](http://damtp.cam.ac.uk/user/tong/whatisqft.html).
 
 ## What is QFT?
 

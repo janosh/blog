@@ -14,7 +14,7 @@ tech:
 
 Originally developed by [Rob Gilbert](https://pixelstew.co.uk), I now maintain [`gatsby-paginate`](https://gatsbyjs.org/packages/gatsby-paginate).
 
-Available on [NPM](https://www.npmjs.com/package/gatsby-paginate). Install via
+Available on [NPM](https://npmjs.com/package/gatsby-paginate). Install via
 
 ```sh
 yarn add gatsby-paginate
