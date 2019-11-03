@@ -41,7 +41,7 @@ posts/drafts
 
 ## Other options?
 
-Another cool solution would have been to completely delete the nodes corresponding to draft content right when Gatsby creates. However, [`actions.deleteNode`](https://www.gatsbyjs.org/docs/actions/#deleteNode) [doesn't seem to be supported](https://github.com/gatsbyjs/gatsby/issues/10844#issuecomment-471375400) inside [`exports.onCreateNode`](https://www.gatsbyjs.org/docs/node-apis/#onCreateNode).
+Another cool solution would have been to completely delete the nodes corresponding to draft content right when Gatsby creates. However, [`actions.deleteNode`](https://gatsbyjs.org/docs/actions/#deleteNode) [doesn't seem to be supported](https://github.com/gatsbyjs/gatsby/issues/10844#issuecomment-471375400) inside [`exports.onCreateNode`](https://gatsbyjs.org/docs/node-apis/#onCreateNode).
 
 ```js:title=gatsby-node.js
 exports.onCreateNode = ({ node, actions }) => {

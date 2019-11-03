@@ -5,11 +5,11 @@ purpose: page
 cover:
   img: particle-collision.jpg
   credit: Quantamagazine
-  url: https://www.quantamagazine.org/strange-numbers-found-in-particle-collisions-20161115
+  url: https://quantamagazine.org/strange-numbers-found-in-particle-collisions-20161115
   caption: Particle collision
 ---
 
-Advanced quantum field theory was given by [Prof. Jürgen Berges](pdfs/http://www.thphys.uni-heidelberg.de/~berges/people.htm) at Heidelberg University in the summer of 2015.
+Advanced quantum field theory was given by [Prof. Jürgen Berges](https://www.thphys.uni-heidelberg.de/~berges/people.htm) at Heidelberg University in the summer of 2015.
 
 Below is some material I used to prepare for the exam as well as all the assignment sheets and my solutions.
 

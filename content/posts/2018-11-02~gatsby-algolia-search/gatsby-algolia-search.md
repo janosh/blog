@@ -10,7 +10,7 @@ tags:
   - JS
 ---
 
-This post is a guide on how to write a React component that implements custom search powered by [Algolia](https://www.algolia.com) on a [Gatsby](https://gatsbyjs.org) site. You can see the result in action by clicking on the search icon in the top right of this page. The complete code is on [GitHub](https://github.com/janosh/janosh.io/tree/master/src/components/Search). Also, check out Algolia's own CodeSandbox on how to use their [React Instantsearch](https://codesandbox.io/s/github/algolia/create-instantsearch-app/tree/templates/react-instantsearch) library.
+This post is a guide on how to write a React component that implements custom search powered by [Algolia](https://algolia.com) on a [Gatsby](https://gatsbyjs.org) site. You can see the result in action by clicking on the search icon in the top right of this page. The complete code is on [GitHub](https://github.com/janosh/janosh.io/tree/master/src/components/Search). Also, check out Algolia's own CodeSandbox on how to use their [React Instantsearch](https://codesandbox.io/s/github/algolia/create-instantsearch-app/tree/templates/react-instantsearch) library.
 
 If you're looking to add search to a documentation site with highly structured content, then you can let Algolia handle the steps outlined in the backend section for you by using their excellent [Docsearch](https://community.algolia.com/docsearch). For other types of sites and more fine-grained control over exactly what data should be indexed, read on.
 

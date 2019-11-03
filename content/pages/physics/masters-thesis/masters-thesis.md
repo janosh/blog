@@ -5,11 +5,11 @@ purpose: page
 cover:
   img: heidelberg-castle-at-night.jpg
   credit: Alex Meyer
-  url: https://www.locationscout.net/germany/3596-philosophenweg-heidelberg
+  url: https://locationscout.net/germany/3596-philosophenweg-heidelberg
   caption: Heidelberg castle at night
 ---
 
-I wrote my master's thesis under the supervision of [Stefan Flörchinger](http://www.thphys.uni-heidelberg.de/~floerchinger), [Michael Scherer](http://www.thp.uni-koeln.de/~scherer) and [Christof Wetterich](http://www.thphys.uni-heidelberg.de/~wetterich) at ITP Heidelberg.
+I wrote my master's thesis under the supervision of [Stefan Flörchinger](https://www.thphys.uni-heidelberg.de/~floerchinger), [Michael Scherer](https://www.thp.uni-koeln.de/~scherer) and [Christof Wetterich](https://www.thphys.uni-heidelberg.de/~wetterich) at ITP Heidelberg.
 
 ## Topic
 
