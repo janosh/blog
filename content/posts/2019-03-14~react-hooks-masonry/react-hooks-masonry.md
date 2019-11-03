@@ -74,10 +74,10 @@ export const Col = styled.div`
 
 Using `Masonry` is as simple as wrapping it around an array of child elements. For example, here's how you'd use it to display a [list of image thumbnails](/nature) in a masonry layout.
 
-```js{3,11,24}
+```js
 import React, { useState, Fragment } from 'react'
 
-import Masonry from 'components/Masonry'
+import Masonry from 'components/Masonry' // highlight-line
 import Modal from 'components/Modal'
 
 import { Thumbnail, LargeImg } from './styles'
@@ -85,7 +85,7 @@ import { Thumbnail, LargeImg } from './styles'
 export default function Photos({ photos }) {
   const [modal, setModal] = useState()
   return (
-    <Masonry>
+    <Masonry> // highlight-line
       {photos.map((img, index) => (
         <Fragment key={img.title}>
           <Thumbnail
@@ -98,7 +98,7 @@ export default function Photos({ photos }) {
           </Modal>
         </Fragment>
       ))}
-    </Masonry>
+    </Masonry> // highlight-line
   )
 }
 ```

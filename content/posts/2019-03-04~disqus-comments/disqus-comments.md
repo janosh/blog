@@ -64,10 +64,10 @@ Here are the steps for adding Disqus comments to your own blog:
 
 4. Go to your blog post template (usually `src/templates/post.js`) and import the `DiscussionEmbed` React component.
 
-   ```js{3}:title=src/templates/post.js
+   ```js:title=src/templates/post.js
    import React from 'react'
    import { graphql } from 'gatsby'
-   import { DiscussionEmbed } from 'disqus-react'
+   import { DiscussionEmbed } from 'disqus-react' // highlight-line
    ...
    ```
 
@@ -82,13 +82,13 @@ Here are the steps for adding Disqus comments to your own blog:
 
    where `identifier` must be a string or number that uniquely identifies the post. Finally, add `DiscussionEmbed` near the end of the JSX of your post template.
 
-   ```js{6}:title=src/templates/post.js
+   ```js:title=src/templates/post.js
    return (
      <Global>
        ...
        <PageBody>
          ...
-         <DiscussionEmbed {...disqusConfig} />
+         <DiscussionEmbed {...disqusConfig} /> // highlight-line
        </PageBody>
      </Global>
    )
@@ -100,10 +100,10 @@ And you're done. You should now see the Disqus comment form appear beneath your 
 
 If you'd like your blog post previews to show a count of the number of comments each post received, simply import `disqus-react`'s `CommentCount` in the relevant post preview component and provide it the exact same config object as `DiscussionEmbed`.
 
-```js{4,21-23}:title=src/components/postMeta/index.js
+```js:title=src/components/postMeta/index.js
 import React from 'react'
 import { Link } from 'gatsby'
-import { CommentCount } from 'disqus-react'
+import { CommentCount } from 'disqus-react' // highlight-line
 
 import { Meta, TagList, Calendar, Timer, Comments } from './styles'
 
@@ -124,9 +124,11 @@ const PostMeta = ({ title, slug, date, timeToRead, tags }) => (
     </span>
     <span>
       <Comments size="1.2em" />
+      // highlight-start
       <Link to={slug + `#disqus_thread`}>
         <CommentCount {...disqusConfig({ slug, title })} />
       </Link>
+      // highlight-end
     </span>
     <TagList tags={tags} />
   </Meta>

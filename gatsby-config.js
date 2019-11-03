@@ -9,9 +9,17 @@ const gatsbyRemarkPlugins = [
   `gatsby-remark-responsive-iframe`,
   `gatsby-remark-copy-linked-files`,
   `gatsby-remark-code-titles`,
-  `gatsby-remark-vscode`,
   `gatsby-remark-sub-sup`,
   `gatsby-remark-autolink-headers`,
+  {
+    resolve: `gatsby-remark-vscode`,
+    options: {
+      extensions: [
+        { identifier: `silvenon.mdx`, version: `0.1.0` },
+        { identifier: `jpoissonnier.vscode-styled-components`, version: `0.0.26` },
+      ],
+    },
+  },
   {
     resolve: `gatsby-remark-katex`,
     options: { macros },
@@ -26,10 +34,7 @@ const gatsbyRemarkPlugins = [
   },
   {
     resolve: `gatsby-remark-emojis`,
-    options: {
-      active: true,
-      size: 24,
-    },
+    options: { active: true, size: 24 },
   },
 ]
 
