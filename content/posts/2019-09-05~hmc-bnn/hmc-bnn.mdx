@@ -11,7 +11,7 @@ showToc: true
 ---
 import bimodalProps from './bimodal'
 
-This post is a guide on how to use the [Hamiltonian Monte Carlo (HMC) transition kernel](https://www.tensorflow.org/probability/api_docs/python/tfp/mcmc/HamiltonianMonteCarlo) provided by [TensorFlow Probability](https://www.tensorflow.org/probability) to train Bayesian neural networks (BNN) by sampling from their posterior distribution. If you haven't heard of HMC before, check out this [short introduction](/blog/hmc-intro). Or, if you just want the 30-second elevator pitch: HMC is a Markov chain Monte Carlo (MCMC) algorithm that avoids the random walk behavior of simpler MCMC methods such as Metropolis-Hastings or Gibbs sampling by using Hamilton's equations of classical mechanics to take a series of first-order-gradient-informed steps through an auxiliary phase space which can be projected down onto the probability density you care about. This allows it to massively speed up mixing (i.e. generating a Markov chain of less correlated samples) and converge on even high-dimensional target distributions (although -- here's the upfront disclaimer -- perhaps not the many tens of thousands to several million parameters of modern neural networks which result in a posterior distribution of equal dimensionality).
+This post is a guide on how to use the [Hamiltonian Monte Carlo (HMC) transition kernel](https://tensorflow.org/probability/api_docs/python/tfp/mcmc/HamiltonianMonteCarlo) provided by [TensorFlow Probability](https://tensorflow.org/probability) to train Bayesian neural networks (BNN) by sampling from their posterior distribution. If you haven't heard of HMC before, check out this [short introduction](/blog/hmc-intro). Or, if you just want the 30-second elevator pitch: HMC is a Markov chain Monte Carlo (MCMC) algorithm that avoids the random walk behavior of simpler MCMC methods such as Metropolis-Hastings or Gibbs sampling by using Hamilton's equations of classical mechanics to take a series of first-order-gradient-informed steps through an auxiliary phase space which can be projected down onto the probability density you care about. This allows it to massively speed up mixing (i.e. generating a Markov chain of less correlated samples) and converge on even high-dimensional target distributions (although -- here's the upfront disclaimer -- perhaps not the many tens of thousands to several million parameters of modern neural networks which result in a posterior distribution of equal dimensionality).
 
 > The code in this guide was written in [TensorFlow (TF) v2.1](https://pypi.org/project/tensorflow) and [TensorFlow Probability (TFP) v0.9](https://pypi.org/project/tensorflow-probability).
 
@@ -460,7 +460,7 @@ import src.bnn.hmc as hmcnn
 import src.bnn.map as mapnn
 
 # %%
-# About the data: https://www.kaggle.com/c/boston-housing
+# About the data: https://kaggle.com/c/boston-housing
 (X_train, y_train), (X_test, y_test) = tf.keras.datasets.boston_housing.load_data()
 X_train, y_train, X_test, y_test = [
     arr.astype("float32") for arr in [X_train, y_train, X_test, y_test]

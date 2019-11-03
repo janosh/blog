@@ -7,10 +7,10 @@ The site is fully responsive, built with [Gatsby](https://gatsbyjs.org), has [fl
 - [**MDX**](https://mdxjs.com) for interactive content
 - [**styled-components**](https://styled-components.com) for appearance
 - [**KaTeX**](https://katex.org) for typesetting math
-- [**gatsby-remark-vscode**](https://www.gatsbyjs.org/packages/gatsby-remark-vscode) for syntax highlighting
+- [**gatsby-remark-vscode**](https://gatsbyjs.org/packages/gatsby-remark-vscode) for syntax highlighting
 - [**Disqus**](https://disqus.com) for blog post comments
-- [**Algolia**](https://www.algolia.com) for custom search
-- [**react-spring**](https://www.react-spring.io) for animations
+- [**Algolia**](https://algolia.com) for custom search
+- [**react-spring**](https://react-spring.io) for animations
 
 Feel free to reuse the whole or any part of this repo to create your own Gatsby site.
 
@@ -58,7 +58,7 @@ The easiest way to get this site published is as follows:
    netlify login
    ```
 
-4. Connect your GitHub repo with your netlify account for [continuous deployment](https://www.netlify.com/docs/cli/#continuous-deployment).
+4. Connect your GitHub repo with your netlify account for [continuous deployment](https://docs.netlify.com/cli/get-started/#usage-data-collection).
 
    ```sh
    netlify init

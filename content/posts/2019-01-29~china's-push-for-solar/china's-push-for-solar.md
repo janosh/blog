@@ -19,7 +19,7 @@ Based on this claim, I want to make a further prediction. The way China has rele
 To give you an idea just how fast China has been ramping up their solar industry since 2005 and where it stood compared to other countries back in 2010, take a look at this astonishing graph. 9 years ago, China was producing about 60 % more solar panels than the rest of the world combined!
 
 ![Solar Production By Country](solar-production-by-country.jpg)
-_Annual solar panel production in megawatts by country. Credit: [Kurzweil Network](http://www.kurzweilai.net/the-chinese-solar-machine)_
+_Annual solar panel production in megawatts by country. Credit: [Kurzweil Network](http://kurzweilai.net/the-chinese-solar-machine)_
 
 It was hard to find recent data but at least until 2013 this discrepancy only appears to have increased. According to data compiled by CleanTechnica, by 2013 China was able to extend their lead from 160 % to 200 % of the rest of the world's solar cell production, all while many of the other countries were busy ramping up their output as well.
 

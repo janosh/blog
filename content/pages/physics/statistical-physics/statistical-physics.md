@@ -9,7 +9,7 @@ cover:
   caption: Bose-Einstein condensate
 ---
 
-I had the pleasure of attending [Prof. Manfred Salmhofer](http://www.thphys.uni-heidelberg.de/~salmhofer)'s lecture on statistical physics at Heidelberg University in the fall of 2016.
+I had the pleasure of attending [Prof. Manfred Salmhofer](https://www.thphys.uni-heidelberg.de/~salmhofer)'s lecture on statistical physics at Heidelberg University in the fall of 2016.
 
 Below you can find solutions to all the exercises as well as the final exam.
 
