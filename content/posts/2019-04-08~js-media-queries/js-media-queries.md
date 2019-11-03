@@ -75,12 +75,15 @@ _[`window.matchMedia` browser support](https://caniuse.com/#search=matchMedia)_
 
 To use it in a React function component, simply throw in the following code snippet.
 
-```js{3,6-13}
+```js
 import React, { useState, useEffect } from 'react'
 
-const maxPhone = `screen and (max-width: 30em)`
+import { Mobile, Desktop} from 'src/components
+
+const maxPhone = `screen and (max-width: 30em)` // highlight-line
 
 export default function ResponsiveComponent(props) {
+  // highlight-start
   const query = window.matchMedia(maxPhone)
   const [match, setMatch] = useState(query.matches)
   useEffect(() => {
@@ -89,6 +92,7 @@ export default function ResponsiveComponent(props) {
     return () => query.removeListener(handleMatch)
   })
   return match ? <Mobile {...props} /> : <Desktop {...props} />
+  // highlight-end
 }
 ```
 
@@ -96,13 +100,13 @@ Note that we needed to remove the `@media` prefix of CSS media queries from `max
 
 If you're using server-side rendering, you'll need to wrap this code in a `if` statement that checks that the `window` object is defined.
 
-```js{6,15}
+```js
 import React, { useState, useEffect } from 'react'
 
 const maxPhone = `screen and (max-width: 30em)`
 
 export default function ResponsiveComponent(props) {
-  if (typeof window !== `undefined`) {
+  if (typeof window !== `undefined`) { // highlight-line
     const query = window.matchMedia(maxPhone)
     const [match, setMatch] = useState(query.matches)
     useEffect(() => {
@@ -111,7 +115,7 @@ export default function ResponsiveComponent(props) {
       return () => query.removeListener(handleMatch)
     })
     return match ? <Mobile {...props} /> : <Desktop {...props} />
-  } else return null
+  } else return null // highlight-line
 }
 ```
 
@@ -191,21 +195,23 @@ export const useMediaQuery = cond => {
 
 And this is how I use that hook on this site to switch between `MobileNav` and `DesktopNav`
 
-```js{4,9-14}
+```js
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 
-import { useMediaQuery } from 'utils/mediaQuery'
+import { useMediaQuery } from 'utils/mediaQuery' // highlight-line
 
 import MobileNav from './Mobile'
 import DesktopNav from './Desktop'
 
+// highlight-start
 const Nav = props =>
   useMediaQuery(`maxTablet`) ? (
     <MobileNav {...props} />
   ) : (
     <DesktopNav {...props} />
   )
+// highlight-end
 
 const query = graphql`
   {

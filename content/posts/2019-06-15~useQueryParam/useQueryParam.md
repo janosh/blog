@@ -63,7 +63,7 @@ export const useQueryParam = (key, value, options) => {
 
 Here's an example of how to use this hook to filter a list of posts on a blog page by tag. The `TagList` component in the last highlighted line simply uses `setActiveTag` in a `onClick` callback function `onClick={() => setActiveTag(tag.slug)}`. Note that the `All` tag has a `slug` of `null` so that clicking it will remove the query parameter.
 
-```js{9,19,29,41}:title=src/pages/blog.js
+```js:title=src/pages/blog.js
 import React from 'react'
 import { kebabCase } from 'lodash'
 
@@ -72,7 +72,7 @@ import PageTitle from 'components/PageTitle'
 import { PageBody } from 'components/styles'
 import TagList from 'components/TagList'
 import PostList from 'views/PostList'
-import { useQueryParam } from 'hooks'
+import { useQueryParam } from 'hooks' // highlight-line
 
 const addSlugs = tags =>
   tags.map(tag => ({
@@ -82,7 +82,7 @@ const addSlugs = tags =>
 
 const insertAllTag = (tags, count) =>
   !tags.map(tag => tag.title).includes(`All`)
-    ? [{ title: `All`, slug: null, count }, ...addSlugs(tags)]
+    ? [{ title: `All`, slug: null, count }, ...addSlugs(tags)] // highlight-line
     : tags
 
 const filterPostsByTag = (tag, posts) =>
@@ -92,7 +92,7 @@ const filterPostsByTag = (tag, posts) =>
 
 export default function BlogPage({ data, location }) {
   const { posts, tags, img } = data
-  const [activeTag, setActiveTag] = useQueryParam(`tag`)
+  const [activeTag, setActiveTag] = useQueryParam(`tag`) // highlight-line
   const allTags = insertAllTag(tags.group, posts.edges.length)
   const filteredPosts = filterPostsByTag(
     allTags.find(tag => tag.slug === activeTag),
@@ -104,7 +104,7 @@ export default function BlogPage({ data, location }) {
         <h1>Blog</h1>
       </PageTitle>
       <PageBody>
-        <TagList {...{ tags: allTags, activeTag, setActiveTag }} />
+        <TagList {...{ tags: allTags, activeTag, setActiveTag }} /> // highlight-line
         <PostList inBlog posts={filteredPosts} />
       </PageBody>
     </Global>

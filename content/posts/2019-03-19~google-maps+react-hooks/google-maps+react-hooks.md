@@ -57,14 +57,14 @@ To use it, simply grab a free Google Maps API key from [Google's cloud console](
 
 Then simply drop in the above `Map` component wherever you'd like to display a Google map.
 
-```js{7}:title=src/app.js
+```js:title=src/app.js
 import React from 'react'
 import Map from './components/map.js'
 
 export default () => (
   <div>
     <h1>Google Maps</h1>
-    <Map />
+    <Map /> // highlight-line
   </div>
 )
 ```
@@ -86,7 +86,7 @@ mapProps = {
 
 If you'd like to do something more fancy, for instance add some markers to the map, you can also pass an `onMount` function:
 
-```js{17}
+```js
 const addMarkers = links => map => {
   links.forEach((link, index) => {
     const marker = new window.google.maps.Marker({
@@ -103,7 +103,7 @@ const addMarkers = links => map => {
 
 mapProps = {
   options: { center: { lat: 20, lng: 40 }, zoom: 4 },
-  onMount: addMarkers(linksComingFromSomewhere),
+  onMount: addMarkers(linksComingFromSomewhere), // highlight-line
 }
 
 <Map {...mapProps} />
@@ -117,16 +117,16 @@ Note that the `onMount` function must be [curried](https://en.wikipedia.org/wiki
 
 By default, the `Map` component will rerender whenever the parent component rerenders. There are two problems with this. First, it wastes computation since there's no need to rerender the map if its props didn't change. Second and even more importantly, it ruins the user experience since the map will jump back to its initial `center` and `zoom` on every rerender. To prevent this, you can easily create a memoized map with the `useCallback` hook:
 
-```js{1,4,9}:title=src/app.js
-import React, { useCallback } from 'react'
+```js:title=src/app.js
+import React, { useCallback } from 'react' // highlight-line
 import Map from './components/map.js'
 
-const MemoMap = useCallback(<Map />, [])
+const MemoMap = useCallback(<Map />, []) // highlight-line
 
 export default () => (
   <div>
     <h1>This is a memoized map</h1>
-    {MemoMap}
+    {MemoMap} // highlight-line
   </div>
 )
 ```
@@ -141,7 +141,7 @@ export default function Map({ options, onMount, className }) {
 
 with
 
-```js{7,15}:title=src/components/map.js
+```js:title=src/components/map.js
 import { isEqual, omit, functions } from 'lodash'
 
 function Map({ options, onMount, className }) {
@@ -156,7 +156,7 @@ const shouldUpdate = (prevProps, nextProps) => {
   )
 }
 
-export default React.memo(Map, shouldUpdate)
+export default React.memo(Map, shouldUpdate) // highlight-line
 ```
 
 [`React.memo`](https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-shouldcomponentupdate) shallowly compares props and only rerenders a function component if the comparison returns false. It's the equivalent of `PureComponent` for class components. For components that receive objects, arrays and functions as props which are often referentially different on every render, the default behavior of shallow prop comparison can be overridden by passing a custom comparison function as second argument. It takes the next and previous props as input and returns true if the update should be skipped or false if the component should rerender.
