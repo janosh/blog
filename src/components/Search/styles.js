@@ -82,21 +82,15 @@ export const HitsWrapper = styled.div`
   box-shadow: 0 0 5px 0 black;
   padding: 0.7em 1em 0.4em;
   border-radius: ${props => props.theme.smallBorderRadius};
-  > * + * {
-    padding-top: 1em !important;
-    border-top: 2px solid ${props => props.theme.darkGray};
-  }
-  li + li {
-    margin-top: 0.7em;
-    padding-top: 0.7em;
-    border-top: 1px solid ${props => props.theme.lighterGray};
-  }
   * {
     margin-top: 0;
-    padding: 0;
   }
-  ul {
-    list-style: none;
+  > div {
+    padding-top: 0.6em;
+  }
+  div + div {
+    margin-top: 0.6em;
+    border-top: 1px solid ${props => props.theme.lighterGray};
   }
   mark {
     color: ${props => props.theme.lighterBlue};
@@ -105,16 +99,17 @@ export const HitsWrapper = styled.div`
   header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.3em;
+    border-bottom: 2px solid ${props => props.theme.darkGray};
     h3 {
       color: white;
       background: ${props => props.theme.gray};
       padding: 0.1em 0.4em;
       border-radius: ${props => props.theme.smallBorderRadius};
+      margin-bottom: 0.3em;
     }
   }
-  h3 {
-    margin: 0 0 0.5em;
+  * + header {
+    padding-top: 1em;
   }
   h4 {
     margin-bottom: 0.3em;

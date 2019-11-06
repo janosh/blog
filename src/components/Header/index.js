@@ -6,8 +6,8 @@ import Social from '../Social'
 import { HeaderContainer, Logo } from './styles'
 
 const searchIndices = [
-  { name: `Pages`, title: `Pages`, hitComp: `PageHit` },
-  { name: `Posts`, title: `Blog Posts`, hitComp: `PostHit` },
+  { name: `Pages`, title: `Pages` },
+  { name: `Posts`, title: `Blog Posts`, type: `postHit` },
 ]
 
 const Header = ({ site }) => (

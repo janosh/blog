@@ -168,21 +168,20 @@ There's quite a lot happening in these files so let's break them down one by one
 
 ```js:title=src/components/search/index.js
 import React, { useState, useEffect, useMemo, createRef } from 'react'
-import {
-  InstantSearch,
-  Index,
-  Hits,
-  connectStateResults,
-} from 'react-instantsearch-dom'
+import { connectStateResults, Index, InstantSearch } from 'react-instantsearch-dom'
 import algoliasearch from 'algoliasearch/lite'
 
-import { Root, HitsWrapper, PoweredBy } from './styles'
+import { HitsWrapper, PoweredBy, Root } from './styles'
+import Hits from './Hits'
 import Input from './Input'
-import * as hitComps from './hitComps'
 
 const Results = connectStateResults(
-  ({ searchState: state, searchResults: res, children }) =>
-    res && res.nbHits > 0 ? children : `No results for '${state.query}'`
+  ({ searching, searchState: state, searchResults: res }) => (
+    <div>
+      {(searching && `Searching...`) ||
+        (res && res.nbHits === 0 && `No results for '${state.query}'`)}
+    </div>
+  )
 )
 
 const Stats = connectStateResults(
@@ -228,15 +227,14 @@ export default function Search({ indices, collapse, hitsAsGrid }) {
       >
         <Input onFocus={() => setFocus(true)} {...{ collapse, focus }} />
         <HitsWrapper show={query.length > 0 && focus} asGrid={hitsAsGrid}>
-          {indices.map(({ name, title, hitComp }) => (
+          {indices.map(({ name, title, type }) => (
             <Index key={name} indexName={name}>
               <header>
                 <h3>{title}</h3>
                 <Stats />
               </header>
-              <Results>
-                <Hits hitComponent={hitComps[hitComp](() => setFocus(false))} />
-              </Results>
+              <Results />
+              <HitComp type={type} onClick={() => setFocus(false)} />
             </Index>
           ))}
           <PoweredBy />
@@ -258,18 +256,19 @@ import Input from './Input'
 
 `PoweredBy` renders the string "Powered by Algolia" with a small logo and link. If you're using Algolia's generous free tier, they ask you to acknowledge them in this way below the search results. `react-instantsearch-dom` also provides a [`PoweredBy` component](https://community.algolia.com/react-instantsearch/widgets/PoweredBy.html) specifically for this purpose but I preferred to build my own. We'll get back to these styled components once we're done with `index.js`. For now, let's move on.
 
-The last thing we need for the `Search` component to work are hit components for every type of result we want to display to the user. The hit component determines how attributes of matching results (such as author, date, tags and title in the case of a blog post) are displayed to the user.
+The last thing we need for the `Search` component to work is a hit component for every type of result we want to display to the user. It determines how attributes of matching results (such as author, date, tags and title in the case of a blog post) are displayed to the user.
 
 ```js
-import * as hitComps from './hitComps'
+import Hits from './Hits'
 ```
 
 Next we define two connected components. `Results` informs the user that no matches could be found for a query unless the number of hits is positive, i.e. `searchResults.nbHits > 0`. `Stats` just displays `searchResults.nbHits`.
 
 ```js
 const Results = connectStateResults(
-  ({ searchState: state, searchResults: res, children }) =>
-    res && res.nbHits > 0 ? children : `No results for ${state.query}`
+  ({ searching, searchState: state, searchResults: res }) =>
+    (searching && <div>Searching...</div>) ||
+    (res && res.nbHits === 0 && <div>No results for &apos;{state.query}&apos;</div>)
 )
 
 const Stats = connectStateResults(
@@ -307,32 +306,30 @@ export default function Search({ indices, collapse, hitsAsGrid }) {
 `Search` returns JSX that renders a dynamic array of `indices` passed as a prop. Each array item should be an object with keys `name`, `title`, `hitComp` that specifies the name of the index in your Algolia account to be queried, the title to display above the results shown to the user and the component `hitComp` that renders the data returned for each match.
 
 ```js
-  return (
-    <Root ref={ref}>
-      <InstantSearch
-        searchClient={searchClient}
-        indexName={indices[0].name}
-        onSearchStateChange={({ query }) => setQuery(query)}
-      >
-        <Input onFocus={() => setFocus(true)} {...{ collapse, focus }} />
-        <HitsWrapper show={query.length > 0 && focus} asGrid={hitsAsGrid}>
-          {indices.map(({ name, title, hitComp }) => (
-            <Index key={name} indexName={name}>
-              <header>
-                <h3>{title}</h3>
-                <Stats />
-              </header>
-              <Results>
-                <Hits hitComponent={hitComps[hitComp](() => setFocus(false))} />
-              </Results>
-            </Index>
-          ))}
-          <PoweredBy />
-        </HitsWrapper>
-      </InstantSearch>
-    </Root>
-  )
-}
+return (
+  <Root ref={ref}>
+    <InstantSearch
+      searchClient={searchClient}
+      indexName={indices[0].name}
+      onSearchStateChange={({ query }) => setQuery(query)}
+    >
+      <Input onFocus={() => setFocus(true)} {...{ collapse, focus }} />
+      <HitsWrapper show={query.length > 0 && focus} asGrid={hitsAsGrid}>
+        {indices.map(({ name, title, type }) => (
+          <Index key={name} indexName={name}>
+            <header>
+              <h3>{title}</h3>
+              <Stats />
+            </header>
+            <Results />
+            <Hits type={type} onClick={() => setFocus(false)} />
+          </Index>
+        ))}
+        <PoweredBy />
+      </HitsWrapper>
+    </InstantSearch>
+  </Root>
+)
 ```
 
 Passing this `indices` array as a prop allows you to reuse the same `Search` component in different parts of your site and have each of them query different indices. As an example, besides a primary search box in the header used for finding pages and/or posts, your site might have a wiki and you want to offer your visitors a second search box that displays only wiki articles.
@@ -367,16 +364,17 @@ Now let's look at the styled components `SearchIcon`, `Form`, `Input` as well as
 
 ## `styled.js`
 
-```js:title=src/components/search/styles.js
+```js:title=src/components/Search/styles.js
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Search } from 'styled-icons/fa-solid/Search'
 import { Algolia } from 'styled-icons/fa-brands/Algolia'
+import { Search } from 'styled-icons/fa-solid/Search'
 
 export const Root = styled.div`
   position: relative;
   display: grid;
   grid-gap: 1em;
+  color: ${props => props.theme.textColor};
 `
 
 export const SearchIcon = styled(Search)`
@@ -386,11 +384,11 @@ export const SearchIcon = styled(Search)`
 
 const focus = css`
   background: white;
-  color: ${props => props.theme.darkBlue};
+  color: ${props => props.theme.darkerBlue};
   cursor: text;
   width: 5em;
   + ${SearchIcon} {
-    color: ${props => props.theme.darkBlue};
+    color: ${props => props.theme.darkerBlue};
     margin: 0.3em;
   }
 `
@@ -398,7 +396,7 @@ const focus = css`
 const collapse = css`
   width: 0;
   cursor: pointer;
-  color: ${props => props.theme.lightBlue};
+  color: ${props => props.theme.lighterBlue};
   + ${SearchIcon} {
     color: white;
   }
@@ -411,7 +409,7 @@ const collapse = css`
 `
 
 const expand = css`
-  background: ${props => props.theme.veryLightGray};
+  background: ${props => props.theme.lighterGray};
   width: 6em;
   margin-left: -1.6em;
   padding-left: 1.6em;
@@ -427,7 +425,6 @@ export const Input = styled.input`
   background: transparent;
   transition: ${props => props.theme.shortTrans};
   border-radius: ${props => props.theme.smallBorderRadius};
-  {hightlight-next-line}
   ${props => (props.collapse ? collapse : expand)};
 `
 
@@ -439,6 +436,7 @@ export const Form = styled.form`
 
 export const HitsWrapper = styled.div`
   display: ${props => (props.show ? `grid` : `none`)};
+  background: ${props => props.theme.background};
   max-height: 80vh;
   overflow: scroll;
   z-index: 2;
@@ -448,43 +446,37 @@ export const HitsWrapper = styled.div`
   top: calc(100% + 0.5em);
   width: 80vw;
   max-width: 30em;
-  box-shadow: 0 0 5px 0;
+  box-shadow: 0 0 5px 0 black;
   padding: 0.7em 1em 0.4em;
-  background: white;
   border-radius: ${props => props.theme.smallBorderRadius};
-  > * + * {
-    padding-top: 1em !important;
-    border-top: 2px solid ${props => props.theme.darkGray};
-  }
-  li + li {
-    margin-top: 0.7em;
-    padding-top: 0.7em;
-    border-top: 1px solid ${props => props.theme.lightGray};
-  }
   * {
     margin-top: 0;
-    padding: 0;
   }
-  ul {
-    list-style: none;
+  > div {
+    padding-top: 0.6em;
+  }
+  div + div {
+    margin-top: 0.6em;
+    border-top: 1px solid ${props => props.theme.lighterGray};
   }
   mark {
-    color: ${props => props.theme.lightBlue};
-    background: ${props => props.theme.darkBlue};
+    color: ${props => props.theme.lighterBlue};
+    background: ${props => props.theme.darkerBlue};
   }
   header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.3em;
+    border-bottom: 2px solid ${props => props.theme.darkGray};
     h3 {
       color: white;
       background: ${props => props.theme.gray};
       padding: 0.1em 0.4em;
       border-radius: ${props => props.theme.smallBorderRadius};
+      margin-bottom: 0.3em;
     }
   }
-  h3 {
-    margin: 0 0 0.5em;
+  * + header {
+    padding-top: 1em;
   }
   h4 {
     margin-bottom: 0.3em;
@@ -505,50 +497,47 @@ Styles will of course be different from one site to the next so I only list thes
 
 Now we're almost done. 2 small steps remain. First, we need to put together a hit component for every type of result we want to display. In our example, these are blog posts and pages. And second, we need to call our `Search` component somewhere on our site. Here are the hit components.
 
-## `hitComps.js`
+## `Hits.js`
 
-```js:title=src/components/Search/hitComps.js
+```js:title=src/components/Search/Hits.js
+import { Link } from 'gatsby'
 import React, { Fragment } from 'react'
 import { Highlight, Snippet } from 'react-instantsearch-dom'
-import { Link } from 'gatsby'
-import { Calendar } from 'styled-icons/octicons/Calendar'
 import { Tags } from 'styled-icons/fa-solid/Tags'
+import { Calendar } from 'styled-icons/octicons/Calendar'
+import { connectHits } from 'react-instantsearch-dom'
 
-export const PageHit = clickHandler => ({ hit }) => (
+const postHit = hit => (
   <div>
-    <Link to={hit.slug} onClick={clickHandler}>
-      <h4>
-        <Highlight attribute="title" hit={hit} tagName="mark" />
-      </h4>
-    </Link>
-    <Snippet attribute="excerpt" hit={hit} tagName="mark" />
+    <Calendar size="1em" />
+    &nbsp;
+    <Highlight attribute="date" hit={hit} tagName="mark" />
+    &emsp;
+    <Tags size="1em" />
+    &nbsp;
+    {hit.tags.map((tag, index) => (
+      <Fragment key={tag}>
+        {index > 0 && `, `}
+        {tag}
+      </Fragment>
+    ))}
   </div>
 )
 
-export const PostHit = clickHandler => ({ hit }) => (
-  <div>
-    <Link to={hit.slug} onClick={clickHandler}>
-      <h4>
-        <Highlight attribute="title" hit={hit} tagName="mark" />
-      </h4>
-    </Link>
-    <div>
-      <Calendar size="1em" />
-      &nbsp;
-      <Highlight attribute="date" hit={hit} tagName="mark" />
-      &emsp;
-      <Tags size="1em" />
-      &nbsp;
-      {hit.tags.map((tag, index) => (
-        <Fragment key={tag}>
-          {index > 0 && `, `}
-          {tag}
-        </Fragment>
-      ))}
+export default connectHits(function HitComp({ type, hits, onClick }) {
+  const extend = { postHit }[type]
+  return hits.map(hit => (
+    <div key={hit.objectID}>
+      <Link to={hit.slug} onClick={onClick}>
+        <h4>
+          <Highlight attribute="title" hit={hit} tagName="mark" />
+        </h4>
+      </Link>
+      {extend && extend(hit)}
+      <Snippet attribute="excerpt" hit={hit} tagName="mark" />
     </div>
-    <Snippet attribute="excerpt" hit={hit} tagName="mark" />
-  </div>
-)
+  ))
+})
 ```
 
 `Highlight` and `Snippet` imported from `react-instantsearch-dom` both display attributes of matching search results to the user. Their distinction is that the former renders it in full (e.g. a title, date or list of tags) whereas the latter only shows a snippet, i.e. a text passage of given length surrounding the matching string (e.g. for body texts). In each case the `attribute` prop should be the name of the property as it was assigned in `src/utils/algolia.js` and as it appears in your Algolia indices.
@@ -565,8 +554,8 @@ import Nav from '../Nav'
 import Search from '../Search'
 
 const searchIndices = [
-  { name: `Pages`, title: `Pages`, hitComp: `PageHit` },
-  { name: `Posts`, title: `Blog Posts`, hitComp: `PostHit` },
+  { name: `Pages`, title: `Pages` },
+  { name: `Posts`, title: `Blog Posts`, type: `postHit` },
 ]
 
 const Header = ({ site, transparent }) => (
