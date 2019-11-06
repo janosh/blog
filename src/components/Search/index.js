@@ -1,19 +1,15 @@
 import algoliasearch from 'algoliasearch/lite'
 import React, { createRef, useMemo, useState } from 'react'
-import {
-  connectStateResults,
-  Hits,
-  Index,
-  InstantSearch,
-} from 'react-instantsearch-dom'
+import { connectStateResults, Index, InstantSearch } from 'react-instantsearch-dom'
 import { useOnClickOutside } from 'hooks'
-import * as hitComps from './hitComps'
+import Hits from './Hits'
 import Input from './Input'
 import { HitsWrapper, PoweredBy, Root } from './styles'
 
 const Results = connectStateResults(
-  ({ searchState: state, searchResults: res, children }) =>
-    res && res.nbHits > 0 ? children : `No results for '${state.query}'`
+  ({ searching, searchState: state, searchResults: res }) =>
+    (searching && <div>Searching...</div>) ||
+    (res && res.nbHits === 0 && <div>No results for &apos;{state.query}&apos;</div>)
 )
 
 const Stats = connectStateResults(
@@ -43,15 +39,14 @@ export default function Search({ indices, collapse, hitsAsGrid }) {
       >
         <Input onFocus={() => setFocus(true)} {...{ collapse, focus }} />
         <HitsWrapper show={query.length > 0 && focus} asGrid={hitsAsGrid}>
-          {indices.map(({ name, title, hitComp }) => (
+          {indices.map(({ name, title, type }) => (
             <Index key={name} indexName={name}>
               <header>
                 <h3>{title}</h3>
                 <Stats />
               </header>
-              <Results>
-                <Hits hitComponent={hitComps[hitComp](() => setFocus(false))} />
-              </Results>
+              <Results />
+              <Hits type={type} onClick={() => setFocus(false)} />
             </Index>
           ))}
           <PoweredBy />
