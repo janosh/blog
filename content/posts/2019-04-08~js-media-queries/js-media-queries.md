@@ -196,40 +196,33 @@ export const useMediaQuery = cond => {
 And this is how I use that hook on this site to switch between `MobileNav` and `DesktopNav`
 
 ```js
+import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
-
-import { useMediaQuery } from 'utils/mediaQuery' // highlight-line
-
-import MobileNav from './Mobile'
+import { useScreenQuery } from 'hooks/useMediaQuery'
 import DesktopNav from './Desktop'
+import MobileNav from './Mobile'
 
-// highlight-start
-const Nav = props =>
-  useMediaQuery(`maxTablet`) ? (
-    <MobileNav {...props} />
-  ) : (
-    <DesktopNav {...props} />
-  )
-// highlight-end
+export { NavLink, navLinkStyle } from './styles'
 
-const query = graphql`
-  {
-    nav: file(base: { eq: "nav.yml" }) {
-      nav: childrenNavYaml {
-        title
-        url
+export default function Nav(props) {
+  const { nav } = useStaticQuery(graphql`
+    {
+      nav: file(base: { eq: "nav.yml" }) {
+        nav: childrenNavYaml {
+          title
+          url
+        }
       }
     }
-  }
-`
-
-export default props => (
-  <StaticQuery
-    query={query}
-    render={data => <Nav {...data.nav} {...props} role="navigation" />}
-  />
-)
+  `)
+  // highlight-start
+  return useScreenQuery(`maxPhablet`) ? (
+    <MobileNav {...nav} {...props} />
+  ) : (
+    <DesktopNav {...nav} {...props} />
+  )
+  // highlight-end
+}
 ```
 
 For a more elaborate example involving a media query with multiple break points, check out the [`useMedia` post on usehooks.com](https://usehooks.com/useMedia).
