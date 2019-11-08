@@ -5,7 +5,7 @@ import PageTitle from 'components/PageTitle'
 import { theme } from 'utils/theme'
 
 const PageNotFound = ({ data, location }) => (
-  <Global margin="0" transparent path={location.pathname}>
+  <Global path={location.pathname}>
     <PageTitle img={data.file.img}>
       <h2>Oops, this page doesn&apos;t exist</h2>
       <Link to="/" css={`color:` + theme.orange}>
