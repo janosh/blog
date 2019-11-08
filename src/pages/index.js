@@ -1,4 +1,4 @@
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
@@ -11,10 +11,10 @@ import Scroll from 'components/Scroll'
 import { PageBody } from 'components/styles'
 import mediaQuery from 'utils/mediaQuery'
 import PostList from 'views/PostList'
-import Projects from 'views/Projects'
+import { ProjectList } from 'views/Web'
 
 export default function IndexPage({ data, location }) {
-  const { mdx, janosh, posts, projects } = data
+  const { mdx, janosh, posts } = data
   const img = {
     ...mdx.frontmatter.cover,
     fluid: mdx.frontmatter.cover.img.sharp.fluid,
@@ -24,7 +24,9 @@ export default function IndexPage({ data, location }) {
       <PageTitle img={img} fillToBottom backdrop={false}>
         <Title>
           {mdx.frontmatter.title.split(`, `).map(str => (
-            <span key={str}>{str}</span>
+            <Link key={str} to={`/` + str.toLowerCase()}>
+              {str}
+            </Link>
           ))}
         </Title>
         <Scroll direction="down" to={1} />
@@ -38,7 +40,7 @@ export default function IndexPage({ data, location }) {
         <H>Recent posts</H>
         <PostList asRow noText posts={posts.edges} />
         <H>Recent projects</H>
-        <Projects asRow {...projects} />
+        <ProjectList asRow />
       </PageBody>
     </Global>
   )
@@ -49,17 +51,18 @@ const Title = styled.h1`
   padding: 0.4em;
   background: rgba(0, 0, 0, 0.4);
   display: grid;
-  span {
+  a {
     padding: 0.4em;
+    color: white;
     ${mediaQuery.maxPhone} {
-      & + span {
+      & + a {
         border-top: 0.5px solid rgba(255, 255, 255, 0.9);
       }
     }
   }
   ${mediaQuery.minPhone} {
     grid-template-columns: 1fr 1fr;
-    span {
+    a {
       :nth-child(2),
       :nth-child(3) {
         background: rgba(0, 0, 0, 0.6);
@@ -109,6 +112,5 @@ export const query = graphql`
         }
       }
     }
-    ...projects
   }
 `
