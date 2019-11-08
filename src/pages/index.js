@@ -20,7 +20,7 @@ export default function IndexPage({ data, location }) {
     fluid: mdx.frontmatter.cover.img.sharp.fluid,
   }
   return (
-    <Global margin="0" transparent path={location.pathname}>
+    <Global path={location.pathname}>
       <PageTitle img={img} fillToBottom backdrop={false}>
         <Title>
           {mdx.frontmatter.title.split(`, `).map(str => (
