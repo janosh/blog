@@ -1,41 +1,44 @@
-import RawModal from 'components/Modal'
-import { Grid } from 'components/styles'
+import Image from 'gatsby-image'
 import styled, { css } from 'styled-components'
-import { Link } from 'styled-icons/boxicons-regular'
-import { Npm } from 'styled-icons/fa-brands'
-import { PackageIcon } from 'styled-icons/feather'
-import { Github } from 'styled-icons/icomoon'
-import { Calendar } from 'styled-icons/octicons'
-
-const asRow = css`
-  grid-column: 2/-2;
-  grid-auto-flow: column;
-  overflow: scroll;
-  padding: 1em;
-  grid-auto-columns: 15em;
-`
+import { Link } from 'styled-icons/boxicons-regular/Link'
+import { Npm } from 'styled-icons/fa-brands/Npm'
+import { PackageIcon } from 'styled-icons/feather/PackageIcon'
+import { Github } from 'styled-icons/icomoon/Github'
+import { Calendar } from 'styled-icons/octicons/Calendar'
+import { Grid } from 'components/styles'
 
 export const ProjectGrid = styled(Grid)`
-  ${props => props.asRow && asRow};
+  ${props =>
+    props.asRow &&
+    css`
+      grid-column: 2/-2;
+      grid-auto-flow: column;
+      overflow: scroll;
+      padding: 1em;
+      grid-auto-columns: 15em;
+      -webkit-overflow-scrolling: touch;
+    `};
 `
 
 export const Thumbnail = styled.div`
-  border-radius: 0.5em;
+  border-radius: ${props => props.theme.mediumBorderRadius};
   overflow: hidden;
   display: grid;
-  box-shadow: 0 0 1em var(--color-shadow);
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 1em ${props => props.theme.shadowColor};
   transition: 0.5s;
-  position: relative;
-  cursor: pointer;
   h3 {
-    position: absolute;
+    grid-area: 1 / 1;
+    z-index: 1;
     color: white;
     align-self: center;
     justify-self: center;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.6);
     padding: 0.3em 0.7em;
     text-align: center;
     border-radius: 1em;
+    width: max-content;
     max-width: 70%;
   }
   &:hover {
@@ -43,20 +46,13 @@ export const Thumbnail = styled.div`
   }
 `
 
-export const Modal = styled(RawModal)`
-  padding: 1em 2em 0;
-  max-width: 45em;
-  &:after {
-    content: '';
-    display: block;
-    height: 1em;
-    width: 100%;
-  }
+export const Img = styled(Image)`
+  grid-area: 1 / 1;
 `
 
 export const Meta = styled.div`
   margin: 1em 0;
-  border-left: 0.2em solid var(--color-green-light);
+  border-left: ${({ theme }) => `${theme.largeBorder} solid ${theme.lightGreen}`};
 `
 
 const iconCss = css`
