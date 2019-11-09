@@ -4,28 +4,26 @@ import React, { useEffect, useRef } from 'react'
 const apiKey = process.env.GATSBY_GOOGLE_MAPS_API_KEY
 
 function Map({ options, onMount, className }) {
-  const divProps = { ref: useRef(), className }
+  const ref = useRef()
 
   useEffect(() => {
     const onLoad = () => {
-      const map = new window.google.maps.Map(divProps.ref.current, options)
-      onMount && onMount(map)
+      const map = new window.google.maps.Map(ref.current, options)
+      if (typeof onMount === `function`) onMount(map)
     }
     if (!window.google) {
       const script = document.createElement(`script`)
-      script.type = `text/javascript`
       script.src = `https://maps.googleapis.com/maps/api/js?key=` + apiKey
-      const headScript = document.getElementsByTagName(`script`)[0]
-      headScript.parentNode.insertBefore(script, headScript)
+      document.head.append(script)
       script.addEventListener(`load`, onLoad)
       return () => script.removeEventListener(`load`, onLoad)
     } else onLoad()
-  }, [divProps.ref, onMount, options])
+  }, [onMount, options])
 
   return (
     <div
       css="height: 35em; max-height: 70vh; margin: 1em 0; border-radius: 0.5em;"
-      {...divProps}
+      {...{ ref, className }}
     />
   )
 }
