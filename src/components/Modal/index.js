@@ -19,7 +19,6 @@ export default function Modal({ open, modal, setModal, children, ...rest }) {
     useEventListener(`keydown`, handleArrowKeys(setModal))
     useEffect(() => {
       document.body.style.overflowY = `hidden`
-      return () => document.body.style.removeProperty(`overflow-y`)
     }, [])
     return (
       // calling setModal without arguments will close the modal
@@ -46,7 +45,7 @@ export default function Modal({ open, modal, setModal, children, ...rest }) {
       </ModalBackground>
     )
   } else {
-    typeof document !== `undefined` &&
+    if (typeof document !== `undefined`)
       document.body.style.removeProperty(`overflow-y`)
     return null
   }
