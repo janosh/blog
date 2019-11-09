@@ -11,36 +11,36 @@ tags:
 showToc: true
 ---
 
+import GoogleMap from 'components/Map'
+
 Had to share this one since it's so nice and simple. If you're looking for a drop-in, zero-dependency Google Maps React component, look no further.
 
 ```js:title=src/components/map.js
 import React, { useEffect, useRef } from 'react'
 
 export default function Map({ options, onMount, className }) {
-  const divProps = { ref: useRef(), className }
+  const ref = useRef()
 
   useEffect(() => {
     const onLoad = () => {
-      const map = new window.google.maps.Map(divProps.ref.current, options)
-      onMount && onMount(map)
+      const map = new window.google.maps.Map(ref.current, options)
+      if (typeof onMount === `function`) onMount(map)
     }
     if (!window.google) {
       const script = document.createElement(`script`)
-      script.type = `text/javascript`
       script.src =
         `https://maps.googleapis.com/maps/api/js?key=` +
         process.env.GOOGLE_MAPS_API_KEY
-      const headScript = document.getElementsByTagName(`script`)[0]
-      headScript.parentNode.insertBefore(script, headScript)
+      document.head.append(script)
       script.addEventListener(`load`, onLoad)
       return () => script.removeEventListener(`load`, onLoad)
     } else onLoad()
-  }, [divProps.ref, onMount, options])
+  }, [onMount, options])
 
   return (
     <div
-      css="height: 70vh; margin: 1em 0; border-radius: 0.5em;"
-      {...divProps}
+      style={{height: `60vh`, margin: `1em 0`, borderRadius: `0.5em` }}
+      {...{ ref, className }}
     />
   )
 }
@@ -59,7 +59,7 @@ Then simply drop in the above `Map` component wherever you'd like to display a G
 
 ```js:title=src/app.js
 import React from 'react'
-import Map from './components/map.js'
+import Map from 'components/map.js'
 
 export default () => (
   <div>
@@ -68,6 +68,10 @@ export default () => (
   </div>
 )
 ```
+
+This is what it looks like by default.
+
+<GoogleMap />
 
 ## Customization
 
@@ -81,10 +85,10 @@ mapProps = {
   },
 }
 
-<Map {...mapProps} />
+<Map {...mapProps} /> // highlight-line
 ```
 
-If you'd like to do something more fancy, for instance add some markers to the map, you can also pass an `onMount` function:
+If you'd like to do something more fancy you can also pass an `onMount` function. For example, the following function adds some markers to the map.
 
 ```js
 const addMarkers = links => map => {
@@ -109,7 +113,16 @@ mapProps = {
 <Map {...mapProps} />
 ```
 
-`link.coords` should be an object of the same structure as `center`, i.e. with `lat` and `lng` keys for the latitude and longitude at which to display each marker.
+`linksComingFromSomewhere` is an array of `link` objects of shape
+
+```js
+const link = {
+  coords: { lat: 42, lng: 51 }, // required: latitude & longitude
+  // at which to display the marker
+  title: `Life, the Universe and Area 51`, // optional
+  url: `https://wikipedia.org/wiki/Area_51`, // optional
+}
+```
 
 Note that the `onMount` function must be [curried](https://en.wikipedia.org/wiki/Currying) since the `Map` component itself passes in the `map` object on which to apply `onMount`.
 
@@ -119,7 +132,7 @@ By default, the `Map` component will rerender whenever the parent component rere
 
 ```js:title=src/app.js
 import React, { useCallback } from 'react' // highlight-line
-import Map from './components/map.js'
+import Map from 'components/map.js'
 
 const MemoMap = useCallback(<Map />, []) // highlight-line
 
@@ -172,30 +185,28 @@ import { functions, isEqual, omit } from 'lodash'
 import React, { useEffect, useRef } from 'react'
 
 function Map({ options, onMount, className }) {
-  const divProps = { ref: useRef(), className }
+  const ref = useRef()
 
   useEffect(() => {
     const onLoad = () => {
-      const map = new window.google.maps.Map(divProps.ref.current, options)
-      onMount && onMount(map)
+      const map = new window.google.maps.Map(ref.current, options)
+      if (typeof onMount === `function`) onMount(map)
     }
     if (!window.google) {
       const script = document.createElement(`script`)
-      script.type = `text/javascript`
       script.src =
         `https://maps.googleapis.com/maps/api/js?key=` +
         process.env.GOOGLE_MAPS_API_KEY
-      const headScript = document.getElementsByTagName(`script`)[0]
-      headScript.parentNode.insertBefore(script, headScript)
+      document.head.append(script)
       script.addEventListener(`load`, onLoad)
       return () => script.removeEventListener(`load`, onLoad)
     } else onLoad()
-  }, [divProps.ref, onMount, options])
+  }, [onMount, options])
 
   return (
     <div
-      css="height: 70vh; margin: 1em 0; border-radius: 0.5em;"
-      {...divProps}
+      style={{height: `60vh`, margin: `1em 0`, borderRadius: `0.5em` }}
+      {...{ ref, className }}
     />
   )
 }
