@@ -9,7 +9,9 @@ export const PageTitleContainer = styled.hgroup`
   align-items: center;
   min-height: 60vh;
   flex: 1; /* for filling height between header and footer on 404 page */
+  z-index: 1;
 `
+
 const backdropCss = css`
   > * {
     background: rgba(0, 0, 0, 0.7);
@@ -26,6 +28,9 @@ export const Title = styled.div`
   display: grid;
   justify-content: center;
   ${props => props.backdrop && backdropCss};
+  a {
+    color: ${props => props.theme.lighterBlue};
+  }
 `
 
 export const Img = styled(Image).attrs(

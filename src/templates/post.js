@@ -58,13 +58,13 @@ export default function PostTemplate({ data, location }) {
 export const query = graphql`
   query($slug: String!, $prevSlug: String!, $nextSlug: String!) {
     post: mdx(frontmatter: { slug: { eq: $slug } }) {
-      ...post
+      ...page
     }
     next: mdx(frontmatter: { slug: { eq: $nextSlug } }) {
-      ...post
+      ...page
     }
     prev: mdx(frontmatter: { slug: { eq: $prevSlug } }) {
-      ...post
+      ...page
     }
   }
 `
