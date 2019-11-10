@@ -53,7 +53,7 @@ export const query = graphql`
     ) {
       edges {
         node {
-          ...post
+          ...page
         }
       }
     }
