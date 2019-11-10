@@ -11,6 +11,9 @@ tags:
 showToc: true
 ---
 
+import DarkMode from 'components/DarkMode'
+import { BorderBox } from 'components/styles'
+
 All the cool kids these days have websites with a dark color scheme. The really cool kids even have a dark _and_ a light mode and allow you, the valued reader, to choose. In an attempt to make it easier for everyone to attain the status of really cool kid, I'll share my implementation of a dark mode for this very site. You can try it out by clicking the sun/moon icon in the header above.
 
 In fact we'll even go a step further and use the new [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) media query which just [recently landed in Safari, Firefox, Chrome and Edge](https://caniuse.com/#search=prefers-color-scheme). It will allow us to query the user's OS for a color scheme preference. So if the user's device is set to dark mode, your site will automatically respect that and display in dark mode as well.
@@ -38,6 +41,10 @@ Anyway, with this overview out of the way, let's get cracking.
 The user-facing `DarkMode` component provides a three-state button to choose between dark mode, light mode or the OS setting. The latter is the default value and the component just cycles through these states when clicked.
 
 It also displays a little notification with the name of the mode for one second below the mode's icon (a sun for light, moon for dark and a sun and moon separated by a slash for the OS setting). It uses [react-spring](https://github.com/react-spring/react-spring) to animate the icon transition between modes and a simple [CSS animation](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for the notifications.
+
+<BorderBox>
+  <DarkMode />
+</BorderBox>
 
 ```js:title=src/components/DarkMode/index.js
 import React from 'react'

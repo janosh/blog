@@ -4,6 +4,7 @@ export * from './ButtonGroup'
 export * from './Caption'
 export * from './Grid'
 export * from './PageBody'
+export * from './BorderBox'
 
 export const fadeInOnHoverParent = parent => css`
   opacity: 0;
