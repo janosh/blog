@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby'
 
 export const query = graphql`
-  fragment post on Mdx {
+  fragment page on Mdx {
     frontmatter {
       title
       subtitle
@@ -9,6 +9,11 @@ export const query = graphql`
       date(formatString: "MMM D, YYYY")
       tags
       showToc
+      mdxTitle {
+        childMdx {
+          body
+        }
+      }
       ...cover
     }
     timeToRead
