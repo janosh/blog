@@ -9,5 +9,4 @@ export const MasonryDiv = styled.div`
 export const Col = styled.div`
   display: grid;
   grid-gap: ${props => props.gap || `1em`};
-  grid-auto-rows: max-content;
 `
