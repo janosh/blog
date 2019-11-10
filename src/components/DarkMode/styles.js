@@ -17,6 +17,10 @@ export const Box = styled.div`
 export const Div = styled(animated.div)``
 
 export const Notification = styled.div`
+  color: white;
+  a {
+    color: ${props => props.theme.lighterBlue};
+  }
   position: absolute;
   top: calc(100% + 1em);
   width: max-content;
