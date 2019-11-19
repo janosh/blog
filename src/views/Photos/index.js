@@ -6,6 +6,13 @@ import Modal from 'components/Modal'
 import { Caption } from 'components/styles'
 import { Img, Thumbnail } from './styles'
 
+const Icon = color => `
+  <svg fill="${color}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+    <circle cx="120" cy="120" opacity=".6" r="70" />
+    <circle cx="120" cy="120" opacity=".4" r="95" />
+    <circle cx="120" cy="120" opacity=".2" r="120" />
+  </svg>`
+
 const addMarkers = (photos, setModal) => map => {
   const markers = photos.map(({ caption, lat, lng }, index) => {
     const marker = new window.google.maps.Marker({
@@ -17,7 +24,14 @@ const addMarkers = (photos, setModal) => map => {
     marker.addListener(`click`, () => setModal(index))
     return marker
   })
-  new MarkerClusterer(map, markers)
+  new MarkerClusterer(map, markers, {
+    styles: [`blue`, `green`, `red`].map(color => ({
+      url: `data:image/svg+xml;utf-8,${Icon(color)}`,
+      height: 30,
+      width: 30,
+      textColor: `whitesmoke`,
+    })),
+  })
 }
 
 export default function Photos({ tab, photos, modal, setModal }) {
@@ -36,6 +50,7 @@ export default function Photos({ tab, photos, modal, setModal }) {
         <Map
           options={{ center: { lat: 40, lng: 10 }, zoom: 3 }}
           onMount={addMarkers(photos, setModal)}
+          css="height: 75vh;"
         />
       )}
       <Modal
