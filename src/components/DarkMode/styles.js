@@ -24,8 +24,10 @@ export const Notification = styled.div`
   position: absolute;
   top: calc(100% + 1em);
   width: max-content;
+  max-width: 5em;
+  text-align: center;
   background: rgba(0, 0, 0, 0.9);
-  padding: 0 0.4em;
+  padding: 0.1em 0.3em;
   border-radius: 0.2em;
   left: 50%;
   transform: translateX(-50%);
