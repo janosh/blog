@@ -13,7 +13,9 @@ export const useDarkMode = (initialValue = `noPreference`) => {
   const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: dark)`)
 
   // Dark mode is enabled if either the color scheme was set to dark
-  // by the user or the media query `prefers-color-scheme: dark` is true.
-  const darkModeEnabled = colorMode === `dark` || prefersDarkMode
+  // by the user or if the media query `prefers-color-scheme: dark` is
+  // true _and_ the user did not explicitly set a light theme.
+  const darkModeEnabled =
+    colorMode === `dark` || (prefersDarkMode && colorMode !== `light`)
   return [darkModeEnabled, colorMode, setter]
 }

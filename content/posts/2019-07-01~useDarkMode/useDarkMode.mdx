@@ -15,7 +15,11 @@ showToc: true
 import DarkMode from 'components/DarkMode'
 import { BorderBox } from 'components/styles'
 
-All the cool kids these days have websites with a dark color scheme. The really cool kids even have a dark _and_ a light mode and allow you, the valued reader, to choose. In an attempt to make it easier for everyone to attain the status of really cool kid, I'll share my implementation of a dark mode for this very site. You can try it out by clicking the sun/moon icon in the header above.
+All the cool kids these days have websites with a dark color scheme. The really cool kids even have a dark _and_ a light mode and allow you, the valued reader, to choose. In an attempt to make it easier for everyone to attain the status of really cool kid, I'll share my React Hooks-based implementation of a dark mode. You can try it out by clicking/tapping this sun/moon icon.
+
+<BorderBox>
+  <DarkMode />
+</BorderBox>
 
 In fact we'll even go a step further and use the new [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) media query which just [recently landed in Safari, Firefox, Chrome and Edge](https://caniuse.com/#search=prefers-color-scheme). It will allow us to query the user's OS for a color scheme preference. So if the user's device is set to dark mode, your site will automatically respect that and display in dark mode as well.
 
@@ -54,8 +58,8 @@ import { useDarkMode } from 'hooks'
 import { Box, Div, SunIcon, MoonIcon, SunMoonIcon, Notification } from './styles'
 import { Link } from 'gatsby'
 
-export default function DarkMode() {
-  const [colorMode, setColorMode] = useDarkMode().slice(1)
+export default function DarkMode({ initial, ...rest }) {
+  const [, colorMode, setColorMode] = useDarkMode(initial)
   const Modes = {
     light: { Icon: SunIcon, title: `Light Mode`, nextMode: `dark` },
     dark: { Icon: MoonIcon, title: `Dark Mode`, nextMode: `noPreference` },
@@ -68,12 +72,17 @@ export default function DarkMode() {
     leave: { opacity: 0, transform: `translateX(-100%)` },
   })
   return (
-    <Box>
+    <Box {...rest}>
       {transitions.map(({ item, props, key }) => {
         const { Icon, title, nextMode } = Modes[item]
         return (
           <Div key={key} style={props}>
-            <Icon title={title} onClick={() => setColorMode(nextMode)} />
+            <Icon
+              title={title}
+              onClick={() => setColorMode(nextMode)}
+              // onTouchStart needed to react on first tap in iOS Safari.
+              onTouchStart={() => setColorMode(nextMode)}
+            />
             <Notification>{title}</Notification>
           </Div>
         )
@@ -163,10 +172,7 @@ The `useDarkMode` hook imported in `DarkMode/index.js` reads as follows.
 import { useLocalStorage, useMediaQuery } from '.'
 
 export const useDarkMode = (initialValue = `noPreference`) => {
-  const [colorMode, setColorMode] = useLocalStorage(
-    `colorMode`,
-    initialValue
-  )
+  const [colorMode, setColorMode] = useLocalStorage(`colorMode`, initialValue)
   const setter = value => {
     // Add half-second transitions to the body's color and background
     // properties here rather than in CSS to prevent flashing from
@@ -179,8 +185,10 @@ export const useDarkMode = (initialValue = `noPreference`) => {
   const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: dark)`)
 
   // Dark mode is enabled if either the color scheme was set to dark
-  // by the user or the media query `prefers-color-scheme: dark` is true.
-  const darkModeEnabled = colorMode === `dark` || prefersDarkMode
+  // by the user or if the media query `prefers-color-scheme: dark` is
+  // true _and_ the user did not explicitly set a light theme.
+  const darkModeEnabled =
+    colorMode === `dark` || (prefersDarkMode && colorMode !== `light`)
   return [darkModeEnabled, colorMode, setter]
 }
 ```
@@ -275,7 +283,8 @@ import { GlobalStyle } from './styles'
 export default function Global() {
   const [darkMode] = useDarkMode() // highlight-line
   return (
-    <ThemeProvider theme={theme(darkMode)}> // highlight-line
+    // highlight-next-line
+    <ThemeProvider theme={theme(darkMode)}>
       <>
         <GlobalStyle />
         <App />
@@ -372,7 +381,6 @@ export const darkTheme = {
 
 export default darkMode =>
   darkMode ? { ...theme, ...darkTheme } : { ...theme, ...lightTheme }
-
 ```
 
 `lightTheme` and `darkTheme` each specify different values for parts of the site that are color-scheme dependent. Thanks to [`styled-components`'s ThemeProvider](https://styled-components.com/docs/api#themeprovider) any part of your site below `Global` in the component tree can then simply consume this theme. For instance the `GlobalStyle` component above does this as follows.
