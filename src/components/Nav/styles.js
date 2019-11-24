@@ -1,7 +1,10 @@
 import { Link } from 'gatsby'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-export const navLinkStyle = css`
+export const NavLink = styled(Link).attrs({
+  activeClassName: `active`,
+  partiallyActive: true,
+})`
   color: inherit;
   transition: ${props => props.theme.shortTrans};
   &.active {
@@ -10,11 +13,4 @@ export const navLinkStyle = css`
   :hover {
     color: ${props => props.theme.lighterBlue};
   }
-`
-
-export const NavLink = styled(Link).attrs({
-  activeClassName: `active`,
-  partiallyActive: true,
-})`
-  ${navLinkStyle};
 `

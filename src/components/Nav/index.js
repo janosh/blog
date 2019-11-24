@@ -1,10 +1,10 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
-import { useScreenQuery } from 'hooks/useMediaQuery'
+import { useScreenQuery } from 'hooks'
 import DesktopNav from './Desktop'
 import MobileNav from './Mobile'
 
-export { NavLink, navLinkStyle } from './styles'
+export { NavLink } from './styles'
 
 export default function Nav(props) {
   const { nav } = useStaticQuery(graphql`

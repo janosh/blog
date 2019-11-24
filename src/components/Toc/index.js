@@ -1,7 +1,7 @@
 import { throttle } from 'lodash'
 import React, { useEffect, useRef, useState } from 'react'
 import { useEventListener, useOnClickOutside } from 'hooks'
-import { Title, TocDiv, TocIcon, TocLink, Toggle } from './styles'
+import { Title, TocDiv, TocIcon, TocLink, TocToggle } from './styles'
 
 const accumulateOffsetTop = (el, totalOffset = 0) => {
   while (el) {
@@ -54,12 +54,12 @@ export default function Toc({ headingSelector, getTitle, getDepth, ...rest }) {
 
   return (
     <>
-      <Toggle opener open={open} onClick={() => setOpen(true)} size="1.6em" />
+      <TocToggle opener open={open} onClick={() => setOpen(true)} />
       <TocDiv ref={ref} open={open}>
         <Title>
           <TocIcon />
           {tocTitle}
-          <Toggle closer onClick={() => setOpen(false)} />
+          <TocToggle onClick={() => setOpen(false)} />
         </Title>
         <nav>
           {headings.titles.map(({ title, depth }, index) => (

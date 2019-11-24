@@ -1,51 +1,56 @@
 import { animated } from 'react-spring'
-import styled from 'styled-components'
-import { KeyboardArrowDown as More } from 'styled-icons/material/KeyboardArrowDown'
-import { KeyboardArrowRight as Arrow } from 'styled-icons/material/KeyboardArrowRight'
-import { KeyboardArrowUp as Less } from 'styled-icons/material/KeyboardArrowUp'
+import styled, { css } from 'styled-components'
 import { ThMenu } from 'styled-icons/typicons/ThMenu'
 import { NavLink } from '../styles'
+import { Close as Cross } from 'styled-icons/material/Close'
+import mediaQuery from 'utils/mediaQuery'
 
 export { NavLink }
-
-export const Icons = { More, Less, Arrow }
+export { KeyboardArrowDown as ArrowDown } from 'styled-icons/material/KeyboardArrowDown'
+export { KeyboardArrowUp as ArrowUp } from 'styled-icons/material/KeyboardArrowUp'
 
 export const MobileNavDiv = styled.nav`
+  overscroll-behavior: none;
+  z-index: 2;
+  box-sizing: border-box;
+  width: 70vw;
+  max-width: 12em;
   position: fixed;
   top: 0;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   height: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  padding: 6vmin;
-  font-size: 1.6em;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 0.8em 1.5em 0.8em 1.8em;
+  font-size: 1.2em;
   color: white;
   right: 100%;
   display: grid;
   grid-gap: 1em;
-  grid-auto-columns: max-content;
   grid-auto-rows: max-content;
   transform: translate(${props => (props.open ? `99%` : `0`)});
   transition: ${props => props.theme.shortTrans};
+  /* Needed to scroll past last element in case of overflow. */
+  :after {
+    content: '';
+    height: 0.5em;
+  }
 `
 
 export const Item = styled.div`
-  a {
-    color: white;
-  }
-  /* target arrow icons prefixing links */
+  /* Target arrow icons prefixing nav links with children. */
   svg:first-child {
     width: 1em;
-    margin-right: 0.2em;
+    margin-right: 0.3em;
     cursor: pointer;
-    vertical-align: -0.15em;
+    vertical-align: -0.1em;
   }
 `
 
 export const Children = styled(animated.div)`
   will-change: transform, opacity, height;
   margin-left: 0.5em;
-  padding-left: 0.5em;
+  padding-left: 0.8em;
   border-left: thin dashed white;
   overflow: hidden;
   padding-bottom: ${props => props.open && `0.6em`};
@@ -56,11 +61,42 @@ export const Children = styled(animated.div)`
   }
 `
 
-export const Menu = styled(NavLink).attrs({
-  size: `1em`,
-  as: ThMenu,
-})`
-  cursor: pointer;
-  transform: scale(1.7, 1.3);
-  margin: 0 0.3em;
+const openerCss = css`
+  z-index: 2;
+  position: fixed;
+  bottom: 2vh;
+  left: 0;
+  padding: 0.5em 0.6em 0.5em 0.3em;
+  background: ${props => props.theme.background};
+  border: 2px solid ${props => props.theme.borderColor};
+  border-radius: 0 50% 50% 0;
+  transform: translate(${props => (props.open ? `-100%` : 0)});
+`
+
+const closedCss = css`
+  color: white;
+`
+
+export const NavToggle = styled(Cross).attrs(props => ({
+  as: props.opener && ThMenu,
+  size: props.opener ? `1.2em` : `1.6em`,
+}))`
+  color: ${props => props.theme.textColor};
+  transition: ${props => props.theme.shortTrans};
+  :hover {
+    transform: scale(1.1);
+  }
+  ${mediaQuery.minLaptop} {
+    display: none;
+  }
+  ${props => (props.opener ? openedCss : closedCss)};
+`
+
+export const ControlsDiv = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  border-bottom: 1px solid;
+  padding-bottom: 0.3em;
+  align-items: center;
+  justify-content: space-between;
 `
