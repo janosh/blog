@@ -22,11 +22,11 @@ const focus = css`
   width: 5em;
   + ${SearchIcon} {
     color: ${props => props.theme.darkerBlue};
-    margin: 0.3em;
+    margin: 0 0.3em;
   }
 `
 
-const collapse = css`
+const collapsed = css`
   width: 0;
   cursor: pointer;
   color: ${props => props.theme.lighterBlue};
@@ -41,7 +41,7 @@ const collapse = css`
   }
 `
 
-const expand = css`
+const expanded = css`
   background: ${props => props.theme.lighterGray};
   width: 6em;
   margin-left: -1.6em;
@@ -58,7 +58,7 @@ export const Input = styled.input`
   background: transparent;
   transition: ${props => props.theme.shortTrans};
   border-radius: ${props => props.theme.smallBorderRadius};
-  ${props => (props.collapse ? collapse : expand)};
+  ${props => (props.collapse ? collapsed : expanded)};
 `
 
 export const Form = styled.form`
