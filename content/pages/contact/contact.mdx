@@ -6,12 +6,24 @@ cover:
   img: mt-meru.jpg
 ---
 
-import Social from '../../../src/components/Social'
 import { MapEmbed } from 'components/Map'
+import { Github } from 'styled-icons/fa-brands/Github'
+import { Email } from 'styled-icons/material/Email'
+import { LinkedinIn } from 'styled-icons/fa-brands/LinkedinIn'
 
 You can reach me by email or on any of these platforms.
 
-<Social size="2em" />
+<div style="display: grid; grid-gap: 2em; grid-auto-flow: column; margin: 1em auto;">
+  <a href="https://github.com/janosh" title="Github">
+    <Github size="2.5em" />
+  </a>
+  <a href="https://linkedin.com/in/janosh-riebesell" title="LinkedIn">
+    <LinkedinIn size="2.5em" />
+  </a>
+  <a href="mailto:janosh.riebesell@gmail.com" title="Email">
+    <Email size="2.5em" />
+  </a>
+</div>
 
 I spend most of my days at the Maxwell Centre. If you‘re in the area, feel free to drop by.
 
