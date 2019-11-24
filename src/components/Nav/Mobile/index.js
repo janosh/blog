@@ -1,9 +1,19 @@
 import React, { memo, useRef, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import { useOnClickOutside, useSize } from 'hooks'
-import { Children, Icons, Item, Menu, MobileNavDiv, NavLink } from './styles'
+import DarkMode from '../../DarkMode'
+import {
+  Children,
+  ArrowUp,
+  ArrowDown,
+  Item,
+  MobileNavDiv,
+  NavLink,
+  NavToggle,
+  ControlsDiv,
+} from './styles'
 
-const Tree = memo(({ text, url, children }) => {
+const Tree = memo(({ title, url, children }) => {
   const ref = useRef()
   const [open, setOpen] = useState(false)
   const treeHeight = useSize(ref, `height`)
@@ -15,11 +25,11 @@ const Tree = memo(({ text, url, children }) => {
       transform: `translateX(${open ? 0 : 1}em)`,
     },
   })
-  const Icon = Icons[children ? (open ? `Less` : `More`) : `Arrow`]
+  const Arrow = open ? ArrowUp : ArrowDown
   return (
     <Item>
-      <Icon onClick={() => setOpen(!open)} />
-      <NavLink to={url}>{text}</NavLink>
+      {children && <Arrow onClick={() => setOpen(!open)} />}
+      <NavLink to={url}>{title}</NavLink>
       {children && (
         <Children style={{ opacity, height }} open={open}>
           <animated.div style={{ transform }} ref={ref}>
@@ -37,13 +47,17 @@ export default function MobileNav({ nav }) {
   useOnClickOutside(ref, () => open && setOpen(false))
   return (
     <>
-      <Menu onClick={() => setOpen(!open)} />
+      <NavToggle opener open={open} onClick={() => setOpen(true)} />
       <MobileNavDiv ref={ref} open={open} onScroll={e => e.preventDefault()}>
+        <ControlsDiv>
+          <NavToggle open={open} onClick={() => setOpen(false)} />
+          <DarkMode />
+        </ControlsDiv>
         {nav.map(({ title, url, subNav }) => (
-          <Tree key={url} url={url} text={title}>
+          <Tree key={url} url={url} title={title}>
             {subNav &&
               subNav.map(item => (
-                <Tree key={item.url} url={url + item.url} text={item.title} />
+                <Tree key={item.url} url={url + item.url} title={item.title} />
               ))}
           </Tree>
         ))}
