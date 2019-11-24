@@ -4,8 +4,8 @@ import { useDarkMode } from 'hooks'
 import { Box, Div, SunIcon, MoonIcon, SunMoonIcon, Notification } from './styles'
 import { Link } from 'gatsby'
 
-export default function DarkMode() {
-  const [colorMode, setColorMode] = useDarkMode().slice(1)
+export default function DarkMode({ initial, ...rest }) {
+  const [, colorMode, setColorMode] = useDarkMode(initial)
   const Modes = {
     light: { Icon: SunIcon, title: `Light Mode`, nextMode: `dark` },
     dark: { Icon: MoonIcon, title: `Dark Mode`, nextMode: `noPreference` },
@@ -27,12 +27,17 @@ export default function DarkMode() {
     leave: { opacity: 0, transform: `translateX(-100%)` },
   })
   return (
-    <Box>
+    <Box {...rest}>
       {transitions.map(({ item, props, key }) => {
         const { Icon, title, render, nextMode } = Modes[item]
         return (
           <Div key={key} style={props}>
-            <Icon title={title} onClick={() => setColorMode(nextMode)} />
+            <Icon
+              title={title}
+              onClick={() => setColorMode(nextMode)}
+              // onTouchStart needed to react on first tap in iOS Safari.
+              onTouchStart={() => setColorMode(nextMode)}
+            />
             <Notification>{render || title}</Notification>
           </Div>
         )
