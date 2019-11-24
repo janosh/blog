@@ -203,7 +203,7 @@ const useOnClickOutside = (ref, handler, events) => {
   })
 }
 
-export default function Search({ indices, collapse, hitsAsGrid }) {
+export default function Search({ indices, collapse = true, hitsAsGrid }) {
   const ref = createRef()
   const [query, setQuery] = useState(``)
   const [focus, setFocus] = useState(false)
@@ -389,11 +389,11 @@ const focus = css`
   width: 5em;
   + ${SearchIcon} {
     color: ${props => props.theme.darkerBlue};
-    margin: 0.3em;
+    margin: 0 0.3em;
   }
 `
 
-const collapse = css`
+const collapsed = css`
   width: 0;
   cursor: pointer;
   color: ${props => props.theme.lighterBlue};
@@ -408,7 +408,7 @@ const collapse = css`
   }
 `
 
-const expand = css`
+const expanded = css`
   background: ${props => props.theme.lighterGray};
   width: 6em;
   margin-left: -1.6em;
@@ -425,7 +425,7 @@ export const Input = styled.input`
   background: transparent;
   transition: ${props => props.theme.shortTrans};
   border-radius: ${props => props.theme.smallBorderRadius};
-  ${props => (props.collapse ? collapse : expand)};
+  ${props => (props.collapse ? collapsed : expanded)};
 `
 
 export const Form = styled.form`
@@ -558,8 +558,8 @@ const searchIndices = [
   { name: `Posts`, title: `Blog Posts`, type: `postHit` },
 ]
 
-const Header = ({ site, transparent }) => (
-  <Container transparent={transparent}>
+const Header = ({ site }) => (
+  <Container>
     <Logo to="/" title={site.title} rel="home" />
     <Nav />
     <Search collapse indices={searchIndices} />
