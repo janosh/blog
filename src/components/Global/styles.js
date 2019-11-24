@@ -13,6 +13,8 @@ export const GlobalStyle = createGlobalStyle`
     font-family: ${fonts};
     font-size: ${minFontSize}em;
     line-height: ${minLineHeight}em;
+    /* Fix very large font size in code blocks in iOS Safari (https://stackoverflow.com/a/3428477). */
+    -webkit-text-size-adjust: 100%;
     ${mediaQuery.minPhone} {
       font-size: calc(${minFontSize}em + (${maxFontSize} - ${minFontSize}) * ((100vw - ${phone}em) / (${desktop} - ${phone})));
       line-height: calc(${minLineHeight}em + (${maxLineHeight} - ${minLineHeight}) * ((100vw - ${phone}em) / (${desktop} - ${phone})));
@@ -21,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
       font-size: ${maxFontSize}em;
       line-height: ${maxLineHeight}em;
     }
-    /* ensure full height page even if unsufficient content */
+    /* Ensure full height page even if unsufficient content. */
     div[role="group"][tabindex] {
       min-height: 100vh;
       display: flex;
@@ -30,7 +32,7 @@ export const GlobalStyle = createGlobalStyle`
         flex: 1;
       }
     }
-    /* below rules enable dark mode */
+    /* The rules below enable dark mode. */
     background: ${props => props.theme.background};
     color: ${props => props.theme.textColor};
     a {
@@ -75,7 +77,7 @@ export const GlobalStyle = createGlobalStyle`
       background: ${props => props.theme.hoveredButtonBg};
     }
   }
-  /* center image captions */
+  /* Center image captions. */
   .gatsby-resp-image-wrapper + em, img + em, .js-plotly-plot + p > em {
     margin-top: 0.3em;
     display: block;
@@ -85,7 +87,7 @@ export const GlobalStyle = createGlobalStyle`
     margin-right: auto;
     font-size: 0.95em;
   }
-  /* prevent wide equations from breaking layout */
+  /* Prevent wide equations from breaking layout. */
   .katex-display {
     overflow-x: scroll;
     overflow-y: hidden;
