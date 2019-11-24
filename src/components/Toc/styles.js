@@ -16,7 +16,7 @@ export const TocDiv = styled.div`
   height: max-content;
   max-height: 80vh;
   overflow-y: scroll;
-  z-index: 1;
+  z-index: 3;
   line-height: 2em;
   -webkit-overflow-scrolling: touch;
   right: 1em;
@@ -69,13 +69,14 @@ export const TocIcon = styled(BookContent)`
 
 const openedCss = css`
   position: fixed;
-  bottom: 1em;
+  bottom: 10vh;
+  ${mediaQuery.minPhablet} {
+    bottom: 2vh;
+  }
   left: 0;
   padding: 0.5em 0.6em 0.5em 0.3em;
   background: ${props => props.theme.background};
-  z-index: 1;
-  box-shadow: 0 0 1em ${props => props.theme.shadowColor};
-  border: 1px solid ${props => props.theme.borderColor};
+  border: 2px solid ${props => props.theme.borderColor};
   border-radius: 0 50% 50% 0;
   transform: translate(${props => (props.open ? `-100%` : 0)});
 `
@@ -86,10 +87,11 @@ const closedCss = css`
   border-radius: 50%;
 `
 
-export const Toggle = styled(Cross).attrs(props => ({
+export const TocToggle = styled(Cross).attrs(props => ({
   as: props.opener && BookContent,
-  size: props.size || `1.2em`,
+  size: props.size || `1.6em`,
 }))`
+  z-index: 2;
   transition: ${props => props.theme.shortTrans};
   justify-self: end;
   :hover {

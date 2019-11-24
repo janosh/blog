@@ -198,11 +198,9 @@ And this is how I use that hook on this site to switch between `MobileNav` and `
 ```js
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
-import { useScreenQuery } from 'hooks/useMediaQuery'
+import { useScreenQuery } from 'hooks'
 import DesktopNav from './Desktop'
 import MobileNav from './Mobile'
-
-export { NavLink, navLinkStyle } from './styles'
 
 export default function Nav(props) {
   const { nav } = useStaticQuery(graphql`
