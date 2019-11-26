@@ -214,11 +214,14 @@ export default function Nav(props) {
     }
   `)
   // highlight-start
-  return useScreenQuery(`maxPhablet`) ? (
-    <MobileNav {...nav} {...props} />
-  ) : (
-    <DesktopNav {...nav} {...props} />
-  )
+  // useScreenQuery returns true or false on client, undefined in SSR.
+  const mobile = useScreenQuery(`maxPhablet`)
+  if (mobile) return <MobileNav {...nav} {...props} />
+  // Only render DesktopNav if screen query is false.
+  if (mobile === false) return <DesktopNav {...nav} {...props} />
+  // Render nothing in SSR to avoid showing DesktopNav on mobile
+  // on initial page load from cleared cache.
+  return null
   // highlight-end
 }
 ```
