@@ -50,7 +50,8 @@ export const theme = { ...colors, ...measures }
 export const lightTheme = {
   background: `white`,
   textColor: `black`,
-  quoteBg: theme.lightestGray,
+  // Used in blockquotes and alternating table rows.
+  accentBackground: theme.lightestGray,
 
   links: theme.blue,
   hoveredLinks: theme.orange,
@@ -72,7 +73,7 @@ export const lightTheme = {
 export const darkTheme = {
   background: theme.darkerGray,
   textColor: theme.lighterGray,
-  quoteBg: theme.darkestGray,
+  accentBackground: theme.darkestGray,
 
   links: theme.lighterBlue,
   hoveredLinks: theme.orange,
