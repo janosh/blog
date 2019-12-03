@@ -18,7 +18,6 @@ export const MobileNavDiv = styled.nav`
   position: fixed;
   top: 0;
   overflow: scroll;
-  -webkit-overflow-scrolling: touch;
   height: 100%;
   background: rgba(0, 0, 0, 0.9);
   padding: 0.8em 1.5em 0.8em 1.8em;
