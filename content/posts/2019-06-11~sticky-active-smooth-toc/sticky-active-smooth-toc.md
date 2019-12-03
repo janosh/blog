@@ -193,16 +193,14 @@ const openTocDiv = css`
 export const TocDiv = styled.div`
   height: max-content;
   max-height: 80vh;
-  overflow-y: scroll;
-  z-index: 1;
+  z-index: 3;
   line-height: 2em;
-  -webkit-overflow-scrolling: touch;
   right: 1em;
   max-width: 20em;
+  overscroll-behavior: none;
   nav {
     max-height: 78vh;
     overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
   }
   ${mediaQuery.maxLaptop} {
     position: fixed;

@@ -15,16 +15,14 @@ const openTocDiv = css`
 export const TocDiv = styled.div`
   height: max-content;
   max-height: 80vh;
-  overflow-y: scroll;
   z-index: 3;
   line-height: 2em;
-  -webkit-overflow-scrolling: touch;
   right: 1em;
   max-width: 20em;
+  overscroll-behavior: none;
   nav {
     max-height: 78vh;
     overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
   }
   ${mediaQuery.maxLaptop} {
     position: fixed;
@@ -69,9 +67,9 @@ export const TocIcon = styled(BookContent)`
 
 const openedCss = css`
   position: fixed;
-  bottom: 10vh;
+  bottom: calc(1vh + 4em);
   ${mediaQuery.minPhablet} {
-    bottom: 2vh;
+    bottom: calc(1vh + 1em);
   }
   left: 0;
   padding: 0.5em 0.6em 0.5em 0.3em;

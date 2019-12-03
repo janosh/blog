@@ -8,7 +8,6 @@ const asRow = css`
   overflow: scroll;
   grid-auto-columns: 18em;
   padding: 1em;
-  -webkit-overflow-scrolling: touch;
 `
 
 const inBlog = css`
