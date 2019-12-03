@@ -1,9 +1,9 @@
 import 'katex/dist/katex.min.css'
 import { createGlobalStyle } from 'styled-components'
-import mediaQuery from 'utils/mediaQuery'
+import mediaQuery, { screens } from 'utils/mediaQuery'
 import typography from 'utils/typography'
 
-const { phone, desktop } = mediaQuery.screens
+const { phone, desktop } = screens
 const { fonts, minFontSize, maxFontSize, minLineHeight, maxLineHeight } = typography
 
 export const GlobalStyle = createGlobalStyle`
@@ -78,7 +78,7 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   /* Center image captions. */
-  .gatsby-resp-image-wrapper + em, img + em, .js-plotly-plot + p > em {
+  .gatsby-resp-image-wrapper + em, img + em, .js-plotly-plot + p > em, div.table + p > em {
     margin-top: 0.3em;
     display: block;
     text-align: center;
@@ -92,10 +92,39 @@ export const GlobalStyle = createGlobalStyle`
     overflow-x: scroll;
     overflow-y: hidden;
   }
-  blockquote {
+  blockquote, details {
     border-left: 0.25em solid ${props => props.theme.lighterBlue};
-    background: ${props => props.theme.quoteBg};
-    padding: 0.1em 0 0.1em 1em;
+    background: ${props => props.theme.accentBackground};
+    padding: 0.1em 0.3em 0.1em 0.6em;
     margin: 0;
+    summary {
+      font-weight: bold;
+    }
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  table td, table th {
+    border: 1px solid ${props => props.theme.lightGray};
+    padding: 0.2em 0.6em;
+  }
+  tbody tr:nth-child(odd) {
+    background: ${props => props.theme.accentBackground};
+  }
+  div.scroll {
+    overflow: scroll;
+    margin: 1em auto;
+    border: 1px solid ${props => props.theme.lightGray};
+    border-width: 0 1px;
+    white-space: nowrap;
+    table td, table th {
+      :first-child {
+        border-left: none;
+      }
+      :last-child {
+        border-right: none;
+      }
+    }
   }
 `
