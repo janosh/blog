@@ -73,7 +73,6 @@ export const HitsWrapper = styled.div`
   max-height: 80vh;
   overflow: scroll;
   z-index: 2;
-  -webkit-overflow-scrolling: touch;
   position: absolute;
   right: 0;
   top: calc(100% + 0.5em);
