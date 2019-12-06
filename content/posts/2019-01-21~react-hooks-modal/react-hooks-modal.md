@@ -223,24 +223,25 @@ import { ModalBackground, ModalContainer, Close, Next, Prev } from './styles'
 
 // highlight-start
 const handleArrowKeys = (modal, setModal) => event => {
-  if (event.key === `ArrowRight`) setModal(modal + 1)
-  else if (event.key === `ArrowLeft`) setModal(modal - 1)
+  if (event && event.key === `ArrowRight`) setModal(modal + 1)
+  else if (event && event.key === `ArrowLeft`) setModal(modal - 1)
+  else if (event && event.key === `Escape`) setModal()
 }
 // highlight-end
 
 export default function Modal({ open, modal, setModal, ...rest }) {
+  // highlight-start
+  const { showArrows, className, children } = rest
+  useEffect(() => {
+    const handler = handleArrowKeys(modal, setModal)
+    document.addEventListener(`keydown`, handler)
+    return () => document.removeEventListener(`keydown`, handler)
+  })
+  // highlight-end
   if (open) {
-    // highlight-start
-    const { navigation, className, children } = rest
-    useEffect(() => {
-      const handler = handleArrowKeys(modal, setModal)
-      document.addEventListener(`keydown`, handler)
-      return () => document.removeEventListener(`keydown`, handler)
-    })
-    // highlight-end
     return (
-      // passing setModal to onClick without arguments implicitly
-      // passes undefined and thus closes the modal when triggered
+      // Passing setModal to onClick without arguments implicitly
+      // sets to undefined, i.e. closes the modal.
       <ModalBackground open={open} onClick={setModal}>
         <ModalContainer
           onClick={event => event.stopPropagation()}
@@ -248,7 +249,7 @@ export default function Modal({ open, modal, setModal, ...rest }) {
         >
           <Close onClick={setModal} />
           // highlight-start
-          {navigation && (
+          {showArrows && (
             <>
               <Next onClick={() => setModal(modal + 1)} />
               <Prev onClick={() => setModal(modal - 1)} />

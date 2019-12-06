@@ -58,13 +58,14 @@ export default function Photos({ tab, photos, modal, setModal }) {
         {...{ modal, setModal }}
         whiteControls
         fullScreenDefault
-        css="background: black; display: grid; align-items: center;"
+        showArrows
+        css="background: black; overflow: hidden;"
       >
         <Img
           alt={currentPhoto.caption}
           fluid={currentPhoto.fluid}
           imgStyle={{ objectFit: `contain` }}
-          css="height: fill-available;"
+          css="height: 100%;"
         />
         <Caption>
           <h3 css="margin: 0;">{currentPhoto.caption}</h3>

@@ -1,10 +1,11 @@
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { Fragment } from 'react'
-import { Date, GitHub, Homepage, Img, Meta, NPM, Tech } from './styles'
+import { Date, GitHub, Homepage, Meta, NPM, Tech } from './styles'
+import Img from 'gatsby-image'
 
 const Project = ({ title, cover, date, url, repo, npm, tech, body }) => (
   <>
-    <h2>
+    <h2 css="margin-top: 0;">
       <a href={url}>{title}</a>
     </h2>
     {cover && <Img fluid={cover.img.sharp.fluid} />}

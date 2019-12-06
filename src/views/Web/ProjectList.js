@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import Modal from 'components/Modal'
 import Project from './Project'
-import { Img, ProjectGrid, Thumbnail } from './styles'
+import { ProjectGrid, Thumbnail } from './styles'
 import { graphql, useStaticQuery } from 'gatsby'
+import Img from 'gatsby-image'
 
 export function ProjectList(props) {
   let { projects } = useStaticQuery(graphql`
