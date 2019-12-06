@@ -55,20 +55,25 @@ export const ModalBehind = styled.div`
   visibility: ${props => (props.open ? `visible` : `hidden`)};
   opacity: ${props => (props.open ? `1` : `0`)};
   transition: 0.5s;
-  z-index: 1;
+  z-index: 2;
 `
 
 export const ModalDiv = styled.div`
+  display: grid;
+  align-items: center;
+  box-sizing: border-box;
   align-self: center;
   justify-self: center;
-  background: white;
-  max-width: ${props => props.theme.maxWidth};
+  background: ${props => props.theme.background};
+  height: max-content;
   max-height: 80vh;
+  width: 80vw;
   position: relative;
   overflow: scroll;
-  padding: 2em;
-  border-radius: 1em;
+  border-radius: ${props => props.theme.mediumBorderRadius};
+  transition: ${props => props.theme.shortTrans};
   box-shadow: 0 0 3em black;
+  margin: calc(0.5em + 2vw);
 `
 
 export const Close = styled(Cross).attrs({ size: `2em` })`
@@ -224,28 +229,30 @@ import { ModalBehind, ModalDiv, Close, Next, Prev } from './styles'
 
 // highlight-start
 const handleArrowKeys = (modal, setModal) => event => {
-  if (event.key === `ArrowRight`) setModal(modal + 1)
-  else if (event.key === `ArrowLeft`) setModal(modal - 1)
+  if (event && event.key === `ArrowRight`) setModal(modal + 1)
+  else if (event && event.key === `ArrowLeft`) setModal(modal - 1)
+  else if (event && event.key === `Escape`) setModal()
 }
 // highlight-end
 
-const Modal = ({ open, modal, setModal, children, navigation, className }) => {
+export default function Modal({ open, modal, setModal, ...rest }) {
+  // highlight-start
+  const { showArrows, className, children } = rest
+  useEffect(() => {
+    const handler = handleArrowKeys(modal, setModal)
+    document.addEventListener(`keydown`, handler)
+    return () => document.removeEventListener(`keydown`, handler)
+  })
+  // highlight-end
   if (open) {
-    // highlight-start
-    const { navigation, className, children } = rest
-    useEffect(() => {
-      const handler = handleArrowKeys(modal, setModal)
-      document.addEventListener(`keydown`, handler)
-      return () => document.removeEventListener(`keydown`, handler)
-    })
-    // highlight-end
     return (
-      // passing setModal without arguments will close the modal when triggered
+      // Passing setModal to onClick without arguments implicitly
+      // sets to undefined, i.e. closes the modal.
       <ModalBehind open={open} onClick={setModal}>
         <ModalDiv onClick={event => event.stopPropagation()} className={className}>
           <Close onClick={setModal} />
           // highlight-start
-          {navigation && (
+          {showArrows && (
             <>
               <Next onClick={() => setModal(modal + 1)} />
               <Prev onClick={() => setModal(modal - 1)} />
