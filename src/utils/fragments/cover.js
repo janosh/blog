@@ -11,7 +11,7 @@ export const query = graphql`
   }
   fragment cover on MdxFrontmatter {
     cover {
-      credit
+      source
       url
       caption
       img {
