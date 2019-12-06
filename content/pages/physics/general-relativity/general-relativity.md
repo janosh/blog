@@ -4,7 +4,7 @@ slug: /physics/general-relativity
 purpose: page
 cover:
   img: sun-earth-spacetime.jpg
-  credit: Australia's Science Channel
+  source: Australia's Science Channel
   url: https://australiascience.tv/why-the-general-theory-of-relativity-is-not-just-for-physicists
   caption: Artist's impression of bended spacetime due to the sun and Earth's gravity
 ---

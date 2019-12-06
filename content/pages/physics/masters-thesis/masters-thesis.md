@@ -4,7 +4,7 @@ slug: /physics/masters-thesis
 purpose: page
 cover:
   img: heidelberg-castle-at-night.jpg
-  credit: Alex Meyer
+  source: Alex Meyer
   url: https://locationscout.net/germany/3596-philosophenweg-heidelberg
   caption: Heidelberg castle at night
 ---

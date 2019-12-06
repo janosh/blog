@@ -5,7 +5,7 @@ slug: /hmc-intro
 date: 2019-05-01
 cover:
   img: grand-canyon.jpg
-  credit: Free-Photos
+  source: Free-Photos
   url: https://pixabay.com/photos/grand-canyon-scenery-landscape-1246248
 tags:
   - Physics

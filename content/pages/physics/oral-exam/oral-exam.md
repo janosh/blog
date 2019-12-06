@@ -4,7 +4,7 @@ slug: /physics/oral-exam
 purpose: page
 cover:
   img: string-theory-blackboard.jpg
-  credit: National University of Singapore
+  source: National University of Singapore
   url: http://news.nus.edu.sg/highlights/worlds-top-theorists-take-theory-everything
   caption: String theory blackboard
 ---

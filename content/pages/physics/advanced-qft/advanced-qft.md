@@ -4,7 +4,7 @@ slug: /physics/advanced-qft
 purpose: page
 cover:
   img: particle-collision.jpg
-  credit: Quantamagazine
+  source: Quantamagazine
   url: https://quantamagazine.org/strange-numbers-found-in-particle-collisions-20161115
   caption: Particle collision
 ---

@@ -4,7 +4,7 @@ slug: /solar+batteries-rule
 date: 2019-01-21
 cover:
   img: tesla-battery.jpg
-  credit: Hornsdale Power Reserve
+  source: Hornsdale Power Reserve
   url: https://hornsdalepowerreserve.com.au
 tags:
   - Technology
@@ -21,7 +21,7 @@ Just to give you an idea of the incredibly high ceiling for solar on Earth: In a
 Humanity could continue to advance and increase its energy consumption at the current rate for centuries harnessing only solar power without problems. Certainly not so with wind and hydro and probably not even with fusion, simply because nothing in the solar system could ever come even close to the energy released by the sun. And with the sun comprising 99.8 % of all mass in our solar system, short of us discovering a huge pile of antimatter lying around somewhere this isn't going to change.
 
 ![World energy consumption by source](world-energy-consumption-by-source.png)
-_World energy consumption by source. Credit: [The Oil Drum](http://theoildrum.com/node/9023)_
+_World energy consumption by source. Source: [The Oil Drum](http://theoildrum.com/node/9023)_
 
 Even if our energy demands should exceed the amount of sun light reaching the Earth, i.e. increase by more than a factor of the number of hours in a year ($24 \cdot 365 = 8760$), all we'd have to do is start harnessing solar radiation from space. This has a number of advantages anyway.
 
@@ -29,12 +29,12 @@ Even if our energy demands should exceed the amount of sun light reaching the Ea
 2. Solar cells in space could receive sunlight all day every day by placing them on one of the Lagrange points for instance.
 
 ![Lagrange Points](lagrange-points.png)
-_Contour plot of the effective potential due to gravity and the centrifugal force in the Sun-Earth system. Credit: [Wikipedia][1]_
+_Contour plot of the effective potential due to gravity and the centrifugal force in the Sun-Earth system. Source: [Wikipedia][1]_
 
 Once we start collecting the sun's light in space, the new ceiling for max solar energy collection becomes a [Dyson sphere](https://en.wikipedia.org/wiki/Dyson_sphere), i.e. a sphere enclosing the entire sun. Covering its inside with solar cell would allow us to harness all of the sun's energy! At that point we should comfortably be able to test string theory. :sunglasses:
 
 ![Dyson Sphere](dyson-sphere.jpg)
-_Artist's rendition of a Dyson sphere. Credit: [Danielle Futeslaar](https://abc.net.au/news/2015-12-10/artists-representation-of-dyson-sphere-surrounding-star/7019336)_
+_Artist's rendition of a Dyson sphere. Source: [Danielle Futeslaar](https://abc.net.au/news/2015-12-10/artists-representation-of-dyson-sphere-surrounding-star/7019336)_
 
 Just to demonstrate the long term scalability of the sun as an energy source, looking again at the plot of the world's energy consumption over time, we can see that it increased from $E_{1950} \approx 100 \, \mathrm{E J} = 10^{20} \, \mathrm J$ to $E_{2000} \approx 420 \, \mathrm{EJ} = 4.2 \cdot 10^{20} \, \mathrm J$, i.e. a 4.2-fold increase over a period of $t = 50$ years. Since $E_{1950} \cdot (1 + c)^t = E_{2000}$ this results in an average annual increase in human energy consumption $c$ of
 
@@ -59,7 +59,7 @@ But I digress. Basically my point is that solar energy is obviously by far the b
 The price of solar has seen such a steady and rapid decrease that it won't take much longer for it to drastically undercut every other method of energy generation humanity has yet developed.
 
 ![Solar Price Drop](solar-price-drop.jpg)
-_Solar energy price drop and rise in global installations. Credit: [CleanTechnica](https://cleantechnica.com/2018/02/11/solar-panel-prices-continue-falling-quicker-expected-cleantechnica-exclusive)_
+_Solar energy price drop and rise in global installations. Source: [CleanTechnica](https://cleantechnica.com/2018/02/11/solar-panel-prices-continue-falling-quicker-expected-cleantechnica-exclusive)_
 
 In fact, in sunny countries this is already the case. In early 2018, Saudi Arabian operator ACWA Power reported they are able to operate their newest solar park at an [incredible tariff of 2.34 cents per kilowatt hour](https://cleantechnica.com/2018/02/06/acwa-power-develop-first-ever-utility-scale-renewable-project-saudi-arabia-record-breaking-tariff)! There's simply no other technology that can compete with this, let alone be sustainable. With solar cell technology continuing to improve, global manufacturing continuing to increase to economies of enormous scale, imagine where that figure is going to be in 10 years time.
 

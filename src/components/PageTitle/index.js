@@ -16,13 +16,13 @@ export default function PageTitle({ children, img, className, ...rest }) {
     <PageTitleContainer {...{ ref, className }}>
       <Img {...img} />
       <Title backdrop={backdrop}>{children}</Title>
-      {img && (img.caption || img.credit) && (
+      {img && (img.caption || img.source) && (
         <Caption showOnHoverParent={PageTitleContainer}>
           <span dangerouslySetInnerHTML={{ __html: img.caption }} />
-          {img.caption && img.credit && ` | `}
-          {img.credit && (
+          {img.caption && img.source && ` | `}
+          {img.source && (
             <span>
-              Credit: <a href={img.url}>{img.credit}</a>
+              Source: <a href={img.url}>{img.source}</a>
             </span>
           )}
         </Caption>

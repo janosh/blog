@@ -4,7 +4,7 @@ slug: /physics/statistical-physics
 purpose: page
 cover:
   img: bose-einstein-condensate.png
-  credit: Wikipedia
+  source: Wikipedia
   url: https://commons.wikimedia.org/wiki/File:Bose_Einstein_condensate.png
   caption: Bose-Einstein condensate
 ---
