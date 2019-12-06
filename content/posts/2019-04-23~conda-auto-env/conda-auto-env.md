@@ -4,7 +4,7 @@ slug: /conda-auto-env
 date: 2019-04-23
 cover:
   img: royal-python.jpg
-  credit: Kapa65
+  source: Kapa65
   url: https://pixabay.com/photos/snake-ball-python-garden-camouflage-365037
 tags:
   - Tutorial
