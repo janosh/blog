@@ -1,7 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
-import { ThemeProvider } from 'styled-components'
+import React, { useEffect, useState, useRef } from 'react'
 import { useEventListener } from 'hooks'
 import { controls, ModalBackground, ModalContainer } from './styles'
 
@@ -10,47 +7,44 @@ const { Close, Next, Prev, FullscreenToggle } = controls
 const handleArrowKeys = setModal => event => {
   if (event && event.key === `ArrowRight`) setModal(m => m + 1)
   else if (event && event.key === `ArrowLeft`) setModal(m => m - 1)
+  else if (event && event.key === `Escape`) setModal()
 }
 
 export default function Modal({ open, modal, setModal, children, ...rest }) {
-  if (open) {
-    const { showControls = true, className, whiteControls } = rest
-    const [fullscreen, setFullscreen] = useState(rest.fullScreenDefault)
-    useEventListener(`keydown`, handleArrowKeys(setModal))
-    useEffect(() => {
-      document.body.style.overflowY = `hidden`
-    }, [])
+  const ref = useRef()
+  const { showArrows, className } = rest
+  const [fullscreen, setFullscreen] = useState(rest.fullScreenDefault)
+  useEventListener(`keydown`, handleArrowKeys(setModal))
+  useEffect(() => {
+    if (open) document.body.style.overflowY = `hidden`
+    if (ref.current) ref.current.closest(`main`).style.zIndex = 3
+  }, [open])
+  if (open)
     return (
-      // calling setModal without arguments will close the modal
       <ModalBackground open={open} onClick={setModal}>
         <ModalContainer
           onClick={event => event.stopPropagation()}
-          {...{ className, fullscreen }}
+          {...{ className, fullscreen, ref }}
         >
-          <ThemeProvider theme={{ whiteControls }}>
-            {showControls && (
-              <>
-                <Close onClick={setModal} />
-                <FullscreenToggle
-                  onClick={() => setFullscreen(!fullscreen)}
-                  {...{ fullscreen }}
-                />
-                <Next onClick={() => setModal(modal + 1)} />
-                <Prev onClick={() => setModal(modal - 1)} />
-              </>
-            )}
-          </ThemeProvider>
+          <Close onClick={setModal} />
+          <FullscreenToggle
+            onClick={() => setFullscreen(!fullscreen)}
+            {...{ fullscreen }}
+          />
+          {showArrows && (
+            <>
+              <Next onClick={() => setModal(modal + 1)} />
+              <Prev onClick={() => setModal(modal - 1)} />
+            </>
+          )}
           {children}
         </ModalContainer>
       </ModalBackground>
     )
-  } else {
+  else {
     if (typeof document !== `undefined`)
       document.body.style.removeProperty(`overflow-y`)
+    if (ref.current) ref.current.closest(`main`).style.removeProperty(`z-index`)
     return null
   }
-}
-
-Modal.propTypes = {
-  setModal: PropTypes.func.isRequired,
 }

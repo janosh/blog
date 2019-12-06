@@ -1,56 +1,61 @@
-import Image from 'gatsby-image'
+import RawModal from 'components/Modal'
+import { Grid } from 'components/styles'
 import styled, { css } from 'styled-components'
 import { Link } from 'styled-icons/boxicons-regular/Link'
 import { Npm } from 'styled-icons/fa-brands/Npm'
 import { PackageIcon } from 'styled-icons/feather/PackageIcon'
 import { Github } from 'styled-icons/icomoon/Github'
 import { Calendar } from 'styled-icons/octicons/Calendar'
-import { Grid } from 'components/styles'
+
+const asRow = css`
+  grid-column: 2/-2;
+  grid-auto-flow: column;
+  overflow: scroll;
+  padding: 1em;
+  grid-auto-columns: 15em;
+`
 
 export const ProjectGrid = styled(Grid)`
-  ${props =>
-    props.asRow &&
-    css`
-      grid-column: 2/-2;
-      grid-auto-flow: column;
-      overflow: scroll;
-      padding: 1em;
-      grid-auto-columns: 15em;
-    `};
+  ${props => props.asRow && asRow};
 `
 
 export const Thumbnail = styled.div`
   border-radius: ${props => props.theme.mediumBorderRadius};
   overflow: hidden;
   display: grid;
-  width: 100%;
-  height: 100%;
-  box-shadow: 0 0 1em ${props => props.theme.shadowColor};
+  box-shadow: 0 0 1em var(--color-shadow);
   transition: 0.5s;
+  position: relative;
   h3 {
-    grid-area: 1 / 1;
-    z-index: 1;
+    position: absolute;
     color: white;
     align-self: center;
     justify-self: center;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.8);
     padding: 0.3em 0.7em;
     text-align: center;
     border-radius: 1em;
-    width: max-content;
     max-width: 70%;
   }
   &:hover {
     transform: scale(1.03);
   }
 `
-export const Img = styled(Image)`
-  grid-area: 1 / 1;
+
+export const Modal = styled(RawModal)`
+  padding: 1em 2em 0;
+  max-width: 45em;
+  &:after {
+    content: '';
+    display: block;
+    height: 1em;
+    width: 100%;
+  }
 `
 
 export const Meta = styled.div`
   margin: 1em 0;
-  border-left: ${({ theme }) => `${theme.largeBorder} solid ${theme.lightGreen}`};
+  border-left: 0.2em solid var(--color-green-light);
 `
 
 const iconCss = css`
