@@ -20,6 +20,7 @@ export const ModalBackground = styled.div`
 `
 
 const fullscreen = css`
+  max-height: none;
   width: 100vw;
   height: 100vh;
   margin: 0;
@@ -27,11 +28,14 @@ const fullscreen = css`
 `
 
 export const ModalContainer = styled.div`
+  display: grid;
+  align-items: center;
   box-sizing: border-box;
   align-self: center;
   justify-self: center;
   background: ${props => props.theme.background};
-  height: 80vh;
+  height: max-content;
+  max-height: 80vh;
   width: 80vw;
   position: relative;
   overflow: scroll;
@@ -86,4 +90,4 @@ const Prev = styled(NavigateBefore)`
   left: 0.3em;
 `
 
-export const controls = { FullscreenToggle, Close, Next, Prev }
+export const controls = { Close, Next, Prev, FullscreenToggle }
