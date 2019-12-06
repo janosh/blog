@@ -4,7 +4,7 @@ slug: /physics/bachelors-thesis
 purpose: page
 cover:
   img: graphene.jpg
-  credit: Wikipedia
+  source: Wikipedia
   url: https://en.wikipedia.org/wiki/Graphene#/media/File:Graphen.jpg
   caption: Graphene lattice
 ---
