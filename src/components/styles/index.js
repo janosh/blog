@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export * from './ButtonGroup'
+export * from './Button'
 export * from './Caption'
 export * from './Grid'
 export * from './PageBody'
