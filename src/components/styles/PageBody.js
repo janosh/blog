@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import mediaQuery from 'utils/mediaQuery'
 
 export const PageBody = styled.main`
   position: relative;
@@ -11,10 +10,5 @@ export const PageBody = styled.main`
   grid-auto-flow: dense;
   > * {
     grid-column: ${props => props.cols || 3};
-  }
-  ${mediaQuery.minPhablet} {
-    > p {
-      text-align: justify;
-    }
   }
 `

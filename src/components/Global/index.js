@@ -10,11 +10,10 @@ import Header from '../Header'
 import Scroll from '../Scroll'
 import Seo from '../Seo'
 import { GlobalStyle } from './styles'
+import { DocsGrid } from '../styles'
 import { LazyPlot } from '../Plotly'
 
-const components = {
-  LazyPlot,
-}
+const components = { LazyPlot, DocsGrid }
 
 export default function Global({ children, ...rest }) {
   const [darkMode] = useDarkMode()
