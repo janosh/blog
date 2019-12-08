@@ -46,37 +46,6 @@ export const GlobalStyle = createGlobalStyle`
   h1, h2, h3, h4, h5, h6 {
     line-height: initial;
   }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
-    grid-gap: 1em 2em;
-    text-align: center;
-    &.docs {
-    grid-gap: 1em;
-      p {
-        margin: 0;
-      }
-      img {
-        border: 1px solid lightgray;
-        border-radius: 5px;
-        overflow: hidden;
-      }
-    }
-  }
-  .button {
-    background: ${props => props.theme.buttonBg};
-    color: white;
-    border-radius: ${props => props.theme.smallBorderRadius};
-    padding: 0.3em 0.6em;
-    transition: ${props => props.theme.shortTrans};
-    display: flex;
-    align-items: center;
-    width: max-content;
-    margin: 0 auto;
-    :hover {
-      background: ${props => props.theme.hoveredButtonBg};
-    }
-  }
   /* Center image captions. */
   .gatsby-resp-image-wrapper + em, img + em, .js-plotly-plot + p > em, div.table + p > em {
     margin-top: 0.3em;
