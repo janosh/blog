@@ -9,6 +9,8 @@ export default connectSearchBox(({ refine, ...rest }) => (
       placeholder="Search"
       aria-label="Search"
       onChange={e => refine(e.target.value)}
+      // iOS Safari doesn't blur input automatically on tap outside.
+      onMouseLeave={e => e.target.blur()}
       {...rest}
     />
     <SearchIcon />
