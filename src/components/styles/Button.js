@@ -1,5 +1,20 @@
 import styled from 'styled-components'
 
+export const ButtonLink = styled.a`
+  background: ${props => props.theme.buttonBg};
+  color: white;
+  border-radius: 0.4em;
+  padding: 0.3em 0.6em;
+  transition: ${props => props.theme.shortTrans};
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  :hover {
+    color: white;
+    background: ${props => props.theme.hoveredButtonBg};
+  }
+`
+
 export const ButtonGroup = styled.div`
   margin: 2em auto;
   border-radius: ${props => props.theme.mediumBorderRadius};
