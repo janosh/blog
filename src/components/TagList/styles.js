@@ -14,6 +14,7 @@ import { Lab } from 'styled-icons/icomoon/Lab'
 import { ColorLens } from 'styled-icons/material/ColorLens'
 import { Web } from 'styled-icons/material/Web'
 import { WeatherSunny } from 'styled-icons/typicons/WeatherSunny'
+import { Sigma } from 'styled-icons/icomoon/Sigma'
 import mediaQuery from 'utils/mediaQuery'
 export { Tags as TagsIcon } from 'styled-icons/fa-solid/Tags'
 
@@ -24,6 +25,10 @@ export const TagGrid = styled.div`
   height: max-content;
   h2 {
     margin: 0;
+  }
+  ${mediaQuery.minPhablet} {
+    position: sticky;
+    top: 2em;
   }
   ${mediaQuery.maxPhablet} {
     display: flex;
@@ -86,4 +91,5 @@ export const tagIcons = {
   Future: Robot,
   JS: JsSquare,
   Python,
+  Statistics: Sigma,
 }
