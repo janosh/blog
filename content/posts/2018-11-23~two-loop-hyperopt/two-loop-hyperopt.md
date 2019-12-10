@@ -10,6 +10,7 @@ tags:
   - Machine Learning
   - Python
   - Tutorial
+  - Statistics
 ---
 
 I recently started using [Scikit-Optimize](https://scikit-optimize.github.io/) (`skopt` for short) to run Bayesian optimization on the hyperparameters of a set of fully-connected neural networks. The hyperparameters I optimized were
