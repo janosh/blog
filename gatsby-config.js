@@ -22,7 +22,7 @@ const gatsbyRemarkPlugins = [
   },
   {
     resolve: `gatsby-remark-katex`,
-    options: { macros },
+    options: { macros, throwOnError: false },
   },
   {
     resolve: `gatsby-remark-images`,
