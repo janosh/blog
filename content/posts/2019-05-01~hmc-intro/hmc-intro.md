@@ -9,7 +9,8 @@ cover:
   url: https://pixabay.com/photos/grand-canyon-scenery-landscape-1246248
 tags:
   - Physics
-  - Machine Learning
+  - Statistics
+  - Science
 showToc: true
 ---
 
