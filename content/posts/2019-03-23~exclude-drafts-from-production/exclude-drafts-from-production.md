@@ -30,7 +30,7 @@ If the content is part of the site's repo, a solution that avoids these problems
 
 Then, once the content is ready to be published, simply remove the file's `draft-` prefix and build.
 
-An advantage to this approach is that it works with both files and folders. If you want to exclude multiple files, simply add the prefix to the parent directory. For instance, you could have a permanent `drafts` folder and move posts in and out of this folder as needed. In that case, you'd replace ``[`**/draft-*`]`` with ``[`**/posts/drafts`]``
+An advantage to this approach is that it works with both files and folders. If you want to exclude multiple files, simply add the prefix to the parent directory. For instance, you could have a permanent `drafts` folder and move posts in and out of this folder as needed. In that case, you'd replace `` [`**/draft-*`] `` with `` [`**/posts/drafts`] ``
 
 You can then also prevent those files from cluttering up your `git` tracker by adding this directory to your `.gitignore`.
 
