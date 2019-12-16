@@ -56,7 +56,7 @@ chpwd() {
 chpwd
 ```
 
-To install it, either copy it to `.bashrc` or `.bashprofile` or -- perhaps a little cleaner --  source this script in either of those files. For instance, say you have a `~/scripts` directory where you keep custom scripts like this one, to add this script to your path, you would simply run
+To install it, either copy it to `.bashrc` or `.bashprofile` or -- perhaps a little cleaner -- source this script in either of those files. For instance, say you have a `~/scripts` directory where you keep custom scripts like this one, to add this script to your path, you would simply run
 
 ```sh
 ln -s "~/scripts/conda_auto_env" /usr/local/bin

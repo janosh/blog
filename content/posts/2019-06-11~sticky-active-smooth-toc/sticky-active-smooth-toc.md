@@ -161,8 +161,7 @@ export const useOnClickOutside = (ref, handler, events) => {
   useEffect(() => {
     const detectClickOutside = event =>
       !ref.current.contains(event.target) && handler()
-    for (const event of events)
-      document.addEventListener(event, detectClickOutside)
+    for (const event of events) document.addEventListener(event, detectClickOutside)
     return () => {
       for (const event of events)
         document.removeEventListener(event, detectClickOutside)
@@ -210,7 +209,7 @@ export const TocDiv = styled.div`
     ${props => props.open && openTocDiv};
     visibility: ${props => (props.open ? `visible` : `hidden`)};
     opacity: ${props => (props.open ? 1 : 0)};
-    transition: ${props => props.theme.shortTrans};
+    transition: 0.3s;
   }
   ${mediaQuery.minLaptop} {
     font-size: 0.85em;
@@ -268,7 +267,7 @@ export const TocToggle = styled(Cross).attrs(props => ({
   size: props.size || `1.6em`,
 }))`
   z-index: 2;
-  transition: ${props => props.theme.shortTrans};
+  transition: 0.3s;
   justify-self: end;
   :hover {
     transform: scale(1.1);
