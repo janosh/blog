@@ -425,7 +425,7 @@ export const Input = styled.input`
   border: none;
   font-size: 1em;
   background: transparent;
-  transition: ${props => props.theme.shortTrans};
+  transition: 0.3s;
   border-radius: ${props => props.theme.smallBorderRadius};
   ${props => (props.collapse ? collapsed : expanded)};
 `

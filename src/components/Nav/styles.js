@@ -6,7 +6,7 @@ export const NavLink = styled(Link).attrs({
   partiallyActive: true,
 })`
   color: inherit;
-  transition: ${props => props.theme.shortTrans};
+  transition: 0.3s;
   &.active {
     color: ${props => props.theme.orange};
   }
