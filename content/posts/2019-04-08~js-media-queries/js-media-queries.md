@@ -40,7 +40,10 @@ const max = width => `@media screen and (max-width: ${width}em)`
 //   ...
 for (const key of Object.keys(mediaQuery.screens)) {
   const Key = titleCase(key)
-  for (const [func, name] of [[min, `min`], [max, `max`]])
+  for (const [func, name] of [
+    [min, `min`],
+    [max, `max`],
+  ])
     mediaQuery[name + Key] = func(mediaQuery.screens[key])
 }
 
@@ -78,7 +81,7 @@ To use it in a React function component, simply throw in the following code snip
 ```js
 import React, { useState, useEffect } from 'react'
 
-import { Mobile, Desktop} from 'src/components
+import { Mobile, Desktop } from 'src/components'
 
 const maxPhone = `screen and (max-width: 30em)` // highlight-line
 
@@ -98,7 +101,9 @@ export default function ResponsiveComponent(props) {
 
 Note that we needed to remove the `@media` prefix of CSS media queries from `maxPhone`. `window.matchMedia(maxPhone)` then turns that string into the object `query` which becomes the JavaScript equivalent of `@media screen and (max-width: 30em)`. We then call `useState` to manage whether or not the query _currently_ matches the screen size, followed by `useEffect` which creates a listener to the window size and updates the status of the query when on resize. Finally, we return the `Mobile` or `Desktop` implementation of `ResponsiveComponent`, depending on the state of the query.
 
-If you're using server-side rendering, you'll need to wrap this code in a `if` statement that checks that the `window` object is defined.
+If you're using server-side rendering (SSR), you'll need to wrap this code in a `if` statement that checks that the `window` object is defined.
+
+<!-- eslint-skip -->
 
 ```js
 import React, { useState, useEffect } from 'react'
@@ -106,7 +111,8 @@ import React, { useState, useEffect } from 'react'
 const maxPhone = `screen and (max-width: 30em)`
 
 export default function ResponsiveComponent(props) {
-  if (typeof window !== `undefined`) { // highlight-line
+  // highlight-next-line
+  if (typeof window !== `undefined`) {
     const query = window.matchMedia(maxPhone)
     const [match, setMatch] = useState(query.matches)
     useEffect(() => {
@@ -124,18 +130,21 @@ export default function ResponsiveComponent(props) {
 Since this is functionality you may end up using on a regular basis, it probably makes sense to abstract it into a custom hook, say `useMediaQuery`.
 
 ```js
+const noop = () => {}
+
 // React hook for JS media queries
-export const useMediaQuery = cond => {
-  if (typeof window !== `undefined`) {
-    const query = window.matchMedia(cond)
-    const [match, setMatch] = useState(query.matches)
-    useEffect(() => {
-      const handleMatch = q => setMatch(q.matches)
-      query.addListener(handleMatch)
-      return () => query.removeListener(handleMatch)
-    })
-    return match
-  }
+export const useMediaQuery = query => {
+  // Fall back on dummy matchMedia in SSR.
+  const matchMedia =
+    globalThis.matchMedia || (() => ({ addListener: noop, removeListener: noop }))
+  query = matchMedia(query)
+  const [matches, setMatches] = useState(query.matches)
+  useEffect(() => {
+    const handleMatch = q => setMatches(q.matches)
+    query.addListener(handleMatch)
+    return () => query.removeListener(handleMatch)
+  }, [query])
+  return matches
 }
 ```
 

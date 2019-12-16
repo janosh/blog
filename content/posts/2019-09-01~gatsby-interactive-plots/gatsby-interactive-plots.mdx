@@ -11,6 +11,7 @@ tags:
   - Science
 showToc: true
 ---
+
 import fpProps from './frameworkPopularity'
 import saddleProps from './saddle'
 import triModalProps from './triModal'
@@ -51,7 +52,7 @@ Next we'll need to install a plotting library. I went with Plotly because
 - I looked at more than a dozen other Javascript plotting libraries and nothing else seemed to provide the functionality needed for scientific plots.
 - they've really fleshed out their docs over the last year or two.
 
-Plotly offers loads of customization options, perhaps at the expense of being a little more verbose than other options. If you're more interested in financial data visualization where (I think) people use more standardized plots, you might want to take a look at  [Highcharts](https://highcharts.com) instead which also offers [official React support](https://github.com/highcharts/highcharts-react). [Recharts](http://recharts.org) also looked quite nice. However, both seem to be 2d only and only the former seems to be actively maintained.
+Plotly offers loads of customization options, perhaps at the expense of being a little more verbose than other options. If you're more interested in financial data visualization where (I think) people use more standardized plots, you might want to take a look at [Highcharts](https://highcharts.com) instead which also offers [official React support](https://github.com/highcharts/highcharts-react). [Recharts](http://recharts.org) also looked quite nice. However, both seem to be 2d only and only the former seems to be actively maintained.
 
 To start using Plotly, we need to install it and its React components along with [`react-loadable`](https://github.com/jamiebuilds/react-loadable)
 
@@ -228,7 +229,7 @@ export default function App(props) {
 }
 ```
 
-[As mentioned in the MDX docs](https://mdxjs.com/advanced/components#caveats), it's important not to define this component inline with your JSX. This would make it referentially unstable and cause it to trigger a rerender of your entire page during *every* render cycle (even if most of the DOM remains unchanged). This results in bad performance and can cause unwanted side effects like breaking in-page browser navigation (e.g. clicking on headings in a table of contents). Avoid this by declaring your mapping as a variable.
+[As mentioned in the MDX docs](https://mdxjs.com/advanced/components#caveats), it's important not to define this component inline with your JSX. This would make it referentially unstable and cause it to trigger a rerender of your entire page during _every_ render cycle (even if most of the DOM remains unchanged). This results in bad performance and can cause unwanted side effects like breaking in-page browser navigation (e.g. clicking on headings in a table of contents). Avoid this by declaring your mapping as a variable.
 
 Note that every component passed to `MDXProvider` in this way will be directly added to your page bundle which can quickly add up and increase load times. So while it makes your life as an author easier because you don't have to clutter your MDX files with import statements, you don't want to do this with too many components. (If I understand correctly, I believe `gatsby-plugin-mdx` is actually doing that with all components at the moment, no matter if they're imported in a file or globally provided. But that's expected to be remedied soon.)
 

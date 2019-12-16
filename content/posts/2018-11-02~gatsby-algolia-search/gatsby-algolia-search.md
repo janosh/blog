@@ -194,8 +194,7 @@ const useOnClickOutside = (ref, handler, events) => {
   const detectClickOutside = event =>
     !ref.current.contains(event.target) && handler()
   useEffect(() => {
-    for (const event of events)
-      document.addEventListener(event, detectClickOutside)
+    for (const event of events) document.addEventListener(event, detectClickOutside)
     return () => {
       for (const event of events)
         document.removeEventListener(event, detectClickOutside)
@@ -280,27 +279,36 @@ const Stats = connectStateResults(
 Now comes the actual `Search` component. It starts off with some state initialization, defining handler functions and event listeners to trigger them. All they do is make the search input slide out when the user clicks a search icon and disappear again when the user clicks or touches (on mobile) anywhere.
 
 ```js
-export default function Search({ indices, collapse, hitsAsGrid }) {
+const useOnClickOutside = (ref, handler, events) => {
+  if (!events) events = [`mousedown`, `touchstart`]
+  const detectClickOutside = event =>
+    !ref.current.contains(event.target) && handler()
+  useEffect(() => {
+    for (const event of events) document.addEventListener(event, detectClickOutside)
+    return () => {
+      for (const event of events)
+        document.removeEventListener(event, detectClickOutside)
+    }
+  })
+}
+
+export default function Search({ indices, collapse = true, hitsAsGrid }) {
   const ref = createRef()
   const [query, setQuery] = useState(``)
   const [focus, setFocus] = useState(false)
-  const searchClient = algoliasearch(
-    process.env.GATSBY_ALGOLIA_APP_ID,
-    process.env.GATSBY_ALGOLIA_SEARCH_KEY
+  // useMemo prevents the searchClient from being recreated on every render.
+  // Avoids unnecessary XHR requests (see https://tinyurl.com/yyj93r2s).
+  const searchClient = useMemo(
+    () =>
+      algoliasearch(
+        process.env.GATSBY_ALGOLIA_APP_ID,
+        process.env.GATSBY_ALGOLIA_SEARCH_KEY
+      ),
+    []
   )
-
-  const handleClickOutside = event =>
-    !ref.current.contains(event.target) && setFocus(false)
-
-  useEffect(() => {
-    [`mousedown`, `touchstart`].forEach(event =>
-      document.addEventListener(event, handleClickOutside)
-    )
-    return () =>
-      [`mousedown`, `touchstart`].forEach(event =>
-        document.removeEventListener(event, handleClickOutside)
-      )
-  })
+  useOnClickOutside(ref, () => setFocus(false))
+  return // ...
+}
 ```
 
 `Search` returns JSX that renders a dynamic array of `indices` passed as a prop. Each array item should be an object with keys `name`, `title`, `hitComp` that specifies the name of the index in your Algolia account to be queried, the title to display above the results shown to the user and the component `hitComp` that renders the data returned for each match.
@@ -382,6 +390,7 @@ export const Root = styled.div`
 export const SearchIcon = styled(Search)`
   width: 1em;
   pointer-events: none;
+  color: white;
 `
 
 const focus = css`
@@ -399,9 +408,6 @@ const collapsed = css`
   width: 0;
   cursor: pointer;
   color: ${props => props.theme.lighterBlue};
-  + ${SearchIcon} {
-    color: white;
-  }
   ${props => props.focus && focus}
   margin-left: ${props => (props.focus ? `-1.6em` : `-1em`)};
   padding-left: ${props => (props.focus ? `1.6em` : `1em`)};
