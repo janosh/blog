@@ -20,7 +20,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'react-hooks'],
+  plugins: ['react', 'react-hooks', 'markdown'],
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
     quotes: ['error', 'backtick', { avoidEscape: true }],
@@ -32,6 +32,18 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
   },
+  overrides: [
+    {
+      files: ['*.md'],
+      rules: {
+        'no-undef': 'off',
+        'no-unused-vars': 'off',
+        'react/jsx-no-undef': 'off',
+        'react/react-in-jsx-scope': 'off',
+        'react/jsx-no-comment-textnodes': 'off',
+      },
+    },
+  ],
   settings: {
     react: {
       version: 'detect',
