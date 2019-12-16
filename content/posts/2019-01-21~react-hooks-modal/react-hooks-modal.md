@@ -101,7 +101,8 @@ export default function Photos({ photos }) {
             alt={img.title}
             src={img.src}
           />
-          <Modal {...{ open: index === modal, modal, setModal }}> // highlight-line
+          // highlight-next-line
+          <Modal open={index === modal} {...{ modal, setModal }}>
             <LargeImg alt={img.title} src={img.src} />
           </Modal>
         </Fragment>
@@ -128,20 +129,20 @@ class Modal extends React.Component {
     }
   }
 
-  componentWillMount() {
-    this.props.closeOnClickOutside &&
-      document.addEventListener('mousedown', this.handleClickOutside)
+  componentDidMount() {
+    if (this.props.closeOnClickOutside)
+      document.addEventListener(`mousedown`, this.handleClickOutside)
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside)
+    document.removeEventListener(`mousedown`, this.handleClickOutside)
   }
 
   render() {
     const { modal, name, closeButton, toggleModal, children } = this.props
     if (!modal) return null
     return (
-      <div ref={node => (this.node = node)} id={name + '-modal'}>
+      <div ref={node => (this.node = node)} id={name + `-modal`}>
         {closeButton && (
           <button className="close-button" onClick={toggleModal}>
             &#10005;
@@ -169,20 +170,20 @@ Admittedly this component is bloated further by using Redux but even without it,
 One thing I should mention for future readers who want to use this `Modal` component: Once Chrome's new [`<dialog>` tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) gets better [browser support](https://caniuse.com/#feat=dialog), it would improve semantics to use it for the modal container, i.e.
 
 ```js
-- export const ModalContainer = styled.div`
-+ export const ModalContainer = styled.dialog`
+// previously: styled.div
+export const ModalContainer = styled.dialog`
+  ...;
+`
 ```
 
 and then maybe use the `::backdrop` pseudo-element for the modal background.
 
 ```js
-- export const ModalBackground = styled.div`
-+ export const ModalContainer = styled.dialog`
-    ...
-    ::backdrop {
-      ...
-    }
-  `
+export const ModalContainer = styled.dialog`
+  ::backdrop {
+    ...;
+  }
+`
 ```
 
 However, bear in mind that using `::backdrop` would make it more difficult to close the modal on clicks outside of it, i.e. on the background. This is because React is unable to attach `onClick` event handlers to pseudo-elements and it seems unlikely this will change down the road. A workaround would be to use the new `useRef` and `useEffect` hook to create an event listener on the browser's `window` object that checks for the target of the `click` event. That would complicate things a little, though, since the listener would have to trigger on _all_ clicks and check that the modal doesn't include the target before closing. Something like so:
