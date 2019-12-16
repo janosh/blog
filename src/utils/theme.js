@@ -40,10 +40,6 @@ export const measures = {
   smallBorderRadius: `0.2em`,
   mediumBorderRadius: `0.5em`,
   largeBorderRadius: `1em`,
-
-  shortTrans: `0.3s`,
-  mediumTrans: `0.6s`,
-  longTrans: `1s`,
 }
 
 export const theme = { ...colors, ...measures }

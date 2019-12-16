@@ -281,7 +281,7 @@ const controlsCss = css`
   background: ${props => props.white && `rgba(0, 0, 0, 0.5)`};
   border-radius: 50%;
   padding: 0.1em;
-  transition: ${props => props.theme.shortTrans};
+  transition: 0.3s;
   :hover {
     transform: scale(1.07);
   }

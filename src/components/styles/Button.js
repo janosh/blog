@@ -5,7 +5,7 @@ export const ButtonLink = styled.a`
   color: white;
   border-radius: 0.4em;
   padding: 0.3em 0.6em;
-  transition: ${props => props.theme.shortTrans};
+  transition: 0.3s;
   display: flex;
   align-items: center;
   margin: 0 auto;
@@ -28,7 +28,7 @@ export const ButtonGroup = styled.div`
     padding: 0.2em 0.6em;
     width: max-content;
     font-size: ${props => props.size};
-    transition: ${props => props.theme.shortTrans};
+    transition: 0.3s;
     :hover {
       background: ${props => props.theme.lighterBlue};
     }

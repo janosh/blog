@@ -40,7 +40,7 @@ export const ModalContainer = styled.div`
   position: relative;
   overflow: scroll;
   border-radius: ${props => props.theme.mediumBorderRadius};
-  transition: ${props => props.theme.shortTrans};
+  transition: 0.3s;
   box-shadow: 0 0 3em black;
   margin: calc(0.5em + 2vw);
   ${props => props.fullscreen && fullscreen}
@@ -53,7 +53,7 @@ const controlsCss = css`
   color: ${props => props.theme.whiteControls && `white`};
   background: ${props => props.theme.whiteControls && `rgba(0, 0, 0, 0.5)`};
   padding: 0.1em;
-  transition: ${props => props.theme.shortTrans};
+  transition: 0.3s;
   width: 1.6em;
   :hover {
     transform: scale(1.07);
