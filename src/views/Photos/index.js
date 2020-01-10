@@ -13,7 +13,7 @@ const Icon = color => `
     <circle cx="120" cy="120" opacity=".2" r="120" />
   </svg>`
 
-const addMarkers = (photos, setModal) => map => {
+function addMarkers(map, { photos, setModal }) {
   const markers = photos.map(({ caption, lat, lng }, index) => {
     const marker = new window.google.maps.Marker({
       map,
@@ -48,8 +48,9 @@ export default function Photos({ tab, photos, modal, setModal }) {
         </Masonry>
       ) : (
         <Map
-          options={{ center: { lat: 40, lng: 10 }, zoom: 3 }}
-          onMount={addMarkers(photos, setModal)}
+          options={{ center: { lat: 40, lng: 10 }, zoom: 3, disableDefaultUI: true }}
+          onMount={addMarkers}
+          onMountProps={{ photos, setModal }}
           css="height: 75vh;"
         />
       )}

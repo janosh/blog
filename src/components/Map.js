@@ -1,16 +1,18 @@
 import { functions, isEqual, omit } from 'lodash'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 const apiKey = process.env.GATSBY_GOOGLE_MAPS_API_KEY
 
-function Map({ options, onMount, className }) {
+function Map({ options, onMount, className, onMountProps }) {
   const ref = useRef()
+  const [map, setMap] = useState()
 
   useEffect(() => {
-    const onLoad = () => {
-      const map = new window.google.maps.Map(ref.current, options)
-      if (typeof onMount === `function`) onMount(map)
-    }
+    // The Map constructor modifies its options object in place by adding
+    // a mapTypeId with default value 'roadmap'. This confuses shouldNotUpdate.
+    // { ...options } prevents this by passing in a copy.
+    const onLoad = () =>
+      setMap(new window.google.maps.Map(ref.current, { ...options }))
     if (!window.google) {
       const script = document.createElement(`script`)
       script.src = `https://maps.googleapis.com/maps/api/js?key=` + apiKey
@@ -18,7 +20,9 @@ function Map({ options, onMount, className }) {
       script.addEventListener(`load`, onLoad)
       return () => script.removeEventListener(`load`, onLoad)
     } else onLoad()
-  }, [onMount, options])
+  }, [options])
+
+  if (map && typeof onMount === `function`) onMount(map, onMountProps)
 
   return (
     <div
@@ -28,16 +32,16 @@ function Map({ options, onMount, className }) {
   )
 }
 
-const shouldUpdate = (prevProps, nextProps) => {
-  delete prevProps.options.mapTypeId
-  const [prevFuncs, nextFuncs] = [functions(prevProps), functions(nextProps)]
-  return (
-    isEqual(omit(prevProps, prevFuncs), omit(nextProps, nextFuncs)) &&
-    prevFuncs.every(fn => prevProps[fn].toString() === nextProps[fn].toString())
-  )
+function shouldNotUpdate(props, nextProps) {
+  const [funcs, nextFuncs] = [functions(props), functions(nextProps)]
+  const noPropChange = isEqual(omit(props, funcs), omit(nextProps, nextFuncs))
+  const noFuncChange =
+    funcs.length === nextFuncs.length &&
+    funcs.every(fn => props[fn].toString() === nextProps[fn].toString())
+  return noPropChange && noFuncChange
 }
 
-export default React.memo(Map, shouldUpdate)
+export default React.memo(Map, shouldNotUpdate)
 
 Map.defaultProps = {
   options: {
