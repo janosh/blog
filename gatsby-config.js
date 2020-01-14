@@ -13,12 +13,7 @@ const gatsbyRemarkPlugins = [
   `gatsby-remark-autolink-headers`,
   {
     resolve: `gatsby-remark-vscode`,
-    options: {
-      extensions: [
-        { identifier: `silvenon.mdx`, version: `0.1.0` },
-        { identifier: `jpoissonnier.vscode-styled-components`, version: `0.0.26` },
-      ],
-    },
+    options: { extensions: [`mdx`, `vscode-styled-components`] },
   },
   {
     resolve: `gatsby-remark-katex`,
