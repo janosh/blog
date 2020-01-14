@@ -26,7 +26,7 @@ const langTagColor = [
 
 const languageTags = langTagColor.map(
   ({ lang, tag, color }) =>
-    `pre.vscode-highlight[data-language="${lang}"]::before {
+    `pre.grvsc-container[data-language="${lang}"]::before {
         content: '${tag}';
         background: ${color};
       }`
@@ -35,7 +35,7 @@ const languageTags = langTagColor.map(
 export default createGlobalStyle`
   ${languageTags.join(`\n`)}
 
-  pre.vscode-highlight {
+  pre.grvsc-container {
     position: relative;
     background: #050431;
     font-size: 0.92em;
@@ -43,7 +43,7 @@ export default createGlobalStyle`
     line-height: 1.5em
   }
 
-  pre.vscode-highlight[data-language]::before {
+  pre.grvsc-container[data-language]::before {
     position: absolute;
     top: 0;
     right: 2em;
@@ -70,7 +70,7 @@ export default createGlobalStyle`
   }
 
   /* highlighted lines */
-  .vscode-highlight .vscode-highlight-line-highlighted {
+  .grvsc-container .grvsc-line-highlighted {
     background: rgba(255, 255, 255, 0.15);
     box-shadow: inset 0.3em 0 0 0 ${props => props.theme.lighterBlue};
   }
