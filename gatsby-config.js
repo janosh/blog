@@ -1,5 +1,6 @@
 const queries = require(`./src/utils/algolia`)
 const macros = require(`./src/utils/katex`)
+const rssOptions = require(`./src/utils/rss`)
 
 require(`dotenv`).config()
 
@@ -76,6 +77,10 @@ module.exports = {
         queries,
         chunkSize: 10000, // default: 1000
       },
+    },
+    {
+      resolve: `gatsby-plugin-feed-mdx`,
+      options: rssOptions,
     },
     {
       resolve: `gatsby-plugin-favicon`,

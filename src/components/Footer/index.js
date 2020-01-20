@@ -1,6 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import { FooterContainer, PoweredBy } from './styles'
+import Rss from '../Rss'
 
 export default function Footer() {
   const { footer, logos } = useStaticQuery(graphql`
@@ -30,6 +31,7 @@ export default function Footer() {
     <FooterContainer>
       <span css="grid-area: copyright;">
         © {new Date().getFullYear()} - {copyright}
+        &emsp; <Rss />
       </span>
       <span
         css="grid-area: source;"
