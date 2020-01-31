@@ -11,38 +11,46 @@ tags:
   - Python
 ---
 
-If you're like me, you'll have gotten tired of manually having to activate your `conda` environment every time you switch between Python projects pretty quickly. Since you're reading this, you may even have started googling for a solution that could take care of this automatically. The following shell script has served me very well for this purpose for several months now. It's a spin-off of [Christine Doig](https://github.com/chdoig)'s [`conda-auto-env`](https://github.com/chdoig/conda-auto-env).
+If you're like me, you'll have gotten tired of manually having to activate your `conda` environment every time you switch between Python projects pretty quickly. Since you're reading this, you may even have started googling for a solution that could take care of this automatically. The following shell script has served me very well for this purpose for several months now. It's a spin-off of Christine Doig's [`conda-auto-env`](https://github.com/chdoig/conda-auto-env).
 
 ```sh:title=conda_auto_env
-#!/bin/bash
+#!/bin/zsh
 
-# automatically activates conda environments when entering directories
-# with a conda environment file which must be named one of
+# Automatically activates conda environments when entering directories
+# containing a conda environment file. The file must be named one of
 #   - env(ironment).y(a)ml
 #   - requirements.y(a)ml
-# if env doesn't exist yet, create it; deactivate env when exciting folder
-# installation: copy chpwd() to .bashrc or save the whole script as
-# file and source it in .bashrc, e.g. by placing it in /usr/local/bin
-# or by symlinking conda_auto_env there
+# If the env doesn't exist yet, it will be created automatically.
+# The env will be deactivated again when exciting the directory.
 
-# chpwd is a zsh hook function that is executed whenever the current working
-# directory is changed (http://zsh.sourceforge.net/Doc/Release/Functions.html).
+# Installation: Copy chpwd() to .zshrc or save the whole script as a file
+# and source it in .zshrc, e.g. by placing it in /usr/local/bin or by
+# symlinking conda_auto_env there and then adding `source conda_auto_env`.
+
+# chpwd is a zsh hook function that is executed whenever the current working directory
+# is changed (http://zsh.sourceforge.net/Doc/Release/Functions.html#Hook-Functions).
+# When using bash, use the environment variable `PROMPT_COMMAND` instead.
+# Not sure though if this has performance implications since it runs on every
+# prompt (even empty ones), not just directory changes. Plus this makes it impossible
+# to change to a different conda env while you're in a directory with an
+# env file since bash will always auto-change back to that file's env.
 chpwd() {
+  # On Linux replace `find -E` with `f -regextype posix-extended`.
   FILE="$(find -E . -maxdepth 1 -regex '.*(env(ironment)?|requirements)\.ya?ml' -print -quit)"
   if [[ -e $FILE ]]; then
     ENV=$(sed -n 's/name: //p' $FILE)
-    # check if env already active
+    # Check if env is already active.
     if [[ $CONDA_DEFAULT_ENV != $ENV ]]; then
       conda activate $ENV
-      # if env activation unsuccessful, create new env from file
+      # If env activation is unsuccessful, create a new conda env from file.
       if [ $? -ne 0 ]; then
         echo "Conda environment '$ENV' doesn't exist. Creating it now."
-        conda env create -q
+        conda env create -f $FILE
         conda activate $ENV
       fi
       CONDA_ENV_ROOT="$(pwd)"
     fi
-  # deactivate env when exciting root dir
+  # Deactivate env when exciting the env file's directory.
   elif [[ $PATH = */envs/* ]]\
     && [[ $(pwd) != $CONDA_ENV_ROOT ]]\
     && [[ $(pwd) != $CONDA_ENV_ROOT/* ]]
@@ -52,19 +60,19 @@ chpwd() {
   fi
 }
 
-# execute chpwd on shell init
+# Execute chpwd on shell init.
 chpwd
 ```
 
-To install it, either copy it to `.bashrc` or `.bashprofile` or -- perhaps a little cleaner -- source this script in either of those files. For instance, say you have a `~/scripts` directory where you keep custom scripts like this one, to add this script to your path, you would simply run
+To install it, either copy it to `.zshrc` or `.zprofile` or -- perhaps a little cleaner -- source this script in either of those files. For instance, say you have a `~/scripts` directory where you keep custom scripts like this one, simply run
 
 ```sh
 ln -s "~/scripts/conda_auto_env" /usr/local/bin
 ```
 
-and then append the following line to your `.bashrc`.
+to add this script to your path. Then append the following line to your `.zshrc`.
 
-```sh:title=.bashrc
+```sh:title=.zshrc
 source conda_auto_env
 ```
 
