@@ -64,11 +64,7 @@ export const query = graphql`
       }
     }
     img: file(name: { eq: "blog-cover" }) {
-      sharp: childImageSharp {
-        fluid(maxWidth: 1800) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
-      }
+      ...sharpSrc
     }
   }
 `

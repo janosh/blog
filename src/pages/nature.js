@@ -11,9 +11,8 @@ export default function NaturePage({ data, location }) {
   const [tab, setTab] = useState(`list`)
   const photos = data.photos.edges.map(({ node }) => ({
     ...(node.fields && node.fields.meta),
-    ...node.img,
+    ...node.sharp,
   }))
-  const photoProps = { tab, modal, setModal, photos }
   const buttonProps = tabName => ({
     className: tab === tabName ? `active` : null,
     onClick: () => setTab(tabName),
@@ -28,7 +27,7 @@ export default function NaturePage({ data, location }) {
           <button {...buttonProps(`list`)}>List</button>
           <button {...buttonProps(`map`)}>Map</button>
         </ButtonGroup>
-        <Photos {...photoProps} />
+        <Photos {...{ tab, modal, setModal, photos }} />
       </PageBody>
     </Global>
   )
@@ -41,16 +40,12 @@ export const query = graphql`
     ) {
       edges {
         node {
+          ...sharpSrc
           fields {
             meta {
               caption
               lat
               lng
-            }
-          }
-          img: childImageSharp {
-            fluid(maxWidth: 2000) {
-              ...GatsbyImageSharpFluid_withWebp
             }
           }
         }
