@@ -2,8 +2,9 @@ import { graphql } from 'gatsby'
 
 export const query = graphql`
   fragment sharpSrc on File {
+    alt: name
     sharp: childImageSharp {
-      fluid(maxWidth: 2200) {
+      fluid(maxWidth: 1500) {
         ...GatsbyImageSharpFluid_withWebp
       }
     }
