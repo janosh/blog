@@ -10,7 +10,7 @@ export default function NaturePage({ data, location }) {
   const [modal, setModal] = useState()
   const [tab, setTab] = useState(`list`)
   const photos = data.photos.edges.map(({ node }) => ({
-    ...(node.fields && node.fields.meta),
+    ...node?.fields.meta,
     ...node.sharp,
   }))
   const buttonProps = tabName => ({

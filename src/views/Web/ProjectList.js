@@ -36,7 +36,7 @@ export function ProjectList(props) {
     <ProjectGrid minWidth="15em" gap="1em" {...props}>
       {projects.map(({ frontmatter: { title, cover } }, index) => (
         <Thumbnail key={title} onClick={() => setModal(index)}>
-          {cover && <Img fluid={cover.img.sharp.fluid} />}
+          <Img {...cover?.img.sharp} />
           <h3>{title}</h3>
         </Thumbnail>
       ))}

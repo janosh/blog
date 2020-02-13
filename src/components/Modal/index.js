@@ -5,9 +5,9 @@ import { controls, ModalBackground, ModalContainer } from './styles'
 const { Close, Next, Prev, FullscreenToggle } = controls
 
 const handleArrowKeys = setModal => event => {
-  if (event && event.key === `ArrowRight`) setModal(m => m + 1)
-  else if (event && event.key === `ArrowLeft`) setModal(m => m - 1)
-  else if (event && event.key === `Escape`) setModal()
+  if (event?.key === `ArrowRight`) setModal(m => m + 1)
+  else if (event?.key === `ArrowLeft`) setModal(m => m - 1)
+  else if (event?.key === `Escape`) setModal()
 }
 
 export default function Modal({ open, modal, setModal, children, ...rest }) {
