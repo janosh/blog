@@ -179,14 +179,14 @@ const Results = connectStateResults(
   ({ searching, searchState: state, searchResults: res }) => (
     <div>
       {(searching && `Searching...`) ||
-        (res && res.nbHits === 0 && `No results for '${state.query}'`)}
+        (res?.nbHits === 0 && `No results for '${state.query}'`)}
     </div>
   )
 )
 
 const Stats = connectStateResults(
   ({ searchResults: res }) =>
-    res && res.nbHits > 0 && `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`
+    res?.nbHits > 0 && `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`
 )
 
 const useOnClickOutside = (ref, handler, events) => {
@@ -267,12 +267,12 @@ Next we define two connected components. `Results` informs the user that no matc
 const Results = connectStateResults(
   ({ searching, searchState: state, searchResults: res }) =>
     (searching && <div>Searching...</div>) ||
-    (res && res.nbHits === 0 && <div>No results for &apos;{state.query}&apos;</div>)
+    (res?.nbHits === 0 && <div>No results for &apos;{state.query}&apos;</div>)
 )
 
 const Stats = connectStateResults(
   ({ searchResults: res }) =>
-    res && res.nbHits > 0 && `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`
+    res?.nbHits > 0 && `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`
 )
 ```
 

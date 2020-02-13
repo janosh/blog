@@ -25,14 +25,18 @@ const PostTitle = ({ title, subtitle }) =>
     <h1>{title}</h1>
   )
 
+function flattenCovers(fmatters) {
+  fmatters.forEach(f => {
+    f.cover = { ...f.cover, ...f?.cover?.img?.sharp, ...f?.cover?.img }
+    delete f.cover?.img
+  })
+}
+
 export default function PostTemplate({ data, location }) {
   const { post, next, prev } = data
+  flattenCovers([post, next, prev].filter(p => p).map(p => p.frontmatter))
   const { frontmatter, excerpt, body, timeToRead } = post
   const { title, slug, cover, showToc } = frontmatter
-  if (cover && cover.img) {
-    if (cover.img.sharp) cover.fluid = cover.img.sharp.fluid
-    if (cover.img.src) cover.src = cover.img.src
-  }
   return (
     <Global pageTitle={title} path={location.pathname} description={excerpt}>
       <PageTitle img={cover}>
@@ -45,11 +49,7 @@ export default function PostTemplate({ data, location }) {
           <MDXRenderer>{body}</MDXRenderer>
         </main>
         <DiscussionEmbed {...disqusConfig({ slug, title })} />
-        <PrevNext
-          prev={prev && prev.frontmatter}
-          next={next && next.frontmatter}
-          label="post"
-        />
+        <PrevNext prev={prev?.frontmatter} next={next?.frontmatter} label="post" />
       </PageBody>
     </Global>
   )
