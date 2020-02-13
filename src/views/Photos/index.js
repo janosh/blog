@@ -6,7 +6,7 @@ import Modal from 'components/Modal'
 import { Caption } from 'components/styles'
 import { Img, Thumbnail } from './styles'
 
-const Icon = color => `
+const ClusterIcon = color => `
   <svg fill="${color}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
     <circle cx="120" cy="120" opacity=".6" r="70" />
     <circle cx="120" cy="120" opacity=".4" r="95" />
@@ -26,10 +26,11 @@ function addMarkers(map, { photos, setModal }) {
   })
   new MarkerClusterer(map, markers, {
     styles: [`blue`, `green`, `red`].map(color => ({
-      url: `data:image/svg+xml;utf-8,${Icon(color)}`,
+      url: `data:image/svg+xml;base64,${window.btoa(ClusterIcon(color))}`,
       height: 30,
       width: 30,
-      textColor: `whitesmoke`,
+      textLineHeight: 30,
+      textColor: `white`,
     })),
   })
 }

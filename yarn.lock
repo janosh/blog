@@ -1076,10 +1076,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@google/markerclustererplus@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@google/markerclustererplus/-/markerclustererplus-4.0.1.tgz#bef12932a301eaabad6a02a44dbfe9c04d3f304b"
-  integrity sha512-hyYjgCf3HcmiYkhHHx7a34/FiGIjzZDq6EF45W0UI6rt+oKtZlzGl8a/GqKxqR5AAwx0zN95vJ0/TiPbqnGjSA==
+"@google/markerclustererplus@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@google/markerclustererplus/-/markerclustererplus-5.0.1.tgz#b66b5970c217d214f46c77c169ddefb38aa40b7c"
+  integrity sha512-NYQGr1eKrxPVQZMEF2gSKwEJ3GrovJETaIcKwNWSLD6MY+acFvdU/vjZE2YaSTzFD/HvH50jLJxL0UXD2KcpHw==
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -3234,6 +3234,7 @@ babel-preset-gatsby@^0.2.36:
     babel-plugin-dynamic-import-node "^2.3.0"
     babel-plugin-macros "^2.8.0"
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
+    gatsby-core-utils "^1.0.28"
 
 babel-runtime@^6.26.0:
   version "6.26.0"
