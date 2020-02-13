@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby'
-import { kebabCase } from 'lodash'
 import React from 'react'
 import Global from 'components/Global'
 import PageTitle from 'components/PageTitle'
@@ -8,37 +7,27 @@ import TagList from 'components/TagList'
 import { useQueryParam } from 'hooks'
 import PostList from 'views/PostList'
 
-const addSlugs = tags =>
-  tags.map(tag => ({
-    slug: kebabCase(tag.title),
-    ...tag,
-  }))
-
 const insertAllTag = (tags, count) =>
-  !tags.map(tag => tag.title).includes(`All`)
-    ? [{ title: `All`, slug: null, count }, ...addSlugs(tags)]
-    : tags
+  !tags.map(tag => tag.title).includes(`All`) &&
+  tags.unshift({ title: `All`, count })
 
 const filterPostsByTag = (tag, posts) =>
-  tag && tag.slug
-    ? posts.filter(({ node }) => node.frontmatter.tags.includes(tag.title))
-    : posts
+  // If !tag, tag is null which stands for all posts.
+  posts.filter(edge => !tag || edge.node.frontmatter.tags.includes(tag))
 
 export default function BlogPage({ data, location }) {
-  const { posts, tags, img } = data
+  const { allMdx, img } = data
+  const { posts, tags } = allMdx
   const [activeTag, setActiveTag] = useQueryParam(`tag`)
-  const allTags = insertAllTag(tags.group, posts.edges.length)
-  const filteredPosts = filterPostsByTag(
-    allTags.find(tag => tag.slug === activeTag),
-    posts.edges
-  )
+  insertAllTag(tags, posts.length)
+  const filteredPosts = filterPostsByTag(activeTag, posts)
   return (
     <Global pageTitle="Blog" path={location.pathname}>
-      <PageTitle img={img && img.sharp}>
+      <PageTitle img={{ ...img, ...img.sharp }}>
         <h1>Blog</h1>
       </PageTitle>
       <PageBody>
-        <TagList {...{ tags: allTags, activeTag, setActiveTag }} />
+        <TagList {...{ tags, activeTag, setActiveTag }} />
         <PostList inBlog posts={filteredPosts} />
       </PageBody>
     </Global>
@@ -47,18 +36,16 @@ export default function BlogPage({ data, location }) {
 
 export const query = graphql`
   {
-    posts: allMdx(
+    allMdx(
       filter: { fileAbsolutePath: { regex: "/posts/" } }
       sort: { fields: frontmatter___date, order: DESC }
     ) {
-      edges {
+      posts: edges {
         node {
           ...page
         }
       }
-    }
-    tags: allMdx {
-      group(field: frontmatter___tags) {
+      tags: group(field: frontmatter___tags) {
         title: fieldValue
         count: totalCount
       }
