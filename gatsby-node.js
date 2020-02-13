@@ -48,10 +48,9 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   posts.edges.forEach(({ node }, index, arr) => {
-    const nextSlug = index === 0 ? `` : arr[index - 1].node.frontmatter.slug
-    const prevSlug =
-      index === arr.length - 1 ? `` : arr[index + 1].node.frontmatter.slug
-    const slug = node.frontmatter.slug
+    const nextSlug = arr[index - 1]?.frontmatter.slug || ``
+    const prevSlug = arr[index + 1]?.frontmatter.slug || ``
+    const { slug } = node.frontmatter
     actions.createPage({
       path: slug,
       component: postTemplate,

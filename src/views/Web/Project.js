@@ -35,7 +35,7 @@ const Project = ({ title, cover, date, url, repo, npm, tech, body }) => (
           <Tech />
           {tech.map((name, index) => (
             <Fragment key={name}>
-              {!!index && `, `}
+              {index > 0 && `, `}
               <span>{name}</span>
             </Fragment>
           ))}

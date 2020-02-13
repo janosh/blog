@@ -230,9 +230,9 @@ import { ModalBehind, ModalDiv, Close, Next, Prev } from './styles'
 
 // highlight-start
 const handleArrowKeys = (modal, setModal) => event => {
-  if (event && event.key === `ArrowRight`) setModal(modal + 1)
-  else if (event && event.key === `ArrowLeft`) setModal(modal - 1)
-  else if (event && event.key === `Escape`) setModal()
+  if (event?.key === `ArrowRight`) setModal(modal + 1)
+  else if (event?.key === `ArrowLeft`) setModal(modal - 1)
+  else if (event?.key === `Escape`) setModal()
 }
 // highlight-end
 
