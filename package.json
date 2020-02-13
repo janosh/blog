@@ -9,7 +9,7 @@
   "repository": "https://github.com/janosh/janosh.io",
   "license": "MIT",
   "dependencies": {
-    "@google/markerclustererplus": "^4.0.1",
+    "@google/markerclustererplus": "^5.0.1",
     "@mdx-js/mdx": "^1.5.7",
     "@mdx-js/react": "^1.5.7",
     "algoliasearch": "^4.0.3",
