@@ -61,53 +61,57 @@ export const useQueryParam = (key, value, options) => {
 
 ## Usage Example
 
-Here's an example of how to use this hook to filter a list of posts on a blog page by tag. The `TagList` component in the last highlighted line simply uses `setActiveTag` in a `onClick` callback function `onClick={() => setActiveTag(tag.slug)}`. Note that the `All` tag has a `slug` of `null` so that clicking it will remove the query parameter.
+Here's an example of how to use this hook to filter a list of posts on a blog page by tag.
 
 ```js:title=src/pages/blog.js
+import { graphql } from 'gatsby'
 import React from 'react'
-import { kebabCase } from 'lodash'
-
-import Global from 'components/Global'
-import PageTitle from 'components/PageTitle'
-import { PageBody } from 'components/styles'
-import TagList from 'components/TagList'
-import PostList from 'views/PostList'
+import { PostList, TagList } from 'components'
 import { useQueryParam } from 'hooks' // highlight-line
 
-const addSlugs = tags =>
-  tags.map(tag => ({
-    slug: kebabCase(tag.title),
-    ...tag,
-  }))
-
-const insertAllTag = (tags, count) =>
-  !tags.map(tag => tag.title).includes(`All`)
-    ? [{ title: `All`, slug: null, count }, ...addSlugs(tags)] // highlight-line
-    : tags
-
 const filterPostsByTag = (tag, posts) =>
-  tag && tag.slug
-    ? posts.filter(({ node }) => node.frontmatter.tags.includes(tag.title))
-    : posts
+  // If !tag, tag is null which stands for all posts.
+  posts.filter(edge => !tag || edge.node.frontmatter.tags.includes(tag))
 
-export default function BlogPage({ data, location }) {
-  const { posts, tags, img } = data
+export default function BlogPage({ posts, tags }) {
   const [activeTag, setActiveTag] = useQueryParam(`tag`) // highlight-line
-  const allTags = insertAllTag(tags.group, posts.edges.length)
-  const filteredPosts = filterPostsByTag(
-    allTags.find(tag => tag.slug === activeTag),
-    posts.edges
-  )
+  const filteredPosts = filterPostsByTag(activeTag, posts)
   return (
-    <Global pageTitle="Blog" path={location.pathname}>
-      <PageTitle img={img && img.sharp}>
-        <h1>Blog</h1>
-      </PageTitle>
-      <PageBody>
-        <TagList {...{ tags: allTags, activeTag, setActiveTag }} /> // highlight-line
-        <PostList inBlog posts={filteredPosts} />
-      </PageBody>
-    </Global>
+    <>
+      <TagList {...{ tags, activeTag, setActiveTag }} />
+      <PostList posts={filteredPosts} />
+    </>
+  )
+}
+```
+
+The `TagList` component in the last highlighted line simply uses `setActiveTag` in a `onClick` callback function `onClick={() => setActiveTag(tag.title)}`. Note that the `All` tag sets the active tag to `null` so that clicking it will remove the query parameter from the address bar.
+
+```js:title=src/components/TagList.js
+import React from 'react'
+import { Tag, TagGrid, tagIcons, TagsIcon, Toggle } from './styles'
+
+export default function TagList({ tags, activeTag = `All`, setActiveTag }) {
+  return (
+    <TagGrid>
+      <h2>
+        <TagsIcon size="1em" />
+        &nbsp; Tags
+      </h2>
+      {tags.map(({ title, count }) => {
+        const TagIcon = tagIcons[title]
+        return (
+          <Tag
+            key={title}
+            active={activeTag === title || (title === `All` && !activeTag)} // highlight-line
+            onClick={() => setActiveTag(title === `All` ? null : title)} // highlight-line
+          >
+            <TagIcon size="1em" />
+            &nbsp; {title} ({count})
+          </Tag>
+        )
+      })}
+    </TagGrid>
   )
 }
 ```
