@@ -23,14 +23,11 @@ export const GlobalStyle = createGlobalStyle`
       font-size: ${maxFontSize}em;
       line-height: ${maxLineHeight}em;
     }
-    /* Ensure full height page even if unsufficient content. */
-    div[role="group"][tabindex] {
+    /* Ensure full-height page even if unsufficient content. */
+    #gatsby-focus-wrapper {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      main {
-        flex: 1;
-      }
+      display: grid;
+      grid-template-rows: auto 1fr auto;
     }
     /* The rules below enable dark mode. */
     background: ${props => props.theme.background};
