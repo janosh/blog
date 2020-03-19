@@ -1,6 +1,6 @@
 import React from 'react'
-import { Rss } from 'styled-icons/icomoon/Rss'
 import styled from 'styled-components'
+import { Rss } from 'styled-icons/icomoon'
 
 const Title = styled.span`
   position: absolute;

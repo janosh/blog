@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { BookContent } from 'styled-icons/boxicons-regular/BookContent'
-import { Close as Cross } from 'styled-icons/material/Close'
+import { BookContent } from 'styled-icons/boxicons-regular'
+import { Close as Cross } from 'styled-icons/material'
 import mediaQuery from 'utils/mediaQuery'
 
 const openTocDiv = css`

@@ -1,11 +1,11 @@
 import RawModal from 'components/Modal'
 import { Grid } from 'components/styles'
 import styled, { css } from 'styled-components'
-import { Link } from 'styled-icons/boxicons-regular/Link'
-import { Npm } from 'styled-icons/fa-brands/Npm'
-import { PackageIcon } from 'styled-icons/feather/PackageIcon'
-import { Github } from 'styled-icons/icomoon/Github'
-import { Calendar } from 'styled-icons/octicons/Calendar'
+import { Link } from 'styled-icons/boxicons-regular'
+import { Npm } from 'styled-icons/fa-brands'
+import { PackageIcon } from 'styled-icons/feather'
+import { Github } from 'styled-icons/icomoon'
+import { Calendar } from 'styled-icons/octicons'
 
 const asRow = css`
   grid-column: 2/-2;

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { fadeInOnHoverParent } from '../../styles'
 
-export { DownArrow } from 'styled-icons/boxicons-solid/DownArrow'
+export { DownArrow } from 'styled-icons/boxicons-solid'
 
 // Unable to accomodate expanding search box via overflow-x: scroll;
 // here because of https://stackoverflow.com/a/6433475. Would include
