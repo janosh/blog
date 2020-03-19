@@ -42,7 +42,7 @@ And here are the styled components imported on line 3.
 
 ```js:title=src/components/modal/styles.js
 import styled from 'styled-components'
-import { Close as Cross } from 'styled-icons/material/Close'
+import { Close as Cross } from 'styled-icons/material'
 
 export const ModalBehind = styled.div`
   position: fixed;
@@ -275,9 +275,7 @@ The new styled components `Next` and `Prev` share most of their CSS with `Close`
 ```js:title=src/components/modal/styles.js
 import styled, { css } from 'styled-components'
 
-import { Close as Cross } from 'styled-icons/material/Close'
-import { NavigateNext } from 'styled-icons/material/NavigateNext'
-import { NavigateBefore } from 'styled-icons/material/NavigateBefore'
+import { Close as Cross, NavigateNext, NavigateBefore } from 'styled-icons/material'
 
 const controlsCss = css`
   position: absolute;
