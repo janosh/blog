@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
-import { Link } from 'styled-icons/boxicons-regular/Link'
-import { Npm } from 'styled-icons/fa-brands/Npm'
-import { PackageIcon } from 'styled-icons/feather/PackageIcon'
-import { Github } from 'styled-icons/icomoon/Github'
-import { Calendar } from 'styled-icons/octicons/Calendar'
+import { Link } from 'styled-icons/boxicons-regular'
+import { Npm } from 'styled-icons/fa-brands'
+import { PackageIcon } from 'styled-icons/feather'
+import { Github } from 'styled-icons/icomoon'
+import { Calendar } from 'styled-icons/octicons'
 import { Grid } from 'components/styles'
 
 const asRow = css`

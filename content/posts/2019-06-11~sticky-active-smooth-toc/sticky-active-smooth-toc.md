@@ -176,8 +176,8 @@ I include the styles here mostly for completeness and in case you're also using 
 
 ```js:title=src/components/toc/styles.js
 import styled, { css } from 'styled-components'
-import { BookContent } from 'styled-icons/boxicons-regular/BookContent'
-import { Close as Cross } from 'styled-icons/material/Close'
+import { BookContent } from 'styled-icons/boxicons-regular'
+import { Close as Cross } from 'styled-icons/material'
 import mediaQuery from 'utils/mediaQuery'
 
 const openTocDiv = css`

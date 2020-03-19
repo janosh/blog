@@ -1,8 +1,7 @@
 import React from 'react'
 import { animated } from 'react-spring'
 import styled from 'styled-components'
-import { Moon } from 'styled-icons/fa-solid/Moon'
-import { Sun } from 'styled-icons/fa-solid/Sun'
+import { Sun, Moon } from 'styled-icons/fa-solid'
 
 export const Box = styled.div`
   display: grid;

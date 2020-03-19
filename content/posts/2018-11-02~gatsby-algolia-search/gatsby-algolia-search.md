@@ -377,8 +377,8 @@ Now let's look at the styled components `SearchIcon`, `Form`, `Input` as well as
 ```js:title=src/components/Search/styles.js
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Algolia } from 'styled-icons/fa-brands/Algolia'
-import { Search } from 'styled-icons/fa-solid/Search'
+import { Algolia } from 'styled-icons/fa-brands'
+import { Search } from 'styled-icons/fa-solid'
 
 export const Root = styled.div`
   position: relative;
@@ -510,8 +510,8 @@ Now we're almost done. 2 small steps remain. First, we need to put together a hi
 import { Link } from 'gatsby'
 import React, { Fragment } from 'react'
 import { Highlight, Snippet } from 'react-instantsearch-dom'
-import { Tags } from 'styled-icons/fa-solid/Tags'
-import { Calendar } from 'styled-icons/octicons/Calendar'
+import { Tags } from 'styled-icons/fa-solid'
+import { Calendar } from 'styled-icons/octicons'
 import { connectHits } from 'react-instantsearch-dom'
 
 const postHit = hit => (

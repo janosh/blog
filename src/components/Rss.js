@@ -1,5 +1,5 @@
 import React from 'react'
-import { Rss } from 'styled-icons/icomoon/Rss'
+import { Rss } from 'styled-icons/icomoon'
 import styled from 'styled-components'
 
 const Title = styled.span`
