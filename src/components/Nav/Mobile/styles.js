@@ -22,13 +22,12 @@ export const MobileNavDiv = styled.nav`
   background: rgba(0, 0, 0, 0.9);
   padding: 0.8em 1.5em 0.8em 1.8em;
   font-size: 1.2em;
-  color: white;
   right: 100%;
   display: grid;
   grid-gap: 1em;
   grid-auto-rows: max-content;
   transform: translate(${props => (props.open ? `99%` : `0`)});
-  transition: ${props => props.theme.shortTrans};
+  transition: 0.3s;
   /* Needed to scroll past last element in case of overflow. */
   :after {
     content: '';
@@ -72,23 +71,20 @@ const openerCss = css`
   transform: translate(${props => (props.open ? `-100%` : 0)});
 `
 
-const closedCss = css`
-  color: white;
-`
-
 export const NavToggle = styled(Cross).attrs(props => ({
   as: props.opener && ThMenu,
   size: props.opener ? `1.2em` : `1.6em`,
 }))`
-  color: ${props => props.theme.textColor};
-  transition: ${props => props.theme.shortTrans};
+  color: ${({ theme, opener }) => (opener ? theme.textColor : `white`)};
+  transition: 0.3s;
+  cursor: pointer;
   :hover {
     transform: scale(1.1);
   }
   ${mediaQuery.minLaptop} {
     display: none;
   }
-  ${props => (props.opener ? openedCss : closedCss)};
+  ${props => props.opener && openerCss};
 `
 
 export const ControlsDiv = styled.div`

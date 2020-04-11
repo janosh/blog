@@ -20,7 +20,7 @@ export const ProjectGrid = styled(Grid)`
 `
 
 export const Thumbnail = styled.div`
-  border-radius: ${props => props.theme.mediumBorderRadius};
+  border-radius: 0.5em;
   overflow: hidden;
   display: grid;
   box-shadow: 0 0 1em var(--color-shadow);

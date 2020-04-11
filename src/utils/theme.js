@@ -1,4 +1,4 @@
-export const colors = {
+export const theme = {
   blue: `#2202a9`,
   darkBlue: `#190c65`,
   darkerBlue: `#150956`,
@@ -28,25 +28,9 @@ export const colors = {
   lightGray: `#bcbcbc`,
   lighterGray: `#e5e5e5`,
   lightestGray: `#f7f7f7`,
-}
 
-export const measures = {
   maxWidth: `40em`,
-
-  smallBorder: `0.1em`,
-  mediumBorder: `0.15em`,
-  largeBorder: `0.2em`,
-
-  smallBorderRadius: `0.2em`,
-  mediumBorderRadius: `0.5em`,
-  largeBorderRadius: `1em`,
-
-  shortTrans: `0.3s`,
-  mediumTrans: `0.6s`,
-  longTrans: `1s`,
 }
-
-export const theme = { ...colors, ...measures }
 
 export const lightTheme = {
   background: `white`,
@@ -93,5 +77,5 @@ export const darkTheme = {
   inlineCodeColor: theme.darkestGray,
 }
 
-export default darkMode =>
+export default (darkMode) =>
   darkMode ? { ...theme, ...darkTheme } : { ...theme, ...lightTheme }

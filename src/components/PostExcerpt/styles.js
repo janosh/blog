@@ -5,7 +5,7 @@ export const Post = styled.article`
   height: 100%;
   width: 100%;
   display: grid;
-  border-radius: ${props => props.theme.mediumBorderRadius};
+  border-radius: 0.5em;
   border: 1px solid ${props => props.theme.borderColor};
   box-shadow: 0 0 1em ${props => props.theme.shadowColor};
   overflow: hidden;

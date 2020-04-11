@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby'
-import React from 'react'
 import { useScreenQuery } from 'hooks'
+import React from 'react'
 import DesktopNav from './Desktop'
 import MobileNav from './Mobile'
 

@@ -39,7 +39,7 @@ export default createGlobalStyle`
     position: relative;
     background: #050431;
     font-size: 0.92em;
-    border-radius: ${props => props.theme.mediumBorderRadius};
+    border-radius: 0.5em;
     line-height: 1.5em
   }
 

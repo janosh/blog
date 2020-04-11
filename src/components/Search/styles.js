@@ -13,6 +13,7 @@ export const Root = styled.div`
 export const SearchIcon = styled(Search)`
   width: 1em;
   pointer-events: none;
+  color: white;
 `
 
 const focus = css`
@@ -30,9 +31,6 @@ const collapsed = css`
   width: 0;
   cursor: pointer;
   color: ${props => props.theme.lighterBlue};
-  + ${SearchIcon} {
-    color: white;
-  }
   ${props => props.focus && focus}
   margin-left: ${props => (props.focus ? `-1.6em` : `-1em`)};
   padding-left: ${props => (props.focus ? `1.6em` : `1em`)};
@@ -56,8 +54,8 @@ export const Input = styled.input`
   border: none;
   font-size: 1em;
   background: transparent;
-  transition: ${props => props.theme.shortTrans};
-  border-radius: ${props => props.theme.smallBorderRadius};
+  transition: 0.3s;
+  border-radius: 0.2em;
   ${props => (props.collapse ? collapsed : expanded)};
 `
 
@@ -80,7 +78,7 @@ export const HitsWrapper = styled.div`
   max-width: 30em;
   box-shadow: 0 0 5px 0 black;
   padding: 0.7em 1em 0.4em;
-  border-radius: ${props => props.theme.smallBorderRadius};
+  border-radius: 0.2em;
   * {
     margin-top: 0;
   }
@@ -103,7 +101,7 @@ export const HitsWrapper = styled.div`
       color: white;
       background: ${props => props.theme.gray};
       padding: 0.1em 0.4em;
-      border-radius: ${props => props.theme.smallBorderRadius};
+      border-radius: 0.2em;
       margin-bottom: 0.3em;
     }
   }
