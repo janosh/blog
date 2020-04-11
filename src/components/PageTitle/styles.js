@@ -1,52 +1,40 @@
 import Image from 'gatsby-image'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-export const PageTitleContainer = styled.hgroup`
+export const PageTitleDiv = styled.hgroup`
   position: relative;
   color: white;
+  /* Use flex instead of grid. Else Safari messes up vertical alignment of children. */
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  min-height: 60vh;
+  align-content: center;
+  min-height: 20em;
   flex: 1; /* for filling height between header and footer on 404 page */
-  z-index: 1;
-`
-
-const backdropCss = css`
-  > * {
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: ${props => props.theme.smallBorderRadius};
-    justify-self: center;
-    padding: 0.1em 0.4em;
-  }
-`
-
-export const Title = styled.div`
-  text-align: center;
   font-size: calc(1em + 0.5vw);
-  margin: 1em;
-  display: grid;
-  justify-content: center;
-  ${props => props.backdrop && backdropCss};
+  text-align: center;
+  overflow: hidden;
+  /* prettier-ignore */
+  > :not(:first-child):not(svg):not(figcaption) {
+    justify-self: center;
+    max-width: 30em;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 0.2em;
+    padding: 0.1em 0.4em;
+    margin-right: auto;
+    margin-left: auto;
+  }
   a {
     color: ${props => props.theme.lighterBlue};
   }
 `
 
 export const Img = styled(Image).attrs(
-  ({ fluid, src }) => !fluid && { as: src ? `img` : `div` }
+  ({ fluid, src }) => !fluid && src && { as: `img` }
 )`
   position: absolute !important;
   z-index: -1;
   width: 100%;
   height: 100%;
-  background: ${props =>
-    props.as === `div` &&
-    `linear-gradient(
-    28deg,
-    rgba(255, 113, 0, 1) 0%,
-    rgba(9, 9, 121, 1) 50%,
-    rgba(0, 212, 255, 1) 100%
-  )`};
   object-fit: cover;
 `
