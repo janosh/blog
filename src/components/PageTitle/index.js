@@ -1,24 +1,15 @@
-import React, { useEffect, useRef } from 'react'
-import { useEventListener } from 'hooks'
+import React from 'react'
 import { Caption } from '../styles'
-import { Img, PageTitleContainer, Title } from './styles'
+import { Img, PageTitleDiv } from './styles'
 
-export default function PageTitle({ children, img, className, ...rest }) {
-  const { backdrop = true, fillToBottom } = rest
+export default function PageTitle({ children, img, ...rest }) {
   const { source, caption, url } = img
-  const ref = useRef()
-  const fillAvailHeight = () => {
-    if (fillToBottom)
-      ref.current.style.minHeight = window.innerHeight - ref.current.offsetTop + `px`
-  }
-  useEventListener(`resize`, fillAvailHeight)
-  useEffect(fillAvailHeight, [])
   return (
-    <PageTitleContainer {...{ ref, className }}>
+    <PageTitleDiv {...rest}>
       <Img {...img} />
-      <Title backdrop={backdrop}>{children}</Title>
+      {children}
       {(caption || source) && (
-        <Caption showOnHoverParent={PageTitleContainer}>
+        <Caption showOnHoverParent={PageTitleDiv}>
           <span dangerouslySetInnerHTML={{ __html: caption }} />
           {caption && source && ` | `}
           {source && (
@@ -28,6 +19,6 @@ export default function PageTitle({ children, img, className, ...rest }) {
           )}
         </Caption>
       )}
-    </PageTitleContainer>
+    </PageTitleDiv>
   )
 }

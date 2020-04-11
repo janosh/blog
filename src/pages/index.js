@@ -20,7 +20,7 @@ export default function IndexPage({ data, location }) {
   }
   return (
     <Global path={location.pathname}>
-      <PageTitle img={img} fillToBottom backdrop={false}>
+      <PageTitle img={img} css="min-height: 35em">
         <Title>
           {mdx.frontmatter.title.split(`, `).map(str => (
             <Link key={str} to={`/` + str.toLowerCase()}>
@@ -46,9 +46,9 @@ export default function IndexPage({ data, location }) {
 }
 
 const Title = styled.h1`
-  border: 1px solid white;
-  padding: 0.4em;
-  background: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  margin-top: 4em;
+  padding: 0 !important;
   display: grid;
   a {
     padding: 0.4em;
@@ -64,7 +64,7 @@ const Title = styled.h1`
     a {
       :nth-child(2),
       :nth-child(3) {
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 255, 0.2);
       }
     }
   }
