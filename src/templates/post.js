@@ -43,11 +43,9 @@ export default function PostTemplate({ data, location }) {
         <PostTitle {...frontmatter} />
         <PostMeta inTitle {...{ ...frontmatter, timeToRead }} />
       </PageTitle>
-      <PageBody as="div">
+      <PageBody>
         {showToc && <Toc />}
-        <main>
-          <MDXRenderer>{body}</MDXRenderer>
-        </main>
+        <MDXRenderer>{body}</MDXRenderer>
         <DiscussionEmbed {...disqusConfig({ slug, title })} />
         <PrevNext prev={prev?.frontmatter} next={next?.frontmatter} label="post" />
       </PageBody>

@@ -3,16 +3,13 @@ import { BookContent } from 'styled-icons/boxicons-regular'
 import { Close as Cross } from 'styled-icons/material'
 import mediaQuery from 'utils/mediaQuery'
 
-const openTocDiv = css`
+export const TocDiv = styled.aside`
   background: ${props => props.theme.background};
   color: ${props => props.theme.textColor};
   padding: 0.7em 1.2em;
   border-radius: 0.5em;
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
   border: 1px solid ${props => props.theme.borderColor};
-`
-
-export const TocDiv = styled.div`
   height: max-content;
   max-height: 80vh;
   z-index: 3;
@@ -20,6 +17,7 @@ export const TocDiv = styled.div`
   right: 1em;
   max-width: 20em;
   overscroll-behavior: none;
+  grid-row: span 10;
   nav {
     max-height: 78vh;
     overflow-y: scroll;
@@ -29,7 +27,6 @@ export const TocDiv = styled.div`
     bottom: 1em;
     left: 1em;
     ${props => !props.open && `height: 0;`};
-    ${props => props.open && openTocDiv};
     visibility: ${props => (props.open ? `visible` : `hidden`)};
     opacity: ${props => (props.open ? 1 : 0)};
     transition: 0.3s;
@@ -52,6 +49,7 @@ export const Title = styled.h2`
 `
 
 export const TocLink = styled.a`
+  cursor: pointer;
   color: ${({ theme, active }) => (active ? theme.linkColor : theme.textColor)};
   font-weight: ${props => props.active && `bold`};
   display: block;
