@@ -32,7 +32,7 @@ export const TocDiv = styled.div`
     ${props => props.open && openTocDiv};
     visibility: ${props => (props.open ? `visible` : `hidden`)};
     opacity: ${props => (props.open ? 1 : 0)};
-    transition: ${props => props.theme.shortTrans};
+    transition: 0.3s;
   }
   ${mediaQuery.minLaptop} {
     font-size: 0.85em;
@@ -65,7 +65,7 @@ export const TocIcon = styled(BookContent)`
   margin-right: 0.2em;
 `
 
-const openedCss = css`
+const openerCss = css`
   position: fixed;
   bottom: calc(1vh + 4em);
   ${mediaQuery.minPhablet} {
@@ -79,7 +79,7 @@ const openedCss = css`
   transform: translate(${props => (props.open ? `-100%` : 0)});
 `
 
-const closedCss = css`
+const closerCss = css`
   margin-left: 1em;
   border: 1px solid ${props => props.theme.borderColor};
   border-radius: 50%;
@@ -90,7 +90,7 @@ export const TocToggle = styled(Cross).attrs(props => ({
   size: props.size || `1.6em`,
 }))`
   z-index: 2;
-  transition: ${props => props.theme.shortTrans};
+  transition: 0.3s;
   justify-self: end;
   :hover {
     transform: scale(1.1);
@@ -98,5 +98,5 @@ export const TocToggle = styled(Cross).attrs(props => ({
   ${mediaQuery.minLaptop} {
     display: none;
   }
-  ${props => (props.opener ? openedCss : closedCss)};
+  ${props => (props.opener ? openerCss : closerCss)};
 `

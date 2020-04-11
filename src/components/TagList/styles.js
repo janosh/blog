@@ -53,13 +53,13 @@ export const Tag = styled.button`
   white-space: nowrap;
   color: ${({ active, theme }) => (active ? `black` : theme.textColor)};
   font-weight: 300;
-  border-radius: ${props => props.theme.smallBorderRadius};
+  border-radius: 0.2em;
   background: ${({ active, theme }) =>
     active ? theme.grayHoveredButtonBg : theme.grayButtonBg};
   ${mediaQuery.maxPhablet} {
     padding: 0.1em 0.5em 0.2em;
     margin: 0 1em 1em 0;
-    transition: ${props => props.theme.mediumTrans};
+    transition: 0.6s;
     visibility: ${props => (props.open ? `visible` : `hidden`)};
     margin-bottom: ${props => (props.open ? `1em` : `-2em`)};
     opacity: ${props => (props.open ? 1 : 0)};
