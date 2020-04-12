@@ -5,10 +5,10 @@ export const Caption = styled.figcaption`
   position: absolute;
   bottom: 0;
   right: 1em;
-  font-size: 0.8em;
+  font-size: 0.7em;
   transition: 0.3s;
   color: white;
-  padding: 0.1em 0.5em;
+  padding: 0.2em 0.6em;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 0.5em 0.5em 0 0;
   a {

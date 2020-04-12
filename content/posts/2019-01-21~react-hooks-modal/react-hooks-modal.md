@@ -3,7 +3,9 @@ title: React Hooks Modal
 slug: /react-hooks-modal
 date: 2019-01-13
 cover:
-  img: react-hooks-modal.png
+  img: modal.svg
+  source: Codyhouse
+  url: https://codyhouse.co/gem/svg-modal-window
 tags:
   - Web Dev
   - Tutorial

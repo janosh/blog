@@ -1,11 +1,11 @@
 ---
 title: useQueryParam
-subtitle: React hook for URL query parameters
 slug: /use-query-param
 date: 2019-06-15
 cover:
-  img: useQueryParam.svg
-  thumbnail: thumbnail.svg
+  img: urlQueryParam.svg
+  source: Vecteezy
+  url: https://vecteezy.com/vector-art/165556-domain-illustration-free-vector
 tags:
   - JS
   - Tutorial

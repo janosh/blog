@@ -23,7 +23,7 @@ export default function BlogPage({ data, location }) {
   const filteredPosts = filterPostsByTag(activeTag, posts)
   return (
     <Global pageTitle="Blog" path={location.pathname}>
-      <PageTitle img={{ ...img, ...img.sharp }}>
+      <PageTitle img={img}>
         <h1>Blog</h1>
       </PageTitle>
       <PageBody>
@@ -50,7 +50,7 @@ export const query = graphql`
         count: totalCount
       }
     }
-    img: file(name: { eq: "blog-cover" }) {
+    img: file(name: { eq: "blog-banner" }) {
       ...sharpSrc
     }
   }

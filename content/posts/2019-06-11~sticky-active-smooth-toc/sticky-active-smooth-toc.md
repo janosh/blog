@@ -3,7 +3,9 @@ title: Sticky Active Smooth Responsive ToC
 slug: /sticky-active-smooth-responsive-toc
 date: 2019-06-11
 cover:
-  img: desk-toc.jpg
+  img: responsive.svg
+  source: Vecteezy
+  url: https://vecteezy.com/vector-art/304793-responsive-web-design
 tags:
   - Design
   - JS

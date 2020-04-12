@@ -17,9 +17,10 @@ export default function NaturePage({ data, location }) {
     className: tab === tabName ? `active` : null,
     onClick: () => setTab(tabName),
   })
+  const { cover } = data.mdx.frontmatter
   return (
     <Global path={location.pathname}>
-      <PageTitle img={photos[13].fluid}>
+      <PageTitle img={{ ...cover, ...cover.img }}>
         <h1>Nature</h1>
       </PageTitle>
       <PageBody cols="2/-2">
@@ -49,6 +50,11 @@ export const query = graphql`
             }
           }
         }
+      }
+    }
+    mdx(fileAbsolutePath: { regex: "/nature.md/" }) {
+      frontmatter {
+        ...cover
       }
     }
   }

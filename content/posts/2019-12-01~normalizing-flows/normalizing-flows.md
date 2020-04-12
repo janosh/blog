@@ -3,9 +3,9 @@ title: Normalizing Flows
 slug: /normalizing-flows
 date: 2019-11-26
 cover:
-  img: liquid-flow.jpg
-  source: Pixabay
-  url: https://pixabay.com/illustrations/paint-flow-liquid-flowing-ink-1900809
+  img: abstract-flow.svg
+  source: Vecteezy
+  url: https://vecteezy.com/vector-art/277024-abstract-wave-background
 tags:
   - Science
   - Machine Learning

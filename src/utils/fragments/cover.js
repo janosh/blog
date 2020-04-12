@@ -18,9 +18,6 @@ export const query = graphql`
       img {
         ...sharpSrc
       }
-      thumbnail {
-        ...sharpSrc
-      }
     }
   }
 `

@@ -3,9 +3,9 @@ title: Conda Auto Env
 slug: /conda-auto-env
 date: 2019-04-23
 cover:
-  img: royal-python.jpg
-  source: Kapa65
-  url: https://pixabay.com/photos/snake-ball-python-garden-camouflage-365037
+  img: conda-python-robot.svg
+  source: Vecteezy
+  url: https://vecteezy.com/vector-art/192230-robot-character-design
 tags:
   - Tutorial
   - Python
