@@ -3,7 +3,9 @@ title: Custom search with Algolia in Gatsby
 slug: /gatsby-algolia-search
 date: 2018-11-02
 cover:
-  img: gatsby+algolia.svg
+  img: gatsby-algolia-search.svg
+  source: Vecteezy
+  url: https://vecteezy.com/vector-art/229827-web-search
 tags:
   - Web Dev
   - Tutorial

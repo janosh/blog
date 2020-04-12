@@ -1,11 +1,11 @@
 ---
-title: JavaScript media queries
-subtitle: And how to hook into them
+title: JS media queries with React hooks
 slug: /js-media-queries
 date: 2019-04-08
 cover:
-  img: responsive.svg
-  thumbnail: matchMedia.svg
+  img: js-media-queries.svg
+  source: Vecteezy
+  url: https://vecteezy.com/vector-art/214877-website-wireframe-layouts-ui-kits-for-site-map-and-ux-design
 tags:
   - Web Dev
   - Tutorial

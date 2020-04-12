@@ -8,7 +8,9 @@ import { PageBody } from 'components/styles'
 export default function PageTemplate({ data, location }) {
   const { frontmatter, body, excerpt } = data.page
   const { title, mdxTitle, cover } = frontmatter
-  if (cover) cover.fluid = cover.img.sharp.fluid
+  cover.fluid = cover?.img?.sharp?.fluid
+  cover.src = cover?.img?.src
+  cover.alt = cover?.img?.alt
   return (
     <Global pageTitle={title} path={location.pathname} description={excerpt}>
       <PageTitle img={cover}>

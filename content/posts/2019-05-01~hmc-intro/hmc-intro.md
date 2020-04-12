@@ -4,9 +4,9 @@ subtitle: A Conceptual Introduction
 slug: /hmc-intro
 date: 2019-05-01
 cover:
-  img: grand-canyon.jpg
-  source: Free-Photos
-  url: https://pixabay.com/photos/grand-canyon-scenery-landscape-1246248
+  img: bell-curves.svg
+  source: Vecteezy
+  url: https://vecteezy.com/vector-art/111204-free-bell-curve-vector
 tags:
   - Physics
   - Statistics

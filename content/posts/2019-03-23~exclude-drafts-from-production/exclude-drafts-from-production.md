@@ -3,7 +3,9 @@ title: Exclude drafts from production in Gatsby
 slug: /exclude-drafts-from-production
 date: 2019-03-19
 cover:
-  img: exclude-drafts-from-production.svg
+  img: draft-content.svg
+  source: Vecteezy
+  url: https://vecteezy.com/vector-art/116659-free-flat-website-template-vector-background
 tags:
   - Web Dev
   - Tutorial
