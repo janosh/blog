@@ -14,22 +14,24 @@ showToc: true
 
 ## Intro
 
-This is a guide on how to implement a sticky, active, smooth and responsive table of contents (ToC) in a mere 80 lines of JavaScript (styles excluded) using [React](https://reactjs.org) and [styled-components](https://styled-components.com). A ToC is particularly useful for longer pages with lots of headings where it allows readers to see their place in the document and quickly jump to other sections. This post is too short for it to make much sense. I added it anyway just to demonstrate. If you want to try it out in a setting where it's more at home, check out [this introduction to Hamiltonian Monte Carlo](/blog/hmc-intro).
+This post aims to serve as a guide on how to implement a sticky, active, smooth and responsive table of contents (ToC). It takes a mere 80 lines of JS (styles excluded) and is implemented in [React](https://reactjs.org) and [styled-components](https://styled-components.com). A ToC is particularly useful on long pages with lots of headings where it affords you a quick overview of the page's content, shortcuts to other parts of the page and an indication how far you've progressed through the page. This post is too short for a ToC to make much sense. I added it anyway just to demonstrate. If you want to try it out in a setting where it's more at home, check out this short introduction to a cool method in statistical sampling known as [Hamiltonian Monte Carlo](/blog/hmc-intro).
 
 [![HMC Intro](/hmc-toc.png)](/blog/hmc-intro)
 
 Just so we're on the same page, here are two important points.
 
-1. The component assumes that all headings you want to list in the ToC can be targeted by one or several CSS selectors which the component passes into [`document.querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll). By default it uses `['main h1', 'main h2', ..., 'main h6']`. Also, you should be able to provide `getTitle` and `getDepth` functions to obtain the title and depth of a heading given it's DOM node. (The latter is not essential if you're happy with a flat ToC, i.e. one that doesn't indent lower-level headings.) The default values are `getTitle = node => node.innerText` and `getDepth = node => Number(node.nodeName[1])` (since with the default CSS selector, `nodeName` will be one of `H[1-6]`).
+1. This component assumes all headings you want to list in the ToC can be targeted by one or several CSS selectors which the component passes into [`document.querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll). By default it uses `['main h1', 'main h2', ..., 'main h6']`. Also, you should be able to provide `getTitle` and `getDepth` functions to obtain the title and depth of a heading given it's DOM node. (The latter is not essential if you're happy with a flat ToC, i.e. one that doesn't indent lower-level headings.) The default values are `getTitle = node => node.innerText` and `getDepth = node => Number(node.nodeName[1])`. (With the default CSS selector, `nodeName` will be one of `H[1-6]`. Hence `Number(node.nodeName[1])` yields the heading's depth.)
 
-2. This is what each of the words in the unwieldy title mean:
+2. This is what each of the words in my unwieldy title mean:
 
-   - **Responsive**: The ToC is displayed in a column to the right of the text if the screen width permits or as a small book icon in the lower left corner on narrow screens. In that case, the component expands to show the full ToC when that icon is clicked.
+   - **Responsive**: If the screen width permits, the ToC is displayed in a column to the right of the main text. Else (on narrow screens) it appears as a small book icon in the lower left corner. In that case, the component expands to show the full ToC when that icon is clicked.
    - **Sticky**: The ToC scrolls with the viewport below a certain threshold on the page to always remain easily accessible as you progress through the document.
-   - **Active**: The ToC highlights the heading that's closest to the reader's current position to act as a "progress bar", i.e. give an idea how far through the document you've progressed.
-   - **Smooth**: When a user clicks a heading in the ToC, the viewport smoothly scrolls there (without adding to the browser history, i.e. clicking the back button will always send the reader back to the previous page).
+   - **Active**: The ToC highlights the heading that's closest to the reader's current position to act as a "progress bar".
+   - **Smooth**: When a user clicks a heading in the ToC, the viewport smoothly scrolls there (without adding to the browser history so that clicking the back button will always send the reader back to the previous page).
 
-Alright, enough talking! Here comes the code.
+3. Positioning the ToC to the side of the main text relies on CSS grid. If you're not using grid this can very likely be achieved in other ways too but will require some small modifications on your part.
+
+Alright, enough talking! Let's see the code.
 
 ## Implementation
 
@@ -172,7 +174,7 @@ export const useOnClickOutside = (ref, handler, events) => {
 
 ## Styles
 
-I include the styles here mostly for completeness and in case you're also using `styled-components`. You can boil these down some if you don't need the component to be responsive or adjust to your site's dark theme.
+I include the styles here mostly for completeness and in case you're also using `styled-components`. You can boil these down some if you don't need the component to be responsive or support a dark theme.
 
 ```js:title=src/components/toc/styles.js
 import styled, { css } from 'styled-components'
@@ -281,8 +283,8 @@ export const TocToggle = styled(Cross).attrs(props => ({
 
 ## Closing Remarks
 
-That's all. It took quite a bit less code than I expected when I started writing this component considering the list of requirements I wanted to implement. I think that's another testament to the hooks API. It's been a big step towards making React even more modular, composable and compact.
+It took quite a bit less code than I expected when I started writing this component considering the list of requirements I wanted to implement. I think that's another testament to the hooks API. It's been a big step towards making React even more modular, composable and compact.
 
-As implemented, the ToC does not update when adding new headings to a page after the page has loaded. In most cases, pages are static once the user has loaded them so there's no point in wasting CPU cycles on a DOM observer. But just in case your ToC should update to include new headings even while the user is viewing a page, you might want to take a look the [MutationObserver](https://developer.mozilla.org/docs/Web/API/MutationObserver) ([with excellent browser support](https://caniuse.com/#feat=mutationobserver)).
+One last disclaimer: In its current implementation, the ToC does not update when adding new headings to a page after the page has loaded. In most cases, pages are static once the user has loaded them so there's no point in wasting CPU cycles on a DOM observer. But just in case your ToC should update to include new headings even while the user is viewing a page, you might want to take a look the [MutationObserver](https://developer.mozilla.org/docs/Web/API/MutationObserver) ([which has excellent browser support](https://caniuse.com/#feat=mutationobserver)).
 
 Let me know in the comments how the component works for you or if you have questions!
