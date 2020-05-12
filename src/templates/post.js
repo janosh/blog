@@ -53,15 +53,22 @@ export default function PostTemplate({ data }) {
 }
 
 export const query = graphql`
+  fragment adjacent on Mdx {
+    frontmatter {
+      title
+      slug
+      ...cover
+    }
+  }
   query($slug: String!, $prevSlug: String!, $nextSlug: String!) {
     post: mdx(frontmatter: { slug: { eq: $slug } }) {
       ...page
     }
     next: mdx(frontmatter: { slug: { eq: $nextSlug } }) {
-      ...page
+      ...adjacent
     }
     prev: mdx(frontmatter: { slug: { eq: $prevSlug } }) {
-      ...page
+      ...adjacent
     }
   }
 `
