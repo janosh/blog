@@ -6,12 +6,13 @@ import mediaQuery from 'utils/mediaQuery'
 export const TocDiv = styled.aside`
   background: var(--color-background);
   padding: 0.7em 1.2em;
+  margin: 1em 0;
   border-radius: 0.5em;
   box-shadow: 0 0 1em 3px var(--color-shadow);
   height: max-content;
   max-height: 80vh;
   z-index: 3;
-  line-height: 2em;
+  line-height: 2.2em;
   right: 1em;
   max-width: 20em;
   overscroll-behavior: none;
@@ -33,7 +34,7 @@ export const TocDiv = styled.aside`
     font-size: 0.85em;
     grid-column: 4 / -1;
     position: sticky;
-    top: 2em;
+    top: 7em;
   }
 `
 

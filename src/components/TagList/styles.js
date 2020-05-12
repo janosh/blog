@@ -27,7 +27,7 @@ export const TagGrid = styled.aside`
   }
   ${mediaQuery.minPhablet} {
     position: sticky;
-    top: 2em;
+    top: 6em;
   }
   ${mediaQuery.maxPhablet} {
     display: flex;
