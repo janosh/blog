@@ -1,5 +1,5 @@
 import React from 'react'
-import DarkMode from '../DarkMode'
+import DarkToggle from '../DarkToggle'
 import Nav from '../Nav'
 import Search from '../Search'
 import { HeaderContainer, Logo } from './styles'
@@ -16,7 +16,7 @@ export default function Header({ site }) {
         JR
       </Logo>
       <Nav />
-      <DarkMode />
+      <DarkToggle />
       <Search indices={searchIndices} />
     </HeaderContainer>
   )

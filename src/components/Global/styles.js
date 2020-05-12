@@ -30,13 +30,13 @@ export const GlobalStyle = createGlobalStyle`
       flex-direction: column;
     }
     /* The rules below enable dark mode. */
-    background: ${props => props.theme.background};
-    color: ${props => props.theme.textColor};
+    background: var(--color-background);
+    color: var(--color-text);
     a {
       text-decoration: none;
-      color: ${props => props.theme.links};
+      color: var(--color-link);
       :hover {
-        color: ${props => props.theme.hoveredLinks};
+        color: var(--color-a);
       }
     }
   }
@@ -59,8 +59,8 @@ export const GlobalStyle = createGlobalStyle`
     overflow-y: hidden;
   }
   blockquote, details {
-    border-left: 0.25em solid ${props => props.theme.lighterBlue};
-    background: ${props => props.theme.accentBackground};
+    border-left: 0.25em solid var(--color-link);
+    background: var(--color-accentBackground);
     padding: 0.1em 0.3em 0.1em 1em;
     margin: 0;
     summary {
@@ -72,16 +72,16 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
   }
   table td, table th {
-    border: 1px solid ${props => props.theme.lightGray};
+    border: 1px solid var(--color-text);
     padding: 0.2em 0.6em;
   }
   tbody tr:nth-child(odd) {
-    background: ${props => props.theme.accentBackground};
+    background: var(--color-accentBackground);
   }
   div.scroll {
     overflow: scroll;
     margin: 1em auto;
-    border: 1px solid ${props => props.theme.lightGray};
+    border: 1px solid var(--color-text);
     border-width: 0 1px;
     white-space: nowrap;
     table td, table th {
