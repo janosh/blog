@@ -93,41 +93,4 @@ export const GlobalStyle = createGlobalStyle`
       }
     }
   }
-  /* Enables markdown mouseover text via ___~^note^ *Some mouseover text*~___ */
-  strong > em > sub {
-    position: relative;
-    text-decoration: none;
-    vertical-align: initial;
-    > sup {
-      color: ${props => props.theme.links};
-      cursor: pointer;
-    }
-    > em {
-      z-index: 3;
-      font-style: normal;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s;
-      position: absolute;
-      width: 25em;
-      max-width: 80vw;
-      max-height: 80vh;
-      overflow: scroll;
-      background: ${props => props.theme.accentBackground};
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 0.5em 0.8em;
-      border-radius: 0.5em;
-      ${mediaQuery.maxPhablet} {
-        position: fixed;
-      }
-    }
-  }
-  strong > em > sub:hover {
-    > em {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
 `
