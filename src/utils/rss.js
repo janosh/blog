@@ -1,13 +1,18 @@
-// gatsby-plugin-feed-mdx config
+// gatsby-plugin-feed config
+// Adapted from https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-plugin-mdx/feed.js
+
 module.exports = {
   query: `{
     site {
       siteMetadata {
+        title
         url
         site_url: url
+        description
       }
     }
   }`,
+  setup: ({ query }) => query.site.siteMetadata,
   feeds: [
     {
       serialize: ({ query }) => {
@@ -42,7 +47,6 @@ module.exports = {
           }
         }
       }`,
-      title: `janosh.io`,
       output: `/rss.xml`,
     },
   ],
