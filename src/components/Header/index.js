@@ -2,7 +2,7 @@ import React from 'react'
 import DarkToggle from '../DarkToggle'
 import Nav from '../Nav'
 import Search from '../Search'
-import { HeaderContainer, Logo } from './styles'
+import { HeaderDiv, Logo } from './styles'
 
 const searchIndices = [
   { name: `Pages`, title: `Pages` },
@@ -11,13 +11,13 @@ const searchIndices = [
 
 export default function Header({ site }) {
   return (
-    <HeaderContainer>
+    <HeaderDiv>
       <Logo to="/" title={site.title} rel="home">
         JR
       </Logo>
       <Nav />
       <DarkToggle />
       <Search indices={searchIndices} />
-    </HeaderContainer>
+    </HeaderDiv>
   )
 }

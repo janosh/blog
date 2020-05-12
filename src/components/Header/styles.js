@@ -4,12 +4,14 @@ import mediaQuery from 'utils/mediaQuery'
 
 export const HeaderDiv = styled.header`
   background: var(--color-b);
+  position: sticky;
+  top: 0;
   display: grid;
   grid-gap: calc(1em + 1vw);
-  z-index: 3;
+  z-index: 4;
   align-items: center;
   justify-content: space-between;
-  padding: 1em;
+  padding: 0.7em 1em;
   color: white;
   font-size: 1.2em;
   grid-template-columns: 1fr auto auto;
