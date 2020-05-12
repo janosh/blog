@@ -1,7 +1,7 @@
 import algoliasearch from 'algoliasearch/lite'
+import { useOnClickOutside } from 'hooks'
 import React, { createRef, useMemo, useState } from 'react'
 import { connectStateResults, Index, InstantSearch } from 'react-instantsearch-dom'
-import { useOnClickOutside } from 'hooks'
 import Hits from './Hits'
 import Input from './Input'
 import { HitsWrapper, PoweredBy, Root } from './styles'

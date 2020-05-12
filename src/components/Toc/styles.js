@@ -4,12 +4,10 @@ import { Close as Cross } from 'styled-icons/material'
 import mediaQuery from 'utils/mediaQuery'
 
 export const TocDiv = styled.aside`
-  background: ${props => props.theme.background};
-  color: ${props => props.theme.textColor};
+  background: var(--color-background);
   padding: 0.7em 1.2em;
   border-radius: 0.5em;
-  box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
-  border: 1px solid ${props => props.theme.borderColor};
+  box-shadow: 0 0 1em 3px var(--color-shadow);
   height: max-content;
   max-height: 80vh;
   z-index: 3;
@@ -46,16 +44,15 @@ export const Title = styled.h2`
   grid-auto-flow: column;
   align-items: center;
   grid-template-columns: auto auto 1fr;
+  color: var(--color-gray);
 `
 
 export const TocLink = styled.a`
   cursor: pointer;
-  color: ${({ theme, active }) => (active ? theme.linkColor : theme.textColor)};
+  color: ${p => (p.active ? `var(--color-c)` : `var(--color-gray)`)};
   font-weight: ${props => props.active && `bold`};
   display: block;
   margin-left: ${props => props.depth + `em`};
-  border-top: ${props =>
-    props.depth === 0 && `1px solid ` + props.theme.lighterGray};
 `
 
 export const TocIcon = styled(BookContent)`
@@ -71,16 +68,10 @@ const openerCss = css`
   }
   left: 0;
   padding: 0.5em 0.6em 0.5em 0.3em;
-  background: ${props => props.theme.background};
-  border: 2px solid ${props => props.theme.borderColor};
+  background: var(--color-background);
+  border: 2px solid var(--color-text);
   border-radius: 0 50% 50% 0;
   transform: translate(${props => (props.open ? `-100%` : 0)});
-`
-
-const closerCss = css`
-  margin-left: 1em;
-  border: 1px solid ${props => props.theme.borderColor};
-  border-radius: 50%;
 `
 
 export const TocToggle = styled(Cross).attrs(props => ({
@@ -96,5 +87,5 @@ export const TocToggle = styled(Cross).attrs(props => ({
   ${mediaQuery.minLaptop} {
     display: none;
   }
-  ${props => (props.opener ? openerCss : closerCss)};
+  ${props => props.opener && openerCss};
 `

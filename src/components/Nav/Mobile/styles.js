@@ -65,8 +65,8 @@ const openerCss = css`
   bottom: 2vh;
   left: 0;
   padding: 0.5em 0.6em 0.5em 0.3em;
-  background: ${props => props.theme.background};
-  border: 2px solid ${props => props.theme.borderColor};
+  border: 1px solid;
+  border-left: none;
   border-radius: 0 50% 50% 0;
   transform: translate(${props => (props.open ? `-100%` : 0)});
 `
@@ -75,11 +75,11 @@ export const NavToggle = styled(Cross).attrs(props => ({
   as: props.opener && ThMenu,
   size: props.opener ? `1.2em` : `1.6em`,
 }))`
-  color: ${({ theme, opener }) => (opener ? theme.textColor : `white`)};
+  background: ${p => p.opener && `var(--color-background)`};
   transition: 0.3s;
   cursor: pointer;
   :hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
   ${mediaQuery.minLaptop} {
     display: none;

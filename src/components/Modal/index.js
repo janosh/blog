@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react'
 import { useEventListener } from 'hooks'
-import { controls, ModalBackground, ModalContainer } from './styles'
+import React, { useEffect, useRef, useState } from 'react'
+import { controls, ModalBackground, ModalDiv } from './styles'
 
 const { Close, Next, Prev, FullscreenToggle } = controls
 
@@ -22,7 +22,7 @@ export default function Modal({ open, modal, setModal, children, ...rest }) {
   if (open)
     return (
       <ModalBackground open={open} onClick={setModal}>
-        <ModalContainer
+        <ModalDiv
           onClick={event => event.stopPropagation()}
           {...{ className, fullscreen, ref }}
         >
@@ -38,7 +38,7 @@ export default function Modal({ open, modal, setModal, children, ...rest }) {
             </>
           )}
           {children}
-        </ModalContainer>
+        </ModalDiv>
       </ModalBackground>
     )
   else {

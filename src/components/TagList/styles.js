@@ -1,8 +1,15 @@
 import styled from 'styled-components'
 import { Grid } from 'styled-icons/boxicons-regular'
 import { JsSquare, Python } from 'styled-icons/fa-brands'
-import { ToggleOff, ToggleOn, Atom, Brain } from 'styled-icons/fa-solid'
-import { ChalkboardTeacher, Database, Robot } from 'styled-icons/fa-solid'
+import {
+  Atom,
+  Brain,
+  ChalkboardTeacher,
+  Database,
+  Robot,
+  ToggleOff,
+  ToggleOn,
+} from 'styled-icons/fa-solid'
 import { Cpu } from 'styled-icons/feather'
 import { Lab, Sigma } from 'styled-icons/icomoon'
 import { ColorLens, Web } from 'styled-icons/material'
@@ -39,15 +46,15 @@ export const TagGrid = styled.aside`
 export const Tag = styled.button`
   font-size: 1em;
   outline: none;
-  border: 1px solid ${props => props.theme.shadowColor};
+  border: 1px solid var(--color-shadow);
   cursor: pointer;
   width: max-content;
   white-space: nowrap;
-  color: ${({ active, theme }) => (active ? `black` : theme.textColor)};
+  color: ${p => (p.active ? `black` : `var(--color-text)`)};
   font-weight: 300;
   border-radius: 0.2em;
-  background: ${({ active, theme }) =>
-    active ? theme.grayHoveredButtonBg : theme.grayButtonBg};
+  background: ${p =>
+    p.active ? `var(--color-a)` : `var(--color-accentBackground)`};
   ${mediaQuery.maxPhablet} {
     padding: 0.1em 0.5em 0.2em;
     margin: 0 1em 1em 0;

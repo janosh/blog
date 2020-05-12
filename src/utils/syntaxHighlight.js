@@ -57,9 +57,9 @@ export default createGlobalStyle`
   }
 
   .gatsby-code-title {
-    background: ${props => props.theme.orange};
+    background: var(--color-orange-default);
     color: black;
-    padding: 0.2em 0.4em;
+    padding: 0.3em 0.5em;
     width: max-content;
     margin: 1em 0 -1.6em 1em;
     border-radius: 0.3em;
@@ -72,13 +72,13 @@ export default createGlobalStyle`
   /* highlighted lines */
   .grvsc-container .grvsc-line-highlighted {
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: inset 0.3em 0 0 0 ${props => props.theme.lighterBlue};
+    border-left: 0.3em solid var(--color-blue-lighter);
   }
 
   /* inline code */
   :not(pre) > code {
     border-radius: 0.2em;
-    background: ${props => props.theme.inlineCodeColor};
+    background: var(--color-accentBackground);
     padding: 0.15em 0.2em;
     font-size: 1.1em;
   }

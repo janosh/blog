@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
-import { graphql } from 'gatsby'
-
-import Global from 'components/Global'
 import PageTitle from 'components/PageTitle'
-import { PageBody, ButtonGroup } from 'components/styles'
+import { ButtonGroup, PageBody } from 'components/styles'
+import { graphql } from 'gatsby'
+import React, { useState } from 'react'
 import Photos from 'views/Photos'
 
-export default function NaturePage({ data, location }) {
+export default function NaturePage({ data }) {
   const [modal, setModal] = useState()
   const [tab, setTab] = useState(`list`)
   const photos = data.photos.edges.map(({ node }) => ({
@@ -19,7 +17,7 @@ export default function NaturePage({ data, location }) {
   })
   const { cover } = data.mdx.frontmatter
   return (
-    <Global path={location.pathname}>
+    <>
       <PageTitle img={{ ...cover, ...cover.img }}>
         <h1>Nature</h1>
       </PageTitle>
@@ -30,7 +28,7 @@ export default function NaturePage({ data, location }) {
         </ButtonGroup>
         <Photos {...{ tab, modal, setModal, photos }} />
       </PageBody>
-    </Global>
+    </>
   )
 }
 

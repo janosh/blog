@@ -14,6 +14,6 @@ export const Grid = styled.div`
 
 export const DocsGrid = styled(Grid).attrs({ minWidth: `8em`, align: `center` })`
   p > a > span {
-    border: 1px solid ${props => props.theme.borderColor};
+    border: 1px solid var(--color-shadow);
   }
 `

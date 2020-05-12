@@ -1,25 +1,24 @@
+import PageTitle from 'components/PageTitle'
+import Scroll from 'components/Scroll'
+import { PageBody } from 'components/styles'
 import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { ArrowLeft, ArrowRight } from 'styled-icons/fa-solid'
-import Global from 'components/Global'
-import PageTitle from 'components/PageTitle'
-import Scroll from 'components/Scroll'
-import { PageBody } from 'components/styles'
 import mediaQuery from 'utils/mediaQuery'
 import PostList from 'views/PostList'
 import { ProjectList } from 'views/Web'
 
-export default function IndexPage({ data, location }) {
+export default function IndexPage({ data }) {
   const { mdx, janosh, posts } = data
   const img = {
     ...mdx.frontmatter.cover,
     fluid: mdx.frontmatter.cover.img.sharp.fluid,
   }
   return (
-    <Global path={location.pathname}>
+    <>
       <PageTitle img={img} css="min-height: 35em">
         <Title>
           {mdx.frontmatter.title.split(`, `).map(str => (
@@ -41,7 +40,7 @@ export default function IndexPage({ data, location }) {
         <H>Recent projects</H>
         <ProjectList asRow />
       </PageBody>
-    </Global>
+    </>
   )
 }
 

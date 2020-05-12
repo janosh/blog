@@ -1,18 +1,17 @@
+import PageTitle from 'components/PageTitle'
+import { PageBody } from 'components/styles'
 import { graphql } from 'gatsby'
 import { MDXRenderer as Mdx } from 'gatsby-plugin-mdx'
 import React from 'react'
-import Global from 'components/Global'
-import PageTitle from 'components/PageTitle'
-import { PageBody } from 'components/styles'
 
-export default function PageTemplate({ data, location }) {
+export default function PageTemplate({ data }) {
   const { frontmatter, body, excerpt } = data.page
   const { title, mdxTitle, cover } = frontmatter
   cover.fluid = cover?.img?.sharp?.fluid
   cover.src = cover?.img?.src
   cover.alt = cover?.img?.alt
   return (
-    <Global pageTitle={title} path={location.pathname} description={excerpt}>
+    <>
       <PageTitle img={cover}>
         {mdxTitle ? <Mdx>{mdxTitle.childMdx.body}</Mdx> : <h1>{title}</h1>}
       </PageTitle>
@@ -22,7 +21,7 @@ export default function PageTemplate({ data, location }) {
           <Mdx>{body}</Mdx>
         </PageBody>
       )}
-    </Global>
+    </>
   )
 }
 
