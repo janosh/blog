@@ -11,22 +11,22 @@ tags:
 showToc: true
 ---
 
-import DarkMode from 'components/DarkMode'
+import DarkToggle from 'components/DarkToggle'
 import { BorderBox } from 'components/styles'
 
 All the cool kids these days have websites with a dark color scheme. The really cool kids even have a dark _and_ a light mode and allow you, the valued reader, to choose. In an attempt to make it easier for everyone to attain the status of really cool kid, I'll share my React Hooks-based implementation of a dark mode. You can try it out by clicking/tapping this sun/moon icon.
 
 <BorderBox>
-  <DarkMode />
+  <DarkToggle />
 </BorderBox>
 
 In fact we'll even go a step further and use the new [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) media query which just [recently landed in Safari, Firefox, Chrome and Edge](https://caniuse.com/#search=prefers-color-scheme). It will allow us to query the user's OS for a color scheme preference. So if the user's device is set to dark mode, your site will automatically respect that and display in dark mode as well.
 
 Here's an overview of everything we're going to build to achieve this:
 
-1. The user-facing component [`DarkMode`](#darkmode) allows to pick either the dark or light color scheme or to reset the preference. In that case, we'll go back to querying the OS setting. All the logic to achieve this will be abstracted out of this component with React hooks.
+1. The user-facing component [`DarkToggle`](#darkmode) allows to pick either the dark or light color scheme or to reset the preference. In that case, we'll go back to querying the OS setting. All the logic to achieve this will be abstracted out of this component with React hooks.
 
-2. The [`useDarkMode`](#usedarkmode) hook informs the `DarkMode` component which color scheme the user prefers and provides a setter function to change the current setting.
+2. The [`useDarkMode`](#usedarkmode) hook informs the `DarkToggle` component which color scheme the user prefers and provides a setter function to change the current setting.
 
 3. The [`useLocalStorage`](#uselocalstorage) hook is called by `useDarkMode` to persist the user's preference in `localStorage` across visits to your site.
 
@@ -40,24 +40,24 @@ By the way, you should really check out [usehooks.com](https://usehooks.com). Th
 
 Anyway, with this overview out of the way, let's get cracking.
 
-## `DarkMode`
+## `DarkToggle`
 
-The user-facing `DarkMode` component provides a three-state button to choose between dark mode, light mode or the OS setting. The latter is the default value and the component just cycles through these states when clicked.
+The user-facing `DarkToggle` component provides a three-state button to choose between dark mode, light mode or the OS setting. The latter is the default value and the component just cycles through these states when clicked.
 
 It also displays a little notification with the name of the mode for one second below the mode's icon (a sun for light, moon for dark and a sun and moon separated by a slash for the OS setting). It uses [react-spring](https://github.com/react-spring/react-spring) to animate the icon transition between modes and a simple [CSS animation](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for the notifications.
 
 <BorderBox>
-  <DarkMode />
+  <DarkToggle />
 </BorderBox>
 
-```js:title=src/components/DarkMode/index.js
+```js:title=src/components/DarkToggle/index.js
 import React from 'react'
 import { useTransition } from 'react-spring'
 import { useDarkMode } from 'hooks'
 import { Box, Div, SunIcon, MoonIcon, SunMoonIcon, Notification } from './styles'
 import { Link } from 'gatsby'
 
-export default function DarkMode({ initial, ...rest }) {
+export default function DarkToggle({ initial, ...rest }) {
   const [, colorMode, setColorMode] = useDarkMode(initial)
   const Modes = {
     light: { Icon: SunIcon, title: `Light Mode`, nextMode: `dark` },
@@ -93,7 +93,7 @@ export default function DarkMode({ initial, ...rest }) {
 
 The index file imports the following styled components:
 
-```js:title=src/components/DarkMode/styles.js
+```js:title=src/components/DarkToggle/styles.js
 import React from 'react'
 import { animated } from 'react-spring'
 import styled from 'styled-components'
@@ -164,7 +164,7 @@ export const SunMoonIcon = styled(SunSlashMoon)`
 
 ## `useDarkMode`
 
-The `useDarkMode` hook imported in `DarkMode/index.js` reads as follows.
+The `useDarkMode` hook imported in `DarkToggle/index.js` reads as follows.
 
 ```js:title=src/hooks/useDarkMode.js
 import { useLocalStorage, useMediaQuery } from '.'
@@ -308,24 +308,17 @@ with the objects `theme`, `lightTheme` and `darkTheme` looking something like th
 export const theme = {
   blue: `#2202a9`,
   darkBlue: `#190c65`,
-  darkerBlue: `#150956`,
-  darkestBlue: `#0f073b`,
+  darkBlue: `#150956`,
+  darkerBlue: `#0f073b`,
   lightBlue: `#1f59cd`,
   lighterBlue: `#279AF1`,
-  lightestBlue: `#83aaff`,
 
   green: `#3f7912`,
   darkGreen: `#0c511a`,
   lightGreen: `#00d69b`,
-  paleDarkGreen: `#104F55`,
-
-  yellow: `#f9ff00`,
-  darkYellow: `#d0d500`,
-  lightYellow: `#fbff6c`,
 
   orange: `#efbf00`,
   darkOrange: `#ff9100`,
-  lightOrange: `#ffbe41`,
 
   gray: `#464849`,
   darkGray: `#3d3d3d`,
@@ -347,7 +340,7 @@ export const lightTheme = {
   shadowColor: theme.lighterGray,
   borderColor: theme.lighterGray,
 
-  headerBg: theme.darkerBlue,
+  headerBg: theme.darkBlue,
   footerBg: theme.darkerGray,
 
   buttonBg: theme.blue,
@@ -369,7 +362,7 @@ export const darkTheme = {
   shadowColor: `black`,
   borderColor: `black`,
 
-  headerBg: theme.darkestBlue,
+  headerBg: theme.darkerBlue,
   footerBg: theme.darkestGray,
 
   buttonBg: theme.darkGreen,

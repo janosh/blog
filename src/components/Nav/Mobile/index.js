@@ -1,16 +1,16 @@
+import { useOnClickOutside, useSize } from 'hooks'
 import React, { memo, useRef, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
-import { useOnClickOutside, useSize } from 'hooks'
-import DarkMode from '../../DarkMode'
+import DarkToggle from '../../DarkToggle'
 import {
-  Children,
-  ArrowUp,
   ArrowDown,
+  ArrowUp,
+  Children,
+  ControlsDiv,
   Item,
   MobileNavDiv,
   NavLink,
   NavToggle,
-  ControlsDiv,
 } from './styles'
 
 const Tree = memo(({ title, url, children }) => {
@@ -51,7 +51,7 @@ export default function MobileNav({ nav }) {
       <MobileNavDiv ref={ref} open={open} onScroll={e => e.preventDefault()}>
         <ControlsDiv>
           <NavToggle open={open} onClick={() => setOpen(false)} />
-          <DarkMode />
+          <DarkToggle />
         </ControlsDiv>
         {nav.map(({ title, url, subNav }) => (
           <Tree key={url} url={url} title={title}>
