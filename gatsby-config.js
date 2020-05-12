@@ -50,7 +50,13 @@ module.exports = {
         extensions: [`.mdx`, `.md`],
       },
     },
-    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-transformer-sharp`,
+      options: {
+        // https://github.com/gatsbyjs/gatsby/issues/21776#issuecomment-604924320
+        checkSupportedExtensions: false,
+      },
+    },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-yaml`,
     {
