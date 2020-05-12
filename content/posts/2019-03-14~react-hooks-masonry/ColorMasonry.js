@@ -13,7 +13,7 @@ const ColorBox = styled.div`
   cursor: pointer;
   :hover {
     transform: scale(1.1);
-    box-shadow: 0 0 12px 0 ${props => props.theme.lightGray};
+    box-shadow: 0 0 1em 0 var(--color-shadow);
   }
 `
 

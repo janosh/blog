@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react'
 import { useEventListener } from 'hooks'
+import React, { useEffect, useRef, useState } from 'react'
 import { controls, ModalBehind, ModalDiv } from './styles'
 
 const { Close, Next, Prev, FullscreenToggle } = controls

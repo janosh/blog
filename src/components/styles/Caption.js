@@ -11,13 +11,6 @@ export const Caption = styled.figcaption`
   padding: 0.2em 0.6em;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 0.5em 0.5em 0 0;
-  a {
-    color: ${props => props.theme.lighterBlue};
-    transition: 0.3s;
-    :hover {
-      color: ${props => props.theme.orange};
-    }
-  }
   ${props =>
     props.showOnHoverParent && fadeInOnHoverParent(props.showOnHoverParent)};
 `

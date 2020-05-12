@@ -2,8 +2,8 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 import mediaQuery from 'utils/mediaQuery'
 
-export const HeaderContainer = styled.header`
-  background: ${props => props.theme.headerBg};
+export const HeaderDiv = styled.header`
+  background: var(--color-b);
   display: grid;
   grid-gap: calc(1em + 1vw);
   z-index: 3;
@@ -15,6 +15,7 @@ export const HeaderContainer = styled.header`
   grid-template-columns: 1fr auto auto;
   grid-template-areas: 'title darkmode search';
   justify-items: start;
+  border-bottom: 1px solid var(--color-a);
   ${mediaQuery.minPhablet} {
     grid-template-columns: auto 1fr auto auto;
   }

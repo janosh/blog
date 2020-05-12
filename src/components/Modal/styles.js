@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
-import { ExitFullscreen } from 'styled-icons/boxicons-regular'
-import { Fullscreen } from 'styled-icons/boxicons-regular'
+import { ExitFullscreen, Fullscreen } from 'styled-icons/boxicons-regular'
 import { Close as Cross, NavigateBefore, NavigateNext } from 'styled-icons/material'
 
 export const ModalBehind = styled.div`
@@ -11,8 +10,8 @@ export const ModalBehind = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: grid;
-  visibility: ${(props) => (props.open ? `visible` : `hidden`)};
-  opacity: ${(props) => (props.open ? `1` : `0`)};
+  visibility: ${props => (props.open ? `visible` : `hidden`)};
+  opacity: ${props => (props.open ? `1` : `0`)};
   transition: 0.5s;
   z-index: 2;
 `
@@ -31,7 +30,7 @@ export const ModalDiv = styled.div`
   box-sizing: border-box;
   align-self: center;
   justify-self: center;
-  background: ${(props) => props.theme.background};
+  background: var(--color-background);
   height: max-content;
   max-height: 80vh;
   width: 80vw;
@@ -41,15 +40,13 @@ export const ModalDiv = styled.div`
   transition: 0.3s;
   box-shadow: 0 0 3em black;
   margin: calc(0.5em + 2vw);
-  ${(props) => props.fullscreen && fullscreen}
+  ${props => props.fullscreen && fullscreen}
 `
 
 const controlsCss = css`
   position: absolute;
   cursor: pointer;
   z-index: 1;
-  color: ${(props) => props.theme.whiteControls && `white`};
-  background: ${(props) => props.theme.whiteControls && `rgba(0, 0, 0, 0.5)`};
   padding: 0.1em;
   transition: 0.3s;
   width: 1.6em;
@@ -58,7 +55,7 @@ const controlsCss = css`
   }
 `
 
-const FullscreenToggle = styled(Fullscreen).attrs((props) => ({
+const FullscreenToggle = styled(Fullscreen).attrs(props => ({
   as: props.fullscreen && ExitFullscreen,
 }))`
   ${controlsCss};

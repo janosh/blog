@@ -1,9 +1,8 @@
 import { Link } from 'gatsby'
 import React, { Fragment } from 'react'
-import { Highlight, Snippet } from 'react-instantsearch-dom'
+import { connectHits, Highlight, Snippet } from 'react-instantsearch-dom'
 import { Tags } from 'styled-icons/fa-solid'
 import { Calendar } from 'styled-icons/octicons'
-import { connectHits } from 'react-instantsearch-dom'
 
 const postHit = hit => (
   <div>

@@ -7,7 +7,7 @@ export const Root = styled.div`
   position: relative;
   display: grid;
   grid-gap: 1em;
-  color: ${props => props.theme.textColor};
+  color: var(--color-text);
 `
 
 export const SearchIcon = styled(Search)`
@@ -18,11 +18,11 @@ export const SearchIcon = styled(Search)`
 
 const focus = css`
   background: white;
-  color: ${props => props.theme.darkerBlue};
+  color: var(--color-blue-dark);
   cursor: text;
   width: 5em;
   + ${SearchIcon} {
-    color: ${props => props.theme.darkerBlue};
+    color: var(--color-blue-dark);
     margin: 0 0.3em;
   }
 `
@@ -30,17 +30,17 @@ const focus = css`
 const collapsed = css`
   width: 0;
   cursor: pointer;
-  color: ${props => props.theme.lighterBlue};
+  color: var(--color-blue-lighter);
   ${props => props.focus && focus}
   margin-left: ${props => (props.focus ? `-1.6em` : `-1em`)};
   padding-left: ${props => (props.focus ? `1.6em` : `1em`)};
   ::placeholder {
-    color: ${props => props.theme.gray};
+    color: var(--color-gray-default);
   }
 `
 
 const expanded = css`
-  background: ${props => props.theme.lighterGray};
+  background: white;
   width: 6em;
   margin-left: -1.6em;
   padding-left: 1.6em;
@@ -67,7 +67,7 @@ export const Form = styled.form`
 
 export const HitsWrapper = styled.div`
   display: ${props => (props.show ? `grid` : `none`)};
-  background: ${props => props.theme.background};
+  background: var(--color-background);
   max-height: 80vh;
   overflow: scroll;
   z-index: 2;
@@ -87,19 +87,19 @@ export const HitsWrapper = styled.div`
   }
   div + div {
     margin-top: 0.6em;
-    border-top: 1px solid ${props => props.theme.lighterGray};
+    border-top: 1px solid var(--color-gray-lighter);
   }
   mark {
-    color: ${props => props.theme.lighterBlue};
-    background: ${props => props.theme.darkerBlue};
+    color: var(--color-blue-lighter);
+    background: var(--color-blue-dark);
   }
   header {
     display: flex;
     justify-content: space-between;
-    border-bottom: 2px solid ${props => props.theme.darkGray};
+    border-bottom: 2px solid var(--color-gray-dark);
     h3 {
       color: white;
-      background: ${props => props.theme.gray};
+      background: var(--color-gray-default);
       padding: 0.1em 0.4em;
       border-radius: 0.2em;
       margin-bottom: 0.3em;

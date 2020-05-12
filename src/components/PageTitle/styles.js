@@ -24,7 +24,7 @@ export const PageTitleDiv = styled.hgroup`
     margin-left: auto;
   }
   a {
-    color: ${props => props.theme.lighterBlue};
+    color: var(--color-lightLink);
   }
 `
 

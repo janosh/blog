@@ -20,7 +20,7 @@ export const FoldingDiv = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: ${({ color, theme }) => theme[color] || theme.textColor};
+    background: var(--color-text);
     ${props => props.active && `animation: foldCube 2.4s infinite linear both`};
     transform-origin: 100% 100%;
   }

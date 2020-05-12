@@ -4,7 +4,7 @@ import { ArrowDownCircle as Down, ArrowUpCircle as Up } from 'styled-icons/feath
 export const Arrow = styled(Down).attrs(props => ({
   as: props.direction === `up` && Up,
 }))`
-  background: ${props => props.theme.lightGreen};
+  background: var(--color-green-light);
   color: white;
   border-radius: 50%;
   transition: 0.3s;
@@ -17,6 +17,6 @@ export const Arrow = styled(Down).attrs(props => ({
   height: ${props => props.size};
   :hover {
     transform: scale(1.15);
-    background: ${props => props.theme.orange};
+    background: var(--color-orange-default);
   }
 `
