@@ -14,37 +14,276 @@ showToc: true
 import DarkToggle from 'components/DarkToggle'
 import { BorderBox } from 'components/styles'
 
-All the cool kids these days have websites with a dark color scheme. The really cool kids even have a dark _and_ a light mode and allow you, the valued reader, to choose. In an attempt to make it easier for everyone to attain the status of really cool kid, I'll share my React Hooks-based implementation of a dark mode. You can try it out by clicking/tapping this sun/moon icon.
+All the cool kids these days have websites with a dark color scheme. The really cool kids even have a dark _and_ a light mode with a neat little toggle for you to pick your preference. Being regularly annoyed myself when browsing pages that insist on being eye-piercingly bright even late in the evening, I decided my site needs a dark mode as well. In this post, I'll share my implementation. It's API is a simple `useDarkMode` React hook. Internally, it relies on
+
+- `localStorage` to persist the user's preference across visits,
+- a custom event bus for keeping multiple call sites to `useDarkMode` in sync across the application,
+- the [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) media query to adopt the OS's color scheme (unless the user makes an explicit choice otherwise),
+- CSS custom properties to specify the color theme,
+- Gatsby's server-side rendering (SSR) API to prevent light theme colors from briefly flashing up on initial page load. (This part is separate from the `useDarkMode` hook and not necessary if your app isn't server-rendered.)
+
+The last two parts of this implementation were heavily inspired by [Joshua Comeau](https://github.com/joshwcomeau), a Gatsby core member. You can read about his dark mode implementation in [this awesome post](https://joshwcomeau.com/gatsby/dark-mode).
+
+To try out the dark mode on this site, click/tap this toggle:
 
 <BorderBox>
   <DarkToggle />
 </BorderBox>
 
-In fact we'll even go a step further and use the new [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) media query which just [recently landed in Safari, Firefox, Chrome and Edge](https://caniuse.com/#search=prefers-color-scheme). It will allow us to query the user's OS for a color scheme preference. So if the user's device is set to dark mode, your site will automatically respect that and display in dark mode as well.
+Here's an overview of everything we'll need to build to get this working:
 
-Here's an overview of everything we're going to build to achieve this:
+1. The [`useDarkMode`](#usedarkmode) hook informs the user-facing `DarkToggle` component which color scheme the user prefers and provides a setter function to change the current setting.
 
-1. The user-facing component [`DarkToggle`](#darkmode) allows to pick either the dark or light color scheme or to reset the preference. In that case, we'll go back to querying the OS setting. All the logic to achieve this will be abstracted out of this component with React hooks.
+2. The [`useLocalStorage`](#uselocalstorage) hook is called by `useDarkMode` to persist the user's preference in `localStorage` across visits to the site.
 
-2. The [`useDarkMode`](#usedarkmode) hook informs the `DarkToggle` component which color scheme the user prefers and provides a setter function to change the current setting.
+3. The [`useMediaQuery`](#usemediaquery) hook allows us to check the `prefers-color-scheme` setting of the reader's device. It also sets up an event listener that updates the active theme when the state of the media query changes.
 
-3. The [`useLocalStorage`](#uselocalstorage) hook is called by `useDarkMode` to persist the user's preference in `localStorage` across visits to your site.
+4. [`DarkToggle`](#darktoggle) allows to pick either the dark or light color scheme or to 'unset' the preference in which case we fall back to whatever color scheme the user's OS is currently set to.
 
-4. The [`useMediaQuery`](#usemediaquery) hook allows us to check the `prefers-color-scheme` setting of the reader's device.
+5. The [`onRenderBody`](#onrenderbody) API in `gatsby-ssr.js` to prevent flashing colors on initial page load.
 
-It turns out implementing a dark mode is a perfect use case for hooks as it really makes hook composability shine. Or as Gabe Ragland on [usehooks.com](https://usehooks.com) put it:
+You can take a look at an **MVP** and play around with a **live demo** of all these parts working together [over on GitHub](https://github.com/janosh/dark-mode-minimal).
+
+Considering how neatly `useDarkMode`, `useLocalStorage` and `useMediaQuery` fit together to accomplish this fairly sophisticated piece of functionality, I think it's fair to say that implementing a dark mode is an excellent use case for hooks. It demonstrates how hooks allow us to isolate and reuse pieces of logic and bring them together in ways where they become more than the sum of their parts. Or as Gabe Ragland on [usehooks.com](https://usehooks.com) put it:
 
 > It's almost as if hooks bring the compositional power of React components to stateful logic! 🤯
 
-By the way, you should really check out [usehooks.com](https://usehooks.com). They offer another structurally -- although not feature-wise -- [similar implementation of `useDarkMode`](https://usehooks.com/useDarkMode).
+By the way, [usehooks.com](https://usehooks.com) offers yet another simpler, although not as feature-rich [implementation of `useDarkMode`](https://usehooks.com/useDarkMode).
 
-Anyway, with this overview out of the way, let's get cracking.
+With this overview out of the way, let's get cracking.
+
+## `useDarkMode`
+
+The `useDarkMode` hook which we will import in `DarkToggle/index.js` reads as follows.
+
+```js:title=src/hooks/useDarkMode.js
+import { useLocalStorage, useMediaQuery } from 'hooks'
+import { useEffect } from 'react'
+import { COLOR_MODE_KEY, INITIAL_COLOR_MODE_CSS_PROP, COLORS } from 'utils/constants'
+
+export const useDarkMode = () => {
+  const [colorMode, setLSColorMode] = useLocalStorage(COLOR_MODE_KEY)
+
+  const prefersDarkFromMQ = useMediaQuery(
+    `(prefers-color-scheme: dark)`,
+    prefersDarkFromMQ => setBodyColors(prefersDarkFromMQ ? `dark` : `light`)
+  )
+
+  // Place useDarkMode initialization in useEffect to exclude it from SSR.
+  // The code inside will run on the client after React rehydration.
+  // Because colors matter a lot for the initial page view, we're not
+  // setting them here but in gatsby-ssr. That way it happens before
+  // the React component tree mounts.
+  useEffect(() => {
+    const initialColorMode = document.body.style.getPropertyValue(
+      INITIAL_COLOR_MODE_CSS_PROP
+    )
+    setLSColorMode(initialColorMode)
+    // https://stackoverflow.com/a/61735300
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  function setColorMode(newValue) {
+    setLSColorMode(newValue)
+
+    // This reassignment happens after setLSColorMode because `osPref`
+    // is a valid value for persisting but not for the actual color mode.
+    if (newValue === `osPref`) {
+      newValue = prefersDarkFromMQ ? `dark` : `light`
+    }
+
+    setBodyColors(newValue)
+  }
+
+  return [colorMode, setColorMode]
+}
+
+const setBodyColors = mode => {
+  for (const [name, colorByMode] of Object.entries(COLORS)) {
+    document.body.style.setProperty(`--color-${name}`, colorByMode[mode])
+  }
+}
+```
+
+Thanks to the now ubiquitous [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) media query (which only [recently landed in all major browsers including Firefox, Chrome, Safari and Edge](https://caniuse.com/#search=prefers-color-scheme)) we can ask the user's OS for their current color scheme in just a single line. So if the user's device is set to dark mode, the app will automatically respect that and display in dark mode as well.
+
+You may have noted we imported three constants in `useDarkMode`: `COLOR_MODE_KEY`, `INITIAL_COLOR_MODE_CSS_PROP` and `COLORS`. These are shared between `useDarkMode` and `gatsby-ssr` and ensure a smooth handover between the server-rendered app and its hydrated version on the clint. To make sure we don't accidentally break this handover when we change our implementation later, we create a single source of truth for both files:
+
+```js:title=src/utils/constants.js
+export const COLOR_MODE_KEY = `color-mode`
+
+export const INITIAL_COLOR_MODE_CSS_PROP = `--initial-color-mode`
+
+const colors = {
+  gray: {
+    default: `#464849`,
+    dark: `#3d3d3d`,
+    darker: `#1a1d23`,
+    darkest: `#060606`,
+    light: `#bcbcbc`,
+    lighter: `#e5e5e5`,
+    lightest: `#f7f7f7`,
+  },
+  blue: {
+    default: `#2202a9`,
+    dark: `#150956`,
+    darker: `#0a051e`,
+    darkest: `#00040c`,
+    light: `#1f59cd`,
+    lighter: `#279AF1`,
+  },
+  // ...
+}
+
+const { gray, blue, orange } = colors
+
+export const COLORS = {
+  text: {
+    light: `black`,
+    dark: gray.lighter,
+  },
+  background: {
+    light: `white`,
+    dark: blue.darker,
+  },
+  shadow: {
+    light: gray.lighter,
+    dark: `black`,
+  },
+  link: {
+    light: blue.light,
+    dark: blue.lighter,
+  },
+  gray: {
+    light: gray.regular,
+    dark: gray.light,
+  },
+  lightGray: {
+    light: gray.lightest,
+    dark: gray.darker,
+  },
+  darkGray: {
+    light: gray.default,
+    dark: gray.darkest,
+  },
+  a: {
+    light: orange.default,
+    dark: orange.darker,
+  },
+  b: {
+    light: blue.dark,
+    dark: blue.darkest,
+  },
+  // ...
+}
+```
+
+## `useStorage`
+
+The `useStorage` hook looks a little complicated at first but that's mostly just because it includes a custom event bus. In other words, it dispatches and listens to some events that make different calls to `useStorage` across the application but with the same key stay in sync. If you change the value associated with `key` at one call site, all others will update to this value as well.
+
+```js:title=src/hooks/useStorage.js
+import { useEffect, useState } from 'react'
+
+export const useStorage = (storage, key, initialValue, options = {}) => {
+  // storage can be local or session or any instance that supports
+  // reading and writing key-value pairs (like any JS object).
+  const { deleteKeyIfValueIs = null } = options
+
+  // We pass useState a function that handles initial state creation.
+  // That way, the function is executed only once and useStorage
+  // returns the correct value on initial render.
+  const [value, setValue] = useState(() => {
+    // During SSR, storage is unavailable so we go straight to initialValue.
+    if (typeof window === `undefined`) return initialValue
+    try {
+      const value = storage[key]
+      // Parse stored JSON if there was any, else return initialValue.
+      return value ? JSON.parse(value) : initialValue
+    } catch (error) {
+      // If error also return initialValue
+      console.error(error)
+      return initialValue
+    }
+  })
+
+  useEffect(() => {
+    // If key is not in storage, set it to the provided initial value to
+    // ensure we store it even if setStoredValue is never called.
+    if (storage[key] === undefined) storage[key] = JSON.stringify(value)
+
+    // The CustomEvent triggered by a call to useStorage somewhere
+    // else in the app carries the new value as the event.detail.
+    const cb = event => setValue(event.detail)
+
+    // Register event listener on initial state creation. Allows us to react
+    // to events emitted by setValue below. That way we can keep value in sync
+    // between multiple call sites to useStorage with the same key.
+    document.addEventListener(`storage:${key}Change`, cb)
+    return () => document.removeEventListener(`storage:${key}Change`, cb)
+  }, [value, key, storage])
+
+  const setStoredValue = newValue => {
+    if (newValue === value) return
+
+    // Conform to useState API by allowing newValue to be a function
+    // which takes the current value.
+    if (newValue instanceof Function) newValue = newValue(value)
+
+    const event = new CustomEvent(`storage:${key}Change`, {
+      detail: newValue,
+    })
+    document.dispatchEvent(event)
+
+    if (newValue === deleteKeyIfValueIs) delete storage[key]
+    else storage[key] = JSON.stringify(newValue)
+
+    setValue(newValue)
+  }
+  return [value, setStoredValue]
+}
+
+export const useLocalStorage = (...args) =>
+  useStorage(typeof window !== `undefined` && localStorage, ...args)
+
+export const useSessionStorage = (...args) =>
+  useStorage(typeof window !== `undefined` && sessionStorage, ...args)
+```
+
+Another option here besides custom events is to use [React's Context API](https://reactjs.org/docs/context.html). By wrapping the root element of your app in a context provider whose value is the current `colorMode` and its setter function, you can make both available throughout React's component tree. You can take a look at Joshua's implementation to see how to do that in Gatsby. However, I found that approach to be little more cumbersome since you need to import the React context wherever you want to use or set the current color scheme.
+
+## `useMediaQuery`
+
+Last but not least in our list of hooks is `useMediaQuery`. It uses the [`window.matchMedia` API](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) to parse the `query` string and turn it into a [`MediaQueryList`](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList) object. It couples that with a call to `useState` to instantiate a boolean `match` indicating whether the query currently matches and registers an event listener to update that variable whenever the state of the `query` changes. Lastly, it accepts a callback function `cb` that takes the current state of the query. In the case of our dark mode implementation, this will be the function that updates the values of CSS custom properties on the `document`'s `body`.
+
+```js:title=src/hooks/useMediaQuery.js
+import { useEffect, useState } from 'react'
+
+export const useMediaQuery = (query, cb) => {
+  const [matches, setMatches] = useState(false)
+
+  useEffect(() => {
+    const qry = window.matchMedia(query)
+    setMatches(qry.matches)
+
+    const handleMatch = q => {
+      setMatches(q.matches)
+      if (cb instanceof Function) cb(q.matches)
+    }
+
+    qry.addListener(handleMatch)
+    return () => qry.removeListener(handleMatch)
+  }, [query, cb])
+
+  return matches
+}
+```
 
 ## `DarkToggle`
 
 The user-facing `DarkToggle` component provides a three-state button to choose between dark mode, light mode or the OS setting. The latter is the default value and the component just cycles through these states when clicked.
 
-It also displays a little notification with the name of the mode for one second below the mode's icon (a sun for light, moon for dark and a sun and moon separated by a slash for the OS setting). It uses [react-spring](https://github.com/react-spring/react-spring) to animate the icon transition between modes and a simple [CSS animation](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for the notifications.
+It also displays a little notification with the name of the mode for one second below the mode's icon (sun, moon or sun-slash-moon for the OS setting). It uses [react-spring](https://github.com/react-spring/react-spring) to animate the icon transition between modes and a simple [CSS animation](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for the notifications.
 
 <BorderBox>
   <DarkToggle />
@@ -54,34 +293,36 @@ It also displays a little notification with the name of the mode for one second 
 import React from 'react'
 import { useTransition } from 'react-spring'
 import { useDarkMode } from 'hooks'
-import { Box, Div, SunIcon, MoonIcon, SunMoonIcon, Notification } from './styles'
-import { Link } from 'gatsby'
+import { Box, Div, Icons, Notification } from './styles'
 
-export default function DarkToggle({ initial, ...rest }) {
-  const [, colorMode, setColorMode] = useDarkMode(initial)
-  const Modes = {
-    light: { Icon: SunIcon, title: `Light Mode`, nextMode: `dark` },
-    dark: { Icon: MoonIcon, title: `Dark Mode`, nextMode: `noPreference` },
-    noPreference: { Icon: SunMoonIcon, title: `Use OS setting`, nextMode: `light` },
-  }
+const modes = {
+  light: [`Light Mode`, Icons.Sun, `dark`],
+  dark: [`Dark Mode`, Icons.Moon, `osPref`],
+  osPref: [`OS setting`, Icons.SunMoon, `light`],
+}
+
+export default function DarkToggle(props) {
+  const [colorMode, setColorMode] = useDarkMode()
+  if (colorMode && ![`light`, `dark`, `osPref`].includes(colorMode))
+    console.error(`Invalid color mode: ${colorMode}`)
+
   const transitions = useTransition(colorMode, null, {
     initial: null,
     from: { opacity: 0, transform: `translateX(100%)` },
     enter: { opacity: 1, transform: `translateX(0%)` },
     leave: { opacity: 0, transform: `translateX(-100%)` },
   })
+
   return (
-    <Box {...rest}>
-      {transitions.map(({ item, props, key }) => {
-        const { Icon, title, nextMode } = Modes[item]
+    <Box {...props}>
+      {transitions.map(({ item, props: style, key }) => {
+        // Since we can't know the value of media queries or localStorage during SSR,
+        // defer any rendering of the toggle until after rehydration on the client.
+        if (!item) return null
+        const [title, Icon, nextMode] = modes[item]
         return (
-          <Div key={key} style={props}>
-            <Icon
-              title={title}
-              onClick={() => setColorMode(nextMode)}
-              // onTouchStart needed to react on first tap in iOS Safari.
-              onTouchStart={() => setColorMode(nextMode)}
-            />
+          <Div key={key} style={style}>
+            <Icon title={title} onClick={() => setColorMode(nextMode)} />
             <Notification>{title}</Notification>
           </Div>
         )
@@ -97,26 +338,31 @@ The index file imports the following styled components:
 import React from 'react'
 import { animated } from 'react-spring'
 import styled from 'styled-components'
-import { Sun, Moon } from 'styled-icons/fa-solid'
+import { Moon, Sun } from 'styled-icons/fa-solid'
 
 export const Box = styled.div`
+  cursor: pointer;
   display: grid;
   > * {
-    /* for vertical centering */
-    display: flex;
     grid-area: 1/1;
   }
 `
 
 // Needed as a selector in Notification below.
-export const Div = styled(animated.div)``
+export const Div = styled(animated.div)`
+  svg {
+    vertical-align: -0.1em;
+  }
+`
 
 export const Notification = styled.div`
   position: absolute;
   top: calc(100% + 1em);
   width: max-content;
+  color: white;
+  text-align: center;
   background: rgba(0, 0, 0, 0.9);
-  padding: 0 0.4em;
+  padding: 0.1em 0.3em;
   border-radius: 0.2em;
   left: 50%;
   transform: translateX(-50%);
@@ -129,277 +375,166 @@ export const Notification = styled.div`
 
 const SunSlashMoon = props => (
   <svg {...props} viewBox="0 0 512 512" fill="currentColor">
-    <g>
-      <path
-        d="m283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23-15.429-2.845-31.086-4.278-46.775-4.28-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"
-        transform="matrix(.556976 0 0 .499999 241.983 256)"
-      />
-      <path
-        d="m256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7-100.5-33.5c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0s-49.9-131.1 0-181 131.1-49.9 181 0 49.9 131.1 0 181z"
-        transform="matrix(.550782 0 0 .550782 -.000096 -.000096)"
-      />
-      <path
-        d="m384.097 72.796c0-1.543-1.579-2.796-3.524-2.796h-7.049c-1.945 0-3.524 1.253-3.524 2.796v407.408c0 1.543 1.579 2.796 3.524 2.796h7.049c1.945 0 3.524-1.253 3.524-2.796z"
-        transform="matrix(.871418 .871418 -.891126 .891126 183.83 -308.963)"
-      />
-    </g>
+    <path
+      d="m283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23-15.429-2.845-31.086-4.278-46.775-4.28-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"
+      transform="matrix(.556976 0 0 .499999 241.983 256)"
+    />
+    <path
+      d="m256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7-100.5-33.5c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0s-49.9-131.1 0-181 131.1-49.9 181 0 49.9 131.1 0 181z"
+      transform="matrix(.550782 0 0 .550782 -.000096 -.000096)"
+    />
+    <path
+      d="m384.097 72.796c0-1.543-1.579-2.796-3.524-2.796h-7.049c-1.945 0-3.524 1.253-3.524 2.796v407.408c0 1.543 1.579 2.796 3.524 2.796h7.049c1.945 0 3.524-1.253 3.524-2.796z"
+      transform="matrix(.871418 .871418 -.891126 .891126 183.83 -308.963)"
+    />
   </svg>
 )
 
-export const SunIcon = styled(Sun).attrs({ size: `1em` })`
-  cursor: pointer;
-`
-
-export const MoonIcon = styled(Moon).attrs({ size: `1em` })`
-  transform: scale(0.9);
-  cursor: pointer;
-`
-
-export const SunMoonIcon = styled(SunSlashMoon)`
-  cursor: pointer;
-  transform: scale(1.2);
-  height: 1em;
-`
-```
-
-## `useDarkMode`
-
-The `useDarkMode` hook imported in `DarkToggle/index.js` reads as follows.
-
-```js:title=src/hooks/useDarkMode.js
-import { useLocalStorage, useMediaQuery } from '.'
-
-export const useDarkMode = (initialValue = `noPreference`) => {
-  const [colorMode, setColorMode] = useLocalStorage(`colorMode`, initialValue)
-  const setter = value => {
-    // Add half-second transitions to the body's color and background
-    // properties here rather than in CSS to prevent flashing from
-    // light to dark on initial page load.
-    document.body.style.transition = `color 0.5s, background 0.5s`
-    setColorMode(value)
-  }
-
-  // Check if the user has an OS preference for dark mode.
-  const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: dark)`)
-
-  // Dark mode is enabled if either the color scheme was set to dark
-  // by the user or if the media query `prefers-color-scheme: dark` is
-  // true _and_ the user did not explicitly set a light theme.
-  const darkModeEnabled =
-    colorMode === `dark` || (prefersDarkMode && colorMode !== `light`)
-  return [darkModeEnabled, colorMode, setter]
+export const Icons = {
+  Sun: props => <Sun css="transform: scale(1.05);" {...props} />,
+  Moon: props => <Moon css="transform: scale(0.95);" {...props} />,
+  SunMoon: props => <SunSlashMoon {...props} width={props.size} />,
 }
 ```
 
-It in turn imports the `useLocalStorage` and `useMediaQuery` hooks.
+## `onRenderBody`
 
-## `useLocalStorage`
-
-The `useLocalStorage` hook looks a little complicated at first but that's mostly just because it contains some event dispatching and listening that makes it (and by extension `useDarkMode`) global. By global I mean that all invocations of `useLocalStorage` with the same `key` will stay in sync. If you change the value associated with `key` at one call site, all others will update to this value as well.
-
-This is quite useful for implementing dark mode (and probably other use cases) because the component that controls the site's color scheme might be much further up the component tree than the user-facing component `DarkMode` which actually changes the color scheme setting. This way you don't have to use [React's Context API](https://reactjs.org/docs/context.html) or pass the value and setter function for `colorMode` down a component chain.
-
-```js:title=src/hooks/useLocalStorage.js
-import { useState } from 'react'
-
-export const useLocalStorage = (key, initialValue, options = {}) => {
-  const { deleteKeyIfValueIs = null } = options
-  // We pass useState a function that handles initial state
-  // creation. That way, the function is executed only once.
-  const [storedValue, setStoredValue] = useState(() => {
-    if (typeof localStorage !== `undefined`) {
-      // Register global event listener on initial state creation.
-      // This allows us to react to change events emitted by setValue
-      // below. That way we can keep storedValue in sync between
-      // multiple call sites to useLocalStorage with the same key.
-      // Whenever the value of key in localStorage is changed anywhere
-      // in the application, all storedValues with that key will
-      // reflect the change.
-      document.addEventListener(`localStorage:${key}Change`, event =>
-        // The new value set somewhere else in the app is saved as the
-        // event.detail attribute in CustomEvent below.
-        setStoredValue(event.detail)
-      )
-      const item = localStorage[key]
-      if (!item) localStorage[key] = JSON.stringify(initialValue)
-      return item ? JSON.parse(item) : initialValue
-    } else return initialValue
-  })
-  const setValue = value => {
-    // allow value to be a function which takes the current value
-    // to conform to useState API
-    const valueToStore = value instanceof Function ? value(storedValue) : value
-    setStoredValue(valueToStore)
-    const event = new CustomEvent(`localStorage:${key}Change`, {
-      detail: valueToStore,
-    })
-    document.dispatchEvent(event)
-    if (value === deleteKeyIfValueIs) delete localStorage[key]
-    else localStorage[key] = JSON.stringify(valueToStore)
-  }
-  return [storedValue, setValue]
-}
-```
-
-## `useMediaQuery`
-
-Last but not least in our list of hooks is `useMediaQuery`. It uses the [`window.matchMedia` API](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) to parse the `query` string and turn it into a [`MediaQueryList`](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList) object. It then calls `useState` to instantiate a boolean `match` indicating whether the query currently matches and registers an event listener to update that variable whenever the state of the `query` changes.
-
-The check `typeof window !== 'undefined'` is just there to ensure this hook plays nicely with server-side rendering where `window` will be unavailable. If you don't need SSR, just get rid of it.
-
-```js:title=src/hooks/useLocalStorage.js
-import { useEffect, useState } from 'react'
-
-const noop = () => {}
-
-// React hook for JS media queries
-export const useMediaQuery = query => {
-  // Fall back on dummy matchMedia in SSR.
-  const matchMedia =
-    globalThis.matchMedia || (() => ({ addListener: noop, removeListener: noop }))
-  query = matchMedia(query)
-  const [matches, setMatches] = useState(query.matches)
-  useEffect(() => {
-    const handleMatch = q => setMatches(q.matches)
-    query.addListener(handleMatch)
-    return () => query.removeListener(handleMatch)
-  }, [query])
-  return matches
-}
-```
-
-## Controlling the site's theme
-
-So much for the all of the infrastructure. All we need to do now is call `useDarkMode` in the component that controls the site's color theme and turn that theme into a function that returns different colors depending on which color scheme is currently enabled. In my case that component is called `Global`.
-
-```js:title=src/components/Global/index.js
-import { graphql, useStaticQuery } from 'gatsby'
-import React from 'react'
-import { ThemeProvider } from 'styled-components'
-import { useDarkMode } from 'hooks' // highlight-line
-import theme from 'utils/theme' // highlight-line
-import App from 'components/App'
-import { GlobalStyle } from './styles'
-
-export default function Global() {
-  const [darkMode] = useDarkMode() // highlight-line
-  return (
-    // highlight-next-line
-    <ThemeProvider theme={theme(darkMode)}>
-      <>
-        <GlobalStyle />
-        <App />
-      </>
-    </ThemeProvider>
-  )
-}
-```
-
-The `theme` function is very simple.
+Now comes the tricky SSR bit where we need to set the theme colors correctly based on the current preference prior to first paint and in particular before React even has a chance to load. As you might have guessed, that means we can only rely on browser APIs to accomplish this. No hooks, no Context API, nothing from React land will be available yet.
 
 ```js
-export default darkMode =>
-  darkMode ? { ...theme, ...darkTheme } : { ...theme, ...lightTheme }
+import React from 'react'
+import App from 'components/App'
+import { COLORS, COLOR_MODE_KEY, INITIAL_COLOR_MODE_CSS_PROP } from 'utils/constants'
+
+function setColorsByTheme() {
+  // Don't use backticks around emojis. Breaks replacement in boundFn below.
+  const [colors, colorModeKey, colorModeCssProp] = ['🌈', '🔑', '⚡️']
+  // Default value if the user never used DarkToggle is to use the OS color mode.
+  let colorMode = `osPref`
+
+  // Only try to parse value from localStorage if there is one.
+  const persistedPreference =
+    localStorage[colorModeKey] && JSON.parse(localStorage[colorModeKey])
+  if ([`light`, `dark`, `osPref`].includes(persistedPreference))
+    colorMode = persistedPreference
+
+  document.body.style.setProperty(colorModeCssProp, colorMode)
+
+  // Here we set the actual colors for the page after SSR.
+  // colorByMode only supports `dark` or `light`. So if colorMode
+  // is `osPref` we pick either of those depending on prefersDarkFromMQ.
+  if (colorMode === `osPref`) {
+    const mq = window.matchMedia(`(prefers-color-scheme: dark)`)
+    const prefersDarkFromMQ = mq.matches
+    colorMode = prefersDarkFromMQ ? `dark` : `light`
+  }
+
+  for (const [name, colorByMode] of Object.entries(colors))
+    document.body.style.setProperty(`--color-${name}`, colorByMode[colorMode])
+}
+
+function RssSetColorsByTheme() {
+  const boundFn = String(setColorsByTheme)
+    .replace(`'🌈'`, JSON.stringify(COLORS))
+    .replace(`🔑`, COLOR_MODE_KEY)
+    .replace(`⚡️`, INITIAL_COLOR_MODE_CSS_PROP)
+
+  // Turn boundFn into an IIFE so it runs asap. Also avoids polluting global namespace.
+  return <script dangerouslySetInnerHTML={{ __html: `(${boundFn})()` }} />
+}
+
+// If the user disabled JS, the injected script setColorsByTheme will
+// never run and no colors will be set. Everything will be default
+// black and white. By injecting a `<style>` tag into the head of the
+// document, we can set default values for all of our colors. Only
+// light mode will be available for users with JS disabled.
+function FallbackStyles({ cssColors = `` }) {
+  // Create a string holding each CSS variable:
+  // `--color-text: black;\n--color-background: white;\n...`
+
+  for (const [name, colorByMode] of Object.entries(COLORS))
+    cssColors += `--color-${name}: ${colorByMode.light};\n`
+
+  const wrappedInSelector = `html { ${cssColors} }`
+
+  return <style>{wrappedInSelector}</style>
+}
+
+export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
+  // Keys just to prevent warning: Each child in a list should have a unique "key" prop.
+  setHeadComponents(<FallbackStyles key="foo" />)
+  setPreBodyComponents(<RssSetColorsByTheme key="bar" />)
+}
+
+export const wrapPageElement = ({ element, props }) => {
+  return <App {...props}>{element}</App>
+}
 ```
 
-with the objects `theme`, `lightTheme` and `darkTheme` looking something like this
+## Using CSS custom props
 
-```js:title=src/utils/theme.js
-export const theme = {
-  blue: `#2202a9`,
-  darkBlue: `#190c65`,
-  darkBlue: `#150956`,
-  darkerBlue: `#0f073b`,
-  lightBlue: `#1f59cd`,
-  lighterBlue: `#279AF1`,
+So much for the all of the infrastructure. All we need to do now is write some components that actually make use of our CSS custom color properties and thereby become responsive to the currently active color mode.
 
-  green: `#3f7912`,
-  darkGreen: `#0c511a`,
-  lightGreen: `#00d69b`,
+I use styled-component's `createGlobalStyle` for this combined with Gatsby's `wrapPageElement` API which we need to implement in both `gatsby-ssr.js` and `gatsby-browser.js`.
 
-  orange: `#efbf00`,
-  darkOrange: `#ff9100`,
-
-  gray: `#464849`,
-  darkGray: `#3d3d3d`,
-  darkerGray: `#1a1d23`,
-  darkestGray: `#060606`,
-  lightGray: `#bcbcbc`,
-  lighterGray: `#e5e5e5`,
-  lightestGray: `#f7f7f7`,
-}
-
-export const lightTheme = {
-  background: `white`,
-  textColor: `black`,
-  accentBackground: theme.lightestGray,
-
-  links: theme.blue,
-  hoveredLinks: theme.orange,
-
-  shadowColor: theme.lighterGray,
-  borderColor: theme.lighterGray,
-
-  headerBg: theme.darkBlue,
-  footerBg: theme.darkerGray,
-
-  buttonBg: theme.blue,
-  hoveredButtonBg: theme.lightBlue,
-  grayButtonBg: theme.lightestGray,
-  grayHoveredButtonBg: theme.orange,
-
-  inlineCodeColor: theme.lighterGray,
-}
-
-export const darkTheme = {
-  background: theme.darkerGray,
-  textColor: theme.lighterGray,
-  accentBackground: theme.darkestGray,
-
-  links: theme.lighterBlue,
-  hoveredLinks: theme.orange,
-
-  shadowColor: `black`,
-  borderColor: `black`,
-
-  headerBg: theme.darkerBlue,
-  footerBg: theme.darkestGray,
-
-  buttonBg: theme.darkGreen,
-  hoveredButtonBg: theme.green,
-  grayButtonBg: theme.darkGray,
-  grayHoveredButtonBg: theme.orange,
-
-  inlineCodeColor: theme.darkGray,
-}
-
-export default darkMode =>
-  darkMode ? { ...theme, ...darkTheme } : { ...theme, ...lightTheme }
-```
-
-`lightTheme` and `darkTheme` each specify different values for parts of the site that are color-scheme dependent. Thanks to [`styled-components`'s ThemeProvider](https://styled-components.com/docs/api#themeprovider) any part of your site below `Global` in the component tree can then simply consume this theme. For instance the `GlobalStyle` component above does this as follows.
-
-```js:title=src/components/Global/styles.js
+```js:title=src/components/Global.js
+import React from 'react'
 import { createGlobalStyle } from 'styled-components'
+import { graphql, useStaticQuery } from 'gatsby'
 
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   body {
-    margin: 0;
-    hyphens: auto;
-    /* below rules enable dark mode */
-    background: ${props => props.theme.background};
-    color: ${props => props.theme.textColor};
+    background: var(--color-background);
+    color: var(--color-text);
     a {
-      text-decoration: none;
-      color: ${props => props.theme.links};
+      color: var(--color-link);
       :hover {
-        color: ${props => props.theme.hoveredLinks};
+        color: var(--color-link-hover);
       }
     }
   }
 `
+
+export function PageComponents({ children, ...rest }) {
+  const { site } = useStaticQuery(graphql`
+    {
+      site {
+        site: siteMetadata {
+          title
+          url
+          description
+        }
+      }
+    }
+  `)
+  return (
+    <>
+      <GlobalStyle /> // highlight-line
+      <Seo {...site} {...rest} />
+      <Header {...site} />
+      {children}
+      <Footer />
+    </>
+  )
+}
+```
+
+```js:title=gatsby-ssr.js
+import { PageComponents } from 'components/Global'
+
+export const wrapPageElement = ({ element, props }) => {
+  return <PageComponents {...props}>{element}</PageComponents>
+}
+```
+
+```js:title=gatsby-browser.js
+import { PageComponents } from 'components/Global'
+
+export const wrapPageElement = ({ element, props }) => {
+  return <PageComponents {...props}>{element}</PageComponents>
+}
 ```
 
 ## Conclusion
 
-To be honest, implementing a dark mode using React hooks and styled-components from start to finish took longer and was more work than I had originally anticipated. All the more reason to write this up in a blog post, right? Hopefully this is helpful to other's in the future. If you have questions or you think I was unclear anywhere, let me know in the comments.
+To be honest, implementing a dark mode using React hooks from start to finish took way longer and involved many more complications than I had originally anticipated. All the more reason to write this up in a blog post, right? Hopefully this is helpful to other's in the future. If you have questions, let me know in the comments!
