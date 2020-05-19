@@ -11,4 +11,22 @@ export const PageBody = styled.main`
   > * {
     grid-column: ${props => props.cols || 3};
   }
+  /* Center image captions. */
+  .gatsby-resp-image-wrapper + em,
+  img + em,
+  .js-plotly-plot + p > em,
+  div.table + p > em {
+    margin-top: 0.3em;
+    display: block;
+    text-align: center;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.95em;
+  }
+  /* Center SVGs, not necessary for .gatsby-resp-image-wrapper */
+  img {
+    display: block;
+    margin: auto;
+  }
 `

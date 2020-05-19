@@ -43,16 +43,6 @@ export const GlobalStyle = createGlobalStyle`
   h1, h2, h3, h4, h5, h6 {
     line-height: initial;
   }
-  /* Center image captions. */
-  .gatsby-resp-image-wrapper + em, img + em, .js-plotly-plot + p > em, div.table + p > em {
-    margin-top: 0.3em;
-    display: block;
-    text-align: center;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 0.95em;
-  }
   /* Prevent wide equations from breaking layout. */
   .katex-display {
     overflow-x: scroll;
