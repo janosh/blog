@@ -82,9 +82,8 @@ kernel = tfp.mcmc.NoUTurnSampler(bimodal.log_prob, step_size=step_size)
 adaptive_kernel = tfp.mcmc.DualAveragingStepSizeAdaptation(
     kernel,
     num_adaptation_steps=500,
-    step_size_setter_fn=lambda pkr, new_step_size: pkr._replace(
-        step_size=new_step_size
-    ),
+    # pkr: previous kernel results, new_ss: new step size
+    step_size_setter_fn=lambda pkr, new_ss: pkr._replace(step_size=new_ss),
     step_size_getter_fn=lambda pkr: pkr.step_size,
     log_accept_prob_getter_fn=lambda pkr: pkr.log_accept_ratio,
 )
@@ -95,14 +94,16 @@ chain, trace, final_kernel_results = sample_chain(
     return_final_kernel_results=True,
 )
 
-x = np.arange(-6, 6, 0.3)
-domain = np.stack(np.meshgrid(x, x), -1).reshape(-1, 2)
+xr = np.linspace(-6, 6, 13)
+domain = np.stack(np.meshgrid(xr, xr), -1).reshape(-1, 2)
 
-density_plot = go.Surface(x=x, y=x, z=bimodal.prob(domain).numpy().reshape(len(x), -1))
+density_plot = go.Surface(
+    x=xr, y=xr, z=bimodal.prob(domain).numpy().reshape(len(xr), -1)
+)
 samples_plot = go.Scatter3d(x=chain[:, 0], y=chain[:, 1], z=bimodal.prob(chain))
 
 fig = go.Figure(data=[density_plot, samples_plot])
-fig.update_layout(height=700, title=go.layout.Title(text=f"step size: {step_size}"))
+fig.update_layout(height=700, title_text=f"step size: {step_size}")
 ```
 
 These awkward `lambda` functions passed to `adaptive_kernel` are only necessary due to temporary inconsistencies in TFP's `mcmc` module. They will be unnecessary once that receives a good refactor [as stated here](https://github.com/tensorflow/probability/issues/549#issuecomment-529092462). If you're reading this post several months down the line, then perhaps all you need to write is
