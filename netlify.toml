@@ -7,5 +7,10 @@
 
 [[redirects]]
   from = "https://janosh.netlify.com/*"
-  to = "https://janosh.io/:splat"
+  to = "https://janosh.dev/:splat"
+  force = true
+
+[[redirects]]
+  from = "https://janosh.io/*"
+  to = "https://janosh.dev/:splat"
   force = true

@@ -36,10 +36,10 @@ const gatsbyRemarkPlugins = [
 
 module.exports = {
   siteMetadata: {
-    title: `janosh.io`,
+    title: `janosh.dev`,
     description: `Physics, machine learning, sustainability and web development.`,
     author: `Janosh Riebesell`,
-    url: `https://janosh.io`,
+    url: `https://janosh.dev`,
   },
   plugins: [
     {

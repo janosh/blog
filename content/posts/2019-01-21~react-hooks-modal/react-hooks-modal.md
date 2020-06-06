@@ -312,4 +312,4 @@ export const Prev = styled(NavigateBefore).attrs({ size: `2em` })`
 `
 ```
 
-For the full and most up to date implementation of this component, check out [this site's Github repo](https://github.com/janosh/janosh.io/tree/master/src/components/Modal).
+For the full and most up to date implementation of this component, check out [this site's Github repo](https://github.com/janosh/blog/tree/master/src/components/Modal).

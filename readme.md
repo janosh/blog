@@ -1,6 +1,6 @@
-# janosh.io
+# janosh.dev
 
-My personal site. I use it to write about physics, machine learning, sustainability and web development.
+The code for my personal blog. I use it to write about physics, machine learning, sustainability and web development.
 
 The site is fully responsive, built with [Gatsby](https://gatsbyjs.org), has [fluid typography](https://css-tricks.com/snippets/css/fluid-typography), relies heavily on [React Hooks](https://reactjs.org/docs/hooks-intro) for stateful function components and CSS grid for layout. It uses the following libraries:
 
@@ -21,8 +21,8 @@ To get this site running locally, you need to have installed [`git`](https://git
 1. Clone the repo to your machine and change into its directory.
 
    ```sh
-   git clone https://github.com/janosh/janosh.io \
-   && cd janosh.io
+   git clone https://github.com/janosh/blog \
+   && cd blog
    ```
 
 2. Optionally setup `git` hooks (recommended if you intend to open a PR).

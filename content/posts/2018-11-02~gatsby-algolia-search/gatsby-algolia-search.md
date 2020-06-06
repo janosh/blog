@@ -12,7 +12,7 @@ tags:
   - JS
 ---
 
-This post is a guide on how to write a React component that implements custom search powered by [Algolia](https://algolia.com) on a [Gatsby](https://gatsbyjs.org) site. You can see the result in action by clicking on the search icon in the top right of this page. The complete code is on [GitHub](https://github.com/janosh/janosh.io/tree/master/src/components/Search). Also, check out Algolia's own CodeSandbox on how to use their [React Instantsearch](https://codesandbox.io/s/github/algolia/create-instantsearch-app/tree/templates/react-instantsearch) library.
+This post is a guide on how to write a React component that implements custom search powered by [Algolia](https://algolia.com) on a [Gatsby](https://gatsbyjs.org) site. You can see the result in action by clicking on the search icon in the top right of this page. The complete code is on [GitHub](https://github.com/janosh/blog/tree/master/src/components/Search). Also, check out Algolia's own CodeSandbox on how to use their [React Instantsearch](https://codesandbox.io/s/github/algolia/create-instantsearch-app/tree/templates/react-instantsearch) library.
 
 If you're looking to add search to a documentation site with highly structured content, then you can let Algolia handle the steps outlined in the backend section for you by using their excellent [Docsearch](https://community.algolia.com/docsearch). For other types of sites and more fine-grained control over exactly what data should be indexed, read on.
 
@@ -159,10 +159,10 @@ We're going to assemble everything we need into a React `Search` component that 
 
 The `Search` components is made up of the following files:
 
-- [**`index.js`**: the main component](https://github.com/janosh/janosh.io/tree/master/src/components/Search/index.js)
-- [**`input.js`**: the text input field](https://github.com/janosh/janosh.io/tree/master/src/components/Search/Input.js)
-- [**`hitComps.js`**: the components that will render matching posts/pages](https://github.com/janosh/janosh.io/tree/master/src/components/Search/hitComps.js)
-- [**`styles.js`**: the styled components](https://github.com/janosh/janosh.io/tree/master/src/components/Search/styles.js)
+- [**`index.js`**: the main component](https://github.com/janosh/blog/tree/master/src/components/Search/index.js)
+- [**`input.js`**: the text input field](https://github.com/janosh/blog/tree/master/src/components/Search/Input.js)
+- [**`hitComps.js`**: the components that will render matching posts/pages](https://github.com/janosh/blog/tree/master/src/components/Search/hitComps.js)
+- [**`styles.js`**: the styled components](https://github.com/janosh/blog/tree/master/src/components/Search/styles.js)
 
 There's quite a lot happening in these files so let's break them down one by one and piece by piece.
 
