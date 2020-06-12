@@ -12,7 +12,7 @@ const insertAllTag = (tags, count) =>
 
 const filterPostsByTag = (tag, posts) =>
   // If !tag, tag is null which stands for all posts.
-  posts.filter(edge => !tag || edge.node.frontmatter.tags.includes(tag))
+  posts.filter(post => !tag || post.frontmatter.tags.includes(tag))
 
 export default function BlogPage({ data }) {
   const { allMdx, img } = data
@@ -39,10 +39,8 @@ export const query = graphql`
       filter: { fileAbsolutePath: { regex: "/posts/" } }
       sort: { fields: frontmatter___date, order: DESC }
     ) {
-      posts: edges {
-        node {
-          ...page
-        }
+      posts: nodes {
+        ...page
       }
       tags: group(field: frontmatter___tags) {
         title: fieldValue

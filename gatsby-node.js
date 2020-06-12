@@ -10,11 +10,9 @@ const query = `
     pages: allMdx(
       filter: { frontmatter: { purpose: { eq: "page" } } }
     ) {
-      edges {
-        node {
-          frontmatter {
-            slug
-          }
+      nodes {
+        frontmatter {
+          slug
         }
       }
     }
@@ -22,11 +20,9 @@ const query = `
       filter: { fileAbsolutePath: { regex: "/posts/" } }
       sort: { fields: frontmatter___date, order: DESC }
     ) {
-      edges {
-        node {
-          frontmatter {
-            slug
-          }
+      nodes {
+        frontmatter {
+          slug
         }
       }
     }
@@ -38,8 +34,8 @@ exports.createPages = async ({ graphql, actions }) => {
   if (response.errors) throw new Error(response.errors)
   const { pages, posts } = response.data
 
-  pages.edges.forEach(({ node }) => {
-    const { slug } = node.frontmatter
+  pages.nodes.forEach(page => {
+    const { slug } = page.frontmatter
     actions.createPage({
       path: slug,
       component: pageTemplate,
@@ -47,10 +43,10 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  posts.edges.forEach(({ node }, index, arr) => {
+  posts.nodes.forEach((post, index, arr) => {
     const nextSlug = arr[index - 1]?.frontmatter.slug || ``
     const prevSlug = arr[index + 1]?.frontmatter.slug || ``
-    const { slug } = node.frontmatter
+    const { slug } = post.frontmatter
     actions.createPage({
       path: slug,
       component: postTemplate,

@@ -5,31 +5,29 @@ import Project from './Project'
 import { Modal, ProjectGrid, Thumbnail } from './styles'
 
 export function ProjectList(props) {
-  let { projects } = useStaticQuery(graphql`
+  const { allMdx } = useStaticQuery(graphql`
     {
-      projects: allMdx(
+      allMdx(
         filter: { fileAbsolutePath: { regex: "/pages/web/projects/" } }
         sort: { fields: frontmatter___date, order: DESC }
       ) {
-        edges {
-          node {
-            body
-            frontmatter {
-              title
-              slug
-              date(formatString: "MMM D, YYYY")
-              url
-              repo
-              npm
-              tech
-              ...cover
-            }
+        projects: nodes {
+          body
+          frontmatter {
+            title
+            slug
+            date(formatString: "MMM D, YYYY")
+            url
+            repo
+            npm
+            tech
+            ...cover
           }
         }
       }
     }
   `)
-  projects = projects.edges.map(proj => proj.node)
+  const { projects } = allMdx
   const [modal, setModal] = useState()
   const project = modal >= 0 && modal < projects.length && projects[modal]
   return (

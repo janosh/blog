@@ -81,62 +81,38 @@ ALGOLIA_ADMIN_KEY=insertValue
 The `queries` allow you to grab the data you want Algolia to index directly from Gatsby's GraphQL layer by exporting from `src/utils/algolia.js` an array of objects, each containing a required GraphQL query and an optional index name, transformer function and settings object.
 
 ```js:title=src/utils/algolia.js
-const pageQuery = `{
-  pages: allMarkdownRemark(
-    filter: {
-      fileAbsolutePath: { regex: "/pages/" },
-      frontmatter: {purpose: {eq: "page"}}
-    }
-  ) {
-    edges {
-      node {
-        objectID: id
-        frontmatter {
-          title
-          slug
-        }
-        excerpt(pruneLength: 5000)
+const queryTemplate = (filters = ``, fields = ``) => `{
+  allMdx(filter: {${filters}}) {
+    nodes {
+      objectID: id
+      frontmatter {
+        title
+        slug
+        ${fields}
       }
-    }
-  }
-}`
-
-const postQuery = `{
-  posts: allMarkdownRemark(
-    filter: { fileAbsolutePath: { regex: "/posts/" } }
-  ) {
-    edges {
-      node {
-        objectID: id
-        frontmatter {
-          title
-          slug
-          date(formatString: "MMM D, YYYY")
-          tags
-        }
-        excerpt(pruneLength: 5000)
-      }
+      excerpt(pruneLength: 5000)
     }
   }
 }`
 
 const flatten = arr =>
-  arr.map(({ node: { frontmatter, ...rest } }) => ({
-    ...frontmatter,
-    ...rest,
-  }))
+  arr.map(({ frontmatter, ...rest }) => ({ ...frontmatter, ...rest }))
+
 const settings = { attributesToSnippet: [`excerpt:20`] }
 
 const queries = [
   {
-    query: pageQuery,
-    transformer: ({ data }) => flatten(data.pages.edges),
+    query: queryTemplate(`frontmatter: {purpose: {eq: "page"}}`),
+    transformer: res => flatten(res.data.allMdx.nodes),
     indexName: `Pages`,
     settings,
   },
   {
-    query: postQuery,
-    transformer: ({ data }) => flatten(data.posts.edges),
+    query: queryTemplate(
+      `fileAbsolutePath: {regex: "/posts/"}`,
+      `tags date(formatString: "MMM D, YYYY")`
+    ),
+    transformer: res => flatten(res.data.allMdx.nodes),
     indexName: `Posts`,
     settings,
   },

@@ -36,7 +36,7 @@ export default function IndexPage({ data }) {
         />
         <MDXRenderer>{mdx.body}</MDXRenderer>
         <H>Recent posts</H>
-        <PostList asRow noText posts={posts.edges} />
+        <PostList asRow noText posts={posts.nodes} />
         <H>Recent projects</H>
         <ProjectList asRow />
       </PageBody>
@@ -104,10 +104,8 @@ export const query = graphql`
       sort: { fields: frontmatter___date, order: DESC }
       limit: 5
     ) {
-      edges {
-        node {
-          ...page
-        }
+      nodes {
+        ...page
       }
     }
   }

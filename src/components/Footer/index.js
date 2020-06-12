@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
-import { FooterContainer, PoweredBy } from './styles'
+import { FooterDiv, PoweredBy } from './styles'
 import Rss from '../Rss'
 
 export default function Footer() {
@@ -18,17 +18,15 @@ export default function Footer() {
         filter: { dir: { regex: "/footer/logos/" } }
         sort: { fields: name }
       ) {
-        edges {
-          node {
-            src: publicURL
-          }
+        nodes {
+          src: publicURL
         }
       }
     }
   `)
   const { copyright, sourceNote, poweredBy } = footer
   return (
-    <FooterContainer>
+    <FooterDiv>
       <span css="grid-area: copyright;">
         © {new Date().getFullYear()} - {copyright}
         &emsp; <Rss />
@@ -41,10 +39,10 @@ export default function Footer() {
         Powered by
         {poweredBy.map(({ url, title }, index) => (
           <a key={title} href={url}>
-            <img src={logos.edges[index].node.src} alt={title} />
+            <img src={logos.nodes[index].src} alt={title} />
           </a>
         ))}
       </PoweredBy>
-    </FooterContainer>
+    </FooterDiv>
   )
 }

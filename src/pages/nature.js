@@ -7,9 +7,9 @@ import Photos from 'views/Photos'
 export default function NaturePage({ data }) {
   const [modal, setModal] = useState()
   const [tab, setTab] = useState(`list`)
-  const photos = data.photos.edges.map(({ node }) => ({
-    ...node?.fields.meta,
-    ...node.sharp,
+  const photos = data.photos.nodes.map(photo => ({
+    ...photo?.fields.meta,
+    ...photo.sharp,
   }))
   const buttonProps = tabName => ({
     className: tab === tabName ? `active` : null,
@@ -37,15 +37,13 @@ export const query = graphql`
     photos: allFile(
       filter: { dir: { regex: "/content/photos/" }, ext: { eq: ".jpg" } }
     ) {
-      edges {
-        node {
-          ...sharpSrc
-          fields {
-            meta {
-              caption
-              lat
-              lng
-            }
+      nodes {
+        ...sharpSrc
+        fields {
+          meta {
+            caption
+            lat
+            lng
           }
         }
       }

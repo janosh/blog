@@ -1,28 +1,26 @@
 const queryTemplate = (filters = ``, fields = ``) => `{
   allMdx(filter: {${filters}}) {
-    edges {
-      node {
-        objectID: id
-        frontmatter {
-          title
-          slug
-          ${fields}
-        }
-        excerpt(pruneLength: 5000)
+    nodes {
+      objectID: id
+      frontmatter {
+        title
+        slug
+        ${fields}
       }
+      excerpt(pruneLength: 5000)
     }
   }
 }`
 
 const flatten = arr =>
-  arr.map(({ node: { frontmatter, ...rest } }) => ({ ...frontmatter, ...rest }))
+  arr.map(({ frontmatter, ...rest }) => ({ ...frontmatter, ...rest }))
 
 const settings = { attributesToSnippet: [`excerpt:20`] }
 
 const queries = [
   {
     query: queryTemplate(`frontmatter: {purpose: {eq: "page"}}`),
-    transformer: res => flatten(res.data.allMdx.edges),
+    transformer: res => flatten(res.data.allMdx.nodes),
     indexName: `Pages`,
     settings,
   },
@@ -31,7 +29,7 @@ const queries = [
       `fileAbsolutePath: {regex: "/posts/"}`,
       `tags date(formatString: "MMM D, YYYY")`
     ),
-    transformer: res => flatten(res.data.allMdx.edges),
+    transformer: res => flatten(res.data.allMdx.nodes),
     indexName: `Posts`,
     settings,
   },

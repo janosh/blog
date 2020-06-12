@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import mediaQuery from 'utils/mediaQuery'
 
-export const FooterContainer = styled.footer`
+export const FooterDiv = styled.footer`
   background: var(--color-b);
   padding: 5vh 5vw;
   color: white;
