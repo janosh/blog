@@ -80,7 +80,8 @@ import Masonry from 'components/Masonry' // highlight-line
 import { Thumbnail } from './styles'
 
 export const Photos = ({ photos }) => (
-  <Masonry> // highlight-line
+  // highlight-next-line
+  <Masonry>
     {photos.map(img => (
       <Thumbnail key={img.title} alt={img.title} src={img.src} />
     ))}
@@ -106,7 +107,7 @@ const ColorBox = styled.div`
   cursor: pointer;
   :hover {
     transform: scale(1.1);
-    box-shadow: 0 0 12px 0 ${props => props.theme.lightGray};
+    box-shadow: 0 0 12px 0 var(--color-shadow);
   }
 `
 
@@ -125,7 +126,8 @@ const data = [
 export default function MasonryExample() {
   const [divs, setDivs] = useState(data.concat(data))
   return (
-    <Masonry minWidth={300} css="margin: 2em 0;"> // highlight-line
+    // highlight-next-line
+    <Masonry minWidth={300} css="margin: 2em 0;">
       {divs.map(([minHeight, background], index) => (
         <ColorBox
           key={index}

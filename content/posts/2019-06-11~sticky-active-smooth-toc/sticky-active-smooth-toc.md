@@ -176,7 +176,7 @@ export const useOnClickOutside = (ref, handler, events) => {
 
 ## Styles
 
-I include the styles here mostly for completeness and in case you're also using `styled-components`. You can boil these down some if you don't need the component to be responsive or support a dark theme.
+I include the styles here mostly for completeness and in case you're also using `styled-components`. You can boil these down some if you don't need the component to be responsive or have dark-mode support.
 
 ```js:title=src/components/toc/styles.js
 import styled, { css } from 'styled-components'
@@ -184,23 +184,20 @@ import { BookContent } from 'styled-icons/boxicons-regular'
 import { Close as Cross } from 'styled-icons/material'
 import mediaQuery from 'utils/mediaQuery'
 
-const openTocDiv = css`
-  background: ${props => props.theme.background};
-  color: ${props => props.theme.textColor};
+export const TocDiv = styled.aside`
+  background: var(--color-background);
   padding: 0.7em 1.2em;
+  margin: 1em 0;
   border-radius: 0.5em;
-  box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
-  border: 1px solid ${props => props.theme.borderColor};
-`
-
-export const TocDiv = styled.div`
+  box-shadow: 0 0 1em 3px var(--color-shadow);
   height: max-content;
   max-height: 80vh;
   z-index: 3;
-  line-height: 2em;
+  line-height: 2.2em;
   right: 1em;
   max-width: 20em;
   overscroll-behavior: none;
+  grid-row: span 10;
   nav {
     max-height: 78vh;
     overflow-y: scroll;
@@ -210,7 +207,6 @@ export const TocDiv = styled.div`
     bottom: 1em;
     left: 1em;
     ${props => !props.open && `height: 0;`};
-    ${props => props.open && openTocDiv};
     visibility: ${props => (props.open ? `visible` : `hidden`)};
     opacity: ${props => (props.open ? 1 : 0)};
     transition: 0.3s;
@@ -219,7 +215,7 @@ export const TocDiv = styled.div`
     font-size: 0.85em;
     grid-column: 4 / -1;
     position: sticky;
-    top: 2em;
+    top: 7em;
   }
 `
 
@@ -230,15 +226,15 @@ export const Title = styled.h2`
   grid-auto-flow: column;
   align-items: center;
   grid-template-columns: auto auto 1fr;
+  color: var(--color-gray);
 `
 
 export const TocLink = styled.a`
-  color: ${({ theme, active }) => (active ? theme.linkColor : theme.textColor)};
+  cursor: pointer;
+  color: ${p => (p.active ? `var(--color-c)` : `var(--color-gray)`)};
   font-weight: ${props => props.active && `bold`};
   display: block;
   margin-left: ${props => props.depth + `em`};
-  border-top: ${props =>
-    props.depth === 0 && `1px solid ` + props.theme.lighterGray};
 `
 
 export const TocIcon = styled(BookContent)`
@@ -246,7 +242,7 @@ export const TocIcon = styled(BookContent)`
   margin-right: 0.2em;
 `
 
-const openedCss = css`
+const openerCss = css`
   position: fixed;
   bottom: calc(1vh + 4em);
   ${mediaQuery.minPhablet} {
@@ -254,16 +250,10 @@ const openedCss = css`
   }
   left: 0;
   padding: 0.5em 0.6em 0.5em 0.3em;
-  background: ${props => props.theme.background};
-  border: 2px solid ${props => props.theme.borderColor};
+  background: var(--color-background);
+  border: 2px solid var(--color-text);
   border-radius: 0 50% 50% 0;
   transform: translate(${props => (props.open ? `-100%` : 0)});
-`
-
-const closedCss = css`
-  margin-left: 1em;
-  border: 1px solid ${props => props.theme.borderColor};
-  border-radius: 50%;
 `
 
 export const TocToggle = styled(Cross).attrs(props => ({
@@ -279,7 +269,7 @@ export const TocToggle = styled(Cross).attrs(props => ({
   ${mediaQuery.minLaptop} {
     display: none;
   }
-  ${props => (props.opener ? openedCss : closedCss)};
+  ${props => props.opener && openerCss};
 `
 ```
 
