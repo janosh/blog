@@ -180,30 +180,26 @@ const useOnClickOutside = (ref, handler, events) => {
   })
 }
 
-export default function Search({ indices, collapse = true, hitsAsGrid }) {
+const appId = process.env.GATSBY_ALGOLIA_APP_ID
+const searchKey = process.env.GATSBY_ALGOLIA_SEARCH_KE
+
+export default function Search({ indices, collapse = true, size, ...rest }) {
   const ref = createRef()
   const [query, setQuery] = useState(``)
   const [focus, setFocus] = useState(false)
   // useMemo prevents the searchClient from being recreated on every render.
   // Avoids unnecessary XHR requests (see https://tinyurl.com/yyj93r2s).
-  const searchClient = useMemo(
-    () =>
-      algoliasearch(
-        process.env.GATSBY_ALGOLIA_APP_ID,
-        process.env.GATSBY_ALGOLIA_SEARCH_KEY
-      ),
-    []
-  )
+  const searchClient = useMemo(() => algoliasearch(appId, searchKey), [])
   useOnClickOutside(ref, () => setFocus(false))
   return (
-    <Root ref={ref}>
+    <Root ref={ref} {...rest}>
       <InstantSearch
         searchClient={searchClient}
         indexName={indices[0].name}
         onSearchStateChange={({ query }) => setQuery(query)}
       >
-        <Input onFocus={() => setFocus(true)} {...{ collapse, focus }} />
-        <HitsWrapper show={query.length > 0 && focus} asGrid={hitsAsGrid}>
+        <Input onFocus={() => setFocus(true)} {...{ size, collapse, focus }} />
+        <HitsWrapper show={query.length > 0 && focus}>
           {indices.map(({ name, title, type }) => (
             <Index key={name} indexName={name}>
               <header>
@@ -211,7 +207,7 @@ export default function Search({ indices, collapse = true, hitsAsGrid }) {
                 <Stats />
               </header>
               <Results />
-              <HitComp type={type} onClick={() => setFocus(false)} />
+              <Hits type={type} onClick={() => setFocus(false)} />
             </Index>
           ))}
           <PoweredBy />
@@ -270,20 +266,16 @@ const useOnClickOutside = (ref, handler, events) => {
   })
 }
 
-export default function Search({ indices, collapse = true, hitsAsGrid }) {
+const appId = process.env.GATSBY_ALGOLIA_APP_ID
+const searchKey = process.env.GATSBY_ALGOLIA_SEARCH_KEY
+
+export default function Search({ indices, collapse = true, size, ...rest }) {
   const ref = createRef()
   const [query, setQuery] = useState(``)
   const [focus, setFocus] = useState(false)
   // useMemo prevents the searchClient from being recreated on every render.
   // Avoids unnecessary XHR requests (see https://tinyurl.com/yyj93r2s).
-  const searchClient = useMemo(
-    () =>
-      algoliasearch(
-        process.env.GATSBY_ALGOLIA_APP_ID,
-        process.env.GATSBY_ALGOLIA_SEARCH_KEY
-      ),
-    []
-  )
+  const searchClient = useMemo(() => algoliasearch(appId, searchKey), [])
   useOnClickOutside(ref, () => setFocus(false))
   return // ...
 }
@@ -293,14 +285,14 @@ export default function Search({ indices, collapse = true, hitsAsGrid }) {
 
 ```js
 return (
-  <Root ref={ref}>
+  <Root ref={ref} {...rest}>
     <InstantSearch
       searchClient={searchClient}
       indexName={indices[0].name}
       onSearchStateChange={({ query }) => setQuery(query)}
     >
-      <Input onFocus={() => setFocus(true)} {...{ collapse, focus }} />
-      <HitsWrapper show={query.length > 0 && focus} asGrid={hitsAsGrid}>
+      <Input onFocus={() => setFocus(true)} {...{ size, collapse, focus }} />
+      <HitsWrapper show={query.length > 0 && focus}>
         {indices.map(({ name, title, type }) => (
           <Index key={name} indexName={name}>
             <header>

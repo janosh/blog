@@ -11,7 +11,6 @@ export const Root = styled.div`
 `
 
 export const SearchIcon = styled(Search)`
-  width: 1em;
   pointer-events: none;
   color: white;
 `
@@ -52,7 +51,7 @@ const expanded = css`
 export const Input = styled.input`
   outline: none;
   border: none;
-  font-size: 1em;
+  font-size: ${p => p.size};
   background: transparent;
   transition: 0.3s;
   border-radius: 0.2em;
