@@ -30,6 +30,7 @@
     "gatsby-plugin-offline": "3.2.8",
     "gatsby-plugin-react-helmet": "3.3.3",
     "gatsby-plugin-sharp": "2.6.10",
+    "gatsby-plugin-sitemap": "^2.4.5",
     "gatsby-plugin-styled-components": "^3.3.3",
     "gatsby-remark-autolink-headers": "^2.3.4",
     "gatsby-remark-code-titles": "^1.1.0",

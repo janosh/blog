@@ -1,6 +1,7 @@
 const queries = require(`./src/utils/algolia`)
 const macros = require(`./src/utils/katex`)
 const rssOptions = require(`./src/utils/rss`)
+const sitemapOptions = require(`./src/utils/sitemap`)
 
 require(`dotenv`).config()
 
@@ -87,6 +88,10 @@ module.exports = {
     {
       resolve: `gatsby-plugin-feed`,
       options: rssOptions,
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: sitemapOptions,
     },
     {
       resolve: `gatsby-plugin-favicon`,
