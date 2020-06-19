@@ -1,6 +1,7 @@
 const path = require(`path`)
 const fs = require(`fs`)
 const ExifReader = require(`exifreader`)
+const childProcess = require(`child_process`)
 
 const pageTemplate = path.resolve(`./src/templates/page.js`)
 const postTemplate = path.resolve(`./src/templates/post.js`)
@@ -82,4 +83,19 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       modules: [path.resolve(__dirname, `src`), `node_modules`],
     },
   })
+}
+
+// Works on macOS only. Should do nothing on other platforms.
+const notify = (title, text) =>
+  `osascript -e 'display notification "${text}" ` +
+  `with title "${title}" sound name "default"'`
+
+exports.onCreateDevServer = () => {
+  const cmd = notify(`Done!`, `gatsby developed finished`)
+  childProcess.exec(cmd)
+}
+
+exports.onPostBuild = () => {
+  const cmd = notify(`Done!`, `gatsby build finished`)
+  childProcess.exec(cmd)
 }
