@@ -38,7 +38,6 @@ export default createGlobalStyle`
   pre.grvsc-container {
     position: relative;
     background: #050431;
-    font-size: 0.92em;
     border-radius: 0.5em;
     line-height: 1.5em
   }
@@ -70,9 +69,10 @@ export default createGlobalStyle`
   }
 
   /* highlighted lines */
-  .grvsc-container .grvsc-line-highlighted {
-    background: rgba(255, 255, 255, 0.15);
-    border-left: 0.3em solid var(--color-blue-lighter);
+  :root {
+    --grvsc-line-highlighted-background-color: rgba(255, 255, 255, 0.2); /* default unchanged */
+    --grvsc-line-highlighted-border-color: var(--color-blue-lighter); /* default: rgba(255, 255, 255, 0.5) */
+    --grvsc-line-highlighted-border-width: 0.3em; /* default: 2px */
   }
 
   /* inline code */
