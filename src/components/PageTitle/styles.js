@@ -8,7 +8,7 @@ export const PageTitleDiv = styled.hgroup`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   min-height: 20em;
   flex: 1; /* for filling height between header and footer on 404 page */
   font-size: calc(1em + 0.5vw);
@@ -20,8 +20,7 @@ export const PageTitleDiv = styled.hgroup`
     background: rgba(0, 0, 0, 0.7);
     border-radius: 0.2em;
     padding: 0.1em 0.4em;
-    margin-right: auto;
-    margin-left: auto;
+    margin: 1em;
   }
   a {
     color: var(--color-lightLink);

@@ -13,33 +13,14 @@ export const disqusConfig = ({ slug, title }) => ({
   config: { identifier: slug, title },
 })
 
-const PostTitle = ({ title, subtitle }) =>
-  subtitle ? (
-    <div css="padding: 0.3em 1em; > * { margin: 0;}">
-      <h1>{title}</h1>
-      <hr css="margin: 0.3em 0;" />
-      <h2>{subtitle}</h2>
-    </div>
-  ) : (
-    <h1>{title}</h1>
-  )
-
-function flattenCovers(fmatters) {
-  fmatters.forEach(f => {
-    f.cover = { ...f.cover, ...f?.cover?.img?.sharp, ...f?.cover?.img }
-    delete f.cover?.img
-  })
-}
-
 export default function PostTemplate({ data }) {
   const { post, next, prev } = data
-  flattenCovers([post, next, prev].filter(p => p).map(p => p.frontmatter))
   const { frontmatter, body, timeToRead } = post
   const { title, slug, cover, showToc } = frontmatter
   return (
     <>
-      <PageTitle img={cover}>
-        <PostTitle {...frontmatter} />
+      <PageTitle {...cover}>
+        <h1>{title}</h1>
         <PostMeta inTitle {...{ ...frontmatter, timeToRead }} />
       </PageTitle>
       <PageBody>

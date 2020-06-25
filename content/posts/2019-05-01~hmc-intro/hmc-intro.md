@@ -1,6 +1,5 @@
 ---
-title: Hamiltonian Monte Carlo
-subtitle: A Conceptual Introduction
+title: Hamiltonian Monte Carlo - A Conceptual Introduction
 slug: /hmc-intro
 date: 2019-05-01
 cover:
@@ -118,7 +117,7 @@ $$
 n_\text{eff} = \frac{N}{1 + 2 \sum_{i=1}^\infty \rho_i},
 $$
 
-with $\rho_i$ the lag-$i$ autocorrelation of $f$ over the history of the chain. $n_\text{eff}$ takes into account possible correlations between successive samples in the chain. If a point in the chain is strongly correlated with one of its predecessors, the amount of new information it provides about the typical set is reduced. $n_\text{eff}$ quantifies the actual number of _independent_ samples contained in the Markov chain. In practice this number can be estimated from the chain itself, although care must be taken to avoid biases ([Geyer, 1992](https://jstor.org/stable/2246094?seq=1#metadata_info_tab_contents); [Gelman et al., 2014](https://taylorfrancis.com/books/9780429113079)).
+with $\rho_i$ the lag-$i$ autocorrelation of $f$ over the history of the chain. $n_\text{eff}$ takes into account possible correlations between successive samples in the chain. If a point in the chain is strongly correlated with one of its predecessors, the amount of new information it provides about the typical set is reduced. $n_\text{eff}$ quantifies the actual number of*independent* samples contained in the Markov chain. In practice this number can be estimated from the chain itself, although care must be taken to avoid biases ([Geyer, 1992](https://jstor.org/stable/2246094?seq=1#metadata_info_tab_contents); [Gelman et al., 2014](https://taylorfrancis.com/books/9780429113079)).
 
 Because the part of the Markov chain generated during the initial walk into the typical set biases the estimators, it is common practice to "warm up" the Markov chain by discarding a chosen number of early samples. Warm-up can also be used to empirically optimize any degrees of freedom such as reducing or increasing the stepsize of the Markov transition without biasing the subsequent estimators.
 

@@ -9,7 +9,7 @@ const PrevNext = ({ prev, next, label, slugPrefix = `` }) => (
       <Link to={slugPrefix + prev.slug} rel="prev" css="margin-right: 1em;">
         <h3 css="text-align: left;">← Previous {label}</h3>
         <Thumbnail>
-          <Img {...prev.cover} />
+          <Img {...prev.cover?.img} />
           <h4>{prev.title}</h4>
         </Thumbnail>
       </Link>
@@ -18,7 +18,7 @@ const PrevNext = ({ prev, next, label, slugPrefix = `` }) => (
       <Link to={slugPrefix + next.slug} rel="next" css="margin-left: auto;">
         <h3 css="text-align: right;">Next {label} →</h3>
         <Thumbnail>
-          <Img {...next.cover} />
+          <Img {...next.cover?.img} />
           <h4>{next.title}</h4>
         </Thumbnail>
       </Link>
