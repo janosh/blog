@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import mediaQuery from 'utils/mediaQuery'
+import { Gatsby, Github, Netlify } from 'styled-icons/simple-icons'
 
 export const FooterDiv = styled.footer`
   background: var(--color-b);
@@ -28,11 +29,13 @@ export const FooterDiv = styled.footer`
 
 export const PoweredBy = styled.div`
   grid-area: poweredBy;
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: 1em;
-  a {
-    height: 1.5em;
-    width: 1.5em;
+  > a {
+    padding: 0 0.5em;
   }
 `
+
+export const Icons = {
+  Gatsby,
+  Github,
+  Netlify,
+}

@@ -1,47 +1,39 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
-import { FooterDiv, PoweredBy } from './styles'
+import { FooterDiv, PoweredBy, Icons } from './styles'
 import Rss from '../Rss'
 
 export default function Footer() {
-  const { footer, logos } = useStaticQuery(graphql`
+  const { contentYaml } = useStaticQuery(graphql`
     {
-      footer: footerYaml {
-        copyright
+      contentYaml {
         sourceNote
+        copyright
         poweredBy {
-          url
           title
-        }
-      }
-      logos: allFile(
-        filter: { dir: { regex: "/footer/logos/" } }
-        sort: { fields: name }
-      ) {
-        nodes {
-          src: publicURL
+          url
         }
       }
     }
   `)
-  const { copyright, sourceNote, poweredBy } = footer
+  const { copyright, sourceNote, poweredBy } = contentYaml
   return (
     <FooterDiv>
-      <span css="grid-area: copyright;">
+      <span>
         © {new Date().getFullYear()} - {copyright}
         &emsp; <Rss />
       </span>
-      <span
-        css="grid-area: source;"
-        dangerouslySetInnerHTML={{ __html: sourceNote }}
-      />
+      <span dangerouslySetInnerHTML={{ __html: sourceNote }} />
       <PoweredBy>
-        Powered by
-        {poweredBy.map(({ url, title }, index) => (
-          <a key={title} href={url}>
-            <img src={logos.nodes[index].src} alt={title} />
-          </a>
-        ))}
+        Powered by&ensp;
+        {poweredBy.map(({ url, title }) => {
+          const Icon = Icons[title]
+          return (
+            <a key={title} href={url} aria-label={title}>
+              <Icon size="1.4em" />
+            </a>
+          )
+        })}
       </PoweredBy>
     </FooterDiv>
   )
