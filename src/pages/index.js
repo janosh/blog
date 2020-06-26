@@ -7,7 +7,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { ArrowLeft, ArrowRight } from 'styled-icons/fa-solid'
-import mediaQuery from 'utils/mediaQuery'
+import { mediaQueries } from 'utils/mediaQueries'
 import PostList from 'views/PostList'
 import { ProjectList } from 'views/Web'
 
@@ -52,13 +52,13 @@ const Title = styled.h1`
   a {
     padding: 0.4em;
     color: white;
-    ${mediaQuery.maxPhone} {
+    ${mediaQueries.maxPhone} {
       & + a {
         border-top: 0.5px solid rgba(255, 255, 255, 0.9);
       }
     }
   }
-  ${mediaQuery.minPhone} {
+  ${mediaQueries.minPhone} {
     grid-template-columns: 1fr 1fr;
     a {
       :nth-child(2),

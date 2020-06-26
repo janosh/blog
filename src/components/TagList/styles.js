@@ -14,7 +14,7 @@ import { Cpu } from 'styled-icons/feather'
 import { Lab, Sigma } from 'styled-icons/icomoon'
 import { ColorLens, Web } from 'styled-icons/material'
 import { WeatherSunny } from 'styled-icons/typicons'
-import mediaQuery from 'utils/mediaQuery'
+import { mediaQueries } from 'utils/mediaQueries'
 export { Tags as TagsIcon } from 'styled-icons/fa-solid'
 
 export const TagGrid = styled.aside`
@@ -25,11 +25,11 @@ export const TagGrid = styled.aside`
   h2 {
     margin: 0;
   }
-  ${mediaQuery.minPhablet} {
+  ${mediaQueries.minPhablet} {
     position: sticky;
     top: 6em;
   }
-  ${mediaQuery.maxPhablet} {
+  ${mediaQueries.maxPhablet} {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -55,7 +55,7 @@ export const Tag = styled.button`
   border-radius: 0.2em;
   background: ${p =>
     p.active ? `var(--color-a)` : `var(--color-accentBackground)`};
-  ${mediaQuery.maxPhablet} {
+  ${mediaQueries.maxPhablet} {
     padding: 0.1em 0.5em 0.2em;
     margin: 0 1em 1em 0;
     transition: 0.6s;
@@ -71,7 +71,7 @@ export const Toggle = styled(ToggleOff).attrs(props => ({
 }))`
   margin-left: 0.5em;
   cursor: pointer;
-  ${mediaQuery.minPhablet} {
+  ${mediaQueries.minPhablet} {
     display: none;
   }
 `

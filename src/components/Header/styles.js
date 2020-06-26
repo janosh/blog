@@ -1,6 +1,6 @@
 import { Link } from 'gatsby'
 import styled from 'styled-components'
-import mediaQuery from 'utils/mediaQuery'
+import { mediaQueries } from 'utils/mediaQueries'
 
 export const HeaderDiv = styled.header`
   background: var(--color-b);
@@ -17,7 +17,7 @@ export const HeaderDiv = styled.header`
   grid-template-areas: 'nav title darkmode search';
   grid-template-columns: auto 1fr auto auto;
   border-bottom: 1px solid var(--color-a);
-  ${mediaQuery.minTablet} {
+  ${mediaQueries.minTablet} {
     grid-template-areas: 'title nav darkmode search';
   }
 `

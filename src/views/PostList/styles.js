@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Grid } from 'components/styles'
-import mediaQuery from 'utils/mediaQuery'
+import { mediaQueries } from 'utils/mediaQueries'
 
 const asRow = css`
   grid-column: 2/-2;
@@ -11,11 +11,11 @@ const asRow = css`
 `
 
 const inBlog = css`
-  ${mediaQuery.maxPhablet} {
+  ${mediaQueries.maxPhablet} {
     grid-column: 3;
     justify-self: center;
   }
-  ${mediaQuery.minPhablet} {
+  ${mediaQueries.minPhablet} {
     grid-column: 2/-3;
   }
 `

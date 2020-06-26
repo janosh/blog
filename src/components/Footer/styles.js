@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import mediaQuery from 'utils/mediaQuery'
+import { mediaQueries } from 'utils/mediaQueries'
 import { Gatsby, Github, Netlify } from 'styled-icons/simple-icons'
 
 export const FooterDiv = styled.footer`
@@ -17,12 +17,12 @@ export const FooterDiv = styled.footer`
     'source'
     'poweredBy';
   grid-gap: 4vh 6vw;
-  ${mediaQuery.minPhone} {
+  ${mediaQueries.minPhone} {
     grid-template-areas:
       'copyright source'
       'poweredBy poweredBy';
   }
-  ${mediaQuery.minTablet} {
+  ${mediaQueries.minTablet} {
     grid-template-areas: 'copyright source poweredBy';
   }
 `

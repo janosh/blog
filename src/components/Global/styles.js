@@ -1,6 +1,6 @@
 import 'katex/dist/katex.min.css'
 import { createGlobalStyle } from 'styled-components'
-import mediaQuery, { screens } from 'utils/mediaQuery'
+import { mediaQueries, screens } from 'utils/mediaQueries'
 import { typography } from 'utils/constants'
 
 const { phone, desktop } = screens
@@ -15,11 +15,11 @@ export const GlobalStyle = createGlobalStyle`
     line-height: ${minLineHeight}em;
     /* Fix very large font size in code blocks in iOS Safari (https://stackoverflow.com/a/3428477). */
     -webkit-text-size-adjust: 100%;
-    ${mediaQuery.minPhone} {
+    ${mediaQueries.minPhone} {
       font-size: calc(${minFontSize}em + (${maxFontSize} - ${minFontSize}) * ((100vw - ${phone}em) / (${desktop} - ${phone})));
       line-height: calc(${minLineHeight}em + (${maxLineHeight} - ${minLineHeight}) * ((100vw - ${phone}em) / (${desktop} - ${phone})));
     }
-    ${mediaQuery.minDesktop} {
+    ${mediaQueries.minDesktop} {
       font-size: ${maxFontSize}em;
       line-height: ${maxLineHeight}em;
     }

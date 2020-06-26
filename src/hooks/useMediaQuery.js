@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import mediaQuery from 'utils/mediaQuery'
+import { mediaQueries } from 'utils/mediaQueries'
 
 export const useMediaQuery = (query, cb) => {
   const [matches, setMatches] = useState(false)
@@ -21,9 +21,9 @@ export const useMediaQuery = (query, cb) => {
 }
 
 export const useScreenQuery = condition => {
-  if (!mediaQuery[condition + `Js`])
+  if (!mediaQueries[condition + `Js`])
     throw new TypeError(
       `useMediaQuery's condition should be one of (min|max)(Phone|Phablet|Tablet|etc.)`
     )
-  return useMediaQuery(mediaQuery[condition + `Js`])
+  return useMediaQuery(mediaQueries[condition + `Js`])
 }
