@@ -20,10 +20,12 @@ export const useMediaQuery = (query, cb) => {
   return matches
 }
 
-export const useScreenQuery = condition => {
-  if (!mediaQueries[condition + `Js`])
+const validKeys = Object.keys(mediaQueries).filter(key => !key.includes(`Js`))
+
+export const useScreenQuery = (key, cb) => {
+  if (!mediaQueries[key + `Js`])
     throw new TypeError(
-      `useMediaQuery's condition should be one of (min|max)(Phone|Phablet|Tablet|etc.)`
+      `useScreenQuery received invalid key: ${key}. Should be one of ${validKeys}`
     )
-  return useMediaQuery(mediaQueries[condition + `Js`])
+  return useMediaQuery(mediaQueries[key + `Js`], cb)
 }
