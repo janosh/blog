@@ -63,14 +63,12 @@ export const TocIcon = styled(BookContent)`
 
 const openerCss = css`
   position: fixed;
-  bottom: calc(1vh + 4em);
-  ${mediaQuery.minPhablet} {
-    bottom: calc(1vh + 1em);
-  }
+  bottom: 2em;
   left: 0;
   padding: 0.5em 0.6em 0.5em 0.3em;
   background: var(--color-background);
   border: 2px solid var(--color-text);
+  border-left: none;
   border-radius: 0 50% 50% 0;
   transform: translate(${props => (props.open ? `-100%` : 0)});
 `
