@@ -28,7 +28,7 @@ export const PageTitleDiv = styled.hgroup`
 `
 
 export const Img = styled(Image).attrs(
-  ({ fluid, src }) => !fluid && src && { as: `img` }
+  p => !p.fluid && p.src && { as: `img`, src: p.dataURI || p.src }
 )`
   position: absolute !important;
   z-index: -1;

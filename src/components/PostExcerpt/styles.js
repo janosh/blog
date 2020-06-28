@@ -19,7 +19,7 @@ export const Post = styled.article`
 `
 
 export const Cover = styled(Img).attrs(
-  ({ fluid, src }) => !fluid && { as: src ? `img` : `div` }
+  ({ fluid, src }) => !fluid && src && { as: `img` }
 )`
   height: calc(10em + 4vh);
   width: 100%;

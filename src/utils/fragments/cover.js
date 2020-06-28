@@ -9,6 +9,7 @@ export const query = graphql`
       }
     }
     src: publicURL
+    dataURI
   }
   fragment cover on MdxFrontmatter {
     cover {

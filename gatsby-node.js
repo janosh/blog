@@ -1,7 +1,9 @@
 const path = require(`path`)
-const fs = require(`fs`)
+const fs = require(`fs`).promises
 const ExifReader = require(`exifreader`)
 const childProcess = require(`child_process`)
+const svgToMiniDataURI = require(`mini-svg-data-uri`)
+const SVGO = require(`svgo`)
 
 const pageTemplate = path.resolve(`./src/templates/page.js`)
 const postTemplate = path.resolve(`./src/templates/post.js`)
@@ -56,9 +58,9 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 }
 
-exports.onCreateNode = ({ node, actions }) => {
+exports.onCreateNode = async ({ node, actions }) => {
   if (node.dir && node.dir.includes(`content/photos`) && node.ext === `.jpg`) {
-    const buffer = fs.readFileSync(node.absolutePath)
+    const buffer = await fs.readFile(node.absolutePath)
     const tags = ExifReader.load(buffer)
     const meta = {
       lat: tags.GPSLatitude.description,
@@ -98,4 +100,26 @@ exports.onCreateDevServer = () => {
 exports.onPostBuild = () => {
   const cmd = notify(`Done!`, `gatsby build finished`)
   childProcess.exec(cmd)
+}
+
+// https://github.com/gatsbyjs/gatsby/issues/25193
+exports.createResolvers = ({ createResolvers }) => {
+  const svgo = new SVGO()
+  const resolvers = {
+    File: {
+      dataURI: {
+        type: `String`,
+        // full resolve args: parent, args, context, info
+        async resolve(parent) {
+          if (parent.extension === `svg` && parent.size < 15000) {
+            const svg = await fs.readFile(parent.absolutePath, `utf8`)
+            const { data } = await svgo.optimize(svg)
+            return svgToMiniDataURI(data)
+          }
+          return null
+        },
+      },
+    },
+  }
+  createResolvers(resolvers)
 }
