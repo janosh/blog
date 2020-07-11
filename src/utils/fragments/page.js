@@ -8,11 +8,6 @@ export const query = graphql`
       date(formatString: "MMM D, YYYY")
       tags
       showToc
-      mdxTitle {
-        childMdx {
-          body
-        }
-      }
       ...cover
     }
     timeToRead

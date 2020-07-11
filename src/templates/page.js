@@ -6,14 +6,14 @@ import React from 'react'
 
 export default function PageTemplate({ data }) {
   const { frontmatter, body, excerpt } = data.page
-  const { title, mdxTitle, cover } = frontmatter
+  const { title, cover } = frontmatter
   cover.fluid = cover?.img?.sharp?.fluid
   cover.src = cover?.img?.src
   cover.alt = cover?.img?.alt
   return (
     <>
       <PageTitle img={cover}>
-        {mdxTitle ? <Mdx>{mdxTitle.childMdx.body}</Mdx> : <h1>{title}</h1>}
+        <h1>{title}</h1>
       </PageTitle>
       {excerpt && ( // If excerpt is empty, so is body. Hence no need to render it.
         // Testing excerpt because body is an MDX function (always truthy).
