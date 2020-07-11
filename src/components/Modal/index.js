@@ -21,12 +21,12 @@ export default function Modal({ open, modal, setModal, children, ...rest }) {
   }, [open])
   if (open)
     return (
-      <ModalBehind open={open} onClick={setModal}>
+      <ModalBehind open={open} onClick={() => setModal()}>
         <ModalDiv
           onClick={event => event.stopPropagation()}
           {...{ className, fullscreen, ref }}
         >
-          <Close onClick={setModal} />
+          <Close onClick={() => setModal()} />
           <FullscreenToggle
             onClick={() => setFullscreen(!fullscreen)}
             {...{ fullscreen }}
