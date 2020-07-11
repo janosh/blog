@@ -19,7 +19,7 @@ const settings = { attributesToSnippet: [`excerpt:20`] }
 
 const queries = [
   {
-    query: queryTemplate(`frontmatter: {purpose: {eq: "page"}}`),
+    query: queryTemplate(`fileAbsolutePath: {regex: "/pages/"}`),
     transformer: res => flatten(res.data.allMdx.nodes),
     indexName: `Pages`,
     settings,

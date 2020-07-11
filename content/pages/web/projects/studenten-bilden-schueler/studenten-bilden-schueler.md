@@ -1,6 +1,5 @@
 ---
 title: Studenten bilden Schüler
-slug: /web/projects/studenten-bilden-schueler
 cover:
   img: studenten-bilden-schueler.png
 url: https://studenten-bilden-schueler.de

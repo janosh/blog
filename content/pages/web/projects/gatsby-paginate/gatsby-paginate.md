@@ -1,6 +1,5 @@
 ---
 title: Gatsby Paginate
-slug: /web/projects/gatsby-paginate
 cover:
   img: gatsby-paginate.png
 url: https://gatsbyjs.org/packages/gatsby-paginate

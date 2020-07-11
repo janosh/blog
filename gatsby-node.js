@@ -11,7 +11,7 @@ const postTemplate = path.resolve(`./src/templates/post.js`)
 const query = `
   {
     pages: allMdx(
-      filter: { frontmatter: { purpose: { eq: "page" } } }
+      filter: { fileAbsolutePath: { regex: "/pages/" } }
     ) {
       nodes {
         frontmatter {
@@ -39,11 +39,13 @@ exports.createPages = async ({ graphql, actions }) => {
 
   pages.nodes.forEach(page => {
     const { slug } = page.frontmatter
-    actions.createPage({
-      path: slug,
-      component: pageTemplate,
-      context: { slug },
-    })
+    if (slug) {
+      actions.createPage({
+        path: slug,
+        component: pageTemplate,
+        context: { slug },
+      })
+    }
   })
 
   posts.nodes.forEach((post, index, arr) => {

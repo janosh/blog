@@ -1,6 +1,5 @@
 ---
 title: Tutorific
-slug: /web/projects/tutorific
 cover:
   img: tutorific.png
 url: https://github.com/janosh/tutorific-frontend
