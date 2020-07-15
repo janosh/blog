@@ -40,7 +40,7 @@ export function ProjectList(props) {
   const project = modal >= 0 && modal < projects.length && projects[modal]
 
   const setter = idx => {
-    setUrlProject(projects[idx]?.frontmatter.title || null)
+    setUrlProject(projects[idx]?.frontmatter.title ?? null)
     setModal(idx)
   }
   return (

@@ -6,7 +6,7 @@ import favicon from '../../content/favicon.svg'
 export default function Seo({ site, uri = ``, data, children }) {
   const title = uri.length > 1 ? `${startCase(uri)} | ${site.title}` : site.title
   const pageUrl = site.url + uri
-  const desc = data?.page?.excerpt || site.description
+  const desc = data?.page?.excerpt ?? site.description
   return (
     <Helmet title={title}>
       <meta property="og:type" content="website" />
