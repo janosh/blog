@@ -16,7 +16,7 @@ tech:
 
 A [Gatsby](https://gatsbyjs.org) source plugin that pulls metadata for scientific publications from [Google Scholar](https://scholar.google.com).
 
-[![gatsby-source-google-scholar on gatsbyjs.org](gatsby-plugin-page.png)](https://gatsbyjs.org/packages/gatsby-source-google-scholar)
+[![gatsby-source-google-scholar](gatsby-plugin-page.png)](https://gatsbyjs.org/packages/gatsby-source-google-scholar)
 
 Available on [NPM](https://npmjs.com/package/gatsby-source-google-scholar). Install via
 

@@ -13,13 +13,13 @@ tags:
 
 import ColorMasonry from './ColorMasonry'
 
-Now that we have React Hooks, so many components can (and should) be rewritten in a more succinct, readable and maintainable manner ([despite what Dan said at React Conf](https://youtu.be/dpw9EHDh2bM?t=3365)). A perfect candidate for this in my own code base was a rather brittle [`Masonry` component that was centered around CSS grid](/blog/css-grid-masonry). With hooks, it was easy to significantly improve on this approach.
+Now that we have React Hooks, so many components can (and should) be rewritten in a more succinct, readable and maintainable manner ([despite what Dan said at React Conf](https://youtu.be/dpw9EHDh2bM?t=3365)). A perfect rewrite candidate in the code base of this site was a rather brittle [`Masonry` component that was centered around CSS grid](/blog/css-grid-masonry). With hooks, it was easy to significantly improve on this approach.
 
 For those unfamiliar with "masonry" on the web, the goal is to create a layout like this.
 
 <ColorMasonry />
 
-Excluding the `useEventListener` hook and styles it uses, the new implementation uses ony 29 lines of codes and is about as plug-and-play as components get.
+Excluding the `useEventListener` hook and styles it uses, the new implementation uses only 29 lines of codes and is about as plug-and-play as components get.
 
 ```js:title=src/components/masonry/index.js
 import React, { useEffect, useRef, useState } from 'react'
@@ -89,7 +89,7 @@ export const Photos = ({ photos }) => (
 )
 ```
 
-More concretely, the above colored tiles are rendered by the this component.
+The interactive colored tiles above are rendered by this component.
 
 ```js:title=ColorMasonry.js
 import React, { useState } from 'react'

@@ -12,7 +12,7 @@ tags:
   - JS
 ---
 
-This post is a guide on how to write a React component that implements custom search powered by [Algolia](https://algolia.com) on a [Gatsby](https://gatsbyjs.org) site. You can see the result in action by clicking on the search icon in the top right of this page. The complete code is on [GitHub](https://github.com/janosh/blog/tree/master/src/components/Search). Also, check out Algolia's own CodeSandbox on how to use their [React Instantsearch](https://codesandbox.io/s/github/algolia/create-instantsearch-app/tree/templates/react-instantsearch) library.
+This post is a guide on how to write a React component that implements custom search powered by [Algolia](https://algolia.com) on a [Gatsby](https://gatsbyjs.org) site. You can see the result in action by clicking on the search icon in the top right of this page. The complete code is on [GitHub](https://github.com/janosh/blog/tree/master/src/components/Search). Also, check out Algolia's CodeSandbox on how to use their [React Instantsearch](https://codesandbox.io/s/github/algolia/create-instantsearch-app/tree/templates/react-instantsearch) library.
 
 If you're looking to add search to a documentation site with highly structured content, then you can let Algolia handle the steps outlined in the backend section for you by using their excellent [Docsearch](https://community.algolia.com/docsearch). For other types of sites and more fine-grained control over exactly what data should be indexed, read on.
 
@@ -24,7 +24,7 @@ First, you'll need to add [`gatsby-plugin-algolia`](https://github.com/algolia/g
 yarn add gatsby-plugin-algolia react-instantsearch-dom dotenv
 ```
 
-If you're project doesn't use them already, you will also need to install `react` and `styled-components`. The latter is optional but you will then have to convert some styled components to whichever design approach you use.
+If your project doesn't use them already, you will also need to install `react` and `styled-components`. The latter is optional but you will then have to convert some styled-components to whichever design approach you use.
 
 ```sh
 yarn add react styled-components
@@ -121,7 +121,7 @@ const queries = [
 module.exports = queries
 ```
 
-It might look a little intimidating at first, but basically you're just letting `gatsby-plugin-algolia` know how to acquire the data with which to populate your indices on their servers. The example above uses separate queries passing data to separate indices for pages and blog posts.
+It might look a little intimidating at first, but basically, you're just letting `gatsby-plugin-algolia` know how to acquire the data with which to populate your indices on their servers. The example above uses separate queries passing data to separate indices for pages and blog posts.
 
 Transformers allow you to modify the data returned by the queries to bring it into a format ready for searching. All we're doing here is 'flattening' posts and pages to 'unnest' the frontmatter fields (such as `author`, `date`, `tags`) but transformers could do much more for you if required. This makes the whole process of indexing your data really flexible and powerful. You could for instance use them to filter the results of your queries, format fields, add or merge them, etc.
 
@@ -133,7 +133,7 @@ What remains is a user-facing search interface for your site. It needs a way for
 
 We're going to assemble everything we need into a React `Search` component that we call from anywhere on our site where we want the user to be able to search. Even though design varies strongly from site to site, I'll also go through the styles implemented with [`styled-components`](https://styled-components.com) in this guide since working out the CSS transitions to have the search field slide out as the user clicks on it and the results pane to appear once Algolia returns matches took some time.
 
-The `Search` components is made up of the following files:
+The `Search` component is made up of the following files:
 
 - [**`index.js`**: the main component](https://github.com/janosh/blog/tree/master/src/components/Search/index.js)
 - [**`input.js`**: the text input field](https://github.com/janosh/blog/tree/master/src/components/Search/Input.js)
@@ -218,7 +218,7 @@ export default function Search({ indices, collapse = true, size, ...rest }) {
 }
 ```
 
-At the top, we import `InstantSearch` from [`react-instantsearch-dom`](https://community.algolia.com/react-instantsearch) which is the root component that allows your whole search experience to connect to Algolia's service. As the name suggests, `Index` allows you to tap into an individual index and `Hits` provides you with the data returned for a user's search input. Finally [`connectStateResults`](https://community.algolia.com/react-instantsearch/connectors/connectStateResults.html) wraps around custom React components and provides them with high-level stats about the current search state such as the query, the number of results and how long it took to fetch them.
+At the top, we import `InstantSearch` from [`react-instantsearch-dom`](https://community.algolia.com/react-instantsearch) which is the root component that allows your whole search experience to connect to Algolia's service. As the name suggests, `Index` allows you to tap into an individual index and `Hits` provides you with the data returned for a user's search input. Finally, [`connectStateResults`](https://community.algolia.com/react-instantsearch/connectors/connectStateResults.html) wraps around custom React components and provides them with high-level stats about the current search state such as the query, the number of results and how long it took to fetch them.
 
 We then import the styled components that make up the UI and the `Input` component into which the user enters the query.
 
@@ -235,7 +235,7 @@ The last thing we need for the `Search` component to work is a hit component for
 import Hits from './Hits'
 ```
 
-Next we define two connected components. `Results` informs the user that no matches could be found for a query unless the number of hits is positive, i.e. `searchResults.nbHits > 0`. `Stats` just displays `searchResults.nbHits`.
+Next, we define two connected components. `Results` informs the user that no matches could be found for a query unless the number of hits is positive, i.e. `searchResults.nbHits > 0`. `Stats` just displays `searchResults.nbHits`.
 
 ```js
 const Results = connectStateResults(
@@ -521,7 +521,7 @@ export default connectHits(function HitComp({ type, hits, onClick }) {
 
 ## Usage
 
-Now all we need to do is import `Search` somewhere. The obvious place is the `Header` component so let's add it there.
+All we need to do now is import `Search` somewhere. The obvious place is the `Header` component so let's add it there.
 
 ```js:title=src/components/Header/index.js
 import React from 'react'

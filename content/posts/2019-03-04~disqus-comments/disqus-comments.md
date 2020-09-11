@@ -11,7 +11,7 @@ tags:
 showToc: true
 ---
 
-If you’re running a Gatsby blog (or any React-powered blog for that matter) and you’ve started adding some content to it, the next thing to think about is how to increase engagement among your visitors. A great way to do that is to allow them to ask questions and express their views on what you’ve written. This will make your blog seem much more lively and interactive. The good news is, this is really easy. I just went through that process and the only thing that took time was deciding which service to use.
+If you’re running a Gatsby blog (or any React-powered blog for that matter) and you’ve started adding some content to it, the next thing to think about is how to increase engagement among your visitors. A great way to do that is to allow them to ask questions and express their views on what you’ve written. This will make your blog seem much more lively and interactive. The good news is, this is easy. I just went through that process and the only thing that took time was deciding which service to use.
 
 ## Available services
 
@@ -44,14 +44,14 @@ You should, however, consider the privacy implications of letting a third party 
 
 Here are the steps for adding Disqus comments to your own blog:
 
-1. [Sign-up to Disqus](https://disqus.com/profile/signup). During the process you'll have to choose a 'shortname' for your site. This is how Disqus will identify comments coming from your site. Copy that for later.
+1. [Sign-up to Disqus](https://disqus.com/profile/signup). During the process, you'll have to choose a `shortname` for your site. This is how Disqus will identify comments coming from your site. Copy that for later.
 2. Install the Disqus React package
 
    ```sh
    yarn add disqus-react
    ```
 
-3. Add the shortname from step 1 to your `.env` and `.env.example` files and call it something like `GATSBY_DISQUS_NAME` so that people forking your repo will know that they need to supply this value to get comments to work. (You need to prefix the environment variable with `GATSBY_` in order to [make it available to client side code](https://gatsbyjs.org/docs/environment-variables/#client-side-javascript).)
+3. Add the `shortname` from step 1 to your `.env` and `.env.example` files and call it something like `GATSBY_DISQUS_NAME` so that people forking your repo will know that they need to supply this value to get comments to work. (You need to prefix the environment variable with `GATSBY_` in order to [make it available to client-side code](https://gatsbyjs.org/docs/environment-variables/#client-side-javascript).)
 
    ```sh:title=.env.example
    # enables Disqus comments below blog posts
@@ -98,7 +98,7 @@ And you're done. You should now see the Disqus comment form appear beneath your 
 
 ## Comment counts in post previews
 
-If you'd like your blog post previews to show a count of the number of comments each post received, simply import `disqus-react`'s `CommentCount` in the relevant post preview component and provide it the exact same config object as `DiscussionEmbed`.
+If you'd like your blog post previews to show a count of the number of comments each post received, simply import `disqus-react`'s `CommentCount` in the relevant post preview component and provide it the same config object as `DiscussionEmbed`.
 
 ```js:title=src/components/postMeta/index.js
 import React from 'react'
@@ -139,7 +139,7 @@ export default PostMeta
 
 The config object `disqusConfig` is now an exported function to keep things [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself) and make it reusable by the post template component above where it was just an object.
 
-You can customize what string the `CommentCount` component displays depending on how many comments a post has by going to your Disqus admin settings [as described here](https://help.disqus.com/installation/customizing-comment-count-link-text). For instance you might want to change the text "0 comments" to something more inspiring like "Start a discussion!". :wink:
+You can customize what string the `CommentCount` component displays depending on how many comments a post has by going to your Disqus admin settings [as described here](https://help.disqus.com/installation/customizing-comment-count-link-text). For instance, you might want to change the text "0 comments" to something more inspiring like "Start a discussion!". :wink:
 
 ![Disqus community admin settings](disqus-community-admin-settings.png)
 

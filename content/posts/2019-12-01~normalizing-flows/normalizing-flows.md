@@ -83,7 +83,7 @@ $$
 <details>
 <summary>Derivation</summary>
 
-Eq. (1) follows from the [change of variables theorem](https://wikipedia.org/wiki/Integration_by_substitution#Substitution_for_multiple_variables) (a.k.a. integration by substitution, integration's pendant to the chain rule of differentiation). By definition of probability
+Eq. (2) follows from the [change of variables theorem](https://wikipedia.org/wiki/Integration_by_substitution#Substitution_for_multiple_variables) (a.k.a. integration by substitution, integration's pendant to the chain rule of differentiation). By definition of probability
 
 $$
 \int_{\reals^d} p_z(\vec z) \ \dif z

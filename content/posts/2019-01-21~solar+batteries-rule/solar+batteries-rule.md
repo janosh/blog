@@ -54,14 +54,14 @@ $$
 
 It would take us close to a thousand years of continuing the period of strongest increase in human power consumption to reach the sun's total energy output.
 
-But I digress. Basically my point is that solar energy is obviously by far the best long-term solution for all our energy needs and (perhaps slightly less obviously) - here comes the core message of this blog post - the best short term solution as well when combined with large-scale batteries.
+But I digress. My point is that solar energy is obviously by far the best long-term solution for all our energy needs and (perhaps slightly less obviously) - here comes the core message of this blog post - the best short term solution as well when combined with large-scale batteries.
 
 The price of solar has seen such a steady and rapid decrease that it won't take much longer for it to drastically undercut every other method of energy generation humanity has yet developed.
 
 ![Solar Price Drop](solar-price-drop.jpg)
 _Solar energy price drop and rise in global installations. Source: [CleanTechnica](https://cleantechnica.com/2018/02/11/solar-panel-prices-continue-falling-quicker-expected-cleantechnica-exclusive)_
 
-In fact, in sunny countries this is already the case. In early 2018, Saudi Arabian operator ACWA Power reported they are able to operate their newest solar park at an [incredible tariff of 2.34 cents per kilowatt hour](https://cleantechnica.com/2018/02/06/acwa-power-develop-first-ever-utility-scale-renewable-project-saudi-arabia-record-breaking-tariff)! There's simply no other technology that can compete with this, let alone be sustainable. With solar cell technology continuing to improve, global manufacturing continuing to increase to economies of enormous scale, imagine where that figure is going to be in 10 years time.
+In fact in sunny countries, this is already the case. In early 2018, Saudi Arabian operator ACWA Power reported they can operate their newest solar park at an [incredible tariff of 2.34 cents per kilowatt hour](https://cleantechnica.com/2018/02/06/acwa-power-develop-first-ever-utility-scale-renewable-project-saudi-arabia-record-breaking-tariff)! There's simply no other technology that can compete with this, let alone be sustainable. With solar cell technology continuing to improve, global manufacturing continuing to increase to economies of enormous scale, imagine where that figure is going to be in 10 years time.
 
 The reason why I'm writing this blog post now is that I just watched an excellent video on one of my favorite YouTube channels called [ColdFusion](https://youtube.com/channel/UC4QZ_LsYcvcq7qOsOhpAX4A) in which Dagogo excellently outlines recent advances in battery technology and why they are the most viable solution for intermediate power storage of renewable energies. Take a look at the video and I think you'll have to agree, the solution to global warming is right in front us. It's as simple as building out our solar cell and battery manufacturing capabilities as quickly as we can.
 
@@ -69,4 +69,4 @@ The reason why I'm writing this blog post now is that I just watched an excellen
 
 [1]: https://en.wikipedia.org/wiki/lagrangian_point
 
-[^1]: Basically ever since I first heard of Tesla. I still remember that day and how I excited I was that someone had finally come along that took sustainable technologies seriously and was willing to invest all the necessary time, effort and capital to push their applications far enough to enable to transform our entire fossil fuel-driven economy.
+[^1]: Ever since I first heard of Tesla. I still remember that day and how I excited I was that someone had finally come along that took sustainable technologies seriously and was willing to invest all the necessary time, effort and capital to push their applications far enough to enable to transform our entire fossil fuel-driven economy.

@@ -26,14 +26,14 @@ Just so we're on the same page, here are two important points.
 
 2. This is what each of the words in my unwieldy title mean:
 
-   - **Responsive**: If the screen width permits, the ToC is displayed in a column to the right of the main text. Else (on narrow screens) it appears as a small book icon in the lower left corner. In that case, the component expands to show the full ToC when that icon is clicked.
+   - **Responsive**: If the screen width permits, the ToC is displayed in a column to the right of the main text. Else (on narrow screens) it appears as a small book icon in the lower-left corner. In that case, the component expands to show the full ToC when that icon is clicked.
    - **Sticky**: The ToC scrolls with the viewport below a certain threshold on the page to always remain easily accessible as you progress through the document.
    - **Active**: The ToC highlights the heading that's closest to the reader's current position to act as a "progress bar".
    - **Smooth**: When a user clicks a heading in the ToC, the viewport smoothly scrolls there (without adding to the browser history so that clicking the back button will always send the reader back to the previous page).
 
 3. Positioning the ToC to the side of the main text relies on CSS grid. If you're not using grid this can very likely be achieved in other ways too but will require some small modifications on your part.
 
-Alright, enough talking! Let's see the code.
+Enough talking! Let's see the code.
 
 ## Implementation
 
@@ -277,6 +277,6 @@ export const TocToggle = styled(Cross).attrs(props => ({
 
 It took quite a bit less code than I expected when I started writing this component considering the list of requirements I wanted to implement. I think that's another testament to the hooks API. It's been a big step towards making React even more modular, composable and compact.
 
-One last disclaimer: In its current implementation, the ToC does not update when adding new headings to a page after the page has loaded. In most cases, pages are static once the user has loaded them so there's no point in wasting CPU cycles on a DOM observer. But just in case your ToC should update to include new headings even while the user is viewing a page, you might want to take a look the [MutationObserver](https://developer.mozilla.org/docs/Web/API/MutationObserver) ([which has excellent browser support](https://caniuse.com/#feat=mutationobserver)).
+One last disclaimer: In its current implementation, the ToC does not update when adding new headings to a page after the page has loaded. In most cases, pages are static once the user has loaded them so there's no point in wasting CPU cycles on a DOM observer. But just in case your ToC should update to include new headings even while the user is viewing a page, you might want to take a look at the [`MutationObserver`](https://developer.mozilla.org/docs/Web/API/MutationObserver) ([which has excellent browser support](https://caniuse.com/#feat=mutationobserver)).
 
 Let me know in the comments how the component works for you or if you have questions!

@@ -14,7 +14,7 @@ tags:
 
 This is a follow-up to my [last post](/blog/solar+batteries-rule) in which I claimed that solar cells and batteries will lead us to sustainability far cheaper and faster than most people realize at this point.
 
-Based on this claim, I want to make a further prediction. The way China has relentlessly pushed its solar industry over the past decade already allows them to produce solar cells at such enormous economies of scale that they can significantly undercut competitors. The rising chinese labor costs should be no obstacle to this even in the future thanks to the projected increase in automation in solar cell production.
+Based on this claim, I want to make a further prediction. The way China has relentlessly pushed its solar industry over the past decade already allows them to produce solar cells at such enormous economies of scale that they can significantly undercut competitors. The rising Chinese labor costs should be no obstacle to this even in the future thanks to the projected increase in automation in solar cell production.
 
 To give you an idea just how fast China has been ramping up their solar industry since 2005 and where it stood compared to other countries back in 2010, take a look at this astonishing graph. 9 years ago, China was producing about 60 % more solar panels than the rest of the world combined!
 

@@ -13,4 +13,4 @@ tech:
   - React
 ---
 
-Homepage for German non-profit Afara which supports education of children in Africa. Built using Gatsby, styled-components and Contentful. The site is open [source](https://github.com/janosh/afara).
+Homepage for German non-profit Afara which supports the education of children in Africa. Built using Gatsby, styled-components and Contentful. The site is open [source](https://github.com/janosh/afara).
