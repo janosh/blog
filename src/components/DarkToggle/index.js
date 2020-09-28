@@ -5,13 +5,13 @@ import { Box, Div, Icons, Notification } from './styles'
 
 const modes = {
   light: [`Light Mode`, Icons.Sun, `dark`],
-  dark: [`Dark Mode`, Icons.Moon, `osPref`],
-  osPref: [`OS setting`, Icons.SunMoon, `light`],
+  dark: [`Dark Mode`, Icons.Moon, `auto`],
+  auto: [`Auto`, Icons.SunMoon, `light`],
 }
 
 export default function DarkToggle({ size = `1em`, ...rest }) {
   const [colorMode, setColorMode] = useDarkMode()
-  if (colorMode && ![`light`, `dark`, `osPref`].includes(colorMode))
+  if (colorMode && ![`light`, `dark`, `auto`].includes(colorMode))
     console.error(`Invalid color mode: ${colorMode}`)
 
   const transitions = useTransition(colorMode, null, {

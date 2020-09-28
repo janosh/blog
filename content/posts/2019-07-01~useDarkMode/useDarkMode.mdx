@@ -38,7 +38,7 @@ Here's an overview of everything we'll need to build to get this working:
 
 3. The [`useMediaQuery`](#usemediaquery) hook allows us to check the `prefers-color-scheme` setting of the reader's device. It also sets up an event listener that updates the active theme when the state of the media query changes.
 
-4. [`DarkToggle`](#darktoggle) allows to pick either the dark or light color scheme or to 'unset' the preference in which case we fall back to whatever color scheme the user's OS is currently set to.
+4. [`DarkToggle`](#darktoggle) allows to pick either the dark or light color scheme or to 'unset' the preference with "auto" in which case we fall back to whatever color scheme the user's OS is currently set to.
 
 5. The [`onRenderBody`](#onrenderbody) API in `gatsby-ssr.js` to prevent flashing colors on initial page load.
 
@@ -86,9 +86,9 @@ export const useDarkMode = () => {
   function setColorMode(newValue) {
     setLSColorMode(newValue)
 
-    // This reassignment happens after setLSColorMode because `osPref`
+    // This reassignment happens after setLSColorMode because `auto`
     // is a valid value for persisting but not for the actual color mode.
-    if (newValue === `osPref`) {
+    if (newValue === `auto`) {
       newValue = prefersDarkFromMQ ? `dark` : `light`
     }
 
@@ -281,9 +281,9 @@ export const useMediaQuery = (query, cb) => {
 
 ## `DarkToggle`
 
-The user-facing `DarkToggle` component provides a three-state button to choose between dark mode, light mode or the OS setting. The latter is the default value and the component just cycles through these states when clicked.
+The user-facing `DarkToggle` component provides a three-state button to choose between dark mode, light mode or auto in which case we fall back to the OS color mode. The latter is the default value and the component just cycles through these states when clicked.
 
-It also displays a little notification with the name of the mode for one second below the mode's icon (sun, moon or sun-slash-moon for the OS setting). It uses [react-spring](https://github.com/react-spring/react-spring) to animate the icon transition between modes and a simple [CSS animation](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for the notifications.
+It also displays a little notification with the name of the mode for one second below the mode's icon (sun, moon or sun-slash-moon for the auto setting). It uses [react-spring](https://github.com/react-spring/react-spring) to animate the icon transition between modes and a simple [CSS animation](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for the notifications.
 
 <BorderBox>
   <DarkToggle />
@@ -297,13 +297,13 @@ import { Box, Div, Icons, Notification } from './styles'
 
 const modes = {
   light: [`Light Mode`, Icons.Sun, `dark`],
-  dark: [`Dark Mode`, Icons.Moon, `osPref`],
-  osPref: [`OS setting`, Icons.SunMoon, `light`],
+  dark: [`Dark Mode`, Icons.Moon, `auto`],
+  auto: [`Auto`, Icons.SunMoon, `light`],
 }
 
 export default function DarkToggle(props) {
   const [colorMode, setColorMode] = useDarkMode()
-  if (colorMode && ![`light`, `dark`, `osPref`].includes(colorMode))
+  if (colorMode && ![`light`, `dark`, `auto`].includes(colorMode))
     console.error(`Invalid color mode: ${colorMode}`)
 
   const transitions = useTransition(colorMode, null, {
@@ -410,20 +410,20 @@ function setColorsByTheme() {
   // Don't use backticks around emojis. Breaks replacement in boundFn below.
   const [colors, colorModeKey, colorModeCssProp] = ['🌈', '🔑', '⚡️']
   // Default value if the user never used DarkToggle is to use the OS color mode.
-  let colorMode = `osPref`
+  let colorMode = `auto`
 
   // Only try to parse value from localStorage if there is one.
   const persistedPreference =
     localStorage[colorModeKey] && JSON.parse(localStorage[colorModeKey])
-  if ([`light`, `dark`, `osPref`].includes(persistedPreference))
+  if ([`light`, `dark`, `auto`].includes(persistedPreference))
     colorMode = persistedPreference
 
   document.body.style.setProperty(colorModeCssProp, colorMode)
 
   // Here we set the actual colors for the page after SSR.
   // colorByMode only supports `dark` or `light`. So if colorMode
-  // is `osPref` we pick either of those depending on prefersDarkFromMQ.
-  if (colorMode === `osPref`) {
+  // is `auto` we pick either of those depending on prefersDarkFromMQ.
+  if (colorMode === `auto`) {
     const mq = window.matchMedia(`(prefers-color-scheme: dark)`)
     const prefersDarkFromMQ = mq.matches
     colorMode = prefersDarkFromMQ ? `dark` : `light`

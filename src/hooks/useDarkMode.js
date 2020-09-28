@@ -37,9 +37,9 @@ export const useDarkMode = () => {
   function setColorMode(newValue) {
     setLSColorMode(newValue)
 
-    // This reassignment happens after setLSColorMode because `osPref`
+    // This reassignment happens after setLSColorMode because `auto`
     // is a valid value for persisting but not for the actual color mode.
-    if (newValue === `osPref`) {
+    if (newValue === `auto`) {
       newValue = prefersDarkFromMQ ? `dark` : `light`
     }
 

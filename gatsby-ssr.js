@@ -12,20 +12,20 @@ function setColorsByTheme() {
   // eslint-disable-next-line quotes
   const [colors, colorModeKey, colorModeCssProp] = ['🌈', '🔑', '⚡️']
   // Default value if the user never used DarkToggle is to use the OS color mode.
-  let colorMode = `osPref`
+  let colorMode = `auto`
 
   // Only try to parse value from localStorage if there seems to be one.
   const persistedPreference =
     localStorage[colorModeKey] && JSON.parse(localStorage[colorModeKey])
-  if ([`light`, `dark`, `osPref`].includes(persistedPreference))
+  if ([`light`, `dark`, `auto`].includes(persistedPreference))
     colorMode = persistedPreference
 
   document.body.style.setProperty(colorModeCssProp, colorMode)
 
   // Here we set the actual colors for the page after SSR.
   // colorByMode only supports `dark` or `light`. So if colorMode
-  // is `osPref` we pick either of those depending on prefersDarkFromMQ.
-  if (colorMode === `osPref`) {
+  // is `auto` we pick either of those depending on prefersDarkFromMQ.
+  if (colorMode === `auto`) {
     const mq = window.matchMedia(`(prefers-color-scheme: dark)`)
     const prefersDarkFromMQ = mq.matches
     colorMode = prefersDarkFromMQ ? `dark` : `light`
