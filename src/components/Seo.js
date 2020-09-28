@@ -1,7 +1,6 @@
 import { startCase } from 'lodash'
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import favicon from '../../content/favicon.svg'
 
 export default function Seo({ site, uri = ``, data, children }) {
   const title = uri.length > 1 ? `${startCase(uri)} | ${site.title}` : site.title
@@ -16,7 +15,6 @@ export default function Seo({ site, uri = ``, data, children }) {
       <meta property="og:description" content={desc} />
       <meta name="description" content={desc} />
       <link rel="canonical" href={pageUrl} />
-      <link rel="icon" href={favicon} type="image/svg+xml" sizes="any" />
       {children}
     </Helmet>
   )
