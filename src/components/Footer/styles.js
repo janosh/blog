@@ -10,8 +10,7 @@ export const FooterDiv = styled.footer`
     color: var(--color-lightLink);
   }
   display: grid;
-  justify-items: center;
-  align-items: center;
+  place-items: center;
   grid-template-areas:
     'copyright'
     'source'

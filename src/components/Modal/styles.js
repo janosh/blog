@@ -26,10 +26,8 @@ const fullscreen = css`
 
 export const ModalDiv = styled.div`
   display: grid;
-  align-items: center;
   box-sizing: border-box;
-  align-self: center;
-  justify-self: center;
+  place-self: center;
   background: var(--color-background);
   height: max-content;
   max-height: 80vh;

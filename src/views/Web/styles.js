@@ -29,8 +29,7 @@ export const Thumbnail = styled.div`
   h3 {
     position: absolute;
     color: white;
-    align-self: center;
-    justify-self: center;
+    place-self: center;
     background: rgba(0, 0, 0, 0.8);
     padding: 0.3em 0.7em;
     text-align: center;

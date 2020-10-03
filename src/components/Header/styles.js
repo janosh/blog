@@ -9,8 +9,6 @@ export const HeaderDiv = styled.header`
   display: grid;
   grid-gap: calc(1em + 1vw);
   z-index: 4;
-  align-items: center;
-  justify-content: space-between;
   padding: 1em;
   color: white;
   font-size: 1.2em;
@@ -27,5 +25,5 @@ export const Logo = styled(Link)`
   font-size: 2.4em;
   transform: scale(1, 0.85);
   color: inherit;
-  justify-self: center;
+  place-self: center;
 `

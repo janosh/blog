@@ -53,6 +53,36 @@ export default function Masonry({ children, gap, minWidth = 500, ...rest }) {
 }
 ```
 
+The [`useEventListener` hook](https://github.com/janosh/blog/blob/master/src/hooks/useEventListener.js) looks like this:
+
+```js:title=hooks/useEventListener.js
+import { useEffect, useRef } from 'react'
+
+export function useEventListener(eventNames, handler, element = globalThis) {
+  // Create a ref that stores the handler.
+  const savedHandler = useRef()
+  if (!Array.isArray(eventNames)) eventNames = [eventNames]
+
+  // Save handler to ref.current on initial call to useEventListener
+  // and then update ref.current whenever the handler changes.
+  // This allows the second useEffect below to always get the latest
+  // handler without needing to have it in than hooks deps array which
+  // could cause the effect to re-run every render.
+  useEffect(() => (savedHandler.current = handler), [handler])
+
+  useEffect(() => {
+    if (!element.addEventListener) return // element doesn't support a listener, abort.
+
+    // Create event listener that calls handler function stored in ref
+    const listener = event => savedHandler.current(event)
+    for (const e of eventNames) element.addEventListener(e, listener)
+    return () => {
+      for (const e of eventNames) element.removeEventListener(e, listener)
+    }
+  }, [element, eventNames])
+}
+```
+
 The styled components `MasonryDiv` and `Col` each create a CSS grid to layout children with a default gap of `1em`. You can pass any valid CSS units as a string as well as different values for vertical and horizontal gap, e.g. `<Masonry gap="calc(2vh + 20px) calc(1vw + 20px)" />`.
 
 ```js:title=src/components/masonry/styled.js
@@ -100,8 +130,7 @@ import styled from 'styled-components'
 const ColorBox = styled.div`
   border-radius: 1em;
   transition: 0.2s;
-  justify-content: center;
-  align-content: center;
+  place-content: center;
   display: grid;
   color: white;
   cursor: pointer;

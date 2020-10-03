@@ -6,8 +6,7 @@ import styled from 'styled-components'
 const ColorBox = styled.div`
   border-radius: 1em;
   transition: 0.2s;
-  justify-content: center;
-  align-content: center;
+  place-content: center;
   display: grid;
   color: white;
   cursor: pointer;

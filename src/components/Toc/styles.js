@@ -41,10 +41,7 @@ export const TocDiv = styled.aside`
 export const Title = styled.h2`
   margin: 0;
   padding-bottom: 0.5em;
-  display: grid;
-  grid-auto-flow: column;
-  align-items: center;
-  grid-template-columns: auto auto 1fr;
+  display: flex;
   color: var(--color-gray);
 `
 
