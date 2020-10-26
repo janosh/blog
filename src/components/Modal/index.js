@@ -16,7 +16,7 @@ export default function Modal({ open, modal, setModal, children, ...rest }) {
   const [fullscreen, setFullscreen] = useState(rest.fullScreenDefault)
   useEventListener(`keydown`, handleArrowKeys(setModal))
   useEffect(() => {
-    if (open) document.body.style.overflowY = `hidden`
+    if (open) document.body.style.overflowY = `hidden` // prevent scrolling background while modal open
     if (ref.current) ref.current.closest(`main`).style.zIndex = 3
   }, [open])
   if (open)

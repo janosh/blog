@@ -5,7 +5,6 @@ import { Rss } from 'styled-icons/icomoon'
 const Title = styled.span`
   position: absolute;
   top: -0.7em;
-  right: -1.7em;
   font-size: 0.7em;
 `
 

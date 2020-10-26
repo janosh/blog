@@ -5,7 +5,7 @@ export const query = graphql`
     alt: name
     sharp: childImageSharp {
       fluid(maxWidth: 1500) {
-        ...GatsbyImageSharpFluid_withWebp
+        ...GatsbyImageSharpFluid_withWebp_tracedSVG
       }
     }
     src: publicURL

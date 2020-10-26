@@ -8,7 +8,7 @@ export const HeaderDiv = styled.header`
   top: 0;
   display: grid;
   grid-gap: calc(1em + 1vw);
-  z-index: 4;
+  z-index: 3;
   padding: 1em;
   color: white;
   font-size: 1.2em;
