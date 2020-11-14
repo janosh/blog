@@ -13,13 +13,9 @@ import { ProjectList } from 'views/Web'
 
 export default function IndexPage({ data }) {
   const { mdx, janosh, posts } = data
-  const img = {
-    ...mdx.frontmatter.cover,
-    fluid: mdx.frontmatter.cover.img.sharp.fluid,
-  }
   return (
     <>
-      <PageTitle img={img} css="min-height: 35em">
+      <PageTitle {...mdx.frontmatter.cover} css="min-height: 35em">
         <Title>
           {mdx.frontmatter.title.split(`, `).map(str => (
             <Link key={str} to={`/` + str.toLowerCase()}>
