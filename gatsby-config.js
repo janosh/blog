@@ -5,6 +5,13 @@ const sitemapOptions = require(`./src/utils/sitemap`)
 
 require(`dotenv`).config()
 
+const siteMetadata = {
+  title: `janosh.dev`,
+  description: `Physics, machine learning, sustainability and web development.`,
+  author: `Janosh Riebesell`,
+  url: `https://janosh.dev`,
+}
+
 const gatsbyRemarkPlugins = [
   `gatsby-remark-smartypants`,
   `gatsby-remark-embed-video`,
@@ -34,13 +41,6 @@ const gatsbyRemarkPlugins = [
     options: { active: true, size: 24 },
   },
 ]
-
-const siteMetadata = {
-  title: `janosh.dev`,
-  description: `Physics, machine learning, sustainability and web development.`,
-  author: `Janosh Riebesell`,
-  url: `https://janosh.dev`,
-}
 
 const plugins = [
   {
@@ -104,7 +104,6 @@ const plugins = [
       theme_color: `#150956`,
     },
   },
-  `gatsby-plugin-offline`,
   `gatsby-plugin-lodash`,
   `gatsby-plugin-react-helmet`,
   `gatsby-plugin-netlify-cache`,

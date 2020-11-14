@@ -26,7 +26,6 @@
     "gatsby-plugin-manifest": "^2.4.34",
     "gatsby-plugin-mdx": "^1.2.46",
     "gatsby-plugin-netlify-cache": "^1.2.0",
-    "gatsby-plugin-offline": "3.2.31",
     "gatsby-plugin-react-helmet": "3.3.14",
     "gatsby-plugin-sharp": "2.6.40",
     "gatsby-plugin-sitemap": "^2.4.15",
