@@ -13,7 +13,7 @@ export const FoldingDiv = styled.div`
     position: relative;
     transform: scale(1.1);
   }
-  div:before {
+  div::before {
     content: '';
     position: absolute;
     top: 0;
@@ -29,7 +29,7 @@ export const FoldingDiv = styled.div`
       (el, idx) => `div:nth-child(${el}) {
         transform: scale(1.1) rotateZ(${90 * (idx + 1)}deg);
       }
-      div:nth-child(${el}):before {
+      div:nth-child(${el})::before {
         animation-delay: ${0.3 * (idx + 1)}s;
       }`
     )

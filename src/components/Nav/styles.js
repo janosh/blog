@@ -33,7 +33,7 @@ export const NavDiv = styled.nav`
     height: 100%;
     right: 100%;
     /* Needed to scroll past last element in case of overflow. */
-    :after {
+    ::after {
       content: '';
       height: 0.5em;
     }

@@ -64,7 +64,7 @@ const plugins = [
     resolve: `gatsby-source-filesystem`,
     options: {
       path: `${__dirname}/content`,
-      ignore: process.env.NODE_ENV === `production` && [`**/posts/drafts`],
+      ignore: process.env.NODE_ENV === `production` ? [`**/posts/drafts`] : [],
     },
   },
   `gatsby-transformer-yaml`,

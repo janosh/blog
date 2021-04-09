@@ -3,7 +3,7 @@ title: Studenten bilden Schüler
 cover:
   img: studenten-bilden-schueler.png
 url: https://studenten-bilden-schueler.de
-repo: https://github.com/StudentenBildenSchueler/sbs-homepage
+repo: https://github.com/sbsev/svelte-site
 date: 2018-06-23
 tech:
   - Gatsby

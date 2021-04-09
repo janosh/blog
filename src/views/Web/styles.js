@@ -44,7 +44,7 @@ export const Thumbnail = styled.div`
 export const Modal = styled(RawModal)`
   padding: 1em 2em 0;
   max-width: 45em;
-  &:after {
+  &::after {
     content: '';
     display: block;
     height: 1em;
