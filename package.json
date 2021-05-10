@@ -45,7 +45,7 @@
     "gatsby-transformer-sharp": "2.5.17",
     "gatsby-transformer-yaml": "2.4.14",
     "katex": "^0.12.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "mdx": "silvenon/vscode-mdx",
     "plotly.js": "^1.56.0",
     "react": "^16.13.1",
