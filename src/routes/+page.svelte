@@ -42,7 +42,7 @@
     <li>
       <h3><a {href}>{post.title}</a></h3>
       <a {href}>
-        <img src="src/routes/posts/{post.slug}/{post.cover.img}" alt={post.cover.src} />
+        <img src={post.cover.src} alt={post.cover.src} />
       </a>
       <time>
         <Icon icon="carbon:calendar" inline />
