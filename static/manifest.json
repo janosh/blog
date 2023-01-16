@@ -1,0 +1,15 @@
+{
+  "background_color": "#ffffff",
+  "display": "minimal-ui",
+  "icons": [
+    {
+      "sizes": "any",
+      "src": "favicon.svg",
+      "type": "image/svg"
+    }
+  ],
+  "name": "janosh.dev",
+  "short_name": "janosh.dev",
+  "start_url": "/",
+  "theme_color": "#003056"
+}
