@@ -1,15 +1,9 @@
-# dependencies
+# dependenices
 node_modules
 
-# builds
-.cache
-public
+# production build
+.svelte-kit
+build
 
-# deploy config
-.netlify
-
-# environment variables
-.env*
-
-# draft posts
-content/posts/drafts
+# secrets
+.env
