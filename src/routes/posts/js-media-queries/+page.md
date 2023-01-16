@@ -58,7 +58,7 @@ export default styled.div`
 
 However, sometimes CSS alone doesn't cut it. Thankfully, [`window.matchMedia`](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) makes it very easy to use media queries directly in JavaScript without any 3rd party dependencies! And it even has great browser support.
 
-![window.matchMedia browser support](matchMedia-browser-support.png)
+![window.matchMedia browser support](./matchMedia-browser-support.png)
 _[`window.matchMedia` browser support](https://caniuse.com/#search=matchMedia)_
 
 ## `window.matchMedia` in React
