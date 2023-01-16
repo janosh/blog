@@ -7,11 +7,10 @@
   "version": "1.0.0",
   "author": "Janosh Riebesell <janosh.riebesell@gmail.com>",
   "repository": "https://github.com/janosh/blog",
+  "issues": "https://github.com/janosh/blog/issues",
   "license": "MIT",
-  "devDependencies": {},
-  "scripts": {},
+  "type": "module",
   "keywords": [
-    "janosh riebesell",
     "personal blog",
     "portfolio",
     "physics",
@@ -21,5 +20,42 @@
     "nature",
     "gatsby",
     "styled-components"
-  ]
+  ],
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "vite build && vite preview",
+    "check": "svelte-check"
+  },
+  "devDependencies": {
+    "@iconify/svelte": "^3.0.1",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@sveltejs/adapter-static": "^1.0.4",
+    "@sveltejs/kit": "^1.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "devalue": "^4.2.2",
+    "eslint": "^8.32.0",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "hast-util-from-string": "^2.0.0",
+    "hast-util-select": "^5.0.3",
+    "hastscript": "^7.2.0",
+    "js-yaml": "^4.1.0",
+    "katex": "^0.16.4",
+    "mdsvex": "^0.10.6",
+    "prettier": "^2.8.3",
+    "prettier-plugin-svelte": "^2.9.0",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-katex-svelte": "^1.1.2",
+    "rehype-slug": "^5.1.0",
+    "remark-math": "3.0.0",
+    "svelte": "^3.55.1",
+    "svelte-check": "^3.0.2",
+    "svelte-preprocess": "^5.0.0",
+    "svelte-preprocess-import-assets": "^0.2.5",
+    "svelte2tsx": "^0.6.0",
+    "typescript": "^4.9.4",
+    "vite": "^4.0.4"
+  }
 }
