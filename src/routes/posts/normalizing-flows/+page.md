@@ -142,7 +142,7 @@ $$
 
 This flow can transform a simple base distribution such as a multivariate Gaussian into a complicated multi-modal one as illustrated below.
 
-![Normalizing Flow](normalizing-flow.svg)
+![Normalizing Flow](./normalizing-flow.svg)
 _A normalizing flow transforming a simple distribution $p_0(\vec z_0)$ step by step into a complex one $p_k(\vec z_k)$ approximating some target distribution $p_x(\vec x)$. Source: [Lilian Weng](https://lilianweng.github.io/lil-log/2018/10/13/flow-based-deep-generative-models.html)_
 
 You may have already guessed that the word 'flow' in normalizing flow refers to the trajectories that a collection of samples from $p_z(\vec z)$ move along as transformations are applied to them, sort of like the particles in a compressible fluid undergoing stirring motions to achieve a certain pattern. The modifier 'normalizing' comes from the fact that we renormalize the resulting density $p_i(\vec z_{i-1})$ after every transformation $f_i$ by its Jacobian determinant $|\det J_{f_i}(\vec z_{i-1})|$ in order to retain a normalized probability distribution at every step.

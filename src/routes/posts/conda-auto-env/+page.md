@@ -10,7 +10,7 @@ tags:
   - Python
 ---
 
-If you're like me, you're tired of manually having to activate your `conda` environment every time you switch between Python projects. Since you're reading this, you may even have started googling for a solution that automates this process. The following `zsh` script aimed satisfies this objective and has served me well for the last few months now. It's a spin-off of Christine Doig's [`conda-auto-env`](https://github.com/chdoig/conda-auto-env).
+If you grow tired of having to manually activate your `conda` environment every time you switch between Python projects. Since you're reading this, you may even have started googling for a solution that automates this process. The following `zsh` script aimed satisfies this objective and has served me well for the last few months now. It's a spin-off of Christine Doig's [`conda-auto-env`](https://github.com/chdoig/conda-auto-env).
 
 ```sh:title=conda_auto_env.sh
 #!/bin/zsh

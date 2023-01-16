@@ -11,10 +11,10 @@ tags:
 showToc: true
 ---
 
-import fpProps from './frameworkPopularity'
+<!-- import fpProps from './frameworkPopularity'
 import saddleProps from './saddle'
 import triModalProps from './triModal'
-import { FoldingSpinner } from 'components/Spinners'
+import { FoldingSpinner } from 'components/Spinners' -->
 
 The possibilities and authoring experience when creating content for the web have advanced by leaps and bounds in recent years. MDX -- the latest in a long line of game-changing innovations -- allows writers to sprinkle snippets of JSX directly into their markdown content (hence MDX). Think WordPress shortcodes but fancier. Not only does this open up seemingly endless possibilities in terms of more interactive and engaging content, it also facilitates the clear separation of code and content (i.e. no more need to write text directly into `.js` files).
 
@@ -132,9 +132,9 @@ export const LazyPlot = ({ layout, style, config, ...rest }) => {
 
 It was surprisingly easy to add dark mode support. All it took was a transparent background and calling the `useDarkMode` hook to adjust `font.color` depending on the current `colorMode`. I also threw in a cool `<FoldingSpinner />` courtesy of [Tobias Ahlin](https://tobiasahlin.com/spinkit) refactored with `styled-components` to support dark mode as well. It is displayed while the plot is still loading to let the user know more content is about to appear in the spinner's place. Here's what it looks like in action. (You can click it to pause the animation if it disturbs your reading.)
 
-<FoldingSpinner />
+<!-- <FoldingSpinner /> -->
 
-And here's how its implemented.
+And here's how it's implemented.
 
 ```js:title=src/components/Spinners/styles.js
 import React, { useState } from 'react'
@@ -245,7 +245,7 @@ That's it for the setup. We're now ready to produce some actual plots.
 
 Let's start simple with a 2d plot.
 
-<LazyPlot {...fpProps} />
+<!-- <LazyPlot {...fpProps} /> -->
 
 _Frontend framework popularity over time measured by Google search frequency. Source: [Google Trends](https://trends.google.com/trends/explore?date=2012-01-01%202018-08-31&geo=US&q=%2Fm%2F012l1vxv,%2Fm%2F0j45p7w,%2Fg%2F11c6w0ddw9,%2Fg%2F11c0vmgx5d)_
 
@@ -289,7 +289,7 @@ export default {
 
 Next, let's aim a little higher and visualize the saddle point of $x^2 - y^2$ at $(0,0)$.
 
-<LazyPlot {...saddleProps} />
+<!-- <LazyPlot {...saddleProps} /> -->
 
 _The surface $x^2 - y^2$ plotted over the domain $[-10,10]^2$._
 
@@ -335,7 +335,7 @@ export default {
 
 Here's another surface, this one a tri-modal distribution consisting of three unnormalized Gaussians.
 
-<LazyPlot {...triModalProps} />
+<!-- <LazyPlot {...triModalProps} /> -->
 
 _$\exp[-\frac{1}{20}(x^2 + y^2)] + \exp\{-\frac{1}{10}[(x-10)^2 + y^2]\} + \exp\{-\frac{1}{10}[(x-7)^2 + (y-7)^2]\}$._
 
