@@ -404,7 +404,11 @@ Now comes the tricky SSR bit where we need to set the theme colors correctly bas
 ```js
 import React from 'react'
 import App from 'components/App'
-import { COLORS, COLOR_MODE_KEY, INITIAL_COLOR_MODE_CSS_PROP } from 'utils/constants'
+import {
+  COLORS,
+  COLOR_MODE_KEY,
+  INITIAL_COLOR_MODE_CSS_PROP,
+} from 'utils/constants'
 
 function setColorsByTheme() {
   // Don't use backticks around emojis. Breaks replacement in boundFn below.

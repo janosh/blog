@@ -14,7 +14,7 @@ showToc: true
 
 > This post is without original content, providing merely a summary of the first 3 sections of [Michael Betancourt](https://betanalpha.github.io)'s excellent [introduction to Hamiltonian Monte Carlo](https://arxiv.org/abs/1701.02434). Most images were taken from there and slightly modified.
 
-Hamiltonian Monte Carlo (HMC) was originally developed by [Duane et al.](https://sciencedirect.com/science/article/pii/037026938791197X) in the late 1980s as Hybrid Monte Carlo in the context of Quantum Chromodynamics, specifically lattice computations that attempted to understand the structure of protons and neutrons comprising atomic nuclei. Radford Neal was the first to realize the potential of HMC in applied statistics as part of his [pioneering work in the mid 1990s on Bayesian neural networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.446.9306&rep=rep1&type=pdf).
+Hamiltonian Monte Carlo (HMC) was originally developed by [Duane et al.](https://sciencedirect.com/science/article/pii/037026938791197X) in the late 1980s as Hybrid Monte Carlo in the context of Quantum Chromodynamics, specifically, lattice computations that attempted to understand the structure of protons and neutrons comprising atomic nuclei. Radford Neal was the first to realize the potential of HMC in applied statistics as part of his [pioneering work in the mid 1990s on Bayesian neural networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.446.9306&rep=rep1&type=pdf).
 
 Over the ensuing decades, HMC made a rather reluctant entry into modern statistics. This is mostly due to two reasons:
 
@@ -116,7 +116,7 @@ $$
 n_\text{eff} = \frac{N}{1 + 2 \sum_{i=1}^\infty \rho_i},
 $$
 
-with $\rho_i$ the lag-$i$ autocorrelation of $f$ over the history of the chain. $n_\text{eff}$ takes into account possible correlations between successive samples in the chain. If a point in the chain is strongly correlated with one of its predecessors, the amount of new information it provides about the typical set is reduced. $n_\text{eff}$ quantifies the actual number of_independent_ samples contained in the Markov chain. In practice this number can be estimated from the chain itself, although care must be taken to avoid biases ([Geyer, 1992](https://jstor.org/stable/2246094?seq=1#metadata_info_tab_contents); [Gelman et al., 2014](https://taylorfrancis.com/books/9780429113079)).
+with $\rho_i$ the lag-$i$ autocorrelation of $f$ over the history of the chain. $n_\text{eff}$ takes into account possible correlations between successive samples in the chain. If a point in the chain is strongly correlated with one of its predecessors, the amount of new information it provides about the typical set is reduced. $n_\text{eff}$ quantifies the actual number of _independent_ samples contained in the Markov chain. In practice, this number can be estimated from the chain itself, although care must be taken to avoid biases ([Geyer, 1992](https://jstor.org/stable/2246094?seq=1#metadata_info_tab_contents); [Gelman et al., 2014](https://taylorfrancis.com/books/9780429113079)).
 
 Because the part of the Markov chain generated during the initial walk into the typical set biases the estimators, it is common practice to "warm up" the Markov chain by discarding a chosen number of early samples. Warm-up can also be used to empirically optimize any degrees of freedom such as reducing or increasing the stepsize of the Markov transition without biasing the subsequent estimators.
 

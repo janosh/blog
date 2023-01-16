@@ -129,7 +129,7 @@ import { toggleModal } from '../redux/actions'
 import './Modal.css'
 
 class Modal extends React.Component {
-  handleClickOutside = event => {
+  handleClickOutside = (event) => {
     if (this.node && !this.node.contains(event.target)) {
       const { dispatch, name } = this.props
       dispatch(toggleModal(name))
@@ -149,7 +149,7 @@ class Modal extends React.Component {
     const { modal, name, closeButton, toggleModal, children } = this.props
     if (!modal) return null
     return (
-      <div ref={node => (this.node = node)} id={name + `-modal`}>
+      <div ref={(node) => (this.node = node)} id={name + `-modal`}>
         {closeButton && (
           <button className="close-button" onClick={toggleModal}>
             &#10005;

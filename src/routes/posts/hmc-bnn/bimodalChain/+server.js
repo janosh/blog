@@ -101,6 +101,8 @@ const chain = [
   [4.125, 4.001],
 ]
 
-export const [xChain, yChain] = chain[0].map((col, i) => chain.map(row => row[i]))
+export const [xChain, yChain] = chain[0].map((col, i) =>
+  chain.map((row) => row[i])
+)
 
 export default chain

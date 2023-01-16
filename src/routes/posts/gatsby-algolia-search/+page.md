@@ -254,10 +254,11 @@ Now comes the actual `Search` component. It starts off with some state initializ
 ```js
 const useOnClickOutside = (ref, handler, events) => {
   if (!events) events = [`mousedown`, `touchstart`]
-  const detectClickOutside = event =>
+  const detectClickOutside = (event) =>
     !ref.current.contains(event.target) && handler()
   useEffect(() => {
-    for (const event of events) document.addEventListener(event, detectClickOutside)
+    for (const event of events)
+      document.addEventListener(event, detectClickOutside)
     return () => {
       for (const event of events)
         document.removeEventListener(event, detectClickOutside)
@@ -327,9 +328,9 @@ export default connectSearchBox(({ refine, ...rest }) => (
       type="text"
       placeholder="Search"
       aria-label="Search"
-      onChange={e => refine(e.target.value)}
+      onChange={(e) => refine(e.target.value)}
       // iOS Safari doesn't blur input automatically on tap outside.
-      onMouseLeave={e => e.target.blur()}
+      onMouseLeave={(e) => e.target.blur()}
       {...rest}
     />
     <SearchIcon />

@@ -79,7 +79,7 @@ export default function ResponsiveComponent(props) {
   // highlight-end
 
   useEffect(() => {
-    const handleMatch = q => setMatch(q.matches)
+    const handleMatch = (q) => setMatch(q.matches)
     query.addListener(handleMatch)
     return () => query.removeListener(handleMatch)
   })
@@ -106,7 +106,7 @@ export default function ResponsiveComponent(props) {
     const [match, setMatch] = useState(query.matches)
 
     useEffect(() => {
-      const handleMatch = q => setMatch(q.matches)
+      const handleMatch = (q) => setMatch(q.matches)
       query.addListener(handleMatch)
       return () => query.removeListener(handleMatch)
     })

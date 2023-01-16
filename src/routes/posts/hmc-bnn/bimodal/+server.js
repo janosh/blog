@@ -6,7 +6,7 @@ const bimodal = (x, y) =>
   multivariateNormalDiag([4, 4], [1, 1])([x, y])
 
 const ax = range(-3, 8.1, 0.3)
-const z = ax.map(x => ax.map(y => bimodal(x, y)))
+const z = ax.map((x) => ax.map((y) => bimodal(x, y)))
 
 export default {
   data: [
@@ -27,7 +27,7 @@ export default {
       showscale: false,
     },
     {
-      ...{ z: chain.map(el => bimodal(...el)), x: xChain, y: yChain },
+      ...{ z: chain.map((el) => bimodal(...el)), x: xChain, y: yChain },
       type: `scatter3d`,
     },
   ],

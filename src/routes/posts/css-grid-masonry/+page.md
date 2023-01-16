@@ -112,7 +112,7 @@ import PostExcerpt from './PostExcerpt'
 
 const PostList = ({ posts }) => (
   <Masonry>
-    {posts.map(post => (
+    {posts.map((post) => (
       <PostExcerpt key={post.slug} {...post} />
     ))}
   </Masonry>
