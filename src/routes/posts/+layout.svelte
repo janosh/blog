@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { PrevNext } from '$lib'
   import type { LayoutServerData } from '../physics/$types'
 
   export let data: LayoutServerData
@@ -8,6 +9,7 @@
   )
 
   $: ({ src, caption } = data.frontmatter.cover)
+  $: ({ prev, next } = data)
 </script>
 
 <img {src} alt={caption} />
@@ -15,6 +17,8 @@
 
 <main>
   <slot />
+
+  <PrevNext {prev} {next} />
 </main>
 
 <style>

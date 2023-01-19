@@ -9,7 +9,6 @@ tags:
   - Physics
   - Statistics
   - Science
-showToc: true
 ---
 
 > This post is without original content, providing merely a summary of the first 3 sections of [Michael Betancourt](https://betanalpha.github.io)'s excellent [introduction to Hamiltonian Monte Carlo](https://arxiv.org/abs/1701.02434). Most images were taken from there and slightly modified.

@@ -8,7 +8,6 @@ tags:
   - Tutorial
   - Web Dev
   - Science
-showToc: true
 ---
 
 <!-- import fpProps from './frameworkPopularity'

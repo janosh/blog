@@ -11,7 +11,10 @@
 
 <h1>Janosh Riebesell</h1>
 
-<p>I'm interested in computational materials discovery, machine learning & data viz.</p>
+<p>
+  I'm interested in computational materials discovery, machine learning, software
+  engineering & data viz.
+</p>
 
 <address>
   <a href={repository}>
@@ -81,7 +84,7 @@
     grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
     list-style: none;
     max-width: min(90vw, 65em);
-    margin: 2em auto;
+    margin: 4em auto;
   }
   ul > li {
     display: grid;
