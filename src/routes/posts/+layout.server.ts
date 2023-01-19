@@ -23,8 +23,32 @@ export const load: LayoutServerLoad = async ({ url }) => {
 
   page.metadata.cover.src = src
   page.metadata.path = path
+  page.metadata.slug = slug
+
+  const slugs = Object.keys(modules).map((x) => x.split(`/`)[1])
+  const { prev_slug, next_slug } = get_prev_next(slugs, slug)
+
+  const { metadata: prev } = await modules[`./${prev_slug}/+page.md`]?.()
+  const { metadata: next } = await modules[`./${next_slug}/+page.md`]?.()
 
   return {
     frontmatter: page.metadata,
+    prev: { slug: prev_slug, ...prev },
+    next: { slug: next_slug, ...next },
   }
+}
+
+const get_prev_next = (slugs: string[], slug: string) => {
+  const idx = slugs.findIndex((slg) => slg === slug)
+  if (idx === -1) {
+    throw error(404, `Page '${slug}' not found`)
+  }
+  // wrap around start/end of array
+  const prev_idx = (idx - 1 + slugs.length) % slugs.length
+  const next_idx = (idx + 1) % slugs.length
+
+  const prev_slug = slugs[prev_idx]
+  const next_slug = slugs[next_idx]
+
+  return { prev_slug, next_slug }
 }

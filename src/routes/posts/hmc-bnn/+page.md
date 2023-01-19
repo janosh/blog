@@ -8,7 +8,6 @@ tags:
   - Machine Learning
   - Statistics
   - Science
-showToc: true
 ---
 
 import bimodalProps from './bimodal'

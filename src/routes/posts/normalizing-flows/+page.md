@@ -9,7 +9,6 @@ tags:
   - Science
   - Machine Learning
   - Statistics
-showToc: true
 ---
 
 I'm a big fan of Feynman's technique of learning something new by trying to explain it to someone else. So in this post, I'll try to explain normalizing flows (NF), a relatively simple yet powerful new tool in statistics for constructing expressive probability distributions from simple base distribution using smooth bijective transformations. It's a hot topic right now and has exciting applications in the context of probabilistic modeling and inference.

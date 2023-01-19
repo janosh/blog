@@ -7,7 +7,6 @@ tags:
   - JS
   - Tutorial
   - Web Dev
-showToc: true
 ---
 
 <!-- import DarkToggle from 'components/DarkToggle'
