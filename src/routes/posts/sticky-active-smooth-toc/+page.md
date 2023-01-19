@@ -10,7 +10,6 @@ tags:
   - JS
   - Tutorial
   - Web Dev
-showToc: true
 ---
 
 ## Intro
