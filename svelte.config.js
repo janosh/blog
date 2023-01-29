@@ -79,6 +79,7 @@ export default {
   extensions: [`.svelte`, `.svx`, `.md`],
 
   preprocess: [
+    preprocess(),
     mdsvex({
       rehypePlugins,
       // remark-math@3.0.0 pinned due to mdsvex, see
@@ -86,8 +87,22 @@ export default {
       remarkPlugins: [math],
       extensions: [`.svx`, `.md`],
     }),
-    preprocess(),
-    relative_imports(),
+    relative_imports({
+      sources: (default_sources) => {
+        return [
+          ...default_sources,
+          {
+            tag: `a`,
+            srcAttributes: [`href`],
+            filter({ attributes }) {
+              if (!attributes.href) return false
+
+              return attributes.href.endsWith(`.pdf`)
+            },
+          },
+        ]
+      },
+    }),
   ],
 
   kit: {
@@ -95,10 +110,6 @@ export default {
 
     alias: {
       $root: `.`,
-    },
-
-    prerender: {
-      handleHttpError: `warn`,
     },
   },
 }

@@ -32,7 +32,7 @@ Here's an overview of everything we'll need to build to get this working:
 
 1. The [`useDarkMode`](#usedarkmode) hook informs the user-facing `DarkToggle` component which color scheme the user prefers and provides a setter function to change the current setting.
 
-2. The [`useLocalStorage`](#uselocalstorage) hook is called by `useDarkMode` to persist the user's preference in `localStorage` across visits to the site.
+2. The [`useLocalStorage`](#usestorage) hook is called by `useDarkMode` to persist the user's preference in `localStorage` across visits to the site.
 
 3. The [`useMediaQuery`](#usemediaquery) hook allows us to check the `prefers-color-scheme` setting of the reader's device. It also sets up an event listener that updates the active theme when the state of the media query changes.
 

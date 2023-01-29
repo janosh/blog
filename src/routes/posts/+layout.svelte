@@ -1,20 +1,24 @@
 <script lang="ts">
   import { PrevNext } from '$lib'
+  import { repository } from '$root/package.json'
+  import Icon from '@iconify/svelte'
   import type { LayoutServerData } from '../physics/$types'
 
   export let data: LayoutServerData
 
-  const routes = Object.keys(import.meta.glob('./*/+page*.{svx,md,svelte}')).map(
-    (filename) => filename.split(`/`)[1]
-  )
-
-  $: ({ src, caption } = data.frontmatter.cover)
-  $: ({ prev, next } = data)
+  $: ({ post, prev, next } = data)
+  $: ({ title, cover, date, slug } = post)
 </script>
 
-<img {src} alt={caption} />
-<h1>{data.frontmatter.title}</h1>
-
+<img
+  src="{repository}/raw/main/src/routes/posts/{slug}/{cover.img}"
+  alt={cover.caption}
+/>
+<h1>{title}</h1>
+<time>
+  <Icon icon="carbon:calendar" inline />
+  {date.split(`T`)[0]}
+</time>
 <main>
   <slot />
 
@@ -26,5 +30,8 @@
     margin: 0;
     height: 50vh;
     object-fit: cover;
+  }
+  time {
+    text-align: center;
   }
 </style>

@@ -12,7 +12,7 @@ cover:
   import { DocsGrid } from '$lib'
 </script>
 
-Atomic physics was an undergrad lecture jointly held by [Prof. Klaus Sengstock](https://physik.uni-hamburg.de/en/ilp/sengstock/personen/sengstock) and [Prof. Henning Moritz](https://physik.uni-hamburg.de/en/ilp/moritz/personen/moritz) at Hamburg University in the summer of 2014.
+Atomic physics was an undergrad lecture jointly held by [Prof. Klaus Sengstock](https://physik.uni-hamburg.de/en/ilp/sengstock/personen/sengstock) and [Prof. Henning Moritz](https://physik.uni-hamburg.de/en/ilp/moritz/personen/moritz).
 
 Below are solutions to the exercise sheets as well as the final exam. Fair warning though, it's all in German.
 

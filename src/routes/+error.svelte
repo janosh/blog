@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores'
-  import { name } from '$root/package.json'
+  import { issues, name } from '$root/package.json'
   import Icon from '@iconify/svelte'
 
   let online: boolean
@@ -14,12 +14,12 @@
 
 <div>
   <h1>Error {String($page.status).replace(`0`, `😵`)}: {$page.error?.message}</h1>
-  <!-- {#if $page.status >= 500}
+  {#if $page.status >= 500}
     <p>
       If page reloading doesn't help, please raise an issue on
       <a href={issues} target="_blank" rel="noreferrer">GitHub</a>. Thanks! 🙏
     </p>
-  {/if} -->
+  {/if}
   {#if online === false}
     Looks like you're offline. If you think your connection is fine, check the
     <a href="https://githubstatus.com">GitHub status page</a>
@@ -27,12 +27,9 @@
     GitHub Pages.
   {/if}
 
-  <!-- <p>
-    Back to <a href=".">
-      <img src="/favicon.svg" alt={name} height="30" />
-      landing page
-    </a>.
-  </p> -->
+  <p>
+    Back to <a href="/">landing page</a>
+  </p>
 </div>
 
 <style>
@@ -42,9 +39,5 @@
     padding: 5em 3em 1em;
     margin: auto;
     text-align: center;
-  }
-  p img {
-    vertical-align: middle;
-    margin: 0 1pt 0 3pt;
   }
 </style>

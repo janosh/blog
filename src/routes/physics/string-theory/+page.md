@@ -10,7 +10,7 @@ cover:
   import { DocsGrid } from '$lib'
 </script>
 
-My notes and solutions for the final exam and the exercises handed out in the string theory lecture[^1] read by [Prof. Timo Weigand](https://qu.uni-hamburg.de/cluster/team/weigand.html) at Heidelberg University in the winter semester of 2015/16.
+My notes and solutions for the final exam and the exercises handed out in the string theory lecture read by [Prof. Timo Weigand](https://qu.uni-hamburg.de/cluster/team/weigand.html) at Heidelberg University in the winter semester of 2015/16.
 
 ## Exam
 
@@ -44,4 +44,4 @@ My notes and solutions for the final exam and the exercises handed out in the st
 
 </DocsGrid>
 
-[^1]: The lecture website was deleted but used to be at http://thphys.uni-heidelberg.de/~weigand
+> The lecture website was deleted but used to be on [Timo's staff page](http://thphys.uni-heidelberg.de/~weigand) and can still be found on the [Internet Archive](https://web.archive.org/web/20160226230209/http://www.thphys.uni-heidelberg.de/~weigand/Strings-2015.html).
