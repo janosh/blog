@@ -16,13 +16,8 @@ export const load: LayoutServerLoad = async ({ url }) => {
     throw error(404, `couldn't resolve ${slug} from ${Object.keys(modules)}`)
   }
 
-  const { default: src } = await import(
-    /* @vite-ignore */
-    `./${slug}/${page.metadata.cover.img}`
-  )
-
-  page.metadata.cover.src = src
   page.metadata.path = path
+  page.metadata.slug = slug
 
   return {
     frontmatter: page.metadata,

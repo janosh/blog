@@ -26,7 +26,7 @@ $$
 \vec\theta_\text{min} = \argmin_{\vec\theta \in \Scal(\vec\theta)} \; L(\vec\theta).
 $$
 
-But of course the search space can't change while we're searching it! Luckily, there's a simple fix. We just split the problem into two separate minimizations by pulling everything that doesn't depend on the number of layers $n_L$ into an outer loop. Hence, two-loop hyperoptimization. This yields
+Of course, the search space can't change while we're searching it! Luckily, there's a simple fix. We just split the problem into two separate minimizations by pulling everything that doesn't depend on the number of layers $n_L$ into an outer loop. Hence, two-loop hyperoptimization. This yields
 
 $$
 \vec\theta_\text{min} = \argmin_{\vec\theta_1 \in \Scal_1} \; \argmin_{\vec\theta_2 \in \Scal_2(\vec\theta_1)} \; L(\vec\theta_1, \vec\theta_2),
@@ -34,7 +34,7 @@ $$
 
 where $\vec\theta = (\vec\theta_1,\vec\theta_2)$ with $\vec\theta_1 = (n_L, r_l)$ and $\vec\theta_{2,i} = (N_\text{n}, R_\text{d}, A)$. The full search space is then given by $\Scal = \Scal_1 \cup \bigcup_{\vec\theta_1 \in \Scal_1} \Scal_2(\vec\theta_1)$.
 
-Implemented in Python it doesn't look quite as pretty any more. To some degree that is because `skopt` insists on calling its objective function with a single argument, namely a list of the current set of hyperparameters. That means bringing in any additional arguments as required in this case to access the current parameters of the outer loop inside the inner one requires some workaround. The best I could come up with is some slightly verbose currying. See for yourself:
+Implemented in Python it doesn't look quite as pretty anymore. To some degree that is because `skopt` insists on calling its objective function with a single argument, namely a list of the current set of hyperparameters. That means bringing in any additional arguments as required in this case to access the current parameters of the outer loop inside the inner one requires some workaround. The best I could come up with is some slightly verbose currying. See for yourself:
 
 ```python
 import keras

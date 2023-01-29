@@ -14,9 +14,9 @@ tags:
 
 ## Intro
 
-This post aims to serve as a guide on how to implement a sticky, active, smooth and responsive table of contents (ToC). It takes a mere 80 lines of JS (styles excluded) and is implemented in [React](https://reactjs.org) and [styled-components](https://styled-components.com). A ToC is particularly useful on long pages with lots of headings where it affords you a quick overview of the page's content, shortcuts to other parts of the page and an indication how far you've progressed through the page. This post is too short for a ToC to make much sense. I added it anyway just to demonstrate. If you want to try it out in a setting where it's more at home, check out this short introduction to a cool method in statistical sampling known as [Hamiltonian Monte Carlo](/blog/hmc-intro).
+This post aims to serve as a guide on how to implement a sticky, active, smooth and responsive table of contents (ToC). It takes a mere 80 lines of JS (styles excluded) and is implemented in [React](https://reactjs.org) and [styled-components](https://styled-components.com). A ToC is particularly useful on long pages with lots of headings where it affords you a quick overview of the page's content, shortcuts to other parts of the page and an indication how far you've progressed through the page. This post is too short for a ToC to make much sense. I added it anyway just to demonstrate. If you want to try it out in a setting where it's more at home, check out this short introduction to a cool method in statistical sampling known as [Hamiltonian Monte Carlo](/posts/hmc-intro).
 
-[![HMC Intro](./hmc-toc.png)](/blog/hmc-intro)
+[![HMC Intro](./hmc-toc.png)](/posts/hmc-intro)
 
 Just so we're on the same page, here are two important points.
 
