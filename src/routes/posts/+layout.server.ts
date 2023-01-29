@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit'
 import type { LayoutServerLoad } from './$types'
 
-export const load: LayoutServerLoad = async ({ url }) => {
+export const load: LayoutServerLoad = async ({ url, parent }) => {
   const modules = import.meta.glob(`./*/+page.{md,svx,svelte}`)
   const slug = url.pathname.split(`/`).at(-1)
 
@@ -16,12 +16,6 @@ export const load: LayoutServerLoad = async ({ url }) => {
     throw error(404, `couldn't resolve ${slug} from ${Object.keys(modules)}`)
   }
 
-  const { default: src } = await import(
-    /* @vite-ignore */
-    `./${slug}/${page.metadata.cover.img}`
-  )
-
-  page.metadata.cover.src = src
   page.metadata.path = path
   page.metadata.slug = slug
 
@@ -32,7 +26,8 @@ export const load: LayoutServerLoad = async ({ url }) => {
   const { metadata: next } = await modules[`./${next_slug}/+page.md`]?.()
 
   return {
-    frontmatter: page.metadata,
+    posts: parent(),
+    post: page.metadata,
     prev: { slug: prev_slug, ...prev },
     next: { slug: next_slug, ...next },
   }

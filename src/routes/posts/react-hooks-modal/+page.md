@@ -87,7 +87,7 @@ export const Close = styled(Cross).attrs({ size: `2em` })`
 
 As you can see, the styles are longer than the component itself. That's where I spent most of my time too. Figuring out how to use React hooks took mere minutes. Props to the React team (pun intended) for the excellent onboarding experience!
 
-Anyways, regarding usage, notice that the modal component doesn't actually handle it's own state. That's done by the parent component. As an example here's a [list of photos](/nature) that when clicked enter a higher-resolution modal view.
+Anyways, regarding usage, notice that the modal component doesn't actually handle its own state. That's done by the parent component. As an example here's a list of photos that when clicked enter a higher-resolution modal view.
 
 ```js
 import React, { useState, Fragment } from 'react' // highlight-line

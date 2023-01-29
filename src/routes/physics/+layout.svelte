@@ -1,5 +1,6 @@
 <script lang="ts">
-  import type { LayoutServerData } from '../physics/$types'
+  import { repository } from '$root/package.json'
+  import type { LayoutServerData } from './$types'
 
   export let data: LayoutServerData
 
@@ -7,10 +8,13 @@
     (filename) => filename.split(`/`)[1]
   )
 
-  $: ({ src, caption } = data.frontmatter.cover)
+  $: ({ cover, slug } = data.frontmatter)
 </script>
 
-<img {src} alt={caption} />
+<img
+  src="{repository}/raw/main/src/routes/physics/{slug}/{cover.img}"
+  alt={cover.caption}
+/>
 <h1>{data.frontmatter.title}</h1>
 
 <main>
