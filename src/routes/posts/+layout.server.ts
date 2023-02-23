@@ -22,8 +22,8 @@ export const load: LayoutServerLoad = async ({ url, parent }) => {
   const slugs = Object.keys(modules).map((x) => x.split(`/`)[1])
   const { prev_slug, next_slug } = get_prev_next(slugs, slug)
 
-  const { metadata: prev } = await modules[`./${prev_slug}/+page.md`]?.()
-  const { metadata: next } = await modules[`./${next_slug}/+page.md`]?.()
+  const { metadata: prev } = modules[`./${prev_slug}/+page.md`]?.() ?? {}
+  const { metadata: next } = modules[`./${next_slug}/+page.md`]?.() ?? {}
 
   return {
     posts: parent(),
