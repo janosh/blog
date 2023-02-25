@@ -4,6 +4,7 @@ import type { LayoutServerLoad } from './$types'
 export const load: LayoutServerLoad = async ({ url, parent }) => {
   const modules = import.meta.glob(`./*/+page.{md,svx,svelte}`)
   const slug = url.pathname.split(`/`).at(-1)
+  if (!slug) throw error(404, `no slug`)
 
   const [path, resolver] = Object.entries(modules).find(([path]) => {
     const route = path.split(`/`)[1]
@@ -22,14 +23,14 @@ export const load: LayoutServerLoad = async ({ url, parent }) => {
   const slugs = Object.keys(modules).map((x) => x.split(`/`)[1])
   const { prev_slug, next_slug } = get_prev_next(slugs, slug)
 
-  const { metadata: prev } = modules[`./${prev_slug}/+page.md`]?.() ?? {}
-  const { metadata: next } = modules[`./${next_slug}/+page.md`]?.() ?? {}
+  const prev_post = await modules[`./${prev_slug}/+page.md`]?.()
+  const next_post = await modules[`./${next_slug}/+page.md`]?.()
 
   return {
     posts: parent(),
     post: page.metadata,
-    prev: { slug: prev_slug, ...prev },
-    next: { slug: next_slug, ...next },
+    prev: { slug: prev_slug, ...(prev_post.metadata ?? {}) },
+    next: { slug: next_slug, ...(next_post.metadata ?? {}) },
   }
 }
 

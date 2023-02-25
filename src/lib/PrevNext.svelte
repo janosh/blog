@@ -19,6 +19,10 @@
       <time>{new Date(prev.date).toLocaleString().split(`,`)[0]}</time>
     </h3>
   </li>
+  <a href="/" aria-label="Back to index page">
+    <Icon icon="simple-icons:homeassistant" inline />
+    back to home
+  </a>
   <li style="text-align: right;">
     <h3>
       <a href={next.slug}>
@@ -41,11 +45,23 @@
     place-content: space-between;
     gap: 2em;
     margin: 3em 0;
+    position: relative;
   }
-  ul li {
+  ul > li {
     display: flex;
     flex-direction: column;
   }
+  a[href='/'] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15pt;
+    padding: 1pt 5pt;
+    border-radius: 3pt;
+    transition: 0.2s;
+  }
+
   time {
     font-weight: lighter;
     font-size: 10pt;
