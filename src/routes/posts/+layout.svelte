@@ -1,19 +1,17 @@
 <script lang="ts">
   import { dev } from '$app/environment'
-  import { PrevNext } from '$lib'
   import { repository } from '$root/package.json'
   import Icon from '@iconify/svelte'
-  import type { LayoutServerData } from '../physics/$types'
+  import { PrevNext } from 'svelte-zoo'
 
-  export let data: LayoutServerData
+  export let data
 
-  $: ({ post, prev, next } = data)
-  $: ({ title, cover, date, slug } = post)
+  $: ({ title, cover, date, slug } = data.post)
 </script>
 
 {#if dev}
-  {#await import(`./${slug}/${cover.img}`) then { default: src }}
-    <img {src} alt={title} />
+  {#await import(`./${slug}/${cover?.img?.replace('.svg', '')}.svg`) then { default: src }}
+    <img {src} alt={cover?.caption} />
   {/await}
 {:else}
   <img
@@ -30,7 +28,23 @@
 <main>
   <slot />
 
-  <PrevNext {prev} {next} />
+  <br />
+  <PrevNext
+    items={data.posts.map((post) => [post.slug, post])}
+    current={slug}
+    let:item
+    let:kind
+  >
+    <h3>
+      <a href={item.slug}>
+        {@html kind == `next` ? `Next &rarr;` : `&larr; Previous`}
+        <br />
+        <small>{item.title}</small>
+      </a>
+      <br />
+      <time>{new Date(item.date).toISOString().split?.(`T`)[0]}</time>
+    </h3>
+  </PrevNext>
 </main>
 
 <style>
@@ -41,6 +55,8 @@
     background: linear-gradient(-45deg, #5a6323, #2a355e, #642626);
   }
   time {
+    font-weight: lighter;
+    font-size: 10pt;
     text-align: center;
   }
 </style>
