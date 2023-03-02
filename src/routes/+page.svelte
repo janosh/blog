@@ -1,10 +1,7 @@
 <script lang="ts">
   import Icon from '@iconify/svelte'
-  import type { PageServerData } from './$types'
   import Physics from './physics/+page@.md'
   import Posts from './posts/+page@.svelte'
-
-  export let data: PageServerData
 </script>
 
 <img src="./janosh.jpg" alt="me" width="200" />
@@ -36,7 +33,7 @@
 
 <h2>Posts</h2>
 
-<Posts {data} />
+<Posts />
 
 <style>
   img[alt='me'] {

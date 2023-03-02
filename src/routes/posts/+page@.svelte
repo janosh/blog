@@ -1,18 +1,15 @@
 <script lang="ts">
   import { dev } from '$app/environment'
+  import { page } from '$app/stores'
   import { repository } from '$root/package.json'
   import Icon from '@iconify/svelte'
-  import type { PageServerData } from './$types'
-
-  export let data: PageServerData
 </script>
 
 <img src="./blog-banner.svg" alt="Banner" />
 
 <ul>
-  {#each data.posts?.sort((p1, p2) => {
-    // sort by date descending
-    return p2.date.localeCompare(p1.date)
+  {#each $page.data?.posts?.sort((p1, p2) => {
+    return p2.date.localeCompare(p1.date) // sort by date descending
   }) ?? [] as post}
     {@const { cover, slug, title, tags, date } = post}
     {@const href = `/posts/${slug}`}
@@ -20,7 +17,7 @@
       <h3><a {href}>{title}</a></h3>
       <a {href}>
         {#if dev}
-          {#await import(`./${slug}/${cover.img}`) then { default: src }}
+          {#await import(`./${slug}/${cover.img.replace('.svg', '')}.svg`) then { default: src }}
             <img {src} alt={title} />
           {/await}
         {:else}
