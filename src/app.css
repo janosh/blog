@@ -85,7 +85,7 @@ label {
   font-weight: bold;
   cursor: pointer;
 }
-img {
+main > img {
   width: 100%;
 }
 
