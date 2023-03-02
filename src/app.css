@@ -2,7 +2,7 @@
   --night: #061e25;
   --text-color: rgb(208, 208, 208);
 
-  --toc-mobile-bg: #0d1a1d;
+  --toc-mobile-bg: #081011;
   --toc-mobile-shadow: 0 0 1em 0 black;
   --toc-title-padding: 0 0 0 3pt;
   --toc-li-padding: 4pt 1ex;
@@ -10,6 +10,8 @@
   --toc-desktop-nav-margin: 0 0 0 1em;
   --toc-min-width: 16em;
   --toc-active-bg: darkcyan;
+
+  --sms-options-bg: #081011;
 
   --zoo-github-corner-color: var(--night);
   --zoo-github-corner-bg: white;
