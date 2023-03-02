@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { dev } from '$app/environment'
   import { repository } from '$root/package.json'
   import Icon from '@iconify/svelte'
   import type { PageServerData } from './$types'
@@ -9,17 +10,25 @@
 <img src="./blog-banner.svg" alt="Banner" />
 
 <ul>
-  {#each data.posts ?? [] as post}
+  {#each data.posts?.sort((p1, p2) => {
+    // sort by date descending
+    return p2.date.localeCompare(p1.date)
+  }) ?? [] as post}
     {@const { cover, slug, title, tags, date } = post}
     {@const href = `/posts/${slug}`}
     <li>
       <h3><a {href}>{title}</a></h3>
-      {slug}
       <a {href}>
-        <img
-          src="{repository}/raw/main/src/routes/posts/{slug}/{cover.img}"
-          alt={cover.src}
-        />
+        {#if dev}
+          {#await import(`./${slug}/${cover.img}`) then { default: src }}
+            <img {src} alt={title} />
+          {/await}
+        {:else}
+          <img
+            src="{repository}/raw/main/src/routes/posts/{slug}/{cover.img}"
+            alt={cover.caption}
+          />
+        {/if}
       </a>
       <time>
         <Icon icon="carbon:calendar" inline />
@@ -55,5 +64,7 @@
     border-radius: 2pt;
     object-fit: cover;
     height: 10em;
+    width: 100%;
+    background: linear-gradient(-45deg, #5a6323, #2a355e, #642626);
   }
 </style>
