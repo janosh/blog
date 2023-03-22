@@ -17,7 +17,7 @@
       <h3><a {href}>{title}</a></h3>
       <a {href}>
         {#if dev}
-          {#await import(`./${slug}/${cover.img.replace('.svg', '')}.svg`) then { default: src }}
+          {#await import(`./${slug}/${cover.img.replace(`.svg`, ``)}.svg`) then { default: src }}
             <img {src} alt={title} />
           {/await}
         {:else}
