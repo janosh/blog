@@ -7,7 +7,7 @@ export const load = async ({ url }) => {
   ).map(([file, post]) => ({
     ...post.metadata,
     slug: file.split(`/`)[2],
-    path: '/' + file.split(`/`).slice(1, -1).join(`/`),
+    path: `/` + file.split(`/`).slice(1, -1).join(`/`),
     file,
   }))
 

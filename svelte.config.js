@@ -6,7 +6,7 @@ import katex from 'rehype-katex-svelte'
 import heading_slugs from 'rehype-slug'
 import math from 'remark-math'
 import preprocess from 'svelte-preprocess'
-import relative_imports from 'svelte-preprocess-import-assets'
+import { importAssets } from 'svelte-preprocess-import-assets'
 
 const macros = {
   // Infinitesimal differential (used in derivatives and integrals)
@@ -87,18 +87,14 @@ export default {
       remarkPlugins: [math],
       extensions: [`.svx`, `.md`],
     }),
-    relative_imports({
+    importAssets({
       sources: (default_sources) => {
         return [
           ...default_sources,
           {
             tag: `a`,
             srcAttributes: [`href`],
-            filter({ attributes }) {
-              if (!attributes.href) return false
-
-              return attributes.href.endsWith(`.pdf`)
-            },
+            filter: (node) => node.attributes?.href.endsWith(`.pdf`),
           },
         ]
       },
