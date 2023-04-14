@@ -12,6 +12,12 @@
   engineering & data viz.
 </p>
 
+<strong>
+  Check out my latest work at <a href="https://matbench-discovery.materialsproject.org">
+    matbench-discovery.materialsproject.org</a
+  >
+</strong>
+
 <address>
   <a href="https://github.com/janosh" target="_blank" rel="noreferrer">
     <Icon inline icon="octicon:mark-github" />
@@ -55,5 +61,16 @@
     place-items: center;
     gap: 1em;
     font-size: 16pt;
+  }
+  strong {
+    text-align: center;
+    margin: 2em auto 3em;
+    background-color: darkcyan;
+    padding: 2pt 9pt;
+    border-radius: 9pt;
+  }
+  strong a {
+    color: #191960;
+    text-decoration: none;
   }
 </style>
