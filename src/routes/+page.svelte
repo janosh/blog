@@ -13,9 +13,12 @@
 </p>
 
 <strong>
-  Check out my latest work at <a href="https://matbench-discovery.materialsproject.org">
-    matbench-discovery.materialsproject.org</a
-  >
+  Check out <a href="https://matbench-discovery.materialsproject.org">
+    matbench-discovery.materialsproject.org
+  </a>
+  <br />
+  A new framework to evaluate ML energy models on materials stability prediction from unrelaxed
+  crystals
 </strong>
 
 <address>
@@ -68,6 +71,7 @@
     background-color: darkcyan;
     padding: 2pt 9pt;
     border-radius: 9pt;
+    max-width: 500px;
   }
   strong a {
     color: #191960;
