@@ -28,7 +28,7 @@ publications:
     authors: Janosh Riebesell, Rhys Goodall, Anubhav Jain, Kristin Persson, Alpha Lee
     date: 10 Feb 2023
     journal: ICLR ML4Materials
-    url: https://matbench-discovery.janosh.dev/paper/iclr-ml4mat
+    url: https://matbench-discovery.materialsproject.org/preprint
   - name: Crystal Toolkit
     title: Crystal Toolkit - A Web App Framework to Improve Usability and Accessibility of Materials Science Research Algorithms
     arxiv: https://arxiv.org/abs/2302.06147
@@ -46,7 +46,7 @@ publications:
 
 projects:
   - name: Matbench Discovery
-    url: https://matbench-discovery.janosh.dev
+    url: https://matbench-discovery.materialsproject.org
     img_style: 'filter: invert(1);'
     github: https://github.com/janosh/matbench-discovery
     description: Benchmark for machine learning energy models simulating a real-world materials discovery campaign. Interactive leader board and Python package make new model submissions easy.

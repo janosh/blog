@@ -1,25 +1,20 @@
+import type { FrontMatter } from '$lib/types'
 import { error } from '@sveltejs/kit'
 import type { LayoutServerLoad } from './$types'
 
 export const load: LayoutServerLoad = async ({ url }) => {
-  const modules = import.meta.glob(`./*/+page.{md,svx,svelte}`)
+  const modules = import.meta.glob(`./*/+page.md`, { eager: true })
+
   const slug = url.pathname.split(`/`).at(-1)
-
-  const [path, resolver] = Object.entries(modules).find(([path]) => {
-    const route = path.split(`/`)[1]
-    return route == slug
-  })
-
-  const page = await resolver?.()
-
-  if (!page?.metadata) {
+  const path = `./${slug}/+page.md`
+  if (!slug || !(path in modules)) {
     throw error(404, `couldn't resolve ${slug} from ${Object.keys(modules)}`)
   }
 
-  page.metadata.path = path
-  page.metadata.slug = slug
+  const frontmatter = modules[path]?.metadata as FrontMatter
 
-  return {
-    frontmatter: page.metadata,
-  }
+  frontmatter.path = path
+  frontmatter.slug = slug
+
+  return { frontmatter }
 }

@@ -1,12 +1,7 @@
 <script lang="ts">
   import { repository } from '$root/package.json'
-  import type { LayoutServerData } from './$types'
 
-  export let data: LayoutServerData
-
-  const routes = Object.keys(import.meta.glob('./*/+page*.{svx,md,svelte}')).map(
-    (filename) => filename.split(`/`)[1]
-  )
+  export let data
 
   $: ({ cover, slug } = data.frontmatter)
 </script>
