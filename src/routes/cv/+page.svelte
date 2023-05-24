@@ -30,8 +30,8 @@
   <h1>Janosh Riebesell</h1>
 
   <small>
-    <a href="https://tcm.phy.cam.ac.uk/profiles/jr769">
-      PhD Student, University of Cambridge
+    <a href="https://materialsproject.org/about/people">
+      Materials Project Staff @ Lawrence Berkeley National Lab
     </a>
   </small>
 
@@ -39,17 +39,6 @@
     {#each social as [name, url, icon]}
       <a href={url} {...links}><Icon inline {icon} />{name}</a>
     {/each}
-  </address>
-  <address>
-    <a href="https://goo.gl/maps/Qu63RmiSAPCE3Ci48">
-      <Icon inline icon="mdi:map-marker" />
-      2601 Benvenue Ave, 94704 Berkeley, CA
-    </a>
-    &bull;
-    <a href="tel:{phone}">
-      <Icon inline icon="mdi:cellphone-iphone" />
-      {phone}
-    </a>
   </address>
 </section>
 
