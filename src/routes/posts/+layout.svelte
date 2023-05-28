@@ -23,7 +23,7 @@
 <h1>{title}</h1>
 <time>
   <Icon icon="carbon:calendar" inline />
-  {date.split(`T`)[0]}
+  {date?.split(`T`)[0]}
 </time>
 <main>
   <slot />
