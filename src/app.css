@@ -9,7 +9,7 @@
   --toc-mobile-btn-color: white;
   --toc-desktop-nav-margin: 0 0 0 1em;
   --toc-min-width: 16em;
-  --toc-active-bg: darkcyan;
+  --toc-active-bg: teal;
 
   --sms-options-bg: #081011;
 
@@ -73,6 +73,7 @@ pre code {
   display: inline-block;
 }
 pre {
+  position: relative;
   border-radius: 4pt;
   font-size: 9.5pt;
   background-color: rgba(255, 255, 255, 0.05);
