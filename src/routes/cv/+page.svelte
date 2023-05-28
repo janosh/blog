@@ -15,7 +15,6 @@
 
   const email = `janosh@lbl.gov`
   const links = { target: `_blank`, rel: `noreferrer` }
-  const phone = `+1 (510) 423-1915`
 
   const social: [string, string, string][] = [
     [email, `mailto:${email}`, `mdi:email`],
@@ -221,10 +220,6 @@
     font-style: normal;
     font-weight: 200;
     margin: 1ex;
-  }
-  address + address {
-    font-size: 10pt;
-    gap: 8pt;
   }
   address a {
     display: flex;

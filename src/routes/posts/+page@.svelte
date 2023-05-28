@@ -8,8 +8,8 @@
 <img src="./blog-banner.svg" alt="Banner" />
 
 <ul>
-  {#each $page.data?.posts?.sort((p1, p2) => {
-    return p2.date.localeCompare(p1.date) // sort by date descending
+  {#each $page.data?.posts?.sort((post_1, post_2) => {
+    return post_2.date.localeCompare(post_1.date) // sort by date descending
   }) ?? [] as post}
     {@const { cover, slug, title, tags, date } = post}
     {@const href = `/posts/${slug}`}
@@ -17,7 +17,7 @@
       <h3><a {href}>{title}</a></h3>
       <a {href}>
         {#if dev}
-          {#await import(`./${slug}/${cover.img.replace(`.svg`, ``)}.svg`) then { default: src }}
+          {#await import(`./${slug}/${cover?.img?.replace(`.svg`, ``)}.svg`) then { default: src }}
             <img {src} alt={title} />
           {/await}
         {:else}
@@ -29,9 +29,9 @@
       </a>
       <time>
         <Icon icon="carbon:calendar" inline />
-        {date.split(`T`)[0]}
+        {date?.split(`T`)[0]}
       </time>
-      <small><Icon icon="carbon:tag" inline /> {tags.join(`, `)}</small>
+      <small><Icon icon="carbon:tag" inline /> {tags?.join(`, `)}</small>
     </li>
   {/each}
 </ul>
