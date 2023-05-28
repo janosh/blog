@@ -12,13 +12,13 @@ tags:
 
 <!-- also posted at https://github.com/pngwn/MDsveX/issues/385#issuecomment-1565811519 -->
 
-In the age of LLMs, we've entered a copy-paste world. Anything you do 20 times a day should be automated. Manually selecting text in the browser only to have unintended scrolling or weird page flow mess up the selection gets old fast. And don't get me started on mobile devices! Nowadays any blog, docs, and technical writing worth its salt needs proper code block copy buttons!
+Anything you do 20 times a day should be automated. Manually selecting text in the browser only to have unintended scrolling or weird page flow mess up the selection gets old fast. And don't get me started on mobile devices! Any blog, docs, or technical writing worth its salt needs code block with proper copy buttons!
 
-Luckily, the lowest-effort solution turns out to also be the most robust here... like fixing your device by simply turning it off and on again. Robust in the sense that these copy buttons apply to both code blocks in markdown and in Svelte components (which are not processed by MSveX). The only downside is that they flash on page load. Might try to fix that another day.
+Luckily, the lowest-effort solution turns out to be quite robust here... like fixing your device by simply turning it off and on again. Robust in the sense that these copy buttons apply to both code blocks in markdown and in Svelte components (which are not processed by MSveX). The only downside is that they flash on page load. Might try to fix that another day.
 
-## Cut to the Chase
+## 🔥 Cut to the Chase
 
-If your site is built with SvelteKit (as this one is), go to your root `+layout.svelte` file. Many other frameworks will have an equivalent file that wraps the base of your component tree. Using the `afterNavigate` function from SvelteKit's `$app/navigation`, which fires on page load and again on every page navigation, we can easily make the required DOM manipulations to prefix every code block with a Svelte component that renders a copy button. I'll use `CopyButton from 'svelte-zoo'` here but feel free to roll your own.
+If your site is built with SvelteKit (as mine is), go to your root `+layout.svelte` file. Many other frameworks will have an equivalent file that wraps the base of your component tree. Using the `afterNavigate` function from SvelteKit's `$app/navigation`, which fires on page load and again on every page navigation, we can easily make the required DOM manipulations to prefix every code block with a Svelte component that renders a copy button. I'll use `CopyButton from 'svelte-zoo'` here but feel free to roll your own.
 
 ```ts
 import { CopyButton } from 'svelte-zoo'
@@ -61,7 +61,7 @@ button {
 
 </details>
 
-### Caveman Style
+## 🗿 Caveman Style
 
 That's all there is to it in Svelte. But for completeness, let me cover the vanilla JS framework agnostic version. Here's how to insert a copy button imperatively:
 
@@ -82,7 +82,7 @@ afterNavigate(() => {
 })
 ```
 
-### Caveman with Style
+## 🔨 Caveman with Style
 
 If you count yourself a sophisticated caveman, you may not want to forego a pretty SVG icon to decorate your copy button. I got you covered:
 
