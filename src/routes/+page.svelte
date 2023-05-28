@@ -50,7 +50,7 @@
     object-fit: cover;
     height: 10em;
     width: 10em;
-    margin: 1em auto 0;
+    margin: 4em auto 0;
   }
   h1 {
     margin: 0;

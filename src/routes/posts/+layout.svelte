@@ -20,7 +20,7 @@
   />
 {/if}
 
-<h1>{title}</h1>
+<h1 style="margin: 2em 0 1em;">{title}</h1>
 <time>
   <Icon icon="carbon:calendar" inline />
   {date?.split(`T`)[0]}
