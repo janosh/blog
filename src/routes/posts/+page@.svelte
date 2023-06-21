@@ -27,10 +27,12 @@
           />
         {/if}
       </a>
-      <time>
-        <Icon icon="carbon:calendar" inline />
-        {date?.split(`T`)[0]}
-      </time>
+      <small>
+        <time>
+          <Icon icon="carbon:calendar" inline />
+          {date?.split(`T`)[0]}
+        </time>
+      </small>
       <small><Icon icon="carbon:tag" inline /> {tags?.join(`, `)}</small>
     </li>
   {/each}
