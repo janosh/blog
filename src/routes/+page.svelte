@@ -67,6 +67,7 @@
   }
   strong {
     text-align: center;
+    color: #eee;
     margin: 2em auto 3em;
     background-color: darkcyan;
     padding: 2pt 9pt;
@@ -74,7 +75,7 @@
     max-width: 500px;
   }
   strong a {
-    color: #191960;
-    text-decoration: none;
+    color: white;
+    text-decoration: underline;
   }
 </style>
