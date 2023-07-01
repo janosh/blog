@@ -1,17 +1,6 @@
 <script lang="ts">
   import Icon from '@iconify/svelte'
-  import {
-    awards,
-    education,
-    hobbies,
-    languages,
-    memberships,
-    nationality,
-    projects,
-    publications,
-    skills,
-    volunteer,
-  } from './cv-data.yml'
+  import cv from './cv-data.yml'
 
   const email = `janosh@lbl.gov`
   const links = { target: `_blank`, rel: `noreferrer` }
@@ -46,7 +35,7 @@
     <Icon inline icon="zondicons:education" />&nbsp; Education
   </h2>
   <ul>
-    {#each education as { title, thesis_title, date = '', href, uni }}
+    {#each cv.education as { title, thesis_title, date, href, uni }}
       <li>
         <h4>
           <a {href}>{title}</a>
@@ -61,7 +50,7 @@
     <Icon inline icon="iconoir:journal" />&nbsp; Publications
   </h2>
   <ul>
-    {#each publications as { title, authors, journal, date, url, arxiv }}
+    {#each cv.publications as { title, authors, journal, date, url, arxiv }}
       {@const year = new Date(date).getFullYear()}
       <li>
         <h4>{title}</h4>
@@ -78,7 +67,7 @@
     <!-- <small>only lead dev repos</small> -->
   </h2>
   <ul>
-    {#each projects as { url, img_style, github, name, description, stars, logo }}
+    {#each cv.projects as { url, img_style, github, name, description, stars, logo }}
       <li>
         <h4>
           <img src={logo ?? `${url}/favicon.svg`} alt="{name} Logo" style={img_style} />
@@ -101,7 +90,7 @@
     <Icon inline icon="mdi:trophy" />&nbsp; Awards
   </h2>
   <ul>
-    {#each awards as { name, description, date, href }}
+    {#each cv.awards as { name, description, date, href }}
       <li>
         <h4><a {href}>{name}</a></h4>
         <p>{description} <small>{date}</small></p>
@@ -113,7 +102,7 @@
     <Icon inline icon="material-symbols:volunteer-activism" />&nbsp; Volunteer Work
   </h2>
   <ul>
-    {#each volunteer as { name, description, href, logo, role }}
+    {#each cv.volunteer as { name, description, href, logo, role }}
       <li>
         <h4>
           <a {href}><img src={logo} alt={name} height="20" />{name}</a>
@@ -130,7 +119,7 @@
     <Icon inline icon="lucide:languages" />&nbsp; Languages
   </h3>
   <ul>
-    {#each languages as { name, level }}
+    {#each cv.languages as { name, level }}
       <li>
         {name}
         <Icon inline icon="carbon:skill-level-{level}" />
@@ -141,7 +130,7 @@
   <h3>
     <Icon inline icon="mdi:earth" />&nbsp; Nationality
     <ul>
-      {#each nationality as nat}
+      {#each cv.nationality as nat}
         <li>{nat}</li>
       {/each}
     </ul>
@@ -151,7 +140,7 @@
     <Icon inline icon="carbon:skill-level-advanced" />&nbsp; Skills
   </h3>
   <ul class="skills">
-    {#each skills as { name, icon, score, href }}
+    {#each cv.skills as { name, icon, score, href }}
       <!-- color based on score style="color: hsl({score * 20}, 100%, 40%)" -->
       <li style:font-weight={(score - 3) * 100}>
         <a {href}>
@@ -167,7 +156,7 @@
     <Icon inline icon="material-symbols:interests" />&nbsp; Hobbies
   </h3>
   <ul>
-    {#each hobbies as { name, icon, href }}
+    {#each cv.hobbies as { name, icon, href }}
       <li>
         <a {href}>
           <Icon inline {icon} />
@@ -182,7 +171,7 @@
     &nbsp; Memberships
   </h3>
   <ul>
-    {#each memberships as { name, date, href }}
+    {#each cv.memberships as { name, date, href }}
       <li>
         <a {href}>{name}</a>&ensp;<small>{date}</small>
       </li>
