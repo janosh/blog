@@ -48,5 +48,6 @@ repos:
           - svelte
           - typescript
           - eslint-plugin-svelte
+          - svelte-eslint-parser
           - '@typescript-eslint/eslint-plugin'
           - '@typescript-eslint/parser'
