@@ -460,7 +460,7 @@ function FallbackStyles({ cssColors = `` }) {
 
   const wrappedInSelector = `html { ${cssColors} }`
 
-  return <style>{wrappedInSelector}</style>
+  return <style>{wrappedInSelector}<\/style>
 }
 
 export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
