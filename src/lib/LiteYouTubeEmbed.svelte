@@ -9,7 +9,13 @@
   $: video_id, (activated = false)
 </script>
 
-<div class="lite-youtube" class:activated on:click={activate} on:keyup={activate}>
+<div
+  class="lite-youtube"
+  class:activated
+  on:click={activate}
+  on:keyup={activate}
+  role="presentation"
+>
   {#key video_id}
     <picture>
       <source
