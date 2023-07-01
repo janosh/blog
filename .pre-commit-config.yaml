@@ -45,6 +45,7 @@ repos:
         files: \.(js|ts|svelte)$
         additional_dependencies:
           - eslint
+          - svelte
           - typescript
           - eslint-plugin-svelte
           - '@typescript-eslint/eslint-plugin'
