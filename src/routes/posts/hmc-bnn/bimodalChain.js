@@ -102,7 +102,7 @@ const chain = [
 ]
 
 export const [xChain, yChain] = chain[0].map((col, i) =>
-  chain.map((row) => row[i])
+  chain.map((row) => row[i]),
 )
 
 export default chain

@@ -29,6 +29,7 @@ publications:
     date: 10 Feb 2023
     journal: ICLR ML4Materials
     url: https://matbench-discovery.materialsproject.org/preprint
+    arxiv: https://arxiv.org/abs/2308.14920
   - name: CHGNet
     title: CHGNet - Pretrained universal neural network potential for charge-informed atomistic modeling
     authors: Bowen Deng, Peichen Zhong, Janosh Riebesell, KyuJung Jun, Kevin Han, Christopher J. Bartel, Gerbrand Ceder
