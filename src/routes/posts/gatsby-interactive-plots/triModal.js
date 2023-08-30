@@ -5,8 +5,8 @@ const z = range.map((x) =>
     (y) =>
       Math.exp(-0.05 * (x ** 2 + y ** 2)) +
       0.7 * Math.exp(-0.1 * ((x - 10) ** 2 + y ** 2)) +
-      0.5 * Math.exp(-0.1 * ((x + 7) ** 2 + (y - 7) ** 2))
-  )
+      0.5 * Math.exp(-0.1 * ((x + 7) ** 2 + (y - 7) ** 2)),
+  ),
 )
 
 export default {
