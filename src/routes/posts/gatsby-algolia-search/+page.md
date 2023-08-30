@@ -240,12 +240,12 @@ Next, we define two connected components. `Results` informs the user that no mat
 const Results = connectStateResults(
   ({ searching, searchState: state, searchResults: res }) =>
     (searching && <div>Searching...</div>) ||
-    (res?.nbHits === 0 && <div>No results for &apos;{state.query}&apos;</div>)
+    (res?.nbHits === 0 && <div>No results for &apos;{state.query}&apos;</div>),
 )
 
 const Stats = connectStateResults(
   ({ searchResults: res }) =>
-    res?.nbHits > 0 && `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`
+    res?.nbHits > 0 && `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`,
 )
 ```
 

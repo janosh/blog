@@ -13,9 +13,12 @@
 </p>
 
 <strong>
-  Check out <a href="https://matbench-discovery.materialsproject.org">
+  Check out my latest work
+  <br />
+  <a href="https://matbench-discovery.materialsproject.org">
     matbench-discovery.materialsproject.org
   </a>
+  [<a href="https://arxiv.org/abs/2308.14920">arXiv</a>]
   <br />
   A new framework to evaluate ML energy models on materials stability prediction from unrelaxed
   crystals
