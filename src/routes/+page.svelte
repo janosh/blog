@@ -35,7 +35,7 @@
     <Icon inline icon="bi:linkedin" />
   </a>
   <a href="mailto:janosh.riebesell@gmail.com" target="_blank" rel="noreferrer">
-    <Icon inline icon="bi:envelope" />
+    <Icon inline icon="mdi:email" width="1.35em" style="vertical-align: middle;" />
   </a>
 </address>
 

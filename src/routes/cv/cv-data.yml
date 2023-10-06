@@ -27,8 +27,8 @@ publications:
     title: Matbench Discovery - Can machine learning identify stable crystals?
     authors: Janosh Riebesell, Rhys Goodall, Anubhav Jain, Kristin Persson, Alpha Lee
     date: 10 Feb 2023
-    journal: ICLR ML4Materials
-    url: https://matbench-discovery.materialsproject.org/preprint
+    journal: ICLR ML4Materials/arXiv
+    url: https://matbench-discovery.materialsproject.org
     arxiv: https://arxiv.org/abs/2308.14920
   - name: CHGNet
     title: CHGNet - Pretrained universal neural network potential for charge-informed atomistic modeling
@@ -44,12 +44,12 @@ publications:
     authors: Matthew Horton, ..., Janosh Riebesell, ..., Anubhav Jain, Kristin A. Persson
     date: 13 Feb 2023
     journal: arxiv
-  - name: Functional Renormalization Analytically Continued
-    title: Functional Renormalization Group Analytically Continued to Finite Temperatures
-    arxiv: https://arxiv.org/abs/1712.09863v1
-    authors: Janosh Riebesell
-    date: 25 Jan 2018
-    journal: arxiv
+  # - name: Functional Renormalization Analytically Continued
+  #   title: Functional Renormalization Group Analytically Continued to Finite Temperatures
+  #   arxiv: https://arxiv.org/abs/1712.09863v1
+  #   authors: Janosh Riebesell
+  #   date: 25 Jan 2018
+  #   journal: arxiv
 
 projects:
   - name: Matbench Discovery
