@@ -25,10 +25,9 @@
     bottom: 18pt;
     right: 18pt;
     display: flex;
-    place-content: center;
     place-items: center;
-    width: 18pt;
-    height: 18pt;
+    aspect-ratio: 1;
     border-radius: 50%;
+    transform: scale(1.4);
   }
 </style>
