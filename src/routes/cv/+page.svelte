@@ -31,6 +31,13 @@
 </section>
 
 <section class="body">
+  <small>
+    I joined the Materials Project in early 2023 where I build high-throughput workflows
+    for generating large DFT and ML potential datasets. I am a core maintainer of
+    <a href="https://github.com/materialsproject/pymatgen">pymatgen</a>
+    and enjoy building infrastructure around high-quality open source software that enables
+    new capabilities in computational materials to scale.
+  </small>
   <h2>
     <Icon inline icon="zondicons:education" />&nbsp; Education
   </h2>
@@ -47,16 +54,21 @@
   </ul>
 
   <h2>
-    <Icon inline icon="iconoir:journal" />&nbsp; Publications
+    <Icon inline icon="iconoir:journal" />&nbsp; Recent Publications
   </h2>
   <ul>
-    {#each cv.publications as { title, authors, journal, date, url, arxiv }}
+    {#each cv.publications as { title, authors, journal, date, url: href, arxiv }}
       {@const year = new Date(date).getFullYear()}
       <li>
         <h4>{title}</h4>
         <p>
-          {authors} - <small><a href={url ?? arxiv} {...links}>{journal}</a></small> -
-          <small>{year}</small>
+          {authors} - <small><a href={arxiv} {...links}>{journal}</a></small> -
+          <small
+            >{year}
+            {#if href}
+              - <a {href}>{href}</a>
+            {/if}
+          </small>
         </p>
       </li>
     {/each}
