@@ -25,7 +25,7 @@ education:
 publications:
   - name: Matbench Discovery
     title: Matbench Discovery - Can machine learning identify stable crystals?
-    authors: Janosh Riebesell, Rhys Goodall, Anubhav Jain, Kristin Persson, Alpha Lee
+    authors: Janosh Riebesell, Rhys Goodall, Philipp Benner, Yuan Chiang, Alpha Lee, Anubhav Jain, Kristin Persson
     date: 10 Feb 2023
     journal: ICLR ML4Materials/arXiv
     url: https://matbench-discovery.materialsproject.org
@@ -39,9 +39,7 @@ publications:
   - name: Crystal Toolkit
     title: Crystal Toolkit - A Web App Framework to Improve Usability and Accessibility of Materials Science Research Algorithms
     arxiv: https://arxiv.org/abs/2302.06147
-    # TODO auto-ellipsis long author lists
-    # authors: Matthew Horton, Jimmy-Xuan Shen, Jordan Burns, Orion Cohen, François Chabbey, Alex M. Ganose, Rishabh Guha, Patrick Huck, Hamming Howard Li, Matthew McDermott, Joseph Montoya, Guy Moore, Jason Munro, Cody O'Donnell, Colin Ophus, Guido Petretto, Janosh Riebesell, Steven Wetizner, Brook Wander, Donald Winston, Ruoxi Yang, Steven Zeltmann, Anubhav Jain, Kristin A. Persson
-    authors: Matthew Horton, ..., Janosh Riebesell, ..., Anubhav Jain, Kristin A. Persson
+    authors: Matthew Horton, Jimmy-Xuan Shen, Jordan Burns, Orion Cohen, François Chabbey, Alex M. Ganose, Rishabh Guha, Patrick Huck, Hamming Howard Li, Matthew McDermott, Joseph Montoya, Guy Moore, Jason Munro, Cody O'Donnell, Colin Ophus, Guido Petretto, Janosh Riebesell, Steven Wetizner, Brook Wander, Donald Winston, Ruoxi Yang, Steven Zeltmann, Anubhav Jain, Kristin A. Persson
     date: 13 Feb 2023
     journal: arxiv
   # - name: Functional Renormalization Analytically Continued
@@ -52,6 +50,12 @@ publications:
   #   journal: arxiv
 
 projects:
+  - name: ''
+    url: https://pymatgen.org
+    logo: https://raw.githubusercontent.com/materialsproject/pymatgen/master/docs/assets/pymatgen.svg
+    img_style: 'min-width: 90px;'
+    github: https://github.com/materialsproject/pymatgen
+    description: One of the largest and most popular open source materials analysis codes that defines classes for structures, molecules, slabs, etc. and interfaces seamlessly with various other materials codes. It also powers the Materials Project.
   - name: Matbench Discovery
     url: https://matbench-discovery.materialsproject.org
     img_style: 'filter: invert(1);'
