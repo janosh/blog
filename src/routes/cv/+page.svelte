@@ -1,6 +1,6 @@
 <script lang="ts">
   import Icon from '@iconify/svelte'
-  import cv from './cv-data.yml'
+  import cv from './cv.yml'
 
   const email = `janosh@lbl.gov`
   const links = { target: `_blank`, rel: `noreferrer` }
@@ -73,10 +73,11 @@
 <section class="body">
   <small>
     I joined the Materials Project in early 2023 where I build high-throughput workflows
-    for generating large DFT and ML potential datasets. I am a core maintainer of
+    for generating large DFT datasets. I am a core maintainer of
     <a href="https://github.com/materialsproject/pymatgen">pymatgen</a>
-    and enjoy building infrastructure around high-quality open source software that enables
-    new capabilities in computational materials to scale.
+    and enjoy building high-quality open source software that enables new capabilities in computational
+    materials to scale. In particular, my current interests are on further development, training
+    and benchmarking of universal interatomic potentials.
   </small>
   <h2>
     <Icon inline icon="zondicons:education" />&nbsp; Education
@@ -121,7 +122,7 @@
     <!-- <small>only lead dev repos</small> -->
   </h2>
   <ul>
-    {#each cv.projects as { url, img_style, github, name, description, stars, logo }}
+    {#each cv.projects as { url, img_style, github, name, description, stars, logo, languages }}
       {@const logo_url = logo ?? `${url}/favicon.svg`}
       <li>
         <h4>
@@ -137,6 +138,7 @@
               <small>{stars} ⭐</small>
             </a>
           {/if}
+          <small class="langs">{languages.slice(0, 3).join(`, `)}</small>
         </h4>
         <p>{description}</p>
       </li>
@@ -215,10 +217,15 @@
   <ul>
     {#each cv.hobbies as { name, icon, href }}
       <li>
-        <a {href}>
+        {#if href}
+          <a {href}>
+            <Icon inline {icon} />
+            {name}
+          </a>
+        {:else}
           <Icon inline {icon} />
           {name}
-        </a>
+        {/if}
       </li>
     {/each}
   </ul>
@@ -289,6 +296,11 @@
     display: flex;
     gap: 8pt;
     place-items: center;
+  }
+  ul > li > h4 > small.langs {
+    margin-left: 2ex;
+    font-weight: 200;
+    font-size: 9pt;
   }
   p {
     margin: 0;

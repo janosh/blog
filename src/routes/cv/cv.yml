@@ -21,7 +21,6 @@ education:
     thesis_title: van der Waals Corrections for Density Functional Theory - DFT+D2 applied to Graphene-hBN-Heterostructures
     href: https://physik.uni-hamburg.de/en.html
     logo: https://assets.rrz.uni-hamburg.de/assets/uhh-logo-4ec3691b46570436d95977e2c0c368646d0c24d722425dd674f48b1c44585e81.svg
-
 publications:
   - name: Matbench Discovery
     title: Matbench Discovery - Can machine learning identify stable crystals?
@@ -42,13 +41,6 @@ publications:
     authors: Matthew Horton, Jimmy-Xuan Shen, Jordan Burns, Orion Cohen, François Chabbey, Alex M. Ganose, Rishabh Guha, Patrick Huck, Hamming Howard Li, Matthew McDermott, Joseph Montoya, Guy Moore, Jason Munro, Cody O'Donnell, Colin Ophus, Guido Petretto, Janosh Riebesell, Steven Wetizner, Brook Wander, Donald Winston, Ruoxi Yang, Steven Zeltmann, Anubhav Jain, Kristin A. Persson
     date: 13 Feb 2023
     journal: arxiv
-  # - name: Functional Renormalization Analytically Continued
-  #   title: Functional Renormalization Group Analytically Continued to Finite Temperatures
-  #   arxiv: https://arxiv.org/abs/1712.09863v1
-  #   authors: Janosh Riebesell
-  #   date: 25 Jan 2018
-  #   journal: arxiv
-
 projects:
   - name: ''
     url: https://pymatgen.org
@@ -56,45 +48,117 @@ projects:
     img_style: 'min-width: 90px;'
     github: https://github.com/materialsproject/pymatgen
     description: One of the largest and most popular open source materials analysis codes that defines classes for structures, molecules, slabs, etc. and interfaces seamlessly with various other materials codes. It also powers the Materials Project.
+    languages:
+      - Python
+      - Cython
+    stars: 1173
   - name: Matbench Discovery
     url: https://matbench-discovery.materialsproject.org
     img_style: 'filter: invert(1);'
     github: https://github.com/janosh/matbench-discovery
     description: Benchmark for machine learning energy models simulating a real-world materials discovery campaign. Interactive leader board and Python package make new model submissions easy.
+    languages:
+      - Python
+      - Svelte
+      - CSS
+      - TypeScript
+      - JavaScript
+      - HTML
+    stars: 37
+  - name: CHGNet
+    url: https://chgnet.lbl.gov
+    github: https://github.com/CederGroupHub/chgnet
+    description: Pretrained universal neural network potential for charge-informed atomistic modeling. Published on the cover of Nature Machine Intelligence.
+    languages:
+      - Python
+      - C
+      - Cython
+      - CSS
+      - Svelte
+      - HTML
+      - JavaScript
+      - TypeScript
+    stars: 113
   - name: Elementari
     url: https://elementari.janosh.dev
     github: https://github.com/janosh/elementari
     description: A library of Svelte components for building interactive web apps with performant chemistry visualizations like periodic tables, Bohr atoms, nuclei, heatmaps, scatter plots.
-    stars: 49
+    languages:
+      - TypeScript
+      - Svelte
+      - CSS
+      - Python
+      - JavaScript
+      - HTML
+    stars: 91
   - name: pymatviz
     url: https://pymatviz.janosh.dev
     img_style: 'filter: invert(1);'
     github: https://github.com/janosh/pymatviz
     description: A toolkit for visualizations in materials informatics to complement pymatgen.
-    stars: 48
+    languages:
+      - Python
+      - Svelte
+      - CSS
+      - TypeScript
+      - HTML
+      - JavaScript
+    stars: 70
   - name: Tensorboard Reducer
     github: https://github.com/janosh/tensorboard-reducer
     logo: https://raw.githubusercontent.com/janosh/tensorboard-reducer/main/assets/tensorboard-reducer-square.svg
     description: Reduce multiple PyTorch TensorBoard runs to new events/CSV/JSON. Good for model ensembles.
-    stars: 51
     pypi: https://pypi.org/project/tensorboard-reducer
+    languages:
+      - Python
+      - TeX
+    stars: 59
+  - name: Normalizing Flows
+    github: https://github.com/janosh/awesome-normalizing-flows
+    logo: https://api.iconify.design/logos:awesome.svg?color=%23888888
+    description: Curated list of resources for learning and using normalizing flows, a powerful tool in ML for modeling probability distributions.
+    languages:
+      - Python
+    stars: 1172
+  - name: atomate2
+    github: https://github.com/materialsproject/atomate2
+    logo: https://github.com/materialsproject/atomate2/assets/30958850/53e02adf-5bdb-4c8e-8076-cb30765ac0db
+    description: |
+      atomate2 is a library of computational materials science workflows used by the Materials Project and beyond.
+      It supports multiple DFT codes and downstream analysis tools. Recently, we added machine learning
+      potential-powered structure relaxation workflows.
+    languages:
+      - Python
+    stars: 94
+  - name: jobflow
+    github: https://github.com/materialsproject/jobflow
+    logo: https://user-images.githubusercontent.com/30958850/275247234-0650d187-8a42-4962-a95d-ff40354baf6b.svg
+    description: |
+      jobflow is a library for writing computational workflows. It provides the plumbing underlying atomate2
+      and was adopted by several other workflow libraries.
+    languages:
+      - Python
+      - TeX
+    stars: 57
   - name: Aviary
     github: https://github.com/CompRhys/aviary
     logo: https://raw.githubusercontent.com/janosh/tikz/main/assets/aviary/aviary.svg
     description: Multiple ML energy model implementations (Roost, Wren, CGCNN, Wrenformer) with a consistent API.
-    stars: 21
     pypi: https://pypi.org/project/tensorboard-reducer
-  - name: Normalizing Flows
-    github: https://github.com/janosh/awesome-normalizing-flows
-    stars: 983
-    logo: https://api.iconify.design/logos:awesome.svg?color=%23888888
-    description: Curated list of resources for learning and using normalizing flows, a powerful tool in ML for modeling probability distributions.
+    languages:
+      - Python
+    stars: 29
   - name: MultiSelect
     url: https://multiselect.janosh.dev
     github: https://github.com/janosh/svelte-multiselect
-    stars: 146
     description: Keyboard-friendly, accessible and customizable multi-select web component.
-
+    languages:
+      - TypeScript
+      - Svelte
+      - CSS
+      - HTML
+      - JavaScript
+    stars: 219
 skills:
   - name: Python
     icon: mdi:language-python
@@ -168,31 +232,25 @@ skills:
   - name: Cypress
     icon: simple-icons:cypress
     score: 3
-
 hobbies:
-  - name: nature photography
+  - name: photography
     icon: mdi:camera
     href: https://youtube.com/@jrib
-  - name: film & editing
+  - name: video editing
     href: https://youtube.com/@jrib
     icon: mdi:youtube
   - name: hiking
     icon: mdi:map-marker-distance
-    href: https://komoot.com/user/179035526626
   - name: cycling
     icon: mdi:bike
-    href: https://komoot.com/user/179035526626
-  - name: rock climbing
+  - name: climbing
     icon: map:climbing
-    href: https://komoot.com/user/179035526626
-  - name: drone flying
+  - name: drones
     icon: carbon:drone
     href: https://youtube.com/@jrib
-
 nationality:
   - 🇨🇦 Canadian
   - 🇩🇪 German
-
 languages:
   - name: 🇺🇸 English
     level: advanced
@@ -202,7 +260,6 @@ languages:
     level: intermediate
   - name: 🇪🇸 Spanish
     level: basic
-
 volunteer:
   - name: Studenten bilden Schüler
     description: Non-profit student initiative that connects University student volunteers with children from underprivileged families for free tutoring.
@@ -216,13 +273,11 @@ volunteer:
     href: https://afara.foundation
     logo: https://afara.foundation/favicon.svg
     role: Board member and head of IT
-
 awards:
   - name: Studienstiftung des deutschen Volkes
     description: Full scholarship for outstanding students (German Academic Scholarship Foundation)
-    date: 2015 - present
+    date: 2015 - 2023
     href: https://studienstiftung.de
-
 memberships:
   - name: Cambridge Physical Society
     date: 2019 - present
