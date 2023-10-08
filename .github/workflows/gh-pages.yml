@@ -8,3 +8,4 @@ on:
 jobs:
   build:
     uses: janosh/workflows/.github/workflows/nodejs-gh-pages.yml@main
+    secrets: inherit
