@@ -12,6 +12,46 @@
     [`janosh`, `https://stackoverflow.com/u/4034025`, `mdi:stackoverflow`],
     // [`janosh-riebesell`, `https://linkedin.com/in/janosh-riebesell`, `bi:linkedin`],
   ]
+  function truncate_authors(
+    author_str: string,
+    target_name: string,
+    max_authors: number = 3
+  ): string {
+    const authors = author_str.split(`, `)
+    const target_idx = authors.indexOf(target_name)
+
+    if (authors.length <= max_authors) return author_str
+
+    let truncated_authors = [authors[0], authors[target_idx], authors[authors.length - 1]]
+
+    // Remove duplicates
+    truncated_authors = [...new Set(truncated_authors)]
+
+    // Fill remaining spots
+    let i = 1 // Start from the second author
+    while (truncated_authors.length < max_authors && i < authors.length - 1) {
+      if (!truncated_authors.includes(authors[i])) {
+        truncated_authors.splice(i, 0, authors[i])
+      }
+      i++
+    }
+    truncated_authors = truncated_authors.slice(0, max_authors)
+
+    // Add ellipsis
+    let truncated_str = truncated_authors[0]
+    for (let j = 1; j < truncated_authors.length; j++) {
+      if (
+        authors.indexOf(truncated_authors[j]) -
+          authors.indexOf(truncated_authors[j - 1]) >
+        1
+      ) {
+        truncated_str += `, ...`
+      }
+      truncated_str += `, ${truncated_authors[j]}`
+    }
+
+    return truncated_str
+  }
 </script>
 
 <section class="title">
@@ -54,7 +94,7 @@
   </ul>
 
   <h2>
-    <Icon inline icon="iconoir:journal" />&nbsp; Recent Publications
+    <Icon inline icon="iconoir:journal" />&nbsp; Selected Publications
   </h2>
   <ul>
     {#each cv.publications as { title, authors, journal, date, url: href, arxiv }}
@@ -62,7 +102,9 @@
       <li>
         <h4>{title}</h4>
         <p>
-          {authors} - <small><a href={arxiv} {...links}>{journal}</a></small> -
+          {truncate_authors(authors, `Janosh Riebesell`)} -
+          <small><a href={arxiv} {...links}>{journal}</a></small>
+          -
           <small
             >{year}
             {#if href}
@@ -80,10 +122,13 @@
   </h2>
   <ul>
     {#each cv.projects as { url, img_style, github, name, description, stars, logo }}
+      {@const logo_url = logo ?? `${url}/favicon.svg`}
       <li>
         <h4>
-          <img src={logo ?? `${url}/favicon.svg`} alt="{name} Logo" style={img_style} />
-          <a href={url ?? github} {...links}>{name}</a>
+          <a href={url ?? github} {...links}>
+            <img src={logo_url} alt="{name} Logo" style={img_style} />
+            {name}
+          </a>
           <a href={github} {...links}>
             <Icon inline icon="octicon:mark-github" />
           </a>
