@@ -98,10 +98,15 @@
     <Icon inline icon="iconoir:journal" />&nbsp; Selected Publications
   </h2>
   <ul>
-    {#each cv.publications as { title, authors, journal, date, url: href, arxiv }}
+    {#each cv.publications as { title, authors, journal, date, url: href, arxiv, icon }}
       {@const year = new Date(date).getFullYear()}
       <li>
-        <h4>{title}</h4>
+        <h4>
+          {#if icon}
+            <img src={icon} alt={icon} style="width: 4em; margin: 0" />
+          {/if}
+          {title}
+        </h4>
         <p>
           {truncate_authors(authors, `Janosh Riebesell`)} -
           <small><a href={arxiv} {...links}>{journal}</a></small>
@@ -187,7 +192,7 @@
   </ul>
 
   <h3>
-    <Icon inline icon="mdi:earth" />&nbsp; Nationality
+    <Icon inline icon="gis:search-country" />&nbsp; Nationality
     <ul>
       {#each cv.nationality as nat}
         <li>{nat}</li>
@@ -195,9 +200,10 @@
     </ul>
   </h3>
 
-  <h3>
+  <h3 style="margin-bottom: 0;">
     <Icon inline icon="carbon:skill-level-advanced" />&nbsp; Skills
   </h3>
+  <small style="white-space: nowrap;">(emphasis &asymp; proficiency)</small>
   <ul class="skills">
     {#each cv.skills as { name, icon, score, href }}
       <!-- color based on score style="color: hsl({score * 20}, 100%, 40%)" -->
@@ -208,7 +214,6 @@
         </a>
       </li>
     {/each}
-    <small style="white-space: nowrap;">(emphasis &asymp; proficiency)</small>
   </ul>
 
   <h3>
@@ -318,6 +323,7 @@
   }
   aside {
     font-size: smaller;
+    max-height: max-content;
   }
   aside > h3 {
     white-space: nowrap;
