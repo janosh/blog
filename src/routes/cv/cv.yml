@@ -35,6 +35,7 @@ publications:
     date: 28 Feb 2023
     journal: arXiv
     url: https://doi.org/10.48550/arXiv.2302.14231
+    icon: nature-machine-intelligence.svg
   - name: Crystal Toolkit
     title: Crystal Toolkit - A Web App Framework to Improve Usability and Accessibility of Materials Science Research Algorithms
     arxiv: https://arxiv.org/abs/2302.06147
@@ -143,7 +144,7 @@ projects:
   - name: Aviary
     github: https://github.com/CompRhys/aviary
     logo: https://raw.githubusercontent.com/janosh/tikz/main/assets/aviary/aviary.svg
-    description: Multiple ML energy model implementations (Roost, Wren, CGCNN, Wrenformer) with a consistent API.
+    description: Compositional, structural and coarse-grained structural ML energy model implementations (Roost, Wren, CGCNN, Wrenformer) with a consistent API.
     pypi: https://pypi.org/project/tensorboard-reducer
     languages:
       - Python
@@ -191,9 +192,9 @@ skills:
   - name: MongoDB
     icon: simple-icons:mongodb
     score: 8
-  - name: Docker
-    icon: mdi:docker
-    score: 2
+  # - name: Docker
+  #   icon: mdi:docker
+  #   score: 2
   - name: GraphQL
     icon: simple-icons:graphql
     score: 5
@@ -201,9 +202,9 @@ skills:
     icon: simple-icons:pytorch
     score: 8
     href: https://github.com/janosh?tab=repositories&language=python
-  - name: JAX
-    icon: simple-icons:jax
-    score: 3
+  # - name: JAX
+  #   icon: simple-icons:jax
+  #   score: 3
   - name: TensorFlow
     icon: simple-icons:tensorflow
     score: 6
@@ -229,9 +230,9 @@ skills:
   - name: Selenium
     icon: simple-icons:selenium
     score: 3
-  - name: Cypress
-    icon: simple-icons:cypress
-    score: 3
+  - name: PlayWright
+    icon: simple-icons:playwright
+    score: 7
 hobbies:
   - name: photography
     icon: mdi:camera
