@@ -9,7 +9,8 @@
 
 <p>
   I'm interested in computational materials discovery, machine learning, software
-  engineering & data viz.
+  engineering & data viz.<br />
+  Outside of work, I enjoy hiking and cycling. The rougher the terrain, the better! ⛰️
 </p>
 
 <strong>
