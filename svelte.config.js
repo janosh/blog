@@ -22,7 +22,7 @@ const macros = {
   // Integers
   '\\ints': `{\\mathbb{Z}}`,
   // Expectation value
-  '\\expec': `\\mathbb{E}`,
+  '\\expect': `\\mathbb{E}`,
   // Variance
   '\\var': `\\operatorname{var}`,
   // Matrix diagonal
