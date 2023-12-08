@@ -40,11 +40,7 @@
   </a>
 </address>
 
-<h2>Notes on Physics</h2>
-
 <Physics />
-
-<h2>Posts</h2>
 
 <Posts />
 

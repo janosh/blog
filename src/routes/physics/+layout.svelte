@@ -12,9 +12,7 @@
 />
 <h1>{data.frontmatter.title}</h1>
 
-<main>
-  <slot />
-</main>
+<slot />
 
 <style>
   img {

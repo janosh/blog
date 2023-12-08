@@ -5,38 +5,42 @@
   import Icon from '@iconify/svelte'
 </script>
 
-<img src="./blog-banner.svg" alt="Banner" />
+<section class="landing">
+  <img src="./blog-banner.svg" alt="Banner" />
 
-<ul>
-  {#each $page.data?.posts?.sort((post_1, post_2) => {
-    return post_2.date.localeCompare(post_1.date) // sort by date descending
-  }) ?? [] as post}
-    {@const { cover, slug, title, tags, date } = post}
-    {@const href = `/posts/${slug}`}
-    <li>
-      <h3><a {href}>{title}</a></h3>
-      <a {href}>
-        {#if dev}
-          {#await import(`./${slug}/${cover?.img?.replace(`.svg`, ``)}.svg`) then { default: src }}
-            <img {src} alt={title} />
-          {/await}
-        {:else}
-          <img
-            src="{repository}/raw/main/src/routes/posts/{slug}/{cover.img}"
-            alt={cover.caption}
-          />
-        {/if}
-      </a>
-      <small>
-        <time>
-          <Icon icon="carbon:calendar" inline />
-          {date?.split(`T`)[0]}
-        </time>
-      </small>
-      <small><Icon icon="carbon:tag" inline /> {tags?.join(`, `)}</small>
-    </li>
-  {/each}
-</ul>
+  <h2 class="section-title">Posts</h2>
+
+  <ul>
+    {#each $page.data?.posts?.sort((post_1, post_2) => {
+      return post_2.date.localeCompare(post_1.date) // sort by date descending
+    }) ?? [] as post}
+      {@const { cover, slug, title, tags, date } = post}
+      {@const href = `/posts/${slug}`}
+      <li>
+        <h3><a {href}>{title}</a></h3>
+        <a {href}>
+          {#if dev}
+            {#await import(`./${slug}/${cover?.img?.replace(`.svg`, ``)}.svg`) then { default: src }}
+              <img {src} alt={title} />
+            {/await}
+          {:else}
+            <img
+              src="{repository}/raw/main/src/routes/posts/{slug}/{cover.img}"
+              alt={cover.caption}
+            />
+          {/if}
+        </a>
+        <small>
+          <time>
+            <Icon icon="carbon:calendar" inline />
+            {date?.split(`T`)[0]}
+          </time>
+        </small>
+        <small><Icon icon="carbon:tag" inline /> {tags?.join(`, `)}</small>
+      </li>
+    {/each}
+  </ul>
+</section>
 
 <style>
   ul {
