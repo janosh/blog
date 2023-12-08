@@ -154,3 +154,15 @@ img + em {
   display: block;
   margin: 1em auto 2em;
 }
+
+h2.section-title {
+  text-align: center;
+  margin: 1em auto;
+  font-size: 2em;
+}
+section.landing {
+  padding: calc(1ex + 2vw);
+  flex: 1;
+  max-width: 55em;
+  margin: auto;
+}
