@@ -20,3 +20,7 @@ declare module '*cv.yml' {
   }
   export default cv
 }
+
+declare module '*papers.yaml' {
+  export const references: import('$lib/types').Reference[]
+}
