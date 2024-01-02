@@ -1,0 +1,298 @@
+---
+references:
+  - id: deng_chgnet_2023
+    accessed:
+      - year: 2023
+        month: 11
+        day: 24
+    author:
+      - family: Deng
+        given: Bowen
+      - family: Zhong
+        given: Peichen
+      - family: Jun
+        given: KyuJung
+      - family: Riebesell
+        given: Janosh
+      - family: Han
+        given: Kevin
+      - family: Bartel
+        given: Christopher J.
+      - family: Ceder
+        given: Gerbrand
+    citation-key: deng_chgnet_2023
+    container-title: Nature Machine Intelligence
+    container-title-short: Nat Mach Intell
+    DOI: 10.1038/s42256-023-00716-3
+    ISSN: 2522-5839
+    issue: '9'
+    issued:
+      - year: 2023
+        month: 9
+    language: en
+    license: >-
+      2023 This is a U.S. Government work and not under copyright protection in
+      the US; foreign copyright protection may apply
+    number: '9'
+    page: 1031-1041
+    publisher: Nature Publishing Group
+    source: www.nature.com
+    title: >-
+      CHGNet as a pretrained universal neural network potential for
+      charge-informed atomistic modelling
+    URL: https://www.nature.com/articles/s42256-023-00716-3
+    volume: '5'
+
+  - id: horton_crystal_2023
+    accessed:
+      - year: 2023
+        month: 2
+        day: 16
+    author:
+      - family: Horton
+        given: Matthew
+      - family: Shen
+        given: Jimmy-Xuan
+      - family: Burns
+        given: Jordan
+      - family: Cohen
+        given: Orion
+      - family: Chabbey
+        given: François
+      - family: Ganose
+        given: Alex M.
+      - family: Guha
+        given: Rishabh
+      - family: Huck
+        given: Patrick
+      - family: Li
+        given: Hamming Howard
+      - family: McDermott
+        given: Matthew
+      - family: Montoya
+        given: Joseph
+      - family: Moore
+        given: Guy
+      - family: Munro
+        given: Jason
+      - family: O'Donnell
+        given: Cody
+      - family: Ophus
+        given: Colin
+      - family: Petretto
+        given: Guido
+      - family: Riebsell
+        given: Janosh
+      - family: Wetizner
+        given: Steven
+      - family: Wander
+        given: Brook
+      - family: Winston
+        given: Donald
+      - family: Yang
+        given: Ruoxi
+      - family: Zeltmann
+        given: Steven
+      - family: Jain
+        given: Anubhav
+      - family: Persson
+        given: Kristin A.
+    citation-key: horton_crystal_2023
+    DOI: 10.48550/arXiv.2302.06147
+    issued:
+      - year: 2023
+        month: 2
+        day: 13
+    number: arXiv:2302.06147
+    publisher: arXiv
+    source: arXiv.org
+    title: >-
+      Crystal Toolkit: A Web App Framework to Improve Usability and Accessibility
+      of Materials Science Research Algorithms
+    title-short: Crystal Toolkit
+    URL: http://arxiv.org/abs/2302.06147
+
+  - id: riebesell_foundation_2023
+    accessed:
+      - year: 2024
+        month: 1
+        day: 2
+    author:
+      - family: Riebesell
+        given: Janosh
+      - family: Batatia
+        given: Ilyes
+      - family: Benner
+        given: Philipp
+      - family: Chiang
+        given: Yuan
+      - family: Elena
+        given: Alin M.
+      - family: Kovács
+        given: Dávid P.
+      - family: Advincula
+        given: Xavier R.
+      - family: Asta
+        given: Mark
+      - family: Baldwin
+        given: William J.
+      - family: Bernstein
+        given: Noam
+      - family: Bhowmik
+        given: Arghya
+      - family: Blau
+        given: Samuel M.
+      - family: Cărare
+        given: Vlad
+      - family: Darby
+        given: James P.
+      - family: De
+        given: Sandip
+      - family: Della Pia
+        given: Flaviano
+      - family: Deringer
+        given: Volker L.
+      - family: Elijošius
+        given: Rokas
+      - family: El-Machachi
+        given: Zakariya
+      - family: Fako
+        given: Edvin
+      - family: Ferrari
+        given: Andrea C.
+      - family: Genreith-Schriever
+        given: Annalena
+      - family: George
+        given: Janine
+      - family: Goodall
+        given: Rhys E. A.
+      - family: Grey
+        given: Clare P.
+      - family: Han
+        given: Shuang
+      - family: Handley
+        given: Will
+      - family: Heenen
+        given: Hendrik H.
+      - family: Hermansson
+        given: Kersti
+      - family: Holm
+        given: Christian
+      - family: Jaafar
+        given: Jad
+      - family: Hofmann
+        given: Stephan
+      - family: Jakob
+        given: Konstantin S.
+      - family: Jung
+        given: Hyunwook
+      - family: Kapil
+        given: Venkat
+      - family: Kaplan
+        given: Aaron D.
+      - family: Karimitari
+        given: Nima
+      - family: Kroupa
+        given: Namu
+      - family: Kullgren
+        given: Jolla
+      - family: Kuner
+        given: Matthew C.
+      - family: Kuryla
+        given: Domantas
+      - family: Liepuoniute
+        given: Guoda
+      - family: Margraf
+        given: Johannes T.
+      - family: Magdău
+        given: Ioan-Bogdan
+      - family: Michaelides
+        given: Angelos
+      - family: Moore
+        given: J. Harry
+      - family: Naik
+        given: Aakash A.
+      - family: Niblett
+        given: Samuel P.
+      - family: Norwood
+        given: Sam Walton
+      - family: O'Neill
+        given: Niamh
+      - family: Ortner
+        given: Christoph
+      - family: Persson
+        given: Kristin A.
+      - family: Reuter
+        given: Karsten
+      - family: Rosen
+        given: Andrew S.
+      - family: Schaaf
+        given: Lars L.
+      - family: Schran
+        given: Christoph
+      - family: Sivonxay
+        given: Eric
+      - family: Stenczel
+        given: Tamás K.
+      - family: Svahn
+        given: Viktor
+      - family: Sutton
+        given: Christopher
+      - family: Oord
+        given: Cas
+        non-dropping-particle: van der
+      - family: Varga-Umbrich
+        given: Eszter
+      - family: Vegge
+        given: Tejs
+      - family: Vondrák
+        given: Martin
+      - family: Wang
+        given: Yangshuai
+      - family: Witt
+        given: William C.
+      - family: Zills
+        given: Fabian
+      - family: Csányi
+        given: Gábor
+    citation-key: riebesell_foundation_2023
+    container-title: arXiv.org
+    issued:
+      - year: 2023
+        month: 12
+        day: 29
+    language: en
+    title: A foundation model for atomistic materials chemistry
+    URL: https://arxiv.org/abs/2401.00096v1
+
+  - id: riebesell_matbench_2023
+    accessed:
+      - year: 2023
+        month: 11
+        day: 24
+    author:
+      - family: Riebesell
+        given: Janosh
+      - family: Goodall
+        given: Rhys E. A.
+      - family: Jain
+        given: Anubhav
+      - family: Benner
+        given: Philipp
+      - family: Persson
+        given: Kristin A.
+      - family: Lee
+        given: Alpha A.
+    citation-key: riebesell_matbench_2023
+    DOI: 10.48550/arXiv.2308.14920
+    issued:
+      - year: 2023
+        month: 8
+        day: 28
+    number: arXiv:2308.14920
+    publisher: arXiv
+    source: arXiv.org
+    title: >-
+      Matbench Discovery -- An evaluation framework for machine learning crystal
+      stability prediction
+    URL: http://arxiv.org/abs/2308.14920
