@@ -21,27 +21,6 @@ education:
     thesis_title: van der Waals Corrections for Density Functional Theory - DFT+D2 applied to Graphene-hBN-Heterostructures
     href: https://physik.uni-hamburg.de/en.html
     logo: https://assets.rrz.uni-hamburg.de/assets/uhh-logo-4ec3691b46570436d95977e2c0c368646d0c24d722425dd674f48b1c44585e81.svg
-publications:
-  - name: Matbench Discovery
-    title: Matbench Discovery - Can machine learning identify stable crystals?
-    authors: Janosh Riebesell, Rhys Goodall, Philipp Benner, Yuan Chiang, Alpha Lee, Anubhav Jain, Kristin Persson
-    date: 10 Feb 2023
-    journal: ICLR ML4Materials/arXiv
-    url: https://matbench-discovery.materialsproject.org
-    arxiv: https://arxiv.org/abs/2308.14920
-  - name: CHGNet
-    title: CHGNet - Pretrained universal neural network potential for charge-informed atomistic modeling
-    authors: Bowen Deng, Peichen Zhong, Janosh Riebesell, KyuJung Jun, Kevin Han, Christopher J. Bartel, Gerbrand Ceder
-    date: 28 Feb 2023
-    journal: arXiv
-    url: https://doi.org/10.48550/arXiv.2302.14231
-    icon: nature-machine-intelligence.svg
-  - name: Crystal Toolkit
-    title: Crystal Toolkit - A Web App Framework to Improve Usability and Accessibility of Materials Science Research Algorithms
-    arxiv: https://arxiv.org/abs/2302.06147
-    authors: Matthew Horton, Jimmy-Xuan Shen, Jordan Burns, Orion Cohen, François Chabbey, Alex M. Ganose, Rishabh Guha, Patrick Huck, Hamming Howard Li, Matthew McDermott, Joseph Montoya, Guy Moore, Jason Munro, Cody O'Donnell, Colin Ophus, Guido Petretto, Janosh Riebesell, Steven Wetizner, Brook Wander, Donald Winston, Ruoxi Yang, Steven Zeltmann, Anubhav Jain, Kristin A. Persson
-    date: 13 Feb 2023
-    journal: arxiv
 projects:
   - name: ''
     url: https://pymatgen.org
@@ -52,7 +31,7 @@ projects:
     languages:
       - Python
       - Cython
-    stars: 1197
+    stars: 1219
   - name: Matbench Discovery
     url: https://matbench-discovery.materialsproject.org
     img_style: 'filter: invert(1);'
@@ -65,7 +44,7 @@ projects:
       - TypeScript
       - JavaScript
       - HTML
-    stars: 44
+    stars: 46
   - name: CHGNet
     url: https://chgnet.lbl.gov
     github: https://github.com/CederGroupHub/chgnet
@@ -79,7 +58,7 @@ projects:
       - HTML
       - JavaScript
       - TypeScript
-    stars: 143
+    stars: 153
   - name: Elementari
     url: https://elementari.janosh.dev
     github: https://github.com/janosh/elementari
@@ -91,7 +70,7 @@ projects:
       - Python
       - JavaScript
       - HTML
-    stars: 97
+    stars: 102
   - name: pymatviz
     url: https://pymatviz.janosh.dev
     img_style: 'filter: invert(1);'
@@ -104,7 +83,7 @@ projects:
       - TypeScript
       - HTML
       - JavaScript
-    stars: 80
+    stars: 86
   - name: Tensorboard Reducer
     github: https://github.com/janosh/tensorboard-reducer
     logo: https://raw.githubusercontent.com/janosh/tensorboard-reducer/main/assets/tensorboard-reducer-square.svg
@@ -120,7 +99,7 @@ projects:
     description: Curated list of resources for learning and using normalizing flows, a powerful tool in ML for modeling probability distributions.
     languages:
       - Python
-    stars: 1212
+    stars: 1231
   - name: atomate2
     github: https://github.com/materialsproject/atomate2
     logo: https://github.com/materialsproject/atomate2/assets/30958850/53e02adf-5bdb-4c8e-8076-cb30765ac0db
@@ -130,7 +109,7 @@ projects:
       potential-powered structure relaxation workflows.
     languages:
       - Python
-    stars: 101
+    stars: 103
   - name: jobflow
     github: https://github.com/materialsproject/jobflow
     logo: https://user-images.githubusercontent.com/30958850/275247234-0650d187-8a42-4962-a95d-ff40354baf6b.svg
@@ -149,6 +128,14 @@ projects:
     languages:
       - Python
     stars: 31
+  - name: MatCalc
+    url: https://materialsvirtuallab.github.io/matcalc
+    logo: https://github.com/materialsvirtuallab/matcalc/assets/30958850/89486f2f-73fb-40fb-803a-dfafe510eb6d
+    github: https://github.com/materialsvirtuallab/matcalc
+    description: A Python library for calculating materials properties from ML force field potential energy surfaces.
+    languages:
+      - Python
+    stars: 31
   - name: MultiSelect
     url: https://multiselect.janosh.dev
     github: https://github.com/janosh/svelte-multiselect
@@ -159,7 +146,7 @@ projects:
       - CSS
       - HTML
       - JavaScript
-    stars: 236
+    stars: 241
 skills:
   - name: Python
     icon: mdi:language-python
@@ -280,3 +267,6 @@ memberships:
   - name: Materials Research Society
     date: 2023 - present
     href: https://mrs.org
+  - name: Materials Project Software Foundation
+    date: 2023 - present
+    href: https://github.com/materialsproject/foundation

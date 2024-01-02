@@ -84,3 +84,16 @@ export type Language = {
   name: string
   level: string
 }
+
+export type Reference = {
+  title: string
+  id: string
+  author: { family: string; given: string }[]
+  DOI: string
+  URL?: string
+  issued: { year: number; month: number; day: number }[]
+  accessed: { year: number; month: number; day: number }[]
+  page: string
+  type: string
+  ISSN?: string
+}
