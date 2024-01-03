@@ -15,15 +15,16 @@
 <img src="./janosh.jpg" alt="me" width="200" />
 <h1>Janosh</h1>
 
-<p>
-  I work on <a href={urls.mbd}>computational materials discovery 🔎</a>,
-  <a href={urls.mace}>machine learning 🤖</a>,
-  <a href={urls.pmg}>software engineering 💻</a>, &
-  <a href={urls.pmv}>data visualization 📊</a>.<br />
+<p style="max-width: min(40em, 80vw); margin: auto;">
+  I work on
+  <a href={urls.mbd}>🔎 computational materials discovery</a>,
+  <a href={urls.mace}>🤖 machine learning</a>,
+  <a href={urls.pmg}>💻 software engineering</a>, &
+  <a href={urls.pmv}>📊 data visualization</a>.<br />
   Outside of work, I enjoy hiking 🧗 and cycling 🚲. The rougher the terrain, the better! ⛰️
 </p>
 
-<strong>My latest work</strong>
+<strong>Recent Projects</strong>
 <ul>
   <li>
     <h3>
@@ -51,7 +52,12 @@
     <Icon inline icon="bi:linkedin" />
   </a>
   <a href="mailto:janosh.riebesell@gmail.com" target="_blank" rel="noreferrer">
-    <Icon inline icon="mdi:email" width="1.35em" style="vertical-align: middle;" />
+    <Icon
+      inline
+      icon="mdi:email"
+      width="1.4em"
+      style="vertical-align: middle; transform: translateY(-2px)"
+    />
   </a>
 </address>
 

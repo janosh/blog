@@ -4,12 +4,12 @@
 
   export let references: Reference[]
   export let first_name_mode: 'initial' | 'full' | 'none' = `full`
-  export let target_author = `Janosh Riebesell`
+  export let target_author: string = `Janosh Riebesell`
 </script>
 
 <ol>
   {#each references.sort(({ author }) => {
-    return +(author[0].family == target_author.split(` `)[1])
+    return -(author[0].family == target_author.split(` `)[1])
   }) as { title, id, author, DOI, URL: href, issued } (id)}
     {@const authors = author
       .map(({ given, family }) => {
