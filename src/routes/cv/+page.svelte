@@ -63,10 +63,9 @@
 
   <h2>
     <Icon inline icon="ri:open-source-line" />&nbsp; Open Source
-    <!-- <small>only lead dev repos</small> -->
   </h2>
   <ul>
-    {#each cv.projects as { url, img_style, github, name, description, stars, logo, languages }}
+    {#each cv.projects as { url, img_style, github, name, description, stars, logo, languages, commits }}
       {@const logo_url = logo ?? `${url}/favicon.svg`}
       <li>
         <h4>
@@ -80,6 +79,15 @@
           {#if stars}
             <a href="{github}/stargazers">
               <small>{stars} ⭐</small>
+            </a>
+          {/if}
+          {#if commits}
+            <a href="{github}/graphs/contributors">
+              <Icon inline icon="octicon:git-commit" />
+              <small>
+                {commits}
+                <span style="font-weight: 200;">commits</span>
+              </small>
             </a>
           {/if}
           <small class="langs">{languages.slice(0, 3).join(`, `)}</small>
@@ -234,12 +242,14 @@
     padding: 0 0 0 4pt;
     margin: 0;
     place-items: center;
+    container-type: inline-size;
   }
   ul > li > h4 {
-    margin: 9pt 0 4pt;
+    margin: 8pt 0 4pt;
     display: flex;
     gap: 8pt;
     place-items: center;
+    font-size: smaller;
   }
   ul > li > h4 > small.langs {
     margin-left: 2ex;

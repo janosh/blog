@@ -41,6 +41,7 @@ export type Project = {
   github: string
   description: string
   stars: number
+  commits: number
   pypi?: string
   languages: string[]
 }

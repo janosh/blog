@@ -18,6 +18,16 @@ async function fetch_github_data(gh_token: string) {
 
     const repo = await repo_promise.json()
     project.stars = repo.stargazers_count
+    // fetch number of commits by @janosh using repo contribs API
+    const contributors = await (
+      await fetch(`https://api.github.com/repos/${handle}/contributors`, auth)
+    ).json()
+    const janosh = contributors.find(
+      (contributor: Record<string, unknown>) => contributor.login === `janosh`,
+    )
+    if (janosh) {
+      project.commits = janosh.contributions
+    }
 
     const languages = await (
       await fetch(`https://api.github.com/repos/${handle}/languages`, auth)
