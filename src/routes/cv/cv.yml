@@ -31,7 +31,8 @@ projects:
     languages:
       - Python
       - Cython
-    stars: 1219
+    stars: 1220
+    commits: 902
   - name: Matbench Discovery
     url: https://matbench-discovery.materialsproject.org
     img_style: 'filter: invert(1);'
@@ -44,7 +45,8 @@ projects:
       - TypeScript
       - JavaScript
       - HTML
-    stars: 46
+    stars: 47
+    commits: 295
   - name: CHGNet
     url: https://chgnet.lbl.gov
     github: https://github.com/CederGroupHub/chgnet
@@ -58,7 +60,8 @@ projects:
       - HTML
       - JavaScript
       - TypeScript
-    stars: 153
+    stars: 152
+    commits: 163
   - name: Elementari
     url: https://elementari.janosh.dev
     github: https://github.com/janosh/elementari
@@ -71,6 +74,7 @@ projects:
       - JavaScript
       - HTML
     stars: 102
+    commits: 171
   - name: pymatviz
     url: https://pymatviz.janosh.dev
     img_style: 'filter: invert(1);'
@@ -84,6 +88,7 @@ projects:
       - HTML
       - JavaScript
     stars: 86
+    commits: 233
   - name: Tensorboard Reducer
     github: https://github.com/janosh/tensorboard-reducer
     logo: https://raw.githubusercontent.com/janosh/tensorboard-reducer/main/assets/tensorboard-reducer-square.svg
@@ -93,13 +98,15 @@ projects:
       - Python
       - TeX
     stars: 58
+    commits: 79
   - name: Normalizing Flows
     github: https://github.com/janosh/awesome-normalizing-flows
     logo: https://api.iconify.design/logos:awesome.svg?color=%23888888
     description: Curated list of resources for learning and using normalizing flows, a powerful tool in ML for modeling probability distributions.
     languages:
       - Python
-    stars: 1231
+    stars: 1232
+    commits: 72
   - name: atomate2
     github: https://github.com/materialsproject/atomate2
     logo: https://github.com/materialsproject/atomate2/assets/30958850/53e02adf-5bdb-4c8e-8076-cb30765ac0db
@@ -110,6 +117,7 @@ projects:
     languages:
       - Python
     stars: 103
+    commits: 343
   - name: jobflow
     github: https://github.com/materialsproject/jobflow
     logo: https://user-images.githubusercontent.com/30958850/275247234-0650d187-8a42-4962-a95d-ff40354baf6b.svg
@@ -120,6 +128,7 @@ projects:
       - Python
       - TeX
     stars: 59
+    commits: 98
   - name: Aviary
     github: https://github.com/CompRhys/aviary
     logo: https://raw.githubusercontent.com/janosh/tikz/main/assets/aviary/aviary.svg
@@ -128,6 +137,7 @@ projects:
     languages:
       - Python
     stars: 31
+    commits: 233
   - name: MatCalc
     url: https://materialsvirtuallab.github.io/matcalc
     logo: https://github.com/materialsvirtuallab/matcalc/assets/30958850/89486f2f-73fb-40fb-803a-dfafe510eb6d
@@ -136,6 +146,7 @@ projects:
     languages:
       - Python
     stars: 31
+    commits: 65
   - name: MultiSelect
     url: https://multiselect.janosh.dev
     github: https://github.com/janosh/svelte-multiselect
@@ -147,6 +158,7 @@ projects:
       - HTML
       - JavaScript
     stars: 241
+    commits: 268
 skills:
   - name: Python
     icon: mdi:language-python
