@@ -1,5 +1,6 @@
 <script lang="ts">
   import Icon from '@iconify/svelte'
+  import OpenSource from './open-source/+page.svelte'
   import Physics from './physics/+page@.md'
   import Posts from './posts/+page@.svelte'
 
@@ -14,32 +15,6 @@
 
 <img src="./janosh.jpg" alt="me" width="200" />
 <h1>Janosh</h1>
-
-<p style="max-width: min(40em, 80vw); margin: auto;">
-  I work on
-  <a href={urls.mbd}>🔎 computational materials discovery</a>,
-  <a href={urls.mace}>🤖 machine learning</a>,
-  <a href={urls.pmg}>💻 software engineering</a>, &
-  <a href={urls.pmv}>📊 data visualization</a>.<br />
-  Outside of work, I enjoy hiking 🧗 and cycling 🚲. The rougher the terrain, the better! ⛰️
-</p>
-
-<strong>Recent Projects</strong>
-<ul>
-  <li>
-    <h3>
-      <a href={urls.mbd}>Matbench Discovery</a>
-      <span style="font-weight: lighter;">[<a href={urls.mbd_arxiv}>arXiv</a>]</span>
-    </h3>
-    A new framework to evaluate ML energy models on materials stability prediction from unrelaxed
-    crystals
-  </li>
-  <li>
-    <h3><a href={urls.mace}>MACE-MP Foundation Model</a></h3>
-    A versatile ML force field capable of a wide range of chemistry simulations and property
-    predictions.
-  </li>
-</ul>
 
 <address>
   <a href="https://github.com/janosh" target="_blank" rel="noreferrer">
@@ -60,6 +35,34 @@
     />
   </a>
 </address>
+
+<p style="max-width: min(40em, 80vw); margin: auto;">
+  I work on
+  <a href={urls.mbd}>🔎 computational materials discovery</a>,
+  <a href={urls.mace}>🤖 machine learning</a>,
+  <a href={urls.pmg}>💻 software engineering</a>, &
+  <a href={urls.pmv}>📊 data visualization</a>.<br />
+  <!-- Outside of work, I enjoy hiking 🧗 and cycling 🚲. The rougher the terrain, the better! ⛰️ -->
+</p>
+
+<strong class="bubble">Recent Projects</strong>
+<ul>
+  <li>
+    <h3>
+      <a href={urls.mbd}>Matbench Discovery</a>
+      <span style="font-weight: lighter;">[<a href={urls.mbd_arxiv}>arXiv</a>]</span>
+    </h3>
+    A new framework to evaluate ML energy models on materials stability prediction from unrelaxed
+    crystals.
+  </li>
+  <li>
+    <h3><a href={urls.mace}>MACE-MP Foundation Model</a></h3>
+    A versatile ML force field capable of a wide range of chemistry simulations and property
+    predictions.
+  </li>
+</ul>
+
+<OpenSource />
 
 <Physics />
 
@@ -86,8 +89,9 @@
     place-items: center;
     gap: 1em;
     font-size: 16pt;
+    margin: 1em auto;
   }
-  strong {
+  strong.bubble {
     text-align: center;
     color: #eee;
     margin: 2em auto auto;

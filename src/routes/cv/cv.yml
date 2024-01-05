@@ -22,16 +22,15 @@ education:
     href: https://physik.uni-hamburg.de/en.html
     logo: https://assets.rrz.uni-hamburg.de/assets/uhh-logo-4ec3691b46570436d95977e2c0c368646d0c24d722425dd674f48b1c44585e81.svg
 projects:
-  - name: ''
+  - name: pymatgen
     url: https://pymatgen.org
-    logo: https://raw.githubusercontent.com/materialsproject/pymatgen/master/docs/assets/pymatgen.svg
-    img_style: 'min-width: 90px;'
+    logo: https://github.com/janosh/blog/assets/30958850/db9aa145-7281-40e9-aaa7-123f63beb7f9
     github: https://github.com/materialsproject/pymatgen
     description: One of the largest and most popular open source materials analysis codes that defines classes for structures, molecules, slabs, etc. and interfaces seamlessly with various other materials codes. It also powers the Materials Project.
     languages:
       - Python
       - Cython
-    stars: 1220
+    stars: 1224
     commits: 902
   - name: Matbench Discovery
     url: https://matbench-discovery.materialsproject.org
@@ -60,7 +59,7 @@ projects:
       - HTML
       - JavaScript
       - TypeScript
-    stars: 152
+    stars: 154
     commits: 163
   - name: Elementari
     url: https://elementari.janosh.dev
@@ -87,7 +86,7 @@ projects:
       - TypeScript
       - HTML
       - JavaScript
-    stars: 86
+    stars: 88
     commits: 233
   - name: Tensorboard Reducer
     github: https://github.com/janosh/tensorboard-reducer
@@ -105,7 +104,7 @@ projects:
     description: Curated list of resources for learning and using normalizing flows, a powerful tool in ML for modeling probability distributions.
     languages:
       - Python
-    stars: 1232
+    stars: 1235
     commits: 72
   - name: atomate2
     github: https://github.com/materialsproject/atomate2
@@ -116,7 +115,7 @@ projects:
       potential-powered structure relaxation workflows.
     languages:
       - Python
-    stars: 103
+    stars: 104
     commits: 343
   - name: jobflow
     github: https://github.com/materialsproject/jobflow
@@ -145,7 +144,7 @@ projects:
     description: A Python library for calculating materials properties from ML force field potential energy surfaces.
     languages:
       - Python
-    stars: 31
+    stars: 32
     commits: 65
   - name: MultiSelect
     url: https://multiselect.janosh.dev
@@ -157,7 +156,7 @@ projects:
       - CSS
       - HTML
       - JavaScript
-    stars: 241
+    stars: 240
     commits: 268
 skills:
   - name: Python
