@@ -8,7 +8,10 @@
 <section class="landing">
   <img src="./blog-banner.svg" alt="Banner" />
 
-  <h2 class="section-title">Posts</h2>
+  <h2 class="section-title">
+    <Icon inline icon="ri:article-line" />
+    Posts
+  </h2>
 
   <ul>
     {#each $page.data?.posts?.sort((post_1, post_2) => {
