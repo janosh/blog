@@ -6,6 +6,9 @@ export function truncate_authors(
   // show at most max_authors, including the target author, replacing the rest with ellipsis
   const authors = author_str.split(`, `)
   const target_idx = authors.indexOf(target_name)
+  if (target_idx === -1) {
+    throw `target_name=${target_name} not found in ${author_str}`
+  }
 
   if (authors.length <= max_authors) return author_str
 

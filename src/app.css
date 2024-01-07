@@ -83,6 +83,16 @@ pre {
 ul {
   padding-left: 1em;
 }
+ul.grid {
+  padding: 0;
+  margin: 1em auto;
+  max-width: min(90vw, 1000px);
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1em;
+  list-style: none;
+}
 label {
   font-weight: bold;
   cursor: pointer;

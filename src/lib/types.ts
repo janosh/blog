@@ -6,6 +6,8 @@ export type FrontMatter = {
     img: string
     src: string
     url: string
+    caption?: string
+    origin?: string
   }
   path: string
   tags: string[]
@@ -38,12 +40,13 @@ export type Project = {
   url?: string
   logo?: string
   img_style?: string
-  github: string
+  repo: string
   description: string
   stars: number
   commits: number
   pypi?: string
   languages: string[]
+  paper?: string
 }
 
 export type Skill = {

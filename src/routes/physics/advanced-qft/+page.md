@@ -2,7 +2,7 @@
 title: Advanced Quantum Field Theory
 cover:
   img: particle-collision.jpg
-  source: Quantamagazine
+  origin: Quantamagazine
   url: https://quantamagazine.org/strange-numbers-found-in-particle-collisions-20161115
   caption: Particle collision
 ---

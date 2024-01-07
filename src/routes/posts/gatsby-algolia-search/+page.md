@@ -3,7 +3,7 @@ title: Custom search with Algolia in Gatsby
 date: 2018-11-02
 cover:
   img: gatsby-algolia-search.svg
-  source: Vecteezy
+  origin: Vecteezy
   url: https://vecteezy.com/vector-art/229827-web-search
 tags:
   - Web Dev
