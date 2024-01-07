@@ -34,7 +34,7 @@
           <a {href}>{href}</a>
         {/if}
         {#if issued}
-          &mdash; {issued[0].year}
+          &mdash; {issued[0].year}-{issued[0].month}
         {/if}
       </small>
     </li>

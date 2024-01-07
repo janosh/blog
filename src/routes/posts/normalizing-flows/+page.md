@@ -3,7 +3,7 @@ title: Normalizing Flows
 date: 2019-11-26
 cover:
   img: abstract-flow.svg
-  source: Vecteezy
+  origin: Vecteezy
   url: https://vecteezy.com/vector-art/277024-abstract-wave-background
 tags:
   - Science

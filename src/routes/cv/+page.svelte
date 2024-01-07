@@ -65,24 +65,24 @@
     <Icon inline icon="ri:open-source-line" />&nbsp; Open Source
   </h2>
   <ul>
-    {#each cv.projects as { url, img_style, github, name, description, stars, logo, languages, commits }}
+    {#each cv.projects as { url, img_style, repo, name, description, stars, logo, languages, commits }}
       {@const logo_url = logo ?? `${url}/favicon.svg`}
       <li>
         <h4>
-          <a href={url ?? github} {...links}>
+          <a href={url ?? repo} {...links}>
             <img src={logo_url} alt="{name} Logo" style={img_style} />
             {name}
           </a>
-          <a href={github} {...links}>
+          <a href={repo} {...links}>
             <Icon inline icon="octicon:mark-github" />
           </a>
           {#if stars}
-            <a href="{github}/stargazers">
+            <a href="{repo}/stargazers">
               <small>{stars} ⭐</small>
             </a>
           {/if}
           {#if commits}
-            <a href="{github}/graphs/contributors">
+            <a href="{repo}/graphs/contributors">
               <Icon inline icon="octicon:git-commit" />
               <small>
                 {commits}

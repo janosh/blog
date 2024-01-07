@@ -3,7 +3,7 @@ title: Conda Auto Env
 date: 2019-04-23
 cover:
   img: conda-python-robot.svg
-  source: Vecteezy
+  origin: Vecteezy
   url: https://vecteezy.com/vector-art/192230-robot-character-design
 tags:
   - Tutorial

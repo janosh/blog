@@ -3,7 +3,7 @@ title: Atomic Physics
 slug: /atomic-physics
 cover:
   img: hydrogen-wave-functions.png
-  source: Wikipedia
+  origin: Wikipedia
   url: https://en.wikipedia.org/wiki/Atomic_orbital#/media/File:Hydrogen_Density_Plots.png
   caption: Hydrogen wave functions
 ---

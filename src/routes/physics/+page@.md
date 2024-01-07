@@ -2,7 +2,7 @@
 title: Physics
 cover:
   img: planets.svg
-  source: Vecteezy
+  origin: Vecteezy
   url: https://vecteezy.com/vector-art/190741-ultra-violet-galactic-background-free-vector
 ---
 

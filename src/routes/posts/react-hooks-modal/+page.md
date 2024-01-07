@@ -3,7 +3,7 @@ title: React Hooks Modal
 date: 2019-01-13
 cover:
   img: modal.svg
-  source: Codyhouse
+  origin: Codyhouse
   url: https://codyhouse.co/gem/svg-modal-window
 tags:
   - JS

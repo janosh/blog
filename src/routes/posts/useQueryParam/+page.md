@@ -3,7 +3,7 @@ title: useQueryParam
 date: 2019-06-15
 cover:
   img: urlQueryParam.svg
-  source: Vecteezy
+  origin: Vecteezy
   url: https://vecteezy.com/vector-art/165556-domain-illustration-free-vector
 tags:
   - JS

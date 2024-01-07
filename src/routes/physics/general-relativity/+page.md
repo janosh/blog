@@ -3,7 +3,7 @@ title: General Relativity
 slug: /general-relativity
 cover:
   img: general-relativity.svg
-  source: Wikipedia
+  origin: Wikipedia
   url: https://en.wikipedia.org/wiki/Tests_of_general_relativity#/media/File:Spacetime_lattice_analogy.svg
 ---
 

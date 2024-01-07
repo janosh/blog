@@ -9,7 +9,7 @@ async function fetch_github_data(gh_token: string) {
   const cv = yamljs.load(fs.readFileSync(`src/routes/cv/cv.yml`, `utf8`))
 
   for (const project of cv.projects) {
-    const handle = project.github.replace(`https://github.com/`, ``)
+    const handle = project.repo.replace(`https://github.com/`, ``)
 
     const repo_promise = await fetch(
       `https://api.github.com/repos/${handle}`,
