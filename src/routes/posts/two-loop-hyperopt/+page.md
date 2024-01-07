@@ -3,7 +3,7 @@ title: Two-Loop Hyperparameter Optimization
 date: 2018-11-23
 cover:
   img: bayesian-optimization.svg
-  source: Ramraj Chandradevan
+  origin: Ramraj Chandradevan
   url: https://towardsdatascience.com/shallow-understanding-on-bayesian-optimization-324b6c1f7083
 tags:
   - Machine Learning

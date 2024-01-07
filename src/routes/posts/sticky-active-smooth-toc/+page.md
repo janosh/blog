@@ -3,7 +3,7 @@ title: Sticky Active Smooth Responsive ToC
 date: 2019-06-11
 cover:
   img: responsive.svg
-  source: Vecteezy
+  origin: Vecteezy
   url: https://vecteezy.com/vector-art/304793-responsive-web-design
 tags:
   - Design

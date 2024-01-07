@@ -3,7 +3,7 @@ title: Master's Thesis
 slug: /masters-thesis
 cover:
   img: heidelberg-castle-at-night.jpg
-  source: Alex Meyer
+  origin: Alex Meyer
   url: https://locationscout.net/germany/3596-philosophenweg-heidelberg
   caption: Heidelberg castle at night
 ---

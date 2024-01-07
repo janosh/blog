@@ -3,7 +3,7 @@ title: Hamiltonian Monte Carlo - A Conceptual Introduction
 date: 2019-05-01
 cover:
   img: bell-curves.svg
-  source: Vecteezy
+  origin: Vecteezy
   url: https://vecteezy.com/vector-art/111204-free-bell-curve-vector
 tags:
   - Physics

@@ -81,7 +81,7 @@ references:
         given: Colin
       - family: Petretto
         given: Guido
-      - family: Riebsell
+      - family: Riebesell
         given: Janosh
       - family: Wetizner
         given: Steven
@@ -102,7 +102,7 @@ references:
     issued:
       - year: 2023
         month: 2
-        day: 13
+        day: 27
     number: arXiv:2302.06147
     publisher: arXiv
     source: arXiv.org
@@ -296,3 +296,54 @@ references:
       Matbench Discovery -- An evaluation framework for machine learning crystal
       stability prediction
     URL: http://arxiv.org/abs/2308.14920
+
+  - id: rosen_jobflow_2024
+    accessed:
+      - year: 2024
+        month: 1
+        day: 7
+    author:
+      - family: Rosen
+        given: Andrew S.
+      - family: Gallant
+        given: Max
+      - family: George
+        given: Janine
+      - family: Riebesell
+        given: Janosh
+      - family: Sahasrabuddhe
+        given: Hrushikesh
+      - family: Shen
+        given: Jimmy-Xuan
+      - family: Wen
+        given: Mingjian
+      - family: Evans
+        given: Matthew L.
+      - family: Petretto
+        given: Guido
+      - family: Waroquiers
+        given: David
+      - family: Rignanese
+        given: Gian-Marco
+      - family: Persson
+        given: Kristin A.
+      - family: Jain
+        given: Anubhav
+      - family: Ganose
+        given: Alex M.
+    citation-key: rosen_jobflow_2024
+    container-title: Journal of Open Source Software
+    DOI: 10.21105/joss.05995
+    ISSN: 2475-9066
+    issue: '93'
+    issued:
+      - year: 2024
+        month: 1
+        day: 7
+    language: en
+    page: '5995'
+    source: joss.theoj.org
+    title: 'Jobflow: Computational Workflows Made Simple'
+    title-short: Jobflow
+    URL: https://joss.theoj.org/papers/10.21105/joss.05995
+    volume: '9'

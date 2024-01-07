@@ -3,7 +3,7 @@ title: Statistical Physics
 slug: /statistical-physics
 cover:
   img: bose-einstein-condensate.png
-  source: Wikipedia
+  origin: Wikipedia
   url: https://commons.wikimedia.org/wiki/File:Bose_Einstein_condensate.png
   caption: Bose-Einstein condensate
 ---
@@ -16,7 +16,7 @@ I had the pleasure of attending a lecture on statistical physics by [Prof. Manfr
 
 Below you can find solutions to all the exercises as well as the final exam.
 
-## Exam and preparation
+## Exam and Prep
 
 <DocsGrid>
 

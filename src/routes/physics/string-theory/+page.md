@@ -2,7 +2,7 @@
 title: String Theory
 cover:
   img: contour-map.svg
-  source: Vecteezy
+  origin: Vecteezy
   url: https://vecteezy.com/vector-art/274839-abstract-background-vector
 ---
 

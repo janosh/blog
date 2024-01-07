@@ -2,7 +2,7 @@
 title: Bachelor's Thesis
 cover:
   img: graphene.jpg
-  source: Wikipedia
+  origin: Wikipedia
   url: https://en.wikipedia.org/wiki/Graphene#/media/File:Graphen.jpg
   caption: Graphene lattice
 ---

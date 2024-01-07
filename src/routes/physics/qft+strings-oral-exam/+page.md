@@ -2,7 +2,7 @@
 title: Oral Exam
 cover:
   img: string-theory-blackboard.jpg
-  source: National University of Singapore
+  origin: National University of Singapore
   url: http://news.nus.edu.sg/highlights/worlds-top-theorists-take-theory-everything
   caption: String theory blackboard
 ---

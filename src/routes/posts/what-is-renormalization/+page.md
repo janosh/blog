@@ -3,7 +3,7 @@ title: What is renormalization?
 date: 2019-02-23
 cover:
   img: magnifying-glasses.svg
-  source: Vecteezy
+  origin: Vecteezy
   url: https://vecteezy.com/vector-art/137884-lupa-colorful-vector
 tags:
   - Physics

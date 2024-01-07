@@ -30,26 +30,26 @@
   {/each}
 </ul>
 
-<ul class="projects">
-  {#each projects as { url, github, name, description, stars, logo, commits } (name)}
+<ul class="projects grid">
+  {#each projects as { url, repo, name, description, stars, logo, commits } (name)}
     {@const logo_url = logo ?? `${url}/favicon.svg`}
     <li animate:flip={{ duration: 400 }}>
       <h3>
-        <a href={url ?? github} target="_blank" rel="noreferrer">
+        <a href={url ?? repo} target="_blank" rel="noreferrer">
           <img src={logo_url} alt="{name} Logo" />
           {name}
         </a>
       </h3>
       <section>
         {#if stars}
-          <a href="{github}/stargazers">
+          <a href="{repo}/stargazers">
             <Icon inline icon="octicon:mark-github" />
             {stars} ⭐
           </a>
         {/if}
 
         {#if commits}
-          <a href="{github}/graphs/contributors">
+          <a href="{repo}/graphs/contributors">
             <Icon inline icon="octicon:git-commit" />
             <span>
               {commits} <small>commits</small>
@@ -106,13 +106,7 @@
     background-color: darkslategrey;
   }
   ul.projects {
-    padding: 0;
     margin: 1em auto 2em;
-    max-width: min(90vw, 1000px);
-    container-type: inline-size;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1em;
   }
   ul.projects > li {
     display: grid;

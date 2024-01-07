@@ -3,7 +3,7 @@ title: Exclude drafts from production in Gatsby
 date: 2019-03-19
 cover:
   img: draft-content.svg
-  source: Vecteezy
+  origin: Vecteezy
   url: https://vecteezy.com/vector-art/116659-free-flat-website-template-vector-background
 tags:
   - Web Dev

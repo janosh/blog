@@ -3,7 +3,7 @@ title: JS media queries with React hooks
 date: 2019-04-08
 cover:
   img: js-media-queries.svg
-  source: Vecteezy
+  origin: Vecteezy
   url: https://vecteezy.com/vector-art/214877-website-wireframe-layouts-ui-kits-for-site-map-and-ux-design
 tags:
   - Web Dev
