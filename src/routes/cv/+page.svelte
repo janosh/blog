@@ -1,5 +1,6 @@
 <script lang="ts">
   import Icon from '@iconify/svelte'
+  import oss from '../open-source/oss.yml'
   import Papers from './Papers.svelte'
   import cv from './cv.yml'
   import papers from './papers.yaml'
@@ -65,7 +66,7 @@
     <Icon inline icon="ri:open-source-line" />&nbsp; Open Source
   </h2>
   <ul>
-    {#each cv.projects as { url, img_style, repo, name, description, stars, logo, languages, commits }}
+    {#each oss.projects as { url, img_style, repo, name, description, stars, logo, languages, commits }}
       {@const logo_url = logo ?? `${url}/favicon.svg`}
       <li>
         <h4>

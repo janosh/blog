@@ -1,12 +1,12 @@
 <script lang="ts">
   import Icon from '@iconify/svelte'
   import { flip } from 'svelte/animate'
-  import cv from '../cv/cv.yml'
+  import oss from './oss.yml'
 
   let sort_by: 'commits' | 'stars' | 'alphabetical' = `commits`
   const sort_by_options = [`commits`, `stars`, `alphabetical`] as const
 
-  $: projects = cv.projects.sort((p1, p2) => {
+  $: projects = oss.projects.sort((p1, p2) => {
     if (sort_by === `alphabetical`) {
       return p1.name.localeCompare(p2.name)
     } else if ([`commits`, `stars`].includes(sort_by)) {
@@ -31,7 +31,7 @@
 </ul>
 
 <ul class="projects grid">
-  {#each projects as { url, repo, name, description, stars, logo, commits } (name)}
+  {#each projects as { url, repo, name, description, stars, logo, commits, role } (name)}
     {@const logo_url = logo ?? `${url}/favicon.svg`}
     <li animate:flip={{ duration: 400 }}>
       <h3>
@@ -56,6 +56,10 @@
             </span>
           </a>
         {/if}
+        <a href="{repo}/graphs/contributors">
+          <Icon inline icon="carbon:user-admin" />
+          {role ?? (repo.includes(`/janosh/`) ? `Lead` : `Contributor`)}
+        </a>
       </section>
       <!-- <p class="langs">{languages.slice(0, 3).join(`, `)}</p> -->
       <p>{description}</p>
@@ -83,6 +87,7 @@
     display: flex;
     gap: 2pt 1em;
     place-content: center;
+    place-items: center;
     font-weight: 200;
     font-size: 11pt;
     flex-wrap: wrap;
