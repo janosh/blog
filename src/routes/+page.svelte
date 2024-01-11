@@ -1,15 +1,15 @@
 <script lang="ts">
   import Icon from '@iconify/svelte'
-  import cv from './cv/cv.yml'
   import OpenSource from './open-source/+page.svelte'
+  import oss from './open-source/oss.yml'
   import Physics from './physics/+page@.md'
   import Posts from './posts/+page@.svelte'
 
-  const chgnet = cv.projects.find((p) => p.name === `CHGNet`)
-  const mbd = cv.projects.find((p) => p.name === `Matbench Discovery`)
-  const pmv = cv.projects.find((p) => p.name === `pymatviz`)
-  const pmg = cv.projects.find((p) => p.name === `pymatgen`)
-  const mace = cv.projects.find((p) => p.name === `MACE`)
+  const chgnet = oss.projects.find((p) => p.name === `CHGNet`)
+  const mbd = oss.projects.find((p) => p.name === `Matbench Discovery`)
+  const pmv = oss.projects.find((p) => p.name === `pymatviz`)
+  const pmg = oss.projects.find((p) => p.name === `pymatgen`)
+  const mace = oss.projects.find((p) => p.name === `MACE`)
 </script>
 
 <img src="./janosh.jpg" alt="me" width="200" />

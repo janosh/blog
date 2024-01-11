@@ -1,0 +1,173 @@
+projects:
+  - name: pymatgen
+    url: https://pymatgen.org
+    logo: https://github.com/janosh/blog/assets/30958850/db9aa145-7281-40e9-aaa7-123f63beb7f9
+    repo: https://github.com/materialsproject/pymatgen
+    role: Maintainer
+    description: One of the largest and most popular open source materials analysis codes that defines classes for structures, molecules, slabs, etc. and interfaces seamlessly with various other materials codes. It also powers the Materials Project.
+    languages:
+      - Python
+      - Cython
+      - Jupyter Notebook
+    stars: 1230
+    commits: 905
+  - name: Matbench Discovery
+    url: https://matbench-discovery.materialsproject.org
+    img_style: 'filter: invert(1);'
+    repo: https://github.com/janosh/matbench-discovery
+    paper: https://arxiv.org/abs/2308.14920
+    description: Benchmark for machine learning energy models simulating a real-world materials discovery campaign. Interactive leader board and Python package make new model submissions easy.
+    languages:
+      - Python
+      - Svelte
+      - CSS
+      - TypeScript
+      - JavaScript
+      - HTML
+    stars: 48
+    commits: 296
+  - name: CHGNet
+    url: https://chgnet.lbl.gov
+    repo: https://github.com/CederGroupHub/chgnet
+    role: Maintainer
+    paper: https://doi.org/10.1038/s42256-023-00716-3
+    description: Pretrained universal neural network potential for charge-informed atomistic modeling. Published on the cover of Nature Machine Intelligence.
+    languages:
+      - Python
+      - C
+      - Cython
+      - CSS
+      - Svelte
+      - HTML
+      - JavaScript
+      - TypeScript
+    stars: 158
+    commits: 163
+  - name: MACE
+    url: https://mace-docs.readthedocs.io
+    repo: https://github.com/ACEsuit/mace
+    role: Contributor
+    paper: https://arxiv.org/abs/2401.00096
+    description: Fast and accurate machine learning interatomic potentials with higher order equivariant message passing.
+    logo: https://avatars.githubusercontent.com/u/68508620
+    stars: 261
+    commits: 21
+    languages:
+      - Python
+      - Shell
+  - name: Elementari
+    url: https://elementari.janosh.dev
+    repo: https://github.com/janosh/elementari
+    description: A library of Svelte components for building interactive web apps with performant chemistry visualizations like periodic tables, Bohr atoms, nuclei, heatmaps, scatter plots.
+    languages:
+      - TypeScript
+      - Svelte
+      - CSS
+      - Python
+      - JavaScript
+      - HTML
+    stars: 102
+    commits: 171
+  - name: pymatviz
+    url: https://pymatviz.janosh.dev
+    img_style: 'filter: invert(1);'
+    repo: https://github.com/janosh/pymatviz
+    description: A toolkit for visualizations in materials informatics to complement pymatgen.
+    languages:
+      - Python
+      - Svelte
+      - CSS
+      - TypeScript
+      - HTML
+      - JavaScript
+    stars: 91
+    commits: 234
+  - name: Tensorboard Reducer
+    repo: https://github.com/janosh/tensorboard-reducer
+    logo: https://raw.githubusercontent.com/janosh/tensorboard-reducer/main/assets/tensorboard-reducer-square.svg
+    description: Reduce multiple PyTorch TensorBoard runs to new events/CSV/JSON. Good for model ensembles.
+    pypi: https://pypi.org/project/tensorboard-reducer
+    languages:
+      - Python
+      - TeX
+    stars: 58
+    commits: 79
+  - name: Normalizing Flows
+    repo: https://github.com/janosh/awesome-normalizing-flows
+    logo: https://api.iconify.design/logos:awesome.svg?color=%23888888
+    description: Curated list of resources for learning and using normalizing flows, a powerful tool in ML for modeling probability distributions.
+    languages:
+      - Python
+    stars: 1239
+    commits: 72
+  - name: atomate2
+    repo: https://github.com/materialsproject/atomate2
+    role: Maintainer
+    logo: https://github.com/materialsproject/atomate2/assets/30958850/53e02adf-5bdb-4c8e-8076-cb30765ac0db
+    description: |
+      atomate2 is a library of computational materials science workflows used by the Materials Project and beyond.
+      It supports multiple DFT codes and downstream analysis tools. Recently, we added machine learning
+      potential-powered structure relaxation workflows.
+    languages:
+      - Python
+    stars: 106
+    commits: 345
+  - name: jobflow
+    repo: https://github.com/materialsproject/jobflow
+    role: Maintainer
+    logo: https://user-images.githubusercontent.com/30958850/275247234-0650d187-8a42-4962-a95d-ff40354baf6b.svg
+    description: |
+      jobflow is a library for writing computational workflows. It provides the plumbing underlying atomate2
+      and was adopted by several other workflow libraries.
+    languages:
+      - Python
+      - TeX
+    stars: 70
+    commits: 100
+  - name: Aviary
+    repo: https://github.com/CompRhys/aviary
+    role: Maintainer
+    logo: https://raw.githubusercontent.com/janosh/tikz/main/assets/aviary/aviary.svg
+    description: Compositional, structural and coarse-grained structural ML energy model implementations (Roost, Wren, CGCNN, Wrenformer) with a consistent API.
+    pypi: https://pypi.org/project/tensorboard-reducer
+    languages:
+      - Python
+    stars: 35
+    commits: 233
+  - name: MatCalc
+    url: https://materialsvirtuallab.github.io/matcalc
+    logo: https://github.com/materialsvirtuallab/matcalc/assets/30958850/89486f2f-73fb-40fb-803a-dfafe510eb6d
+    repo: https://github.com/materialsvirtuallab/matcalc
+    role: Maintainer
+    description: A Python library for calculating materials properties from ML force field potential energy surfaces.
+    languages:
+      - Python
+    stars: 35
+    commits: 66
+  - name: TikZ
+    url: https://tikz.janosh.dev
+    repo: https://github.com/janosh/tikz
+    description: Collection TikZ figures for concepts in physics/chemistry/ML.
+    stars: 167
+    commits: 185
+    languages:
+      - TeX
+      - Svelte
+      - Python
+      - TypeScript
+      - Shell
+      - HTML
+      - CSS
+      - JavaScript
+  - name: MultiSelect
+    url: https://multiselect.janosh.dev
+    repo: https://github.com/janosh/svelte-multiselect
+    description: Keyboard-friendly, accessible and customizable multi-select web component.
+    languages:
+      - TypeScript
+      - Svelte
+      - CSS
+      - HTML
+      - JavaScript
+    stars: 241
+    commits: 268

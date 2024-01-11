@@ -9,7 +9,6 @@ declare module '*cv.yml' {
   const cv: {
     education: types.Education[]
     publications: types.Publication[]
-    projects: types.Project[]
     skills: types.Skill[]
     hobbies: types.Hobby[]
     nationality: string[]
@@ -19,6 +18,14 @@ declare module '*cv.yml' {
     memberships: types.Membership[]
   }
   export default cv
+}
+
+declare module '*oss.yml' {
+  import type * as types from '$lib/types'
+  const oss: {
+    projects: types.Project[]
+  }
+  export default oss
 }
 
 declare module '*papers.yaml' {
