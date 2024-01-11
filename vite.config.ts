@@ -6,7 +6,9 @@ import { loadEnv, type UserConfig } from 'vite'
 
 async function fetch_github_data(gh_token: string) {
   const auth = { headers: { Authorization: `token ${gh_token}` } }
-  const cv = yamljs.load(fs.readFileSync(`src/routes/cv/cv.yml`, `utf8`))
+  const cv = yamljs.load(
+    fs.readFileSync(`src/routes/open-source/oss.yml`, `utf8`),
+  )
 
   for (const project of cv.projects) {
     const handle = project.repo.replace(`https://github.com/`, ``)
@@ -35,7 +37,10 @@ async function fetch_github_data(gh_token: string) {
     project.languages = Object.keys(languages)
   }
 
-  fs.writeFileSync(`src/routes/cv/cv.yml`, yamljs.dump(cv, { lineWidth: -1 }))
+  fs.writeFileSync(
+    `src/routes/open-source/oss.yml`,
+    yamljs.dump(cv, { lineWidth: -1 }),
+  )
 }
 
 process.env = { ...process.env, ...loadEnv(``, process.cwd(), ``) }

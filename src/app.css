@@ -171,8 +171,7 @@ h2.section-title {
   font-size: 2em;
 }
 section.landing {
-  padding: calc(1ex + 2vw);
   flex: 1;
-  max-width: 55em;
+  max-width: 60em;
   margin: auto;
 }
