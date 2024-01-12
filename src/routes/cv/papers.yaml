@@ -297,6 +297,35 @@ references:
       stability prediction
     URL: http://arxiv.org/abs/2308.14920
 
+  - id: riebesell_pushing_2024
+    accessed:
+      - year: 2024
+        month: 1
+        day: 12
+    author:
+      - family: Riebesell
+        given: Janosh
+      - family: Surta
+        given: T. Wesley
+      - family: Goodall
+        given: Rhys
+      - family: Gaultois
+        given: Michael
+      - family: Lee
+        given: Alpha A.
+    citation-key: riebesell_pushing_2024
+    container-title: arXiv.org
+    issued:
+      - year: 2024
+        month: 1
+        day: 11
+    language: en
+    title: >-
+      Pushing the Pareto front of band gap and permittivity: ML-guided search for
+      dielectric materials
+    title-short: Pushing the Pareto front of band gap and permittivity
+    URL: https://arxiv.org/abs/2401.05848v1
+
   - id: rosen_jobflow_2024
     accessed:
       - year: 2024

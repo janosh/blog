@@ -24,13 +24,17 @@ export type Education = {
   date: string
 }
 
-export type Publication = {
-  name: string
+export type Reference = {
   title: string
-  authors: string
-  date: string
-  journal: string
-  url?: string
+  id: string
+  author: { family: string; given: string }[]
+  DOI: string
+  URL?: string
+  issued: { year: number; month: number; day: number }[]
+  accessed: { year: number; month: number; day: number }[]
+  page: string
+  type: string
+  ISSN?: string
   arxiv?: string
   icon?: string
 }
@@ -47,7 +51,7 @@ export type Project = {
   commits: number
   pypi?: string
   languages: string[]
-  paper?: string
+  paper?: string // Zotero BibTeX ID
 }
 
 export type Skill = {
@@ -88,17 +92,4 @@ export type Membership = {
 export type Language = {
   name: string
   level: string
-}
-
-export type Reference = {
-  title: string
-  id: string
-  author: { family: string; given: string }[]
-  DOI: string
-  URL?: string
-  issued: { year: number; month: number; day: number }[]
-  accessed: { year: number; month: number; day: number }[]
-  page: string
-  type: string
-  ISSN?: string
 }
