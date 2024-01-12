@@ -8,7 +8,6 @@ declare module '*cv.yml' {
   import type * as types from '$lib/types'
   const cv: {
     education: types.Education[]
-    publications: types.Publication[]
     skills: types.Skill[]
     hobbies: types.Hobby[]
     nationality: string[]

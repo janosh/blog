@@ -5,15 +5,15 @@
   import cv from './cv.yml'
   import papers from './papers.yaml'
 
-  const email = `janosh@lbl.gov`
+  const email = `janosh.riebesell@gmail.com`
   const links = { target: `_blank`, rel: `noreferrer` }
 
-  const social: [string, string, string][] = [
-    [email, `mailto:${email}`, `mdi:email`],
-    [`janosh`, `https://github.com/janosh`, `octicon:mark-github`],
-    [`jrib_`, `https://twitter.com/jrib_`, `fa-brands:twitter`],
-    [`janosh`, `https://stackoverflow.com/u/4034025`, `mdi:stackoverflow`],
-    // [`janosh-riebesell`, `https://linkedin.com/in/janosh-riebesell`, `bi:linkedin`],
+  const social: [string, string][] = [
+    [`mailto:${email}`, `mdi:email`],
+    [`https://github.com/janosh`, `octicon:mark-github`],
+    [`https://twitter.com/jrib_`, `fa-brands:twitter`],
+    [`https://stackoverflow.com/u/4034025`, `mdi:stackoverflow`],
+    [`https://linkedin.com/in/janosh-riebesell`, `bi:linkedin`],
   ]
 </script>
 
@@ -27,20 +27,20 @@
   </small>
 
   <address>
-    {#each social as [name, url, icon]}
-      <a href={url} {...links}><Icon inline {icon} />{name}</a>
+    {#each social as [url, icon]}
+      <a href={url} {...links}><Icon inline {icon} /></a>
     {/each}
   </address>
 </section>
 
 <section class="body">
   <small>
-    I joined the Materials Project in early 2023 where I build high-throughput workflows
-    for generating large DFT datasets. I am a core maintainer of
-    <a href="https://github.com/materialsproject/pymatgen">pymatgen</a>
-    and enjoy building high-quality open source software that enables new capabilities in computational
-    materials to scale. In particular, my current interests are on further development, training
-    and benchmarking of universal interatomic potentials.
+    I joined the Materials Project in early 2023 where I trained ML foundation models
+    (CHGNet, MACE-MP) and build high-throughput workflows for generating large DFT
+    datasets to train still bigger models on. I am a core maintainer of
+    <a href="https://github.com/materialsproject/pymatgen">pymatgen</a>. I'm a big fan of
+    high-quality open source software that enables new capabilities for scaling
+    computational materials science.
   </small>
   <h2>
     <Icon inline icon="zondicons:education" />&nbsp; Education

@@ -9,14 +9,14 @@ projects:
       - Python
       - Cython
       - Jupyter Notebook
-    stars: 1230
+    stars: 1231
     commits: 905
   - name: Matbench Discovery
     url: https://matbench-discovery.materialsproject.org
     img_style: 'filter: invert(1);'
     repo: https://github.com/janosh/matbench-discovery
-    paper: https://arxiv.org/abs/2308.14920
-    description: Benchmark for machine learning energy models simulating a real-world materials discovery campaign. Interactive leader board and Python package make new model submissions easy.
+    paper: riebesell_matbench_2023
+    description: Benchmark for machine learning energy models simulating a real-world materials discovery campaign.
     languages:
       - Python
       - Svelte
@@ -24,14 +24,14 @@ projects:
       - TypeScript
       - JavaScript
       - HTML
-    stars: 48
+    stars: 50
     commits: 296
   - name: CHGNet
     url: https://chgnet.lbl.gov
     repo: https://github.com/CederGroupHub/chgnet
     role: Maintainer
-    paper: https://doi.org/10.1038/s42256-023-00716-3
-    description: Pretrained universal neural network potential for charge-informed atomistic modeling. Published on the cover of Nature Machine Intelligence.
+    paper: deng_chgnet_2023
+    description: Pretrained universal neural network potential for charge-informed atomistic modeling published on the NMI cover.
     languages:
       - Python
       - C
@@ -47,10 +47,10 @@ projects:
     url: https://mace-docs.readthedocs.io
     repo: https://github.com/ACEsuit/mace
     role: Contributor
-    paper: https://arxiv.org/abs/2401.00096
+    paper: riebesell_foundation_2023
     description: Fast and accurate machine learning interatomic potentials with higher order equivariant message passing.
     logo: https://avatars.githubusercontent.com/u/68508620
-    stars: 261
+    stars: 265
     commits: 21
     languages:
       - Python
@@ -80,7 +80,7 @@ projects:
       - TypeScript
       - HTML
       - JavaScript
-    stars: 91
+    stars: 93
     commits: 234
   - name: Tensorboard Reducer
     repo: https://github.com/janosh/tensorboard-reducer
@@ -90,7 +90,7 @@ projects:
     languages:
       - Python
       - TeX
-    stars: 58
+    stars: 59
     commits: 79
   - name: Normalizing Flows
     repo: https://github.com/janosh/awesome-normalizing-flows
@@ -110,7 +110,7 @@ projects:
       potential-powered structure relaxation workflows.
     languages:
       - Python
-    stars: 106
+    stars: 110
     commits: 345
   - name: jobflow
     repo: https://github.com/materialsproject/jobflow
@@ -142,13 +142,13 @@ projects:
     description: A Python library for calculating materials properties from ML force field potential energy surfaces.
     languages:
       - Python
-    stars: 35
+    stars: 36
     commits: 66
   - name: TikZ
     url: https://tikz.janosh.dev
     repo: https://github.com/janosh/tikz
     description: Collection TikZ figures for concepts in physics/chemistry/ML.
-    stars: 167
+    stars: 168
     commits: 185
     languages:
       - TeX
@@ -159,6 +159,18 @@ projects:
       - HTML
       - CSS
       - JavaScript
+  - name: Dielectrics
+    url: https://janosh.github.io/dielectrics
+    repo: https://github.com/janosh/dielectrics
+    description: Pushing the Pareto front of band gap and permittivity with ML-guided dielectrics discovery incl. experimental synthesis.
+    logo: https://github.com/janosh/tikz/raw/main/assets/plate-capacitor/plate-capacitor.svg
+    paper: riebesell_pushing_2024
+    stars: 5
+    commits: 10
+    languages:
+      - Python
+      - ReScript
+      - Roff
   - name: MultiSelect
     url: https://multiselect.janosh.dev
     repo: https://github.com/janosh/svelte-multiselect
