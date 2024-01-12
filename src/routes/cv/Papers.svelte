@@ -3,15 +3,15 @@
   import { truncate_authors } from './utils'
 
   export let references: Reference[]
-  export let first_name_mode: 'initial' | 'full' | 'none' = `full`
-  export let target_author: string = `Janosh Riebesell`
+  export let first_name_mode: 'initial' | 'full' | 'none' = `initial`
+  export let target_author: string = `J. Riebesell`
 </script>
 
 <ol>
   {#each references.sort(({ author }) => {
     return -(author[0].family == target_author.split(` `)[1])
   }) as { title, id, author, DOI, URL: href, issued } (id)}
-    {@const authors = author
+    {@const author_str = author
       .map(({ given, family }) => {
         const first_name = {
           initial: `${given[0]}. `,
@@ -24,7 +24,7 @@
     <li>
       <h3 {id}>{title}</h3>
       <span>
-        {truncate_authors(authors, target_author)}
+        {@html truncate_authors(author_str, target_author)}
       </span>
       <small>
         &mdash;

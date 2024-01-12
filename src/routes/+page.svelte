@@ -1,15 +1,14 @@
 <script lang="ts">
   import Icon from '@iconify/svelte'
+  import { references } from './cv/papers.yaml'
   import OpenSource from './open-source/+page.svelte'
   import oss from './open-source/oss.yml'
   import Physics from './physics/+page@.md'
   import Posts from './posts/+page@.svelte'
 
-  const chgnet = oss.projects.find((p) => p.name === `CHGNet`)
   const mbd = oss.projects.find((p) => p.name === `Matbench Discovery`)
   const pmv = oss.projects.find((p) => p.name === `pymatviz`)
   const pmg = oss.projects.find((p) => p.name === `pymatgen`)
-  const mace = oss.projects.find((p) => p.name === `MACE`)
 </script>
 
 <img src="./janosh.jpg" alt="me" width="200" />
@@ -33,12 +32,15 @@
       style="vertical-align: middle; transform: translateY(-2px)"
     />
   </a>
+  <a href="/cv">
+    <Icon inline icon="academicons:cv-square" style="transform: scale(1.1);" />
+  </a>
 </address>
 
 <p style="max-width: min(40em, 80vw); margin: auto;">
   I work on
   <a href={mbd?.repo}>🔎 computational materials discovery</a>,
-  <a href={mace?.paper}>🤖 machine learning</a>,
+  <a href="https://arxiv.org/abs/2401.00096v1">🤖 machine learning</a>,
   <a href={pmg?.repo}>💻 software engineering</a>, &
   <a href={pmv?.repo}>📊 data visualization</a>.<br />
   <!-- Outside of work, I enjoy hiking 🧗 and cycling 🚲. The rougher the terrain, the better! ⛰️ -->
@@ -49,37 +51,24 @@
   &nbsp;Recent Projects
 </h2>
 <ul class="recent grid">
-  <li>
-    <h3>
-      <a href={mbd?.repo}>
-        <img src="{mbd?.url}/favicon.svg" alt={mbd?.name} />
-        Matbench Discovery
-      </a>
-      <small>[<a href={mbd?.paper}>arXiv</a>]</small>
-    </h3>
-    A new framework to evaluate ML energy models on materials stability prediction from unrelaxed
-    crystals.
-  </li>
-  <li>
-    <h3>
-      <a href={mace?.paper}>
-        <img src={mace?.logo} alt={mace?.name} />
-        MACE Foundation Model
-      </a>
-    </h3>
-    A versatile ML force field capable of a wide range of chemistry simulations and property
-    predictions.
-  </li>
-  <li>
-    <h3>
-      <a href={chgnet?.repo}>
-        <img src="{chgnet?.url}/favicon.svg" alt={chgnet?.name} />
-        CHGNet
-      </a>
-      <small>[<a href={chgnet?.paper}>NMI</a>]</small>
-    </h3>
-    Pretrained universal neural network potential for charge-informed atomistic modeling. Paper:
-  </li>
+  {#each oss.projects.filter((p) => p.paper) as { name, repo, logo, paper: id, description } (name)}
+    {@const paper = references.find((p) => p.id == id)}
+    {@const date = Object.values(paper?.issued[0]).join(`-`)}
+    {#if !paper}
+      {@debug id}
+    {/if}
+    <li>
+      <h3>
+        <a href={repo}>
+          <img src={logo ?? `${mbd?.url}/favicon.svg`} alt={name} />
+          {name}
+        </a>
+        <small>[<a href={paper?.URL}>Paper</a>]</small>
+      </h3>
+      <time datetime="">{date}</time>
+      {description}
+    </li>
+  {/each}
 </ul>
 
 <OpenSource />
@@ -130,5 +119,16 @@
     margin-right: 5pt;
     vertical-align: middle;
     width: 3ex;
+    transform: translateY(-1px);
+  }
+  time {
+    display: block;
+    font-size: small;
+    margin: -4pt auto 1ex;
+    font-weight: 300;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 0 3pt;
+    border-radius: 4pt;
+    max-width: max-content;
   }
 </style>
