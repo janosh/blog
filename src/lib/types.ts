@@ -10,6 +10,7 @@ export type FrontMatter = {
     origin?: string
   }
   path: string
+  file: string
   tags: string[]
 }
 

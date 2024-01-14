@@ -50,7 +50,7 @@ projects:
     paper: riebesell_foundation_2023
     description: Fast and accurate machine learning interatomic potentials with higher order equivariant message passing.
     logo: https://avatars.githubusercontent.com/u/68508620
-    stars: 265
+    stars: 266
     commits: 21
     languages:
       - Python
@@ -122,7 +122,7 @@ projects:
     languages:
       - Python
       - TeX
-    stars: 70
+    stars: 73
     commits: 100
   - name: Aviary
     repo: https://github.com/CompRhys/aviary
@@ -182,4 +182,4 @@ projects:
       - HTML
       - JavaScript
     stars: 241
-    commits: 268
+    commits: 269
