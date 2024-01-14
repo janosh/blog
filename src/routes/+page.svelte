@@ -1,4 +1,5 @@
 <script lang="ts">
+  import GdmSLides from '$lib/2024-01-12-deepmind-interview.pdf'
   import Icon from '@iconify/svelte'
   import { references } from './cv/papers.yaml'
   import OpenSource from './open-source/+page.svelte'
@@ -47,8 +48,8 @@
 </p>
 
 <h2 class="section-title" style="margin: 1em auto 0;">
-  <Icon inline icon="octicon:repo" />
-  &nbsp;Recent Projects
+  <Icon inline icon="mdi:newspaper" />
+  &nbsp;Recent
 </h2>
 <ul class="recent grid">
   {#each oss.projects.filter((p) => p.paper) as { name, repo, logo, paper: id, description } (name)}
@@ -65,10 +66,23 @@
         </a>
         <small>[<a href={paper?.URL}>Paper</a>]</small>
       </h3>
-      <time datetime="">{date}</time>
+      <time>{date}</time>
       {description}
     </li>
   {/each}
+  <li>
+    <h3>
+      <img
+        src="https://github.com/janosh/blog/assets/30958850/f545ac6e-255f-4242-a23a-7516df80c8e7"
+        alt="DeepMind Logo"
+      />
+      DeepMind Talk
+      <small>[<a href={GdmSLides} type="application/pdf">Slides</a>]</small>
+    </h3>
+    <time>2024-01-12</time>
+    1h talk covering 3 PhD projects on ML-guided materials discovery & synthesis to SF+London
+    DeepMind team.
+  </li>
 </ul>
 
 <OpenSource />

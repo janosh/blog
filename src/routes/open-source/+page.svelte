@@ -57,7 +57,7 @@
           </a>
         {/if}
         <a href="{repo}/graphs/contributors">
-          <Icon inline icon="carbon:user-admin" />
+          <Icon inline icon="octicon:people-16" />
           {role ?? (repo.includes(`/janosh/`) ? `Lead` : `Contributor`)}
         </a>
       </section>
