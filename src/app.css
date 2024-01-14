@@ -28,12 +28,12 @@ body > div {
   min-height: 100vh;
   flex-direction: column;
   position: relative;
+  place-content: center;
+  place-items: center;
 }
 main {
   padding: calc(1ex + 2vw);
   flex: 1;
-  max-width: 55em;
-  margin: auto;
 }
 button {
   color: var(--text-color);
@@ -173,5 +173,4 @@ h2.section-title {
 section.landing {
   flex: 1;
   max-width: 60em;
-  margin: auto;
 }

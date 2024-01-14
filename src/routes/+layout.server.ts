@@ -1,3 +1,5 @@
+import type { FrontMatter } from '../lib/types.js'
+
 export const prerender = true
 
 export const load = async ({ url }) => {
@@ -9,7 +11,7 @@ export const load = async ({ url }) => {
     slug: file.split(`/`)[2],
     path: `/` + file.split(`/`).slice(1, -1).join(`/`),
     file,
-  }))
+  })) as FrontMatter[]
 
   const post = posts.find((post) => post.path === url.pathname)
 

@@ -14,7 +14,7 @@ cover:
 
 <section class="landing">
 
-<img src="./planets.svg" alt={cover.caption} />
+<img src="./planets.svg" alt={cover.caption} style="margin: 2em 0 0;" />
 
 <h2 class="section-title">
   <Icon inline icon="mdi:atom" />
