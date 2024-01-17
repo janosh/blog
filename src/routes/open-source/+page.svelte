@@ -49,7 +49,7 @@
         {/if}
 
         {#if commits}
-          <a href="{repo}/graphs/contributors">
+          <a href="{repo}/commits?author=janosh">
             <Icon inline icon="octicon:git-commit" />
             <span>
               {commits} <small>commits</small>
@@ -70,9 +70,6 @@
 <style>
   h2 {
     text-align: center;
-  }
-  h3 {
-    margin: 0 auto;
   }
   h3 a {
     display: flex;

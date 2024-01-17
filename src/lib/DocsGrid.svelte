@@ -1,9 +1,8 @@
 <script lang="ts">
-  // export let title: string
-  // export let files: [string, string][]
+  export let style: string | null = null
 </script>
 
-<div class="grid">
+<div class="grid" {style}>
   <slot />
 </div>
 

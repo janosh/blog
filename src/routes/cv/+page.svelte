@@ -5,11 +5,12 @@
   import cv from './cv.yml'
   import papers from './papers.yaml'
 
-  const email = `janosh.riebesell@gmail.com`
+  export let data
+
   const links = { target: `_blank`, rel: `noreferrer` }
 
   const social: [string, string][] = [
-    [`mailto:${email}`, `mdi:email`],
+    [`mailto:${data.email}`, `mdi:email`],
     [`https://github.com/janosh`, `octicon:mark-github`],
     [`https://twitter.com/jrib_`, `fa-brands:twitter`],
     [`https://stackoverflow.com/u/4034025`, `mdi:stackoverflow`],

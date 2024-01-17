@@ -3,7 +3,7 @@
   "name": "janosh.dev",
   "title": "janosh.dev",
   "homepage": "https://janosh.dev",
-  "description": "Janosh Riebesell's blog",
+  "description": "I write about materials science, machine learning and software development.",
   "version": "1.0.0",
   "author": "Janosh Riebesell <janosh.riebesell@gmail.com>",
   "repository": "https://github.com/janosh/blog",
@@ -11,15 +11,12 @@
   "license": "MIT",
   "type": "module",
   "keywords": [
-    "personal blog",
-    "portfolio",
+    "blog",
+    "technology",
     "physics",
+    "materials science",
     "machine learning",
-    "web development",
-    "science",
-    "nature",
-    "gatsby",
-    "styled-components"
+    "web dev"
   ],
   "scripts": {
     "dev": "vite dev",

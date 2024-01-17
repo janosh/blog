@@ -12,8 +12,6 @@ cover:
   import Icon from '@iconify/svelte'
 </script>
 
-<section class="landing">
-
 <img src="./planets.svg" alt={cover.caption} style="margin: 2em 0 0;" />
 
 <h2 class="section-title">
@@ -21,9 +19,9 @@ cover:
   Notes on Physics
 </h2>
 
-This is a compilation of notes and solutions to problem sheets for some of the physics lectures I took, most of them in Heidelberg, Germany. Hopefully, they can be useful to others. If you find errors, please [open an issue]({issues}).
+This is a compilation of notes and solutions to problem sheets for some of the physics lectures I took, most of them in [Heidelberg](https://google.com/search?q=Heidelberg). Hopefully, they can be useful to others. If you find errors, please [open an issue]({issues}).
 
-<DocsGrid>
+<DocsGrid style="max-width: var(--body-max-width);">
 
 [String Theory ![Cross section of the quintic Calabi–Yau manifold](./string-theory/calabi-yau.png)](physics/string-theory)
 
@@ -49,4 +47,8 @@ This is a compilation of notes and solutions to problem sheets for some of the p
 
 </DocsGrid>
 
-</section>
+<style>
+  p {
+    max-width: 50em;
+  }
+</style>

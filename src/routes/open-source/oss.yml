@@ -9,8 +9,8 @@ projects:
       - Python
       - Cython
       - Jupyter Notebook
-    stars: 1231
-    commits: 905
+    stars: 1234
+    commits: 914
   - name: Matbench Discovery
     url: https://matbench-discovery.materialsproject.org
     img_style: 'filter: invert(1);'
@@ -24,14 +24,14 @@ projects:
       - TypeScript
       - JavaScript
       - HTML
-    stars: 50
-    commits: 296
+    stars: 52
+    commits: 298
   - name: CHGNet
     url: https://chgnet.lbl.gov
     repo: https://github.com/CederGroupHub/chgnet
     role: Maintainer
     paper: deng_chgnet_2023
-    description: Pretrained universal neural network potential for charge-informed atomistic modeling published on the NMI cover.
+    description: Pretrained universal neural network potential for charge-informed atomistic modeling published on the Sep 2023 cover of NMI.
     languages:
       - Python
       - C
@@ -41,7 +41,7 @@ projects:
       - HTML
       - JavaScript
       - TypeScript
-    stars: 158
+    stars: 161
     commits: 163
   - name: MACE
     url: https://mace-docs.readthedocs.io
@@ -50,7 +50,7 @@ projects:
     paper: riebesell_foundation_2023
     description: Fast and accurate machine learning interatomic potentials with higher order equivariant message passing.
     logo: https://avatars.githubusercontent.com/u/68508620
-    stars: 266
+    stars: 285
     commits: 21
     languages:
       - Python
@@ -67,7 +67,7 @@ projects:
       - JavaScript
       - HTML
     stars: 102
-    commits: 171
+    commits: 173
   - name: pymatviz
     url: https://pymatviz.janosh.dev
     img_style: 'filter: invert(1);'
@@ -80,7 +80,7 @@ projects:
       - TypeScript
       - HTML
       - JavaScript
-    stars: 93
+    stars: 97
     commits: 234
   - name: Tensorboard Reducer
     repo: https://github.com/janosh/tensorboard-reducer
@@ -90,7 +90,7 @@ projects:
     languages:
       - Python
       - TeX
-    stars: 59
+    stars: 60
     commits: 79
   - name: Normalizing Flows
     repo: https://github.com/janosh/awesome-normalizing-flows
@@ -98,7 +98,7 @@ projects:
     description: Curated list of resources for learning and using normalizing flows, a powerful tool in ML for modeling probability distributions.
     languages:
       - Python
-    stars: 1239
+    stars: 1244
     commits: 72
   - name: atomate2
     repo: https://github.com/materialsproject/atomate2
@@ -110,8 +110,8 @@ projects:
       potential-powered structure relaxation workflows.
     languages:
       - Python
-    stars: 110
-    commits: 345
+    stars: 112
+    commits: 347
   - name: jobflow
     repo: https://github.com/materialsproject/jobflow
     role: Maintainer
@@ -122,7 +122,7 @@ projects:
     languages:
       - Python
       - TeX
-    stars: 73
+    stars: 75
     commits: 100
   - name: Aviary
     repo: https://github.com/CompRhys/aviary
@@ -132,7 +132,7 @@ projects:
     pypi: https://pypi.org/project/tensorboard-reducer
     languages:
       - Python
-    stars: 35
+    stars: 36
     commits: 233
   - name: MatCalc
     url: https://materialsvirtuallab.github.io/matcalc
@@ -165,8 +165,8 @@ projects:
     description: Pushing the Pareto front of band gap and permittivity with ML-guided dielectrics discovery incl. experimental synthesis.
     logo: https://github.com/janosh/tikz/raw/main/assets/plate-capacitor/plate-capacitor.svg
     paper: riebesell_pushing_2024
-    stars: 5
-    commits: 10
+    stars: 6
+    commits: 12
     languages:
       - Python
       - ReScript
@@ -181,5 +181,5 @@ projects:
       - CSS
       - HTML
       - JavaScript
-    stars: 241
+    stars: 243
     commits: 269
