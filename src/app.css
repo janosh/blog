@@ -15,6 +15,8 @@
 
   --zoo-github-corner-color: var(--night);
   --zoo-github-corner-bg: white;
+
+  --body-max-width: min(90vw, 1100px);
 }
 body {
   background: var(--night);
@@ -86,12 +88,19 @@ ul {
 ul.grid {
   padding: 0;
   margin: 1em auto;
-  max-width: min(90vw, 1000px);
+  max-width: var(--body-max-width);
+  width: 100%;
   container-type: inline-size;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1em;
   list-style: none;
+}
+ul.grid > li > h3 {
+  margin: 8pt 0 5pt;
+  display: flex;
+  place-content: center;
+  place-items: center;
 }
 label {
   font-weight: bold;

@@ -13,22 +13,20 @@ async function fetch_github_data(gh_token: string) {
   for (const project of cv.projects) {
     const handle = project.repo.replace(`https://github.com/`, ``)
 
-    const repo_promise = await fetch(
-      `https://api.github.com/repos/${handle}`,
-      auth,
-    )
+    const repo = await (
+      await fetch(`https://api.github.com/repos/${handle}`, auth)
+    ).json()
 
-    const repo = await repo_promise.json()
     project.stars = repo.stargazers_count
-    // fetch number of commits by @janosh using repo contribs API
+    // fetch number of commits by contributor.login using repo contribs API
     const contributors = await (
       await fetch(`https://api.github.com/repos/${handle}/contributors`, auth)
     ).json()
-    const janosh = contributors.find(
+    const me = contributors.find(
       (contributor: Record<string, unknown>) => contributor.login === `janosh`,
     )
-    if (janosh) {
-      project.commits = janosh.contributions
+    if (me) {
+      project.commits = me.contributions
     }
 
     const languages = await (

@@ -7,9 +7,12 @@
   import Physics from './physics/+page@.md'
   import Posts from './posts/+page@.svelte'
 
+  export let data
+
   const mbd = oss.projects.find((p) => p.name === `Matbench Discovery`)
   const pmv = oss.projects.find((p) => p.name === `pymatviz`)
   const pmg = oss.projects.find((p) => p.name === `pymatgen`)
+  const elementari = oss.projects.find((p) => p.name === `Elementari`)
 </script>
 
 <img src="./janosh.jpg" alt="me" width="200" />
@@ -25,7 +28,7 @@
   <a href="https://linkedin.com/in/janosh-riebesell/" target="_blank" rel="noreferrer">
     <Icon inline icon="bi:linkedin" />
   </a>
-  <a href="mailto:janosh.riebesell@gmail.com" target="_blank" rel="noreferrer">
+  <a href="mailto:{data.email}" target="_blank" rel="noreferrer">
     <Icon
       inline
       icon="mdi:email"
@@ -43,7 +46,7 @@
   <a href={mbd?.repo}>🔎 computational materials discovery</a>,
   <a href="https://arxiv.org/abs/2401.00096v1">🤖 machine learning</a>,
   <a href={pmg?.repo}>💻 software engineering</a>, &
-  <a href={pmv?.repo}>📊 data visualization</a>.<br />
+  <a href={pmv?.repo}>📊 data</a> <a href={elementari?.repo}>visualization</a>.<br />
   <!-- Outside of work, I enjoy hiking 🧗 and cycling 🚲. The rougher the terrain, the better! ⛰️ -->
 </p>
 
@@ -122,12 +125,6 @@
     background-color: rgba(255, 255, 255, 0.05);
     padding: 1ex 1em;
     border-radius: 4pt;
-  }
-  ul.recent > li > h3 {
-    margin: 0 0 1ex;
-    display: flex;
-    place-content: center;
-    place-items: center;
   }
   ul.recent > li > h3 :is(img, small) {
     margin-right: 5pt;

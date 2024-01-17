@@ -26,68 +26,60 @@
   }
 </script>
 
-<section class="landing">
-  <img src="./blog-banner.svg" alt="Banner" style="margin: 2em 0 0;" />
+<img src="./blog-banner.svg" alt="Banner" style="margin: 2em 0 0;" />
 
-  <h2 class="section-title">
-    <Icon inline icon="ri:article-line" />
-    Posts
-  </h2>
+<h2 class="section-title">
+  <Icon inline icon="ri:article-line" />
+  Posts
+</h2>
 
-  <Select
-    options={all_tags}
-    placeholder="Filter by tag"
-    bind:selected={active_tags}
-    closeDropdownOnSelect
-  />
+<Select
+  options={all_tags}
+  placeholder="Filter by tag"
+  bind:selected={active_tags}
+  closeDropdownOnSelect
+/>
 
-  <ul>
-    {#each $page.data?.posts
-      ?.filter(has_active_tags(active_tags))
-      .sort((post_1, post_2) => {
-        return post_2.date.localeCompare(post_1.date) // sort by date descending
-      }) ?? [] as post (post.title)}
-      {@const { cover, slug, title, tags, date } = post}
-      {@const href = `/posts/${slug}`}
-      <li animate:flip={{ duration: 400 }}>
-        <h3><a {href}>{title}</a></h3>
-        <a {href}>
-          {#if dev}
-            {#await import(`./${slug}/${cover?.img?.replace(`.svg`, ``)}.svg`) then { default: src }}
-              <img {src} alt={title} />
-            {/await}
-          {:else}
-            <img
-              src="{repository}/raw/main/src/routes/posts/{slug}/{cover.img}"
-              alt={cover.caption}
-            />
-          {/if}
-        </a>
-        <small>
-          <time>
-            <Icon icon="carbon:calendar" inline />
-            {date?.split(`T`)[0]}
-          </time>
-        </small>
-        <small><Icon icon="carbon:tag" inline /> {tags?.join(`, `)}</small>
-      </li>
-    {/each}
-  </ul>
-</section>
+<ul class="grid" style="margin: 4em auto; gap: 3ex;">
+  {#each $page.data?.posts
+    ?.filter(has_active_tags(active_tags))
+    .sort((post_1, post_2) => {
+      return post_2.date.localeCompare(post_1.date) // sort by date descending
+    }) ?? [] as post (post.title)}
+    {@const { cover, slug, title, tags, date } = post}
+    {@const href = `/posts/${slug}`}
+    <li animate:flip={{ duration: 400 }}>
+      <h3><a {href}>{title}</a></h3>
+      <a {href}>
+        {#if dev}
+          {#await import(`./${slug}/${cover?.img?.replace(`.svg`, ``)}.svg`) then { default: src }}
+            <img {src} alt={title} />
+          {/await}
+        {:else}
+          <img
+            src="{repository}/raw/main/src/routes/posts/{slug}/{cover.img}"
+            alt={cover.caption}
+          />
+        {/if}
+      </a>
+      <small>
+        <time>
+          <Icon icon="carbon:calendar" inline />
+          {date?.split(`T`)[0]}
+        </time>
+      </small>
+      <small><Icon icon="carbon:tag" inline /> {tags?.join(`, `)}</small>
+    </li>
+  {/each}
+</ul>
 
 <style>
-  ul {
-    display: grid;
-    gap: 2em;
-    place-content: center;
-    grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
-    list-style: none;
-    max-width: min(90vw, 65em);
-    margin: 4em 0;
-  }
   ul > li {
     display: grid;
     align-content: space-between;
+    grid-row: span 4;
+    grid-template-rows: subgrid;
+    gap: 2pt;
   }
   ul > li > h3 {
     margin: 0;
