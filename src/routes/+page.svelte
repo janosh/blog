@@ -50,7 +50,7 @@
   <!-- Outside of work, I enjoy hiking 🧗 and cycling 🚲. The rougher the terrain, the better! ⛰️ -->
 </p>
 
-<h2 class="section-title" style="margin: 1em auto 0;">
+<h2 class="section-title">
   <Icon inline icon="mdi:newspaper" />
   &nbsp;Recent
 </h2>

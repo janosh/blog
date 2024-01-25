@@ -1,20 +1,27 @@
 <script lang="ts">
   import Icon from '@iconify/svelte'
+  import { highlight_matches } from 'svelte-zoo'
   import { flip } from 'svelte/animate'
   import oss from './oss.yml'
 
   let sort_by: 'commits' | 'stars' | 'alphabetical' = `commits`
   const sort_by_options = [`commits`, `stars`, `alphabetical`] as const
 
-  $: projects = oss.projects.sort((p1, p2) => {
-    if (sort_by === `alphabetical`) {
-      return p1.name.localeCompare(p2.name)
-    } else if ([`commits`, `stars`].includes(sort_by)) {
-      return p2[sort_by] - p1[sort_by]
-    } else {
-      throw new Error(`Unknown sort_by: ${sort_by}`)
-    }
-  })
+  $: projects = oss.projects
+    .filter((proj) => {
+      if (!query) return true
+      return JSON.stringify(proj).toLowerCase().includes(query.toLowerCase())
+    })
+    .sort((p1, p2) => {
+      if (sort_by === `alphabetical`) {
+        return p1.name.localeCompare(p2.name)
+      } else if ([`commits`, `stars`].includes(sort_by)) {
+        return p2[sort_by] - p1[sort_by]
+      } else {
+        throw new Error(`Unknown sort_by: ${sort_by}`)
+      }
+    })
+  let query = ``
 </script>
 
 <h2 class="section-title">
@@ -28,9 +35,10 @@
       {title}
     </button>
   {/each}
+  <input type="text" placeholder="Search..." bind:value={query} />
 </ul>
 
-<ul class="projects grid">
+<ul class="projects grid" use:highlight_matches={{ query, css_class: `highlight-match` }}>
   {#each projects as { url, repo, name, description, stars, logo, commits, role } (name)}
     {@const logo_url = logo ?? `${url}/favicon.svg`}
     <li animate:flip={{ duration: 400 }}>
@@ -65,6 +73,8 @@
       <p>{description}</p>
     </li>
   {/each}
+  <li style="visibility: hidden;"></li>
+  <li style="visibility: hidden;"></li>
 </ul>
 
 <style>

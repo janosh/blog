@@ -8,7 +8,7 @@ tags:
   - Bayes theorem
   - educational
   - probability
-  - statistics
+  - Statistics
 ---
 
 <script>
