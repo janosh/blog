@@ -25,7 +25,7 @@
   <Icon icon="carbon:calendar" inline />
   {date?.split(`T`)[0]}
 </time>
-<main>
+<main style="max-width: 50em;">
   <slot />
 
   <br />

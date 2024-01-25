@@ -7,7 +7,8 @@
   import Select from 'svelte-multiselect'
   import { flip } from 'svelte/animate'
 
-  let active_tags: string[] = []
+  type Option = { label: string; count: number }
+  let active_tags: Option[] = []
 
   const tag_counts = $page.data?.posts
     ?.flatMap((post) => post.tags)
@@ -16,13 +17,25 @@
       return acc
     }, {})
   // keep only most frequent tags
-  const all_tags = (Object.entries(tag_counts) as [string, number][])
-    .sort(([, count_1], [, count_2]) => count_2 - count_1)
-    .slice(0, 15)
-    .map(([tag]) => tag)
-    .sort()
-  const has_active_tags = (active_tags: string[]) => (post: FrontMatter) => {
-    return active_tags.length === 0 || post.tags?.some((tag) => active_tags.includes(tag))
+  const all_tags = (Object.entries(tag_counts) as [string, number][]).sort(
+    ([, count_1], [, count_2]) => count_2 - count_1,
+  )
+  // check if any tag appear with different casing (start inner loop at i + 1)
+  for (let ii = 0; ii < all_tags.length; ii++) {
+    const [tag_1] = all_tags[ii]
+    for (let jj = ii + 1; jj < all_tags.length; jj++) {
+      const [tag_2] = all_tags[jj]
+      if (tag_1.toLowerCase() === tag_2.toLowerCase()) {
+        console.error(`Tag "${tag_1}" appears with different casing`)
+      }
+    }
+  }
+  const top_tags = all_tags.slice(0, 15).sort()
+  const has_active_tags = (active_tags: Option[]) => (post: FrontMatter) => {
+    return (
+      active_tags.length === 0 ||
+      active_tags.some(({ label }) => post.tags?.includes(label))
+    )
   }
 </script>
 
@@ -34,11 +47,16 @@
 </h2>
 
 <Select
-  options={all_tags}
+  options={top_tags.map(([label, count]) => ({ label, count }))}
   placeholder="Filter by tag"
   bind:selected={active_tags}
   closeDropdownOnSelect
-/>
+>
+  <span slot="option" let:option style="display: flex; gap: 5pt; align-items: center;">
+    {option.label} <span style="flex: 1;" />
+    {option.count}
+  </span>
+</Select>
 
 <ul class="grid" style="margin: 4em auto; gap: 3ex;">
   {#each $page.data?.posts
@@ -71,6 +89,8 @@
       <small><Icon icon="carbon:tag" inline /> {tags?.join(`, `)}</small>
     </li>
   {/each}
+  <li style="visibility: hidden;"></li>
+  <li style="visibility: hidden;"></li>
 </ul>
 
 <style>
@@ -85,8 +105,8 @@
     margin: 0;
     font-size: 14pt;
     text-overflow: ellipsis;
-    white-space: nowrap;
     overflow: hidden;
+    text-align: center;
   }
   ul > li > a > img {
     border-radius: 2pt;

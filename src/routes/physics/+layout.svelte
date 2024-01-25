@@ -19,7 +19,8 @@
 <style>
   img {
     margin: 0;
-    height: 50vh;
+    height: 30vh;
     object-fit: cover;
+    width: 100%;
   }
 </style>

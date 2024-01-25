@@ -126,6 +126,9 @@ h1 {
   text-align: center;
 }
 
+:where(h1, h2, h3, h4, h5, h6) {
+  text-wrap: balance;
+}
 :where(h2, h3, h4, h5, h6) {
   scroll-margin-top: 50px;
   transition: 0.3s;
@@ -175,11 +178,23 @@ img + em {
 }
 
 h2.section-title {
-  text-align: center;
-  margin: 1em auto;
   font-size: 2em;
 }
 section.landing {
   flex: 1;
   max-width: 60em;
+}
+
+input {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 4pt;
+  padding: 3pt 6pt;
+  color: inherit;
+  font-size: 11pt;
+  transition: background-color 0.2s ease-in-out;
+}
+::highlight(highlight-match) {
+  color: mediumaquamarine;
+  text-decoration: underline;
 }
