@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Reference } from '$lib'
+  import { highlight_matches } from 'svelte-zoo'
   import { truncate_authors } from './utils'
 
   export let references: Reference[]
@@ -7,7 +8,12 @@
   export let target_author: string = `J. Riebesell`
 </script>
 
-<ol>
+<ol
+  use:highlight_matches={{
+    query: target_author.toLowerCase(),
+    css_class: `highlight-match`,
+  }}
+>
   {#each references.sort(({ author }) => {
     return -(author[0].family == target_author.split(` `)[1])
   }) as { title, id, author, DOI, URL: href, issued } (id)}
@@ -53,5 +59,8 @@
   ol > li > h3 {
     margin: 8pt 0 2pt;
     font-size: small;
+  }
+  ::highlight(highlight-match) {
+    color: initial;
   }
 </style>

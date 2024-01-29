@@ -22,6 +22,7 @@
     display: grid;
     font-size: larger;
     font-weight: bolder;
+    color: inherit;
   }
   :global(div.grid img) {
     width: 100%;

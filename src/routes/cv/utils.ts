@@ -2,7 +2,6 @@ export function truncate_authors(
   author_str: string,
   target_name: string,
   max_authors: number = 3,
-  wrap_target_auth: string = `<span style="text-decoration: underline">{}</span>`,
 ): string {
   // show at most max_authors, including the target author, replacing the rest with ellipsis
   const authors = author_str.split(`, `)
@@ -43,11 +42,6 @@ export function truncate_authors(
     }
     truncated_str += `, ${truncated_authors[idx]}`
   }
-
-  truncated_str = truncated_str.replace(
-    target_name,
-    wrap_target_auth.replace(`{}`, target_name),
-  )
 
   return truncated_str
 }
