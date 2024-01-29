@@ -39,7 +39,7 @@
   }
 </script>
 
-<img src="./blog-banner.svg" alt="Banner" style="margin: 2em 0 0;" />
+<img src="./blog-banner.svg" alt="Banner" class="banner" />
 
 <h2 class="section-title">
   <Icon inline icon="ri:article-line" />
@@ -107,6 +107,10 @@
     text-overflow: ellipsis;
     overflow: hidden;
     text-align: center;
+    align-self: end;
+  }
+  ul > li > h3 > a {
+    color: inherit;
   }
   ul > li > a > img {
     border-radius: 2pt;

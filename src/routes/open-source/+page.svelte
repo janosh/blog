@@ -1,8 +1,8 @@
 <script lang="ts">
+  import oss from '$lib/oss.yml'
   import Icon from '@iconify/svelte'
   import { highlight_matches } from 'svelte-zoo'
   import { flip } from 'svelte/animate'
-  import oss from './oss.yml'
 
   let sort_by: 'commits' | 'stars' | 'alphabetical' = `commits`
   const sort_by_options = [`commits`, `stars`, `alphabetical`] as const

@@ -1,5 +1,5 @@
+import type { FrontMatter } from '$lib/types.js'
 import { author } from '$root/package.json'
-import type { FrontMatter } from '../lib/types.js'
 
 export const prerender = true
 

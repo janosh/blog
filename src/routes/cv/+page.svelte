@@ -1,9 +1,9 @@
 <script lang="ts">
+  import oss from '$lib/oss.yml'
+  import papers from '$lib/papers.yaml'
   import Icon from '@iconify/svelte'
-  import oss from '../open-source/oss.yml'
   import Papers from './Papers.svelte'
   import cv from './cv.yml'
-  import papers from './papers.yaml'
 
   export let data
 
