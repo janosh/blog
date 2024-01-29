@@ -1,5 +1,31 @@
 ---
 references:
+  - id: chiang_llamp_2024
+    accessed:
+      - year: 2024
+        month: 1
+        day: 31
+    author:
+      - family: Chiang
+        given: Yuan
+      - family: Chou
+        given: Chia-Hong
+      - family: Riebesell
+        given: Janosh
+    citation-key: chiang_llamp_2024
+    issued:
+      - year: 2024
+        month: 1
+        day: 30
+    number: arXiv:2401.17244
+    publisher: arXiv
+    source: arXiv.org
+    title: >-
+      LLaMP: Large Language Model Made Powerful for High-fidelity Materials
+      Knowledge Retrieval and Distillation
+    title-short: LLaMP
+    URL: http://arxiv.org/abs/2401.17244
+
   - id: deng_chgnet_2023
     accessed:
       - year: 2023

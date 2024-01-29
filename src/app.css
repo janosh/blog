@@ -198,3 +198,9 @@ input {
   color: mediumaquamarine;
   text-decoration: underline;
 }
+
+img.banner {
+  max-height: 25em;
+  object-fit: cover;
+  width: 100%;
+}

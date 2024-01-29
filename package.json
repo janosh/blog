@@ -34,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
     "devalue": "^4.3.2",
+    "elementari": "^0.2.3",
     "eslint": "^8.56.0",
     "eslint-plugin-svelte": "^2.35.1",
     "hast-util-from-string": "^3.0.0",

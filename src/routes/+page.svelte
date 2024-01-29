@@ -1,9 +1,9 @@
 <script lang="ts">
   import GdmSLides from '$lib/2024-01-12-deepmind-interview.pdf'
+  import oss from '$lib/oss.yml'
+  import { references } from '$lib/papers.yaml'
   import Icon from '@iconify/svelte'
-  import { references } from './cv/papers.yaml'
   import OpenSource from './open-source/+page.svelte'
-  import oss from './open-source/oss.yml'
   import Physics from './physics/+page@.md'
   import Posts from './posts/+page@.svelte'
 
