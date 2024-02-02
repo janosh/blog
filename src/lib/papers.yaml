@@ -70,6 +70,145 @@ references:
     URL: https://www.nature.com/articles/s42256-023-00716-3
     volume: '5'
 
+  - id: evans_developments_2024
+    accessed:
+      - year: 2024
+        month: 2
+        day: 2
+    author:
+      - family: Evans
+        given: Matthew L.
+      - family: Bergsma
+        given: Johan
+      - family: Merkys
+        given: Andrius
+      - family: Andersen
+        given: Casper W.
+      - family: Andersson
+        given: Oskar B.
+      - family: Beltrán
+        given: Daniel
+      - family: Blokhin
+        given: Evgeny
+      - family: Boland
+        given: Tara M.
+      - family: Balderas
+        given: Rubén Castañeda
+      - family: Choudhary
+        given: Kamal
+      - family: Díaz
+        given: Alberto Díaz
+      - family: García
+        given: Rodrigo Domínguez
+      - family: Eckert
+        given: Hagen
+      - family: Eimre
+        given: Kristjan
+      - family: Montero
+        given: María Elena Fuentes
+      - family: Krajewski
+        given: Adam M.
+      - family: Mortensen
+        given: Jens Jørgen
+      - family: Duarte
+        given: José Manuel Nápoles
+      - family: Pietryga
+        given: Jacob
+      - family: Qi
+        given: Ji
+      - family: Carrillo
+        given: Felipe de Jesús Trejo
+      - family: Vaitkus
+        given: Antanas
+      - family: Yu
+        given: Jusong
+      - family: Zettel
+        given: Adam
+      - family: Castro
+        given: Pedro Baptista
+        non-dropping-particle: de
+      - family: Carlsson
+        given: Johan
+      - family: Cerqueira
+        given: Tiago F. T.
+      - family: Divilov
+        given: Simon
+      - family: Hajiyani
+        given: Hamidreza
+      - family: Hanke
+        given: Felix
+      - family: Jose
+        given: Kevin
+      - family: Oses
+        given: Corey
+      - family: Riebesell
+        given: Janosh
+      - family: Schmidt
+        given: Jonathan
+      - family: Winston
+        given: Donald
+      - family: Xie
+        given: Christen
+      - family: Yang
+        given: Xiaoyu
+      - family: Bonella
+        given: Sara
+      - family: Botti
+        given: Silvana
+      - family: Curtarolo
+        given: Stefano
+      - family: Draxl
+        given: Claudia
+      - family: Cobas
+        given: Luis Edmundo Fuentes
+      - family: Hospital
+        given: Adam
+      - family: Liu
+        given: Zi-Kui
+      - family: Marques
+        given: Miguel A. L.
+      - family: Marzari
+        given: Nicola
+      - family: Morris
+        given: Andrew J.
+      - family: Ong
+        given: Shyue Ping
+      - family: Orozco
+        given: Modesto
+      - family: Persson
+        given: Kristin A.
+      - family: Thygesen
+        given: Kristian S.
+      - family: Wolverton
+        given: Chris
+      - family: Scheidgen
+        given: Markus
+      - family: Toher
+        given: Cormac
+      - family: Conduit
+        given: Gareth J.
+      - family: Pizzi
+        given: Giovanni
+      - family: Gražulis
+        given: Saulius
+      - family: Rignanese
+        given: Gian-Marco
+      - family: Armiento
+        given: Rickard
+    citation-key: evans_developments_2024
+    DOI: 10.48550/arXiv.2402.00572
+    issued:
+      - year: 2024
+        month: 2
+        day: 1
+    number: arXiv:2402.00572
+    publisher: arXiv
+    source: arXiv.org
+    title: >-
+      Developments and applications of the OPTIMADE API for materials discovery,
+      design, and data exchange
+    URL: http://arxiv.org/abs/2402.00572
+
   - id: horton_crystal_2023
     accessed:
       - year: 2023

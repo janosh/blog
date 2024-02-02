@@ -34,7 +34,7 @@ repos:
       - id: codespell
         stages: [commit, commit-msg]
         exclude_types: [svg]
-        args: [--ignore-words-list, 'ist,yau,te', --check-filenames]
+        args: [--ignore-words-list, 'ist,yau,te,manuel', --check-filenames]
 
   - repo: https://github.com/pre-commit/mirrors-eslint
     rev: v9.0.0-alpha.0
