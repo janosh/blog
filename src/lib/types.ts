@@ -60,6 +60,7 @@ export type Skill = {
   icon: string
   score: number
   href?: string
+  site?: string
 }
 
 export type Hobby = {
