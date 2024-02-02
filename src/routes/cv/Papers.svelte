@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Reference } from '$lib'
   import { highlight_matches } from 'svelte-zoo'
-  import { truncate_authors } from './utils'
+  import { truncate_authors } from '.'
 
   export let references: Reference[]
   export let first_name_mode: 'initial' | 'full' | 'none' = `initial`
@@ -37,7 +37,7 @@
         {#if DOI}
           <a href="https://doi.org/{DOI}">{DOI}</a>
         {:else if href}
-          <a {href}>{href}</a>
+          <a {href}>{href.replace(`https://`, ``)}</a>
         {/if}
         {#if issued}
           &mdash; {issued[0].year}-{issued[0].month}
