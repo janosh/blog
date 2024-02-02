@@ -9,8 +9,8 @@ projects:
       - Python
       - Cython
       - Jupyter Notebook
-    stars: 1255
-    commits: 930
+    stars: 1257
+    commits: 931
   - name: Matbench Discovery
     url: https://matbench-discovery.materialsproject.org
     img_style: 'filter: invert(1);'
@@ -25,7 +25,7 @@ projects:
       - JavaScript
       - HTML
     stars: 52
-    commits: 304
+    commits: 308
   - name: CHGNet
     url: https://chgnet.lbl.gov
     repo: https://github.com/CederGroupHub/chgnet
@@ -41,7 +41,7 @@ projects:
       - HTML
       - JavaScript
       - TypeScript
-    stars: 163
+    stars: 164
     commits: 167
   - name: MACE
     url: https://mace-docs.readthedocs.io
@@ -50,7 +50,7 @@ projects:
     paper: riebesell_foundation_2023
     description: Fast and accurate machine learning interatomic potentials with higher order equivariant message passing.
     logo: https://avatars.githubusercontent.com/u/68508620
-    stars: 295
+    stars: 296
     commits: 21
     languages:
       - Python
@@ -66,7 +66,7 @@ projects:
       - Python
       - JavaScript
       - HTML
-    stars: 103
+    stars: 109
     commits: 174
   - name: pymatviz
     url: https://pymatviz.janosh.dev
@@ -98,7 +98,7 @@ projects:
     description: Curated list of resources for learning and using normalizing flows, a powerful tool in ML for modeling probability distributions.
     languages:
       - Python
-    stars: 1249
+    stars: 1252
     commits: 72
   - name: atomate2
     repo: https://github.com/materialsproject/atomate2
@@ -122,7 +122,7 @@ projects:
     languages:
       - Python
       - TeX
-    stars: 76
+    stars: 77
     commits: 100
   - name: Aviary
     repo: https://github.com/CompRhys/aviary
