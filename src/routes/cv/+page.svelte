@@ -1,14 +1,23 @@
 <script lang="ts">
+  import { SortButtons } from '$lib'
   import oss from '$lib/oss.yml'
   import papers from '$lib/papers.yaml'
   import Icon from '@iconify/svelte'
+  import type { ComponentProps } from 'svelte'
   import { Toggle } from 'svelte-zoo'
+  import { flip } from 'svelte/animate'
   import Papers from './Papers.svelte'
   import cv from './cv.yml'
 
   export let data
   export let show_sidebar = true
+  export let sort_papers_by: ComponentProps<Papers>['sort_by'] = `date`
+  export let sort_papers_order: `asc` | `desc` = `desc`
+  export let sort_oss_by: `commits` | `stars` | `title` = `commits`
+  export let sort_oss_order: `asc` | `desc` = `desc`
+  export let sort_oss_keys = [`commits`, `stars`, `title`] as const
 
+  const paper_sort_keys = [`date`, `title`, `author`] as const
   const links = { target: `_blank`, rel: `noreferrer` }
 
   const social: [string, string][] = [
@@ -24,11 +33,11 @@
   <section class="title">
     <h1>Janosh Riebesell</h1>
 
-    <small>
+    <!-- <small>
       <a href="https://materialsproject.org/about/people">
         Materials Project Staff @ Lawrence Berkeley National Lab
       </a>
-    </small>
+    </small> -->
 
     <address>
       {#each social as [url, icon]}
@@ -39,40 +48,46 @@
 
   <section class="body">
     <small>
-      I joined the Materials Project in early 2023 where I trained ML foundation models
+      I joined the Materials Project in early 2023 where I developed ML foundation models
       (CHGNet, MACE-MP) and build high-throughput workflows for generating large DFT
-      datasets to train still bigger models on. I am a core maintainer of
+      datasets to train still bigger models. I am a co-maintainer of
       <a href="https://github.com/materialsproject/pymatgen">pymatgen</a>. I'm a big fan
-      of high-quality open source software that enables new capabilities for scaling
-      computational materials science.
+      of high-quality open source software with a focus on enabling new capabilities for
+      scaling computational materials science. GitHub is where most of my work happens.
     </small>
-    <h2>
-      <Icon inline icon="zondicons:education" />&nbsp; Education
-    </h2>
-    <ul>
-      {#each cv.education as { title, thesis_title, date, href, uni }}
-        <li>
-          <h4>
-            <a {href}>{title}</a>
-            <small style="font-weight: 200;">{uni}{date ? ` &bull; ${date}` : ``}</small>
-          </h4>
-          <p>Thesis title: {thesis_title}</p>
-        </li>
-      {/each}
-    </ul>
 
     <h2>
       <Icon inline icon="iconoir:journal" />&nbsp; Selected Publications
+      <SortButtons
+        bind:sort_by={sort_papers_by}
+        sort_keys={paper_sort_keys}
+        bind:sort_order={sort_papers_order}
+      />
     </h2>
-    <Papers {...papers} />
+    <Papers {...papers} sort_by={sort_papers_by} sort_order={sort_papers_order} />
 
     <h2>
       <Icon inline icon="ri:open-source-line" />&nbsp; Open Source
+      <SortButtons
+        bind:sort_by={sort_oss_by}
+        sort_keys={sort_oss_keys}
+        bind:sort_order={sort_oss_order}
+      />
     </h2>
-    <ul>
-      {#each oss.projects as { url, img_style, repo, name, description, stars, logo, languages, commits }}
+    <ul class="oss">
+      {#each oss.projects.sort((p1, p2) => {
+        const dir = sort_oss_order === `asc` ? -1 : 1
+
+        if (sort_oss_by === `title`) {
+          return p1.name.localeCompare(p2.name) * dir
+        } else if ([`commits`, `stars`].includes(sort_oss_by)) {
+          return (p2[sort_oss_by] - p1[sort_oss_by]) * dir
+        } else {
+          throw new Error(`Unknown sort_oss_by: ${sort_oss_by}`)
+        }
+      }) as { url, img_style, repo, name, description, stars, logo, languages, commits } (name)}
         {@const logo_url = logo ?? `${url}/favicon.svg`}
-        <li>
+        <li animate:flip={{ duration: 400 }}>
           <h4>
             <a href={url ?? repo} {...links}>
               <img src={logo_url} alt="{name} Logo" style={img_style} />
@@ -98,6 +113,21 @@
             <small class="langs">{languages.slice(0, 3).join(`, `)}</small>
           </h4>
           <p>{description}</p>
+        </li>
+      {/each}
+    </ul>
+
+    <h2>
+      <Icon inline icon="zondicons:education" />&nbsp; Education
+    </h2>
+    <ul>
+      {#each cv.education as { title, thesis_title, date, href, uni }}
+        <li>
+          <h4>
+            <a {href}>{title}</a>
+            <small style="font-weight: 200;">{uni}{date ? ` &bull; ${date}` : ``}</small>
+          </h4>
+          <p>Thesis title: {thesis_title}</p>
         </li>
       {/each}
     </ul>
@@ -136,9 +166,10 @@
         <Icon inline icon="lucide:languages" />&nbsp; Languages
       </h3>
       <ul>
-        {#each cv.languages as { name, level }}
+        {#each cv.languages as { name, level, icon }}
           <li>
-            {name}
+            <Icon inline {icon} />
+            &nbsp;{name}
             <Icon inline icon="carbon:skill-level-{level}" />
           </li>
         {/each}
@@ -146,12 +177,15 @@
 
       <h3>
         <Icon inline icon="gis:search-country" />&nbsp; Nationality
-        <ul>
-          {#each cv.nationality as nat}
-            <li>{nat}</li>
-          {/each}
-        </ul>
       </h3>
+      <ul>
+        {#each cv.nationality as { title, icon }}
+          <li>
+            <Icon inline {icon} />
+            &nbsp;{title}
+          </li>
+        {/each}
+      </ul>
 
       <h3 style="margin-bottom: 0;">
         <Icon inline icon="carbon:skill-level-advanced" />&nbsp; Skills
@@ -165,6 +199,18 @@
               <Icon inline {icon} />
               {name} <small>({score})</small>
             </a>
+          </li>
+        {/each}
+      </ul>
+
+      <h3>
+        <Icon inline icon="mdi:account-group" />
+        &nbsp; Memberships
+      </h3>
+      <ul>
+        {#each cv.memberships as { name, date, href }}
+          <li>
+            <a {href}>{name}</a>&ensp;<small>{date}</small>
           </li>
         {/each}
       </ul>
@@ -187,28 +233,15 @@
           </li>
         {/each}
       </ul>
-
-      <h3>
-        <Icon inline icon="mdi:account-group" />
-        &nbsp; Memberships
-      </h3>
-      <ul>
-        {#each cv.memberships as { name, date, href }}
-          <li>
-            <a {href}>{name}</a>&ensp;<small>{date}</small>
-          </li>
-        {/each}
-      </ul>
     </aside>
   {/if}
-
-  <Toggle
-    bind:checked={show_sidebar}
-    style="transform: scale(0.9); margin: 1em auto 0; font-weight: lighter; gap: 1ex;"
-  >
-    Toggle Sidebar
-  </Toggle>
 </main>
+<Toggle
+  bind:checked={show_sidebar}
+  style="transform: scale(0.9); margin: 1em auto 2em; font-weight: lighter;"
+>
+  Toggle Sidebar&ensp;
+</Toggle>
 
 <style>
   main {
@@ -219,14 +252,10 @@
     padding: 3em;
     display: grid;
     gap: 0 1em;
-    border-radius: 2px;
+    border-radius: 2pt;
   }
   main :global(a) {
     color: darkblue;
-  }
-  h4 a {
-    display: flex;
-    place-items: center;
   }
   h4 img {
     width: 3ex;
@@ -239,9 +268,12 @@
   h1 {
     margin: 0 0 3pt;
   }
-  h1 + small {
+  /* h1 + small {
     text-align: center;
     display: block;
+  } */
+  h2 {
+    position: relative;
   }
   a {
     color: inherit;
@@ -251,47 +283,33 @@
     place-content: center;
     gap: 12pt;
     font-style: normal;
-    font-weight: 200;
     margin: 1ex;
-  }
-  address a {
-    display: flex;
-    gap: 4pt;
-    place-items: center;
-  }
-  h2::after {
-    content: '';
-    display: block;
-    height: 0.5px;
-    background-color: #bbb;
   }
   ul {
     list-style: none;
-    padding: 0 0 0 4pt;
+    padding: 0;
     margin: 0;
-    place-items: center;
-    container-type: inline-size;
   }
-  ul > li > h4 {
+  ul.oss > li > h4 {
     margin: 8pt 0 4pt;
     display: flex;
     gap: 8pt;
     place-items: center;
     font-size: smaller;
   }
-  ul > li > h4 > small.langs {
+  ul.oss > li > h4 > small.langs {
     margin-left: 2ex;
     font-weight: 200;
     font-size: 9pt;
+  }
+  ul.oss > li > h4 a {
+    display: flex;
+    place-items: center;
   }
   p {
     margin: 0;
     font-size: 10pt;
     font-weight: 300;
-  }
-  img[alt$='Logo'] {
-    height: 3ex;
-    width: 3ex;
   }
   ul.skills {
     display: flex;
@@ -304,11 +322,20 @@
   }
   aside > h3 {
     white-space: nowrap;
-    margin: 3ex 0 1em;
+    margin: 2ex 0 1ex;
+  }
+  aside > h3:first-of-type {
+    margin-top: 0;
   }
 
-  /* convert to CSS prop with next svelte-zoo release */
+  /* TODO convert to CSS prop with next svelte-zoo release */
   main :global(input:checked + span) {
     background-color: #f0f0f0 !important;
+  }
+  @media print {
+    /* hide sidebar toggle when printing */
+    main :global(label) {
+      display: none !important;
+    }
   }
 </style>

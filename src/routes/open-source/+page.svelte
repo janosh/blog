@@ -4,8 +4,8 @@
   import { highlight_matches } from 'svelte-zoo'
   import { flip } from 'svelte/animate'
 
-  let sort_by: 'commits' | 'stars' | 'alphabetical' = `commits`
-  const sort_by_options = [`commits`, `stars`, `alphabetical`] as const
+  let sort_by: 'commits' | 'stars' | 'title' = `commits`
+  const sort_by_options = [`commits`, `stars`, `title`] as const
 
   $: projects = oss.projects
     .filter((proj) => {
@@ -13,7 +13,7 @@
       return JSON.stringify(proj).toLowerCase().includes(query.toLowerCase())
     })
     .sort((p1, p2) => {
-      if (sort_by === `alphabetical`) {
+      if (sort_by === `title`) {
         return p1.name.localeCompare(p2.name)
       } else if ([`commits`, `stars`].includes(sort_by)) {
         return p2[sort_by] - p1[sort_by]
