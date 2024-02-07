@@ -30,4 +30,9 @@
     border-radius: 50%;
     transform: scale(1.4);
   }
+  @media print {
+    :is(button, footer) {
+      display: none;
+    }
+  }
 </style>

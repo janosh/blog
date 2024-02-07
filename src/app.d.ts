@@ -10,7 +10,7 @@ declare module '*cv.yml' {
     education: types.Education[]
     skills: types.Skill[]
     hobbies: types.Hobby[]
-    nationality: string[]
+    nationality: { title: string; icon: string }[]
     languages: types.Language[]
     volunteer: types.Volunteer[]
     awards: types.Award[]

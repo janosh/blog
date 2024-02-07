@@ -42,11 +42,11 @@
 </address>
 
 <p style="max-width: min(40em, 80vw); margin: auto;">
-  I work on
-  <a href={mbd?.repo}>🔎 computational materials discovery</a>,
-  <a href="https://arxiv.org/abs/2401.00096v1">🤖 machine learning</a>,
-  <a href={pmg?.repo}>💻 software engineering</a>, &
-  <a href={pmv?.repo}>📊 data</a> <a href={elementari?.repo}>visualization</a>.<br />
+  Interested in<br />
+  <a href={mbd?.repo}>🔎 computational materials discovery&emsp;</a>
+  <a href="https://arxiv.org/abs/2401.00096v1">🤖 machine learning</a><br />
+  <a href={pmg?.repo}>💻 software engineering&emsp;</a>
+  <a href={pmv?.repo}>📊 data</a> <a href={elementari?.repo}>visualization</a>.
   <!-- Outside of work, I enjoy hiking 🧗 and cycling 🚲. The rougher the terrain, the better! ⛰️ -->
 </p>
 
@@ -64,7 +64,7 @@
     <li>
       <h3>
         <a href={repo}>
-          <img src={logo ?? `${mbd?.url}/favicon.svg`} alt={name} />
+          <img src={logo} alt={name} />
           {name}
         </a>
         <small>[<a href={paper?.URL}>Paper</a>]</small>

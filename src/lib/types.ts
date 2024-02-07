@@ -94,4 +94,5 @@ export type Membership = {
 export type Language = {
   name: string
   level: string
+  icon: string
 }

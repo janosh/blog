@@ -122,18 +122,27 @@ hobbies:
   - name: drones
     icon: carbon:drone
     href: https://youtube.com/@jrib
+
 nationality:
-  - 🇨🇦 Canadian
-  - 🇩🇪 German
+  - title: Canadian
+    icon: twemoji:flag-canada
+  - title: German
+    icon: twemoji:flag-germany
+
 languages:
-  - name: 🇺🇸 English
+  - name: English
     level: advanced
-  - name: 🇩🇪 German
+    icon: twemoji:flag-united-states
+  - name: German
     level: advanced
-  - name: 🇫🇷 French
+    icon: twemoji:flag-germany
+  - name: French
     level: intermediate
-  - name: 🇪🇸 Spanish
+    icon: twemoji:flag-france
+  - name: Spanish
     level: basic
+    icon: twemoji:flag-spain
+
 volunteer:
   - name: Studenten bilden Schüler
     description: Non-profit student initiative that connects University student volunteers with children from underprivileged families for free tutoring.
@@ -147,11 +156,13 @@ volunteer:
     href: https://afara.foundation
     logo: https://afara.foundation/favicon.svg
     role: Board member and head of IT
+
 awards:
   - name: Studienstiftung des deutschen Volkes
     description: Full scholarship for outstanding students (German Academic Scholarship Foundation)
     date: 2015 - 2023
     href: https://studienstiftung.de
+
 memberships:
   - name: Cambridge Physical Society
     date: 2019 - present
