@@ -2,7 +2,7 @@
 title: Compile VASP on M1 Mac
 date: 2022-03-28
 cover:
-  img: compile-vasp-m1-mac.svg
+  img: compiling-vasp-m1-mac.svg
 tags:
   - Guide
   - Fortran
@@ -12,48 +12,50 @@ tags:
 
 > This post started out [as a gist](https://gist.github.com/janosh/a484f3842b600b60cd575440e99455c0). There's some Q&A there that may be useful.
 
-**Courtesy of Alex Ganose [@utf](https://github.com/utf) with additions from yours truly [@janosh](https://github.com/janosh).**
+**Written by Alex Ganose [@utf](https://github.com/utf) and Janosh Riebesell [@janosh](https://github.com/janosh). Last updated on 2024-03-30.**
 
-1. Install Xcode command line tools
+Follow these steps to compile VASP on an M1 Mac:
+
+1. Install Xcode command line tools:
 
    ```sh
    xcode-select --install
    ```
 
-2. Install gcc, OpenMPI and OpenMP using homebrew
+2. Install dependencies using Homebrew:
 
    ```sh
    brew install gcc openmpi scalapack fftw qd openblas
    ```
 
-   Consider appending `hdf5` if you want to compile [VASP with HDF5 support][vasp-hdf5].
+   Optionally, add `hdf5` for [HDF5 support in VASP][vasp-hdf5].
 
-3. Compile VASP
+3. Compile VASP:
 
-   These instructions are for VASP 6.3.0; they should be transferable to other versions of VASP but the variable names may be different
+   These instructions are for VASP 6.4.1 but should work with minor adjustments for other versions.
 
    ```sh
    cd /path/to/vasp-6.x.y
    cp arch/makefile.include.gnu_omp makefile.include
    ```
 
-   Then edit `makefile.include` as follows:
+   Edit `makefile.include` in the VASP `src` directory:
 
-   - Add the following to CPP_OPTIONS:
+   - Add to `CPP_OPTIONS`:
 
      ```make
      -D_OPENMP \
      -Dqd_emulate
      ```
 
-   - Change all instances of `gcc` to `gcc-11` and `g++` to `g++-11`
+   - Change all instances of `gcc` to `gcc-13` and `g++` to `g++-13`
 
-   - Add the following lines after `LLIBS       = -lstdc++`. This is necessary to emulate quad precision.
+   - Add after `LLIBS = -lstdc++` to emulate quad precision:
 
      ```make
-     QD         ?= /opt/homebrew/
-     LLIBS      += -L$(QD)/lib -lqdmod -lqd
-     INCS       += -I$(QD)/include/qd
+     QD ?= /opt/homebrew/
+     LLIBS += -L$(QD)/lib -lqdmod -lqd
+     INCS += -I$(QD)/include/qd
      ```
 
    - Set `SCALAPACK_ROOT ?= /opt/homebrew`
@@ -71,6 +73,45 @@ tags:
      INCS       += -I$(HDF5_ROOT)/include
      ```
 
+   - Append `getshmem.o` to `OBJECTS_LIB` in `makefile.include` ([VASP wiki](https://www.vasp.at/wiki/index.php/Shared_memory))
+
+     ```diff
+     - OBJECTS_LIB = linpack_double.o
+     + OBJECTS_LIB = linpack_double.o getshmem.o
+     ```
+
+   - In `src/parser/makefile`, change (as noted by [@zhuligs](https://gist.github.com/janosh/a484f3842b600b60cd575440e99455c0?permalink_comment_id=4323518#gistcomment-4323518)):
+
+     ```diff
+     - ar vq libparser.a $(CPPOBJ_PARS) $(COBJ_PARS) locproj.tab.h
+     + ar vq libparser.a $(CPPOBJ_PARS) $(COBJ_PARS)
+     ```
+
+     Do not replace the tab at the beginning of the line with spaces!
+
+   - In `src/lib/getshmem.c`, add the line `#define SHM_NORESERVE 0` ([VASP forum](https://www.vasp.at/forum/viewtopic.php?t=15106)):
+
+     ```c
+     /*output: shmem id
+     */
+     #define SHM_NORESERVE 0 // this line was added
+
+     void getshmem_C(size_t _size, int *_id)
+     ```
+
+   - In `makefile.include`, update the parser section ([VASP forum](https://www.vasp.at/forum/viewtopic.php?f=2&t=17477)):
+
+     ```diff
+     # For the parser library
+     CXX_PARS = g++-13
+     - LLIBS = -lstdc++
+     + LIBS += parser
+     + LLIBS = -Lparser -lparser -lstdc++
+     QD ?= /opt/homebrew
+     LLIBS += -L$(QD)/lib -lqdmod -lqd
+     INCS += -I$(QD)/include/qd
+     ```
+
 4. Finally, run:
 
    ```sh
@@ -81,9 +122,15 @@ tags:
 
    > Fatal Error: `string.mod` not found
 
+If successful, the VASP binaries will be in `src/bin`. Test with `make test`.
+
+## Last Tested on 2024-03-30
+
+Confirmed working with VASP 6.4.1 on M1 Pro with Sonoma 14.2.1 and `gcc@13.2.0`.
+
 ## Resulting `makefile.include` with all modifications
 
-See `makefile.include` below.
+See [`makefile.include`](https://gist.github.com/janosh/a484f3842b600b60cd575440e99455c0#file-makefile-include).
 
 ## Benchmarking
 

@@ -13,7 +13,6 @@ repos:
       - id: check-symlinks
       - id: check-yaml
       - id: destroyed-symlinks
-      - id: double-quote-string-fixer
       - id: end-of-file-fixer
       - id: mixed-line-ending
       - id: trailing-whitespace
@@ -37,7 +36,7 @@ repos:
         args: [--ignore-words-list, 'ist,yau,te,manuel', --check-filenames]
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.0.0-beta.1
+    rev: v9.0.0-rc.0
     hooks:
       - id: eslint
         types: [file]
