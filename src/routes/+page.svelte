@@ -42,7 +42,7 @@
 </address>
 
 <p style="max-width: min(40em, 80vw); margin: auto;">
-  Interested in<br />
+  I'm interested in<br />
   <a href={mbd?.repo}>🔎 computational materials discovery&emsp;</a>
   <a href="https://arxiv.org/abs/2401.00096v1">🤖 machine learning</a><br />
   <a href={pmg?.repo}>💻 software engineering&emsp;</a>
