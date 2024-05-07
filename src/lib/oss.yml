@@ -9,8 +9,8 @@ projects:
       - Python
       - Cython
       - Jupyter Notebook
-    stars: 1336
-    commits: 979
+    stars: 1375
+    commits: 1002
   - name: Matbench Discovery
     url: https://matbench-discovery.materialsproject.org
     logo: https://janosh.github.io/matbench-discovery/favicon.svg
@@ -25,8 +25,8 @@ projects:
       - TypeScript
       - JavaScript
       - HTML
-    stars: 66
-    commits: 318
+    stars: 70
+    commits: 322
   - name: CHGNet
     url: https://chgnet.lbl.gov
     repo: https://github.com/CederGroupHub/chgnet
@@ -40,20 +40,20 @@ projects:
       - Cython
       - CSS
       - Svelte
-      - HTML
       - JavaScript
+      - HTML
       - TypeScript
-    stars: 184
-    commits: 175
-  - name: MACE
-    url: https://mace-docs.readthedocs.io
+    stars: 195
+    commits: 180
+  - name: MACE-MP
+    url: https://mace-docs.readthedocs.io/en/latest/examples/foundation_models.html#pretrained-mace-mp-0-models
     repo: https://github.com/ACEsuit/mace
     role: Contributor
     paper: riebesell_foundation_2023
     description: Fast and accurate machine learning interatomic potentials with higher order equivariant message passing.
     logo: https://avatars.githubusercontent.com/u/68508620
-    stars: 345
-    commits: 21
+    stars: 375
+    commits: 22
     languages:
       - Python
       - Shell
@@ -68,7 +68,7 @@ projects:
       - Python
       - JavaScript
       - HTML
-    stars: 118
+    stars: 126
     commits: 174
   - name: pymatviz
     url: https://pymatviz.janosh.dev
@@ -80,10 +80,10 @@ projects:
       - Svelte
       - CSS
       - TypeScript
-      - HTML
       - JavaScript
-    stars: 111
-    commits: 242
+      - HTML
+    stars: 121
+    commits: 246
   - name: Tensorboard Reducer
     repo: https://github.com/janosh/tensorboard-reducer
     logo: https://raw.githubusercontent.com/janosh/tensorboard-reducer/main/assets/tensorboard-reducer-square.svg
@@ -92,7 +92,7 @@ projects:
     languages:
       - Python
       - TeX
-    stars: 65
+    stars: 66
     commits: 79
   - name: Normalizing Flows
     repo: https://github.com/janosh/awesome-normalizing-flows
@@ -100,8 +100,8 @@ projects:
     description: Curated list of resources for learning and using normalizing flows, a powerful tool in ML for modeling probability distributions.
     languages:
       - Python
-    stars: 1283
-    commits: 72
+    stars: 1303
+    commits: 73
   - name: atomate2
     repo: https://github.com/materialsproject/atomate2
     role: Maintainer
@@ -112,8 +112,8 @@ projects:
       potential-powered structure relaxation workflows.
     languages:
       - Python
-    stars: 119
-    commits: 357
+    stars: 125
+    commits: 361
   - name: jobflow
     repo: https://github.com/materialsproject/jobflow
     role: Maintainer
@@ -124,8 +124,8 @@ projects:
     languages:
       - Python
       - TeX
-    stars: 83
-    commits: 115
+    stars: 85
+    commits: 117
   - name: Aviary
     repo: https://github.com/CompRhys/aviary
     role: Maintainer
@@ -134,7 +134,7 @@ projects:
     pypi: https://pypi.org/project/tensorboard-reducer
     languages:
       - Python
-    stars: 39
+    stars: 43
     commits: 234
   - name: MatCalc
     url: https://materialsvirtuallab.github.io/matcalc
@@ -145,22 +145,23 @@ projects:
     languages:
       - Python
     stars: 41
-    commits: 72
+    commits: 75
   - name: TikZ
     url: https://tikz.janosh.dev
     repo: https://github.com/janosh/tikz
     description: Collection TikZ figures for concepts in physics/chemistry/ML.
-    stars: 174
-    commits: 187
+    stars: 184
+    commits: 192
     languages:
       - TeX
       - Svelte
       - Python
       - TypeScript
+      - Typst
       - Shell
+      - JavaScript
       - CSS
       - HTML
-      - JavaScript
   - name: Dielectrics
     url: https://janosh.github.io/dielectrics
     repo: https://github.com/janosh/dielectrics
@@ -168,11 +169,10 @@ projects:
     logo: https://github.com/janosh/tikz/raw/main/assets/plate-capacitor/plate-capacitor.svg
     paper: riebesell_pushing_2024
     stars: 7
-    commits: 14
+    commits: 17
     languages:
+      - HTML
       - Python
-      - ReScript
-      - Roff
   - name: MultiSelect
     url: https://multiselect.janosh.dev
     repo: https://github.com/janosh/svelte-multiselect
@@ -181,7 +181,7 @@ projects:
       - TypeScript
       - Svelte
       - CSS
-      - HTML
       - JavaScript
-    stars: 263
-    commits: 271
+      - HTML
+    stars: 270
+    commits: 273
