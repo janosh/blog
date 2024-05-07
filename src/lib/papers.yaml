@@ -433,22 +433,26 @@ references:
 
   - id: riebesell_matbench_2023
     accessed:
-      - year: 2023
-        month: 11
-        day: 24
+      - year: 2024
+        month: 4
+        day: 5
     author:
       - family: Riebesell
         given: Janosh
       - family: Goodall
         given: Rhys E. A.
-      - family: Jain
-        given: Anubhav
       - family: Benner
         given: Philipp
-      - family: Persson
-        given: Kristin A.
+      - family: Chiang
+        given: Yuan
+      - family: Deng
+        given: Bowen
       - family: Lee
         given: Alpha A.
+      - family: Jain
+        given: Anubhav
+      - family: Persson
+        given: Kristin A.
     citation-key: riebesell_matbench_2023
     DOI: 10.48550/arXiv.2308.14920
     issued:
@@ -459,8 +463,8 @@ references:
     publisher: arXiv
     source: arXiv.org
     title: >-
-      Matbench Discovery - An evaluation framework for machine learning crystal
-      stability prediction
+      Matbench Discovery -- A framework to evaluate machine learning crystal
+      stability predictions
     URL: http://arxiv.org/abs/2308.14920
 
   - id: riebesell_pushing_2024
