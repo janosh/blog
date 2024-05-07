@@ -16,11 +16,12 @@ from itertools import product
 from time import perf_counter, sleep
 
 import pandas as pd
+from pandas.io.clipboard import clipboard_set
+from pymatgen.core import Structure
+
 from atomate2.vasp.jobs.core import RelaxMaker
 from atomate2.vasp.powerups import update_user_incar_settings
 from jobflow import run_locally
-from pandas.io.clipboard import clipboard_set
-from pymatgen.core import Structure
 
 warnings.filterwarnings("ignore")  # hide pymatgen warnings clogging up the logs
 
@@ -37,7 +38,7 @@ si_structure = Structure(
 # grid-search OMP_NUM_THREADS, NCORE and number of MPI processes
 try:
     prod = list(product([1, 2, 4, 8], [1, 2], [2, 4]))
-    for idx, (n_proc, n_threads, n_core) in enumerate(prod, 1):
+    for idx, (n_proc, n_threads, n_core) in enumerate(prod, start=1):
         os.environ["OMP_NUM_THREADS"] = str(n_threads)
 
         print(f"Run {idx} / {len(prod)}")

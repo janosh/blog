@@ -31,19 +31,18 @@
       return (idx1 - idx2) * dir
     } else throw `Unknown sort_by: ${sort_by}`
   }) as { title, id, author, DOI, URL: href, issued } (id)}
-    {@const author_str = author
-      .map(({ given, family }) => {
-        const first_name = {
-          initial: `${given[0]}. `,
-          full: `${given} `,
-          none: ``,
-        }[first_name_mode]
-        return `${first_name ?? ``}${family}`
-      })
-      .join(`, `)}
+    {@const authors_formatted = author.map(({ given, family }) => {
+      if (!family) throw `No family name in author=${JSON.stringify(author)} of ${title}`
+      const first_name = {
+        initial: `${given[0]}. `,
+        full: `${given} `,
+        none: ``,
+      }[first_name_mode]
+      return `${first_name ?? ``}${family}`
+    })}
     <li animate:flip={{ duration: 400 }}>
       <h3 {id}>{title}</h3>
-      {truncate_authors(author_str, target_author)}
+      {truncate_authors(authors_formatted.join(`, `), target_author)}
       <small>
         &mdash;
         {#if DOI}
