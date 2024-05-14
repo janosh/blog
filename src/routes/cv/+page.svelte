@@ -8,6 +8,7 @@
   import { flip } from 'svelte/animate'
   import Papers from './Papers.svelte'
   import cv from './cv.yml'
+  import Intro from './intro.md'
 
   export let data
   export let show_sidebar = true
@@ -17,7 +18,12 @@
   export let sort_oss_order: `asc` | `desc` = `desc`
   export let sort_oss_keys = [`commits`, `stars`, `title`] as const
 
-  const paper_sort_keys = [`date`, `title`, `author`] as const
+  const paper_sort_keys = [
+    [`date`, `Sort by date`],
+    [`title`, `Sort by title`],
+    [`author`, `Sort by first-author last name`],
+    [`first`, `First-author papers to the top`],
+  ] as const
   const links = { target: `_blank`, rel: `noreferrer` }
 
   const social: [string, string][] = [
@@ -48,12 +54,7 @@
 
   <section class="body">
     <small>
-      I joined the Materials Project in early 2023 where I developed ML foundation models
-      (CHGNet, MACE-MP) and build high-throughput workflows for generating large DFT
-      datasets to train still bigger models. I am a co-maintainer of
-      <a href="https://github.com/materialsproject/pymatgen">pymatgen</a>. I'm a big fan
-      of high-quality open source software with a focus on enabling new capabilities for
-      scaling computational materials science. GitHub is where most of my work happens.
+      <Intro />
     </small>
 
     <h2>

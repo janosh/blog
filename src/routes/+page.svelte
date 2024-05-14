@@ -1,5 +1,4 @@
 <script lang="ts">
-  import GdmSLides from '$lib/2024-01-12-deepmind-interview.pdf'
   import oss from '$lib/oss.yml'
   import { references } from '$lib/papers.yaml'
   import Icon from '@iconify/svelte'
@@ -76,15 +75,16 @@
   <li>
     <h3>
       <img
-        src="https://github.com/janosh/blog/assets/30958850/f545ac6e-255f-4242-a23a-7516df80c8e7"
-        alt="DeepMind Logo"
+        src="https://github.com/janosh/blog/assets/30958850/b8266e7e-8e78-4ac6-8716-28cbd56d0005"
+        alt="MLIP Potential Energy Surface"
+        style="width: 4ex;"
       />
-      DeepMind Talk
-      <small>[<a href={GdmSLides} type="application/pdf">Slides</a>]</small>
+      MLIP PES Analysis
+      <small>[<a href="https://arxiv.org/abs/2405.07105">Paper</a>]</small>
     </h3>
-    <time>2024-01-12</time>
-    1h talk covering 3 PhD projects on ML-guided materials discovery & synthesis to SF+London
-    DeepMind team.
+    <time>2024-05-11</time>
+    Overcoming systematic softening in universal machine learning interatomic potentials by
+    fine-tuning
   </li>
 </ul>
 
