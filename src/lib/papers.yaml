@@ -70,6 +70,43 @@ references:
     URL: https://www.nature.com/articles/s42256-023-00716-3
     volume: '5'
 
+  - id: deng_overcoming_2024
+    accessed:
+      - year: 2024
+        month: 5
+        day: 14
+    author:
+      - family: Deng
+        given: Bowen
+      - family: Choi
+        given: Yunyeong
+      - family: Zhong
+        given: Peichen
+      - family: Riebesell
+        given: Janosh
+      - family: Anand
+        given: Shashwat
+      - family: Li
+        given: Zhuohan
+      - family: Jun
+        given: KyuJung
+      - family: Persson
+        given: Kristin A.
+      - family: Ceder
+        given: Gerbrand
+    citation-key: deng_overcoming_2024
+    issued:
+      - year: 2024
+        month: 5
+        day: 11
+    number: arXiv:2405.07105
+    publisher: arXiv
+    source: arXiv.org
+    title: >-
+      Overcoming systematic softening in universal machine learning interatomic
+      potentials by fine-tuning
+    URL: http://arxiv.org/abs/2405.07105
+
   - id: evans_developments_2024
     accessed:
       - year: 2024
