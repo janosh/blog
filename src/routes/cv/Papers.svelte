@@ -7,7 +7,7 @@
   export let references: Reference[]
   export let first_name_mode: 'initial' | 'full' | 'none' = `initial`
   export let target_author: string = `J. Riebesell`
-  export let sort_by: 'title' | 'date' | 'author' = `title`
+  export let sort_by: 'title' | 'date' | 'author' | 'first' = `title`
   export let sort_order: 'asc' | 'desc' = `asc`
   export let highlight_props: Parameters<typeof highlight_matches>[1] = {
     query: target_author.toLowerCase(),
@@ -29,6 +29,13 @@
       const idx1 = ref1.author.findIndex((auth) => auth.family === target_author.split(` `)[1])
       const idx2 = ref2.author.findIndex((auth) => auth.family === target_author.split(` `)[1])
       return (idx1 - idx2) * dir
+    } else if (sort_by === `first`) {
+      // papers with target_author first/last
+      const idx1 = ref1.author.findIndex((auth) => auth.family === target_author.split(` `)[1])
+      const idx2 = ref2.author.findIndex((auth) => auth.family === target_author.split(` `)[1])
+      if (idx1 === -1 || idx2 === -1) return 0
+      // -dir to have target_author==first rise to the top by default
+      return (idx1 - idx2) * -dir
     } else throw `Unknown sort_by: ${sort_by}`
   }) as { title, id, author, DOI, URL: href, issued } (id)}
     {@const authors_formatted = author.map(({ given, family }) => {

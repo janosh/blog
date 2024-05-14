@@ -13,8 +13,9 @@
 <svelte:element this={as} class="sort-buttons {className}" {style}>
   {label}
   {#each sort_keys as key}
-    <button on:click={() => (sort_by = key)} class:active={sort_by === key}>
-      {key}
+    {@const [name, title] = Array.isArray(key) ? key : [key, key]}
+    <button on:click={() => (sort_by = name)} class:active={sort_by === name} {title}>
+      {name}
     </button>
   {/each}
   <button on:click={() => (sort_order = sort_order === `asc` ? `desc` : `asc`)}>
