@@ -2,11 +2,16 @@
   import { dev } from '$app/environment'
   import { repository } from '$root/package.json'
   import Icon from '@iconify/svelte'
+  import type { Snippet } from 'svelte'
   import { PrevNext } from 'svelte-zoo'
+  import type { PageData } from '../$types'
 
-  export let data
-
-  $: ({ title, cover, date, slug } = data.post)
+  interface Props {
+    data: PageData
+    children: Snippet
+  }
+  let { data, children }: Props = $props()
+  let { title, cover, date, slug } = $derived(data.post)
 </script>
 
 {#if dev}
@@ -26,24 +31,21 @@
   {date?.split(`T`)[0]}
 </time>
 <main style="max-width: 50em;">
-  <slot />
+  {@render children?.()}
 
   <br />
-  <PrevNext
-    items={data.posts.map((post) => [post.slug, post])}
-    current={slug}
-    let:item
-    let:kind
-  >
-    <h3>
-      <a href={item.slug}>
-        {@html kind == `next` ? `Next &rarr;` : `&larr; Previous`}
+  <PrevNext items={data.posts.map((post) => [post.slug, post])} current={slug}>
+    {#snippet children({ item, kind })}
+      <h3>
+        <a href={item.slug}>
+          {@html kind == `next` ? `Next &rarr;` : `&larr; Previous`}
+          <br />
+          <small>{item.title}</small>
+        </a>
         <br />
-        <small>{item.title}</small>
-      </a>
-      <br />
-      <time>{new Date(item.date).toISOString().split?.(`T`)[0]}</time>
-    </h3>
+        <time>{new Date(item.date).toISOString().split?.(`T`)[0]}</time>
+      </h3>
+    {/snippet}
   </PrevNext>
 </main>
 

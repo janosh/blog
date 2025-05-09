@@ -1,9 +1,15 @@
 <script lang="ts">
-  export let style: string | null = null
+  import type { Snippet } from 'svelte'
+
+  interface Props {
+    style?: string | null
+    children?: Snippet
+  }
+  let { style = null, children }: Props = $props()
 </script>
 
 <div class="grid" {style}>
-  <slot />
+  {@render children?.()}
 </div>
 
 <style>

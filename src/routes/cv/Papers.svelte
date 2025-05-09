@@ -4,15 +4,25 @@
   import { flip } from 'svelte/animate'
   import { truncate_authors } from '.'
 
-  export let references: Reference[]
-  export let first_name_mode: 'initial' | 'full' | 'none' = `initial`
-  export let target_author: string = `J. Riebesell`
-  export let sort_by: 'title' | 'date' | 'author' | 'first' = `title`
-  export let sort_order: 'asc' | 'desc' = `asc`
-  export let highlight_props: Parameters<typeof highlight_matches>[1] = {
-    query: target_author.toLowerCase(),
-    css_class: `highlight-match`,
+  interface Props {
+    references: Reference[]
+    first_name_mode?: `initial` | `full` | `none`
+    target_author?: string
+    sort_by?: `title` | `date` | `author` | `first`
+    sort_order?: `asc` | `desc`
+    highlight_props?: Parameters<typeof highlight_matches>[1]
   }
+  let {
+    references,
+    first_name_mode = `initial`,
+    target_author = `J. Riebesell`,
+    sort_by = `title`,
+    sort_order = `asc`,
+    highlight_props = {
+      query: target_author.toLowerCase(),
+      css_class: `highlight-match`,
+    },
+  }: Props = $props()
 </script>
 
 <ol use:highlight_matches={highlight_props}>

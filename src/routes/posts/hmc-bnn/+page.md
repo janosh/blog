@@ -194,7 +194,7 @@ def run_hmc(
         the Markov chain should converge to.
 
     Returns:
-        burnin(s): Discarded samples generated during warm-up
+        burn_in(s): Discarded samples generated during warm-up
         chain(s): Markov chain(s) of samples distributed according to
             target_log_prob_fn (if converged)
         trace: the data collected by trace_fn
@@ -258,8 +258,8 @@ def run_hmc(
     if resume:
         chain = nest_concat(prev_chain, chain)
         trace = nest_concat(prev_trace, trace)
-    burnin, samples = zip(*[(t[:-num_results], t[-num_results:]) for t in chain])
-    return burnin, samples, trace, final_kernel_results
+    burn_in, samples = zip(*[(t[:-num_results], t[-num_results:]) for t in chain])
+    return burn_in, samples, trace, final_kernel_results
 
 
 def predict_from_chain(chain, X_test, uncertainty="aleatoric+epistemic"):

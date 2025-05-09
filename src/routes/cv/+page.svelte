@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SortButtons } from '$lib'
+  import { SortButtons, type Project } from '$lib'
   import oss from '$lib/oss.yml'
   import papers from '$lib/papers.yaml'
   import Icon from '@iconify/svelte'
@@ -10,13 +10,13 @@
   import cv from './cv.yml'
   import Intro from './intro.md'
 
-  export let data
-  export let show_sidebar = true
-  export let sort_papers_by: ComponentProps<Papers>['sort_by'] = `date`
-  export let sort_papers_order: `asc` | `desc` = `desc`
-  export let sort_oss_by: `commits` | `stars` | `title` = `commits`
-  export let sort_oss_order: `asc` | `desc` = `desc`
-  export let sort_oss_keys = [`commits`, `stars`, `title`] as const
+  type PaperProps = ComponentProps<typeof Papers>
+  let show_sidebar = $state(true)
+  let sort_papers_by: PaperProps[`sort_by`] = $state(`date`)
+  let sort_papers_order: PaperProps[`sort_order`] = $state(`desc`)
+  let sort_oss_by: keyof Project = $state(`commits`)
+  let sort_oss_order: PaperProps[`sort_order`] = $state(`desc`)
+  let sort_oss_keys = [`commits`, `stars`, `title`] as const
 
   const paper_sort_keys = [
     [`date`, `Sort by date`],
@@ -25,14 +25,6 @@
     [`first`, `First-author papers to the top`],
   ] as const
   const links = { target: `_blank`, rel: `noreferrer` }
-
-  const social: [string, string][] = [
-    [`mailto:${data.email}`, `mdi:email`],
-    [`https://github.com/janosh`, `octicon:mark-github`],
-    [`https://twitter.com/jrib_`, `fa-brands:twitter`],
-    [`https://stackoverflow.com/u/4034025`, `mdi:stackoverflow`],
-    [`https://linkedin.com/in/janosh-riebesell`, `bi:linkedin`],
-  ]
 </script>
 
 <main style="grid-template-columns: {show_sidebar ? `1fr 140px` : `1fr`}">
@@ -46,8 +38,8 @@
     </small> -->
 
     <address>
-      {#each social as [url, icon]}
-        <a href={url} {...links}><Icon inline {icon} /></a>
+      {#each cv.social as { url, icon, style } (url)}
+        <a href={url} {...links}><Icon inline {icon} {style} /></a>
       {/each}
     </address>
   </section>
@@ -122,7 +114,8 @@
       <Icon inline icon="zondicons:education" />&nbsp; Education
     </h2>
     <ul>
-      {#each cv.education as { title, thesis_title, date, href, uni }}
+      {#each cv.education as edu (JSON.stringify(edu))}
+        {@const { title, thesis_title, date, href, uni } = edu}
         <li>
           <h4>
             <a {href}>{title}</a>
@@ -137,7 +130,7 @@
       <Icon inline icon="mdi:trophy" />&nbsp; Awards
     </h2>
     <ul>
-      {#each cv.awards as { name, description, date, href }}
+      {#each cv.awards as { name, description, date, href } (href)}
         <li>
           <h4><a {href}>{name}</a></h4>
           <p>{description} <small>{date}</small></p>
@@ -149,7 +142,7 @@
       <Icon inline icon="material-symbols:volunteer-activism" />&nbsp; Volunteer Work
     </h2>
     <ul>
-      {#each cv.volunteer as { name, description, href, logo, role }}
+      {#each cv.volunteer as { name, description, href, logo, role } (href)}
         <li>
           <h4>
             <a {href}><img src={logo} alt={name} height="20" />{name}</a>
@@ -167,7 +160,7 @@
         <Icon inline icon="lucide:languages" />&nbsp; Languages
       </h3>
       <ul>
-        {#each cv.languages as { name, level, icon }}
+        {#each cv.languages as { name, level, icon } (name)}
           <li>
             <Icon inline {icon} />
             &nbsp;{name}
@@ -180,7 +173,7 @@
         <Icon inline icon="gis:search-country" />&nbsp; Nationality
       </h3>
       <ul>
-        {#each cv.nationality as { title, icon }}
+        {#each cv.nationality as { title, icon } (title)}
           <li>
             <Icon inline {icon} />
             &nbsp;{title}
@@ -193,7 +186,7 @@
       </h3>
       <small style="white-space: nowrap;">(emphasis &asymp; proficiency)</small>
       <ul class="skills">
-        {#each cv.skills.sort((s1, s2) => s2.score - s1.score) as { name, icon, score, href, site }}
+        {#each cv.skills.sort((s1, s2) => s2.score - s1.score) as { name, icon, score, href, site } (name)}
           <!-- color based on score style="color: hsl({score * 20}, 100%, 40%)" -->
           <li style:font-weight={(score - 3) * 100}>
             <a href={href ?? site}>
@@ -209,7 +202,7 @@
         &nbsp; Memberships
       </h3>
       <ul>
-        {#each cv.memberships as { name, date, href }}
+        {#each cv.memberships as { name, date, href } (name)}
           <li>
             <a {href}>{name}</a>&ensp;<small>{date}</small>
           </li>
@@ -220,7 +213,7 @@
         <Icon inline icon="material-symbols:interests" />&nbsp; Hobbies
       </h3>
       <ul>
-        {#each cv.hobbies as { name, icon, href }}
+        {#each cv.hobbies as { name, icon, href } (name)}
           <li>
             {#if href}
               <a {href}>

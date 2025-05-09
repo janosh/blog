@@ -1,6 +1,6 @@
 <script lang="ts">
   import { dev } from '$app/environment'
-  import { page } from '$app/stores'
+  import { page } from '$app/state'
   import type { FrontMatter } from '$lib'
   import { repository } from '$root/package.json'
   import Icon from '@iconify/svelte'
@@ -8,9 +8,9 @@
   import { flip } from 'svelte/animate'
 
   type Option = { label: string; count: number }
-  let active_tags: Option[] = []
+  let active_tags: Option[] = $state([])
 
-  const tag_counts = $page.data?.posts
+  const tag_counts = page.data?.posts
     ?.flatMap((post) => post.tags)
     .reduce((acc, tag) => {
       acc[tag] = (acc[tag] ?? 0) + 1
@@ -52,14 +52,16 @@
   bind:selected={active_tags}
   closeDropdownOnSelect
 >
-  <span slot="option" let:option style="display: flex; gap: 5pt; align-items: center;">
-    {option.label} <span style="flex: 1;" />
-    {option.count}
-  </span>
+  {#snippet option({ option })}
+    <span   style="display: flex; gap: 5pt; align-items: center;">
+      {option.label} <span style="flex: 1;"></span>
+      {option.count}
+    </span>
+  {/snippet}
 </Select>
 
 <ul class="grid" style="margin: 4em auto; gap: 3ex;">
-  {#each $page.data?.posts
+  {#each page.data?.posts
     ?.filter(has_active_tags(active_tags))
     .sort((post_1, post_2) => {
       return post_2.date.localeCompare(post_1.date) // sort by date descending
