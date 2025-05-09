@@ -2,9 +2,15 @@
   import { afterNavigate, goto } from '$app/navigation'
   import { page } from '$app/stores'
   import { Footer } from '$lib'
+  import { mount, type Snippet } from 'svelte'
   import { CmdPalette } from 'svelte-multiselect'
   import { CopyButton } from 'svelte-zoo'
   import '../app.css'
+
+  interface Props {
+    children?: Snippet
+  }
+  let { children }: Props = $props()
 
   const actions = Object.keys(import.meta.glob(`./**/+page.{svx,svelte,md}`)).map(
     (filename) => {
@@ -13,6 +19,7 @@
       return { label: route, action: () => goto(route) }
     },
   )
+  const code_btn_style = `position: absolute; top: 1ex; right: 1ex;`
 
   afterNavigate(() => {
     for (const node of document.querySelectorAll(`pre > code`)) {
@@ -20,12 +27,9 @@
       const pre = node.parentElement
       if (!pre || pre.querySelector(`button`)) continue
 
-      new CopyButton({
+      mount(CopyButton, {
         target: pre,
-        props: {
-          content: node.textContent ?? ``,
-          style: `position: absolute; top: 1ex; right: 1ex;`,
-        },
+        props: { content: node.textContent ?? ``, style: code_btn_style },
       })
     }
   })
@@ -37,7 +41,7 @@
   <a href="/" aria-label="Back to index page">&larr; home</a>
 {/if}
 
-<slot />
+{@render children?.()}
 
 {#if $page.url.pathname !== `/cv`}
   <Footer />

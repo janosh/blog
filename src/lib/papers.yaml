@@ -246,6 +246,134 @@ references:
       design, and data exchange
     URL: http://arxiv.org/abs/2402.00572
 
+  - id: ganose_atomate2_2025
+    accessed:
+      - year: 2025
+        month: 1
+        day: 22
+    author:
+      - family: Ganose
+        given: Alex
+      - family: Sahasrabuddhe
+        given: Hrushikesh
+      - family: Asta
+        given: Mark
+      - family: Beck
+        given: Kevin
+      - family: Biswas
+        given: Tathagata
+      - family: Bonkowski
+        given: Alexander
+      - family: Bustamante
+        given: Joana
+      - family: Chen
+        given: Xin
+      - family: Chiang
+        given: Yuan
+      - family: Chrzan
+        given: Daryl
+      - family: Clary
+        given: Jacob
+      - family: Cohen
+        given: Orion
+      - family: Ertural
+        given: Christina
+      - family: Gallant
+        given: Max
+      - family: George
+        given: Janine
+      - family: Gerits
+        given: Sophie
+      - family: Goodall
+        given: Rhys
+      - family: Guha
+        given: Rishabh
+      - family: Hautier
+        given: Geoffroy
+      - family: Horton
+        given: Matthew
+      - family: Kaplan
+        given: Aaron
+      - family: Kingsbury
+        given: Ryan
+      - family: Kuner
+        given: Matthew
+      - family: Li
+        given: Bryant
+      - family: Linn
+        given: Xavier
+      - family: McDermott
+        given: Matthew
+      - family: Mohanakrishnan
+        given: Rohith Srinivaas
+      - family: Naik
+        given: Aakash
+      - family: Neaton
+        given: Jeffrey
+      - family: Persson
+        given: Kristin
+      - family: Petretto
+        given: Guido
+      - family: Purcell
+        given: Thomas
+      - family: Ricci
+        given: Francesco
+      - family: Rich
+        given: Benjamin
+      - family: Riebesell
+        given: Janosh
+      - family: Rignanese
+        given: Gian-Marco
+      - family: Rosen
+        given: Andrew
+      - family: Scheffler
+        given: Matthias
+      - family: Schmidt
+        given: Jonathan
+      - family: Shen
+        given: Jimmy-Xuan
+      - family: Sobolev
+        given: Andrei
+      - family: Sundararaman
+        given: Ravishankar
+      - family: Tezak
+        given: Cooper
+      - family: Trinquet
+        given: Victor
+      - family: Varley
+        given: Joel
+      - family: Vigil-Fowler
+        given: Derek
+      - family: Wang
+        given: Duo
+      - family: Waroquiers
+        given: David
+      - family: Wen
+        given: Mingjian
+      - family: Yang
+        given: Han
+      - family: Zheng
+        given: Hui
+      - family: Zheng
+        given: Jiongzhi
+      - family: Zhu
+        given: Zhuoying
+      - family: Jain
+        given: Anubhav
+    citation-key: ganose_atomate2_2025
+    DOI: 10.26434/chemrxiv-2025-tcr5h
+    issued:
+      - year: 2025
+        month: 1
+        day: 22
+    language: en
+    publisher: ChemRxiv
+    source: Cambridge Engage Preprints
+    title: 'Atomate2: Modular workflows for materials science'
+    title-short: Atomate2
+    URL: >-
+      https://chemrxiv.org/engage/chemrxiv/article-details/678e76a16dde43c9085c75e9
+
   - id: horton_crystal_2023
     accessed:
       - year: 2023
@@ -314,6 +442,42 @@ references:
       of Materials Science Research Algorithms
     title-short: Crystal Toolkit
     URL: http://arxiv.org/abs/2302.06147
+
+  - id: kaplan_foundational_2025
+    accessed:
+      - year: 2025
+        month: 3
+        day: 7
+    author:
+      - family: Kaplan
+        given: Aaron D.
+      - family: Liu
+        given: Runze
+      - family: Qi
+        given: Ji
+      - family: Ko
+        given: Tsz Wai
+      - family: Deng
+        given: Bowen
+      - family: Riebesell
+        given: Janosh
+      - family: Ceder
+        given: Gerbrand
+      - family: Persson
+        given: Kristin A.
+      - family: Ong
+        given: Shyue Ping
+    citation-key: kaplan_foundational_2025
+    DOI: 10.48550/arXiv.2503.04070
+    issued:
+      - year: 2025
+        month: 3
+        day: 6
+    number: arXiv:2503.04070
+    publisher: arXiv
+    source: arXiv.org
+    title: A Foundational Potential Energy Surface Dataset for Materials
+    URL: http://arxiv.org/abs/2503.04070
 
   - id: riebesell_foundation_2023
     accessed:

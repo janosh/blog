@@ -1,19 +1,25 @@
-<script>
+<script lang="ts">
   // adapted from https://github.com/zamanruhy/svelte-lite-youtube-embed
-  export let video_id
-  export let play_label = `Play`
+  interface Props {
+    video_id: string
+    play_label?: string
+  }
 
-  let activated = false
+  let { video_id, play_label = `Play` }: Props = $props()
+
+  let activated = $state(false)
   const activate = () => (activated = true)
 
-  $: video_id, (activated = false)
+  $effect(() => {
+    if (video_id) activated = false // reset on new video_id
+  })
 </script>
 
 <div
   class="lite-youtube"
   class:activated
-  on:click={activate}
-  on:keyup={activate}
+  onclick={activate}
+  onkeyup={activate}
   role="presentation"
 >
   {#key video_id}
@@ -29,7 +35,7 @@
       />
     </picture>
   {/key}
-  <button type="button" class="play-btn" aria-label={play_label} />
+  <button type="button" class="play-btn" aria-label={play_label}></button>
   {#if activated}
     <iframe
       width="560"
@@ -38,9 +44,9 @@
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
       src="https://www.youtube-nocookie.com/embed/{encodeURIComponent(
-        video_id
+        video_id,
       )}?autoplay=1"
-    />
+    ></iframe>
   {/if}
 </div>
 
