@@ -45,11 +45,11 @@ chpwd() {
       # If env activation is unsuccessful, prompt user whether to create conda env from file.
       if [ $? -ne 0 ]; then
         while true; do
-          # Read user reply into variable YorN.
-          read "YorN?[conda_auto_env] Environment '$ENV' doesn't exist. Would you like to create it now? (y/n)"$'\n'
+          # Read user reply into variable answer.
+          read "answer?[conda_auto_env] Environment '$ENV' doesn't exist. Would you like to create it now? (y/n)"$'\n'
           # $'\n' for newline. https://unix.stackexchange.com/a/126316/315020
-          if [ "$YorN" = "" ]; then YorN='y'; fi # interpret enter as y
-          case $YorN in
+          if [ "$answer" = "" ]; then answer='y'; fi # interpret enter as y
+          case $answer in
               [Yy] ) echo Proceeding...
                 conda env create -f $FILE
                 conda activate $ENV;;

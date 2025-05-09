@@ -315,6 +315,42 @@ references:
     title-short: Crystal Toolkit
     URL: http://arxiv.org/abs/2302.06147
 
+  - id: kaplan_foundational_2025
+    accessed:
+      - year: 2025
+        month: 3
+        day: 7
+    author:
+      - family: Kaplan
+        given: Aaron D.
+      - family: Liu
+        given: Runze
+      - family: Qi
+        given: Ji
+      - family: Ko
+        given: Tsz Wai
+      - family: Deng
+        given: Bowen
+      - family: Riebesell
+        given: Janosh
+      - family: Ceder
+        given: Gerbrand
+      - family: Persson
+        given: Kristin A.
+      - family: Ong
+        given: Shyue Ping
+    citation-key: kaplan_foundational_2025
+    DOI: 10.48550/arXiv.2503.04070
+    issued:
+      - year: 2025
+        month: 3
+        day: 6
+    number: arXiv:2503.04070
+    publisher: arXiv
+    source: arXiv.org
+    title: A Foundational Potential Energy Surface Dataset for Materials
+    URL: http://arxiv.org/abs/2503.04070
+
   - id: riebesell_foundation_2023
     accessed:
       - year: 2024

@@ -1,19 +1,32 @@
-<script>
-  export let parent_width
-  export let parent_height
-  export let width = 50
-  export let height = 50
-  export let pos = `top: 0; left: 0;`
-  export let handle_position = `top: 0; left: 0;`
+<script lang="ts">
+  interface Props {
+    parent_width: number
+    parent_height: number
+    width?: number
+    height?: number
+    pos?: string
+    handle_position?: string
+    color: string
+    resizable?: `x` | `y` | `xy`
+    children?: import('svelte').Snippet
+  }
+  let {
+    parent_width,
+    parent_height,
+    width = $bindable(50),
+    height = $bindable(50),
+    pos = `top: 0; left: 0;`,
+    handle_position = `top: 0; left: 0;`,
+    color,
+    resizable = `xy`,
+    children,
+  }: Props = $props()
 
-  export let color
-  export let resizable = `xy` // `x`, `y` or `xy`
+  let [resize_initial_x, resize_initial_y] = $state([0, 0])
 
-  let resize_initial_x, resize_initial_y
+  let [initial_width, initial_height] = $state([width, height])
 
-  let initial_width, initial_height
-
-  function resizePointerDown(event) {
+  function resizePointerDown(event: PointerEvent) {
     event.stopPropagation()
     resize_initial_x = event.pageX
     resize_initial_y = event.pageY
@@ -26,7 +39,7 @@
     window.addEventListener(`pointercancel`, resizePointerUp)
   }
 
-  function resizePointerMove(event) {
+  function resizePointerMove(event: PointerEvent) {
     let dirX = pos.includes(`right`) ? -1 : 1
     let dirY = pos.includes(`bottom`) ? -1 : 1
     let scaleX = parent_width / 100
@@ -54,8 +67,8 @@
   class="resizable"
   style="{pos} width: {width}%; height:{height}%; background: {color};"
 >
-  <slot />
-  <div class="resizer" on:pointerdown={resizePointerDown} style={handle_position} />
+  {@render children?.()}
+  <div class="resizer" onpointerdown={resizePointerDown} style={handle_position}></div>
 </div>
 
 <style>
@@ -64,7 +77,10 @@
     position: absolute;
     will-change: transform;
     /* use box-shadow instead of border to achieve border collapse: https://stackoverflow.com/a/28807765 */
-    box-shadow: 2px 0 0 0 white, 0 2px 0 0 white, 2px 0 0 0 white inset,
+    box-shadow:
+      2px 0 0 0 white,
+      0 2px 0 0 white,
+      2px 0 0 0 white inset,
       0 2px 0 0 white inset;
   }
   .resizer {

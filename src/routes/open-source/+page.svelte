@@ -4,24 +4,26 @@
   import { highlight_matches } from 'svelte-zoo'
   import { flip } from 'svelte/animate'
 
-  let sort_by: 'commits' | 'stars' | 'title' = `commits`
+  let sort_by: `commits` | `stars` | `title` = $state(`commits`)
   const sort_by_options = [`commits`, `stars`, `title`] as const
 
-  $: projects = oss.projects
-    .filter((proj) => {
-      if (!query) return true
-      return JSON.stringify(proj).toLowerCase().includes(query.toLowerCase())
-    })
-    .sort((p1, p2) => {
-      if (sort_by === `title`) {
-        return p1.name.localeCompare(p2.name)
-      } else if ([`commits`, `stars`].includes(sort_by)) {
-        return p2[sort_by] - p1[sort_by]
-      } else {
-        throw new Error(`Unknown sort_by: ${sort_by}`)
-      }
-    })
-  let query = ``
+  let query = $state(``)
+  let projects = $derived(
+    oss.projects
+      .filter((proj) => {
+        if (!query) return true
+        return JSON.stringify(proj).toLowerCase().includes(query.toLowerCase())
+      })
+      .sort((p1, p2) => {
+        if (sort_by === `title`) {
+          return p1.name.localeCompare(p2.name)
+        } else if ([`commits`, `stars`].includes(sort_by)) {
+          return p2[sort_by] - p1[sort_by]
+        } else {
+          throw new Error(`Unknown sort_by: ${sort_by}`)
+        }
+      }),
+  )
 </script>
 
 <h2 class="section-title">
@@ -30,8 +32,8 @@
 
 <ul class="buttons">
   Sort by
-  {#each sort_by_options as title}
-    <button on:click={() => (sort_by = title)} class:active={sort_by === title}>
+  {#each sort_by_options as title (title)}
+    <button onclick={() => (sort_by = title)} class:active={sort_by === title}>
       {title}
     </button>
   {/each}

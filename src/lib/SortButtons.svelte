@@ -1,24 +1,33 @@
 <script lang="ts">
-  export let label: string = `Sort by`
-  export { className as class }
-  export let sort_by: string | undefined = undefined
-  export let sort_keys: readonly string[] = []
-  export let sort_order: 'asc' | 'desc' = `asc`
-  export let as: string = `small`
-  export let style: string | null = null
-
-  let className: string | null = null
+  interface Props {
+    label?: string
+    sort_by?: string | undefined
+    sort_keys?: readonly string[]
+    sort_order?: `asc` | `desc`
+    as?: string
+    style?: string | null
+    class?: string | null
+  }
+  let {
+    label = `Sort by`,
+    sort_by = $bindable(undefined),
+    sort_keys = [],
+    sort_order = $bindable(`asc`),
+    as = `small`,
+    style = null,
+    class: className = null,
+  }: Props = $props()
 </script>
 
 <svelte:element this={as} class="sort-buttons {className}" {style}>
   {label}
-  {#each sort_keys as key}
+  {#each sort_keys as key (key)}
     {@const [name, title] = Array.isArray(key) ? key : [key, key]}
-    <button on:click={() => (sort_by = name)} class:active={sort_by === name} {title}>
+    <button onclick={() => (sort_by = name)} class:active={sort_by === name} {title}>
       {name}
     </button>
   {/each}
-  <button on:click={() => (sort_order = sort_order === `asc` ? `desc` : `asc`)}>
+  <button onclick={() => (sort_order = sort_order === `asc` ? `desc` : `asc`)}>
     {sort_order === `asc` ? `↑` : `↓`}
   </button>
 </svelte:element>

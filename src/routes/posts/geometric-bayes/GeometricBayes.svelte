@@ -1,16 +1,14 @@
 <script>
   import Resizable from './Resizable.svelte'
 
-  let parent_height, parent_width
+  let [parent_height, parent_width] = $state([0, 0])
 
   // geometric Bayes state
-  let pH = 20,
-    pEGivenH = 40,
-    pEGivenNotH = 20
+  let [pH, pEGivenH, pEGivenNotH] = $state([20, 40, 20])
   // derived state
-  $: pNotH = 100 - pH
-  $: pNotEGivenH = 100 - pEGivenH
-  $: pHGivenE = (pEGivenH * pH) / (pEGivenH + pEGivenNotH)
+  let pNotH = $derived(100 - pH)
+  let pNotEGivenH = $derived(100 - pEGivenH)
+  let pHGivenE = $derived((pEGivenH * pH) / (pEGivenH + pEGivenNotH))
 </script>
 
 <div id="container" bind:clientHeight={parent_height} bind:clientWidth={parent_width}>
@@ -77,8 +75,12 @@
     max-height: 600px;
     max-width: 600px;
     margin: 3em auto;
-    box-shadow: 2px 0 0 0 white, 0 2px 0 0 white, 2px 2px 0 0 white,
-      /* Just to fix the corner */ 2px 0 0 0 white inset, 0 2px 0 0 white inset;
+    box-shadow:
+      2px 0 0 0 white,
+      0 2px 0 0 white,
+      2px 2px 0 0 white,
+      /* Just to fix the corner */ 2px 0 0 0 white inset,
+      0 2px 0 0 white inset;
   }
   span {
     position: absolute;

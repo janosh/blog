@@ -2,13 +2,13 @@ ci:
   autoupdate_schedule: quarterly
   skip: [eslint]
 
-default_stages: [commit]
+default_stages: [pre-commit]
 
 default_install_hook_types: [pre-commit, commit-msg]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-case-conflict
       - id: check-symlinks
@@ -29,15 +29,24 @@ repos:
           - svelte
 
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.6
+    rev: v2.4.1
     hooks:
       - id: codespell
-        stages: [commit, commit-msg]
+        stages: [pre-commit, commit-msg]
         exclude_types: [svg]
-        args: [--ignore-words-list, 'ist,yau,te,manuel', --check-filenames]
+        args: [--ignore-words-list, 'ist,Yau,te,manuel', --check-filenames]
+
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.32.0
+    hooks:
+      - id: typos
+        name: typos (dynamic config)
+        types_or: [text]
+        entry: bash -c 'mkdir -p tmp && printf "[default]\\nextend-ignore-identifiers-re = [\"Yau\", \"ist\"]\\n" > tmp/_typos.toml && exec typos "$@"' --
+        args: [--isolated, --config, tmp/_typos.toml]
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.2.0
+    rev: v9.26.0
     hooks:
       - id: eslint
         types: [file]

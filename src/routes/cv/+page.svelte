@@ -6,17 +6,21 @@
   import type { ComponentProps } from 'svelte'
   import { Toggle } from 'svelte-zoo'
   import { flip } from 'svelte/animate'
+  import type { PageData } from '../$types'
   import Papers from './Papers.svelte'
   import cv from './cv.yml'
   import Intro from './intro.md'
 
-  export let data
-  export let show_sidebar = true
-  export let sort_papers_by: ComponentProps<Papers>['sort_by'] = `date`
-  export let sort_papers_order: `asc` | `desc` = `desc`
-  export let sort_oss_by: `commits` | `stars` | `title` = `commits`
-  export let sort_oss_order: `asc` | `desc` = `desc`
-  export let sort_oss_keys = [`commits`, `stars`, `title`] as const
+  interface Props {
+    data: PageData
+  }
+  let { data }: Props = $props()
+  let show_sidebar = $state(true)
+  let sort_papers_by: ComponentProps<typeof Papers>[`sort_by`] = $state(`date`)
+  let sort_papers_order: ComponentProps<typeof Papers>[`sort_order`] = $state(`desc`)
+  let sort_oss_by: ComponentProps<typeof SortButtons>[`sort_by`] = $state(`commits`)
+  let sort_oss_order: ComponentProps<typeof SortButtons>[`sort_order`] = $state(`desc`)
+  let sort_oss_keys = [`commits`, `stars`, `title`] as const
 
   const paper_sort_keys = [
     [`date`, `Sort by date`],
@@ -46,7 +50,7 @@
     </small> -->
 
     <address>
-      {#each social as [url, icon]}
+      {#each social as [url, icon] (url)}
         <a href={url} {...links}><Icon inline {icon} /></a>
       {/each}
     </address>
@@ -122,7 +126,8 @@
       <Icon inline icon="zondicons:education" />&nbsp; Education
     </h2>
     <ul>
-      {#each cv.education as { title, thesis_title, date, href, uni }}
+      {#each cv.education as edu (JSON.stringify(edu))}
+        {@const { title, thesis_title, date, href, uni } = edu}
         <li>
           <h4>
             <a {href}>{title}</a>
@@ -137,7 +142,7 @@
       <Icon inline icon="mdi:trophy" />&nbsp; Awards
     </h2>
     <ul>
-      {#each cv.awards as { name, description, date, href }}
+      {#each cv.awards as { name, description, date, href } (href)}
         <li>
           <h4><a {href}>{name}</a></h4>
           <p>{description} <small>{date}</small></p>
@@ -149,7 +154,7 @@
       <Icon inline icon="material-symbols:volunteer-activism" />&nbsp; Volunteer Work
     </h2>
     <ul>
-      {#each cv.volunteer as { name, description, href, logo, role }}
+      {#each cv.volunteer as { name, description, href, logo, role } (href)}
         <li>
           <h4>
             <a {href}><img src={logo} alt={name} height="20" />{name}</a>
@@ -167,7 +172,7 @@
         <Icon inline icon="lucide:languages" />&nbsp; Languages
       </h3>
       <ul>
-        {#each cv.languages as { name, level, icon }}
+        {#each cv.languages as { name, level, icon } (name)}
           <li>
             <Icon inline {icon} />
             &nbsp;{name}
@@ -180,7 +185,7 @@
         <Icon inline icon="gis:search-country" />&nbsp; Nationality
       </h3>
       <ul>
-        {#each cv.nationality as { title, icon }}
+        {#each cv.nationality as { title, icon } (title)}
           <li>
             <Icon inline {icon} />
             &nbsp;{title}
@@ -193,7 +198,7 @@
       </h3>
       <small style="white-space: nowrap;">(emphasis &asymp; proficiency)</small>
       <ul class="skills">
-        {#each cv.skills.sort((s1, s2) => s2.score - s1.score) as { name, icon, score, href, site }}
+        {#each cv.skills.sort((s1, s2) => s2.score - s1.score) as { name, icon, score, href, site } (name)}
           <!-- color based on score style="color: hsl({score * 20}, 100%, 40%)" -->
           <li style:font-weight={(score - 3) * 100}>
             <a href={href ?? site}>
@@ -209,7 +214,7 @@
         &nbsp; Memberships
       </h3>
       <ul>
-        {#each cv.memberships as { name, date, href }}
+        {#each cv.memberships as { name, date, href } (name)}
           <li>
             <a {href}>{name}</a>&ensp;<small>{date}</small>
           </li>
@@ -220,7 +225,7 @@
         <Icon inline icon="material-symbols:interests" />&nbsp; Hobbies
       </h3>
       <ul>
-        {#each cv.hobbies as { name, icon, href }}
+        {#each cv.hobbies as { name, icon, href } (name)}
           <li>
             {#if href}
               <a {href}>

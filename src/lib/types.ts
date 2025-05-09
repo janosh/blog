@@ -46,13 +46,14 @@ export type Project = {
   logo?: string
   img_style?: string
   repo: string
-  role?: 'Lead' | 'Maintainer' | 'Contributor'
+  role?: `Lead` | `Maintainer` | `Contributor`
   description: string
   stars: number
   commits: number
   pypi?: string
   languages: string[]
   paper?: string // Zotero BibTeX ID
+  featured?: boolean
 }
 
 export type Skill = {

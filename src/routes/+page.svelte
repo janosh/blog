@@ -6,7 +6,7 @@
   import Physics from './physics/+page@.md'
   import Posts from './posts/+page@.svelte'
 
-  export let data
+  let { data } = $props()
 
   const mbd = oss.projects.find((p) => p.name === `Matbench Discovery`)
   const pmv = oss.projects.find((p) => p.name === `pymatviz`)
@@ -21,8 +21,16 @@
   <a href="https://github.com/janosh" target="_blank" rel="noreferrer">
     <Icon inline icon="octicon:mark-github" />
   </a>
-  <a href="https://x.com/jrib_" target="_blank" rel="noreferrer">
-    <Icon inline icon="bi:twitter-x" />
+  <a
+    href="https://scholar.google.com/citations?user=Lfw6Id0AAAAJ"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <Icon
+      inline
+      icon="academicons:google-scholar-square"
+      style="transform: scale(1.1);"
+    />
   </a>
   <a href="https://linkedin.com/in/janosh-riebesell/" target="_blank" rel="noreferrer">
     <Icon inline icon="bi:linkedin" />
@@ -54,11 +62,11 @@
   &nbsp;Recent
 </h2>
 <ul class="recent grid">
-  {#each oss.projects.filter((p) => p.paper) as { name, repo, logo, paper: id, description } (name)}
-    {@const paper = references.find((p) => p.id == id)}
-    {@const date = Object.values(paper?.issued[0]).join(`-`)}
+  {#each oss.projects.filter((p) => p.featured) as project (JSON.stringify(project))}
+    {@const { name, repo, logo, paper: cite_id, description } = project}
+    {@const paper = references.find((p) => p.id == cite_id)}
     {#if !paper}
-      {@debug id}
+      {console.error(`Paper ${cite_id} not found`)}
     {/if}
     <li>
       <h3>
@@ -66,26 +74,17 @@
           <img src={logo} alt={name} />
           {name}
         </a>
-        <small>[<a href={paper?.URL}>Paper</a>]</small>
       </h3>
-      <time>{date}</time>
+      <small>
+        <a href={paper?.URL}>Paper</a>
+        <a href={repo}>Code</a>
+        {#if paper}
+          <time>{Object.values(paper.issued[0]).join(`-`)}</time>
+        {/if}
+      </small>
       {description}
     </li>
   {/each}
-  <li>
-    <h3>
-      <img
-        src="https://github.com/janosh/blog/assets/30958850/b8266e7e-8e78-4ac6-8716-28cbd56d0005"
-        alt="MLIP Potential Energy Surface"
-        style="width: 4ex;"
-      />
-      MLIP PES Analysis
-      <small>[<a href="https://arxiv.org/abs/2405.07105">Paper</a>]</small>
-    </h3>
-    <time>2024-05-11</time>
-    Overcoming systematic softening in universal machine learning interatomic potentials by
-    fine-tuning
-  </li>
 </ul>
 
 <OpenSource />
@@ -117,14 +116,27 @@
     font-size: 16pt;
     margin: 1em auto;
   }
-  ul.recent h3 small {
-    padding-left: 4pt;
+  ul.recent small {
     font-weight: 300;
+    display: flex;
+    gap: 1ex;
+    place-items: center;
+    place-content: center;
+    border-radius: 4pt;
+  }
+  ul.recent small > :is(time, a) {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 0 3pt;
+    border-radius: 4pt;
   }
   ul.recent > li {
     background-color: rgba(255, 255, 255, 0.05);
     padding: 1ex 1em;
     border-radius: 4pt;
+    display: grid;
+    gap: 4pt;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
   }
   ul.recent > li > h3 :is(img, small) {
     margin-right: 5pt;
@@ -132,14 +144,7 @@
     width: 3ex;
     transform: translateY(-1px);
   }
-  time {
-    display: block;
-    font-size: small;
-    margin: -4pt auto 1ex;
-    font-weight: 300;
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 0 3pt;
-    border-radius: 4pt;
-    max-width: max-content;
+  ul.recent > li > h3 {
+    margin: 1ex auto 5pt;
   }
 </style>
