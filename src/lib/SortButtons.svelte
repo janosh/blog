@@ -1,30 +1,37 @@
 <script lang="ts">
-  export let label: string = `Sort by`
-  export { className as class }
-  export let sort_by: string | undefined = undefined
-  export let sort_keys: readonly string[] = []
-  export let sort_order: 'asc' | 'desc' = `asc`
-  export let as: string = `small`
-  export let style: string | null = null
-
-  let className: string | null = null
+  interface Props {
+    label?: string
+    sort_by?: string
+    sort_keys?: readonly string[]
+    sort_order?: `asc` | `desc`
+    as?: string
+    [key: string]: unknown
+  }
+  let {
+    label = `Sort by`,
+    sort_by = $bindable(``),
+    sort_keys = [],
+    sort_order = $bindable(`asc`),
+    as = `small`,
+    ...rest
+  }: Props = $props()
 </script>
 
-<svelte:element this={as} class="sort-buttons {className}" {style}>
+<svelte:element this={as} aria-label="sort-buttons" {...rest}>
   {label}
-  {#each sort_keys as key}
+  {#each sort_keys as key (key)}
     {@const [name, title] = Array.isArray(key) ? key : [key, key]}
-    <button on:click={() => (sort_by = name)} class:active={sort_by === name} {title}>
+    <button onclick={() => (sort_by = name)} class:active={sort_by === name} {title}>
       {name}
     </button>
   {/each}
-  <button on:click={() => (sort_order = sort_order === `asc` ? `desc` : `asc`)}>
+  <button onclick={() => (sort_order = sort_order === `asc` ? `desc` : `asc`)}>
     {sort_order === `asc` ? `↑` : `↓`}
   </button>
 </svelte:element>
 
 <style>
-  .sort-buttons {
+  [aria-label='sort-buttons'] {
     display: flex;
     gap: 2pt;
     position: absolute;
@@ -33,18 +40,18 @@
     font-weight: 100;
     font-size: 9pt;
   }
-  .sort-buttons button {
+  [aria-label='sort-buttons'] button {
     font-size: 9pt;
     padding: 1pt 2pt;
     border: none;
     color: gray;
     background-color: #f0f0f0;
   }
-  .sort-buttons button.active {
+  [aria-label='sort-buttons'] button.active {
     background-color: #e0e0e0;
   }
   @media print {
-    .sort-buttons {
+    [aria-label='sort-buttons'] {
       display: none;
     }
   }

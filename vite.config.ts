@@ -20,7 +20,7 @@ async function fetch_github_data(gh_token: string) {
     const contributors = await (
       await fetch(`https://api.github.com/repos/${handle}/contributors`, auth)
     ).json()
-    const me = contributors.find(
+    const me = contributors.find?.(
       (contributor: Record<string, unknown>) => contributor.login === `janosh`,
     )
     if (me) {

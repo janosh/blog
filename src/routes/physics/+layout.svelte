@@ -1,9 +1,8 @@
 <script lang="ts">
   import { repository } from '$root/package.json'
 
-  export let data
-
-  $: ({ cover, slug } = data.frontmatter)
+  let { data, children } = $props()
+  let { cover, slug } = $derived(data.frontmatter)
 </script>
 
 <img
@@ -13,7 +12,7 @@
 <h1>{data.frontmatter.title}</h1>
 
 <main>
-  <slot />
+  {@render children?.()}
 </main>
 
 <style>

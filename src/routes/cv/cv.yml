@@ -1,3 +1,22 @@
+social:
+  - name: GitHub
+    icon: octicon:mark-github
+    url: https://github.com/janosh
+  - name: Google Scholar
+    icon: academicons:google-scholar-square
+    url: https://scholar.google.com/citations?user=Lfw6Id0AAAAJ
+    style: 'transform: scale(1.15);'
+  - name: LinkedIn
+    icon: bi:linkedin
+    url: https://linkedin.com/in/janosh-riebesell
+  - name: Twitter
+    icon: fa-brands:twitter
+    url: https://twitter.com/jrib_
+  - name: Email
+    icon: mdi:email
+    url: mailto:janosh.riebesell@gmail.com
+    style: 'transform: translateY(-2px) scale(1.25); vertical-align: middle;'
+
 education:
   - title: PhD Student
     uni: University of Cambridge

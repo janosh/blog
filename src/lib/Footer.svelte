@@ -1,14 +1,14 @@
 <script>
-  import { repository as repo } from '$root/package.json'
+  import pkg from '$root/package.json'
   import Icon from '@iconify/svelte'
 </script>
 
-<button on:click={() => document.body.scrollIntoView({ behavior: `smooth` })}>
+<button onclick={() => document.body.scrollIntoView({ behavior: `smooth` })}>
   <Icon icon="material-symbols:arrow-upward-rounded" />
 </button>
 
 <footer>
-  <a href={repo}><Icon icon="octicon:mark-github" width="20pt" />Source</a>
+  <a href={pkg.repository}><Icon icon="octicon:mark-github" width="20pt" />Source</a>
 </footer>
 
 <style>

@@ -7,6 +7,7 @@ declare module '*package.json'
 declare module '*cv.yml' {
   import type * as types from '$lib/types'
   const cv: {
+    social: types.Social[]
     education: types.Education[]
     skills: types.Skill[]
     hobbies: types.Hobby[]

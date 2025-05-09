@@ -1,17 +1,20 @@
 <script lang="ts">
-  import { page } from '$app/stores'
+  import { page } from '$app/state'
 
-  export let routes: string[]
-
-  $: is_current = (url: string) => {
-    if (url === $page.url.pathname) return `page`
-    if (url !== `/` && $page.url.pathname.includes(url)) return `page`
-    return undefined
+  interface Props {
+    routes: string[]
   }
+  let { routes }: Props = $props()
+
+  let is_current = $derived((url: string) => {
+    if (url === page.url.pathname) return `page`
+    if (url !== `/` && page.url.pathname.includes(url)) return `page`
+    return undefined
+  })
 </script>
 
 <nav>
-  {#each routes as slug, idx}
+  {#each routes as slug, idx (slug)}
     {@const href = `/physics/${slug}`}
     {#if idx > 0}<strong>&bull;</strong>{/if}
     <a {href} aria-current={is_current(href)}>{slug}</a>
