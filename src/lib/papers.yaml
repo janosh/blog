@@ -1,5 +1,158 @@
 ---
 references:
+  - id: batatia_foundation_2023
+    accessed:
+      - year: 2024
+        month: 1
+        day: 2
+    author:
+      - family: Batatia
+        given: Ilyes
+      - family: Benner
+        given: Philipp
+      - family: Chiang
+        given: Yuan
+      - family: Elena
+        given: Alin M.
+      - family: Riebesell
+        given: Janosh
+      - family: Kovács
+        given: Dávid P.
+      - family: Advincula
+        given: Xavier R.
+      - family: Asta
+        given: Mark
+      - family: Baldwin
+        given: William J.
+      - family: Bernstein
+        given: Noam
+      - family: Bhowmik
+        given: Arghya
+      - family: Blau
+        given: Samuel M.
+      - family: Cărare
+        given: Vlad
+      - family: Darby
+        given: James P.
+      - family: De
+        given: Sandip
+      - family: Della Pia
+        given: Flaviano
+      - family: Deringer
+        given: Volker L.
+      - family: Elijošius
+        given: Rokas
+      - family: El-Machachi
+        given: Zakariya
+      - family: Fako
+        given: Edvin
+      - family: Ferrari
+        given: Andrea C.
+      - family: Genreith-Schriever
+        given: Annalena
+      - family: George
+        given: Janine
+      - family: Goodall
+        given: Rhys E. A.
+      - family: Grey
+        given: Clare P.
+      - family: Han
+        given: Shuang
+      - family: Handley
+        given: Will
+      - family: Heenen
+        given: Hendrik H.
+      - family: Hermansson
+        given: Kersti
+      - family: Holm
+        given: Christian
+      - family: Jaafar
+        given: Jad
+      - family: Hofmann
+        given: Stephan
+      - family: Jakob
+        given: Konstantin S.
+      - family: Jung
+        given: Hyunwook
+      - family: Kapil
+        given: Venkat
+      - family: Kaplan
+        given: Aaron D.
+      - family: Karimitari
+        given: Nima
+      - family: Kroupa
+        given: Namu
+      - family: Kullgren
+        given: Jolla
+      - family: Kuner
+        given: Matthew C.
+      - family: Kuryla
+        given: Domantas
+      - family: Liepuoniute
+        given: Guoda
+      - family: Margraf
+        given: Johannes T.
+      - family: Magdău
+        given: Ioan-Bogdan
+      - family: Michaelides
+        given: Angelos
+      - family: Moore
+        given: J. Harry
+      - family: Naik
+        given: Aakash A.
+      - family: Niblett
+        given: Samuel P.
+      - family: Norwood
+        given: Sam Walton
+      - family: O'Neill
+        given: Niamh
+      - family: Ortner
+        given: Christoph
+      - family: Persson
+        given: Kristin A.
+      - family: Reuter
+        given: Karsten
+      - family: Rosen
+        given: Andrew S.
+      - family: Schaaf
+        given: Lars L.
+      - family: Schran
+        given: Christoph
+      - family: Sivonxay
+        given: Eric
+      - family: Stenczel
+        given: Tamás K.
+      - family: Svahn
+        given: Viktor
+      - family: Sutton
+        given: Christopher
+      - family: Oord
+        given: Cas
+        non-dropping-particle: van der
+      - family: Varga-Umbrich
+        given: Eszter
+      - family: Vegge
+        given: Tejs
+      - family: Vondrák
+        given: Martin
+      - family: Wang
+        given: Yangshuai
+      - family: Witt
+        given: William C.
+      - family: Zills
+        given: Fabian
+      - family: Csányi
+        given: Gábor
+    citation-key: batatia_foundation_2023
+    container-title: arXiv.org
+    issued:
+      - year: 2023
+        month: 12
+        day: 29
+    language: en
+    title: A foundation model for atomistic materials chemistry
+    URL: https://arxiv.org/abs/2401.00096v1
+
   - id: chiang_llamp_2024
     accessed:
       - year: 2024
@@ -478,159 +631,6 @@ references:
     source: arXiv.org
     title: A Foundational Potential Energy Surface Dataset for Materials
     URL: http://arxiv.org/abs/2503.04070
-
-  - id: riebesell_foundation_2023
-    accessed:
-      - year: 2024
-        month: 1
-        day: 2
-    author:
-      - family: Riebesell
-        given: Janosh
-      - family: Batatia
-        given: Ilyes
-      - family: Benner
-        given: Philipp
-      - family: Chiang
-        given: Yuan
-      - family: Elena
-        given: Alin M.
-      - family: Kovács
-        given: Dávid P.
-      - family: Advincula
-        given: Xavier R.
-      - family: Asta
-        given: Mark
-      - family: Baldwin
-        given: William J.
-      - family: Bernstein
-        given: Noam
-      - family: Bhowmik
-        given: Arghya
-      - family: Blau
-        given: Samuel M.
-      - family: Cărare
-        given: Vlad
-      - family: Darby
-        given: James P.
-      - family: De
-        given: Sandip
-      - family: Della Pia
-        given: Flaviano
-      - family: Deringer
-        given: Volker L.
-      - family: Elijošius
-        given: Rokas
-      - family: El-Machachi
-        given: Zakariya
-      - family: Fako
-        given: Edvin
-      - family: Ferrari
-        given: Andrea C.
-      - family: Genreith-Schriever
-        given: Annalena
-      - family: George
-        given: Janine
-      - family: Goodall
-        given: Rhys E. A.
-      - family: Grey
-        given: Clare P.
-      - family: Han
-        given: Shuang
-      - family: Handley
-        given: Will
-      - family: Heenen
-        given: Hendrik H.
-      - family: Hermansson
-        given: Kersti
-      - family: Holm
-        given: Christian
-      - family: Jaafar
-        given: Jad
-      - family: Hofmann
-        given: Stephan
-      - family: Jakob
-        given: Konstantin S.
-      - family: Jung
-        given: Hyunwook
-      - family: Kapil
-        given: Venkat
-      - family: Kaplan
-        given: Aaron D.
-      - family: Karimitari
-        given: Nima
-      - family: Kroupa
-        given: Namu
-      - family: Kullgren
-        given: Jolla
-      - family: Kuner
-        given: Matthew C.
-      - family: Kuryla
-        given: Domantas
-      - family: Liepuoniute
-        given: Guoda
-      - family: Margraf
-        given: Johannes T.
-      - family: Magdău
-        given: Ioan-Bogdan
-      - family: Michaelides
-        given: Angelos
-      - family: Moore
-        given: J. Harry
-      - family: Naik
-        given: Aakash A.
-      - family: Niblett
-        given: Samuel P.
-      - family: Norwood
-        given: Sam Walton
-      - family: O'Neill
-        given: Niamh
-      - family: Ortner
-        given: Christoph
-      - family: Persson
-        given: Kristin A.
-      - family: Reuter
-        given: Karsten
-      - family: Rosen
-        given: Andrew S.
-      - family: Schaaf
-        given: Lars L.
-      - family: Schran
-        given: Christoph
-      - family: Sivonxay
-        given: Eric
-      - family: Stenczel
-        given: Tamás K.
-      - family: Svahn
-        given: Viktor
-      - family: Sutton
-        given: Christopher
-      - family: Oord
-        given: Cas
-        non-dropping-particle: van der
-      - family: Varga-Umbrich
-        given: Eszter
-      - family: Vegge
-        given: Tejs
-      - family: Vondrák
-        given: Martin
-      - family: Wang
-        given: Yangshuai
-      - family: Witt
-        given: William C.
-      - family: Zills
-        given: Fabian
-      - family: Csányi
-        given: Gábor
-    citation-key: riebesell_foundation_2023
-    container-title: arXiv.org
-    issued:
-      - year: 2023
-        month: 12
-        day: 29
-    language: en
-    title: A foundation model for atomistic materials chemistry
-    URL: https://arxiv.org/abs/2401.00096v1
 
   - id: riebesell_matbench_2023
     accessed:

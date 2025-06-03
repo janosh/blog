@@ -1,4 +1,6 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte'
+
   interface Props {
     parent_width: number
     parent_height: number
@@ -8,7 +10,7 @@
     handle_position?: string
     color: string
     resizable?: `x` | `y` | `xy`
-    children?: import('svelte').Snippet
+    children?: Snippet<[]>
   }
   let {
     parent_width,
@@ -22,17 +24,16 @@
     children,
   }: Props = $props()
 
-  let [resize_initial_x, resize_initial_y] = $state([0, 0])
-
-  let [initial_width, initial_height] = $state([width, height])
+  let resize = $state({ x: 0, y: 0 })
+  let size = $state({ width, height })
 
   function resizePointerDown(event: PointerEvent) {
     event.stopPropagation()
-    resize_initial_x = event.pageX
-    resize_initial_y = event.pageY
+    resize.x = event.pageX
+    resize.y = event.pageY
 
-    initial_width = width
-    initial_height = height
+    size.width = width
+    size.height = height
 
     window.addEventListener(`pointermove`, resizePointerMove)
     window.addEventListener(`pointerup`, resizePointerUp)
@@ -45,13 +46,11 @@
     let scaleX = parent_width / 100
     let scaleY = parent_height / 100
     if (resizable.includes(`x`)) {
-      let newWidth =
-        (initial_width * dirX + (event.pageX - resize_initial_x) / scaleX) * dirX
+      let newWidth = (size.width * dirX + (event.pageX - resize.x) / scaleX) * dirX
       width = Math.min(100, Math.max(0, newWidth)) // prevent extending beyond container
     }
     if (resizable.includes(`y`)) {
-      let newHeight =
-        (initial_height * dirY + (event.pageY - resize_initial_y) / scaleY) * dirY
+      let newHeight = (size.height * dirY + (event.pageY - resize.y) / scaleY) * dirY
       height = Math.min(100, Math.max(0, newHeight)) // prevent extending beyond container
     }
   }

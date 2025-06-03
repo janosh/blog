@@ -50,7 +50,7 @@
     </small>
 
     <h2>
-      <Icon inline icon="iconoir:journal" />&nbsp; Selected Publications
+      <Icon inline icon="iconoir:journal" />&nbsp; Publications
       <SortButtons
         bind:sort_by={sort_papers_by}
         sort_keys={paper_sort_keys}
@@ -115,13 +115,20 @@
     </h2>
     <ul>
       {#each cv.education as edu (JSON.stringify(edu))}
-        {@const { title, thesis_title, date, href, uni } = edu}
+        {@const { title, thesis, date, href, uni } = edu}
         <li>
           <h4>
             <a {href}>{title}</a>
             <small style="font-weight: 200;">{uni}{date ? ` &bull; ${date}` : ``}</small>
           </h4>
-          <p>Thesis title: {thesis_title}</p>
+          <p style="white-space: nowrap;">
+            Thesis title: <a href={thesis?.url}>{thesis?.title}</a>
+            {#if thesis?.repo}
+              &nbsp;<a href={thesis.repo} {...links}>
+                <Icon inline icon="octicon:mark-github" />
+              </a>
+            {/if}
+          </p>
         </li>
       {/each}
     </ul>

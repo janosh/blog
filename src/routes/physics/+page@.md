@@ -39,7 +39,7 @@ This is a compilation of notes and solutions to problem sheets for some of the p
 
 [Statistical Physics ![Phase space trajectory](./statistical-physics/phase-space-trajectory.png)](physics/statistical-physics)
 
-[QFT + Strings Oral exam ![Keep calm](./qft+strings-oral-exam/keep-calm.png)](physics/qft+strings-oral-exam)
+[QFT + Strings ![Keep calm](./advanced-qft+strings/keep-calm.png)](physics/advanced-qft+strings)
 
 [Bachelor's Thesis ![Graphene band structure](./bachelors-thesis/graphene-band-structure.png)](physics/bachelors-thesis)
 

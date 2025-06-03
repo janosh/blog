@@ -17,12 +17,16 @@ export type FrontMatter = {
 export type Education = {
   title: string
   uni: string
-  thesis_title?: string
   department?: string
   href: string
   logo: string
   description?: string
   date: string
+  thesis?: {
+    title?: string
+    url?: string
+    repo?: string
+  }
 }
 
 export type Reference = {
