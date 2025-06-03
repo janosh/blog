@@ -1,5 +1,5 @@
 ---
-title: Oral Exam
+title: Advanced QFT and String Theory
 cover:
   img: string-theory-blackboard.jpg
   origin: National University of Singapore
