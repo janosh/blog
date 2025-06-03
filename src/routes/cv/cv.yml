@@ -20,9 +20,12 @@ social:
 education:
   - title: PhD Student
     uni: University of Cambridge
-    thesis_title: Can machine learning accelerate high-throughput searches for novel functional materials?
     department: Physics
-    href: https://tcm.phy.cam.ac.uk
+    href: https://www.tcm.phy.cam.ac.uk/profiles/jr769/
+    thesis:
+      title: Towards Machine Learning Foundation Models for Materials Chemistry
+      url: https://doi.org/10.17863/CAM.113233
+      repo: https://github.com/janosh/thesis
     logo: https://cam.ac.uk/sites/cam.ac.uk/themes/fresh/images/interface/cambridge_university2.svg
   - title: MPhil in Scientific Computing
     uni: University of Cambridge

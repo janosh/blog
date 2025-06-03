@@ -5,14 +5,13 @@
   import cv from './cv/cv.yml'
   import OpenSource from './open-source/+page.svelte'
   import Physics from './physics/+page@.md'
-  import Posts from './posts/+page@.svelte'
 
   const mbd = oss.projects.find((p) => p.name === `Matbench Discovery`)
   const pmv = oss.projects.find((p) => p.name === `pymatviz`)
   const pmg = oss.projects.find((p) => p.name === `pymatgen`)
   const torchsim = oss.projects.find((p) => p.name === `TorchSim`)
   const elementari = oss.projects.find((p) => p.name === `Elementari`)
-  const mace_paper = references.find((p) => p.id === `riebesell_foundation_2023`)!
+  const mace_paper = references.find((p) => p.id === `batatia_foundation_2023`)!
 </script>
 
 <img src="./janosh.jpg" alt="me" width="200" />
@@ -22,25 +21,30 @@
   {#each cv.social as { url, icon, style } (url)}
     <a href={url} target="_blank" rel="noreferrer"><Icon inline {icon} {style} /></a>
   {/each}
-  <a href="/cv">
+  <a href="/cv" class="primary">
     <Icon inline icon="academicons:cv-square" style="transform: scale(1.1);" />
   </a>
 </address>
 
-<p style="max-width: min(40em, 80vw); margin: auto;">
-  I'm interested in<br />
-  <a href={mbd?.repo}>🔎 computational materials discovery</a>&emsp;
-  <a href={mace_paper.URL}>🤖 ML foundation models for chemistry</a>
-  <br />
-  <a href={torchsim?.repo}>⚛️ atomistic simulation</a>&emsp;
-  <a href={pmv?.repo}>📊 data</a> <a href={elementari?.repo}>visualization</a>&emsp;
-  <a href={pmg?.repo}>💻 software engineering</a>
-  <!-- Outside of work, I enjoy hiking 🧗 and cycling 🚲. The rougher the terrain, the better! ⛰️ -->
-</p>
+<div class="intro">
+  <p class="interest-description">
+    <strong>Computational materials scientist</strong>. I'm interested in machine-
+    learning-powered atomistic simulation and building software around that.
+  </p>
+
+  <div class="interest-links">
+    <a href={mbd?.repo} class="interest-tag">🔎 Materials Discovery</a>
+    <a href={mace_paper.URL} class="interest-tag">🤖 ML Foundation Models</a>
+    <a href={torchsim?.repo} class="interest-tag">⚛️ Atomistic Simulation</a>
+    <a href={pmv?.repo} class="interest-tag">📊 Data Visualization</a>
+    <a href={pmg?.repo} class="interest-tag">💻 Software Engineering</a>
+    <a href={elementari?.repo} class="interest-tag">🌐 Web Development</a>
+  </div>
+</div>
 
 <h2 class="section-title">
   <Icon inline icon="mdi:newspaper" />
-  &nbsp;Recent
+  &nbsp;Recent Work
 </h2>
 <ul class="recent grid">
   {#each oss.projects.filter((p) => p.featured) as project (JSON.stringify(project))}
@@ -51,19 +55,19 @@
     {/if}
     <li>
       <h3>
-        <a href={repo}>
+        <a href={repo} class="repo-link">
           <img src={logo} alt={name} />
           {name}
         </a>
       </h3>
-      <small>
-        <a href={paper?.URL}>Paper</a>
-        <a href={repo}>Code</a>
+      <div class="project-meta">
+        <a href={paper?.URL} class="primary">Paper</a>
+        <a href={repo} class="repo-link">Code</a>
         {#if paper}
           <time>{Object.values(paper.issued[0]).join(`-`)}</time>
         {/if}
-      </small>
-      {description}
+      </div>
+      <p class="project-description">{description}</p>
     </li>
   {/each}
 </ul>
@@ -72,60 +76,153 @@
 
 <Physics />
 
-<Posts />
-
 <style>
   img[alt='me'] {
     border-radius: 50%;
     object-fit: cover;
     height: 10em;
     width: 10em;
-    margin: 4em auto 0;
+    margin: 2em auto 0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
+
   h1 {
-    margin: 0;
+    margin: 0.3em 0 0;
+    font-size: 2.8rem;
+    font-weight: 200;
   }
-  :is(h2, p) {
-    text-align: center;
-    margin: 1em 2em;
-  }
+
   address {
     display: flex;
     place-content: center;
-    place-items: center;
     gap: 1em;
     font-size: 16pt;
     margin: 1em auto;
   }
-  ul.recent small {
-    font-weight: 300;
+
+  address a:hover {
+    transform: scale(1.1);
+  }
+
+  .intro {
+    max-width: min(45em, 85vw);
+    margin: 1em auto;
+    text-align: center;
+  }
+
+  .interest-description {
+    font-size: 1.1rem;
+    margin-bottom: 1.2em;
+  }
+
+  .interest-links {
     display: flex;
-    gap: 1ex;
-    place-items: center;
+    flex-wrap: wrap;
+    gap: 0.6em;
     place-content: center;
-    border-radius: 4pt;
+    margin: 1.2em 0;
   }
-  ul.recent small > :is(time, a) {
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 0 3pt;
-    border-radius: 4pt;
+
+  .interest-tag {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.4em 0.7em;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
   }
-  ul.recent > li {
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 1ex 1em;
-    border-radius: 4pt;
+
+  .interest-tag:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .recent {
+    margin: 1.2em auto 1.5em;
+  }
+
+  .recent > li {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.02)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.8em;
+    border-radius: 6pt;
     display: grid;
-    gap: 4pt;
-    grid-template-rows: subgrid;
-    grid-row: span 3;
+    gap: 0.6em;
+    grid-template-rows: auto auto 1fr;
+    transition: all 0.2s ease;
   }
-  ul.recent > li > h3 :is(img, small) {
-    margin-right: 5pt;
-    vertical-align: middle;
-    width: 3ex;
-    transform: translateY(-1px);
+
+  .recent > li:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.15);
   }
-  ul.recent > li > h3 {
-    margin: 1ex auto 5pt;
+
+  .recent > li > h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .recent > li > h3 a {
+    display: flex;
+    place-items: center;
+    gap: 0.4em;
+  }
+
+  .recent > li > h3 img {
+    width: 2.2em;
+    height: 2.2em;
+    object-fit: contain;
+  }
+
+  .project-meta {
+    display: flex;
+    gap: 0.8em;
+    place-content: center;
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+  }
+
+  .project-meta > a {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.25em 0.6em;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+
+  .project-meta > a:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .project-meta > time {
+    color: var(--text-secondary);
+    font-size: 0.8em;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.25em 0.6em;
+    border-radius: 12px;
+  }
+
+  .project-description {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.3rem;
+    }
+    .interest-tag {
+      font-size: 0.8rem;
+      padding: 0.35em 0.6em;
+    }
+    .recent > li {
+      padding: 0.7em;
+    }
   }
 </style>
