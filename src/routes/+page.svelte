@@ -5,14 +5,13 @@
   import cv from './cv/cv.yml'
   import OpenSource from './open-source/+page.svelte'
   import Physics from './physics/+page@.md'
-  import Posts from './posts/+page@.svelte'
 
   const mbd = oss.projects.find((p) => p.name === `Matbench Discovery`)
   const pmv = oss.projects.find((p) => p.name === `pymatviz`)
   const pmg = oss.projects.find((p) => p.name === `pymatgen`)
   const torchsim = oss.projects.find((p) => p.name === `TorchSim`)
   const elementari = oss.projects.find((p) => p.name === `Elementari`)
-  const mace_paper = references.find((p) => p.id === `riebesell_foundation_2023`)!
+  const mace_paper = references.find((p) => p.id === `batatia_foundation_2023`)!
 </script>
 
 <img src="./janosh.jpg" alt="me" width="200" />
@@ -71,8 +70,6 @@
 <OpenSource />
 
 <Physics />
-
-<Posts />
 
 <style>
   img[alt='me'] {
