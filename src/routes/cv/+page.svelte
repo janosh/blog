@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SortButtons, type Project } from '$lib'
+  import { type Project, SortButtons } from '$lib'
   import oss from '$lib/oss.yml'
   import papers from '$lib/papers.yaml'
   import Icon from '@iconify/svelte'
@@ -27,7 +27,7 @@
   const links = { target: `_blank`, rel: `noreferrer` }
 </script>
 
-<main style="grid-template-columns: {show_sidebar ? `1fr 140px` : `1fr`}">
+<main style:grid-template-columns={show_sidebar ? `1fr 140px` : `1fr`}>
   <section class="title">
     <h1>Janosh Riebesell</h1>
 
@@ -69,16 +69,29 @@
     </h2>
     <ul class="oss">
       {#each oss.projects.sort((p1, p2) => {
-        const dir = sort_oss_order === `asc` ? -1 : 1
+          const dir = sort_oss_order === `asc` ? -1 : 1
 
-        if (sort_oss_by === `title`) {
-          return p1.name.localeCompare(p2.name) * dir
-        } else if ([`commits`, `stars`].includes(sort_oss_by)) {
-          return (p2[sort_oss_by] - p1[sort_oss_by]) * dir
-        } else {
-          throw new Error(`Unknown sort_oss_by: ${sort_oss_by}`)
-        }
-      }) as { url, img_style, repo, name, description, stars, logo, languages, commits } (name)}
+          if (sort_oss_by === `title`) {
+            return p1.name.localeCompare(p2.name) * dir
+          } else if ([`commits`, `stars`].includes(sort_oss_by)) {
+            return (p2[sort_oss_by] - p1[sort_oss_by]) * dir
+          } else {
+            throw new Error(`Unknown sort_oss_by: ${sort_oss_by}`)
+          }
+        }) as
+        {
+        url,
+        img_style,
+        repo,
+        name,
+        description,
+        stars,
+        logo,
+        languages,
+        commits,
+      }
+        (name)
+      }
         {@const logo_url = logo ?? `${url}/favicon.svg`}
         <li animate:flip={{ duration: 400 }}>
           <h4>
@@ -99,7 +112,7 @@
                 <Icon inline icon="octicon:git-commit" />
                 <small>
                   {commits}
-                  <span style="font-weight: 200;">commits</span>
+                  <span style="font-weight: 200">commits</span>
                 </small>
               </a>
             {/if}
@@ -119,9 +132,9 @@
         <li>
           <h4>
             <a {href}>{title}</a>
-            <small style="font-weight: 200;">{uni}{date ? ` &bull; ${date}` : ``}</small>
+            <small style="font-weight: 200">{uni}{date ? ` &bull; ${date}` : ``}</small>
           </h4>
-          <p style="white-space: nowrap;">
+          <p style="white-space: nowrap">
             Thesis title: <a href={thesis?.url}>{thesis?.title}</a>
             {#if thesis?.repo}
               &nbsp;<a href={thesis.repo} {...links}>
@@ -153,7 +166,7 @@
         <li>
           <h4>
             <a {href}><img src={logo} alt={name} height="20" />{name}</a>
-            <small style="font-weight: 200;">{role}</small>
+            <small style="font-weight: 200">{role}</small>
           </h4>
           <p>{description}</p>
         </li>
@@ -188,12 +201,15 @@
         {/each}
       </ul>
 
-      <h3 style="margin-bottom: 0;">
+      <h3 style="margin-bottom: 0">
         <Icon inline icon="carbon:skill-level-advanced" />&nbsp; Skills
       </h3>
-      <small style="white-space: nowrap;">(emphasis &asymp; proficiency)</small>
+      <small style="white-space: nowrap">(emphasis &asymp; proficiency)</small>
       <ul class="skills">
-        {#each cv.skills.sort((s1, s2) => s2.score - s1.score) as { name, icon, score, href, site } (name)}
+        {#each cv.skills.sort((s1, s2) => s2.score - s1.score) as
+          { name, icon, score, href, site }
+          (name)
+        }
           <!-- color based on score style="color: hsl({score * 20}, 100%, 40%)" -->
           <li style:font-weight={(score - 3) * 100}>
             <a href={href ?? site}>
@@ -239,7 +255,7 @@
 </main>
 <Toggle
   bind:checked={show_sidebar}
-  style="transform: scale(0.9); margin: 1em auto 2em; font-weight: lighter;"
+  style="transform: scale(0.9); margin: 1em auto 2em; font-weight: lighter"
 >
   Toggle Sidebar&ensp;
 </Toggle>

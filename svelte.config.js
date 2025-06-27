@@ -12,9 +12,9 @@ const macros = {
   // Infinitesimal differential (used in derivatives and integrals)
   '\\dif': `\\mathrm d`,
   // Vector
-  '\\vec': `{\\boldsymbol{#1}}`,
+  '\\vec': `#1`, // TODO restore {\\boldsymbol{#1}} causing deno build error
   // Matrix
-  '\\mat': `{\\boldsymbol{#1}}`,
+  '\\mat': `#1`, // TODO restore {\\boldsymbol{#1}} causing deno build error
   // Real line
   '\\reals': `{\\mathbb{R}}`,
   // Complex plane
@@ -50,14 +50,7 @@ for (let index = `A`.charCodeAt(); index <= `Z`.charCodeAt(); index++) {
 }
 
 const rehypePlugins = [
-  [
-    katex,
-    {
-      macros,
-      throwOnError: false,
-      errorColor: `#cc0000`,
-    },
-  ],
+  [katex, { macros, throwOnError: false, errorColor: `#cc0000` }],
   heading_slugs,
   [
     link_headings,

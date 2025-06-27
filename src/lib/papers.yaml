@@ -632,11 +632,12 @@ references:
     title: A Foundational Potential Energy Surface Dataset for Materials
     URL: http://arxiv.org/abs/2503.04070
 
-  - id: riebesell_matbench_2023
+  - id: riebesell_matbench_2025
     accessed:
-      - year: 2024
-        month: 4
-        day: 5
+      - year: 2025
+        month: 6
+        day: 27
+    archive: http://arxiv.org/abs/2308.14920
     author:
       - family: Riebesell
         given: Janosh
@@ -648,25 +649,35 @@ references:
         given: Yuan
       - family: Deng
         given: Bowen
+      - family: Ceder
+        given: Gerbrand
+      - family: Asta
+        given: Mark
       - family: Lee
         given: Alpha A.
       - family: Jain
         given: Anubhav
       - family: Persson
         given: Kristin A.
-    citation-key: riebesell_matbench_2023
-    DOI: 10.48550/arXiv.2308.14920
+    citation-key: riebesell_matbench_2025
+    container-title: Nature Machine Intelligence
+    container-title-short: Nat Mach Intell
+    DOI: 10.1038/s42256-025-01055-1
+    ISSN: 2522-5839
+    issue: '6'
     issued:
-      - year: 2023
-        month: 8
-        day: 28
-    number: arXiv:2308.14920
-    publisher: arXiv
-    source: arXiv.org
+      - year: 2025
+        month: 6
+    language: en
+    license: 2025 The Author(s)
+    page: 836-847
+    publisher: Nature Publishing Group
+    source: www.nature.com
     title: >-
-      Matbench Discovery -- A framework to evaluate machine learning crystal
+      Matbench Discovery - A framework to evaluate machine learning crystal
       stability predictions
-    URL: http://arxiv.org/abs/2308.14920
+    URL: https://www.nature.com/articles/s42256-025-01055-1
+    volume: '7'
 
   - id: riebesell_pushing_2024
     accessed:

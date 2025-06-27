@@ -10,7 +10,7 @@
   const pmv = oss.projects.find((p) => p.name === `pymatviz`)
   const pmg = oss.projects.find((p) => p.name === `pymatgen`)
   const torchsim = oss.projects.find((p) => p.name === `TorchSim`)
-  const elementari = oss.projects.find((p) => p.name === `Elementari`)
+  const matterviz = oss.projects.find((p) => p.name === `MatterViz`)
   const mace_paper = references.find((p) => p.id === `batatia_foundation_2023`)!
 </script>
 
@@ -22,7 +22,7 @@
     <a href={url} target="_blank" rel="noreferrer"><Icon inline {icon} {style} /></a>
   {/each}
   <a href="/cv" class="primary">
-    <Icon inline icon="academicons:cv-square" style="transform: scale(1.1);" />
+    <Icon inline icon="academicons:cv-square" style="transform: scale(1.1)" />
   </a>
 </address>
 
@@ -38,7 +38,7 @@
     <a href={torchsim?.repo} class="interest-tag">⚛️ Atomistic Simulation</a>
     <a href={pmv?.repo} class="interest-tag">📊 Data Visualization</a>
     <a href={pmg?.repo} class="interest-tag">💻 Software Engineering</a>
-    <a href={elementari?.repo} class="interest-tag">🌐 Web Development</a>
+    <a href={matterviz?.repo} class="interest-tag">🌐 Web Development</a>
   </div>
 </div>
 
@@ -205,6 +205,8 @@
     background: rgba(255, 255, 255, 0.05);
     padding: 0.25em 0.6em;
     border-radius: 12px;
+    display: flex;
+    place-items: center;
   }
 
   .project-description {
