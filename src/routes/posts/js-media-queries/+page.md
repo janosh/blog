@@ -66,9 +66,9 @@ _[`window.matchMedia` browser support](https://caniuse.com/#search=matchMedia)_
 Here's how you'd use it in React:
 
 ```js
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { Mobile, Desktop } from 'src/components'
+import { Desktop, Mobile } from 'src/components'
 
 const maxPhone = `only screen and (max-width: 30em)` // highlight-line
 
@@ -95,7 +95,7 @@ If you're server-side rendering (SSR), you'll need to wrap this code in a check 
 <!-- eslint-skip -->
 
 ```js
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const maxPhone = `screen and (max-width: 30em)`
 

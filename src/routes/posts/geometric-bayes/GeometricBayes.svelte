@@ -24,7 +24,7 @@
       resizable="x"
       handle_position="top: 0%; left: 100%"
     >
-      <span style="left: 50%; top: 0; transform: translate(-50%, calc(-100% - 1ex));">
+      <span style="left: 50%; top: 0; transform: translate(-50%, calc(-100% - 1ex))">
         p(H) =
         {Math.round(prob.H)}%
       </span>
@@ -38,7 +38,7 @@
       resizable="y"
       pos="bottom: 0; left: 0;"
     >
-      <span style="left: 0; top: 50%; transform: translate(calc(-100% - 1ex), -50%);">
+      <span style="left: 0; top: 50%; transform: translate(calc(-100% - 1ex), -50%)">
         p(E|H) =
         {Math.round(prob.EGivenH)}%
       </span>
@@ -53,16 +53,16 @@
       pos="bottom: 0; right: 0;"
       handle_position="top: 0%; left: 100%"
     >
-      <span style="right: 0; top: 50%; transform: translate(calc(100% + 1ex), -50%);">
+      <span style="right: 0; top: 50%; transform: translate(calc(100% + 1ex), -50%)">
         p(E|&not;H) =
         {Math.round(prob.EGivenNotH)}%
       </span>
     </Resizable>
   {/if}
 </div>
-<div id="result" style="width: {size.width}px">
-  <div style="width: {pHGivenE}%;">
-    <span style="right: 50%; bottom: 0; transform: translate(50%, calc(100% + 1ex));">
+<div id="result" style:width="{size.width}px">
+  <div style:width="{pHGivenE}%">
+    <span style="right: 50%; bottom: 0; transform: translate(50%, calc(100% + 1ex))">
       p(H|E) =
       {Math.round(pHGivenE)}%
     </span>

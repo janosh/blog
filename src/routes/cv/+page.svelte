@@ -1,17 +1,15 @@
 <script lang="ts">
-  import { SortButtons, type Project } from '$lib'
+  import { type Project, SortButtons } from '$lib'
   import oss from '$lib/oss.yml'
   import papers from '$lib/papers.yaml'
   import Icon from '@iconify/svelte'
   import type { ComponentProps } from 'svelte'
-  import { Toggle } from 'svelte-zoo'
   import { flip } from 'svelte/animate'
   import Papers from './Papers.svelte'
   import cv from './cv.yml'
   import Intro from './intro.md'
 
   type PaperProps = ComponentProps<typeof Papers>
-  let show_sidebar = $state(true)
   let sort_papers_by: PaperProps[`sort_by`] = $state(`date`)
   let sort_papers_order: PaperProps[`sort_order`] = $state(`desc`)
   let sort_oss_by: keyof Project = $state(`commits`)
@@ -22,22 +20,16 @@
     [`date`, `Sort by date`],
     [`title`, `Sort by title`],
     [`author`, `Sort by first-author last name`],
-    [`first`, `First-author papers to the top`],
+    [`first author`, `First-author papers to the top`],
   ] as const
   const links = { target: `_blank`, rel: `noreferrer` }
 </script>
 
-<main style="grid-template-columns: {show_sidebar ? `1fr 140px` : `1fr`}">
+<main>
   <section class="title">
-    <h1>Janosh Riebesell</h1>
+    <h1>Janosh Riebesell - CV</h1>
 
-    <!-- <small>
-      <a href="https://materialsproject.org/about/people">
-        Materials Project Staff @ Lawrence Berkeley National Lab
-      </a>
-    </small> -->
-
-    <address>
+    <address style="font-size: 1.2em">
       {#each cv.social as { url, icon, style } (url)}
         <a href={url} {...links}><Icon inline {icon} {style} /></a>
       {/each}
@@ -45,9 +37,7 @@
   </section>
 
   <section class="body">
-    <small>
-      <Intro />
-    </small>
+    <Intro />
 
     <h2>
       <Icon inline icon="iconoir:journal" />&nbsp; Publications
@@ -69,16 +59,19 @@
     </h2>
     <ul class="oss">
       {#each oss.projects.sort((p1, p2) => {
-        const dir = sort_oss_order === `asc` ? -1 : 1
-
-        if (sort_oss_by === `title`) {
-          return p1.name.localeCompare(p2.name) * dir
-        } else if ([`commits`, `stars`].includes(sort_oss_by)) {
-          return (p2[sort_oss_by] - p1[sort_oss_by]) * dir
-        } else {
-          throw new Error(`Unknown sort_oss_by: ${sort_oss_by}`)
-        }
-      }) as { url, img_style, repo, name, description, stars, logo, languages, commits } (name)}
+          const dir = sort_oss_order === `asc` ? -1 : 1
+          if (sort_oss_by === `name`) {
+            return p1.name.localeCompare(p2.name) * dir
+          } else if ([`commits`, `stars`].includes(sort_oss_by)) {
+            return (Number(p2[sort_oss_by]) - Number(p1[sort_oss_by])) * dir
+          } else {
+            throw new Error(`Unknown sort_oss_by: ${sort_oss_by}`)
+          }
+        }) as
+        { url, img_style, repo, name, description, ...rest }
+        (name)
+      }
+        {@const { stars, logo, languages, commits } = rest}
         {@const logo_url = logo ?? `${url}/favicon.svg`}
         <li animate:flip={{ duration: 400 }}>
           <h4>
@@ -99,7 +92,7 @@
                 <Icon inline icon="octicon:git-commit" />
                 <small>
                   {commits}
-                  <span style="font-weight: 200;">commits</span>
+                  <span style="font-weight: 200">commits</span>
                 </small>
               </a>
             {/if}
@@ -117,142 +110,116 @@
       {#each cv.education as edu (JSON.stringify(edu))}
         {@const { title, thesis, date, href, uni } = edu}
         <li>
-          <h4>
+          <h4 style="margin: 2ex 0 1ex">
             <a {href}>{title}</a>
-            <small style="font-weight: 200;">{uni}{date ? ` &bull; ${date}` : ``}</small>
+            <span style="font-weight: 200"> - {uni}{date ? ` &bull; ${date}` : ``}</span>
           </h4>
-          <p style="white-space: nowrap;">
-            Thesis title: <a href={thesis?.url}>{thesis?.title}</a>
-            {#if thesis?.repo}
-              &nbsp;<a href={thesis.repo} {...links}>
-                <Icon inline icon="octicon:mark-github" />
-              </a>
-            {/if}
-          </p>
+          Thesis title: <a href={thesis?.url}>{thesis?.title}</a>
+          {#if thesis?.repo}
+            &nbsp;<a href={thesis.repo} {...links}>
+              <Icon inline icon="octicon:mark-github" />
+            </a>
+          {/if}
+        </li>
+      {/each}
+    </ul>
+
+    <div class="side-by-side">
+      <div>
+        <h2>
+          <Icon inline icon="lucide:languages" />&nbsp; Languages
+        </h2>
+        <ul class="horizontal">
+          {#each cv.languages as { name, level, icon } (name)}
+            <li>
+              <Icon inline {icon} />
+              &nbsp;{name}
+              <Icon inline icon="carbon:skill-level-{level}" />
+            </li>
+          {/each}
+        </ul>
+      </div>
+
+      <div>
+        <h2>
+          <Icon inline icon="gis:search-country" />&nbsp; Nationality
+        </h2>
+        <ul class="horizontal">
+          {#each cv.nationality as { title, icon } (title)}
+            <li>
+              <Icon inline {icon} />
+              &nbsp;{title}
+            </li>
+          {/each}
+        </ul>
+      </div>
+    </div>
+
+    <h2>
+      <Icon inline icon="carbon:skill-level-advanced" />&nbsp; Programming Languages and
+      Tools
+    </h2>
+    <small style="white-space: nowrap">(emphasis &asymp; proficiency)</small>
+    <ul class="skills">
+      {#each cv.skills.sort((s1, s2) => s2.score - s1.score) as
+        { name, icon, score, href, site }
+        (name)
+      }
+        <!-- color based on score style="color: hsl({score * 20}, 100%, 40%)" -->
+        <li style:font-weight={(score - 3) * 100}>
+          <a href={href ?? site}>
+            <Icon inline {icon} />
+            {name} <small>({score})</small>
+          </a>
         </li>
       {/each}
     </ul>
 
     <h2>
-      <Icon inline icon="mdi:trophy" />&nbsp; Awards
+      <Icon inline icon="mdi:account-group" />
+      &nbsp; Memberships
     </h2>
     <ul>
-      {#each cv.awards as { name, description, date, href } (href)}
+      {#each cv.memberships as { name, date, href } (name)}
         <li>
-          <h4><a {href}>{name}</a></h4>
-          <p>{description} <small>{date}</small></p>
+          <a {href}>{name}</a>&ensp;<small>{date}</small>
         </li>
       {/each}
     </ul>
 
     <h2>
-      <Icon inline icon="material-symbols:volunteer-activism" />&nbsp; Volunteer Work
+      <Icon inline icon="material-symbols:interests" />&nbsp; Hobbies
     </h2>
-    <ul>
-      {#each cv.volunteer as { name, description, href, logo, role } (href)}
+    <ul class="hobbies">
+      {#each cv.hobbies as { name, icon, href } (name)}
         <li>
-          <h4>
-            <a {href}><img src={logo} alt={name} height="20" />{name}</a>
-            <small style="font-weight: 200;">{role}</small>
-          </h4>
-          <p>{description}</p>
+          {#if href}
+            <a {href}>
+              <Icon inline {icon} />
+              {name}
+            </a>
+          {:else}
+            <Icon inline {icon} />
+            {name}
+          {/if}
         </li>
       {/each}
     </ul>
   </section>
-
-  {#if show_sidebar}
-    <aside>
-      <h3>
-        <Icon inline icon="lucide:languages" />&nbsp; Languages
-      </h3>
-      <ul>
-        {#each cv.languages as { name, level, icon } (name)}
-          <li>
-            <Icon inline {icon} />
-            &nbsp;{name}
-            <Icon inline icon="carbon:skill-level-{level}" />
-          </li>
-        {/each}
-      </ul>
-
-      <h3>
-        <Icon inline icon="gis:search-country" />&nbsp; Nationality
-      </h3>
-      <ul>
-        {#each cv.nationality as { title, icon } (title)}
-          <li>
-            <Icon inline {icon} />
-            &nbsp;{title}
-          </li>
-        {/each}
-      </ul>
-
-      <h3 style="margin-bottom: 0;">
-        <Icon inline icon="carbon:skill-level-advanced" />&nbsp; Skills
-      </h3>
-      <small style="white-space: nowrap;">(emphasis &asymp; proficiency)</small>
-      <ul class="skills">
-        {#each cv.skills.sort((s1, s2) => s2.score - s1.score) as { name, icon, score, href, site } (name)}
-          <!-- color based on score style="color: hsl({score * 20}, 100%, 40%)" -->
-          <li style:font-weight={(score - 3) * 100}>
-            <a href={href ?? site}>
-              <Icon inline {icon} />
-              {name} <small>({score})</small>
-            </a>
-          </li>
-        {/each}
-      </ul>
-
-      <h3>
-        <Icon inline icon="mdi:account-group" />
-        &nbsp; Memberships
-      </h3>
-      <ul>
-        {#each cv.memberships as { name, date, href } (name)}
-          <li>
-            <a {href}>{name}</a>&ensp;<small>{date}</small>
-          </li>
-        {/each}
-      </ul>
-
-      <h3>
-        <Icon inline icon="material-symbols:interests" />&nbsp; Hobbies
-      </h3>
-      <ul>
-        {#each cv.hobbies as { name, icon, href } (name)}
-          <li>
-            {#if href}
-              <a {href}>
-                <Icon inline {icon} />
-                {name}
-              </a>
-            {:else}
-              <Icon inline {icon} />
-              {name}
-            {/if}
-          </li>
-        {/each}
-      </ul>
-    </aside>
-  {/if}
 </main>
-<Toggle
-  bind:checked={show_sidebar}
-  style="transform: scale(0.9); margin: 1em auto 2em; font-weight: lighter;"
->
-  Toggle Sidebar&ensp;
-</Toggle>
+
+<button class="export-pdf" onclick={() => window.print()} type="button">
+  <Icon icon="mdi:file-pdf-box" />
+  Export PDF
+</button>
 
 <style>
   main {
-    margin: 2em auto 0;
-    max-width: 42em;
+    margin: 2em auto 100px;
+    max-width: 50em;
     background-color: whitesmoke;
     color: black;
     padding: 3em;
-    display: grid;
-    gap: 0 1em;
     border-radius: 2pt;
   }
   main :global(a) {
@@ -275,6 +242,7 @@
   } */
   h2 {
     position: relative;
+    margin-bottom: 0;
   }
   a {
     color: inherit;
@@ -317,26 +285,76 @@
     gap: 4pt 8pt;
     flex-wrap: wrap;
   }
-  aside {
-    font-size: smaller;
-    max-height: max-content;
+  .side-by-side {
+    display: flex;
+    gap: 2em;
+    flex-wrap: wrap;
   }
-  aside > h3 {
-    white-space: nowrap;
-    margin: 2ex 0 1ex;
+  .side-by-side > div {
+    flex: 1;
+    min-width: 200px;
   }
-  aside > h3:first-of-type {
-    margin-top: 0;
+  ul.hobbies {
+    display: flex;
+    gap: 4pt 8pt;
+    flex-wrap: wrap;
   }
-
-  /* TODO convert to CSS prop with next svelte-zoo release */
-  main :global(input:checked + span) {
-    background-color: #f0f0f0 !important;
+  ul.horizontal {
+    display: flex;
+    gap: 4pt 8pt;
+    flex-wrap: wrap;
+  }
+  .export-pdf {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: darkblue;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    z-index: 1000;
+  }
+  .export-pdf:hover {
+    background: #1a237e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
   }
   @media print {
-    /* hide sidebar toggle when printing */
-    main :global(label) {
-      display: none !important;
+    .export-pdf {
+      display: none;
+    }
+    @page {
+      margin: 0;
+      padding: 0.6in;
+      size: auto;
+    }
+    main {
+      margin: 0;
+      padding: 2em;
+      box-shadow: none;
+    }
+    /* Keep section and publication titles with their content */
+    section.body :global(:is(h2, h3)) {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+    /* Keep publication metadata with titles */
+    small {
+      page-break-before: avoid;
+      break-before: avoid;
+    }
+    /* Keep publication list items together */
+    section.body :global(ol li) {
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
   }
 </style>

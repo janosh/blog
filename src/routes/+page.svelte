@@ -6,11 +6,21 @@
   import OpenSource from './open-source/+page.svelte'
   import Physics from './physics/+page@.md'
 
-  const mbd = oss.projects.find((p) => p.name === `Matbench Discovery`)
-  const pmv = oss.projects.find((p) => p.name === `pymatviz`)
-  const pmg = oss.projects.find((p) => p.name === `pymatgen`)
-  const torchsim = oss.projects.find((p) => p.name === `TorchSim`)
-  const elementari = oss.projects.find((p) => p.name === `Elementari`)
+  const projects = oss.projects.map((proj) => {
+    if (!proj.paper_key) return proj
+    const paper = references.find((p) => p.id === proj.paper_key)
+    if (paper) return { ...proj, paper }
+    else {
+      console.error(`Paper ${proj.paper_key} not found`)
+      return proj
+    }
+  })
+
+  const mbd = projects.find((p) => p.name === `Matbench Discovery`)
+  const pmv = projects.find((p) => p.name === `pymatviz`)
+  const pmg = projects.find((p) => p.name === `pymatgen`)
+  const torchsim = projects.find((p) => p.name === `TorchSim`)
+  const matterviz = projects.find((p) => p.name === `MatterViz`)
   const mace_paper = references.find((p) => p.id === `batatia_foundation_2023`)!
 </script>
 
@@ -22,7 +32,7 @@
     <a href={url} target="_blank" rel="noreferrer"><Icon inline {icon} {style} /></a>
   {/each}
   <a href="/cv" class="primary">
-    <Icon inline icon="academicons:cv-square" style="transform: scale(1.1);" />
+    <Icon inline icon="academicons:cv-square" style="transform: scale(1.1)" />
   </a>
 </address>
 
@@ -38,7 +48,7 @@
     <a href={torchsim?.repo} class="interest-tag">⚛️ Atomistic Simulation</a>
     <a href={pmv?.repo} class="interest-tag">📊 Data Visualization</a>
     <a href={pmg?.repo} class="interest-tag">💻 Software Engineering</a>
-    <a href={elementari?.repo} class="interest-tag">🌐 Web Development</a>
+    <a href={matterviz?.repo} class="interest-tag">🌐 Web Development</a>
   </div>
 </div>
 
@@ -47,17 +57,21 @@
   &nbsp;Recent Work
 </h2>
 <ul class="recent grid">
-  {#each oss.projects.filter((p) => p.featured) as project (JSON.stringify(project))}
-    {@const { name, repo, logo, paper: cite_id, description } = project}
-    {@const paper = references.find((p) => p.id == cite_id)}
-    {#if !paper}
-      {console.error(`Paper ${cite_id} not found`)}
-    {/if}
+  {#each projects.filter((p) => p.featured).sort((p1, p2) => {
+      const date1 = p1?.paper?.issued?.[0]
+      const date2 = p2?.paper?.issued?.[0]
+      if (!date1 || !date2) return 0
+      return new Date(date2.year, date2.month, date2.day).getTime() -
+        new Date(date1.year, date1.month, date1.day).getTime()
+    }) as
+    project
+    (project.name)
+  }
+    {@const { name, url, repo, logo, paper, description } = project}
     <li>
-      <h3>
-        <a href={repo} class="repo-link">
-          <img src={logo} alt={name} />
-          {name}
+      <h3 style="white-space: nowrap">
+        <a href={url} class="repo-link">
+          <img src={logo} alt={name} /> {name}
         </a>
       </h3>
       <div class="project-meta">
@@ -205,6 +219,8 @@
     background: rgba(255, 255, 255, 0.05);
     padding: 0.25em 0.6em;
     border-radius: 12px;
+    display: flex;
+    place-items: center;
   }
 
   .project-description {

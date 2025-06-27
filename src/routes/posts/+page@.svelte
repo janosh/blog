@@ -53,26 +53,31 @@
   closeDropdownOnSelect
 >
   {#snippet option({ option })}
-    <span   style="display: flex; gap: 5pt; align-items: center;">
-      {option.label} <span style="flex: 1;"></span>
+    <span style="display: flex; gap: 5pt; align-items: center">
+      {option.label} <span style="flex: 1"></span>
       {option.count}
     </span>
   {/snippet}
 </Select>
 
-<ul class="grid" style="margin: 4em auto; gap: 3ex;">
+<ul class="grid" style="margin: 4em auto; gap: 3ex">
   {#each page.data?.posts
-    ?.filter(has_active_tags(active_tags))
-    .sort((post_1, post_2) => {
-      return post_2.date.localeCompare(post_1.date) // sort by date descending
-    }) ?? [] as post (post.title)}
+      ?.filter(has_active_tags(active_tags))
+      .sort((post_1, post_2) => {
+        return post_2.date.localeCompare(post_1.date) // sort by date descending
+      }) ?? [] as
+    post
+    (post.title)
+  }
     {@const { cover, slug, title, tags, date } = post}
     {@const href = `/posts/${slug}`}
     <li animate:flip={{ duration: 400 }}>
       <h3><a {href}>{title}</a></h3>
       <a {href}>
         {#if dev}
-          {#await import(`./${slug}/${cover?.img?.replace(`.svg`, ``)}.svg`) then { default: src }}
+          {#await import(`./${slug}/${cover?.img?.replace(`.svg`, ``)}.svg`)
+            then { default: src }
+          }
             <img {src} alt={title} />
           {/await}
         {:else}
@@ -91,8 +96,8 @@
       <small><Icon icon="carbon:tag" inline /> {tags?.join(`, `)}</small>
     </li>
   {/each}
-  <li style="visibility: hidden;"></li>
-  <li style="visibility: hidden;"></li>
+  <li style="visibility: hidden"></li>
+  <li style="visibility: hidden"></li>
 </ul>
 
 <style>

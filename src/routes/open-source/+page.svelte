@@ -75,8 +75,8 @@
       <p class="project-description">{description}</p>
     </li>
   {/each}
-  <li style="visibility: hidden;"></li>
-  <li style="visibility: hidden;"></li>
+  <li style="visibility: hidden"></li>
+  <li style="visibility: hidden"></li>
 </ul>
 
 <style>

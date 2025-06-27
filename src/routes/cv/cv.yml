@@ -9,9 +9,10 @@ social:
   - name: LinkedIn
     icon: bi:linkedin
     url: https://linkedin.com/in/janosh-riebesell
-  - name: Twitter
-    icon: fa-brands:twitter
-    url: https://twitter.com/jrib_
+  - name: X
+    icon: fa6-brands:x-twitter
+    url: https://x.com/jrib_
+    style: 'transform: scale(1.2);'
   - name: Email
     icon: mdi:email
     url: mailto:janosh.riebesell@gmail.com
@@ -30,17 +31,20 @@ education:
   - title: MPhil in Scientific Computing
     uni: University of Cambridge
     description: Physics
-    thesis_title: Probabilistic Data-Driven Discovery of Thermoelectric Materials
+    thesis:
+      title: Probabilistic Data-Driven Discovery of Thermoelectric Materials
     href: https://tcm.phy.cam.ac.uk
     logo: https://cam.ac.uk/sites/cam.ac.uk/themes/fresh/images/interface/cambridge_university2.svg
   - title: MSc in Physics
     uni: ITP Heidelberg
-    thesis_title: Functional Renormalization Group Analytically Continued to Finite Temperatures
+    thesis:
+      title: Functional Renormalization Group Analytically Continued to Finite Temperatures
     href: https://physik.uni-heidelberg.de?lang=en
     logo: https://physik.uni-heidelberg.de/images/Logo_NEU_Fak_Phys_Astr_rot_schwarz_en.svg
   - title: BSc in Physics
     uni: Hamburg University
-    thesis_title: van der Waals Corrections for Density Functional Theory - DFT+D2 applied to Graphene-hBN-Heterostructures
+    thesis:
+      title: van der Waals Corrections for Density Functional Theory - DFT+D2 applied to Graphene-hBN-Heterostructures
     href: https://physik.uni-hamburg.de/en.html
     logo: https://assets.rrz.uni-hamburg.de/assets/uhh-logo-4ec3691b46570436d95977e2c0c368646d0c24d722425dd674f48b1c44585e81.svg
 
@@ -112,7 +116,7 @@ skills:
     site: https://nodejs.org
   - name: Deno
     icon: simple-icons:deno
-    score: 4
+    score: 8
     site: https://deno.land
   - name: vitest
     icon: simple-icons:vitest
@@ -125,8 +129,12 @@ skills:
     site: https://pptr.dev
   - name: PlayWright
     icon: simple-icons:playwright
-    score: 7
+    score: 8
     site: https://playwright.dev
+  - name: JAX
+    icon: file-icons:mathjax # TODO fix icon once actual JAX logo available from https://icones.js.org/collection/all?s=jax
+    score: 4
+    site: https://docs.jax.dev
 
 hobbies:
   - name: photography
@@ -164,26 +172,6 @@ languages:
   - name: Spanish
     level: basic
     icon: twemoji:flag-spain
-
-volunteer:
-  - name: Studenten bilden Schüler
-    description: Non-profit student initiative that connects University student volunteers with children from underprivileged families for free tutoring.
-    date: 2015 - 2022
-    href: https://studenten-bilden-schueler.de
-    logo: https://studenten-bilden-schueler.de/favicon.svg
-    role: Board member and head of IT
-  - name: Afara Foundation
-    description: A non-profit student association that runs orphanages in Namibia and funds children's education and medical treatment in several African countries.
-    date: 2016 - present
-    href: https://afara.foundation
-    logo: https://afara.foundation/favicon.svg
-    role: Board member and head of IT
-
-awards:
-  - name: Studienstiftung des deutschen Volkes
-    description: Full scholarship for outstanding students (German Academic Scholarship Foundation)
-    date: 2015 - 2023
-    href: https://studienstiftung.de
 
 memberships:
   - name: Cambridge Physical Society
