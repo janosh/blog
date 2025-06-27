@@ -1,5 +1,5 @@
 const [points, middle] = [21, 10]
-const range = Array.from(Array(points), (e, i) => i - middle)
+const range = Array.from(Array(points), (_itm, idx) => idx - middle)
 const z = range.map((x) => range.map((y) => x * x - y * y))
 
 export default {

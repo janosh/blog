@@ -60,12 +60,12 @@
     window.removeEventListener(`pointerup`, resizePointerUp)
     window.removeEventListener(`pointercancel`, resizePointerUp)
   }
+  let style = $derived(
+    `${pos} width: ${width}%; height:${height}%; background: ${color};`,
+  )
 </script>
 
-<div
-  class="resizable"
-  style="{pos} width: {width}%; height:{height}%; background: {color};"
->
+<div class="resizable" {style}>
   {@render children?.()}
   <div class="resizer" onpointerdown={resizePointerDown} style={handle_position}></div>
 </div>

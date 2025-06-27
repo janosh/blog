@@ -90,12 +90,12 @@ As you can see, the styles are longer than the component itself. That's where I 
 Anyways, regarding usage, notice that the modal component doesn't actually handle its own state. That's done by the parent component. As an example here's a list of photos that when clicked enter a higher-resolution modal view.
 
 ```js
-import React, { useState, Fragment } from 'react' // highlight-line
+import React, { Fragment, useState } from 'react' // highlight-line
 
 import Masonry from 'components/Masonry'
 import Modal from 'components/Modal'
 
-import { Thumbnail, LargeImg } from './styles'
+import { LargeImg, Thumbnail } from './styles'
 
 export default function Photos({ photos }) {
   const [modal, setModal] = useState() // highlight-line
@@ -137,8 +137,9 @@ class Modal extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.closeOnClickOutside)
+    if (this.props.closeOnClickOutside) {
       document.addEventListener(`mousedown`, this.handleClickOutside)
+    }
   }
 
   componentWillUnmount() {
@@ -151,7 +152,7 @@ class Modal extends React.Component {
     return (
       <div ref={(node) => (this.node = node)} id={name + `-modal`}>
         {closeButton && (
-          <button className="close-button" onClick={toggleModal}>
+          <button className='close-button' onClick={toggleModal}>
             &#10005;
           </button>
         )}

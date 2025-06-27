@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { afterNavigate, goto } from '$app/navigation'
-  import { page } from '$app/stores'
+  import { goto } from '$app/navigation'
+  import { page } from '$app/state'
   import { Footer } from '$lib'
-  import { mount, type Snippet } from 'svelte'
+  import { type Snippet } from 'svelte'
   import { CmdPalette } from 'svelte-multiselect'
   import { CopyButton } from 'svelte-zoo'
   import '../app.css'
@@ -19,31 +19,18 @@
       return { label: route, action: () => goto(route) }
     },
   )
-  const code_btn_style = `position: absolute; top: 1ex; right: 1ex;`
-
-  afterNavigate(() => {
-    for (const node of document.querySelectorAll(`pre > code`)) {
-      // skip if <pre> already contains a button (presumably for copy)
-      const pre = node.parentElement
-      if (!pre || pre.querySelector(`button`)) continue
-
-      mount(CopyButton, {
-        target: pre,
-        props: { content: node.textContent ?? ``, style: code_btn_style },
-      })
-    }
-  })
 </script>
 
 <CmdPalette {actions} placeholder="Go to..." />
+<CopyButton global />
 
-{#if $page.url.pathname !== `/`}
+{#if page.url.pathname !== `/`}
   <a href="/" aria-label="Back to index page">&larr; home</a>
 {/if}
 
 {@render children?.()}
 
-{#if $page.url.pathname !== `/cv`}
+{#if page.url.pathname !== `/cv`}
   <Footer />
 {/if}
 

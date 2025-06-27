@@ -174,8 +174,7 @@ The above `shouldNotUpdate` function uses the `functions` and `omit` utilities i
 One little gotcha that took me some time to figure out is that you also need to modify the `onLoad` function for `shouldNotUpdate` to work correctly. The problem is that the Google Maps API modifies the `options` object passed to the `Map` constructor _in-place_ (specifically, it adds a `mapTypeId` with default value `'roadmap'`). But only on the first render. The options object of subsequent renders remains unchanged. So on the first call to `shouldNotUpdate`, `props` will have this key (`props.options.mapTypeId`) but `nextProps` won't. Hence the `Map` component will think it needs to rerender even though nothing has changed. To fix this, we simply pass the `Map` constructor a copy of the `options` object rather than the object itself.
 
 ```js
-const onLoad = () =>
-  setMap(new window.google.maps.Map(ref.current, { ...options }))
+const onLoad = () => setMap(new window.google.maps.Map(ref.current, { ...options }))
 ```
 
 ## Final Implementation

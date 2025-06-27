@@ -222,7 +222,7 @@ At the top, we import `InstantSearch` from [`react-instantsearch-dom`](https://c
 We then import the styled components that make up the UI and the `Input` component into which the user enters the query.
 
 ```js
-import { Root, SearchBox, HitsWrapper, PoweredBy } from './styles'
+import { HitsWrapper, PoweredBy, Root, SearchBox } from './styles'
 import Input from './Input'
 ```
 
@@ -254,14 +254,15 @@ Now comes the actual `Search` component. It starts off with some state initializ
 ```js
 const useOnClickOutside = (ref, handler, events) => {
   if (!events) events = [`mousedown`, `touchstart`]
-  const detectClickOutside = (event) =>
-    !ref.current.contains(event.target) && handler()
+  const detectClickOutside = (event) => !ref.current.contains(event.target) && handler()
   useEffect(() => {
-    for (const event of events)
+    for (const event of events) {
       document.addEventListener(event, detectClickOutside)
+    }
     return () => {
-      for (const event of events)
+      for (const event of events) {
         document.removeEventListener(event, detectClickOutside)
+      }
     }
   })
 }
@@ -320,14 +321,14 @@ Note that we fed `algoliasearch` with the same app ID we specified in our `.env`
 import React from 'react'
 import { connectSearchBox } from 'react-instantsearch-dom'
 
-import { SearchIcon, Form, Input } from './styles'
+import { Form, Input, SearchIcon } from './styles'
 
 export default connectSearchBox(({ refine, ...rest }) => (
   <Form>
     <Input
-      type="text"
-      placeholder="Search"
-      aria-label="Search"
+      type='text'
+      placeholder='Search'
+      aria-label='Search'
       onChange={(e) => refine(e.target.value)}
       // iOS Safari doesn't blur input automatically on tap outside.
       onMouseLeave={(e) => e.target.blur()}

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { dev } from '$app/environment'
+  import type { FrontMatter } from '$lib'
   import { repository } from '$root/package.json'
   import Icon from '@iconify/svelte'
   import type { Snippet } from 'svelte'
@@ -15,7 +16,9 @@
 </script>
 
 {#if dev}
-  {#await import(`./${slug}/${cover?.img?.replace(`.svg`, ``)}.svg`) then { default: src }}
+  {#await import(`./${slug}/${cover?.img?.replace(`.svg`, ``)}.svg`)
+    then { default: src }
+  }
     <img {src} alt={cover?.caption} />
   {/await}
 {:else}
@@ -25,25 +28,26 @@
   />
 {/if}
 
-<h1 style="margin: 2em 0 1em;">{title}</h1>
+<h1 style="margin: 2em 0 1em">{title}</h1>
 <time>
   <Icon icon="carbon:calendar" inline />
   {date?.split(`T`)[0]}
 </time>
-<main style="max-width: 50em;">
+<main style="max-width: 50em">
   {@render children?.()}
 
   <br />
   <PrevNext items={data.posts.map((post) => [post.slug, post])} current={slug}>
     {#snippet children({ item, kind })}
+      {@const { slug, title, date } = item[1] as FrontMatter}
       <h3>
-        <a href={item.slug}>
+        <a href={slug}>
           {@html kind == `next` ? `Next &rarr;` : `&larr; Previous`}
           <br />
-          <small>{item.title}</small>
+          <small>{title}</small>
         </a>
         <br />
-        <time>{new Date(item.date).toISOString().split?.(`T`)[0]}</time>
+        <time>{new Date(date).toISOString().split?.(`T`)[0]}</time>
       </h3>
     {/snippet}
   </PrevNext>
