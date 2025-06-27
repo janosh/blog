@@ -2,7 +2,7 @@
   interface Props {
     label?: string
     sort_by?: string
-    sort_keys?: readonly string[]
+    sort_keys?: readonly string[] | readonly (readonly [string, string])[]
     sort_order?: `asc` | `desc`
     as?: string
     [key: string]: unknown

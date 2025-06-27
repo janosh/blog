@@ -53,7 +53,9 @@ Type a query: <input bind:value={query} />
 
 Type a query: <input bind:value={query} />
 <p use:highlight_matches={{ query, css_class }}>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis nihil excepturi in earum reiciendis perferendis eveniet eum repudiandae! Assumenda dolorem numquam ullam cum vel ad voluptates voluptatum corporis id vero...
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis nihil excepturi in
+  earum reiciendis perferendis eveniet eum repudiandae! Assumenda dolorem numquam ullam
+  cum vel ad voluptates voluptatum corporis id vero...
 </p>
 
 <style>

@@ -218,8 +218,7 @@ By generating a set of samples $\{\vec z_n\}_{n=1}^N$ from $p_z(\vec z; \vec\psi
 
 $$
 \nabla_{\vec\phi} \Lcal(\vec\theta)
-\approx -\frac{1}{N} \sum_{n=1}^N \nabla_{\vec\phi} \log\left| \det J_{f_{\vec\phi}}(\vec z_n) \right|
-+ \nabla_{\vec\phi}\log p_z^*\bigl(f_{\vec\phi}(\vec z_n)\bigr).
+\approx -\frac{1}{N} \sum_{n=1}^N \nabla_{\vec\phi} \log\left| \det J_{f_{\vec\phi}}(\vec z_n) \right| + \nabla_{\vec\phi}\log p_z^*\bigl(f_{\vec\phi}(\vec z_n)\bigr).
 $$
 
 The gradient with respect to $\vec\psi$ isn't strictly necessary since any adjustment to the parameters of the base distribution $p_z(\vec z; \vec\psi)$ can be absorbed into the transformation $f_\vec\phi$. We can fit with respect to $\vec\phi$ only without loss of generality.

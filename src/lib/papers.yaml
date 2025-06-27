@@ -258,12 +258,12 @@ references:
     title: >-
       Overcoming systematic softening in universal machine learning interatomic
       potentials by fine-tuning
-    URL: http://arxiv.org/abs/2405.07105
+    URL: https://arxiv.org/abs/2405.07105
 
   - id: evans_developments_2024
     accessed:
-      - year: 2024
-        month: 2
+      - year: 2025
+        month: 7
         day: 2
     author:
       - family: Evans
@@ -316,7 +316,7 @@ references:
         given: Adam
       - family: Castro
         given: Pedro Baptista
-        non-dropping-particle: de
+        dropping-particle: de
       - family: Carlsson
         given: Johan
       - family: Cerqueira
@@ -386,27 +386,33 @@ references:
       - family: Armiento
         given: Rickard
     citation-key: evans_developments_2024
-    DOI: 10.48550/arXiv.2402.00572
+    container-title: Digital Discovery
+    container-title-short: Digital Discovery
+    DOI: 10.1039/D4DD00039K
+    ISSN: 2635-098X
+    issue: '8'
     issued:
       - year: 2024
-        month: 2
-        day: 1
-    number: arXiv:2402.00572
-    publisher: arXiv
-    source: arXiv.org
+        month: 8
+        day: 7
+    language: en
+    page: 1509-1533
+    publisher: RSC
+    source: pubs.rsc.org
     title: >-
       Developments and applications of the OPTIMADE API for materials discovery,
       design, and data exchange
-    URL: http://arxiv.org/abs/2402.00572
+    URL: https://pubs.rsc.org/en/content/articlelanding/2024/dd/d4dd00039k
+    volume: '3'
 
   - id: ganose_atomate2_2025
     accessed:
       - year: 2025
-        month: 1
-        day: 22
+        month: 7
+        day: 2
     author:
       - family: Ganose
-        given: Alex
+        given: Alex M.
       - family: Sahasrabuddhe
         given: Hrushikesh
       - family: Asta
@@ -424,51 +430,55 @@ references:
       - family: Chiang
         given: Yuan
       - family: Chrzan
-        given: Daryl
+        given: Daryl C.
       - family: Clary
         given: Jacob
       - family: Cohen
-        given: Orion
+        given: Orion A.
       - family: Ertural
         given: Christina
       - family: Gallant
-        given: Max
+        given: Max C.
       - family: George
         given: Janine
       - family: Gerits
         given: Sophie
       - family: Goodall
-        given: Rhys
+        given: Rhys E. A.
       - family: Guha
-        given: Rishabh
+        given: Rishabh D.
       - family: Hautier
         given: Geoffroy
       - family: Horton
         given: Matthew
+      - family: Inizan
+        given: T. J.
       - family: Kaplan
-        given: Aaron
+        given: Aaron D.
       - family: Kingsbury
-        given: Ryan
+        given: Ryan S.
       - family: Kuner
-        given: Matthew
+        given: Matthew C.
       - family: Li
         given: Bryant
       - family: Linn
         given: Xavier
       - family: McDermott
-        given: Matthew
+        given: Matthew J.
       - family: Mohanakrishnan
         given: Rohith Srinivaas
       - family: Naik
-        given: Aakash
+        given: Aakash N.
       - family: Neaton
-        given: Jeffrey
+        given: Jeffrey B.
+      - family: Parmar
+        given: Shehan M.
       - family: Persson
-        given: Kristin
+        given: Kristin A.
       - family: Petretto
         given: Guido
       - family: Purcell
-        given: Thomas
+        given: Thomas A. R.
       - family: Ricci
         given: Francesco
       - family: Rich
@@ -478,7 +488,7 @@ references:
       - family: Rignanese
         given: Gian-Marco
       - family: Rosen
-        given: Andrew
+        given: Andrew S.
       - family: Scheffler
         given: Matthias
       - family: Schmidt
@@ -494,7 +504,7 @@ references:
       - family: Trinquet
         given: Victor
       - family: Varley
-        given: Joel
+        given: Joel B.
       - family: Vigil-Fowler
         given: Derek
       - family: Wang
@@ -514,18 +524,109 @@ references:
       - family: Jain
         given: Anubhav
     citation-key: ganose_atomate2_2025
-    DOI: 10.26434/chemrxiv-2025-tcr5h
+    container-title: Digital Discovery
+    container-title-short: Digital Discovery
+    DOI: 10.1039/D5DD00019J
+    ISSN: 2635-098X
     issued:
       - year: 2025
-        month: 1
-        day: 22
+        month: 7
+        day: 1
     language: en
-    publisher: ChemRxiv
-    source: Cambridge Engage Preprints
-    title: 'Atomate2: Modular workflows for materials science'
+    publisher: RSC
+    source: pubs.rsc.org
+    title: 'Atomate2: modular workflows for materials science'
     title-short: Atomate2
-    URL: >-
-      https://chemrxiv.org/engage/chemrxiv/article-details/678e76a16dde43c9085c75e9
+    URL: https://pubs.rsc.org/en/content/articlelanding/2025/dd/d5dd00019j
+
+  - id: horton_accelerated_2025
+    accessed:
+      - year: 2025
+        month: 7
+        day: 4
+    author:
+      - family: Horton
+        given: Matthew K.
+      - family: Huck
+        given: Patrick
+      - family: Yang
+        given: Ruo Xi
+      - family: Munro
+        given: Jason M.
+      - family: Dwaraknath
+        given: Shyam
+      - family: Ganose
+        given: Alex M.
+      - family: Kingsbury
+        given: Ryan S.
+      - family: Wen
+        given: Mingjian
+      - family: Shen
+        given: Jimmy X.
+      - family: Mathis
+        given: Tyler S.
+      - family: Kaplan
+        given: Aaron D.
+      - family: Berket
+        given: Karlo
+      - family: Riebesell
+        given: Janosh
+      - family: George
+        given: Janine
+      - family: Rosen
+        given: Andrew S.
+      - family: Spotte-Smith
+        given: Evan W. C.
+      - family: McDermott
+        given: Matthew J.
+      - family: Cohen
+        given: Orion A.
+      - family: Dunn
+        given: Alex
+      - family: Kuner
+        given: Matthew C.
+      - family: Rignanese
+        given: Gian-Marco
+      - family: Petretto
+        given: Guido
+      - family: Waroquiers
+        given: David
+      - family: Griffin
+        given: Sinead M.
+      - family: Neaton
+        given: Jeffrey B.
+      - family: Chrzan
+        given: Daryl C.
+      - family: Asta
+        given: Mark
+      - family: Hautier
+        given: Geoffroy
+      - family: Cholia
+        given: Shreyas
+      - family: Ceder
+        given: Gerbrand
+      - family: Ong
+        given: Shyue Ping
+      - family: Jain
+        given: Anubhav
+      - family: Persson
+        given: Kristin A.
+    citation-key: horton_accelerated_2025
+    container-title: Nature Materials
+    container-title-short: Nat. Mater.
+    DOI: 10.1038/s41563-025-02272-0
+    ISSN: 1476-4660
+    issued:
+      - year: 2025
+        month: 7
+        day: 3
+    language: en
+    license: 2025 Springer Nature Limited
+    page: 1-11
+    publisher: Nature Publishing Group
+    source: www.nature.com
+    title: Accelerated data-driven materials science with the Materials Project
+    URL: https://www.nature.com/articles/s41563-025-02272-0
 
   - id: horton_crystal_2023
     accessed:
@@ -632,11 +733,12 @@ references:
     title: A Foundational Potential Energy Surface Dataset for Materials
     URL: http://arxiv.org/abs/2503.04070
 
-  - id: riebesell_matbench_2023
+  - id: riebesell_matbench_2025
     accessed:
-      - year: 2024
-        month: 4
-        day: 5
+      - year: 2025
+        month: 6
+        day: 27
+    archive: https://arxiv.org/abs/2308.14920
     author:
       - family: Riebesell
         given: Janosh
@@ -648,25 +750,35 @@ references:
         given: Yuan
       - family: Deng
         given: Bowen
+      - family: Ceder
+        given: Gerbrand
+      - family: Asta
+        given: Mark
       - family: Lee
         given: Alpha A.
       - family: Jain
         given: Anubhav
       - family: Persson
         given: Kristin A.
-    citation-key: riebesell_matbench_2023
-    DOI: 10.48550/arXiv.2308.14920
+    citation-key: riebesell_matbench_2025
+    container-title: Nature Machine Intelligence
+    container-title-short: Nat Mach Intell
+    DOI: 10.1038/s42256-025-01055-1
+    ISSN: 2522-5839
+    issue: '6'
     issued:
-      - year: 2023
-        month: 8
-        day: 28
-    number: arXiv:2308.14920
-    publisher: arXiv
-    source: arXiv.org
+      - year: 2025
+        month: 6
+    language: en
+    license: 2025 The Author(s)
+    page: 836-847
+    publisher: Nature Publishing Group
+    source: www.nature.com
     title: >-
-      Matbench Discovery -- A framework to evaluate machine learning crystal
+      Matbench Discovery - A framework to evaluate machine learning crystal
       stability predictions
-    URL: http://arxiv.org/abs/2308.14920
+    URL: https://www.nature.com/articles/s42256-025-01055-1
+    volume: '7'
 
   - id: riebesell_pushing_2024
     accessed:
@@ -747,3 +859,4 @@ references:
     title-short: Jobflow
     URL: https://joss.theoj.org/papers/10.21105/joss.05995
     volume: '9'
+...

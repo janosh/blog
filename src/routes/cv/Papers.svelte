@@ -27,29 +27,42 @@
 
 <ol use:highlight_matches={highlight_props}>
   {#each references.sort((ref1, ref2) => {
-    const dir = sort_order === `asc` ? 1 : -1
-    if (sort_by === `title`) {
-      return ref1.title.localeCompare(ref2.title) * dir
-    } else if (sort_by === `date`) {
-      const { year: y1, month: m1 } = ref1.issued[0]
-      const { year: y2, month: m2 } = ref2.issued[0]
-      return dir * (100 * (y1 - y2) + (m1 - m2))
-    } else if (sort_by === `author`) {
-      // papers with target_author first/last
-      const idx1 = ref1.author.findIndex((auth) => auth.family === target_author.split(` `)[1])
-      const idx2 = ref2.author.findIndex((auth) => auth.family === target_author.split(` `)[1])
-      return (idx1 - idx2) * dir
-    } else if (sort_by === `first`) {
-      // papers with target_author first/last
-      const idx1 = ref1.author.findIndex((auth) => auth.family === target_author.split(` `)[1])
-      const idx2 = ref2.author.findIndex((auth) => auth.family === target_author.split(` `)[1])
-      if (idx1 === -1 || idx2 === -1) return 0
-      // -dir to have target_author==first rise to the top by default
-      return (idx1 - idx2) * -dir
-    } else throw `Unknown sort_by: ${sort_by}`
-  }) as { title, id, author, DOI, URL: href, issued } (id)}
+      const dir = sort_order === `asc` ? 1 : -1
+      if (sort_by === `title`) {
+        return ref1.title.localeCompare(ref2.title) * dir
+      } else if (sort_by === `date`) {
+        const { year: y1, month: m1 } = ref1.issued[0]
+        const { year: y2, month: m2 } = ref2.issued[0]
+        return dir * (100 * (y1 - y2) + (m1 - m2))
+      } else if (sort_by === `author`) {
+        // papers with target_author first/last
+        const idx1 = ref1.author.findIndex((auth) =>
+          auth.family === target_author.split(` `)[1]
+        )
+        const idx2 = ref2.author.findIndex((auth) =>
+          auth.family === target_author.split(` `)[1]
+        )
+        return (idx1 - idx2) * dir
+      } else if (sort_by === `first`) {
+        // papers with target_author first/last
+        const idx1 = ref1.author.findIndex((auth) =>
+          auth.family === target_author.split(` `)[1]
+        )
+        const idx2 = ref2.author.findIndex((auth) =>
+          auth.family === target_author.split(` `)[1]
+        )
+        if (idx1 === -1 || idx2 === -1) return 0
+        // -dir to have target_author==first rise to the top by default
+        return (idx1 - idx2) * -dir
+      } else throw `Unknown sort_by: ${sort_by}`
+    }) as
+    { title, id, author, DOI, URL: href, issued, 'container-title': journal }
+    (id)
+  }
     {@const authors_formatted = author.map(({ given, family }) => {
-      if (!family) throw `No family name in author=${JSON.stringify(author)} of ${title}`
+      if (!family) {
+        throw `No family name in author=${JSON.stringify(author)} of ${title}`
+      }
       const first_name = {
         initial: `${given[0]}. `,
         full: `${given} `,
@@ -64,6 +77,12 @@
         &mdash;
         {#if DOI}
           <a href="https://doi.org/{DOI}">{DOI}</a>
+          {#if journal}
+            &nbsp;&mdash; <strong style="color: #444">{journal}</strong>
+          {/if}
+        {:else if href && (href.includes(`arxiv.org`) || href.includes(`arXiv`))}
+          <a {href}>{href.replace(`https://`, ``)}</a>
+          &nbsp;(preprint)
         {:else if href}
           <a {href}>{href.replace(`https://`, ``)}</a>
         {/if}

@@ -77,9 +77,7 @@ export const useDarkMode = () => {
       INITIAL_COLOR_MODE_CSS_PROP
     )
     setLSColorMode(initialColorMode)
-    // https://stackoverflow.com/a/61735300
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []) // empty deps because of https://stackoverflow.com/a/61735300
 
   function setColorMode(newValue) {
     setLSColorMode(newValue)

@@ -33,15 +33,16 @@ export type Reference = {
   title: string
   id: string
   author: { family: string; given: string }[]
-  DOI: string
+  DOI?: string
   URL?: string
   issued: { year: number; month: number; day: number }[]
   accessed: { year: number; month: number; day: number }[]
-  page: string
+  page?: string
   type: string
   ISSN?: string
   arxiv?: string
   icon?: string
+  'container-title'?: string
 }
 
 export type Project = {
@@ -56,7 +57,8 @@ export type Project = {
   commits: number
   pypi?: string
   languages: string[]
-  paper?: string // Zotero BibTeX ID
+  paper_key?: string // Zotero BibTeX ID
+  paper?: Reference
   featured?: boolean
 }
 

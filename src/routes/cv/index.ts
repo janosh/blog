@@ -35,8 +35,8 @@ export function truncate_authors(
     if (
       // Add ellipsis if truncated authors are not consecutive in the original list
       authors.indexOf(truncated_authors[idx]) -
-        authors.indexOf(truncated_authors[idx - 1]) >
-      1
+          authors.indexOf(truncated_authors[idx - 1]) >
+        1
     ) {
       truncated_str += `, ...`
     }

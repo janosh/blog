@@ -1,7 +1,9 @@
-import yaml from '@rollup/plugin-yaml'
+// deno-lint-ignore-file no-await-in-loop
+import rollup_yaml from '@rollup/plugin-yaml'
 import { sveltekit } from '@sveltejs/kit/vite'
-import fs from 'fs'
 import yamljs from 'js-yaml'
+import fs from 'node:fs'
+import process from 'node:process'
 import { loadEnv, type UserConfig } from 'vite'
 
 async function fetch_github_data(gh_token: string) {
@@ -46,7 +48,7 @@ if (gh_token) {
 }
 
 export default {
-  plugins: [sveltekit(), yaml()],
+  plugins: [sveltekit(), rollup_yaml()],
 
   server: {
     port: 3000,
