@@ -8,7 +8,7 @@ projects:
     languages:
       - Python
       - Cython
-    stars: 1668
+    stars: 1684
     commits: 1048
   - name: Matbench Discovery
     url: https://matbench-discovery.materialsproject.org
@@ -28,8 +28,8 @@ projects:
       - JavaScript
       - Shell
       - HTML
-    stars: 165
-    commits: 463
+    stars: 170
+    commits: 464
   - name: CHGNet
     url: https://chgnet.lbl.gov
     repo: https://github.com/CederGroupHub/chgnet
@@ -47,7 +47,7 @@ projects:
       - JavaScript
       - HTML
       - TypeScript
-    stars: 313
+    stars: 317
     commits: 196
   - name: TorchSim
     url: https://radical-ai.github.io/torch-sim
@@ -57,7 +57,7 @@ projects:
     description: Torch-native, batchable, atomistic simulation.
     languages:
       - Python
-    stars: 244
+    stars: 248
     commits: 30
   - name: MACE Foundation Models
     url: https://mace-docs.readthedocs.io/en/latest/examples/foundation_models.html#pretrained-mace-mp-0-models
@@ -81,10 +81,9 @@ projects:
       - Svelte
       - CSS
       - JavaScript
-      - Python
       - HTML
-    stars: 158
-    commits: 241
+    stars: 163
+    commits: 252
   - name: pymatviz
     url: https://pymatviz.janosh.dev
     img_style: 'filter: invert(1);'
@@ -97,8 +96,8 @@ projects:
       - JavaScript
       - TypeScript
       - HTML
-    stars: 235
-    commits: 423
+    stars: 241
+    commits: 424
   - name: Tensorboard Reducer
     repo: https://github.com/janosh/tensorboard-reducer
     logo: https://raw.githubusercontent.com/janosh/tensorboard-reducer/main/assets/tensorboard-reducer-square.svg
@@ -108,14 +107,14 @@ projects:
       - Python
       - TeX
     stars: 74
-    commits: 85
+    commits: 86
   - name: Normalizing Flows
     repo: https://github.com/janosh/awesome-normalizing-flows
     logo: https://api.iconify.design/logos:awesome.svg?color=%23888888
     description: Curated list of resources for learning and using normalizing flows, a powerful tool in ML for modeling probability distributions.
     languages:
       - Python
-    stars: 1541
+    stars: 1543
     commits: 74
   - name: atomate2
     repo: https://github.com/materialsproject/atomate2
@@ -127,7 +126,7 @@ projects:
       - Python
       - Jupyter Notebook
       - Shell
-    stars: 223
+    stars: 230
     commits: 379
     paper_key: ganose_atomate2_2025
     featured: true
@@ -151,7 +150,7 @@ projects:
     pypi: https://pypi.org/project/tensorboard-reducer
     languages:
       - Python
-    stars: 57
+    stars: 58
     commits: 237
   - name: MatCalc
     url: https://materialsvirtuallab.github.io/matcalc
@@ -162,13 +161,13 @@ projects:
     languages:
       - Python
       - Jupyter Notebook
-    stars: 95
+    stars: 96
     commits: 77
   - name: Scientific Diagrams
     url: https://diagrams.janosh.dev
     repo: https://github.com/janosh/diagrams
     description: '[Typst](https://typst.app) and [LaTeX](https://www.latex-project.org) diagrams of concepts in physics/chemistry/ML.'
-    stars: 325
+    stars: 331
     commits: 251
     languages:
       - Typst
@@ -185,7 +184,7 @@ projects:
     repo: https://github.com/janosh/dielectrics
     description: Pushing the Pareto front of band gap and permittivity with ML-guided dielectrics discovery incl. experimental synthesis.
     logo: https://github.com/janosh/diagrams/raw/main/assets/plate-capacitor/plate-capacitor.svg
-    paper_key: riebesell_pushing_2024
+    paper_key: riebesell_discovery_2024
     featured: true
     stars: 10
     commits: 27
@@ -204,8 +203,8 @@ projects:
       - CSS
       - HTML
       - JavaScript
-    stars: 322
-    commits: 288
+    stars: 324
+    commits: 294
   - name: MatPES
     url: https://matpes.ai
     repo: https://github.com/materialsvirtuallab/matpes
@@ -218,15 +217,15 @@ projects:
       - Python
       - CSS
       - Procfile
-    stars: 38
+    stars: 39
   - name: MLIP PES softening
     url: https://nature.com/articles/s41524-024-01500-6
     repo: https://github.com/janosh/ffonons
     description: Overcoming systematic softening in universal machine learning interatomic potentials by fine-tuning
-    paper_key: deng_overcoming_2024
+    paper_key: deng_systematic_2025
     featured: true
     logo: https://github.com/janosh/blog/assets/30958850/b8266e7e-8e78-4ac6-8716-28cbd56d0005
-    stars: 21
+    stars: 22
     commits: 61
     languages:
       - Python

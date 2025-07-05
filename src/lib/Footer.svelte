@@ -21,7 +21,7 @@
     gap: 5pt;
   }
   button {
-    position: absolute;
+    position: fixed;
     bottom: 18pt;
     right: 18pt;
     display: flex;

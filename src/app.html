@@ -41,7 +41,7 @@
     %sveltekit.head%
   </head>
 
-  <body data-sveltekit-prefetch>
+  <body data-sveltekit-preload-data="hover">
     <svg style="display: none">
       <!-- used for heading links in src/utils/marked.js, svg from https://primer.style/octicons/link-16 -->
       <symbol id="octicon-link" fill="currentColor">
@@ -51,6 +51,6 @@
       </symbol>
     </svg>
 
-    <div>%sveltekit.body%</div>
+    <div style="display: contents">%sveltekit.body%</div>
   </body>
 </html>
