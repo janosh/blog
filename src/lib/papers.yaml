@@ -150,6 +150,7 @@ references:
         month: 12
         day: 29
     language: en
+    note: 'Citations: 171 (SemanticScholar) [2025-07-17]'
     title: A foundation model for atomistic materials chemistry
     URL: https://arxiv.org/abs/2401.00096v1
 
@@ -170,6 +171,7 @@ references:
       - year: 2024
         month: 1
         day: 30
+    note: 'Citations: 12 (SemanticScholar) [2025-07-17]'
     number: arXiv:2401.17244
     publisher: arXiv
     source: arXiv.org
@@ -213,6 +215,9 @@ references:
     license: >-
       2023 This is a U.S. Government work and not under copyright protection in
       the US; foreign copyright protection may apply
+    note: |-
+      Citations: 328 (Crossref) [2025-07-17]
+      Citations: 397 (SemanticScholar) [2025-07-17]
     number: '9'
     page: 1031-1041
     publisher: Nature Publishing Group
@@ -252,6 +257,7 @@ references:
       - year: 2024
         month: 5
         day: 11
+    note: 'Citations: 18 (SemanticScholar) [2025-07-17]'
     number: arXiv:2405.07105
     publisher: arXiv
     source: arXiv.org
@@ -396,6 +402,9 @@ references:
         month: 8
         day: 7
     language: en
+    note: |-
+      Citations: 15 (Crossref) [2025-07-17]
+      Citations: 14 (SemanticScholar) [2025-07-17]
     page: 1509-1533
     publisher: RSC
     source: pubs.rsc.org
@@ -533,6 +542,9 @@ references:
         month: 7
         day: 1
     language: en
+    note: |-
+      Citations: 0 (Crossref) [2025-07-17]
+      Citations: 5 (SemanticScholar) [2025-07-17]
     publisher: RSC
     source: pubs.rsc.org
     title: 'Atomate2: modular workflows for materials science'
@@ -622,6 +634,9 @@ references:
         day: 3
     language: en
     license: 2025 Springer Nature Limited
+    note: |-
+      Citations: 0 (Crossref) [2025-07-17]
+      Citations: 0 (SemanticScholar) [2025-07-17]
     page: 1-11
     publisher: Nature Publishing Group
     source: www.nature.com
@@ -727,6 +742,7 @@ references:
       - year: 2025
         month: 3
         day: 6
+    note: 'Citations: 6 (SemanticScholar) [2025-07-17]'
     number: arXiv:2503.04070
     publisher: arXiv
     source: arXiv.org
@@ -771,6 +787,9 @@ references:
         month: 6
     language: en
     license: 2025 The Author(s)
+    note: |-
+      Citations: 5 (Crossref) [2025-07-17]
+      Citations: 1 (SemanticScholar) [2025-07-17]
     page: 836-847
     publisher: Nature Publishing Group
     source: www.nature.com
@@ -803,6 +822,7 @@ references:
         month: 1
         day: 11
     language: en
+    note: 'Citations: 4 (SemanticScholar) [2025-07-17]'
     title: >-
       Pushing the Pareto front of band gap and permittivity: ML-guided search for
       dielectric materials
@@ -853,6 +873,9 @@ references:
         month: 1
         day: 7
     language: en
+    note: |-
+      Citations: 18 (Crossref) [2025-07-17]
+      Citations: 15 (SemanticScholar) [2025-07-17]
     page: '5995'
     source: joss.theoj.org
     title: 'Jobflow: Computational Workflows Made Simple'

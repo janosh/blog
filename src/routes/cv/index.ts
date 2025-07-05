@@ -45,3 +45,21 @@ export function truncate_authors(
 
   return truncated_str
 }
+
+export function extract_citations(
+  note: string | undefined,
+): { citations: number; citation_database: string } {
+  if (!note) return { citations: 0, citation_database: `` }
+
+  const citation_matches = note.match(/Citations: (\d+) \(([^)]+)\)/g)
+  if (!citation_matches) return { citations: 0, citation_database: `` }
+
+  const citations = citation_matches
+    .map((match) => {
+      const [, count, database] = match.match(/Citations: (\d+) \(([^)]+)\)/) || []
+      return { count: parseInt(count || `0`, 10), database: database || `` }
+    })
+    .reduce((max, current) => current.count > max.count ? current : max)
+
+  return { citations: citations.count, citation_database: citations.database }
+}

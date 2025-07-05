@@ -3,8 +3,7 @@
   import { page } from '$app/state'
   import { Footer } from '$lib'
   import { type Snippet } from 'svelte'
-  import { CmdPalette } from 'svelte-multiselect'
-  import { CopyButton } from 'svelte-zoo'
+  import { CmdPalette, CopyButton } from 'svelte-multiselect'
   import '../app.css'
 
   interface Props {
