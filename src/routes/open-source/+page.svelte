@@ -1,7 +1,7 @@
 <script lang="ts">
   import oss from '$lib/oss.yml'
   import Icon from '@iconify/svelte'
-  import { highlight_matches } from 'svelte-zoo'
+  import { highlight_matches } from 'svelte-multiselect/attachments'
   import { flip } from 'svelte/animate'
 
   let sort_by: `commits` | `stars` | `title` = $state(`commits`)
@@ -42,7 +42,10 @@
   <input type="text" placeholder="Search projects..." bind:value={query} />
 </div>
 
-<ul class="projects grid" use:highlight_matches={{ query, css_class: `highlight-match` }}>
+<ul
+  class="projects grid"
+  {@attach highlight_matches({ query, css_class: `highlight-match` })}
+>
   {#each projects as { url, repo, name, description, stars, logo, commits, role } (name)}
     {@const logo_url = logo ?? `${url}/favicon.svg`}
     <li animate:flip={{ duration: 400 }}>

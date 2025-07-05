@@ -33,7 +33,7 @@
 <style>
   [aria-label='sort-buttons'] {
     display: flex;
-    gap: 2pt;
+    gap: 5pt;
     position: absolute;
     right: 0;
     bottom: 4pt;
@@ -42,13 +42,13 @@
   }
   [aria-label='sort-buttons'] button {
     font-size: 9pt;
-    padding: 1pt 2pt;
+    padding: 1pt 4pt;
     border: none;
     color: gray;
-    background-color: #f0f0f0;
+    background-color: rgba(0, 0, 0, 0.03);
   }
   [aria-label='sort-buttons'] button.active {
-    background-color: #e0e0e0;
+    background-color: rgba(0, 0, 0, 0.1);
   }
   @media print {
     [aria-label='sort-buttons'] {

@@ -13,9 +13,9 @@ tags:
 <script>
   import { references } from '$lib/papers.yaml'
   import { projects } from '$lib/oss.yml'
-  import { Structure, StructureCard } from 'matterviz'
+  import { Structure } from 'matterviz'
 
-  const diel_paper = references.find((ref) => ref.id === `riebesell_pushing_2024`)
+  const diel_paper = references.find((ref) => ref.id === `riebesell_discovery_2024`)
   const matterviz = projects.find((proj) => proj.name === `MatterViz`)
 
   const structs = import.meta.glob(`./*.json`, { eager: true, import: 'default' })
@@ -42,7 +42,7 @@ The resulting JSON files can then be visualized with `matterviz` using the `Stru
 
 ```svelte
 <script>
-  import { Structure, StructureCard } from 'matterviz'
+  import { Structure } from 'matterviz'
 
   // parse all JSON files in this directory
   const structs = import.meta.glob(`./*.json`, { eager: true, import: 'default' })
@@ -50,7 +50,6 @@ The resulting JSON files can then be visualized with `matterviz` using the `Stru
 
 <!-- iterate over JSON objects and pass them to the <Structure /> component for rendering -->
 {#each Object.entries(structs) as [name, structure]}
-  <StructureCard {structure} />
   <Structure {structure} />
 {/each}
 ```
@@ -60,10 +59,7 @@ Here's what this code renders:
 <div style="display: grid; gap: 1em;">
   {#each Object.entries(structs) as [name, structure]}
     {@const [formula, spacegroup] = name.match(/\.\/(.+)-(.+)\.json/).slice(1)}
-    <section>
-      <StructureCard {structure} title="{formula} (<small>{spacegroup}</small>)" />
-      <Structure {structure} show_bonds={false} show_site_labels />
-    </section>
+    <Structure {structure} show_bonds={false} />
   {/each}
 </div>
 

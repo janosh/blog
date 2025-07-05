@@ -43,6 +43,9 @@ export type Reference = {
   arxiv?: string
   icon?: string
   'container-title'?: string
+  citations?: number
+  citation_database?: string
+  note?: string
 }
 
 export type Project = {
@@ -110,3 +113,17 @@ export type Social = {
   url: string
   style?: string
 }
+
+export const PAPER_SORT_KEYS = {
+  date: `date`,
+  title: `title`,
+  author: `author`,
+  first_author: `first author`,
+  citations: `citations`,
+} as const
+
+export const OSS_SORT_KEYS = {
+  commits: `commits`,
+  stars: `stars`,
+  name: `name`,
+} as const

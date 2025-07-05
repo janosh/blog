@@ -59,11 +59,6 @@ skills:
     score: 10
     href: https://github.com/janosh?tab=repositories&language=typescript
     site: https://typescriptlang.org
-  - name: JavaScript
-    icon: mdi:language-javascript
-    score: 10
-    href: https://github.com/janosh?tab=repositories&language=javascript
-    site: https://developer.mozilla.org/docs/Web/JavaScript
   - name: Svelte
     icon: carbon:logo-svelte
     score: 10
@@ -75,7 +70,7 @@ skills:
     site: https://wikipedia.org/wiki/C_(programming_language)
   - name: Git
     icon: mdi:git
-    score: 6
+    score: 7
     site: https://git-scm.com
   - name: Mathematica
     icon: simple-icons:wolframmathematica
@@ -116,11 +111,11 @@ skills:
     site: https://nodejs.org
   - name: Deno
     icon: simple-icons:deno
-    score: 8
+    score: 9
     site: https://deno.land
   - name: vitest
     icon: simple-icons:vitest
-    score: 8
+    score: 9
     href: https://github.com/janosh?tab=repositories&language=svelte
     site: https://vitejs.dev
   - name: Puppeteer
@@ -135,23 +130,22 @@ skills:
     icon: file-icons:mathjax # TODO fix icon once actual JAX logo available from https://icones.js.org/collection/all?s=jax
     score: 4
     site: https://docs.jax.dev
+  - name: Rust
+    icon: simple-icons:rust
+    score: 3
+    site: https://rust-lang.org
 
 hobbies:
   - name: photography
     icon: mdi:camera
     href: https://youtube.com/@jrib
-  - name: video editing
-    href: https://youtube.com/@jrib
-    icon: mdi:youtube
   - name: hiking
     icon: mdi:map-marker-distance
+    href: https://komoot.com/user/179035526626
   - name: cycling
     icon: mdi:bike
   - name: climbing
     icon: map:climbing
-  - name: drones
-    icon: carbon:drone
-    href: https://youtube.com/@jrib
 
 nationality:
   - title: Canadian
@@ -175,7 +169,7 @@ languages:
 
 memberships:
   - name: Cambridge Physical Society
-    date: 2019 - present
+    date: 2020 - present
     href: http://camphysoc.co.uk
   - name: Materials Research Society
     date: 2023 - present

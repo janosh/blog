@@ -21,7 +21,7 @@ cover:
 
 This is a compilation of notes and solutions to problem sheets for some of the physics lectures I took, most of them in [Heidelberg](https://google.com/search?q=Heidelberg). Hopefully, they can be useful to others. If you find errors, please [open an issue]({issues}).
 
-<DocsGrid style="max-width: var(--body-max-width); margin: 0 0 5em;">
+<DocsGrid style="max-width: var(--body-max-width); margin: 0 auto 5em;">
 
 [String Theory ![Cross section of the quintic Calabi–Yau manifold](./string-theory/calabi-yau.png)](physics/string-theory)
 
@@ -50,5 +50,6 @@ This is a compilation of notes and solutions to problem sheets for some of the p
 <style>
   p {
     max-width: 50em;
+    margin: 1em auto;
   }
 </style>

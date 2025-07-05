@@ -11,7 +11,7 @@
 />
 <h1>{data.frontmatter.title}</h1>
 
-<main>
+<main style="max-width: 55em; margin: 1em auto">
   {@render children?.()}
 </main>
 

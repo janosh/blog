@@ -1,10 +1,11 @@
 <script lang="ts">
   import { dev } from '$app/environment'
+  import { page } from '$app/state'
   import type { FrontMatter } from '$lib'
   import { repository } from '$root/package.json'
   import Icon from '@iconify/svelte'
   import type { Snippet } from 'svelte'
-  import { PrevNext } from 'svelte-zoo'
+  import { PrevNext } from 'svelte-multiselect'
   import type { PageData } from '../$types'
 
   interface Props {
@@ -12,6 +13,7 @@
     children: Snippet
   }
   let { data, children }: Props = $props()
+  if (!data.post) throw new Error(`Post ${page.url.pathname} not found`)
   let { title, cover, date, slug } = $derived(data.post)
 </script>
 
@@ -28,12 +30,12 @@
   />
 {/if}
 
-<h1 style="margin: 2em 0 1em">{title}</h1>
-<time>
-  <Icon icon="carbon:calendar" inline />
-  {date?.split(`T`)[0]}
-</time>
-<main style="max-width: 50em">
+<main style="max-width: 50em; margin: 0 auto">
+  <h1>{title}</h1>
+  <time>
+    <Icon icon="carbon:calendar" inline />
+    {date?.split(`T`)[0]}
+  </time>
   {@render children?.()}
 
   <br />
@@ -64,5 +66,6 @@
     font-weight: lighter;
     font-size: 10pt;
     text-align: center;
+    display: block;
   }
 </style>
