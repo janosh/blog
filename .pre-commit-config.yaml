@@ -48,7 +48,7 @@ repos:
       - id: typos
         name: typos (dynamic config)
         types_or: [text]
-        entry: bash -c 'mkdir -p tmp && printf "[default]\\nextend-ignore-identifiers-re = [\"Yau\", \"ist\"]\\n" > tmp/_typos.toml && exec typos "$@"' --
+        entry: bash -c 'mkdir -p tmp && printf "[default]\\nextend-ignore-identifiers-re = [\"Yau\", \"ist\", \"Comput\"]\\n" > tmp/_typos.toml && exec typos "$@"' --
         args: [--isolated, --config, tmp/_typos.toml]
         exclude: .pre-commit-config.yaml
 

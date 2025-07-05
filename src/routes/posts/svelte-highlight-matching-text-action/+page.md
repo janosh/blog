@@ -12,7 +12,7 @@ tags:
 ---
 
 <script>
-  import { highlight_matches } from 'svelte-zoo'
+  import { highlight_matches } from 'svelte-multiselect/attachments'
 
   let query = 'adipisicing'
   // must match the name passed to ::highlight() in below, defaults to 'highlight-match'
@@ -143,16 +143,18 @@ function update_highlights(node: Node, ops: HighlightOptions) {
 }
 ```
 
-I started using this in several of my projects and so added this action to a utilities library called `svelte-zoo`. If you prefer not to copy-paste the code above, you can `npm install svelte-zoo` and use it like this:
+## Update
+
+I recently converted this action to an attachment in `svelte-multiselect` (`npm install svelte-multiselect`) and can now be used like this:
 
 ```svelte
 <script>
-  import { highlight_matches } from 'svelte-zoo'
+  import { highlight_matches } from 'svelte-multiselect/attachments'
 
   let query = 'quick'
 </script>
 
-<p use:highlight_matches={{ query, css_class }}>
+<p {@attach highlight_matches({ query, css_class: `highlight-match` })}>
   The quick brown fox jumps over the lazy dog
 </p>
 ```

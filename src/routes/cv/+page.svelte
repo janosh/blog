@@ -1,28 +1,64 @@
 <script lang="ts">
-  import { type Project, SortButtons } from '$lib'
-  import oss from '$lib/oss.yml'
+  import { PaperGrid, PaperTimeline, type Project, SortButtons } from '$lib'
   import papers from '$lib/papers.yaml'
+  import { OSS_SORT_KEYS, PAPER_SORT_KEYS } from '$lib/types'
   import Icon from '@iconify/svelte'
   import type { ComponentProps } from 'svelte'
   import { flip } from 'svelte/animate'
-  import Papers from './Papers.svelte'
   import cv from './cv.yml'
   import Intro from './intro.md'
+  import Papers from './Papers.svelte'
+
+  const { data } = $props()
 
   type PaperProps = ComponentProps<typeof Papers>
   let sort_papers_by: PaperProps[`sort_by`] = $state(`date`)
   let sort_papers_order: PaperProps[`sort_order`] = $state(`desc`)
   let sort_oss_by: keyof Project = $state(`commits`)
   let sort_oss_order: PaperProps[`sort_order`] = $state(`desc`)
-  let sort_oss_keys = [`commits`, `stars`, `title`] as const
+  let PaperGraph: typeof PaperGrid | typeof PaperTimeline = $state(PaperGrid)
 
   const paper_sort_keys = [
-    [`date`, `Sort by date`],
-    [`title`, `Sort by title`],
-    [`author`, `Sort by first-author last name`],
-    [`first author`, `First-author papers to the top`],
+    [PAPER_SORT_KEYS.date, `Sort by date`],
+    [PAPER_SORT_KEYS.title, `Sort by title`],
+    [PAPER_SORT_KEYS.author, `Sort by first-author last name`],
+    [PAPER_SORT_KEYS.first_author, `First-author papers to the top`],
+    [PAPER_SORT_KEYS.citations, `Sort by citations`],
   ] as const
+
+  const oss_sort_keys = [
+    [OSS_SORT_KEYS.commits, `Sort by commits`],
+    [OSS_SORT_KEYS.stars, `Sort by stars`],
+    [OSS_SORT_KEYS.name, `Sort by name`],
+  ] as const
+
   const links = { target: `_blank`, rel: `noreferrer` }
+
+  function export_single_page_pdf(): void {
+    const main_element = document.querySelector(`main`)
+    if (!main_element) return
+
+    // Apply print-like styles for measurement
+    const measure_style = document.createElement(`style`)
+    measure_style.textContent =
+      `@media screen { main { width: calc(210mm - 0.2in) !important; max-width: calc(210mm - 0.2in) !important; margin: 0 !important; padding: 2em !important; font-size: 10pt !important; line-height: 1.2 !important; } main p { font-size: 10pt !important; margin: 0 0 6pt 0 !important; } main h2 { font-size: 12pt !important; margin: 12pt 0 6pt 0 !important; } main h4, main small { font-size: 10pt !important; margin: 6pt 0 3pt 0 !important; } }`
+    document.head.appendChild(measure_style)
+
+    void main_element.offsetHeight // Force layout
+    const height_mm = ((main_element.scrollHeight * 25.4) / 96 * 1.8) + 50
+    measure_style.remove()
+
+    // Create single-page PDF
+    const print_style = document.createElement(`style`)
+    print_style.id = `single-page-pdf`
+    print_style.textContent = `@media print { @page { size: 210mm ${
+      height_mm.toFixed(1)
+    }mm; margin: 0.1in; } *, main, section, section.body, section.body *, ul.oss, ul.oss *, ul.skills, ul.skills *, ul.hobbies, ul.hobbies *, ul.horizontal, ul.horizontal *, .side-by-side, .side-by-side * { page-break-before: auto !important; page-break-after: auto !important; page-break-inside: auto !important; break-before: auto !important; break-after: auto !important; break-inside: auto !important; } html, body, main { height: auto !important; max-height: none !important; overflow: visible !important; } }`
+    document.head.appendChild(print_style)
+
+    window.print()
+    setTimeout(() => document.getElementById(`single-page-pdf`)?.remove(), 1000)
+  }
 </script>
 
 <main>
@@ -47,22 +83,42 @@
         bind:sort_order={sort_papers_order}
       />
     </h2>
-    <Papers {...papers} sort_by={sort_papers_by} sort_order={sort_papers_order} />
+    <div class="view-toggle">
+      {#each [
+          [PaperGrid, `mdi:grid`, `Grid`],
+          [PaperTimeline, `mdi:timeline`, `Line`],
+        ] as const as
+        [Component, icon, label]
+        (icon)
+      }
+        <button
+          class:active={PaperGraph === Component}
+          onclick={() => PaperGraph = Component}
+        >
+          <Icon {icon} /> {label}
+        </button>
+      {/each}
+    </div>
 
+    <PaperGraph papers={papers.references} class="paper-graph" />
+    <Papers {...papers} sort_by={sort_papers_by} sort_order={sort_papers_order} />
     <h2>
       <Icon inline icon="ri:open-source-line" />&nbsp; Open Source
       <SortButtons
         bind:sort_by={sort_oss_by}
-        sort_keys={sort_oss_keys}
+        sort_keys={oss_sort_keys}
         bind:sort_order={sort_oss_order}
       />
     </h2>
     <ul class="oss">
-      {#each oss.projects.sort((p1, p2) => {
+      {#each data.oss.projects.sort((p1, p2) => {
           const dir = sort_oss_order === `asc` ? -1 : 1
-          if (sort_oss_by === `name`) {
+          if (sort_oss_by === OSS_SORT_KEYS.name) {
             return p1.name.localeCompare(p2.name) * dir
-          } else if ([`commits`, `stars`].includes(sort_oss_by)) {
+          } else if (
+            sort_oss_by === OSS_SORT_KEYS.commits ||
+            sort_oss_by === OSS_SORT_KEYS.stars
+          ) {
             return (Number(p2[sort_oss_by]) - Number(p1[sort_oss_by])) * dir
           } else {
             throw new Error(`Unknown sort_oss_by: ${sort_oss_by}`)
@@ -98,7 +154,7 @@
             {/if}
             <small class="langs">{languages.slice(0, 3).join(`, `)}</small>
           </h4>
-          <p>{description}</p>
+          <p>{@html description}</p>
         </li>
       {/each}
     </ul>
@@ -208,10 +264,17 @@
   </section>
 </main>
 
-<button class="export-pdf" onclick={() => window.print()} type="button">
-  <Icon icon="mdi:file-pdf-box" />
-  Export PDF
-</button>
+<div class="pdf-dropdown">
+  <button type="button">
+    <Icon icon="mdi:file-pdf-box" />
+    Export PDF
+    <Icon icon="mdi:chevron-up" />
+  </button>
+  <div>
+    <button onclick={() => window.print()}>Multi-page</button>
+    <button onclick={export_single_page_pdf}>Single tall page</button>
+  </div>
+</div>
 
 <style>
   main {
@@ -259,6 +322,10 @@
     padding: 0;
     margin: 0;
   }
+  ul.oss {
+    font-size: 16pt;
+    text-wrap: balance;
+  }
   ul.oss > li > h4 {
     margin: 8pt 0 4pt;
     display: flex;
@@ -304,15 +371,19 @@
     gap: 4pt 8pt;
     flex-wrap: wrap;
   }
-  .export-pdf {
+  .pdf-dropdown {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: darkblue;
+    z-index: 1000;
+    white-space: nowrap;
+  }
+  .pdf-dropdown > button {
+    background: rgb(58, 87, 215);
     color: white;
     border: none;
     border-radius: 8px;
-    padding: 12px 16px;
+    padding: 9px;
     font-size: 14px;
     cursor: pointer;
     display: flex;
@@ -320,16 +391,45 @@
     gap: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: all 0.2s ease;
-    z-index: 1000;
   }
-  .export-pdf:hover {
-    background: #1a237e;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  .pdf-dropdown > div {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+  }
+  .pdf-dropdown:hover > div {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .pdf-dropdown > div > button {
+    background: white;
+    color: darkblue;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+  }
+  .pdf-dropdown > div > button:hover {
+    background: #f0f0f0;
   }
   @media print {
-    .export-pdf {
-      display: none;
+    .pdf-dropdown, .view-toggle, :global(.paper-graph) {
+      display: none !important;
+    }
+    /* Ensure colors show in PDF for both paper components */
+    :global(:is(.week-tile, .legend-tile, .timeline-line, .marker-bar)) {
+      print-color-adjust: exact !important;
     }
     @page {
       margin: 0;
@@ -356,5 +456,35 @@
       page-break-inside: avoid;
       break-inside: avoid;
     }
+  }
+  .paper-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: auto;
+  }
+  .view-toggle {
+    display: flex;
+    gap: 8px;
+  }
+  .view-toggle button {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s ease;
+    font-size: 12px;
+  }
+  .view-toggle button:hover {
+    background: #f0f0f0;
+  }
+  .view-toggle button.active {
+    background: #3a57d7;
+    color: white;
+    border-color: #3a57d7;
   }
 </style>

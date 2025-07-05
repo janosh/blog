@@ -150,6 +150,7 @@ references:
         month: 12
         day: 29
     language: en
+    note: 'Citations: 171 (SemanticScholar) [2025-07-17]'
     title: A foundation model for atomistic materials chemistry
     URL: https://arxiv.org/abs/2401.00096v1
 
@@ -170,6 +171,7 @@ references:
       - year: 2024
         month: 1
         day: 30
+    note: 'Citations: 12 (SemanticScholar) [2025-07-17]'
     number: arXiv:2401.17244
     publisher: arXiv
     source: arXiv.org
@@ -213,6 +215,9 @@ references:
     license: >-
       2023 This is a U.S. Government work and not under copyright protection in
       the US; foreign copyright protection may apply
+    note: |-
+      Citations: 328 (Crossref) [2025-07-17]
+      Citations: 397 (SemanticScholar) [2025-07-17]
     number: '9'
     page: 1031-1041
     publisher: Nature Publishing Group
@@ -223,11 +228,12 @@ references:
     URL: https://www.nature.com/articles/s42256-023-00716-3
     volume: '5'
 
-  - id: deng_overcoming_2024
+  - id: deng_systematic_2025
     accessed:
-      - year: 2024
-        month: 5
-        day: 14
+      - year: 2025
+        month: 1
+        day: 10
+    archive: https://arxiv.org/abs/2405.07105
     author:
       - family: Deng
         given: Bowen
@@ -247,18 +253,24 @@ references:
         given: Kristin A.
       - family: Ceder
         given: Gerbrand
-    citation-key: deng_overcoming_2024
+    citation-key: deng_systematic_2025
+    container-title: npj Computational Materials
+    container-title-short: npj Comput Mater
+    DOI: 10.1038/s41524-024-01500-6
+    ISSN: 2057-3960
+    issue: '1'
     issued:
-      - year: 2024
-        month: 5
-        day: 11
-    number: arXiv:2405.07105
-    publisher: arXiv
-    source: arXiv.org
-    title: >-
-      Overcoming systematic softening in universal machine learning interatomic
-      potentials by fine-tuning
-    URL: https://arxiv.org/abs/2405.07105
+      - year: 2025
+        month: 1
+        day: 10
+    language: en
+    license: 2025 The Author(s)
+    page: 1-9
+    publisher: Nature Publishing Group
+    source: www.nature.com
+    title: Systematic softening in universal machine learning interatomic potentials
+    URL: https://www.nature.com/articles/s41524-024-01500-6
+    volume: '11'
 
   - id: evans_developments_2024
     accessed:
@@ -396,6 +408,9 @@ references:
         month: 8
         day: 7
     language: en
+    note: |-
+      Citations: 15 (Crossref) [2025-07-17]
+      Citations: 14 (SemanticScholar) [2025-07-17]
     page: 1509-1533
     publisher: RSC
     source: pubs.rsc.org
@@ -533,6 +548,9 @@ references:
         month: 7
         day: 1
     language: en
+    note: |-
+      Citations: 0 (Crossref) [2025-07-17]
+      Citations: 5 (SemanticScholar) [2025-07-17]
     publisher: RSC
     source: pubs.rsc.org
     title: 'Atomate2: modular workflows for materials science'
@@ -622,6 +640,9 @@ references:
         day: 3
     language: en
     license: 2025 Springer Nature Limited
+    note: |-
+      Citations: 0 (Crossref) [2025-07-17]
+      Citations: 0 (SemanticScholar) [2025-07-17]
     page: 1-11
     publisher: Nature Publishing Group
     source: www.nature.com
@@ -727,11 +748,49 @@ references:
       - year: 2025
         month: 3
         day: 6
+    note: 'Citations: 6 (SemanticScholar) [2025-07-17]'
     number: arXiv:2503.04070
     publisher: arXiv
     source: arXiv.org
     title: A Foundational Potential Energy Surface Dataset for Materials
     URL: http://arxiv.org/abs/2503.04070
+
+  - id: riebesell_discovery_2024
+    accessed:
+      - year: 2025
+        month: 1
+        day: 7
+    archive: https://arxiv.org/abs/2401.05848v1
+    author:
+      - family: Riebesell
+        given: Janosh
+      - family: Surta
+        given: Todd Wesley
+      - family: Goodall
+        given: Rhys Edward Andrew
+      - family: Gaultois
+        given: Michael William
+      - family: Lee
+        given: Alpha Albert
+    citation-key: riebesell_discovery_2024
+    container-title: Cell Reports Physical Science
+    container-title-short: CR-PHYS-SC
+    DOI: 10.1016/j.xcrp.2024.102241
+    ISSN: 2666-3864
+    issue: '10'
+    issued:
+      - year: 2024
+        month: 10
+        day: 16
+    language: English
+    publisher: Elsevier
+    source: www.cell.com
+    title: >-
+      Discovery of high-performance dielectric materials with
+      machine-learning-guided search
+    URL: >-
+      https://www.cell.com/cell-reports-physical-science/abstract/S2666-3864(24)00546-0
+    volume: '5'
 
   - id: riebesell_matbench_2025
     accessed:
@@ -771,6 +830,9 @@ references:
         month: 6
     language: en
     license: 2025 The Author(s)
+    note: |-
+      Citations: 5 (Crossref) [2025-07-17]
+      Citations: 1 (SemanticScholar) [2025-07-17]
     page: 836-847
     publisher: Nature Publishing Group
     source: www.nature.com
@@ -779,35 +841,6 @@ references:
       stability predictions
     URL: https://www.nature.com/articles/s42256-025-01055-1
     volume: '7'
-
-  - id: riebesell_pushing_2024
-    accessed:
-      - year: 2024
-        month: 1
-        day: 12
-    author:
-      - family: Riebesell
-        given: Janosh
-      - family: Surta
-        given: T. Wesley
-      - family: Goodall
-        given: Rhys
-      - family: Gaultois
-        given: Michael
-      - family: Lee
-        given: Alpha A.
-    citation-key: riebesell_pushing_2024
-    container-title: arXiv.org
-    issued:
-      - year: 2024
-        month: 1
-        day: 11
-    language: en
-    title: >-
-      Pushing the Pareto front of band gap and permittivity: ML-guided search for
-      dielectric materials
-    title-short: Pushing the Pareto front of band gap and permittivity
-    URL: https://arxiv.org/abs/2401.05848v1
 
   - id: rosen_jobflow_2024
     accessed:
@@ -853,6 +886,9 @@ references:
         month: 1
         day: 7
     language: en
+    note: |-
+      Citations: 18 (Crossref) [2025-07-17]
+      Citations: 15 (SemanticScholar) [2025-07-17]
     page: '5995'
     source: joss.theoj.org
     title: 'Jobflow: Computational Workflows Made Simple'
