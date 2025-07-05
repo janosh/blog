@@ -47,7 +47,7 @@ projects:
       - JavaScript
       - HTML
       - TypeScript
-    stars: 313
+    stars: 314
     commits: 196
   - name: TorchSim
     url: https://radical-ai.github.io/torch-sim
@@ -84,7 +84,7 @@ projects:
       - Python
       - HTML
     stars: 158
-    commits: 241
+    commits: 243
   - name: pymatviz
     url: https://pymatviz.janosh.dev
     img_style: 'filter: invert(1);'
@@ -108,7 +108,7 @@ projects:
       - Python
       - TeX
     stars: 74
-    commits: 85
+    commits: 86
   - name: Normalizing Flows
     repo: https://github.com/janosh/awesome-normalizing-flows
     logo: https://api.iconify.design/logos:awesome.svg?color=%23888888
@@ -127,7 +127,7 @@ projects:
       - Python
       - Jupyter Notebook
       - Shell
-    stars: 223
+    stars: 224
     commits: 379
     paper_key: ganose_atomate2_2025
     featured: true
@@ -168,7 +168,7 @@ projects:
     url: https://diagrams.janosh.dev
     repo: https://github.com/janosh/diagrams
     description: '[Typst](https://typst.app) and [LaTeX](https://www.latex-project.org) diagrams of concepts in physics/chemistry/ML.'
-    stars: 325
+    stars: 326
     commits: 251
     languages:
       - Typst

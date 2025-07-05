@@ -110,3 +110,16 @@ export type Social = {
   url: string
   style?: string
 }
+
+export const PAPER_SORT_KEYS = {
+  date: `date`,
+  title: `title`,
+  author: `author`,
+  first_author: `first author`,
+} as const
+
+export const OSS_SORT_KEYS = {
+  commits: `commits`,
+  stars: `stars`,
+  name: `name`,
+} as const

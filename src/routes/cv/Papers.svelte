@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Reference } from '$lib'
+  import { PAPER_SORT_KEYS } from '$lib/types'
   import { highlight_matches } from 'svelte-zoo'
   import { flip } from 'svelte/animate'
   import { truncate_authors } from '.'
@@ -8,7 +9,7 @@
     references: Reference[]
     first_name_mode?: `initial` | `full` | `none`
     target_author?: string
-    sort_by?: `title` | `date` | `author` | `first`
+    sort_by?: `title` | `date` | `author` | `first author`
     sort_order?: `asc` | `desc`
     highlight_props?: Parameters<typeof highlight_matches>[1]
   }
@@ -28,13 +29,13 @@
 <ol use:highlight_matches={highlight_props}>
   {#each references.sort((ref1, ref2) => {
       const dir = sort_order === `asc` ? 1 : -1
-      if (sort_by === `title`) {
+      if (sort_by === PAPER_SORT_KEYS.title) {
         return ref1.title.localeCompare(ref2.title) * dir
-      } else if (sort_by === `date`) {
+      } else if (sort_by === PAPER_SORT_KEYS.date) {
         const { year: y1, month: m1 } = ref1.issued[0]
         const { year: y2, month: m2 } = ref2.issued[0]
         return dir * (100 * (y1 - y2) + (m1 - m2))
-      } else if (sort_by === `author`) {
+      } else if (sort_by === PAPER_SORT_KEYS.author) {
         // papers with target_author first/last
         const idx1 = ref1.author.findIndex((auth) =>
           auth.family === target_author.split(` `)[1]
@@ -43,7 +44,7 @@
           auth.family === target_author.split(` `)[1]
         )
         return (idx1 - idx2) * dir
-      } else if (sort_by === `first`) {
+      } else if (sort_by === PAPER_SORT_KEYS.first_author) {
         // papers with target_author first/last
         const idx1 = ref1.author.findIndex((auth) =>
           auth.family === target_author.split(` `)[1]
