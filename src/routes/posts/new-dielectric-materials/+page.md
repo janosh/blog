@@ -56,7 +56,7 @@ The resulting JSON files can then be visualized with `matterviz` using the `Stru
 
 Here's what this code renders:
 
-<div style="display: grid; gap: 1em;">
+<div style="display: grid; gap: 5em; margin-bottom: 2em;">
   {#each Object.entries(structs) as [name, structure]}
     {@const [formula, spacegroup] = name.match(/\.\/(.+)-(.+)\.json/).slice(1)}
     <Structure {structure} show_bonds={false} />

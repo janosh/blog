@@ -2,8 +2,7 @@
   --night: #061e25;
   --text-color: rgb(208, 208, 208);
   --text-secondary: rgb(140, 140, 140);
-  --link-default: #7bb3d9;
-  --link-primary: cornflowerblue;
+  --link-color: cornflowerblue;
   --link-hover: orange;
   --body-max-width: min(90vw, 1100px);
 
@@ -41,18 +40,12 @@ button {
   font-weight: 500;
 }
 a {
-  color: var(--link-default);
+  color: var(--link-color);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 a:hover {
   color: var(--link-hover);
-}
-a.primary,
-a.repo-link,
-.interest-links a {
-  color: var(--link-primary);
-  font-weight: 500;
 }
 a.link {
   padding: 0 4pt;
@@ -103,6 +96,7 @@ code {
   background-color: rgba(0, 255, 255, 0.1);
 }
 pre {
+  position: relative;
   border-radius: 4pt;
   font-size: 9.5pt;
   background-color: rgba(255, 255, 255, 0.05);
@@ -152,7 +146,7 @@ tbody tr:nth-child(odd) {
   background: black;
 }
 blockquote {
-  border-left: 3pt solid var(--link-primary);
+  border-left: 3pt solid var(--link-color);
   padding: 4pt 2pt 4pt 9pt;
   margin: 1em auto;
   background-color: rgba(255, 255, 255, 0.1);

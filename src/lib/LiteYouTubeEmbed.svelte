@@ -59,10 +59,7 @@
     cursor: pointer;
     max-width: 720px;
   }
-
-  /* responsive iframe with a 16:9 aspect ratio
-    thanks https://css-tricks.com/responsive-iframes/
-  */
+  /* responsive iframe with a 16:9 aspect ratio, from https://css-tricks.com/responsive-iframes/ */
   .lite-youtube::after {
     content: '';
     display: block;
@@ -76,8 +73,6 @@
     left: 0;
     border: 0;
   }
-
-  /* poster */
   .poster {
     width: 100%;
     height: 100%;
@@ -86,8 +81,6 @@
     left: 0;
     object-fit: cover;
   }
-
-  /* play button */
   .lite-youtube > .play-btn {
     width: 68px;
     height: 48px;
@@ -105,18 +98,14 @@
     border: none;
     outline: 0;
   }
-
-  .lite-youtube:hover > .play-btn,
-  .lite-youtube .play-btn:focus {
+  .lite-youtube:hover > .play-btn, .lite-youtube .play-btn:focus {
     filter: none;
   }
-
   /* Post-click styles */
   .lite-youtube.activated {
     cursor: unset;
   }
-  .lite-youtube.activated::before,
-  .lite-youtube.activated > .play-btn {
+  .lite-youtube.activated::before, .lite-youtube.activated > .play-btn {
     opacity: 0;
     pointer-events: none;
   }
