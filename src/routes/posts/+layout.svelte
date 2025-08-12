@@ -59,6 +59,7 @@
   img {
     margin: 0;
     height: 50vh;
+    width: 100%;
     object-fit: cover;
     background: linear-gradient(-45deg, #5a6323, #2a355e, #642626);
   }

@@ -181,6 +181,43 @@ references:
     title-short: LLaMP
     URL: https://arxiv.org/abs/2401.17244
 
+  - id: cohen_torchsim_2025
+    accessed:
+      - year: 2025
+        month: 8
+        day: 12
+    author:
+      - family: Cohen
+        given: Orion
+      - family: Riebesell
+        given: Janosh
+      - family: Goodall
+        given: Rhys
+      - family: Kolluru
+        given: Adeesh
+      - family: Falletta
+        given: Stefano
+      - family: Krause
+        given: Joseph
+      - family: Colindres
+        given: Jorge
+      - family: Ceder
+        given: Gerbrand
+      - family: Gangan
+        given: Abhijeet S.
+    citation-key: cohen_torchsim_2025
+    DOI: 10.48550/arXiv.2508.06628
+    issued:
+      - year: 2025
+        month: 8
+        day: 8
+    number: arXiv:2508.06628
+    publisher: arXiv
+    source: arXiv.org
+    title: 'TorchSim: An efficient atomistic simulation engine in PyTorch'
+    title-short: TorchSim
+    URL: http://arxiv.org/abs/2508.06628
+
   - id: deng_chgnet_2023
     accessed:
       - year: 2023
