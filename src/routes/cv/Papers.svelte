@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Reference } from '$lib'
   import { PAPER_SORT_KEYS } from '$lib/types'
-  import { highlight_matches } from 'svelte-multiselect/attachments'
+  import { highlight_matches, tooltip } from 'svelte-multiselect/attachments'
   import { flip } from 'svelte/animate'
   import { extract_citations, truncate_authors } from '.'
 
@@ -69,7 +69,7 @@
     { title, id, author, DOI, URL: href, issued, ...rest }
     (id)
   }
-    {@const { 'container-title': journal, citations } = rest}
+    {@const { 'container-title': journal, citations, citation_database } = rest}
     {@const authors_formatted = author.map(({ given, family }) => {
       if (!family) {
         throw `No family name in author=${JSON.stringify(author)} of ${title}`
@@ -100,7 +100,12 @@
         &nbsp;&mdash;&nbsp; {issued[0].year}-{issued[0].month}
       {/if}
       {#if citations}
-        &nbsp;&mdash;&nbsp; {citations} citations
+        &nbsp;&mdash;&nbsp; <strong
+          style="height: 1em"
+          {@attach tooltip({
+            content: `According to ${citation_database}`,
+          })}
+        >{citations} citations</strong>
       {/if}
     </li>
   {/each}

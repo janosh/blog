@@ -31,7 +31,7 @@
   {#each cv.social as { url, icon, style } (url)}
     <a href={url} target="_blank" rel="noreferrer"><Icon inline {icon} {style} /></a>
   {/each}
-  <a href="/cv" class="primary">
+  <a href="/cv">
     <Icon inline icon="academicons:cv-square" style="transform: scale(1.1)" />
   </a>
 </address>
@@ -70,13 +70,13 @@
     {@const { name, url, repo, logo, paper, description } = project}
     <li>
       <h3 style="white-space: nowrap">
-        <a href={url} class="repo-link">
-          <img src={logo} alt={name} /> {name}
+        <a href={url}>
+          <img src={logo} alt={name} style="border-radius: 3pt" /> {name}
         </a>
       </h3>
       <div class="project-meta">
-        <a href={paper?.URL} class="primary">Paper</a>
-        <a href={repo} class="repo-link">Code</a>
+        <a href={paper?.URL}>Paper</a>
+        <a href={repo}>Code</a>
         {#if paper}
           <time>{Object.values(paper.issued[0]).join(`-`)}</time>
         {/if}

@@ -1,6 +1,7 @@
 <script lang="ts">
   import oss from '$lib/oss.yml'
   import Icon from '@iconify/svelte'
+  import { compile } from 'mdsvex'
   import { highlight_matches } from 'svelte-multiselect/attachments'
   import { flip } from 'svelte/animate'
 
@@ -15,13 +16,10 @@
         return JSON.stringify(proj).toLowerCase().includes(query.toLowerCase())
       })
       .sort((p1, p2) => {
-        if (sort_by === `title`) {
-          return p1.name.localeCompare(p2.name)
-        } else if ([`commits`, `stars`].includes(sort_by)) {
+        if (sort_by === `title`) return p1.name.localeCompare(p2.name)
+        else if ([`commits`, `stars`].includes(sort_by)) {
           return p2[sort_by] - p1[sort_by]
-        } else {
-          throw new Error(`Unknown sort_by: ${sort_by}`)
-        }
+        } else throw new Error(`Unknown sort_by: ${sort_by}`)
       }),
   )
 </script>
@@ -31,14 +29,12 @@
 </h2>
 
 <div class="controls">
-  <div class="sort-controls">
-    <span class="sort-label">Sort by</span>
-    {#each sort_by_options as title (title)}
-      <button onclick={() => (sort_by = title)} class:active={sort_by === title}>
-        {title}
-      </button>
-    {/each}
-  </div>
+  <span style="color: var(--text-secondary); font-size: 0.9rem">Sort by</span>
+  {#each sort_by_options as title (title)}
+    <button onclick={() => (sort_by = title)} class:active={sort_by === title}>
+      {title}
+    </button>
+  {/each}
   <input type="text" placeholder="Search projects..." bind:value={query} />
 </div>
 
@@ -50,7 +46,7 @@
     {@const logo_url = logo ?? `${url}/favicon.svg`}
     <li animate:flip={{ duration: 400 }}>
       <h3>
-        <a href={url ?? repo} target="_blank" rel="noreferrer" class="repo-link">
+        <a href={url ?? repo} target="_blank" rel="noreferrer">
           <img src={logo_url} alt="{name} Logo" />
           {name}
         </a>
@@ -75,7 +71,13 @@
           <span>{role ?? (repo.includes(`/janosh/`) ? `Lead` : `Contributor`)}</span>
         </a>
       </div>
-      <p class="project-description">{description}</p>
+      {#await compile(description) then result}
+        {#if result?.code}
+          <p class="project-description">{@html result.code}</p>
+        {:else}
+          <p class="project-description">{description}</p>
+        {/if}
+      {/await}
     </li>
   {/each}
   <li style="visibility: hidden"></li>
@@ -87,26 +89,14 @@
     text-align: center;
     margin-bottom: 1.2em;
   }
-
   .controls {
     display: flex;
     place-content: center;
-    gap: 1.5em;
-    margin: 1.2em auto;
+    place-items: center;
+    gap: 8pt;
+    margin: 1em 2em;
     flex-wrap: wrap;
   }
-
-  .sort-controls {
-    display: flex;
-    gap: 0.6em;
-  }
-
-  .sort-label {
-    font-weight: 500;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-  }
-
   button {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -115,18 +105,15 @@
     font-size: 0.85rem;
     transition: all 0.2s ease;
   }
-
   button:hover {
     background: rgba(255, 255, 255, 0.15);
     transform: translateY(-1px);
   }
-
   button.active {
     background: teal;
     border-color: teal;
     color: white;
   }
-
   input {
     padding: 0.5em 1em;
     border-radius: 18px;
@@ -136,18 +123,15 @@
     font-size: 0.9rem;
     transition: all 0.2s ease;
   }
-
   input:focus {
     outline: none;
     border-color: teal;
     background: rgba(0, 0, 0, 0.6);
   }
-
   .projects {
     margin: 1.2em auto;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
-
   .projects > li {
     display: grid;
     gap: 0.6em;
@@ -164,31 +148,26 @@
     border-radius: 6pt;
     transition: all 0.2s ease;
   }
-
   .projects > li:hover {
     transform: translateY(-2px);
     border-color: rgba(255, 255, 255, 0.12);
   }
-
   h3 {
     margin: 0;
     font-size: 1.1rem;
     font-weight: 500;
   }
-
   h3 a {
     display: flex;
     place-items: center;
     gap: 0.4em;
   }
-
   h3 img {
     width: 2em;
     height: 2em;
     object-fit: contain;
     border-radius: 3px;
   }
-
   .project-stats {
     display: flex;
     gap: 0.6em;
@@ -196,7 +175,6 @@
     flex-wrap: wrap;
     font-size: 0.8rem;
   }
-
   .stat-link {
     display: flex;
     gap: 0.3em;
@@ -207,12 +185,10 @@
     color: var(--text-secondary) !important;
     transition: all 0.2s ease;
   }
-
   .stat-link:hover {
     background: rgba(0, 0, 0, 0.4);
     color: var(--text-color) !important;
   }
-
   .project-description {
     margin: 0;
     font-size: 0.85rem;
@@ -221,36 +197,5 @@
     overflow: hidden;
     max-height: calc(1.4em * 4);
     overflow-y: auto;
-  }
-
-  @media (max-width: 768px) {
-    .controls {
-      flex-direction: column;
-      gap: 0.8em;
-    }
-
-    .sort-controls {
-      flex-wrap: wrap;
-      place-content: center;
-      gap: 0.5em;
-    }
-
-    input {
-      min-width: auto;
-      width: 100%;
-    }
-
-    .projects {
-      grid-template-columns: 1fr;
-    }
-
-    .projects > li {
-      padding: 0.7em;
-    }
-
-    .project-stats {
-      gap: 0.5em;
-      font-size: 0.75rem;
-    }
   }
 </style>

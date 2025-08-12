@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Reference } from '$lib/types'
   import { onMount } from 'svelte'
+  import { SvelteMap } from 'svelte/reactivity'
 
   interface Props {
     papers: Reference[]
@@ -26,7 +27,7 @@
   let max_count = $state(0)
 
   onMount(() => {
-    const papers_by_week = new Map<string, Reference[]>()
+    const papers_by_week = new SvelteMap<string, Reference[]>([])
 
     papers.forEach((paper) => {
       const issued = paper.issued?.[0]
