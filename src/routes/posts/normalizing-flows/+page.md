@@ -174,8 +174,8 @@ $$
 &= D_\text{KL}\bigl(p_x^*\ || \ p_x(\vec x; \vec\psi)\bigr) \\[1ex]
 &= \int_{\reals^d} p_x^*(\vec x) \ \log\left(\frac{p_x^*(\vec x)}{p_x(\vec x; \vec\psi)}\right) \ \dif\vec x \\[1ex]
 &= -\int_{\reals^d} p_x^*(\vec x) \ \log p_x(\vec x; \vec\psi) \ \dif\vec x + \int_{\reals^d} p_x^* \ \log  p_x^*(\vec x) \ \dif\vec x \\[1ex]
-&= -\expec_{p_x^*}\Bigl(\log p_x(\vec x; \vec\theta)\Bigr) + \const \\[1ex]
-&= -\expec_{p_x^*}\left[\log p_z \!\left(f_{\vec\phi}^{-1}(\vec x); \vec\psi\right) + \log\left|\det J_{f_{\vec\phi}^{-1}}(\vec x) \right|\right] + \const.
+&= -\mathbb{E}_{p_x^*}\Bigl(\log p_x(\vec x; \vec\theta)\Bigr) + \const \\[1ex]
+&= -\mathbb{E}_{p_x^*}\left[\log p_z \!\left(f_{\vec\phi}^{-1}(\vec x); \vec\psi\right) + \log\left|\det J_{f_{\vec\phi}^{-1}}(\vec x) \right|\right] + \const.
 \end{aligned}
 $$
 
@@ -207,8 +207,8 @@ $$
 \begin{aligned}
 \Lcal(\vec\theta)
 &= D_\text{KL}\bigl(p_x(\vec x; \vec\theta) \ || \ p_x^*(\vec x)\bigr) \\
-&= \expec_{p_x(\vec x; \vec\theta)} \Bigl(\log p_x(\vec x; \vec\theta)  - \log p_x^*(\vec x)\Bigr) \\
-&= \expec_{p_z(\vec z; \vec\psi)} \Bigl(\log p_z(\vec z; \vec\psi) - \log\bigl|\det J_{f_{\vec\phi}}(\vec z)\bigr| - \log p_x^*\bigl(f_\vec\phi(\vec z)\bigr)\Bigr).
+&= \mathbb{E}_{p_x(\vec x; \vec\theta)} \Bigl(\log p_x(\vec x; \vec\theta)  - \log p_x^*(\vec x)\Bigr) \\
+&= \mathbb{E}_{p_z(\vec z; \vec\psi)} \Bigl(\log p_z(\vec z; \vec\psi) - \log\bigl|\det J_{f_{\vec\phi}}(\vec z)\bigr| - \log p_x^*\bigl(f_\vec\phi(\vec z)\bigr)\Bigr).
 \end{aligned}
 $$
 

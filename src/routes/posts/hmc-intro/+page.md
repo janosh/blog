@@ -24,17 +24,17 @@ To understand how modern problems in statistics naturally lead to the use of a f
 
 ## 1. Computing Expectations
 
-The goal in statistics is to evaluate expectations $\expect_\pi[f]$ of some observable (a.k.a. target function) $f$ with respect to some target probability distribution $\pi$ over a $d$-dimensional sample space $\Qcal$. For example, in the context of machine learning, we might be interested in extracting information from a posterior distribution over model configuration space, a process known as Bayesian inference. Assuming the sample space is smooth, we can represent the target distribution $\pi$ as a smooth probability density function $\pi: \Qcal \to \reals_+$ and expectations as integrals,
+The goal in statistics is to evaluate expectations $\mathbb{E}_\pi[f]$ of some observable (a.k.a. target function) $f$ with respect to some target probability distribution $\pi$ over a $d$-dimensional sample space $\Qcal$. For example, in the context of machine learning, we might be interested in extracting information from a posterior distribution over model configuration space, a process known as Bayesian inference. Assuming the sample space is smooth, we can represent the target distribution $\pi$ as a smooth probability density function $\pi: \Qcal \to \reals_+$ and expectations as integrals,
 
 $$
-\expect_\pi[f] = \int_\Qcal \dif\vec q \, \pi(\vec q) \, f(\vec q).
+\mathbb{E}_\pi[f] = \int_\Qcal \dif\vec q \, \pi(\vec q) \, f(\vec q).
 $$
 
 To compute these integrals explicitly, we first need to define a parametrization of $\Qcal$, i.e. a mapping $P: \reals^d \to \Qcal$ such that every point $\vec q \in \Qcal$ can be uniquely specified by $d$ real numbers. Unfortunately, for all but the simplest target distributions we will still be unable to evaluate these integrals analytically, requiring instead the use of numerical methods to approximate them.
 
 ### 1.1&nbsp; Focus on what matters
 
-In order to scale to the complex problems at the frontiers of applied statistics, we must be clever about where we evaluate the target density $\pi(\vec q)$ and observable $f(\vec q)$. This requires finding the regions of sample space that generate the largest contributions to the expectation $\expect_\pi[f]$.
+In order to scale to the complex problems at the frontiers of applied statistics, we must be clever about where we evaluate the target density $\pi(\vec q)$ and observable $f(\vec q)$. This requires finding the regions of sample space that generate the largest contributions to the expectation $\mathbb{E}_\pi[f]$.
 
 A naive approach would be to focus our attention on areas where the integrand $\pi(\vec q) \, f(\vec q)$ is largest. In fact, since we are interested in a generalizable algorithm, we shouldn't make any assumptions on the properties of the target function (even though exploiting such knowledge can be a major source of improvement in specialized applications ([Mira, Solgi, Imparato, 2013](https://link.springer.com/article/10.1007/s11222-012-9344-6) [[arXiv](https://arxiv.org/abs/1012.2983)]; [Oates, Girolami, Chopin, 2016](https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/rssb.12185)). Letting ourselves be guided solely by the target density is a good first step towards generalizability since in practice, we are often interested in computing expectations for multiple different target functions (e.g. mean and variance) with respect to a single target distribution. Thus our sampling should be concentrated in a neighborhood around the mode, i.e. the area where the target density $\pi(\vec q)$ is maximized.
 
@@ -85,7 +85,7 @@ $$
 $|\Ccal| = N$ is called the cardinality of the chain. Up to some technicalities, such MCMC estimators _will_ converge to the true expectations,
 
 $$
-\lim_{|\Ccal| \to \infty} \hat f = \expect_\pi[f].
+\lim_{|\Ccal| \to \infty} \hat f = \mathbb{E}_\pi[f].
 $$
 
 Of course, due to our finite computational resources, this asymptotic behavior is of limited practical use. In order to develop a robust tool we need to know how Markov chains behave after only finitely many transitions.
@@ -131,7 +131,7 @@ Whether or not a target distribution is pathological for a given MCMC implementa
 A sufficient condition that guarantees the ideal behavior, i.e. the central limit theorem for MCMC estimators, is called **geometric ergodicity** ([Roberts and Rosenthal, 2004](http://emis.ams.org/journals/PS/images/getdoc510c.pdf)). Unfortunately, it is extremely difficult to verify theoretically for all but the simplest problems, requiring instead the use of empirical diagnostics. The most powerful of these is the split $\hat R$ statistic ([Gelman et al., 2014](https://taylorfrancis.com/books/9780429113079)), which can be computed by generating multiple Markov chains $\{\Ccal_1,\dots,\Ccal_k\}$ each of length $|\Ccal_i| = N$ initialized at different points for the same distribution. Let $x$ be a random variable drawn uniformly from the combined samples of all chains $\Ccal = \sum_{i=1}^k \Ccal_1$. Then in the limit $N, k \to \infty$, $\hat R$ is given by
 
 $$
-\hat R = \frac{\expect(\var(x \,|\, \Ccal)) + \var(\expect(x \,|\, \Ccal))}{\expect(\var(x \,|\, \Ccal))}.
+\hat R = \frac{\mathbb{E}(\var(x \,|\, \Ccal)) + \var(\mathbb{E}(x \,|\, \Ccal))}{\mathbb{E}(\var(x \,|\, \Ccal))}.
 $$
 
 By the [law of total variance](https://en.wikipedia.org/wiki/Law_of_total_variance), the numerator is the variance of the chain, and the denominator is the total variance minus the variance of the individual chain means. If the chains are all drawing from the same distribution, they will have the same mean, and thus $\hat R$ should be approximately one. On the other hand, if there _are_ pathologies that frustrate geometric ergodicity, they induce inconsistencies amongst the estimators of different chains in the ensemble resulting in large values of $\hat R$. Thus, when $\hat R$ is not near the nominal value of 1, we should be suspicious both of geometric ergodicity being satisfied and the practical utility of any estimators.

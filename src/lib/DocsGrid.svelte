@@ -1,37 +1,39 @@
 <script lang="ts">
   import type { Snippet } from 'svelte'
+  import type { HTMLAttributes } from 'svelte/elements'
 
-  interface Props {
-    style?: string | null
-    children?: Snippet
-  }
-  let { style = null, children }: Props = $props()
+  let { children, ...rest }: HTMLAttributes<HTMLDivElement> & {
+    children?: Snippet<[{ idx: number }]>
+  } = $props()
 </script>
 
-<div class="grid" {style}>
+<div class="grid" {...rest}>
   {@render children?.()}
 </div>
 
 <style>
   div.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 2em;
-    margin: 1em 0;
-    text-wrap: balance;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5em;
   }
-  :global(div.grid p) {
-    margin: 0;
-  }
-  :global(div.grid a) {
+  div.grid :global(a) {
     text-align: center;
     display: grid;
-    font-size: larger;
-    font-weight: bolder;
+    font-weight: bold;
     color: inherit;
+    padding: 8pt 5pt;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8pt;
   }
-  :global(div.grid img) {
+  div.grid :global(a:hover) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px var(--shadow);
+  }
+  div.grid :global(img) {
     width: 100%;
+    object-fit: cover;
     border-radius: 3pt;
     margin: 0;
   }

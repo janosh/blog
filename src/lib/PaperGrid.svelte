@@ -1,13 +1,12 @@
 <script lang="ts">
   import type { Reference } from '$lib/types'
   import { onMount } from 'svelte'
+  import type { HTMLAttributes } from 'svelte/elements'
   import { SvelteMap } from 'svelte/reactivity'
 
-  interface Props {
+  let { papers, ...rest }: HTMLAttributes<HTMLDivElement> & {
     papers: Reference[]
-    [key: string]: unknown
-  }
-  let { papers, ...rest }: Props = $props()
+  } = $props()
 
   interface WeekData {
     year: number
@@ -16,14 +15,10 @@
     count: number
     date: Date
   }
-
+  type Tooltip = { data: WeekData | null; x: number; y: number }
   let grid_data: WeekData[][] = $state([])
   let years: number[] = $state([])
-  let tooltip: { data: WeekData | null; x: number; y: number } = $state({
-    data: null,
-    x: 0,
-    y: 0,
-  })
+  let tooltip: Tooltip = $state({ data: null, x: 0, y: 0 })
   let max_count = $state(0)
 
   onMount(() => {
@@ -51,16 +46,10 @@
     grid_data = years.map((year) =>
       Array.from({ length: 52 }, (_, week) => {
         const key = `${year}-${week + 1}`
-        const week_papers = papers_by_week.get(key) || []
+        const papers = papers_by_week.get(key) || []
         const date = new Date(year, 0, 1 + (week * 7))
 
-        return {
-          year,
-          week: week + 1,
-          papers: week_papers,
-          count: week_papers.length,
-          date,
-        }
+        return { year, week: week + 1, papers, count: papers.length, date }
       })
     )
   })
@@ -74,7 +63,7 @@
   }
 
   function get_color(count: number): string {
-    if (count === 0) return `#ebedf0`
+    if (count === 0) return `var(--nav-bg)`
     const intensity = Math.min(count / max_count, 1)
     return `hsl(200, 70%, ${85 - intensity * 50}%)`
   }
@@ -179,7 +168,7 @@
     align-items: center;
     gap: 4px;
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
   }
   .legend-tiles {
     display: flex;
@@ -197,7 +186,7 @@
   .year-label {
     flex: 1;
     font-size: 10px;
-    color: #666;
+    color: var(--text-secondary);
     display: flex;
     align-items: center;
     padding-right: 4px;
@@ -222,32 +211,32 @@
   }
   .week-tile:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 3px var(--shadow);
   }
   .tooltip {
     position: fixed;
-    background: white;
-    border: 1px solid #ccc;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: 8px;
     padding: 6px 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px var(--shadow);
     z-index: 1000;
     max-width: 300px;
     pointer-events: none;
     font-size: 14px;
   }
   .tooltip-header {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border);
   }
   .tooltip-header.empty-week {
     border-bottom: none;
   }
   .tooltip-date {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
   }
   .tooltip-paper {
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--border);
   }
   .tooltip-paper:last-child {
     border-bottom: none;
@@ -255,10 +244,10 @@
   .paper-title {
     font-size: 12px;
     font-weight: 500;
-    color: #333;
+    color: var(--text-color);
   }
   .paper-authors {
     font-size: 11px;
-    color: #666;
+    color: var(--text-secondary);
   }
 </style>

@@ -1,9 +1,3 @@
-ci:
-  autoupdate_schedule: quarterly
-  skip: [deno-fmt, deno-lint, eslint]
-
-default_stages: [pre-commit]
-
 default_install_hook_types: [pre-commit, commit-msg]
 
 repos:
@@ -26,7 +20,7 @@ repos:
         entry: deno fmt
         types_or: [file]
         language: system
-        args: [--config, deno.jsonc]
+        args: [--config, deno.jsonc, --permit-no-files]
       - id: deno-lint
         name: Deno lint
         entry: deno lint
@@ -40,15 +34,16 @@ repos:
       - id: codespell
         stages: [pre-commit, commit-msg]
         exclude_types: [svg]
-        args: [--ignore-words-list, 'ist,Yau,te,manuel,mater', --check-filenames]
+        args:
+          [--ignore-words-list, 'ist,Yau,te,manuel,mater', --check-filenames]
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.32.0
+    rev: v1.39.0
     hooks:
       - id: typos
         name: typos (dynamic config)
         types_or: [text]
-        entry: bash -c 'mkdir -p tmp && printf "[default]\\nextend-ignore-identifiers-re = [\"Yau\", \"ist\", \"Comput\"]\\n" > tmp/_typos.toml && exec typos "$@"' --
+        entry: bash -c 'mkdir -p tmp && printf "[default]\\nextend-ignore-identifiers-re = [\"Yau\", \"ist\", \"Comput\", \"atomate\", \"Atomate\"]\\n" > tmp/_typos.toml && exec typos "$@"' --
         args: [--isolated, --config, tmp/_typos.toml]
         exclude: .pre-commit-config.yaml
 
@@ -63,7 +58,7 @@ repos:
         exclude: changelog\.md$
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.33.0
+    rev: v9.39.1
     hooks:
       - id: eslint
         types: [file]

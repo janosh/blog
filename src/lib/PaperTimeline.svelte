@@ -1,12 +1,11 @@
 <script lang="ts">
   import type { Reference } from '$lib/types'
   import { onMount } from 'svelte'
+  import type { HTMLAttributes } from 'svelte/elements'
 
-  interface Props {
+  let { papers, ...rest }: HTMLAttributes<HTMLDivElement> & {
     papers: Reference[]
-    [key: string]: unknown
-  }
-  let { papers, ...rest }: Props = $props()
+  } = $props()
 
   interface TimelineData {
     paper: Reference
@@ -17,17 +16,13 @@
     journal: string
     year: number
   }
-
   let timeline_data: TimelineData[] = $state([])
   let date_range: { min: Date; max: Date } = $state({
     min: new Date(),
     max: new Date(),
   })
-  let tooltip: { data: TimelineData | null; x: number; y: number } = $state({
-    data: null,
-    x: 0,
-    y: 0,
-  })
+  type Tooltip = { data: TimelineData | null; x: number; y: number }
+  let tooltip: Tooltip = $state({ data: null, x: 0, y: 0 })
 
   onMount(() => {
     const parsed_papers = papers
@@ -121,7 +116,7 @@
     width: 100%;
     margin: 30px 15px 40px;
     height: 2px;
-    background: #ddd;
+    background: var(--border);
   }
   .timeline-marker {
     position: absolute;
@@ -136,29 +131,29 @@
   .marker-bar {
     width: 3px;
     height: 30px;
-    background: #3a57d7;
+    background: var(--link-color);
     margin: 0 auto;
     border-radius: 1px;
     transition: all 0.2s ease;
   }
   .timeline-marker:hover .marker-bar {
-    background: #2a47c7;
+    background: var(--link-hover);
     height: 35px;
   }
   .marker-year {
     font-size: 10px;
     text-align: center;
     margin-top: 5px;
-    color: #666;
+    color: var(--text-secondary);
     font-weight: 500;
   }
   .tooltip {
     position: fixed;
-    background: white;
-    border: 1px solid #ccc;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: 8px;
     padding: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px var(--shadow);
     z-index: 1000;
     max-width: 300px;
     pointer-events: none;
@@ -167,21 +162,21 @@
     font-weight: 600;
     font-size: 14px;
     margin-bottom: 6px;
-    color: #333;
+    color: var(--text-color);
   }
   .tooltip-authors {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
     margin-bottom: 4px;
   }
   .tooltip-journal {
     font-size: 12px;
-    color: #888;
+    color: var(--text-secondary);
     font-style: italic;
     margin-bottom: 4px;
   }
   .tooltip-date {
     font-size: 11px;
-    color: #aaa;
+    color: var(--text-secondary);
   }
 </style>

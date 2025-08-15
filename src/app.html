@@ -3,6 +3,20 @@
   <head>
     <title>janosh.dev</title>
     <meta name="author" content="Janosh Riebesell" />
+    <meta name="color-scheme" content="light dark" />
+
+    <script>
+      // Set theme immediately to prevent flashing
+      try {
+        const theme = localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light')
+        document.documentElement.style.colorScheme = theme
+      } catch {
+        document.documentElement.style.colorScheme = 'dark'
+      }
+    </script>
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="janosh.dev" />

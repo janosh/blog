@@ -8,8 +8,8 @@ projects:
     languages:
       - Python
       - Cython
-    stars: 1701
-    commits: 1048
+    stars: 1746
+    commits: 1049
   - name: Matbench Discovery
     url: https://matbench-discovery.materialsproject.org
     logo: https://janosh.github.io/matbench-discovery/favicon.svg
@@ -28,8 +28,8 @@ projects:
       - JavaScript
       - Shell
       - HTML
-    stars: 174
-    commits: 465
+    stars: 197
+    commits: 482
   - name: CHGNet
     url: https://chgnet.lbl.gov
     repo: https://github.com/CederGroupHub/chgnet
@@ -47,7 +47,7 @@ projects:
       - JavaScript
       - HTML
       - TypeScript
-    stars: 319
+    stars: 343
     commits: 196
   - name: TorchSim
     url: https://radical-ai.github.io/torch-sim
@@ -59,8 +59,8 @@ projects:
     featured: true
     languages:
       - Python
-    stars: 257
-    commits: 30
+    stars: 348
+    commits: 32
   - name: MACE Foundation Models
     url: https://mace-docs.readthedocs.io/en/latest/examples/foundation_models.html#pretrained-mace-mp-0-models
     repo: https://github.com/ACEsuit/mace-foundations
@@ -81,11 +81,12 @@ projects:
     languages:
       - TypeScript
       - Svelte
-      - CSS
       - JavaScript
+      - CSS
+      - Python
       - HTML
-    stars: 248
-    commits: 279
+    stars: 278
+    commits: 336
   - name: pymatviz
     url: https://pymatviz.janosh.dev
     img_style: 'filter: invert(1);'
@@ -98,8 +99,8 @@ projects:
       - CSS
       - JavaScript
       - HTML
-    stars: 259
-    commits: 431
+    stars: 278
+    commits: 442
   - name: Tensorboard Reducer
     repo: https://github.com/janosh/tensorboard-reducer
     logo: https://raw.githubusercontent.com/janosh/tensorboard-reducer/main/assets/tensorboard-reducer-square.svg
@@ -108,7 +109,7 @@ projects:
     languages:
       - Python
       - TeX
-    stars: 74
+    stars: 76
     commits: 86
   - name: Normalizing Flows
     repo: https://github.com/janosh/awesome-normalizing-flows
@@ -116,7 +117,7 @@ projects:
     description: Curated list of resources for learning and using normalizing flows, a powerful tool in ML for modeling probability distributions.
     languages:
       - Python
-    stars: 1553
+    stars: 1578
     commits: 74
   - name: atomate2
     repo: https://github.com/materialsproject/atomate2
@@ -128,8 +129,8 @@ projects:
       - Python
       - Jupyter Notebook
       - Shell
-    stars: 234
-    commits: 379
+    stars: 249
+    commits: 380
     paper_key: ganose_atomate2_2025
     featured: true
   - name: jobflow
@@ -142,18 +143,8 @@ projects:
     languages:
       - Python
       - TeX
-    stars: 104
-    commits: 136
-  # - name: Aviary
-  #   repo: https://github.com/CompRhys/aviary
-  #   role: Maintainer
-  #   logo: https://github.com/janosh/diagrams/raw/main/assets/aviary-logo/aviary-logo.svg
-  #   description: Compositional, structural and coarse-grained structural ML energy model implementations (Roost, Wren, CGCNN, Wrenformer) with a consistent API.
-  #   pypi: https://pypi.org/project/tensorboard-reducer
-  #   languages:
-  #     - Python
-  #   stars: 59
-  #   commits: 237
+    stars: 112
+    commits: 153
   - name: MatCalc
     url: https://materialsvirtuallab.github.io/matcalc
     logo: https://github.com/materialsvirtuallab/matcalc/assets/30958850/89486f2f-73fb-40fb-803a-dfafe510eb6d
@@ -163,24 +154,24 @@ projects:
     languages:
       - Python
       - Jupyter Notebook
-    stars: 110
+    stars: 125
     commits: 77
   - name: Diagrams
     url: https://diagrams.janosh.dev
     repo: https://github.com/janosh/diagrams
     description: '[Typst](https://typst.app) and [LaTeX](https://www.latex-project.org) diagrams of concepts in physics/chemistry/ML.'
-    stars: 344
-    commits: 253
+    stars: 377
+    commits: 259
     languages:
       - Typst
       - TeX
       - Svelte
       - Python
       - TypeScript
-      - Shell
       - CSS
       - HTML
       - JavaScript
+      - Shell
   - name: Dielectrics
     url: https://janosh.github.io/dielectrics
     repo: https://github.com/janosh/dielectrics
@@ -189,12 +180,13 @@ projects:
     paper_key: riebesell_discovery_2024
     featured: true
     stars: 10
-    commits: 27
+    commits: 28
     languages:
       - HTML
       - Python
       - TeX
       - Typst
+      - Roff
   - name: MultiSelect
     url: https://multiselect.janosh.dev
     repo: https://github.com/janosh/svelte-multiselect
@@ -205,8 +197,8 @@ projects:
       - CSS
       - HTML
       - JavaScript
-    stars: 332
-    commits: 296
+    stars: 347
+    commits: 307
   - name: MatPES
     url: https://matpes.ai
     repo: https://github.com/materialsvirtuallab/matpes
@@ -219,7 +211,7 @@ projects:
       - Python
       - CSS
       - Procfile
-    stars: 39
+    stars: 45
   - name: MLIP PES softening
     role: Contributor
     url: https://nature.com/articles/s41524-024-01500-6

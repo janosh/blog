@@ -14,12 +14,12 @@ cover:
 
 <img src="./planets.svg" alt={cover.caption} class="banner" />
 
-<h2 class="section-title">
-  <Icon inline icon="mdi:atom" />
-  Notes on Physics
-</h2>
+<section>
+  <h2><Icon inline icon="mdi:atom" /> Notes on Physics</h2>
 
-This is a compilation of notes and solutions to problem sheets for some of the physics lectures I took, most of them in [Heidelberg](https://google.com/search?q=Heidelberg). Hopefully, they can be useful to others. If you find errors, please [open an issue]({issues}).
+This is a compilation of notes and solutions to problem sheets for some of the physics lectures I took, most of them in <a href="https://google.com/search?q=Heidelberg" target="_blank" rel="noopener">Heidelberg</a>. Hopefully, they can be useful to others. If you find errors, please <a href={issues} target="_blank" rel="noopener">open an issue</a>.
+
+</section>
 
 <DocsGrid style="max-width: var(--body-max-width); margin: 0 auto 5em;">
 
@@ -48,8 +48,15 @@ This is a compilation of notes and solutions to problem sheets for some of the p
 </DocsGrid>
 
 <style>
-  p {
+  section {
+    text-align: center;
     max-width: 50em;
-    margin: 1em auto;
+    margin: 2em auto 2.5em;
+  }
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
   }
 </style>

@@ -11,8 +11,8 @@
   let active_tags: Option[] = $state([])
 
   const tag_counts = page.data?.posts
-    ?.flatMap((post) => post.tags)
-    .reduce((acc, tag) => {
+    ?.flatMap((post: FrontMatter) => post.tags)
+    .reduce((acc: Record<string, number>, tag: string) => {
       acc[tag] = (acc[tag] ?? 0) + 1
       return acc
     }, {})
@@ -63,7 +63,7 @@
 <ul class="grid" style="margin: 4em auto; gap: 3ex">
   {#each page.data?.posts
       ?.filter(has_active_tags(active_tags))
-      .sort((post_1, post_2) => {
+      .sort((post_1: FrontMatter, post_2: FrontMatter) => {
         return post_2.date.localeCompare(post_1.date) // sort by date descending
       }) ?? [] as
     post
@@ -124,11 +124,11 @@
     object-fit: cover;
     height: 10em;
     width: 100%;
-    background: linear-gradient(-45deg, #5a6323, #2a355e, #642626);
+    background: linear-gradient(-45deg, var(--card-bg), var(--nav-bg), var(--border));
   }
   :global(div.multiselect) {
     max-width: 20em !important;
     margin: 0 auto -1em !important;
-    border: 1pt solid #666 !important;
+    border: 1pt solid var(--border) !important;
   }
 </style>

@@ -39,13 +39,13 @@ Multimodal distributions where the modes barely overlap typically pose difficult
 Let's see how many samples HMC requires to achieve mixing, i.e. to jump from whichever mode we sample first to the other. Once both modes are covered with roughly equal numbers of samples, we can use the generated Markov chain $\Ccal$ to compute accurate expectation values for $\pi$. For example, say we have an observable $f(\vec x)$ and we're interested in the value it's likely to take given the probabilities for different $\vec x$ under $\pi(\vec x)$,
 
 $$
-\expec_\pi[f] = \int_{\Rbb^2} \pi(\vec x) \, f(\vec x) \, \dif\vec x.
+\mathbb{E}_\pi[f] = \int_{\Rbb^2} \pi(\vec x) \, f(\vec x) \, \dif\vec x.
 $$
 
 If the Markov chain has converged, we can get an unbiased estimate for this expectation value, by averaging over samples in the chain,
 
 $$
-\expec_\pi[f] \approx \hat f = \frac{1}{|\Ccal|} \sum_{\vec x \in \Ccal} f(\vec x),
+\mathbb{E}_\pi[f] \approx \hat f = \frac{1}{|\Ccal|} \sum_{\vec x \in \Ccal} f(\vec x),
 $$
 
 Here's the code to generate $\Ccal$ using TFP:
