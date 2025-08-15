@@ -1,11 +1,12 @@
 <script lang="ts">
-  interface Props {
+  import type { HTMLAttributes } from 'svelte/elements'
+
+  interface Props extends HTMLAttributes<HTMLElementTagNameMap[`small`]> {
     label?: string
     sort_by?: string
     sort_keys?: readonly string[] | readonly (readonly [string, string])[]
     sort_order?: `asc` | `desc`
     as?: string
-    [key: string]: unknown
   }
   let {
     label = `Sort by`,
@@ -44,11 +45,11 @@
     font-size: 9pt;
     padding: 1pt 4pt;
     border: none;
-    color: gray;
-    background-color: rgba(0, 0, 0, 0.03);
+    color: var(--text-secondary);
+    background-color: var(--nav-bg);
   }
   [aria-label='sort-buttons'] button.active {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--accent-bg);
   }
   @media print {
     [aria-label='sort-buttons'] {

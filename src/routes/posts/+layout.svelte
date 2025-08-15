@@ -61,7 +61,7 @@
     height: 50vh;
     width: 100%;
     object-fit: cover;
-    background: linear-gradient(-45deg, #5a6323, #2a355e, #642626);
+    background: linear-gradient(-45deg, var(--card-bg), var(--nav-bg), var(--border));
   }
   time {
     font-weight: lighter;
