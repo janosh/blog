@@ -88,7 +88,7 @@
       {#if DOI}
         <a href="https://doi.org/{DOI}">{DOI}</a>
         {#if journal}
-          &nbsp;&mdash; <strong style="color: #444">{journal}</strong>
+          &nbsp;&mdash; <strong style="color: var(--text-secondary)">{journal}</strong>
         {/if}
       {:else if href && (href.includes(`arxiv.org`) || href.includes(`arXiv`))}
         <a {href}>{href.replace(`https://`, ``)}</a>
@@ -126,9 +126,9 @@
     font-weight: 500;
   }
   ::highlight(highlight-match) {
-    color: initial;
+    color: var(--highlight);
   }
   :root {
-    --tooltip-bg: #f0f0f0;
+    --tooltip-bg: var(--card-bg);
   }
 </style>

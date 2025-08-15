@@ -44,11 +44,11 @@
     font-size: 9pt;
     padding: 1pt 4pt;
     border: none;
-    color: gray;
-    background-color: rgba(0, 0, 0, 0.03);
+    color: var(--text-secondary);
+    background-color: var(--nav-bg);
   }
   [aria-label='sort-buttons'] button.active {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--card-bg);
   }
   @media print {
     [aria-label='sort-buttons'] {
