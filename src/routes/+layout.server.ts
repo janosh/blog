@@ -1,9 +1,8 @@
 import type { FrontMatter } from '$lib/types.js'
 import { author } from '$root/package.json'
-import type { LayoutServerLoad } from './$types'
 export const prerender = true
 
-export const load: LayoutServerLoad = ({ url }) => {
+export const load = ({ url }: { url: URL }) => {
   const posts = Object.entries(
     import.meta.glob(`./posts/*/+page.{md,svx,svelte}`, { eager: true }),
   ).map(([file, post]) => ({

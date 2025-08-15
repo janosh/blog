@@ -57,7 +57,7 @@
   &nbsp;Recent Work
 </h2>
 <ul class="recent grid">
-  {#each projects.filter((p) => p.featured).sort((p1, p2) => {
+  {#each projects.filter((proj) => proj.featured).sort((p1, p2) => {
       const date1 = p1?.paper?.issued?.[0]
       const date2 = p2?.paper?.issued?.[0]
       if (!date1 || !date2) return 0
@@ -98,7 +98,7 @@
     height: 10em;
     width: 10em;
     margin: 2em auto 0;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px var(--shadow);
   }
   h1 {
     margin: 0.3em 0 0;
@@ -132,16 +132,16 @@
     margin: 1.2em 0;
   }
   .interest-tag {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--card-bg);
     padding: 1pt 8pt;
     border-radius: 20px;
     font-weight: 500;
     font-size: 0.85rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--card-border);
     transition: all 0.2s ease;
   }
   .interest-tag:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--nav-bg);
     transform: translateY(-2px);
   }
   .recent {
@@ -150,10 +150,10 @@
   .recent > li {
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.06),
-      rgba(255, 255, 255, 0.02)
+      var(--card-bg),
+      color-mix(in srgb, var(--card-bg) 50%, var(--nav-bg) 50%)
     );
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--card-border);
     padding: 0.8em;
     border-radius: 6pt;
     display: grid;
@@ -163,7 +163,7 @@
   }
   .recent > li:hover {
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--nav-bg);
   }
   .recent > li > h3 {
     margin: 0;
@@ -188,18 +188,18 @@
     flex-wrap: wrap;
   }
   .project-meta > a {
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--card-bg);
     padding: 1pt 6pt;
     border-radius: 12px;
     font-weight: 500;
   }
   .project-meta > a:hover {
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--nav-bg);
   }
   .project-meta > time {
     color: var(--text-secondary);
     font-size: 0.8em;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--nav-bg);
     padding: 1pt 6pt;
     border-radius: 12px;
     display: flex;
@@ -209,17 +209,5 @@
     margin: 0;
     color: var(--text-secondary);
     font-size: 0.9rem;
-  }
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 2.3rem;
-    }
-    .interest-tag {
-      font-size: 0.8rem;
-      padding: 0.35em 0.6em;
-    }
-    .recent > li {
-      padding: 0.7em;
-    }
   }
 </style>

@@ -1,9 +1,11 @@
 import type { FrontMatter } from '$lib/types'
 import { error } from '@sveltejs/kit'
-import type { LayoutServerLoad } from './$types'
 
-export const load: LayoutServerLoad = ({ url }) => {
-  const modules = import.meta.glob(`./*/+page.md`, { eager: true })
+export const load = ({ url }: { url: URL }) => {
+  const modules = import.meta.glob(`./*/+page.md`, { eager: true }) as Record<
+    string,
+    { metadata: FrontMatter }
+  >
 
   const slug = url.pathname.split(`/`).at(-1)
   const path = `./${slug}/+page.md`

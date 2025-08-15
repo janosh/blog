@@ -63,3 +63,29 @@ export function extract_citations(
 
   return { citations: citations.count, citation_database: citations.database }
 }
+
+export function export_single_page_pdf(): void {
+  const main_element = document.querySelector(`main`)
+  if (!main_element) return
+
+  // Apply print-like styles for measurement
+  const measure_style = document.createElement(`style`)
+  measure_style.textContent =
+    `@media screen { main { width: calc(210mm - 0.2in) !important; max-width: calc(210mm - 0.2in) !important; margin: 0 !important; padding: 2em !important; font-size: 10pt !important; line-height: 1.2 !important; } main p { font-size: 10pt !important; margin: 0 0 6pt 0 !important; } main h2 { font-size: 12pt !important; margin: 12pt 0 6pt 0 !important; } main h4, main small { font-size: 10pt !important; margin: 6pt 0 3pt 0 !important; } }`
+  document.head.appendChild(measure_style)
+
+  void main_element.offsetHeight // Force layout
+  const height_mm = ((main_element.scrollHeight * 25.4) / 96 * 1.8) + 50
+  measure_style.remove()
+
+  // Create single-page PDF
+  const print_style = document.createElement(`style`)
+  print_style.id = `single-page-pdf`
+  print_style.textContent = `@media print { @page { size: 210mm ${
+    height_mm.toFixed(1)
+  }mm; margin: 0.1in; } *, main, section, section.body, section.body *, ul.oss, ul.oss *, ul.skills, ul.skills *, ul.hobbies, ul.hobbies *, ul.horizontal, ul.horizontal *, .side-by-side, .side-by-side * { page-break-before: auto !important; page-break-after: auto !important; page-break-inside: auto !important; break-before: auto !important; break-after: auto !important; break-inside: auto !important; } html, body, main { height: auto !important; max-height: none !important; overflow: visible !important; } }`
+  document.head.appendChild(print_style)
+
+  globalThis.print()
+  setTimeout(() => document.getElementById(`single-page-pdf`)?.remove(), 1000)
+}

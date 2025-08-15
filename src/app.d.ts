@@ -15,7 +15,7 @@ declare module '*cv.yml' {
     languages: types.Language[]
     volunteer: types.Volunteer[]
     awards: types.Award[]
-    memberships: types.Membership[]
+    community: types.Community[]
   }
   export default cv
 }

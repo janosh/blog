@@ -1,15 +1,12 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
   import { page } from '$app/state'
-  import { Footer } from '$lib'
-  import { type Snippet } from 'svelte'
+  import { Footer, ThemeToggle } from '$lib'
+  import type { Snippet } from 'svelte'
   import { CmdPalette, CopyButton } from 'svelte-multiselect'
   import '../app.css'
 
-  interface Props {
-    children?: Snippet
-  }
-  let { children }: Props = $props()
+  let { children }: { children?: Snippet<[]> } = $props()
 
   const actions = Object.keys(import.meta.glob(`./**/+page.{svx,svelte,md}`)).map(
     (filename) => {
@@ -20,6 +17,7 @@
   )
 </script>
 
+<ThemeToggle />
 <CmdPalette {actions} placeholder="Go to..." />
 <CopyButton global />
 
@@ -39,7 +37,7 @@
     position: absolute;
     top: 2em;
     left: 2em;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--card-bg);
     padding: 1pt 5pt;
     border-radius: 3pt;
     transition: 0.2s;

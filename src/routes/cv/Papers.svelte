@@ -3,16 +3,9 @@
   import { PAPER_SORT_KEYS } from '$lib/types'
   import { highlight_matches, tooltip } from 'svelte-multiselect/attachments'
   import { flip } from 'svelte/animate'
+  import type { HTMLAttributes } from 'svelte/elements'
   import { extract_citations, truncate_authors } from '.'
 
-  interface Props {
-    references: Reference[]
-    first_name_mode?: `initial` | `full` | `none`
-    target_author?: string
-    sort_by?: `title` | `date` | `author` | `first author` | `citations`
-    sort_order?: `asc` | `desc`
-    highlight_props?: Parameters<typeof highlight_matches>[0]
-  }
   let {
     references,
     first_name_mode = `initial`,
@@ -23,7 +16,15 @@
       query: target_author.toLowerCase(),
       css_class: `highlight-match`,
     },
-  }: Props = $props()
+    ...rest
+  }: {
+    references: Reference[]
+    first_name_mode?: `initial` | `full` | `none`
+    target_author?: string
+    sort_by?: `title` | `date` | `author` | `first author` | `citations`
+    sort_order?: `asc` | `desc`
+    highlight_props?: Parameters<typeof highlight_matches>[0]
+  } & HTMLAttributes<HTMLOListElement> = $props()
 
   // Process references to add citation counts
   const processed_references = $derived(
@@ -31,7 +32,7 @@
   )
 </script>
 
-<ol {@attach highlight_matches(highlight_props)}>
+<ol {...rest} {@attach highlight_matches(highlight_props)}>
   {#each processed_references.sort((ref1, ref2) => {
       const dir = sort_order === `asc` ? 1 : -1
       if (sort_by === PAPER_SORT_KEYS.title) {
@@ -88,7 +89,7 @@
       {#if DOI}
         <a href="https://doi.org/{DOI}">{DOI}</a>
         {#if journal}
-          &nbsp;&mdash; <strong style="color: #444">{journal}</strong>
+          &nbsp;&mdash; <strong style="color: var(--text-secondary)">{journal}</strong>
         {/if}
       {:else if href && (href.includes(`arxiv.org`) || href.includes(`arXiv`))}
         <a {href}>{href.replace(`https://`, ``)}</a>
@@ -126,9 +127,9 @@
     font-weight: 500;
   }
   ::highlight(highlight-match) {
-    color: initial;
+    color: var(--highlight);
   }
   :root {
-    --tooltip-bg: #f0f0f0;
+    --tooltip-bg: var(--card-bg);
   }
 </style>

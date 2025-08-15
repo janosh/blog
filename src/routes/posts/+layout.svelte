@@ -8,11 +8,8 @@
   import { PrevNext } from 'svelte-multiselect'
   import type { PageData } from '../$types'
 
-  interface Props {
-    data: PageData
-    children: Snippet
-  }
-  let { data, children }: Props = $props()
+  let { data, children }: { data: PageData; children?: Snippet<[]> } = $props()
+
   if (!data.post) throw new Error(`Post ${page.url.pathname} not found`)
   let { title, cover, date, slug } = $derived(data.post)
 </script>
@@ -61,7 +58,7 @@
     height: 50vh;
     width: 100%;
     object-fit: cover;
-    background: linear-gradient(-45deg, #5a6323, #2a355e, #642626);
+    background: linear-gradient(-45deg, var(--card-bg), var(--nav-bg), var(--border));
   }
   time {
     font-weight: lighter;
