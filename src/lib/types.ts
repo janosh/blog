@@ -95,10 +95,12 @@ export type Award = {
   href: string
 }
 
-export type Membership = {
+export type Community = {
   name: string
+  role?: string
   date: string
   href: string
+  img: string
 }
 
 export type Language = {

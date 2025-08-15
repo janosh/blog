@@ -28,14 +28,14 @@
   <Icon inline icon="ri:open-source-line" />&nbsp; Open Source
 </h2>
 
-<div class="controls">
-  <span style="color: var(--text-secondary); font-size: 0.9rem">Sort by</span>
+<div class="controls" style="color: var(--text-secondary)">
+  Sort by
   {#each sort_by_options as title (title)}
     <button onclick={() => (sort_by = title)} class:active={sort_by === title}>
       {title}
     </button>
   {/each}
-  <input type="text" placeholder="Search projects..." bind:value={query} />
+  <input placeholder="Search projects..." bind:value={query} style="margin: 0 0 0 1em" />
 </div>
 
 <ul
@@ -93,40 +93,37 @@
     display: flex;
     place-content: center;
     place-items: center;
-    gap: 8pt;
+    gap: 6pt;
     margin: 1em 2em;
     flex-wrap: wrap;
   }
   button {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.4em 0.8em;
-    border-radius: 18px;
-    font-size: 0.85rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 4pt 8pt;
+    border-radius: 8pt;
     transition: all 0.2s ease;
   }
   button:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--nav-bg);
     transform: translateY(-1px);
   }
   button.active {
-    background: teal;
-    border-color: teal;
-    color: white;
+    background: var(--button-bg);
   }
   input {
     padding: 0.5em 1em;
     border-radius: 18px;
     min-width: 180px;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.9rem;
+    background: var(--input-bg);
+    border: 1px solid var(--card-border);
+    font-size: 1em;
     transition: all 0.2s ease;
   }
   input:focus {
     outline: none;
-    border-color: teal;
-    background: rgba(0, 0, 0, 0.6);
+    border-color: var(--button-bg);
+    background: var(--nav-bg);
   }
   .projects {
     margin: 1.2em auto;
@@ -140,17 +137,17 @@
     grid-template-rows: subgrid;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.04),
-      rgba(255, 255, 255, 0.01)
+      var(--card-bg),
+      var(--nav-bg)
     );
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--card-border);
     padding: 0.8em;
     border-radius: 6pt;
     transition: all 0.2s ease;
   }
   .projects > li:hover {
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: var(--nav-bg);
   }
   h3 {
     margin: 0;
@@ -179,14 +176,14 @@
     display: flex;
     gap: 0.3em;
     place-items: center;
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--card-bg);
     padding: 0.2em 0.6em;
     border-radius: 12px;
     color: var(--text-secondary) !important;
     transition: all 0.2s ease;
   }
   .stat-link:hover {
-    background: rgba(0, 0, 0, 0.4);
+    background: var(--nav-bg);
     color: var(--text-color) !important;
   }
   .project-description {

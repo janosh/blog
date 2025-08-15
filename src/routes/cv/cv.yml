@@ -9,10 +9,10 @@ social:
   - name: LinkedIn
     icon: bi:linkedin
     url: https://linkedin.com/in/janosh-riebesell
-  - name: X
-    icon: fa6-brands:x-twitter
-    url: https://x.com/jrib_
-    style: 'transform: scale(1.2);'
+  # - name: X
+  #   icon: fa6-brands:x-twitter
+  #   url: https://x.com/jrib_
+  #   style: 'transform: scale(1.2);'
   - name: Email
     icon: mdi:email
     url: mailto:janosh.riebesell@gmail.com
@@ -167,13 +167,36 @@ languages:
     level: basic
     icon: twemoji:flag-spain
 
-memberships:
+# TODO find better img URLs without white background
+community:
+  - name: Associate Editor IOP AI for Science
+    date: 2025 - present # Feb 2025
+    href: https://iopscience.iop.org/journal/3050-287X/page/editorial-board
+    img: https://ioppublishing.org/wp-content/uploads/2019/02/iop_logo.png.webp
+  - name: Nature Computational Science
+    date: 2025 - present
+    role: frequent reviewer
+    href: https://www.nature.com/natcomputsci
+    img: https://pbs.twimg.com/profile_images/1259876609533906946/ZDr36zYH_400x400.jpg
+  - name: Digital Discovery
+    date: 2024 - present
+    role: frequent reviewer
+    href: https://www.rsc.org/publishing/journals/digital-discovery
+    img: https://pbs.twimg.com/profile_images/1407354102586261511/znhbefSm_400x400.png
+  - name: NPJ Computational Materials
+    date: 2024 - present
+    role: frequent reviewer
+    href: https://www.nature.com/npjcompumats
+    img: https://images.squarespace-cdn.com/content/v1/5e48a7c3d218a94af2a7c7d9/1600288102536-U6R1OGNEPGTGYQE9M4PH/npj.jpg
   - name: Cambridge Physical Society
     date: 2020 - present
     href: http://camphysoc.co.uk
+    img: https://upload.wikimedia.org/wikipedia/commons/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg
   - name: Materials Research Society
     date: 2023 - present
     href: https://mrs.org
+    img: https://www.advancedsciencenews.com/wp-content/uploads/2012/03/MRS-logo-e1332408136614.jpg
   - name: Materials Project Software Foundation
     date: 2023 - present
     href: https://github.com/materialsproject/foundation
+    img: https://materialsproject.org/assets/images/home/materials-project-logo.svg

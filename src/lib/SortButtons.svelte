@@ -1,12 +1,6 @@
 <script lang="ts">
-  interface Props {
-    label?: string
-    sort_by?: string
-    sort_keys?: readonly string[] | readonly (readonly [string, string])[]
-    sort_order?: `asc` | `desc`
-    as?: string
-    [key: string]: unknown
-  }
+  import type { HTMLAttributes } from 'svelte/elements'
+
   let {
     label = `Sort by`,
     sort_by = $bindable(``),
@@ -14,7 +8,13 @@
     sort_order = $bindable(`asc`),
     as = `small`,
     ...rest
-  }: Props = $props()
+  }: HTMLAttributes<HTMLElementTagNameMap[`small`]> & {
+    label?: string
+    sort_by?: string
+    sort_keys?: readonly string[] | readonly (readonly [string, string])[]
+    sort_order?: `asc` | `desc`
+    as?: string
+  } = $props()
 </script>
 
 <svelte:element this={as} aria-label="sort-buttons" {...rest}>
@@ -44,11 +44,11 @@
     font-size: 9pt;
     padding: 1pt 4pt;
     border: none;
-    color: gray;
-    background-color: rgba(0, 0, 0, 0.03);
+    color: var(--text-secondary);
+    background-color: var(--nav-bg);
   }
   [aria-label='sort-buttons'] button.active {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--accent-bg);
   }
   @media print {
     [aria-label='sort-buttons'] {

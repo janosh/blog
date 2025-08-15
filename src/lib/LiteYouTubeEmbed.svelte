@@ -1,11 +1,11 @@
 <script lang="ts">
   // adapted from https://github.com/zamanruhy/svelte-lite-youtube-embed
-  interface Props {
+  import type { HTMLAttributes } from 'svelte/elements'
+
+  let { video_id, play_label = `Play`, ...rest }: {
     video_id: string
     play_label?: string
-  }
-
-  let { video_id, play_label = `Play` }: Props = $props()
+  } & HTMLAttributes<HTMLDivElement> = $props()
 
   let activated = $state(false)
   const activate = () => (activated = true)
@@ -16,7 +16,8 @@
 </script>
 
 <div
-  class="lite-youtube"
+  {...rest}
+  class="lite-youtube {rest.class ?? ``}"
   class:activated
   onclick={activate}
   onkeyup={activate}

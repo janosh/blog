@@ -1,17 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte'
+  import type { HTMLAttributes } from 'svelte/elements'
 
-  interface Props {
-    parent_width: number
-    parent_height: number
-    width?: number
-    height?: number
-    pos?: string
-    handle_position?: string
-    color: string
-    resizable?: `x` | `y` | `xy`
-    children?: Snippet<[]>
-  }
   let {
     parent_width,
     parent_height,
@@ -22,7 +12,17 @@
     color,
     resizable = `xy`,
     children,
-  }: Props = $props()
+  }: {
+    parent_width: number
+    parent_height: number
+    width?: number
+    height?: number
+    pos?: string
+    handle_position?: string
+    color: string
+    resizable?: `x` | `y` | `xy`
+    children?: Snippet<[]>
+  } & HTMLAttributes<HTMLDivElement> = $props()
 
   let resize = $state({ x: 0, y: 0 })
   let size = $state({ width, height })

@@ -184,14 +184,14 @@ references:
   - id: cohen_torchsim_2025
     accessed:
       - year: 2025
-        month: 8
-        day: 12
+        month: 11
+        day: 1
     author:
       - family: Cohen
-        given: Orion
+        given: Orion Archer
       - family: Riebesell
         given: Janosh
-      - family: Goodall
+      - family: Goodall¹
         given: Rhys
       - family: Kolluru
         given: Adeesh
@@ -199,24 +199,27 @@ references:
         given: Stefano
       - family: Krause
         given: Joseph
-      - family: Colindres
+      - family: Colindres¹
         given: Jorge
       - family: Ceder
         given: Gerbrand
       - family: Gangan
-        given: Abhijeet S.
+        given: Abhijeet S
     citation-key: cohen_torchsim_2025
-    DOI: 10.48550/arXiv.2508.06628
+    container-title: AI for Science
+    container-title-short: AI Sci.
+    DOI: 10.1088/3050-287X/ae1799
+    ISSN: 3050-287X
     issued:
       - year: 2025
-        month: 8
-        day: 8
-    number: arXiv:2508.06628
-    publisher: arXiv
-    source: arXiv.org
+    language: en
+    note: |-
+      Citations: 0 (Crossref) [2025-11-01]
+      Citations: 2 (SemanticScholar) [2025-11-01]
+    source: Institute of Physics
     title: 'TorchSim: An efficient atomistic simulation engine in PyTorch'
     title-short: TorchSim
-    URL: http://arxiv.org/abs/2508.06628
+    URL: http://iopscience.iop.org/article/10.1088/3050-287X/ae1799
 
   - id: deng_chgnet_2023
     accessed:
@@ -932,4 +935,3 @@ references:
     title-short: Jobflow
     URL: https://joss.theoj.org/papers/10.21105/joss.05995
     volume: '9'
-...

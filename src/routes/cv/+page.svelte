@@ -6,6 +6,7 @@
   import type { ComponentProps } from 'svelte'
   import { flip } from 'svelte/animate'
   import cv from './cv.yml'
+  import { export_single_page_pdf } from './index'
   import Intro from './intro.md'
   import Papers from './Papers.svelte'
 
@@ -33,32 +34,6 @@
   ] as const
 
   const links = { target: `_blank`, rel: `noreferrer` }
-
-  function export_single_page_pdf(): void {
-    const main_element = document.querySelector(`main`)
-    if (!main_element) return
-
-    // Apply print-like styles for measurement
-    const measure_style = document.createElement(`style`)
-    measure_style.textContent =
-      `@media screen { main { width: calc(210mm - 0.2in) !important; max-width: calc(210mm - 0.2in) !important; margin: 0 !important; padding: 2em !important; font-size: 10pt !important; line-height: 1.2 !important; } main p { font-size: 10pt !important; margin: 0 0 6pt 0 !important; } main h2 { font-size: 12pt !important; margin: 12pt 0 6pt 0 !important; } main h4, main small { font-size: 10pt !important; margin: 6pt 0 3pt 0 !important; } }`
-    document.head.appendChild(measure_style)
-
-    void main_element.offsetHeight // Force layout
-    const height_mm = ((main_element.scrollHeight * 25.4) / 96 * 1.8) + 50
-    measure_style.remove()
-
-    // Create single-page PDF
-    const print_style = document.createElement(`style`)
-    print_style.id = `single-page-pdf`
-    print_style.textContent = `@media print { @page { size: 210mm ${
-      height_mm.toFixed(1)
-    }mm; margin: 0.1in; } *, main, section, section.body, section.body *, ul.oss, ul.oss *, ul.skills, ul.skills *, ul.hobbies, ul.hobbies *, ul.horizontal, ul.horizontal *, .side-by-side, .side-by-side * { page-break-before: auto !important; page-break-after: auto !important; page-break-inside: auto !important; break-before: auto !important; break-after: auto !important; break-inside: auto !important; } html, body, main { height: auto !important; max-height: none !important; overflow: visible !important; } }`
-    document.head.appendChild(print_style)
-
-    window.print()
-    setTimeout(() => document.getElementById(`single-page-pdf`)?.remove(), 1000)
-  }
 </script>
 
 <main>
@@ -233,12 +208,23 @@
 
     <h2>
       <Icon inline icon="mdi:account-group" />
-      &nbsp; Memberships
+      &nbsp; Community
     </h2>
-    <ul>
-      {#each cv.memberships as { name, date, href } (name)}
-        <li>
-          <a {href}>{name}</a>&ensp;<small>{date}</small>
+    <ul style="margin-block: 1em; display: grid; gap: 1ex">
+      {#each cv.community as { name, date, href, img, role } (name)}
+        <li style="display: flex; gap: 1ex; place-items: center; justify-content: start">
+          <a {href}>
+            <img
+              src={img}
+              alt="{name} Logo"
+              width="30"
+              height="30"
+              style="object-fit: contain; margin: 0 1ex 0 0"
+            />
+          </a>
+          <a {href}>{name}</a>
+          {#if role}<span style="font-weight: lighter">{role}</span>{/if}
+          <small>{date}</small>
         </li>
       {/each}
     </ul>
@@ -271,7 +257,7 @@
     <Icon icon="mdi:chevron-up" />
   </button>
   <div>
-    <button onclick={() => window.print()}>Multi-page</button>
+    <button onclick={() => globalThis.print()}>Multi-page</button>
     <button onclick={export_single_page_pdf}>Single tall page</button>
   </div>
 </div>
@@ -280,13 +266,13 @@
   main {
     margin: 2em auto 100px;
     max-width: 50em;
-    background-color: whitesmoke;
-    color: black;
+    background-color: var(--card-bg);
+    color: var(--text-color);
     padding: 3em;
     border-radius: 2pt;
   }
   main :global(a) {
-    color: darkblue;
+    color: var(--link-color);
   }
   h4 img {
     width: 3ex;
@@ -379,8 +365,8 @@
     white-space: nowrap;
   }
   .pdf-dropdown > button {
-    background: rgb(58, 87, 215);
-    color: white;
+    background: var(--button-bg);
+    color: var(--button-text);
     border: none;
     border-radius: 8px;
     padding: 9px;
@@ -389,16 +375,16 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px var(--shadow);
     transition: all 0.2s ease;
   }
   .pdf-dropdown > div {
     position: absolute;
     bottom: 100%;
     right: 0;
-    background: white;
+    background: var(--card-bg);
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px var(--shadow);
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
@@ -410,8 +396,8 @@
     transform: translateY(0);
   }
   .pdf-dropdown > div > button {
-    background: white;
-    color: darkblue;
+    background: var(--card-bg);
+    color: var(--link-color);
     border: none;
     padding: 8px 12px;
     cursor: pointer;
@@ -421,7 +407,7 @@
     text-align: left;
   }
   .pdf-dropdown > div > button:hover {
-    background: #f0f0f0;
+    background: var(--nav-bg);
   }
   @media print {
     .pdf-dropdown, .view-toggle, :global(.paper-graph) {
@@ -468,8 +454,8 @@
     gap: 8px;
   }
   .view-toggle button {
-    background: white;
-    border: 1px solid #ccc;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
     border-radius: 6px;
     padding: 4px 8px;
     cursor: pointer;
@@ -477,14 +463,13 @@
     align-items: center;
     gap: 4px;
     transition: all 0.2s ease;
-    font-size: 12px;
   }
   .view-toggle button:hover {
-    background: #f0f0f0;
+    background: var(--nav-bg);
   }
   .view-toggle button.active {
-    background: #3a57d7;
-    color: white;
-    border-color: #3a57d7;
+    background: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--button-bg);
   }
 </style>
