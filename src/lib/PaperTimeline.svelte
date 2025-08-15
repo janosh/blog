@@ -121,7 +121,7 @@
     width: 100%;
     margin: 30px 15px 40px;
     height: 2px;
-    background: #ddd;
+    background: var(--border);
   }
   .timeline-marker {
     position: absolute;
@@ -136,29 +136,29 @@
   .marker-bar {
     width: 3px;
     height: 30px;
-    background: #3a57d7;
+    background: var(--link-color);
     margin: 0 auto;
     border-radius: 1px;
     transition: all 0.2s ease;
   }
   .timeline-marker:hover .marker-bar {
-    background: #2a47c7;
+    background: var(--link-hover);
     height: 35px;
   }
   .marker-year {
     font-size: 10px;
     text-align: center;
     margin-top: 5px;
-    color: #666;
+    color: var(--text-secondary);
     font-weight: 500;
   }
   .tooltip {
     position: fixed;
-    background: white;
-    border: 1px solid #ccc;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: 8px;
     padding: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px var(--shadow);
     z-index: 1000;
     max-width: 300px;
     pointer-events: none;
@@ -167,21 +167,21 @@
     font-weight: 600;
     font-size: 14px;
     margin-bottom: 6px;
-    color: #333;
+    color: var(--text-color);
   }
   .tooltip-authors {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
     margin-bottom: 4px;
   }
   .tooltip-journal {
     font-size: 12px;
-    color: #888;
+    color: var(--text-secondary);
     font-style: italic;
     margin-bottom: 4px;
   }
   .tooltip-date {
     font-size: 11px;
-    color: #aaa;
+    color: var(--text-secondary);
   }
 </style>

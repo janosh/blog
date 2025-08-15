@@ -9,10 +9,10 @@ social:
   - name: LinkedIn
     icon: bi:linkedin
     url: https://linkedin.com/in/janosh-riebesell
-  - name: X
-    icon: fa6-brands:x-twitter
-    url: https://x.com/jrib_
-    style: 'transform: scale(1.2);'
+  # - name: X
+  #   icon: fa6-brands:x-twitter
+  #   url: https://x.com/jrib_
+  #   style: 'transform: scale(1.2);'
   - name: Email
     icon: mdi:email
     url: mailto:janosh.riebesell@gmail.com

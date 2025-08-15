@@ -280,13 +280,13 @@
   main {
     margin: 2em auto 100px;
     max-width: 50em;
-    background-color: whitesmoke;
-    color: black;
+    background-color: var(--card-bg);
+    color: var(--text-color);
     padding: 3em;
     border-radius: 2pt;
   }
   main :global(a) {
-    color: darkblue;
+    color: var(--link-color);
   }
   h4 img {
     width: 3ex;
@@ -379,8 +379,8 @@
     white-space: nowrap;
   }
   .pdf-dropdown > button {
-    background: rgb(58, 87, 215);
-    color: white;
+    background: var(--button-bg);
+    color: var(--button-text);
     border: none;
     border-radius: 8px;
     padding: 9px;
@@ -389,16 +389,16 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px var(--shadow);
     transition: all 0.2s ease;
   }
   .pdf-dropdown > div {
     position: absolute;
     bottom: 100%;
     right: 0;
-    background: white;
+    background: var(--card-bg);
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px var(--shadow);
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
@@ -410,8 +410,8 @@
     transform: translateY(0);
   }
   .pdf-dropdown > div > button {
-    background: white;
-    color: darkblue;
+    background: var(--card-bg);
+    color: var(--link-color);
     border: none;
     padding: 8px 12px;
     cursor: pointer;
@@ -421,7 +421,7 @@
     text-align: left;
   }
   .pdf-dropdown > div > button:hover {
-    background: #f0f0f0;
+    background: var(--nav-bg);
   }
   @media print {
     .pdf-dropdown, .view-toggle, :global(.paper-graph) {
@@ -468,8 +468,8 @@
     gap: 8px;
   }
   .view-toggle button {
-    background: white;
-    border: 1px solid #ccc;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
     border-radius: 6px;
     padding: 4px 8px;
     cursor: pointer;
@@ -477,14 +477,13 @@
     align-items: center;
     gap: 4px;
     transition: all 0.2s ease;
-    font-size: 12px;
   }
   .view-toggle button:hover {
-    background: #f0f0f0;
+    background: var(--nav-bg);
   }
   .view-toggle button.active {
-    background: #3a57d7;
-    color: white;
-    border-color: #3a57d7;
+    background: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--button-bg);
   }
 </style>

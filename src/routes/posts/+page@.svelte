@@ -124,11 +124,11 @@
     object-fit: cover;
     height: 10em;
     width: 100%;
-    background: linear-gradient(-45deg, #5a6323, #2a355e, #642626);
+    background: linear-gradient(-45deg, var(--card-bg), var(--nav-bg), var(--border));
   }
   :global(div.multiselect) {
     max-width: 20em !important;
     margin: 0 auto -1em !important;
-    border: 1pt solid #666 !important;
+    border: 1pt solid var(--border) !important;
   }
 </style>

@@ -32,11 +32,11 @@
   }
   nav > a {
     padding: 0 4pt;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--nav-bg);
     border-radius: 3pt;
     transition: 0.2s;
   }
   nav > a[aria-current='page'] {
-    color: mediumseagreen;
+    color: var(--link-hover);
   }
 </style>
