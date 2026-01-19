@@ -1,10 +1,9 @@
 import adapter from '@sveltejs/adapter-static'
-import { s } from 'hastscript'
+import type { Config } from '@sveltejs/kit'
 import { mdsvex } from 'mdsvex'
-import link_headings from 'rehype-autolink-headings'
 import katex from 'rehype-katex-svelte'
-import heading_slugs from 'rehype-slug'
 import math from 'remark-math'
+import { heading_ids } from 'svelte-multiselect/heading-anchors'
 import preprocess from 'svelte-preprocess'
 import { importAssets } from 'svelte-preprocess-import-assets'
 
@@ -49,37 +48,21 @@ for (let index = `A`.charCodeAt(); index <= `Z`.charCodeAt(); index++) {
   macros[`\\${letter}bb`] = `\\mathbb{${letter}}`
 }
 
-const rehypePlugins = [
-  [katex, { macros, throwOnError: false, errorColor: `#cc0000` }],
-  heading_slugs,
-  [
-    link_headings,
-    {
-      behavior: `append`,
-      test: [`h2`, `h3`, `h4`, `h5`, `h6`], // don't auto-link <h1>
-      content: s(
-        `svg`,
-        { width: 16, height: 16, viewBox: `0 0 16 16` },
-        // symbol #octicon-link defined in app.html
-        s(`use`, { 'xlink:href': `#octicon-link` }),
-      ),
-    },
-  ],
-]
-
-/** @type {import('@sveltejs/kit').Config} */
 export default {
   extensions: [`.svelte`, `.svx`, `.md`],
 
   preprocess: [
     preprocess(),
     mdsvex({
-      rehypePlugins,
+      rehypePlugins: [
+        [katex, { macros, throwOnError: false, errorColor: `#cc0000` }],
+      ] as Plugin[],
       // remark-math@3.0.0 pinned due to mdsvex, see
       // https://github.com/kwshi/rehype-katex-svelte#usage
       remarkPlugins: [math],
       extensions: [`.svx`, `.md`],
     }),
+    heading_ids(),
     importAssets({
       sources: (default_sources) => {
         return [
@@ -101,4 +84,4 @@ export default {
       $root: `.`,
     },
   },
-}
+} satisfies Config
