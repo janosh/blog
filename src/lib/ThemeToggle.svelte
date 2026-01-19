@@ -37,6 +37,7 @@
     place-items: center;
     place-content: center;
     box-shadow: 0 2px 8px var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
   }
   button:hover {
     transform: scale(1.1);

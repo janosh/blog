@@ -77,6 +77,9 @@ body {
   line-height: 1.6;
   margin: 0;
   font-size: 16px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 main {
   padding: calc(1ex + 2vw);
@@ -125,8 +128,8 @@ h2.section-title {
 :where(h2, h3, h4, h5, h6) {
   scroll-margin-top: 50px;
 }
-:where(h2, h3, h4, h5, h6).toc-clicked {
-  color: var(--link-hover);
+:is(h2, h3, h4, h5, h6):target, .toc-clicked {
+  color: cornflowerblue;
 }
 :where(h2, h3, h4, h5, h6) a[aria-hidden='true'] {
   margin-left: 4pt;
@@ -228,9 +231,6 @@ img.banner {
   object-fit: cover;
   width: 100%;
 }
-main > img {
-  width: 100%;
-}
 section.landing {
   flex: 1;
   max-width: 60em;
@@ -250,11 +250,6 @@ em {
   color: var(--text-secondary);
 }
 
-/* Add selection color support */
 ::selection {
-  background-color: var(--selection);
-}
-
-::-moz-selection {
   background-color: var(--selection);
 }

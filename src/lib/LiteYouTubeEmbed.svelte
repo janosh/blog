@@ -53,18 +53,13 @@
 
 <style>
   .lite-youtube {
-    background-color: #000000;
+    background-color: #000;
     position: relative;
     display: block;
     contain: content;
     cursor: pointer;
     max-width: 720px;
-  }
-  /* responsive iframe with a 16:9 aspect ratio, from https://css-tricks.com/responsive-iframes/ */
-  .lite-youtube::after {
-    content: '';
-    display: block;
-    padding-bottom: calc(100% / (16 / 9));
+    aspect-ratio: 16 / 9;
   }
   .lite-youtube > iframe {
     width: 100%;

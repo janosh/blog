@@ -14,9 +14,9 @@ tags:
 <script>
   import GeometricBayes from './GeometricBayes.svelte'
   import YouTubeEmbed from '$lib/LiteYouTubeEmbed.svelte'
-  import { page } from '$app/stores'
+  import { page } from '$app/state'
 
-  const file = encodeURIComponent(`src/routes/${$page.route.id}/+page.md`)
+  const file = encodeURIComponent(`src/routes/${page.route.id}/+page.md`)
 </script>
 
 [3blue1brown-inspired](https://youtu.be/HZGCoVF3YvM) interactive visualization of Bayes theorem interpreted geometrically.
