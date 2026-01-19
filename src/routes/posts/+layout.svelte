@@ -5,7 +5,7 @@
   import { repository } from '$root/package.json'
   import Icon from '@iconify/svelte'
   import type { Snippet } from 'svelte'
-  import { PrevNext } from 'svelte-multiselect'
+  import { heading_anchors, PrevNext } from 'svelte-multiselect'
   import type { PageData } from '../$types'
 
   let { data, children }: { data: PageData; children?: Snippet<[]> } = $props()
@@ -27,7 +27,7 @@
   />
 {/if}
 
-<main style="max-width: 50em; margin: 0 auto">
+<main style="max-width: 50em; margin: 0 auto" {@attach heading_anchors()}>
   <h1>{title}</h1>
   <time>
     <Icon icon="carbon:calendar" inline />

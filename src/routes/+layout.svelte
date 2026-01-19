@@ -40,7 +40,7 @@
     background-color: var(--card-bg);
     padding: 1pt 5pt;
     border-radius: 3pt;
-    transition: 0.2s;
+    transition: color 0.2s;
   }
   @media print {
     a[href='/'] {

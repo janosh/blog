@@ -1,8 +1,6 @@
 <script>
   import Resizable from './Resizable.svelte'
 
-  // TODO fix this component and/or the Resizable component, unclear when/why it broke
-
   let size = $state({ width: 0, height: 0 })
 
   // geometric Bayes state
@@ -71,6 +69,7 @@
 
 <style>
   #container {
+    position: relative;
     background: #434343;
     width: 50vw;
     height: 50vw;

@@ -46,6 +46,7 @@
     border: none;
     color: var(--text-secondary);
     background-color: var(--nav-bg);
+    cursor: pointer;
   }
   [aria-label='sort-buttons'] button.active {
     background-color: var(--accent-bg);

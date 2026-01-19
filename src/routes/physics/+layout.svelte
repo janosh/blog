@@ -1,5 +1,6 @@
 <script lang="ts">
   import { repository } from '$root/package.json'
+  import { heading_anchors } from 'svelte-multiselect'
 
   let { data, children } = $props()
   let { cover, slug } = $derived(data.frontmatter)
@@ -11,7 +12,7 @@
 />
 <h1>{data.frontmatter.title}</h1>
 
-<main style="max-width: 55em; margin: 1em auto">
+<main style="max-width: 55em; margin: 1em auto" {@attach heading_anchors()}>
   {@render children?.()}
 </main>
 
