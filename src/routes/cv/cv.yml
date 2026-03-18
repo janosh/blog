@@ -127,7 +127,7 @@ skills:
     score: 8
     site: https://playwright.dev
   - name: JAX
-    icon: file-icons:mathjax # TODO fix icon once actual JAX logo available from https://icones.js.org/collection/all?s=jax
+    svg: https://upload.wikimedia.org/wikipedia/commons/8/86/Google_JAX_logo.svg
     score: 4
     site: https://docs.jax.dev
   - name: Rust
@@ -167,7 +167,6 @@ languages:
     level: basic
     icon: twemoji:flag-spain
 
-# TODO find better img URLs without white background
 community:
   - name: Associate Editor IOP AI for Science
     date: 2025 - present # Feb 2025

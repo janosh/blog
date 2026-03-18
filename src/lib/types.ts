@@ -67,7 +67,8 @@ export type Project = {
 
 export type Skill = {
   name: string
-  icon: string
+  icon?: string
+  svg?: string
   score: number
   href?: string
   site?: string

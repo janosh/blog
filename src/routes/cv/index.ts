@@ -50,7 +50,7 @@ export function extract_citations(note: string | undefined): {
   if (!note) return { citations: 0, citation_database: `` }
 
   const matches = [...note.matchAll(/Citations: (\d+) \(([^)]+)\)/g)]
-  if (!matches.length) return { citations: 0, citation_database: `` }
+  if (matches.length === 0) return { citations: 0, citation_database: `` }
 
   const { count, database } = matches
     .map(([, count, database]) => ({
@@ -84,5 +84,5 @@ export function export_single_page_pdf(): void {
   document.head.append(print_style)
 
   globalThis.print()
-  setTimeout(() => document.getElementById(`single-page-pdf`)?.remove(), 1000)
+  setTimeout(() => document.querySelector(`#single-page-pdf`)?.remove(), 1000)
 }

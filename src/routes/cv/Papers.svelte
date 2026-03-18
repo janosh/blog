@@ -12,6 +12,7 @@
     target_author = `J. Riebesell`,
     sort_by = `title`,
     sort_order = `asc`,
+    hovered_ids = [],
     highlight_props = {
       query: target_author.toLowerCase(),
       css_class: `highlight-match`,
@@ -23,10 +24,12 @@
     target_author?: string
     sort_by?: `title` | `date` | `author` | `first author` | `citations`
     sort_order?: `asc` | `desc`
+    hovered_ids?: string[]
     highlight_props?: Parameters<typeof highlight_matches>[0]
   } & HTMLAttributes<HTMLOListElement> = $props()
 
-  // Process references to add citation counts
+  const target_family = $derived(target_author.split(` `)[1])
+
   const processed_references = $derived(
     references.map((ref) => Object.assign({}, ref, extract_citations(ref.note))),
   )
@@ -42,22 +45,12 @@
         const { year: y2, month: m2 } = ref2.issued[0]
         return dir * (100 * (y1 - y2) + (m1 - m2))
       } else if (sort_by === PAPER_SORT_KEYS.author) {
-        // papers with target_author first/last
-        const idx1 = ref1.author.findIndex((auth) =>
-          auth.family === target_author.split(` `)[1]
-        )
-        const idx2 = ref2.author.findIndex((auth) =>
-          auth.family === target_author.split(` `)[1]
-        )
+        const idx1 = ref1.author.findIndex((auth) => auth.family === target_family)
+        const idx2 = ref2.author.findIndex((auth) => auth.family === target_family)
         return (idx1 - idx2) * dir
       } else if (sort_by === PAPER_SORT_KEYS.first_author) {
-        // papers with target_author first/last
-        const idx1 = ref1.author.findIndex((auth) =>
-          auth.family === target_author.split(` `)[1]
-        )
-        const idx2 = ref2.author.findIndex((auth) =>
-          auth.family === target_author.split(` `)[1]
-        )
+        const idx1 = ref1.author.findIndex((auth) => auth.family === target_family)
+        const idx2 = ref2.author.findIndex((auth) => auth.family === target_family)
         if (idx1 === -1 || idx2 === -1) return 0
         // -dir to have target_author==first rise to the top by default
         return (idx1 - idx2) * -dir
@@ -82,7 +75,7 @@
       }[first_name_mode]
       return `${first_name ?? ``}${family}`
     })}
-    <li animate:flip={{ duration: 400 }}>
+    <li animate:flip={{ duration: 400 }} class:grid-hovered={hovered_ids.includes(id)}>
       <h3 {id}>{title}</h3>
       {truncate_authors(authors_formatted.join(`, `), target_author)}
       &nbsp;&mdash;&nbsp;
@@ -121,15 +114,18 @@
     font-weight: 300;
     text-wrap: balance;
     margin-block: 1em;
+    padding: 1pt 6pt;
   }
   ol > li > h3 {
     margin: 2pt 0;
     font-weight: 500;
   }
+  ol > li.grid-hovered {
+    background: var(--nav-bg);
+    border-radius: 4pt;
+    transition: background 0.2s ease;
+  }
   ::highlight(highlight-match) {
     color: var(--highlight);
-  }
-  :root {
-    --tooltip-bg: var(--card-bg);
   }
 </style>

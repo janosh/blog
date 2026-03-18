@@ -3,7 +3,7 @@
   import { bugs, name } from '$root/package.json'
   import Icon from '@iconify/svelte'
 
-  let online: boolean = $state(true)
+  let online = $state(true)
 </script>
 
 <svelte:head>

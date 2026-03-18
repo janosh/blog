@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { PaperGrid, PaperTimeline, type Project, SortButtons } from '$lib'
+  import { PaperGrid, type Project, SortButtons } from '$lib'
   import papers from '$lib/papers.yaml'
   import { OSS_SORT_KEYS, PAPER_SORT_KEYS } from '$lib/types'
   import Icon from '@iconify/svelte'
@@ -17,7 +17,7 @@
   let sort_papers_order: PaperProps[`sort_order`] = $state(`desc`)
   let sort_oss_by: keyof Project = $state(`commits`)
   let sort_oss_order: PaperProps[`sort_order`] = $state(`desc`)
-  let PaperGraph: typeof PaperGrid | typeof PaperTimeline = $state(PaperGrid)
+  let hovered_paper_ids: string[] = $state([])
 
   const paper_sort_keys = [
     [PAPER_SORT_KEYS.date, `Sort by date`],
@@ -50,7 +50,7 @@
   <section class="body">
     <Intro />
 
-    <h2>
+    <h2 style="margin-block: 1em;">
       <Icon inline icon="iconoir:journal" />&nbsp; Publications
       <SortButtons
         bind:sort_by={sort_papers_by}
@@ -58,35 +58,21 @@
         bind:sort_order={sort_papers_order}
       />
     </h2>
-    <div class="view-toggle">
-      {#each [
-          [PaperGrid, `mdi:grid`, `Grid`],
-          [PaperTimeline, `mdi:timeline`, `Line`],
-        ] as const as
-        [Component, icon, label]
-        (icon)
-      }
-        <button
-          class:active={PaperGraph === Component}
-          onclick={() => PaperGraph = Component}
-        >
-          <Icon {icon} /> {label}
-        </button>
-      {/each}
-    </div>
-
-    <PaperGraph papers={papers.references} class="paper-graph" />
-    <Papers {...papers} sort_by={sort_papers_by} sort_order={sort_papers_order} />
+    <PaperGrid papers={papers.references} class="paper-graph" bind:hovered_ids={hovered_paper_ids} />
+    <Papers {...papers} sort_by={sort_papers_by} sort_order={sort_papers_order} hovered_ids={hovered_paper_ids} />
     <h2>
       <Icon inline icon="ri:open-source-line" />&nbsp; Open Source
-      <SortButtons
-        bind:sort_by={sort_oss_by}
-        sort_keys={oss_sort_keys}
-        bind:sort_order={sort_oss_order}
-      />
+        <SortButtons
+          label=""
+          bind:sort_by={sort_oss_by}
+          sort_keys={oss_sort_keys}
+          bind:sort_order={sort_oss_order}
+          as="span"
+        />
     </h2>
+
     <ul class="oss">
-      {#each data.oss.projects.sort((p1, p2) => {
+      {#each data.oss.projects.toSorted((p1, p2) => {
           const dir = sort_oss_order === `asc` ? -1 : 1
           if (sort_oss_by === OSS_SORT_KEYS.name) {
             return p1.name.localeCompare(p2.name) * dir
@@ -110,27 +96,13 @@
               <img src={logo_url} alt="{name} Logo" style={img_style} />
               {name}
             </a>
-            <a href={repo} {...links}>
-              <Icon inline icon="octicon:mark-github" />
-            </a>
-            {#if stars}
-              <a href="{repo}/stargazers">
-                <small>{stars} ⭐</small>
-              </a>
-            {/if}
-            {#if commits}
-              <a href="{repo}/graphs/contributors">
-                <Icon inline icon="octicon:git-commit" />
-                <small>
-                  {commits}
-                  <span style="font-weight: 200">commits</span>
-                </small>
-              </a>
-            {/if}
-            {#if languages}
-              <small class="langs">{languages.slice(0, 3).join(`, `)}</small>
-            {/if}
+            <a href={repo} {...links}><Icon inline icon="octicon:mark-github" /></a>
           </h4>
+          <div class="oss-meta">
+            {#if stars}<a href="{repo}/stargazers"><small>{stars} <Icon inline icon="octicon:star" /></small></a>{/if}
+            {#if commits}<a href="{repo}/graphs/contributors"><small>{commits} commits</small></a>{/if}
+            {#if languages}<small class="langs">{languages.slice(0, 3).join(`, `)}</small>{/if}
+          </div>
           <p>{@html description}</p>
         </li>
       {/each}
@@ -195,13 +167,17 @@
     <small style="white-space: nowrap">(emphasis &asymp; proficiency)</small>
     <ul class="skills">
       {#each cv.skills.sort((s1, s2) => s2.score - s1.score) as
-        { name, icon, score, href, site }
+        { name, icon, svg, score, href, site }
         (name)
       }
         <!-- color based on score style="color: hsl({score * 20}, 100%, 40%)" -->
         <li style:font-weight={(score - 3) * 100}>
           <a href={href ?? site}>
-            <Icon inline {icon} />
+            {#if svg}
+              <img src={svg} alt="{name} logo" class="skill-svg" />
+            {:else if icon}
+              <Icon inline {icon} />
+            {/if}
             {name} <small>({score})</small>
           </a>
         </li>
@@ -221,7 +197,7 @@
               alt="{name} Logo"
               width="30"
               height="30"
-              style="object-fit: contain; margin: 0 1ex 0 0"
+              class="community-logo"
             />
           </a>
           <a {href}>{name}</a>
@@ -287,13 +263,9 @@
   h1 {
     margin: 0 0 3pt;
   }
-  /* h1 + small {
-    text-align: center;
-    display: block;
-  } */
   h2 {
     position: relative;
-    margin-bottom: 0;
+    margin: 1.5em 0 0.5em;
   }
   a {
     color: inherit;
@@ -310,30 +282,57 @@
     padding: 0;
     margin: 0;
   }
+  .oss-controls {
+    position: absolute;
+    right: 0;
+    bottom: 4pt;
+    display: flex;
+    gap: 5pt;
+    align-items: center;
+    font-weight: 100;
+  }
   ul.oss {
-    font-size: 16pt;
-    text-wrap: balance;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+    gap: 12pt;
+    font-size: 14pt;
+  }
+  ul.oss > li {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    gap: 2pt;
   }
   ul.oss > li > h4 {
-    margin: 8pt 0 4pt;
+    margin: 0;
     display: flex;
-    gap: 8pt;
+    gap: 6pt;
     place-items: center;
-    font-size: smaller;
-  }
-  ul.oss > li > h4 > small.langs {
-    margin-left: 2ex;
-    font-weight: 200;
-    font-size: 9pt;
   }
   ul.oss > li > h4 a {
     display: flex;
     place-items: center;
   }
+  .oss-meta {
+    display: flex;
+    gap: 8pt;
+    place-items: center;
+    font-size: 10pt;
+    color: var(--text-secondary);
+  }
+  .oss-meta .langs {
+    font-weight: 200;
+    margin-left: auto;
+  }
   p {
     margin: 0;
     font-size: 10pt;
     font-weight: 300;
+  }
+  .skill-svg {
+    height: 1em;
+    width: auto;
+    vertical-align: -0.125em;
   }
   ul.skills {
     display: flex;
@@ -349,12 +348,14 @@
     flex: 1;
     min-width: 200px;
   }
-  ul.hobbies {
-    display: flex;
-    gap: 4pt 8pt;
-    flex-wrap: wrap;
+  .community-logo {
+    object-fit: contain;
+    margin: 0 1ex 0 0;
+    border-radius: 50%;
+    padding: 3px;
+    background: light-dark(transparent, rgba(255, 255, 255, 0.9));
   }
-  ul.horizontal {
+  :is(ul.hobbies, ul.horizontal) {
     display: flex;
     gap: 4pt 8pt;
     flex-wrap: wrap;
@@ -444,34 +445,5 @@
       page-break-inside: avoid;
       break-inside: avoid;
     }
-  }
-  .paper-controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-left: auto;
-  }
-  .view-toggle {
-    display: flex;
-    gap: 8px;
-  }
-  .view-toggle button {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 4px 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    transition: all 0.2s ease;
-  }
-  .view-toggle button:hover {
-    background: var(--nav-bg);
-  }
-  .view-toggle button.active {
-    background: var(--button-bg);
-    color: var(--button-text);
-    border-color: var(--button-bg);
   }
 </style>

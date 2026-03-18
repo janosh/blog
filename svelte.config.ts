@@ -4,16 +4,16 @@ import { mdsvex } from 'mdsvex'
 import katex from 'rehype-katex-svelte'
 import math from 'remark-math'
 import { heading_ids } from 'svelte-multiselect/heading-anchors'
-import preprocess from 'svelte-preprocess'
+import { starry_night_highlighter } from 'svelte-multiselect/live-examples'
 import { importAssets } from 'svelte-preprocess-import-assets'
 
 const macros: Record<string, string> = {
   // Infinitesimal differential (used in derivatives and integrals)
   '\\dif': `\\mathrm d`,
   // Vector
-  '\\vec': `#1`, // TODO restore {\\boldsymbol{#1}} causing deno build error
+  '\\vec': `{\\boldsymbol{#1}}`,
   // Matrix
-  '\\mat': `#1`, // TODO restore {\\boldsymbol{#1}} causing deno build error
+  '\\mat': `{\\boldsymbol{#1}}`,
   // Real line
   '\\reals': `{\\mathbb{R}}`,
   // Complex plane
@@ -40,8 +40,8 @@ const macros: Record<string, string> = {
   '\\cbrkt': `\\mathopen{}\\left\\{#1\\right\\}\\mathclose{}`,
 }
 
-for (let index = `A`.charCodeAt(0); index <= `Z`.charCodeAt(0); index++) {
-  const letter = String.fromCharCode(index)
+for (let index = 65; index <= 90; index++) {
+  const letter = String.fromCodePoint(index)
   // Caligraphic letters
   macros[`\\${letter}cal`] = `\\mathcal{${letter}}`
   // Blackboard bold letters
@@ -52,13 +52,13 @@ export default {
   extensions: [`.svelte`, `.svx`, `.md`],
 
   preprocess: [
-    preprocess(),
     mdsvex({
       rehypePlugins: [[katex, { macros, throwOnError: false, errorColor: `#cc0000` }]],
       // remark-math@3.0.0 pinned due to mdsvex, see
       // https://github.com/kwshi/rehype-katex-svelte#usage
       remarkPlugins: [math],
       extensions: [`.svx`, `.md`],
+      highlight: { highlighter: starry_night_highlighter },
     }),
     heading_ids(),
     importAssets({

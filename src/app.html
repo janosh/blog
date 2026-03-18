@@ -5,16 +5,17 @@
     <meta name="author" content="Janosh Riebesell" />
     <meta name="color-scheme" content="light dark" />
 
+    <!-- Theme switching (prevent flash before Svelte hydrates) -->
     <script>
-      // Set theme immediately to prevent flashing
-      try {
-        const theme =
-          localStorage.getItem('theme') ||
-          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-        document.documentElement.style.colorScheme = theme
-      } catch {
-        document.documentElement.style.colorScheme = 'dark'
-      }
+      const saved = localStorage.theme
+      const theme =
+        saved === 'light' || saved === 'dark'
+          ? saved
+          : matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light'
+      document.documentElement.style.colorScheme = theme
+      document.documentElement.dataset.theme = theme
     </script>
 
     <meta property="og:type" content="website" />
@@ -43,7 +44,6 @@
     ></script>
 
     <link rel="icon" href="/favicon.svg" />
-    <link rel="stylesheet" href="/prism-vsc-dark-plus.css" />
     <!-- <link rel="manifest" href="/manifest.json" crossorigin="use-credentials" /> -->
     <!-- math display -->
     <link
@@ -55,6 +55,6 @@
   </head>
 
   <body data-sveltekit-preload-data="hover">
-    %sveltekit.body%
+    <div style="display: contents">%sveltekit.body%</div>
   </body>
 </html>

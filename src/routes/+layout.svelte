@@ -1,24 +1,41 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
   import { page } from '$app/state'
-  import { Footer, ThemeToggle } from '$lib'
+  import { Footer } from '$lib'
   import type { Snippet } from 'svelte'
   import { CmdPalette, CopyButton } from 'svelte-multiselect'
   import '../app.css'
 
   let { children }: { children?: Snippet<[]> } = $props()
 
-  const actions = Object.keys(import.meta.glob(`./**/+page.{svx,svelte,md}`)).map(
-    (filename) => {
-      const parts = filename.split(`/`).filter((part) => !part.startsWith(`(`)) // remove hidden route segments
+  function set_theme(mode: 'light' | 'dark' | 'system') {
+    const scheme = mode === `system`
+      ? (matchMedia(`(prefers-color-scheme: dark)`).matches ? `dark` : `light`)
+      : mode
+    document.documentElement.style.colorScheme = scheme
+    document.documentElement.dataset.theme = scheme
+    localStorage.setItem(`theme`, mode)
+  }
+
+  const actions = [
+    ...Object.keys(import.meta.glob(`./**/+page.{svx,svelte,md}`)).map((filename) => {
+      const parts = filename.split(`/`).filter((part) => !part.startsWith(`(`))
       const route = `/${parts.slice(1, -1).join(`/`)}`
       return { label: route, action: () => goto(route) }
-    },
-  )
+    }),
+    { label: `🌞 Light theme`, action: () => set_theme(`light`) },
+    { label: `🌙 Dark theme`, action: () => set_theme(`dark`) },
+    { label: `🖥️ System theme`, action: () => set_theme(`system`) },
+  ]
 </script>
 
-<ThemeToggle />
-<CmdPalette {actions} placeholder="Go to..." />
+<CmdPalette
+  {actions}
+  placeholder="Go to..."
+  inputStyle="background: transparent; font-size: inherit"
+  liOptionStyle="padding: 3pt 5pt; border-left: none"
+  ulOptionsStyle="padding: 0"
+/>
 <CopyButton global />
 
 {#if page.url.pathname !== `/`}

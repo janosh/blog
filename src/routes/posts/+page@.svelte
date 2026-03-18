@@ -16,26 +16,20 @@
       acc[tag] = (acc[tag] ?? 0) + 1
       return acc
     }, {})
-  // keep only most frequent tags
   const all_tags = (Object.entries(tag_counts) as [string, number][]).toSorted(
     ([, count_1], [, count_2]) => count_2 - count_1,
   )
-  // check if any tag appear with different casing (start inner loop at i + 1)
-  for (let ii = 0; ii < all_tags.length; ii++) {
-    const [tag_1] = all_tags[ii]
-    for (let jj = ii + 1; jj < all_tags.length; jj++) {
-      const [tag_2] = all_tags[jj]
-      if (tag_1.toLowerCase() === tag_2.toLowerCase()) {
-        console.error(`Tag "${tag_1}" appears with different casing`)
-      }
-    }
+  // check if any tags appear with different casing
+  const seen_lower = new Set<string>()
+  for (const [tag] of all_tags) {
+    const lower = tag.toLowerCase()
+    if (seen_lower.has(lower)) console.error(`Tag "${tag}" appears with different casing`)
+    seen_lower.add(lower)
   }
   const top_tags = all_tags.slice(0, 15).toSorted()
-  const has_active_tags = (active_tags: Option[]) => (post: FrontMatter) => {
-    return (
-      active_tags.length === 0 ||
-      active_tags.some(({ label }) => post.tags?.includes(label))
-    )
+
+  function matches_active_tags(post: FrontMatter): boolean {
+    return active_tags.length === 0 || active_tags.some(({ label }) => post.tags?.includes(label))
   }
 </script>
 
@@ -62,7 +56,7 @@
 
 <ul class="grid" style="margin: 4em auto; gap: 3ex">
   {#each page.data?.posts
-      ?.filter(has_active_tags(active_tags))
+      ?.filter(matches_active_tags)
       .toSorted((post_1: FrontMatter, post_2: FrontMatter) => {
         return post_2.date.localeCompare(post_1.date) // sort by date descending
       }) ?? [] as

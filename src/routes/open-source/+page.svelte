@@ -17,9 +17,8 @@
       })
       .toSorted((p1, p2) => {
         if (sort_by === `title`) return p1.name.localeCompare(p2.name)
-        else if ([`commits`, `stars`].includes(sort_by)) {
-          return p2[sort_by] - p1[sort_by]
-        } else throw new Error(`Unknown sort_by: ${sort_by}`)
+        if ([`commits`, `stars`].includes(sort_by)) return p2[sort_by] - p1[sort_by]
+        throw new Error(`Unknown sort_by: ${sort_by}`)
       }),
   )
 </script>

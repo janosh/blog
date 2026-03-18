@@ -5,23 +5,15 @@ import { execSync } from 'node:child_process'
 import fs from 'node:fs'
 import { defineConfig } from 'vite-plus'
 
-interface OssYaml {
-  projects: Array<Record<string, unknown>>
-}
-
-function is_oss_yaml(data: unknown): data is OssYaml {
-  return (
-    !!data &&
-    typeof data === `object` &&
-    `projects` in data &&
-    Array.isArray(data.projects)
-  )
-}
-
 async function fetch_github_data(gh_token: string) {
   const auth = { headers: { Authorization: `token ${gh_token}` } }
   const cv = load(fs.readFileSync(`src/lib/oss.yml`, `utf8`))
-  if (!is_oss_yaml(cv)) {
+  if (
+    !cv ||
+    typeof cv !== `object` ||
+    !(`projects` in cv) ||
+    !Array.isArray(cv.projects)
+  ) {
     throw new Error(`Invalid oss.yml structure`)
   }
 
@@ -42,7 +34,7 @@ async function fetch_github_data(gh_token: string) {
     )
     if (!contribs_resp.ok) continue
     const contributors = await contribs_resp.json()
-    const me = contributors.find?.(
+    const me = contributors.find(
       (contributor: Record<string, unknown>) => contributor.login === `janosh`,
     )
     if (me) {
@@ -69,7 +61,7 @@ export default defineConfig({
     printWidth: 90,
   },
   lint: {
-    plugins: [`oxc`, `typescript`, `unicorn`, `import`],
+    plugins: [`oxc`, `typescript`, `unicorn`, `import`, `jest`],
     options: {
       typeAware: true,
       typeCheck: true,
@@ -78,53 +70,53 @@ export default defineConfig({
       correctness: `error`,
       suspicious: `error`,
       perf: `error`,
+      pedantic: `error`,
     },
     ignorePatterns: [`build/`, `.svelte-kit/`],
     rules: {
-      '@typescript-eslint/no-explicit-any': `error`,
-      '@typescript-eslint/no-non-null-asserted-optional-chain': `error`,
-      '@typescript-eslint/no-non-null-assertion': `error`,
-      'no-unused-vars': `error`,
-      'no-eval': `error`,
-      eqeqeq: `error`,
-      'no-var': `error`,
-      'no-throw-literal': `error`,
-      'no-useless-rename': `error`,
-      'no-self-compare': `error`,
-      'no-template-curly-in-string': `error`,
-      'no-constructor-return': `error`,
+      'no-unused-vars': `off`,
+      '@typescript-eslint/no-unused-vars': [
+        `error`,
+        { argsIgnorePattern: `^_`, varsIgnorePattern: `^_` },
+      ],
       'no-console': [`error`, { allow: [`warn`, `error`] }],
-      'default-param-last': `error`,
-      'guard-for-in': `error`,
-      'require-await': `error`,
-      'eslint-plugin-unicorn/no-useless-spread': `error`,
-      'eslint-plugin-unicorn/prefer-string-replace-all': `error`,
-      'eslint-plugin-unicorn/catch-error-name': `error`,
-      'eslint-plugin-unicorn/prefer-set-has': `error`,
-      'eslint-plugin-unicorn/prefer-array-find': `error`,
-      'eslint-plugin-unicorn/prefer-dom-node-append': `error`,
-      'eslint-plugin-import/no-duplicates': `error`,
-      'no-inner-declarations': `error`,
-      'eslint-plugin-unicorn/prefer-global-this': `error`,
-      'eslint-plugin-unicorn/no-lonely-if': `error`,
-      'eslint-plugin-unicorn/no-negated-condition': `error`,
-      'eslint-plugin-unicorn/no-typeof-undefined': `error`,
-      'eslint-plugin-unicorn/prefer-optional-catch-binding': `error`,
-      'eslint-plugin-unicorn/no-length-as-slice-end': `error`,
-      'eslint-plugin-unicorn/prefer-node-protocol': `error`,
-      'eslint-plugin-unicorn/prefer-regexp-test': `error`,
-      'eslint-plugin-unicorn/throw-new-error': `error`,
-      'eslint-plugin-unicorn/prefer-includes': `error`,
-      'eslint-plugin-unicorn/prefer-type-error': `error`,
-      'eslint-plugin-unicorn/prefer-date-now': `error`,
-      'eslint-plugin-unicorn/require-number-to-fixed-digits-argument': `error`,
-      'eslint-plugin-unicorn/no-useless-promise-resolve-reject': `error`,
-      // Rules too noisy for this codebase
+      'no-self-assign': `off`,
       'no-await-in-loop': `off`, // fetch_github_data uses sequential await in loop
       'no-shadow': `off`,
+      'prefer-const': `off`,
+      '@typescript-eslint/no-unnecessary-condition': `off`,
+      '@typescript-eslint/consistent-type-imports': `off`,
       'eslint-plugin-unicorn/consistent-function-scoping': `off`,
+      '@typescript-eslint/no-unsafe-argument': `off`,
+      '@typescript-eslint/no-unsafe-assignment': `off`,
+      '@typescript-eslint/no-unsafe-call': `off`,
+      '@typescript-eslint/no-unsafe-member-access': `off`,
+      '@typescript-eslint/no-unsafe-return': `off`,
+      'no-inline-comments': `off`,
+      'no-confusing-void-expression': `off`,
+      'no-promise-executor-return': `off`,
+      'strict-boolean-expressions': `off`,
+      'max-lines-per-function': `off`,
+      'max-lines': `off`,
+      'max-depth': `off`,
+      'max-classes-per-file': `off`,
+      'sort-vars': `off`,
+      'eslint-plugin-jest/no-conditional-in-test': `off`,
+      'eslint-plugin-unicorn/no-array-callback-reference': `off`,
+      'eslint-plugin-unicorn/no-useless-undefined': `off`,
+      'eslint-plugin-unicorn/no-object-as-default-parameter': `off`,
+      'eslint-plugin-import/no-self-import': `off`,
       'eslint-plugin-import/no-unassigned-import': `off`, // CSS imports are side-effect-only
+      'eslint-plugin-import/max-dependencies': `off`,
+      'eslint-plugin-unicorn/prefer-top-level-await': `off`,
+      'no-warning-comments': `off`,
+      'only-throw-error': `off`,
     },
+  },
+  staged: {
+    '*.{js,ts,svelte,html,css,md,json,yaml}': `vp check --fix`,
+    '*.{ts,svelte}': `sh -c 'npx svelte-kit sync && npx svelte-check-rs --threshold error'`,
+    '*': `codespell --ignore-words-list falsy --check-filenames`,
   },
   plugins: [sveltekit(), rollup_yaml()],
 

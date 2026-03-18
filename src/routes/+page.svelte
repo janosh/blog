@@ -8,7 +8,7 @@
 
   const projects = oss.projects.map((proj) => {
     if (!proj.paper_key) return proj
-    const paper = references.find((p) => p.id === proj.paper_key)
+    const paper = references.find((ref) => ref.id === proj.paper_key)
     if (paper) return Object.assign({}, proj, { paper })
     console.error(`Paper ${proj.paper_key} not found`)
     return proj
@@ -106,6 +106,7 @@
   address {
     display: flex;
     place-content: center;
+    place-items: center;
     gap: 1em;
     font-size: 16pt;
     margin: 1em auto;
