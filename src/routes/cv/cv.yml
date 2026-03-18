@@ -26,15 +26,15 @@ education:
     thesis:
       title: Towards Machine Learning Foundation Models for Materials Chemistry
       url: https://doi.org/10.17863/CAM.113233
-      repo: https://github.com/janosh/thesis
-    logo: https://cam.ac.uk/sites/cam.ac.uk/themes/fresh/images/interface/cambridge_university2.svg
+      # repo: https://github.com/janosh/thesis
+    logo: https://upload.wikimedia.org/wikipedia/commons/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg
   - title: MPhil in Scientific Computing
     uni: University of Cambridge
     description: Physics
     thesis:
       title: Probabilistic Data-Driven Discovery of Thermoelectric Materials
-    href: https://tcm.phy.cam.ac.uk
-    logo: https://cam.ac.uk/sites/cam.ac.uk/themes/fresh/images/interface/cambridge_university2.svg
+    href: https://www.tcm.phy.cam.ac.uk
+    logo: https://upload.wikimedia.org/wikipedia/commons/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg
   - title: MSc in Physics
     uni: ITP Heidelberg
     thesis:
@@ -93,14 +93,10 @@ skills:
     score: 8
     href: https://github.com/janosh?tab=repositories&language=python
     site: https://pytorch.org
-  - name: TensorFlow
-    icon: simple-icons:tensorflow
-    score: 6
-    site: https://tensorflow.org
-  - name: Dash
-    icon: simple-icons:plotly
-    score: 8
-    site: https://plotly.com/dash
+  - name: Rust
+    icon: simple-icons:rust
+    score: 7
+    site: https://rust-lang.org
   - name: React
     icon: simple-icons:react
     score: 8
@@ -118,22 +114,14 @@ skills:
     score: 9
     href: https://github.com/janosh?tab=repositories&language=svelte
     site: https://vitejs.dev
-  - name: Puppeteer
-    icon: simple-icons:puppeteer
-    score: 8
-    site: https://pptr.dev
   - name: PlayWright
     icon: simple-icons:playwright
     score: 8
     site: https://playwright.dev
   - name: JAX
-    icon: file-icons:mathjax # TODO fix icon once actual JAX logo available from https://icones.js.org/collection/all?s=jax
+    svg: https://upload.wikimedia.org/wikipedia/commons/8/86/Google_JAX_logo.svg
     score: 4
     site: https://docs.jax.dev
-  - name: Rust
-    icon: simple-icons:rust
-    score: 3
-    site: https://rust-lang.org
 
 hobbies:
   - name: photography
@@ -167,7 +155,6 @@ languages:
     level: basic
     icon: twemoji:flag-spain
 
-# TODO find better img URLs without white background
 community:
   - name: Associate Editor IOP AI for Science
     date: 2025 - present # Feb 2025
@@ -199,4 +186,4 @@ community:
   - name: Materials Project Software Foundation
     date: 2023 - present
     href: https://github.com/materialsproject/foundation
-    img: https://materialsproject.org/assets/images/home/materials-project-logo.svg
+    img: /materials-project-logo.svg

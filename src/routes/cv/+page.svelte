@@ -1,12 +1,19 @@
 <script lang="ts">
-  import { PaperGrid, PaperTimeline, type Project, SortButtons } from '$lib'
+  import {
+    oss_sort_keys,
+    PaperGrid,
+    sort_oss_projects,
+    SortButtons,
+  } from '$lib'
+  import type { OssSortKey, SortOrder } from '$lib/oss'
   import papers from '$lib/papers.yaml'
-  import { OSS_SORT_KEYS, PAPER_SORT_KEYS } from '$lib/types'
+  import { PAPER_SORT_KEYS } from '$lib/types'
   import Icon from '@iconify/svelte'
+  import { ThemeToggle } from 'svelte-multiselect'
   import type { ComponentProps } from 'svelte'
   import { flip } from 'svelte/animate'
   import cv from './cv.yml'
-  import { export_single_page_pdf } from './index'
+  import { print_cv } from './index'
   import Intro from './intro.md'
   import Papers from './Papers.svelte'
 
@@ -15,9 +22,10 @@
   type PaperProps = ComponentProps<typeof Papers>
   let sort_papers_by: PaperProps[`sort_by`] = $state(`date`)
   let sort_papers_order: PaperProps[`sort_order`] = $state(`desc`)
-  let sort_oss_by: keyof Project = $state(`commits`)
-  let sort_oss_order: PaperProps[`sort_order`] = $state(`desc`)
-  let PaperGraph: typeof PaperGrid | typeof PaperTimeline = $state(PaperGrid)
+  let sort_oss_by: OssSortKey = $state(`commits`)
+  let sort_oss_order: SortOrder = $state(`desc`)
+  let hovered_paper_ids: string[] = $state([])
+  let pdf_menu: HTMLDetailsElement | undefined = $state()
 
   const paper_sort_keys = [
     [PAPER_SORT_KEYS.date, `Sort by date`],
@@ -27,14 +35,16 @@
     [PAPER_SORT_KEYS.citations, `Sort by citations`],
   ] as const
 
-  const oss_sort_keys = [
-    [OSS_SORT_KEYS.commits, `Sort by commits`],
-    [OSS_SORT_KEYS.stars, `Sort by stars`],
-    [OSS_SORT_KEYS.name, `Sort by name`],
-  ] as const
-
   const links = { target: `_blank`, rel: `noreferrer` }
+
+  function close_pdf_menu(event: PointerEvent): void {
+    const target = event.target
+    if (!(target instanceof Node) || pdf_menu?.contains(target)) return
+    if (pdf_menu) pdf_menu.open = false
+  }
 </script>
+
+<svelte:window onpointerdown={close_pdf_menu} />
 
 <main>
   <section class="title">
@@ -50,7 +60,7 @@
   <section class="body">
     <Intro />
 
-    <h2>
+    <h2 style="margin-block: 1em;">
       <Icon inline icon="iconoir:journal" />&nbsp; Publications
       <SortButtons
         bind:sort_by={sort_papers_by}
@@ -58,48 +68,22 @@
         bind:sort_order={sort_papers_order}
       />
     </h2>
-    <div class="view-toggle">
-      {#each [
-          [PaperGrid, `mdi:grid`, `Grid`],
-          [PaperTimeline, `mdi:timeline`, `Line`],
-        ] as const as
-        [Component, icon, label]
-        (icon)
-      }
-        <button
-          class:active={PaperGraph === Component}
-          onclick={() => PaperGraph = Component}
-        >
-          <Icon {icon} /> {label}
-        </button>
-      {/each}
-    </div>
-
-    <PaperGraph papers={papers.references} class="paper-graph" />
-    <Papers {...papers} sort_by={sort_papers_by} sort_order={sort_papers_order} />
+    <PaperGrid papers={papers.references} class="paper-graph" bind:hovered_ids={hovered_paper_ids} />
+    <Papers {...papers} sort_by={sort_papers_by} sort_order={sort_papers_order} hovered_ids={hovered_paper_ids} />
     <h2>
       <Icon inline icon="ri:open-source-line" />&nbsp; Open Source
-      <SortButtons
-        bind:sort_by={sort_oss_by}
-        sort_keys={oss_sort_keys}
-        bind:sort_order={sort_oss_order}
-      />
+        <SortButtons
+          label=""
+          bind:sort_by={sort_oss_by}
+          sort_keys={oss_sort_keys}
+          bind:sort_order={sort_oss_order}
+          as="span"
+        />
     </h2>
+
     <ul class="oss">
-      {#each data.oss.projects.sort((p1, p2) => {
-          const dir = sort_oss_order === `asc` ? -1 : 1
-          if (sort_oss_by === OSS_SORT_KEYS.name) {
-            return p1.name.localeCompare(p2.name) * dir
-          } else if (
-            sort_oss_by === OSS_SORT_KEYS.commits ||
-            sort_oss_by === OSS_SORT_KEYS.stars
-          ) {
-            return (Number(p2[sort_oss_by]) - Number(p1[sort_oss_by])) * dir
-          } else {
-            throw new Error(`Unknown sort_oss_by: ${sort_oss_by}`)
-          }
-        }) as
-        { url, img_style, repo, name, description, ...rest }
+      {#each sort_oss_projects(data.oss.projects, sort_oss_by, sort_oss_order) as
+        { url, color_invert, repo, name, description, ...rest }
         (name)
       }
         {@const { stars, logo, languages, commits } = rest}
@@ -107,30 +91,16 @@
         <li animate:flip={{ duration: 400 }}>
           <h4>
             <a href={url ?? repo} {...links}>
-              <img src={logo_url} alt="{name} Logo" style={img_style} />
+              <img src={logo_url} alt="{name} Logo" data-color-invert={color_invert} />
               {name}
             </a>
-            <a href={repo} {...links}>
-              <Icon inline icon="octicon:mark-github" />
-            </a>
-            {#if stars}
-              <a href="{repo}/stargazers">
-                <small>{stars} ⭐</small>
-              </a>
-            {/if}
-            {#if commits}
-              <a href="{repo}/graphs/contributors">
-                <Icon inline icon="octicon:git-commit" />
-                <small>
-                  {commits}
-                  <span style="font-weight: 200">commits</span>
-                </small>
-              </a>
-            {/if}
-            {#if languages}
-              <small class="langs">{languages.slice(0, 3).join(`, `)}</small>
-            {/if}
+            <a href={repo} {...links}><Icon inline icon="octicon:mark-github" /></a>
           </h4>
+          <div class="oss-meta">
+            {#if stars}<a href="{repo}/stargazers"><small>{stars} <Icon inline icon="octicon:star" /></small></a>{/if}
+            {#if commits}<a href="{repo}/graphs/contributors"><small>{commits} commits</small></a>{/if}
+            {#if languages}<small class="langs">{languages.slice(0, 3).join(`, `)}</small>{/if}
+          </div>
           <p>{@html description}</p>
         </li>
       {/each}
@@ -158,7 +128,21 @@
     </ul>
 
     <div class="side-by-side">
-      <div>
+      <section>
+        <h2>
+          <Icon inline icon="gis:search-country" />&nbsp; Nationality
+        </h2>
+        <ul class="horizontal">
+          {#each cv.nationality as { title, icon } (title)}
+            <li>
+              <Icon inline {icon} />
+              &nbsp;{title}
+            </li>
+          {/each}
+        </ul>
+      </section>
+
+      <section>
         <h2>
           <Icon inline icon="lucide:languages" />&nbsp; Languages
         </h2>
@@ -171,21 +155,7 @@
             </li>
           {/each}
         </ul>
-      </div>
-
-      <div>
-        <h2>
-          <Icon inline icon="gis:search-country" />&nbsp; Nationality
-        </h2>
-        <ul class="horizontal">
-          {#each cv.nationality as { title, icon } (title)}
-            <li>
-              <Icon inline {icon} />
-              &nbsp;{title}
-            </li>
-          {/each}
-        </ul>
-      </div>
+      </section>
     </div>
 
     <h2>
@@ -195,13 +165,17 @@
     <small style="white-space: nowrap">(emphasis &asymp; proficiency)</small>
     <ul class="skills">
       {#each cv.skills.sort((s1, s2) => s2.score - s1.score) as
-        { name, icon, score, href, site }
+        { name, icon, svg, score, href, site }
         (name)
       }
         <!-- color based on score style="color: hsl({score * 20}, 100%, 40%)" -->
         <li style:font-weight={(score - 3) * 100}>
           <a href={href ?? site}>
-            <Icon inline {icon} />
+            {#if svg}
+              <img src={svg} alt="{name} logo" class="skill-svg" />
+            {:else if icon}
+              <Icon inline {icon} />
+            {/if}
             {name} <small>({score})</small>
           </a>
         </li>
@@ -221,7 +195,7 @@
               alt="{name} Logo"
               width="30"
               height="30"
-              style="object-fit: contain; margin: 0 1ex 0 0"
+              class="community-logo"
             />
           </a>
           <a {href}>{name}</a>
@@ -252,16 +226,19 @@
   </section>
 </main>
 
-<div class="pdf-dropdown">
-  <button type="button">
-    <Icon icon="mdi:file-pdf-box" />
-    Export PDF
-    <Icon icon="mdi:chevron-up" />
-  </button>
-  <div>
-    <button onclick={() => globalThis.print()}>Multi-page</button>
-    <button onclick={export_single_page_pdf}>Single tall page</button>
-  </div>
+<div class="cv-controls">
+  <ThemeToggle tooltip={false} />
+  <details bind:this={pdf_menu} class="pdf-menu">
+    <summary>
+      <Icon icon="mdi:file-pdf-box" />
+      Export PDF
+      <Icon icon="mdi:chevron-up" />
+    </summary>
+    <div>
+      <button onclick={() => print_cv()}>Multi-page</button>
+      <button onclick={() => print_cv({ single_page: true })}>Single tall page</button>
+    </div>
+  </details>
 </div>
 
 <style>
@@ -287,13 +264,9 @@
   h1 {
     margin: 0 0 3pt;
   }
-  /* h1 + small {
-    text-align: center;
-    display: block;
-  } */
   h2 {
     position: relative;
-    margin-bottom: 0;
+    margin: 1.5em 0 0.5em;
   }
   a {
     color: inherit;
@@ -310,30 +283,57 @@
     padding: 0;
     margin: 0;
   }
+  .oss-controls {
+    position: absolute;
+    right: 0;
+    bottom: 4pt;
+    display: flex;
+    gap: 5pt;
+    align-items: center;
+    font-weight: 100;
+  }
   ul.oss {
-    font-size: 16pt;
-    text-wrap: balance;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+    gap: 12pt;
+    font-size: 14pt;
+  }
+  ul.oss > li {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    gap: 2pt;
   }
   ul.oss > li > h4 {
-    margin: 8pt 0 4pt;
+    margin: 0;
     display: flex;
-    gap: 8pt;
+    gap: 6pt;
     place-items: center;
-    font-size: smaller;
-  }
-  ul.oss > li > h4 > small.langs {
-    margin-left: 2ex;
-    font-weight: 200;
-    font-size: 9pt;
   }
   ul.oss > li > h4 a {
     display: flex;
     place-items: center;
   }
+  .oss-meta {
+    display: flex;
+    gap: 8pt;
+    place-items: center;
+    font-size: 10pt;
+    color: var(--text-secondary);
+  }
+  .oss-meta .langs {
+    font-weight: 200;
+    margin-left: auto;
+  }
   p {
     margin: 0;
     font-size: 10pt;
     font-weight: 300;
+  }
+  .skill-svg {
+    height: 1em;
+    width: auto;
+    vertical-align: -0.125em;
   }
   ul.skills {
     display: flex;
@@ -345,62 +345,83 @@
     gap: 2em;
     flex-wrap: wrap;
   }
-  .side-by-side > div {
+  .side-by-side > section {
     flex: 1;
     min-width: 200px;
   }
-  ul.hobbies {
+  .community-logo {
+    display: block;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    margin: 0 1ex 0 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+    padding: 3px;
+    background: light-dark(transparent, rgba(255, 255, 255, 0.9));
+  }
+  :is(ul.hobbies, ul.horizontal) {
     display: flex;
-    gap: 4pt 8pt;
+    gap: 6pt 12pt;
     flex-wrap: wrap;
   }
-  ul.horizontal {
-    display: flex;
-    gap: 4pt 8pt;
-    flex-wrap: wrap;
-  }
-  .pdf-dropdown {
+  .cv-controls {
     position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     white-space: nowrap;
   }
-  .pdf-dropdown > button {
+  .cv-controls > :global(button),
+  .pdf-menu > summary {
+    min-height: 28px;
+  }
+  .cv-controls > :global(button) {
+    min-width: 28px;
+    box-shadow: 0 4px 12px var(--shadow);
+  }
+  .pdf-menu {
+    position: relative;
+    width: max-content;
+  }
+  .pdf-menu > summary {
     background: var(--button-bg);
     color: var(--button-text);
     border: none;
     border-radius: 8px;
-    padding: 9px;
+    padding: 2px 3px 2px 6px;
     font-size: 14px;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
     box-shadow: 0 4px 12px var(--shadow);
-    transition: all 0.2s ease;
+    list-style: none;
   }
-  .pdf-dropdown > div {
+  .pdf-menu > summary::-webkit-details-marker {
+    display: none;
+  }
+  .pdf-menu > div {
     position: absolute;
     bottom: 100%;
     right: 0;
+    width: 100%;
     background: var(--card-bg);
     border-radius: 8px;
     box-shadow: 0 4px 12px var(--shadow);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.2s ease;
+    overflow: hidden;
   }
-  .pdf-dropdown:hover > div {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+  .pdf-menu:not([open]) > div {
+    display: none;
   }
-  .pdf-dropdown > div > button {
+  .pdf-menu button {
     background: var(--card-bg);
     color: var(--link-color);
     border: none;
+    border-radius: 0;
     padding: 8px 12px;
     cursor: pointer;
     display: block;
@@ -408,11 +429,11 @@
     box-sizing: border-box;
     text-align: left;
   }
-  .pdf-dropdown > div > button:hover {
+  .pdf-menu button:hover {
     background: var(--nav-bg);
   }
   @media print {
-    .pdf-dropdown, .view-toggle, :global(.paper-graph) {
+    .cv-controls, :global(.paper-graph) {
       display: none !important;
     }
     /* Ensure colors show in PDF for both paper components */
@@ -420,8 +441,7 @@
       print-color-adjust: exact !important;
     }
     @page {
-      margin: 0;
-      padding: 0.6in;
+      margin: 0.6in;
       size: auto;
     }
     main {
@@ -444,34 +464,5 @@
       page-break-inside: avoid;
       break-inside: avoid;
     }
-  }
-  .paper-controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-left: auto;
-  }
-  .view-toggle {
-    display: flex;
-    gap: 8px;
-  }
-  .view-toggle button {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 4px 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    transition: all 0.2s ease;
-  }
-  .view-toggle button:hover {
-    background: var(--nav-bg);
-  }
-  .view-toggle button.active {
-    background: var(--button-bg);
-    color: var(--button-text);
-    border-color: var(--button-bg);
   }
 </style>

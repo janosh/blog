@@ -8,12 +8,12 @@ projects:
     languages:
       - Python
       - Cython
-    stars: 1833
+    stars: 1903
     commits: 1050
   - name: Matbench Discovery
     url: https://matbench-discovery.materialsproject.org
     logo: https://janosh.github.io/matbench-discovery/favicon.svg
-    img_style: 'filter: invert(1);'
+    color_invert: light
     repo: https://github.com/janosh/matbench-discovery
     paper_key: riebesell_matbench_2025
     featured: true
@@ -29,8 +29,8 @@ projects:
       - JavaScript
       - Shell
       - HTML
-    stars: 214
-    commits: 491
+    stars: 229
+    commits: 500
   - name: CHGNet
     url: https://chgnet.lbl.gov
     repo: https://github.com/CederGroupHub/chgnet
@@ -48,7 +48,7 @@ projects:
       - JavaScript
       - HTML
       - TypeScript
-    stars: 368
+    stars: 383
     commits: 196
   - name: TorchSim
     url: https://torchsim.github.io/torch-sim
@@ -60,10 +60,10 @@ projects:
     featured: true
     languages:
       - Python
-    stars: 431
+    stars: 466
     commits: 39
   - name: MACE Foundation Models
-    url: https://mace-docs.readthedocs.io/en/latest/examples/foundation_models.html#pretrained-mace-mp-0-models
+    url: https://mace-docs.readthedocs.io/en/latest/guide/foundation_models.html#pretrained-mace-mp-models
     repo: https://github.com/ACEsuit/mace-foundations
     role: Contributor
     paper_key: batatia_foundation_2023
@@ -73,7 +73,7 @@ projects:
     commits: 1
     languages:
       - Python
-    stars: 215
+    stars: 260
   - name: MatterViz
     url: https://matterviz.janosh.dev
     repo: https://github.com/janosh/matterviz
@@ -86,11 +86,11 @@ projects:
       - CSS
       - HTML
       - Dockerfile
-    stars: 311
-    commits: 456
+    stars: 337
+    commits: 475
   - name: pymatviz
     url: https://pymatviz.janosh.dev
-    img_style: 'filter: invert(1);'
+    color_invert: light
     repo: https://github.com/janosh/pymatviz
     description: A toolkit for visualizations in materials informatics to complement pymatgen.
     languages:
@@ -100,8 +100,8 @@ projects:
       - CSS
       - JavaScript
       - HTML
-    stars: 306
-    commits: 455
+    stars: 313
+    commits: 464
   - name: Tensorboard Reducer
     repo: https://github.com/janosh/tensorboard-reducer
     logo: https://raw.githubusercontent.com/janosh/tensorboard-reducer/main/assets/tensorboard-reducer-square.svg
@@ -118,7 +118,7 @@ projects:
     description: Curated list of resources for learning and using normalizing flows, a powerful tool in ML for modeling probability distributions.
     languages:
       - Python
-    stars: 1614
+    stars: 1628
     commits: 74
   - name: atomate2
     repo: https://github.com/materialsproject/atomate2
@@ -130,7 +130,7 @@ projects:
       - Python
       - Jupyter Notebook
       - Shell
-    stars: 287
+    stars: 313
     commits: 386
     paper_key: ganose_atomate2_2025
     featured: true
@@ -144,10 +144,10 @@ projects:
     languages:
       - Python
       - TeX
-    stars: 118
+    stars: 120
     commits: 153
   - name: MatCalc
-    url: https://materialsvirtuallab.github.io/matcalc
+    url: https://matcalc.ai
     logo: https://github.com/materialsvirtuallab/matcalc/assets/30958850/89486f2f-73fb-40fb-803a-dfafe510eb6d
     repo: https://github.com/materialsvirtuallab/matcalc
     role: Maintainer
@@ -155,14 +155,14 @@ projects:
     languages:
       - Python
       - Jupyter Notebook
-    stars: 133
+    stars: 143
     commits: 77
   - name: Diagrams
     url: https://diagrams.janosh.dev
     repo: https://github.com/janosh/diagrams
     description: '[Typst](https://typst.app) and [LaTeX](https://www.latex-project.org) diagrams of concepts in physics/chemistry/ML.'
-    stars: 481
-    commits: 262
+    stars: 623
+    commits: 273
     languages:
       - Typst
       - TeX
@@ -180,8 +180,8 @@ projects:
     logo: https://github.com/janosh/diagrams/raw/main/assets/plate-capacitor/plate-capacitor.svg
     paper_key: riebesell_discovery_2024
     featured: true
-    stars: 11
-    commits: 28
+    stars: 13
+    commits: 30
     languages:
       - HTML
       - Python
@@ -198,8 +198,8 @@ projects:
       - CSS
       - HTML
       - JavaScript
-    stars: 361
-    commits: 354
+    stars: 374
+    commits: 373
   - name: MatPES
     url: https://matpes.ai
     repo: https://github.com/materialsvirtuallab/matpes
@@ -210,7 +210,7 @@ projects:
     languages:
       - Jupyter Notebook
       - Python
-    stars: 53
+    stars: 56
   - name: MLIP PES softening
     role: Contributor
     url: https://nature.com/articles/s41524-024-01500-6
@@ -219,7 +219,7 @@ projects:
     paper_key: deng_systematic_2025
     featured: true
     logo: https://github.com/janosh/blog/assets/30958850/b8266e7e-8e78-4ac6-8716-28cbd56d0005
-    stars: 23
+    stars: 24
     commits: 61
     languages:
       - Python
@@ -231,7 +231,8 @@ projects:
   - name: Materials Project
     url: https://materialsproject.org
     repo: https://github.com/materialsproject#contributors
-    logo: https://materialsproject.org/assets/images/home/materials-project-logo.svg
+    role: Former staff member
+    logo: /materials-project-logo.svg
     description: Widely used database, website, API and OSS ecosystem built for computing properties of inorganic materials.
     paper_key: horton_accelerated_2025
     featured: true

@@ -8,7 +8,7 @@ cover:
   import { DocsGrid } from '$lib'
 </script>
 
-[Numerical Simulations](https://h-its.org/mbm-teaching/fundamentals-simulation-methods) was a particularly enjoyable course given by [Prof. Volker Springel](https://www.imprs-astro.mpg.de/content/prof-dr-volker-springel) in the winter term 2015/16 at Heidelberg University.
+[Numerical Simulations](https://www.h-its.org/2014/11/10/lecture-fundamentals-of-simulation-methods/) was a particularly enjoyable course given by [Prof. Volker Springel](https://www.imprs-astro.mpg.de/content/prof-dr-volker-springel) in the winter term 2015/16 at Heidelberg University.
 
 Below are solutions to all the exercises as well as to the mock and the final exam.
 

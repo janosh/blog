@@ -3,7 +3,7 @@ title: Advanced QFT and String Theory
 cover:
   img: string-theory-blackboard.jpg
   origin: National University of Singapore
-  url: http://news.nus.edu.sg/highlights/worlds-top-theorists-take-theory-everything
+  url: https://news.nus.edu.sg/worlds-top-theorists-take-on-the-theory-of-everything/
   caption: String theory blackboard
 ---
 

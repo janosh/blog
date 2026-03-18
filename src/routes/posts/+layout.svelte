@@ -10,8 +10,11 @@
 
   let { data, children }: { data: PageData; children?: Snippet<[]> } = $props()
 
-  if (!data.post) throw new Error(`Post ${page.url.pathname} not found`)
-  let { title, cover, date, slug } = $derived(data.post)
+  let post = $derived.by(() => {
+    if (!data.post) throw new Error(`Post ${page.url.pathname} not found`)
+    return data.post
+  })
+  let { title, cover, date, slug } = $derived(post)
 </script>
 
 {#if dev}

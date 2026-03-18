@@ -29,5 +29,6 @@ declare module '*oss.yml' {
 }
 
 declare module '*papers.yaml' {
-  export const references: import('$lib/types').Reference[]
+  import type { Reference } from '$lib/types'
+  export const references: Reference[]
 }

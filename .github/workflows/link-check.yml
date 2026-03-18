@@ -1,0 +1,20 @@
+name: Link check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v6
+
+      - name: Discover broken links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # excluded URLs are valid but unreachable from CI runners (TLS/datacenter firewall) or private (404 for anonymous)
+          args: --exclude '%7B' --exclude '^file://' --exclude 'aspell\.net|physik\.uni-hamburg\.de|theorie\.physnet\.uni-hamburg\.de|qu\.uni-hamburg\.de|ita\.uni-heidelberg\.de|github\.com/janosh/thesis' --root-dir . --accept 100..=103,200..=299,403,429,502,503,999 -- ./**/*.{md,svelte,ts,yml,yaml}

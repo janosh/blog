@@ -5,12 +5,12 @@
     "module": "esnext",
     "target": "esnext",
     "moduleResolution": "bundler",
-
     // To have warnings/errors of the Svelte compiler at the correct position,
     // enable source maps by default.
     "sourceMap": true,
-
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "types": []
   }
 }

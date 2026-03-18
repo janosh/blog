@@ -1,26 +1,24 @@
 <script lang="ts">
-  import oss from '$lib/oss.yml'
+  import { sort_oss_projects } from '$lib'
   import Icon from '@iconify/svelte'
-  import { compile } from 'mdsvex'
   import { highlight_matches } from 'svelte-multiselect/attachments'
   import { flip } from 'svelte/animate'
 
-  let sort_by: `commits` | `stars` | `title` = $state(`commits`)
+  const { data } = $props()
+
+  let sort_by = $state<`commits` | `stars` | `title`>(`commits`)
   const sort_by_options = [`commits`, `stars`, `title`] as const
 
   let query = $state(``)
   let projects = $derived(
-    oss.projects
-      .filter((proj) => {
+    sort_oss_projects(
+      data.oss.projects.filter((project) => {
         if (!query) return true
-        return JSON.stringify(proj).toLowerCase().includes(query.toLowerCase())
-      })
-      .toSorted((p1, p2) => {
-        if (sort_by === `title`) return p1.name.localeCompare(p2.name)
-        else if ([`commits`, `stars`].includes(sort_by)) {
-          return p2[sort_by] - p1[sort_by]
-        } else throw new Error(`Unknown sort_by: ${sort_by}`)
+        return JSON.stringify(project).toLowerCase().includes(query.toLowerCase())
       }),
+      sort_by === `title` ? `name` : sort_by,
+      sort_by === `title` ? `asc` : `desc`,
+    ),
   )
 </script>
 
@@ -42,12 +40,15 @@
   class="projects grid"
   {@attach highlight_matches({ query, css_class: `highlight-match` })}
 >
-  {#each projects as { url, repo, name, description, stars, logo, commits, role } (name)}
+  {#each projects as
+    { url, repo, name, description, stars, logo, commits, role, color_invert }
+    (name)
+  }
     {@const logo_url = logo ?? `${url}/favicon.svg`}
     <li animate:flip={{ duration: 400 }}>
       <h3>
         <a href={url ?? repo} target="_blank" rel="noreferrer">
-          <img src={logo_url} alt="{name} Logo" />
+          <img src={logo_url} alt="{name} Logo" data-color-invert={color_invert} />
           {name}
         </a>
       </h3>
@@ -71,13 +72,7 @@
           <span>{role ?? (repo.includes(`/janosh/`) ? `Lead` : `Contributor`)}</span>
         </a>
       </div>
-      {#await compile(description) then result}
-        {#if result?.code}
-          <p class="project-description">{@html result.code}</p>
-        {:else}
-          <p class="project-description">{description}</p>
-        {/if}
-      {/await}
+      <p class="project-description">{@html description}</p>
     </li>
   {/each}
   <li style="visibility: hidden"></li>

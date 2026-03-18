@@ -44,4 +44,4 @@ My notes and solutions for the final exam and the exercises handed out in the st
 
 </DocsGrid>
 
-> The lecture website was deleted but used to be on [Timo's staff page](http://thphys.uni-heidelberg.de/~weigand) and can still be found on the [Internet Archive](https://web.archive.org/web/20160226230209/http://www.thphys.uni-heidelberg.de/~weigand/Strings-2015.html).
+> The lecture website was deleted but used to be on Timo's staff page and can still be found on the [Internet Archive](https://web.archive.org/web/20160226230209/http://www.thphys.uni-heidelberg.de/~weigand/Strings-2015.html).

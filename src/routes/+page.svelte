@@ -6,12 +6,14 @@
   import OpenSource from './open-source/+page.svelte'
   import Physics from './physics/+page@.md'
 
-  const projects = oss.projects.map((proj) => {
-    if (!proj.paper_key) return proj
-    const paper = references.find((p) => p.id === proj.paper_key)
-    if (paper) return Object.assign({}, proj, { paper })
-    console.error(`Paper ${proj.paper_key} not found`)
-    return proj
+  const { data } = $props()
+
+  const projects = oss.projects.map((project) => {
+    if (!project.paper_key) return project
+    const paper = references.find((reference) => reference.id === project.paper_key)
+    if (paper) return Object.assign({}, project, { paper })
+    console.error(`Paper ${project.paper_key} not found`)
+    return project
   })
 
   const mbd = projects.find((p) => p.name === `Matbench Discovery`)
@@ -36,8 +38,7 @@
 
 <div class="intro">
   <p class="interest-description">
-    <strong>Computational materials scientist</strong>. I'm interested in machine-
-    learning-powered atomistic simulation and building software around that.
+    <strong>Computational materials scientist</strong>. I work at <a href="https://periodic.com/">Periodic Labs</a> on machine-learning force fields for atomistic simulations.
   </p>
 
   <div class="interest-links">
@@ -65,11 +66,11 @@
     project
     (project.name)
   }
-    {@const { name, url, repo, logo, paper, description } = project}
+    {@const { name, url, repo, logo, paper, description, color_invert } = project}
     <li>
       <h3 style="white-space: nowrap">
         <a href={url}>
-          <img src={logo} alt={name} style="border-radius: 3pt" /> {name}
+          <img src={logo} alt={name} style="border-radius: 3pt" data-color-invert={color_invert} /> {name}
         </a>
       </h3>
       <div class="project-meta">
@@ -84,7 +85,7 @@
   {/each}
 </ul>
 
-<OpenSource />
+<OpenSource {data} />
 
 <Physics />
 
@@ -106,6 +107,7 @@
   address {
     display: flex;
     place-content: center;
+    place-items: center;
     gap: 1em;
     font-size: 16pt;
     margin: 1em auto;

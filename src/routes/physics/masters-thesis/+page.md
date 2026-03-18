@@ -12,7 +12,7 @@ cover:
   import { DocsGrid } from '$lib'
 </script>
 
-I wrote my master's thesis under the supervision of [Stefan Flörchinger](https://www.thphys.uni-heidelberg.de/~floerchinger), [Michael Scherer](https://www.thp.uni-koeln.de/~scherer) and [Christof Wetterich](https://www.thphys.uni-heidelberg.de/~wetterich) at ITP Heidelberg.
+I wrote my master's thesis under the supervision of [Stefan Flörchinger](https://www.thphys.uni-heidelberg.de/~floerchinger), [Michael Scherer](https://www.physik.ruhr-uni-bochum.de/en/Professuren/prof-dr-scherer-michael/) and [Christof Wetterich](https://www.thphys.uni-heidelberg.de/~wetterich) at ITP Heidelberg.
 
 ## Topic
 

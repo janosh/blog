@@ -1,5 +1,5 @@
 <script lang="ts">
-  // adapted from https://github.com/zamanruhy/svelte-lite-youtube-embed
+  // adapted from https://npmjs.com/package/svelte-lite-youtube-embed
   import type { HTMLAttributes } from 'svelte/elements'
 
   let { video_id, play_label = `Play`, ...rest }: {

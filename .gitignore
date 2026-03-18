@@ -7,3 +7,4 @@ build
 
 # secrets
 .env
+package-lock.json
