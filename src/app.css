@@ -128,7 +128,8 @@ h2.section-title {
 :where(h2, h3, h4, h5, h6) {
   scroll-margin-top: 50px;
 }
-:is(h2, h3, h4, h5, h6):target, .toc-clicked {
+:is(h2, h3, h4, h5, h6):target,
+.toc-clicked {
   color: cornflowerblue;
 }
 :where(h2, h3, h4, h5, h6) a[aria-hidden='true'] {

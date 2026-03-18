@@ -28,12 +28,12 @@
 
   // Process references to add citation counts
   const processed_references = $derived(
-    references.map((ref) => ({ ...ref, ...extract_citations(ref.note) })),
+    references.map((ref) => Object.assign({}, ref, extract_citations(ref.note))),
   )
 </script>
 
 <ol {...rest} {@attach highlight_matches(highlight_props)}>
-  {#each processed_references.sort((ref1, ref2) => {
+  {#each processed_references.toSorted((ref1, ref2) => {
       const dir = sort_order === `asc` ? 1 : -1
       if (sort_by === PAPER_SORT_KEYS.title) {
         return ref1.title.localeCompare(ref2.title) * dir
@@ -65,7 +65,7 @@
         const citations1 = ref1.citations ?? 0
         const citations2 = ref2.citations ?? 0
         return (citations2 - citations1) * dir
-      } else throw `Unknown sort_by: ${sort_by}`
+      } else throw new Error(`Unknown sort_by: ${sort_by}`)
     }) as
     { title, id, author, DOI, URL: href, issued, ...rest }
     (id)
@@ -73,7 +73,7 @@
     {@const { 'container-title': journal, citations, citation_database } = rest}
     {@const authors_formatted = author.map(({ given, family }) => {
       if (!family) {
-        throw `No family name in author=${JSON.stringify(author)} of ${title}`
+        throw new Error(`No family name in author=${JSON.stringify(author)} of ${title}`)
       }
       const first_name = {
         initial: `${given[0]}. `,

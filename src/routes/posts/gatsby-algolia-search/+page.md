@@ -180,7 +180,7 @@ const useOnClickOutside = (ref, handler, events) => {
 }
 
 const appId = process.env.GATSBY_ALGOLIA_APP_ID
-const searchKey = process.env.GATSBY_ALGOLIA_SEARCH_KE
+const searchKey = process.env.GATSBY_ALGOLIA_SEARCH_KEY
 
 export default function Search({ indices, collapse = true, size, ...rest }) {
   const ref = createRef()
@@ -326,9 +326,9 @@ import { Form, Input, SearchIcon } from './styles'
 export default connectSearchBox(({ refine, ...rest }) => (
   <Form>
     <Input
-      type='text'
-      placeholder='Search'
-      aria-label='Search'
+      type="text"
+      placeholder="Search"
+      aria-label="Search"
       onChange={(e) => refine(e.target.value)}
       // iOS Safari doesn't blur input automatically on tap outside.
       onMouseLeave={(e) => e.target.blur()}

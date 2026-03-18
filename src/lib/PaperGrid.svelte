@@ -32,7 +32,7 @@
       const key = `${date.getFullYear()}-${get_week_number(date)}`
 
       if (!papers_by_week.has(key)) papers_by_week.set(key, [])
-      papers_by_week.get(key)!.push(paper)
+      papers_by_week.get(key)?.push(paper)
     })
 
     const all_years = Array.from(papers_by_week.keys()).map((key) =>

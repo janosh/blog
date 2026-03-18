@@ -23,7 +23,6 @@ Just so we're on the same page, here are two important points.
 1. This component assumes all headings you want to list in the ToC can be targeted by one or several CSS selectors which the component passes into [`document.querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll). By default it uses `['main h1', 'main h2', ..., 'main h6']`. Also, you should be able to provide `getTitle` and `getDepth` functions to obtain the title and depth of a heading given it's DOM node. (The latter is not essential if you're happy with a flat ToC, i.e. one that doesn't indent lower-level headings.) The default values are `getTitle = node => node.innerText` and `getDepth = node => Number(node.nodeName[1])`. (With the default CSS selector, `nodeName` will be one of `H[1-6]`. Hence `Number(node.nodeName[1])` yields the heading's depth.)
 
 2. This is what each of the words in my unwieldy title mean:
-
    - **Responsive**: If the screen width permits, the ToC is displayed in a column to the right of the main text. Else (on narrow screens) it appears as a small book icon in the lower-left corner. In that case, the component expands to show the full ToC when that icon is clicked.
    - **Sticky**: The ToC scrolls with the viewport below a certain threshold on the page to always remain easily accessible as you progress through the document.
    - **Active**: The ToC highlights the heading that's closest to the reader's current position to act as a "progress bar".

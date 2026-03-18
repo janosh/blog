@@ -9,11 +9,9 @@
   const projects = oss.projects.map((proj) => {
     if (!proj.paper_key) return proj
     const paper = references.find((p) => p.id === proj.paper_key)
-    if (paper) return { ...proj, paper }
-    else {
-      console.error(`Paper ${proj.paper_key} not found`)
-      return proj
-    }
+    if (paper) return Object.assign({}, proj, { paper })
+    console.error(`Paper ${proj.paper_key} not found`)
+    return proj
   })
 
   const mbd = projects.find((p) => p.name === `Matbench Discovery`)
@@ -21,7 +19,7 @@
   const pmg = projects.find((p) => p.name === `pymatgen`)
   const torchsim = projects.find((p) => p.name === `TorchSim`)
   const matterviz = projects.find((p) => p.name === `MatterViz`)
-  const mace_paper = references.find((p) => p.id === `batatia_foundation_2023`)!
+  const mace_paper = references.find((p) => p.id === `batatia_foundation_2023`)
 </script>
 
 <img src="./janosh.jpg" alt="me" width="200" />
@@ -44,7 +42,7 @@
 
   <div class="interest-links">
     <a href={mbd?.repo} class="interest-tag">🔎 Materials Discovery</a>
-    <a href={mace_paper.URL} class="interest-tag">🤖 ML Foundation Models</a>
+    <a href={mace_paper?.URL} class="interest-tag">🤖 ML Foundation Models</a>
     <a href={torchsim?.repo} class="interest-tag">⚛️ Atomistic Simulation</a>
     <a href={pmv?.repo} class="interest-tag">📊 Data Visualization</a>
     <a href={pmg?.repo} class="interest-tag">💻 Software Engineering</a>
@@ -57,7 +55,7 @@
   &nbsp;Recent Work
 </h2>
 <ul class="recent grid">
-  {#each projects.filter((proj) => proj.featured).sort((p1, p2) => {
+  {#each projects.filter((proj) => proj.featured).toSorted((p1, p2) => {
       const date1 = p1?.paper?.issued?.[0]
       const date2 = p2?.paper?.issued?.[0]
       if (!date1 || !date2) return 0

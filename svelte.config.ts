@@ -7,7 +7,7 @@ import { heading_ids } from 'svelte-multiselect/heading-anchors'
 import preprocess from 'svelte-preprocess'
 import { importAssets } from 'svelte-preprocess-import-assets'
 
-const macros = {
+const macros: Record<string, string> = {
   // Infinitesimal differential (used in derivatives and integrals)
   '\\dif': `\\mathrm d`,
   // Vector
@@ -40,7 +40,7 @@ const macros = {
   '\\cbrkt': `\\mathopen{}\\left\\{#1\\right\\}\\mathclose{}`,
 }
 
-for (let index = `A`.charCodeAt(); index <= `Z`.charCodeAt(); index++) {
+for (let index = `A`.charCodeAt(0); index <= `Z`.charCodeAt(0); index++) {
   const letter = String.fromCharCode(index)
   // Caligraphic letters
   macros[`\\${letter}cal`] = `\\mathcal{${letter}}`
@@ -54,9 +54,7 @@ export default {
   preprocess: [
     preprocess(),
     mdsvex({
-      rehypePlugins: [
-        [katex, { macros, throwOnError: false, errorColor: `#cc0000` }],
-      ] as Plugin[],
+      rehypePlugins: [[katex, { macros, throwOnError: false, errorColor: `#cc0000` }]],
       // remark-math@3.0.0 pinned due to mdsvex, see
       // https://github.com/kwshi/rehype-katex-svelte#usage
       remarkPlugins: [math],
