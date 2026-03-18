@@ -20,99 +20,77 @@
   "properties": {},
   "sites": [
     {
-      "species": [
-        { "element": "Zr", "oxidation_state": 4.0, "spin": null, "occu": 1 }
-      ],
+      "species": [{ "element": "Zr", "oxidation_state": 4.0, "spin": null, "occu": 1 }],
       "abc": [0.5, 0.5, 0.0],
       "xyz": [2.67425, 2.67425, 3.275011702619809e-16],
       "properties": {},
       "label": "Zr"
     },
     {
-      "species": [
-        { "element": "Zr", "oxidation_state": 4.0, "spin": null, "occu": 1 }
-      ],
+      "species": [{ "element": "Zr", "oxidation_state": 4.0, "spin": null, "occu": 1 }],
       "abc": [0.0, 0.5, 0.5],
       "xyz": [-1.6375058513099044e-16, 2.67425, 2.67425],
       "properties": {},
       "label": "Zr"
     },
     {
-      "species": [
-        { "element": "Bi", "oxidation_state": 3.0, "spin": null, "occu": 1 }
-      ],
+      "species": [{ "element": "Bi", "oxidation_state": 3.0, "spin": null, "occu": 1 }],
       "abc": [0.0, 0.0, 0.0],
       "xyz": [0.0, 0.0, 0.0],
       "properties": {},
       "label": "Zr"
     },
     {
-      "species": [
-        { "element": "Bi", "oxidation_state": 3.0, "spin": null, "occu": 1 }
-      ],
+      "species": [{ "element": "Bi", "oxidation_state": 3.0, "spin": null, "occu": 1 }],
       "abc": [0.5, 0.0, 0.5],
       "xyz": [2.67425, 0.0, 2.67425],
       "properties": {},
       "label": "Zr"
     },
     {
-      "species": [
-        { "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }
-      ],
+      "species": [{ "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }],
       "abc": [0.25, 0.25, 0.25],
       "xyz": [1.337125, 1.337125, 1.3371250000000001],
       "properties": {},
       "label": "O"
     },
     {
-      "species": [
-        { "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }
-      ],
+      "species": [{ "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }],
       "abc": [0.75, 0.75, 0.25],
       "xyz": [4.011374999999999, 4.011374999999999, 1.3371250000000003],
       "properties": {},
       "label": "O"
     },
     {
-      "species": [
-        { "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }
-      ],
+      "species": [{ "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }],
       "abc": [0.75, 0.75, 0.75],
       "xyz": [4.011374999999999, 4.011374999999999, 4.011375],
       "properties": {},
       "label": "O"
     },
     {
-      "species": [
-        { "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }
-      ],
+      "species": [{ "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }],
       "abc": [0.75, 0.25, 0.75],
       "xyz": [4.011374999999999, 1.337125, 4.011375],
       "properties": {},
       "label": "O"
     },
     {
-      "species": [
-        { "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }
-      ],
+      "species": [{ "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }],
       "abc": [0.25, 0.75, 0.75],
       "xyz": [1.3371249999999997, 4.011374999999999, 4.011375],
       "properties": {},
       "label": "O"
     },
     {
-      "species": [
-        { "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }
-      ],
+      "species": [{ "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }],
       "abc": [0.25, 0.75, 0.25],
       "xyz": [1.3371249999999997, 4.011374999999999, 1.3371250000000001],
       "properties": {},
       "label": "O"
     },
     {
-      "species": [
-        { "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }
-      ],
+      "species": [{ "element": "O", "oxidation_state": -2.0, "spin": null, "occu": 1 }],
       "abc": [0.25, 0.25, 0.75],
       "xyz": [1.337125, 1.337125, 4.011375],
       "properties": {},

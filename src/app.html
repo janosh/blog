@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>janosh.dev</title>
@@ -8,10 +8,9 @@
     <script>
       // Set theme immediately to prevent flashing
       try {
-        const theme = localStorage.getItem('theme') ||
-          (window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? 'dark'
-            : 'light')
+        const theme =
+          localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
         document.documentElement.style.colorScheme = theme
       } catch {
         document.documentElement.style.colorScheme = 'dark'

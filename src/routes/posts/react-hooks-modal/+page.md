@@ -152,7 +152,7 @@ class Modal extends React.Component {
     return (
       <div ref={(node) => (this.node = node)} id={name + `-modal`}>
         {closeButton && (
-          <button className='close-button' onClick={toggleModal}>
+          <button className="close-button" onClick={toggleModal}>
             &#10005;
           </button>
         )}

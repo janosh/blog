@@ -127,7 +127,9 @@
                 </small>
               </a>
             {/if}
-            <small class="langs">{languages.slice(0, 3).join(`, `)}</small>
+            {#if languages}
+              <small class="langs">{languages.slice(0, 3).join(`, `)}</small>
+            {/if}
           </h4>
           <p>{@html description}</p>
         </li>

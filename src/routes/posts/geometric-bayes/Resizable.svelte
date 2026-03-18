@@ -35,9 +35,9 @@
     size.width = width
     size.height = height
 
-    window.addEventListener(`pointermove`, resizePointerMove)
-    window.addEventListener(`pointerup`, resizePointerUp)
-    window.addEventListener(`pointercancel`, resizePointerUp)
+    globalThis.addEventListener(`pointermove`, resizePointerMove)
+    globalThis.addEventListener(`pointerup`, resizePointerUp)
+    globalThis.addEventListener(`pointercancel`, resizePointerUp)
   }
 
   function resizePointerMove(event: PointerEvent) {
@@ -56,9 +56,9 @@
   }
 
   function resizePointerUp() {
-    window.removeEventListener(`pointermove`, resizePointerMove)
-    window.removeEventListener(`pointerup`, resizePointerUp)
-    window.removeEventListener(`pointercancel`, resizePointerUp)
+    globalThis.removeEventListener(`pointermove`, resizePointerMove)
+    globalThis.removeEventListener(`pointerup`, resizePointerUp)
+    globalThis.removeEventListener(`pointercancel`, resizePointerUp)
   }
   let style = $derived(
     `${pos} width: ${width}%; height:${height}%; background: ${color};`,
