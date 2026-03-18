@@ -17,7 +17,7 @@
       return acc
     }, {})
   // keep only most frequent tags
-  const all_tags = (Object.entries(tag_counts) as [string, number][]).sort(
+  const all_tags = (Object.entries(tag_counts) as [string, number][]).toSorted(
     ([, count_1], [, count_2]) => count_2 - count_1,
   )
   // check if any tag appear with different casing (start inner loop at i + 1)
@@ -30,7 +30,7 @@
       }
     }
   }
-  const top_tags = all_tags.slice(0, 15).sort()
+  const top_tags = all_tags.slice(0, 15).toSorted()
   const has_active_tags = (active_tags: Option[]) => (post: FrontMatter) => {
     return (
       active_tags.length === 0 ||
@@ -63,7 +63,7 @@
 <ul class="grid" style="margin: 4em auto; gap: 3ex">
   {#each page.data?.posts
       ?.filter(has_active_tags(active_tags))
-      .sort((post_1: FrontMatter, post_2: FrontMatter) => {
+      .toSorted((post_1: FrontMatter, post_2: FrontMatter) => {
         return post_2.date.localeCompare(post_1.date) // sort by date descending
       }) ?? [] as
     post

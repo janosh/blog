@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state'
-  import { issues, name } from '$root/package.json'
+  import { bugs, name } from '$root/package.json'
   import Icon from '@iconify/svelte'
 
   let online: boolean = $state(true)
@@ -17,7 +17,7 @@
   {#if page.status >= 500}
     <p>
       If page reloading doesn't help, please raise an issue on
-      <a href={issues} target="_blank" rel="noreferrer">GitHub</a>. Thanks! 🙏
+      <a href={bugs} target="_blank" rel="noreferrer">GitHub</a>. Thanks! 🙏
     </p>
   {/if}
   {#if online === false}

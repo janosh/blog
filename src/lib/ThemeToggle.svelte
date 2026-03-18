@@ -6,7 +6,7 @@
 
   onMount(() => {
     theme = (localStorage.getItem(`theme`) as `light` | `dark`) ||
-      (window.matchMedia(`(prefers-color-scheme: dark)`).matches ? `dark` : `light`)
+      (globalThis.matchMedia(`(prefers-color-scheme: dark)`).matches ? `dark` : `light`)
     document.documentElement.style.colorScheme = theme
   })
 

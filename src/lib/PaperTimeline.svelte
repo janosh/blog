@@ -61,7 +61,7 @@
         ((paper.date.getTime() - date_range.min.getTime()) / time_range) * 100
     })
 
-    timeline_data = parsed_papers.sort((a, b) => a.date.getTime() - b.date.getTime())
+    timeline_data = parsed_papers.toSorted((a, b) => a.date.getTime() - b.date.getTime())
   })
 
   function handle_hover(event: MouseEvent, paper?: TimelineData) {
