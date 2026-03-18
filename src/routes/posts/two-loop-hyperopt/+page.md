@@ -4,7 +4,7 @@ date: 2018-11-23
 cover:
   img: bayesian-optimization.svg
   origin: Ramraj Chandradevan
-  url: https://towardsdatascience.com/shallow-understanding-on-bayesian-optimization-324b6c1f7083
+  url: https://medium.com/data-science/shallow-understanding-on-bayesian-optimization-324b6c1f7083
 tags:
   - Machine Learning
   - Python

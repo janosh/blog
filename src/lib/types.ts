@@ -52,9 +52,9 @@ export type Project = {
   name: string
   url?: string
   logo?: string
-  img_style?: string
+  color_invert?: `light` | `dark`
   repo: string
-  role?: `Lead` | `Maintainer` | `Contributor`
+  role?: `Lead` | `Maintainer` | `Contributor` | `Former staff member`
   description: string
   stars: number
   commits: number
@@ -67,7 +67,8 @@ export type Project = {
 
 export type Skill = {
   name: string
-  icon: string
+  icon?: string
+  svg?: string
   score: number
   href?: string
   site?: string

@@ -47,42 +47,61 @@ export function extract_citations(note: string | undefined): {
   citations: number
   citation_database: string
 } {
-  if (!note) return { citations: 0, citation_database: `` }
+  if (note === undefined || note.length === 0) {
+    return { citations: 0, citation_database: `` }
+  }
 
-  const matches = [...note.matchAll(/Citations: (\d+) \(([^)]+)\)/g)]
-  if (!matches.length) return { citations: 0, citation_database: `` }
+  let [citations, citation_database] = [0, ``]
+  for (const [, raw_count, raw_database] of note.matchAll(
+    /Citations: (\d+) \(([^)]+)\)/g,
+  )) {
+    const citation_count = parseInt(raw_count, 10)
+    if (citation_count > citations) {
+      citations = citation_count
+      citation_database = raw_database
+    }
+  }
 
-  const { count, database } = matches
-    .map(([, count, database]) => ({
-      count: parseInt(count || `0`, 10),
-      database: database || ``,
-    }))
-    .reduce((max, cur) => (cur.count > max.count ? cur : max))
-
-  return { citations: count, citation_database: database }
+  return { citations, citation_database }
 }
 
-export function export_single_page_pdf(): void {
-  const main_element = document.querySelector(`main`)
-  if (!main_element) return
+export function print_cv({ single_page = false }: { single_page?: boolean } = {}): void {
+  if (!single_page) {
+    globalThis.print()
+    return
+  }
+  const main = document.querySelector(`main`)
+  if (!(main instanceof HTMLElement)) return
 
-  // Apply print-like styles for measurement
-  const measure_style = document.createElement(`style`)
-  measure_style.textContent = `@media screen { main { width: calc(210mm - 0.2in) !important; max-width: calc(210mm - 0.2in) !important; margin: 0 !important; padding: 2em !important; font-size: 10pt !important; line-height: 1.2 !important; } main p { font-size: 10pt !important; margin: 0 0 6pt 0 !important; } main h2 { font-size: 12pt !important; margin: 12pt 0 6pt 0 !important; } main h4, main small { font-size: 10pt !important; margin: 6pt 0 3pt 0 !important; } }`
-  document.head.append(measure_style)
+  const root_class = `single-page-pdf`
+  const style = document.createElement(`style`)
+  const main_css = `width: 210mm !important; max-width: none !important; margin: 0 !important; padding: 2em !important; box-sizing: border-box !important; box-shadow: none !important;`
+  const visible_css = `height: auto !important; max-height: none !important; overflow: visible !important;`
+  style.textContent = `
+    html.${root_class} main { ${main_css} }
+    html.${root_class}, html.${root_class} body, html.${root_class} main { ${visible_css} }
+  `
+  document.head.append(style)
+  document.documentElement.classList.add(root_class)
 
-  void main_element.offsetHeight // Force layout
-  const height_mm = ((main_element.scrollHeight * 25.4) / 96) * 1.8 + 50
-  measure_style.remove()
+  void main.offsetHeight // Force layout before measuring
+  const height_mm = Math.ceil((main.getBoundingClientRect().height * 25.4) / 96)
 
-  // Create single-page PDF
-  const print_style = document.createElement(`style`)
-  print_style.id = `single-page-pdf`
-  print_style.textContent = `@media print { @page { size: 210mm ${height_mm.toFixed(
-    1,
-  )}mm; margin: 0.1in; } *, main, section, section.body, section.body *, ul.oss, ul.oss *, ul.skills, ul.skills *, ul.hobbies, ul.hobbies *, ul.horizontal, ul.horizontal *, .side-by-side, .side-by-side * { page-break-before: auto !important; page-break-after: auto !important; page-break-inside: auto !important; break-before: auto !important; break-after: auto !important; break-inside: auto !important; } html, body, main { height: auto !important; max-height: none !important; overflow: visible !important; } }`
-  document.head.append(print_style)
+  style.textContent = `
+    html.${root_class} main { ${main_css} }
+    html.${root_class}, html.${root_class} body, html.${root_class} main { ${visible_css} }
+    @media print {
+      @page { size: 210mm ${height_mm}mm; margin: 0; }
+      main { ${main_css} }
+      html, body, main { ${visible_css} }
+    }
+  `
+
+  const cleanup = () => {
+    document.documentElement.classList.remove(root_class)
+    style.remove()
+  }
+  globalThis.addEventListener(`afterprint`, cleanup, { once: true })
 
   globalThis.print()
-  setTimeout(() => document.getElementById(`single-page-pdf`)?.remove(), 1000)
 }

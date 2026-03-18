@@ -13,13 +13,13 @@ If you’re running a Gatsby blog (or any React-powered blog for that matter) an
 
 ## Available services
 
-There are many options out there for adding comment functionality, several of them specifically targeted at static sites. The following list was compiled from a [2017 Gatsby Spectrum chat](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05). It is by no means exhaustive, but should serve as a good starting point:
+There are many options out there for adding comment functionality, several of them specifically targeted at static sites. The following list was compiled from a 2017 Gatsby Spectrum chat (Spectrum has since shut down). It is by no means exhaustive, but should serve as a good starting point:
 
-- [Disqus](https://disqus.com) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTUxMTIzMDE0NjY2MQ==)]
-- [Staticman](https://staticman.net) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTUzNDkxODUxMDk4OA==)]
-- [Facebook comments](https://npmjs.com/package/react-facebook) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTU0MTEwNTQyNDI1MA==)]
-- [JustComments](https://just-comments.com) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTU0MTQ0MzcxMTgxMQ==)] (has a [Gatsby plugin](https://gatsbyjs.org/packages/gatsby-plugin-just-comments))
-- [TalkYard](https://talkyard.io) [[mention](https://spectrum.chat/gatsby-js/general/whats-the-best-way-to-make-commenting-system~0c7e3f0f-8737-4948-9c52-0d20dfe37a05?m=MTUxNjMzMzM5MTU5NA==)]
+- [Disqus](https://disqus.com)
+- [Staticman](https://staticman.net)
+- [Facebook comments](https://npmjs.com/package/react-facebook)
+- JustComments
+- [TalkYard](https://talkyard.io)
 - [Gitalk](https://gitalk.github.io) [[mention](https://github.com/gatsbyjs/gatsby/issues/12209#issuecomment-471165136)]
 
 All of these are worth checking out. Staticman, for instance, took an interesting approach. Essentially, you set up your own HTML form for writing comments and have it send a POST request on submission to one of their endpoints. From this Staticman will automatically submit a pull request to your site's repo which you can accept or deny. If that isn't a nerdy way of doing comment moderation, I don't know what is. It's just a gimmick though. This has the big advantage of keeping everything static (hence the name). All your data is in one place (your repo) as opposed to having to be loaded through JavaScript embeds or iframes (short for [inline frame](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)) on the fly. It will remain there even if Staticman is ever discontinued. With the other services, you depend on an external platform to deliver your comments.

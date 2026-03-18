@@ -13,7 +13,7 @@ tags:
 
 I'm a big fan of Feynman's technique of learning something new by trying to explain it to someone else. So in this post, I'll try to explain normalizing flows (NF), a relatively simple yet powerful new tool in statistics for constructing expressive probability distributions from simple base distribution using smooth bijective transformations. It's a hot topic right now and has exciting applications in the context of probabilistic modeling and inference.
 
-Before we get started, huge thanks to [Papamakarios et al.](https://arxiv.org/abs/1912.02762), [Lilian Weng](https://lilianweng.github.io/lil-log/2018/10/13/flow-based-deep-generative-models) and [Adam Kosiorek](https://akosiorek.github.io/ml/2018/04/03/norm_flows.html) from whom I learned most of what follows.
+Before we get started, huge thanks to [Papamakarios et al.](https://arxiv.org/abs/1912.02762), [Lilian Weng](https://lilianweng.github.io/lil-log/2018/10/13/flow-based-deep-generative-models) and [Adam Kosiorek](https://akosiorek.github.io/norm_flows) from whom I learned most of what follows.
 
 ## The Big Picture
 
@@ -315,6 +315,6 @@ To learn more about normalizing flows, here are some resources to take you furth
 - Ari Seff created a [super helpful 3blue1brown-style video](https://youtube.com/watch?v=i7LjDvsLWCg) explaining the basics of normalizing flows.
 - Some of the guys at DeepMind involved in the development of NFs [published a very thorough and very readable review article](https://arxiv.org/abs/1912.02762) on the subject just days after I published this post. (I updated this post with some of the insights I gained there.)
 - Andrej Karpathy created [a repo with PyTorch implementations of the most commonly used flows](https://github.com/karpathy/pytorch-normalizing-flows) (also just days after this post).
-- PyMC3 has a [very helpful notebook](https://docs.pymc.io/notebooks/normalizing_flows_overview.html) showcasing how to work with flows in practice and comparing it to their NUTS-based HMC implementation.
+- PyMC3 has a [very helpful notebook](https://www.pymc.io/projects/examples/en/2022.01.0/variational_inference/normalizing_flows_overview.html) showcasing how to work with flows in practice and comparing it to their NUTS-based HMC implementation.
 
 > I also started this much more up-to-date [collection on NFs](https://github.com/janosh/awesome-normalizing-flows) that's received an unexpected amount of attention. Feel free to submit PRs to gather even more sources/advice/applications.

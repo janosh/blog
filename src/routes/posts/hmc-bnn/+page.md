@@ -507,7 +507,7 @@ _**MAP** predictions vs ground truth_
 ![HMC predictions vs ground truth](./boston-test-vs-pred-hmc.svg)
 _**HMC** predictions vs ground truth_
 
-The full code including the boring parts for generating plots can be found on [GitHub](https://github.com/janosh/thermo/blob/main/src/bnn/hmc.py).
+The full code including the boring parts for generating plots can be found on [GitHub](https://github.com/janosh/thermo/blob/main/thermo/bnn/hmc.py).
 
 ## Future prospects
 
