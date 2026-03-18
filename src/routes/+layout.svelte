@@ -1,9 +1,9 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
   import { page } from '$app/state'
-  import { Footer, ThemeToggle } from '$lib'
+  import { Footer } from '$lib'
   import type { Snippet } from 'svelte'
-  import { CmdPalette, CopyButton } from 'svelte-multiselect'
+  import { CmdPalette, CopyButton, ThemeToggle } from 'svelte-multiselect'
   import '../app.css'
 
   let { children }: { children?: Snippet<[]> } = $props()
@@ -17,7 +17,6 @@
   )
 </script>
 
-<ThemeToggle />
 <CmdPalette {actions} placeholder="Go to..." />
 <CopyButton global />
 

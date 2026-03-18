@@ -36,7 +36,7 @@
     })
 
     const all_years = Array.from(papers_by_week.keys()).map((key) =>
-      parseInt(key.split(`-`)[0])
+      parseInt(key.split(`-`)[0], 10)
     )
     const [min_year, max_year] = [Math.min(...all_years), Math.max(...all_years)]
     years = Array.from({ length: max_year - min_year + 1 }, (_, i) => min_year + i)

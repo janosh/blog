@@ -48,7 +48,7 @@ projects:
       - JavaScript
       - HTML
       - TypeScript
-    stars: 368
+    stars: 369
     commits: 196
   - name: TorchSim
     url: https://torchsim.github.io/torch-sim
@@ -60,7 +60,7 @@ projects:
     featured: true
     languages:
       - Python
-    stars: 431
+    stars: 432
     commits: 39
   - name: MACE Foundation Models
     url: https://mace-docs.readthedocs.io/en/latest/examples/foundation_models.html#pretrained-mace-mp-0-models
@@ -86,7 +86,7 @@ projects:
       - CSS
       - HTML
       - Dockerfile
-    stars: 311
+    stars: 312
     commits: 456
   - name: pymatviz
     url: https://pymatviz.janosh.dev
@@ -130,7 +130,7 @@ projects:
       - Python
       - Jupyter Notebook
       - Shell
-    stars: 287
+    stars: 288
     commits: 386
     paper_key: ganose_atomate2_2025
     featured: true
@@ -161,8 +161,8 @@ projects:
     url: https://diagrams.janosh.dev
     repo: https://github.com/janosh/diagrams
     description: '[Typst](https://typst.app) and [LaTeX](https://www.latex-project.org) diagrams of concepts in physics/chemistry/ML.'
-    stars: 481
-    commits: 262
+    stars: 482
+    commits: 264
     languages:
       - Typst
       - TeX
@@ -198,8 +198,8 @@ projects:
       - CSS
       - HTML
       - JavaScript
-    stars: 361
-    commits: 354
+    stars: 363
+    commits: 358
   - name: MatPES
     url: https://matpes.ai
     repo: https://github.com/materialsvirtuallab/matpes

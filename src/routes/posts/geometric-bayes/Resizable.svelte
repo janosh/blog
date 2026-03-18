@@ -67,7 +67,7 @@
 
 <div class="resizable" {style}>
   {@render children?.()}
-  <div class="resizer" onpointerdown={resizePointerDown} style={handle_position}></div>
+  <div class="resizer" role="separator" onpointerdown={resizePointerDown} style={handle_position}></div>
 </div>
 
 <style>

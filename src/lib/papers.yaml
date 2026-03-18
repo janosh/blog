@@ -259,7 +259,7 @@ references:
       Citations: 328 (Crossref) [2025-07-17]
       Citations: 397 (SemanticScholar) [2025-07-17]
     number: '9'
-    page: 1031-1041
+    page: 1031–1041
     publisher: Nature Publishing Group
     source: www.nature.com
     title: >-
@@ -305,7 +305,7 @@ references:
         day: 10
     language: en
     license: 2025 The Author(s)
-    page: 1-9
+    page: 1–9
     publisher: Nature Publishing Group
     source: www.nature.com
     title: Systematic softening in universal machine learning interatomic potentials
@@ -451,7 +451,7 @@ references:
     note: |-
       Citations: 15 (Crossref) [2025-07-17]
       Citations: 14 (SemanticScholar) [2025-07-17]
-    page: 1509-1533
+    page: 1509–1533
     publisher: RSC
     source: pubs.rsc.org
     title: >-
@@ -683,7 +683,7 @@ references:
     note: |-
       Citations: 0 (Crossref) [2025-07-17]
       Citations: 0 (SemanticScholar) [2025-07-17]
-    page: 1-11
+    page: 1–11
     publisher: Nature Publishing Group
     source: www.nature.com
     title: Accelerated data-driven materials science with the Materials Project
@@ -873,7 +873,7 @@ references:
     note: |-
       Citations: 5 (Crossref) [2025-07-17]
       Citations: 1 (SemanticScholar) [2025-07-17]
-    page: 836-847
+    page: 836–847
     publisher: Nature Publishing Group
     source: www.nature.com
     title: >-
@@ -935,3 +935,4 @@ references:
     title-short: Jobflow
     URL: https://joss.theoj.org/papers/10.21105/joss.05995
     volume: '9'
+...

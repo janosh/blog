@@ -4,7 +4,6 @@ import { mdsvex } from 'mdsvex'
 import katex from 'rehype-katex-svelte'
 import math from 'remark-math'
 import { heading_ids } from 'svelte-multiselect/heading-anchors'
-import preprocess from 'svelte-preprocess'
 import { importAssets } from 'svelte-preprocess-import-assets'
 
 const macros: Record<string, string> = {
@@ -40,8 +39,8 @@ const macros: Record<string, string> = {
   '\\cbrkt': `\\mathopen{}\\left\\{#1\\right\\}\\mathclose{}`,
 }
 
-for (let index = `A`.charCodeAt(0); index <= `Z`.charCodeAt(0); index++) {
-  const letter = String.fromCharCode(index)
+for (let index = 65; index <= 90; index++) {
+  const letter = String.fromCodePoint(index)
   // Caligraphic letters
   macros[`\\${letter}cal`] = `\\mathcal{${letter}}`
   // Blackboard bold letters
@@ -52,7 +51,6 @@ export default {
   extensions: [`.svelte`, `.svx`, `.md`],
 
   preprocess: [
-    preprocess(),
     mdsvex({
       rehypePlugins: [[katex, { macros, throwOnError: false, errorColor: `#cc0000` }]],
       // remark-math@3.0.0 pinned due to mdsvex, see
