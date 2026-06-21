@@ -13,7 +13,7 @@ tags:
 
 > This post is without original content, providing merely a summary of the first 3 sections of [Michael Betancourt](https://betanalpha.github.io)'s excellent [introduction to Hamiltonian Monte Carlo](https://arxiv.org/abs/1701.02434). Most images were taken from there and slightly modified.
 
-Hamiltonian Monte Carlo (HMC) was originally developed by [Duane et al.](https://sciencedirect.com/science/article/pii/037026938791197X) in the late 1980s as Hybrid Monte Carlo in the context of Quantum Chromodynamics, specifically, lattice computations that attempted to understand the structure of protons and neutrons comprising atomic nuclei. Radford Neal was the first to realize the potential of HMC in applied statistics as part of his [pioneering work in the mid-1990s on Bayesian neural networks](https://www.cs.toronto.edu/~radford/ftp/thesis.pdf).
+Hamiltonian Monte Carlo (HMC) was originally developed by [Duane et al.](https://linkinghub.elsevier.com/retrieve/pii/037026938791197X) in the late 1980s as Hybrid Monte Carlo in the context of Quantum Chromodynamics, specifically, lattice computations that attempted to understand the structure of protons and neutrons comprising atomic nuclei. Radford Neal was the first to realize the potential of HMC in applied statistics as part of his [pioneering work in the mid-1990s on Bayesian neural networks](https://www.cs.toronto.edu/~radford/ftp/thesis.pdf).
 
 Over the ensuing decades, HMC made a rather reluctant entry into modern statistics. This is mostly due to two reasons:
 

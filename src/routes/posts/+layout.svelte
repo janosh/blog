@@ -18,10 +18,8 @@
 </script>
 
 {#if dev}
-  {#await import(`./${slug}/${cover?.img?.replace(`.svg`, ``)}.svg`)
-    then { default: src }
-  }
-    <img {src} alt={cover?.caption} />
+  {#await import(`./${slug}/${cover?.img?.replace(`.svg`, ``)}.svg`) then svg}
+    <img src={svg.default} alt={cover?.caption} />
   {/await}
 {:else}
   <img

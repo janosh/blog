@@ -6,10 +6,10 @@ export const load = ({ url }: { url: URL }) => {
     eager: true,
   })
 
-  const available_paths = Object.keys(modules).join(`, `)
   const slug = url.pathname.split(`/`).at(-1)
   const path = `./${slug}/+page.md`
-  if (slug === undefined || slug.length === 0 || !(path in modules)) {
+  if (!slug || !(path in modules)) {
+    const available_paths = Object.keys(modules).join(`, `)
     error(404, `couldn't resolve ${slug} from ${available_paths}`)
   }
 

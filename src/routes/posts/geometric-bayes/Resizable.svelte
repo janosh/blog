@@ -12,6 +12,7 @@
     color,
     resizable = `xy`,
     children,
+    ...rest
   }: {
     parent_width: number
     parent_height: number
@@ -42,11 +43,13 @@
     const dir_x = pos.includes(`right`) ? -1 : 1
     const dir_y = pos.includes(`bottom`) ? -1 : 1
     if (resizable.includes(`x`)) {
-      const new_width = (size.width * dir_x + (event.pageX - resize.x) / (parent_width / 100)) * dir_x
+      const new_width =
+        (size.width * dir_x + (event.pageX - resize.x) / (parent_width / 100)) * dir_x
       width = Math.min(100, Math.max(0, new_width))
     }
     if (resizable.includes(`y`)) {
-      const new_height = (size.height * dir_y + (event.pageY - resize.y) / (parent_height / 100)) * dir_y
+      const new_height =
+        (size.height * dir_y + (event.pageY - resize.y) / (parent_height / 100)) * dir_y
       height = Math.min(100, Math.max(0, new_height))
     }
   }
@@ -57,13 +60,18 @@
     globalThis.removeEventListener(`pointercancel`, pointer_up)
   }
   let style = $derived(
-    `${pos} width: ${width}%; height:${height}%; background: ${color};`,
+    `${pos} width: ${width}%; height: ${height}%; background: ${color}; ${rest.style ?? ``}`,
   )
 </script>
 
-<div class="resizable" {style}>
+<div {...rest} class={['resizable', rest.class]} {style}>
   {@render children?.()}
-  <div class="resizer" role="separator" onpointerdown={pointer_down} style={handle_position}></div>
+  <div
+    class="resizer"
+    role="separator"
+    onpointerdown={pointer_down}
+    style={handle_position}
+  ></div>
 </div>
 
 <style>

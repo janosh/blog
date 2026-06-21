@@ -2,7 +2,11 @@
   // adapted from https://npmjs.com/package/svelte-lite-youtube-embed
   import type { HTMLAttributes } from 'svelte/elements'
 
-  let { video_id, play_label = `Play`, ...rest }: {
+  let {
+    video_id,
+    play_label = `Play`,
+    ...rest
+  }: {
     video_id: string
     play_label?: string
   } & HTMLAttributes<HTMLDivElement> = $props()
@@ -94,14 +98,15 @@
     border: none;
     outline: 0;
   }
-  .lite-youtube:hover > .play-btn, .lite-youtube .play-btn:focus {
+  .lite-youtube:is(:hover, :focus-within) > .play-btn {
     filter: none;
   }
   /* Post-click styles */
   .lite-youtube.activated {
     cursor: unset;
   }
-  .lite-youtube.activated::before, .lite-youtube.activated > .play-btn {
+  .lite-youtube.activated::before,
+  .lite-youtube.activated > .play-btn {
     opacity: 0;
     pointer-events: none;
   }

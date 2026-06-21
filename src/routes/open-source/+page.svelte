@@ -23,7 +23,8 @@
 </script>
 
 <h2 class="section-title">
-  <Icon inline icon="ri:open-source-line" />&nbsp; Open Source
+  <Icon inline icon="ri:open-source-line" />
+  Open Source
 </h2>
 
 <div class="controls" style="color: var(--text-secondary)">
@@ -40,39 +41,36 @@
   class="projects grid"
   {@attach highlight_matches({ query, css_class: `highlight-match` })}
 >
-  {#each projects as
-    { url, repo, name, description, stars, logo, commits, role, color_invert }
-    (name)
-  }
+  {#each projects as { url, repo, name, description, stars, logo, commits, role, color_invert } (name)}
     {@const logo_url = logo ?? `${url}/favicon.svg`}
-    <li animate:flip={{ duration: 400 }}>
+    <li class="card" animate:flip={{ duration: 400 }}>
       <h3>
         <a href={url ?? repo} target="_blank" rel="noreferrer">
           <img src={logo_url} alt="{name} Logo" data-color-invert={color_invert} />
           {name}
         </a>
       </h3>
-      <div class="project-stats">
+      <div class="project-stats meta-row">
         {#if stars}
-          <a href="{repo}/stargazers" class="stat-link">
+          <a href="{repo}/stargazers" class="stat-link pill">
             <Icon inline icon="octicon:mark-github" />
             <span>{stars} ⭐</span>
           </a>
         {/if}
 
         {#if commits}
-          <a href="{repo}/commits?author=janosh" class="stat-link">
+          <a href="{repo}/commits?author=janosh" class="stat-link pill">
             <Icon inline icon="octicon:git-commit" />
             <span>{commits} <small>commits</small></span>
           </a>
         {/if}
 
-        <a href="{repo}/graphs/contributors" class="stat-link">
+        <a href="{repo}/graphs/contributors" class="stat-link pill">
           <Icon inline icon="octicon:people-16" />
           <span>{role ?? (repo.includes(`/janosh/`) ? `Lead` : `Contributor`)}</span>
         </a>
       </div>
-      <p class="project-description">{@html description}</p>
+      <p class="project-description card-description muted">{@html description}</p>
     </li>
   {/each}
   <li style="visibility: hidden"></li>
@@ -80,10 +78,6 @@
 </ul>
 
 <style>
-  h2 {
-    text-align: center;
-    margin-bottom: 1.2em;
-  }
   .controls {
     display: flex;
     place-content: center;
@@ -96,8 +90,10 @@
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     padding: 4pt 8pt;
-    border-radius: 8pt;
-    transition: all 0.2s ease;
+    border-radius: var(--radius-lg);
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
   }
   button:hover {
     background: var(--nav-bg);
@@ -105,10 +101,11 @@
   }
   button.active {
     background: var(--button-bg);
+    border-color: var(--card-hover-border);
   }
   input {
     padding: 0.5em 1em;
-    border-radius: 18px;
+    border-radius: var(--radius-pill);
     min-width: 180px;
     background: var(--input-bg);
     border: 1px solid var(--card-border);
@@ -125,68 +122,23 @@
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
   .projects > li {
-    display: grid;
-    gap: 0.6em;
     grid-row: span 3;
     grid-template-columns: subgrid;
     grid-template-rows: subgrid;
-    background: linear-gradient(
-      135deg,
-      var(--card-bg),
-      var(--nav-bg)
-    );
-    border: 1px solid var(--card-border);
-    padding: 0.8em;
-    border-radius: 6pt;
-    transition: all 0.2s ease;
-  }
-  .projects > li:hover {
-    transform: translateY(-2px);
-    border-color: var(--nav-bg);
   }
   h3 {
-    margin: 0;
     font-size: 1.1rem;
-    font-weight: 500;
-  }
-  h3 a {
-    display: flex;
-    place-items: center;
-    gap: 0.4em;
   }
   h3 img {
     width: 2em;
     height: 2em;
-    object-fit: contain;
-    border-radius: 3px;
   }
   .project-stats {
-    display: flex;
-    gap: 0.6em;
-    place-content: center;
-    flex-wrap: wrap;
     font-size: 0.8rem;
   }
-  .stat-link {
-    display: flex;
-    gap: 0.3em;
-    place-items: center;
-    background: var(--card-bg);
-    padding: 0.2em 0.6em;
-    border-radius: 12px;
-    color: var(--text-secondary) !important;
-    transition: all 0.2s ease;
-  }
-  .stat-link:hover {
-    background: var(--nav-bg);
-    color: var(--text-color) !important;
-  }
   .project-description {
-    margin: 0;
     font-size: 0.85rem;
     line-height: 1.4;
-    color: var(--text-secondary);
-    overflow: hidden;
     max-height: calc(1.4em * 4);
     overflow-y: auto;
   }

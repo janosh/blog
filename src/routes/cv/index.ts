@@ -12,35 +12,25 @@ export function truncate_authors(
 
   if (authors.length <= max_authors) return author_str
 
-  // pick first, target, last authors and drop duplicates
-  const truncated_authors = [
-    ...new Set([authors.at(0), authors[target_idx], authors.at(-1)]),
-  ].filter((auth): auth is string => auth !== undefined)
+  // track original positions (not names) so duplicate author names don't collapse
+  // into one slot or confuse gap detection. Always keep first, target and last.
+  const keep_indices = new Set([0, target_idx, authors.length - 1])
 
-  // Fill remaining spots
-  let pad_idx = 1 // Start from the second author
-  while (truncated_authors.length < max_authors && pad_idx < authors.length - 1) {
-    if (!truncated_authors.includes(authors[pad_idx])) {
-      truncated_authors.splice(pad_idx, 0, authors[pad_idx])
-    }
+  // fill remaining spots with the earliest authors
+  let pad_idx = 1
+  while (keep_indices.size < max_authors && pad_idx < authors.length - 1) {
+    keep_indices.add(pad_idx)
     pad_idx++
   }
 
-  // Add ellipsis
-  let truncated_str = truncated_authors[0]
-  for (let idx = 1; idx < truncated_authors.length; idx++) {
-    if (
-      // Add ellipsis if truncated authors are not consecutive in the original list
-      authors.indexOf(truncated_authors[idx]) -
-        authors.indexOf(truncated_authors[idx - 1]) >
-      1
-    ) {
-      truncated_str += `, ...`
-    }
-    truncated_str += `, ${truncated_authors[idx]}`
-  }
-
-  return truncated_str
+  // join kept authors, inserting an ellipsis wherever we skipped over some
+  const sorted_indices = [...keep_indices].toSorted((idx_1, idx_2) => idx_1 - idx_2)
+  return sorted_indices
+    .map((curr_idx, idx) => {
+      const has_gap = idx > 0 && curr_idx - sorted_indices[idx - 1] > 1
+      return has_gap ? `..., ${authors[curr_idx]}` : authors[curr_idx]
+    })
+    .join(`, `)
 }
 
 export function extract_citations(note: string | undefined): {
@@ -52,56 +42,68 @@ export function extract_citations(note: string | undefined): {
   }
 
   let [citations, citation_database] = [0, ``]
-  for (const [, raw_count, raw_database] of note.matchAll(
-    /Citations: (\d+) \(([^)]+)\)/g,
+  for (const { groups } of note.matchAll(
+    /Citations: (?<count>\d+) \((?<database>[^)]+)\)/g,
   )) {
-    const citation_count = parseInt(raw_count, 10)
+    if (groups === undefined) continue
+    const citation_count = parseInt(groups.count, 10)
     if (citation_count > citations) {
       citations = citation_count
-      citation_database = raw_database
+      citation_database = groups.database
     }
   }
 
   return { citations, citation_database }
 }
 
+function format_print_filename(): string {
+  const date = new Date()
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, `0`)
+  const day = String(date.getDate()).padStart(2, `0`)
+  return `janosh-cv-${year}-${month}-${day}`
+}
+
 export function print_cv({ single_page = false }: { single_page?: boolean } = {}): void {
+  const original_title = document.title
+  const print_title = format_print_filename()
+  let style: HTMLStyleElement | null = null
+
+  const cleanup = () => {
+    document.title = original_title
+    style?.remove()
+  }
+
+  document.title = print_title
+  globalThis.addEventListener(`afterprint`, cleanup, { once: true })
+
   if (!single_page) {
     globalThis.print()
     return
   }
-  const main = document.querySelector(`main`)
-  if (!(main instanceof HTMLElement)) return
 
-  const root_class = `single-page-pdf`
-  const style = document.createElement(`style`)
+  const main = document.querySelector(`main`)
+  if (!(main instanceof HTMLElement)) {
+    cleanup()
+    return
+  }
+
   const main_css = `width: 210mm !important; max-width: none !important; margin: 0 !important; padding: 2em !important; box-sizing: border-box !important; box-shadow: none !important;`
   const visible_css = `height: auto !important; max-height: none !important; overflow: visible !important;`
-  style.textContent = `
-    html.${root_class} main { ${main_css} }
-    html.${root_class}, html.${root_class} body, html.${root_class} main { ${visible_css} }
-  `
+
+  style = document.createElement(`style`)
   document.head.append(style)
-  document.documentElement.classList.add(root_class)
 
   void main.offsetHeight // Force layout before measuring
   const height_mm = Math.ceil((main.getBoundingClientRect().height * 25.4) / 96)
 
   style.textContent = `
-    html.${root_class} main { ${main_css} }
-    html.${root_class}, html.${root_class} body, html.${root_class} main { ${visible_css} }
     @media print {
       @page { size: 210mm ${height_mm}mm; margin: 0; }
       main { ${main_css} }
       html, body, main { ${visible_css} }
     }
   `
-
-  const cleanup = () => {
-    document.documentElement.classList.remove(root_class)
-    style.remove()
-  }
-  globalThis.addEventListener(`afterprint`, cleanup, { once: true })
 
   globalThis.print()
 }

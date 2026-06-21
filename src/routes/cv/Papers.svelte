@@ -31,49 +31,54 @@
   const target_family = $derived(target_author.split(` `)[1])
 
   const processed_references = $derived(
-    references.map((ref) => Object.assign({}, ref, extract_citations(ref.note))),
+    references.map((ref) => ({ ...ref, ...extract_citations(ref.note) })),
+  )
+
+  const date_num = (ref: Reference): number => {
+    const { year, month } = ref.issued[0]
+    return 100 * year + month
+  }
+
+  const sorted_references = $derived(
+    processed_references.toSorted((ref_1, ref_2) => {
+      const sort_dir = sort_order === `asc` ? 1 : -1
+      if (sort_by === PAPER_SORT_KEYS.title) {
+        return ref_1.title.localeCompare(ref_2.title) * sort_dir
+      }
+      if (sort_by === PAPER_SORT_KEYS.date)
+        return (date_num(ref_1) - date_num(ref_2)) * sort_dir
+      if (sort_by === PAPER_SORT_KEYS.citations) {
+        return ((ref_2.citations ?? 0) - (ref_1.citations ?? 0)) * sort_dir
+      }
+
+      const [author_idx_1, author_idx_2] = [
+        ref_1.author.findIndex((auth) => auth.family === target_family),
+        ref_2.author.findIndex((auth) => auth.family === target_family),
+      ]
+      if (
+        sort_by === PAPER_SORT_KEYS.first_author &&
+        (author_idx_1 === -1 || author_idx_2 === -1)
+      )
+        return 0
+      return (
+        (author_idx_1 - author_idx_2) *
+        (sort_by === PAPER_SORT_KEYS.author ? sort_dir : -sort_dir)
+      )
+    }),
   )
 </script>
 
 <ol {...rest} {@attach highlight_matches(highlight_props)}>
-  {#each processed_references.toSorted((ref1, ref2) => {
-      const dir = sort_order === `asc` ? 1 : -1
-      if (sort_by === PAPER_SORT_KEYS.title) {
-        return ref1.title.localeCompare(ref2.title) * dir
-      } else if (sort_by === PAPER_SORT_KEYS.date) {
-        const { year: y1, month: m1 } = ref1.issued[0]
-        const { year: y2, month: m2 } = ref2.issued[0]
-        return dir * (100 * (y1 - y2) + (m1 - m2))
-      } else if (sort_by === PAPER_SORT_KEYS.author) {
-        const idx1 = ref1.author.findIndex((auth) => auth.family === target_family)
-        const idx2 = ref2.author.findIndex((auth) => auth.family === target_family)
-        return (idx1 - idx2) * dir
-      } else if (sort_by === PAPER_SORT_KEYS.first_author) {
-        const idx1 = ref1.author.findIndex((auth) => auth.family === target_family)
-        const idx2 = ref2.author.findIndex((auth) => auth.family === target_family)
-        if (idx1 === -1 || idx2 === -1) return 0
-        // -dir to have target_author==first rise to the top by default
-        return (idx1 - idx2) * -dir
-      } else if (sort_by === PAPER_SORT_KEYS.citations) {
-        const citations1 = ref1.citations ?? 0
-        const citations2 = ref2.citations ?? 0
-        return (citations2 - citations1) * dir
-      } else throw new Error(`Unknown sort_by: ${sort_by}`)
-    }) as
-    { title, id, author, DOI, URL: href, issued, ...rest }
-    (id)
-  }
+  {#each sorted_references as { title, id, author, DOI, URL: href, issued, ...rest } (id)}
     {@const { 'container-title': journal, citations, citation_database } = rest}
     {@const authors_formatted = author.map(({ given, family }) => {
       if (!family) {
         throw new Error(`No family name in author=${JSON.stringify(author)} of ${title}`)
       }
-      const first_name = {
-        initial: `${given[0]}. `,
-        full: `${given} `,
-        none: ``,
-      }[first_name_mode]
-      return `${first_name ?? ``}${family}`
+      const first_name = { initial: `${given[0]}. `, full: `${given} `, none: `` }[
+        first_name_mode
+      ]
+      return `${first_name}${family}`
     })}
     <li animate:flip={{ duration: 400 }} class:grid-hovered={hovered_ids.includes(id)}>
       <h3 {id}>{title}</h3>
@@ -97,7 +102,9 @@
         &nbsp;&mdash;&nbsp; <span
           style="height: 1em"
           {@attach tooltip({ content: `According to ${citation_database}` })}
-        >{citations} citations</span>
+        >
+          {citations} citations
+        </span>
       {/if}
     </li>
   {/each}

@@ -10,9 +10,10 @@
   type Option = { label: string; count: number }
   let active_tags: Option[] = $state([])
 
-  const tag_counts = page.data?.posts
-    ?.flatMap((post: FrontMatter) => post.tags)
-    .reduce((acc: Record<string, number>, tag: string) => {
+  const posts = (page.data?.posts ?? []) as FrontMatter[]
+  const tag_counts = posts
+    .flatMap((post) => post.tags)
+    .reduce((acc: Record<string, number>, tag) => {
       acc[tag] = (acc[tag] ?? 0) + 1
       return acc
     }, {})
@@ -27,9 +28,20 @@
     seen_lower.add(lower)
   }
   const top_tags = all_tags.slice(0, 15).toSorted()
+  const local_covers = import.meta.glob<string>(`./*/*.{avif,jpg,jpeg,png,svg,webp}`, {
+    eager: true,
+    import: `default`,
+  })
 
   const matches_active_tags = (post: FrontMatter): boolean =>
-    active_tags.length === 0 || active_tags.some(({ label }) => post.tags?.includes(label))
+    active_tags.length === 0 ||
+    active_tags.some(({ label }) => post.tags?.includes(label))
+
+  const visible_posts = $derived(
+    posts
+      .filter(matches_active_tags)
+      .toSorted((post_1, post_2) => post_2.date.localeCompare(post_1.date)),
+  )
 </script>
 
 <img src="./blog-banner.svg" alt="Banner" class="banner" />
@@ -55,31 +67,16 @@
 </Select>
 
 <ul class="grid" style="margin: 4em auto; gap: 3ex">
-  {#each page.data?.posts
-      ?.filter(matches_active_tags)
-      .toSorted((post_1: FrontMatter, post_2: FrontMatter) => {
-        return post_2.date.localeCompare(post_1.date) // sort by date descending
-      }) ?? [] as
-    post
-    (post.title)
-  }
+  {#each visible_posts as post (post.title)}
     {@const { cover, slug, title, tags, date } = post}
     {@const href = `/posts/${slug}`}
+    {@const cover_src =
+      (dev && local_covers[`./${slug}/${cover.img}`]) ||
+      `${repository}/raw/main/src/routes/posts/${slug}/${cover.img}`}
     <li animate:flip={{ duration: 400 }}>
       <h3><a {href}>{title}</a></h3>
       <a {href}>
-        {#if dev}
-          {#await import(`./${slug}/${cover?.img?.replace(`.svg`, ``)}.svg`)
-            then { default: src }
-          }
-            <img {src} alt={title} />
-          {/await}
-        {:else}
-          <img
-            src="{repository}/raw/main/src/routes/posts/{slug}/{cover.img}"
-            alt={cover.caption}
-          />
-        {/if}
+        <img src={cover_src} alt={cover.caption} />
       </a>
       <small>
         <time>

@@ -41,10 +41,8 @@ async function fetch_github_data(gh_token: string) {
       }
       project.stars = repo.stargazers_count
 
-      const contribs_resp = await fetch(
-        `https://api.github.com/repos/${handle}/contributors`,
-        auth,
-      )
+      const contribs_url = `https://api.github.com/repos/${handle}/contributors`
+      const contribs_resp = await fetch(contribs_url, auth)
       if (!contribs_resp.ok) return
       const contributors: unknown = await contribs_resp.json()
       if (!Array.isArray(contributors)) {

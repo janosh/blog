@@ -10,9 +10,12 @@
   let { children }: { children?: Snippet<[]> } = $props()
 
   function set_theme(mode: 'light' | 'dark' | 'system') {
-    const scheme = mode === `system`
-      ? (matchMedia(`(prefers-color-scheme: dark)`).matches ? `dark` : `light`)
-      : mode
+    const scheme =
+      mode === `system`
+        ? matchMedia(`(prefers-color-scheme: dark)`).matches
+          ? `dark`
+          : `light`
+        : mode
     document.documentElement.style.colorScheme = scheme
     document.documentElement.dataset.theme = scheme
     localStorage.setItem(`theme`, mode)
@@ -33,7 +36,7 @@
 <CmdPalette
   {actions}
   placeholder="Go to..."
-  inputStyle="background: transparent; font-size: inherit"
+  inputStyle="background: transparent; font-size: inherit; outline: none; border: none"
   liOptionStyle="padding: 3pt 5pt; border-left: none"
   ulOptionsStyle="padding: 0"
 />
@@ -55,10 +58,11 @@
     position: absolute;
     top: 2em;
     left: 2em;
-    background-color: var(--card-bg);
-    padding: 1pt 5pt;
-    border-radius: 3pt;
-    transition: color 0.2s;
+    background-color: color-mix(in srgb, var(--card-bg) 85%, transparent);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--card-border);
+    padding: 2pt 8pt;
+    border-radius: var(--radius-md);
   }
   @media print {
     a[href='/'] {
