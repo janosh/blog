@@ -10,13 +10,18 @@
 <svelte:window bind:scrollY={scroll_y} />
 
 {#if show_scroll_top}
-  <button onclick={() => document.body.scrollIntoView({ behavior: `smooth` })}>
+  <button
+    class="scroll-top"
+    onclick={() => document.body.scrollIntoView({ behavior: `smooth` })}
+  >
     <Icon icon="material-symbols:arrow-upward-rounded" />
   </button>
 {/if}
 
 <footer>
-  <a href={repository} style="display: flex"><Icon icon="octicon:mark-github" width="20pt" />&ensp;Source</a>
+  <a href={repository} style="display: flex">
+    <Icon icon="octicon:mark-github" width="20pt" />&ensp;Source
+  </a>
   <ThemeToggle tooltip={false} style="transform: scale(1.4)" />
 </footer>
 
@@ -27,7 +32,7 @@
     place-content: center;
     gap: max(1em, 2vw);
   }
-  button {
+  button.scroll-top {
     position: fixed;
     bottom: 18pt;
     right: 18pt;

@@ -37,11 +37,11 @@ si_structure = Structure(
 
 # grid-search OMP_NUM_THREADS, NCORE and number of MPI processes
 try:
-    prod = list(product([1, 2, 4, 8], [1, 2], [2, 4]))
-    for idx, (n_proc, n_threads, n_core) in enumerate(prod, start=1):
+    param_grid = list(product([1, 2, 4, 8], [1, 2], [2, 4]))
+    for idx, (n_proc, n_threads, n_core) in enumerate(param_grid, start=1):
         os.environ["OMP_NUM_THREADS"] = str(n_threads)
 
-        print(f"Run {idx} / {len(prod)}")
+        print(f"Run {idx} / {len(param_grid)}")
 
         # make a relax job to optimize the structure
         relax_job = RelaxMaker(
@@ -55,10 +55,8 @@ try:
         run_locally(relax_job, create_folders=True, ensure_success=True)
 
         elapsed = perf_counter() - start
-        print(
-            f"run with {n_proc=}, {n_threads=}, {n_core=} took {elapsed:.1f} sec",
-        )
-        results += [(n_proc, n_threads, n_core, elapsed)]
+        print(f"run with {n_proc=}, {n_threads=}, {n_core=} took {elapsed:.1f} sec")
+        results.append((n_proc, n_threads, n_core, elapsed))
 
         print("Waiting 10 secs to cooldown...\n\n", flush=True)
         sleep(10)  # so every run is a bit more like the first

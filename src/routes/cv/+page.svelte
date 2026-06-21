@@ -1,10 +1,5 @@
 <script lang="ts">
-  import {
-    oss_sort_keys,
-    PaperGrid,
-    sort_oss_projects,
-    SortButtons,
-  } from '$lib'
+  import { oss_sort_keys, PaperGrid, sort_oss_projects, SortButtons } from '$lib'
   import type { OssSortKey, SortOrder } from '$lib/oss'
   import papers from '$lib/papers.yaml'
   import { PAPER_SORT_KEYS } from '$lib/types'
@@ -36,11 +31,16 @@
   ] as const
 
   const links = { target: `_blank`, rel: `noreferrer` }
+  const sorted_oss_projects = $derived(
+    sort_oss_projects(data.oss.projects, sort_oss_by, sort_oss_order),
+  )
+  const sorted_skills = cv.skills.toSorted(
+    (skill_1, skill_2) => skill_2.score - skill_1.score,
+  )
 
-  function close_pdf_menu(event: PointerEvent): void {
-    const target = event.target
-    if (!(target instanceof Node) || pdf_menu?.contains(target)) return
-    if (pdf_menu) pdf_menu.open = false
+  function close_pdf_menu({ target }: PointerEvent): void {
+    if (target instanceof Node && !pdf_menu?.contains(target))
+      pdf_menu?.removeAttribute(`open`)
   }
 </script>
 
@@ -68,25 +68,30 @@
         bind:sort_order={sort_papers_order}
       />
     </h2>
-    <PaperGrid papers={papers.references} class="paper-graph" bind:hovered_ids={hovered_paper_ids} />
-    <Papers {...papers} sort_by={sort_papers_by} sort_order={sort_papers_order} hovered_ids={hovered_paper_ids} />
+    <PaperGrid
+      papers={papers.references}
+      class="paper-graph"
+      bind:hovered_ids={hovered_paper_ids}
+    />
+    <Papers
+      {...papers}
+      sort_by={sort_papers_by}
+      sort_order={sort_papers_order}
+      hovered_ids={hovered_paper_ids}
+    />
     <h2>
       <Icon inline icon="ri:open-source-line" />&nbsp; Open Source
-        <SortButtons
-          label=""
-          bind:sort_by={sort_oss_by}
-          sort_keys={oss_sort_keys}
-          bind:sort_order={sort_oss_order}
-          as="span"
-        />
+      <SortButtons
+        label=""
+        bind:sort_by={sort_oss_by}
+        sort_keys={oss_sort_keys}
+        bind:sort_order={sort_oss_order}
+        as="span"
+      />
     </h2>
 
     <ul class="oss">
-      {#each sort_oss_projects(data.oss.projects, sort_oss_by, sort_oss_order) as
-        { url, color_invert, repo, name, description, ...rest }
-        (name)
-      }
-        {@const { stars, logo, languages, commits } = rest}
+      {#each sorted_oss_projects as { url, color_invert, repo, name, description, stars, logo, languages, commits } (name)}
         {@const logo_url = logo ?? `${url}/favicon.svg`}
         <li animate:flip={{ duration: 400 }}>
           <h4>
@@ -97,9 +102,17 @@
             <a href={repo} {...links}><Icon inline icon="octicon:mark-github" /></a>
           </h4>
           <div class="oss-meta">
-            {#if stars}<a href="{repo}/stargazers"><small>{stars} <Icon inline icon="octicon:star" /></small></a>{/if}
-            {#if commits}<a href="{repo}/graphs/contributors"><small>{commits} commits</small></a>{/if}
-            {#if languages}<small class="langs">{languages.slice(0, 3).join(`, `)}</small>{/if}
+            {#if stars}
+              <a href="{repo}/stargazers">
+                <small>{stars} <Icon inline icon="octicon:star" /></small>
+              </a>
+            {/if}
+            {#if commits}
+              <a href="{repo}/graphs/contributors"><small>{commits} commits</small></a>
+            {/if}
+            {#if languages}
+              <small class="langs">{languages.slice(0, 3).join(`, `)}</small>
+            {/if}
           </div>
           <p>{@html description}</p>
         </li>
@@ -110,14 +123,13 @@
       <Icon inline icon="zondicons:education" />&nbsp; Education
     </h2>
     <ul>
-      {#each cv.education as edu (JSON.stringify(edu))}
-        {@const { title, thesis, date, href, uni } = edu}
+      {#each cv.education as { title, thesis, date, href, uni } (title)}
         <li>
           <h4 style="margin: 2ex 0 1ex">
             <a {href}>{title}</a>
             <span style="font-weight: 200"> - {uni}{date ? ` &bull; ${date}` : ``}</span>
           </h4>
-          Thesis title: <a href={thesis?.url}>{thesis?.title}</a>
+          Thesis title:<a href={thesis?.url}>{thesis?.title}</a>
           {#if thesis?.repo}
             &nbsp;<a href={thesis.repo} {...links}>
               <Icon inline icon="octicon:mark-github" />
@@ -164,10 +176,7 @@
     </h2>
     <small style="white-space: nowrap">(emphasis &asymp; proficiency)</small>
     <ul class="skills">
-      {#each cv.skills.sort((s1, s2) => s2.score - s1.score) as
-        { name, icon, svg, score, href, site }
-        (name)
-      }
+      {#each sorted_skills as { name, icon, svg, score, href, site } (name)}
         <!-- color based on score style="color: hsl({score * 20}, 100%, 40%)" -->
         <li style:font-weight={(score - 3) * 100}>
           <a href={href ?? site}>
@@ -282,15 +291,6 @@
     list-style: none;
     padding: 0;
     margin: 0;
-  }
-  .oss-controls {
-    position: absolute;
-    right: 0;
-    bottom: 4pt;
-    display: flex;
-    gap: 5pt;
-    align-items: center;
-    font-weight: 100;
   }
   ul.oss {
     display: grid;
@@ -433,7 +433,8 @@
     background: var(--nav-bg);
   }
   @media print {
-    .cv-controls, :global(.paper-graph) {
+    .cv-controls,
+    :global(.paper-graph) {
       display: none !important;
     }
     /* Ensure colors show in PDF for both paper components */

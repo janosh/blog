@@ -12,11 +12,12 @@ export async function load({ url }: { url: URL }) {
   )
   const posts: FrontMatter[] = Object.entries(glob).map(([file, post]) => {
     const parts = file.split(`/`)
-    return Object.assign({}, post.metadata, {
+    return {
+      ...post.metadata,
       slug: parts[2],
       path: `/${parts.slice(1, -1).join(`/`)}`,
       file,
-    })
+    }
   })
 
   const post = posts.find((candidate_post) => candidate_post.path === url.pathname)

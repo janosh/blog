@@ -23,7 +23,7 @@ jobs:
 
       # use the project's pinned pnpm (packageManager field) via corepack
       - run: corepack enable && pnpm install
-      - run: pnpm exec vp build
+      - run: pnpm exec vite build
 
       - uses: actions/upload-pages-artifact@v4
         with:

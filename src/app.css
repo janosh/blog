@@ -104,6 +104,16 @@ html[data-theme='dark'] {
   --accent-bg: light-dark(var(--light-accent-bg), var(--dark-accent-bg));
 
   --body-max-width: min(90vw, 1100px);
+  --radius-sm: 3pt;
+  --radius-md: 6pt;
+  --radius-lg: 8pt;
+  --radius-pill: 999px;
+  --card-hover-border: color-mix(in srgb, var(--card-border), var(--link-color) 35%);
+  --card-bg-gradient: linear-gradient(
+    135deg,
+    var(--card-bg),
+    color-mix(in srgb, var(--card-bg) 60%, var(--nav-bg) 40%)
+  );
   --sms-options-bg: light-dark(var(--light-bg), var(--dark-bg));
   --sms-text-color: light-dark(var(--light-text), var(--dark-text));
   --tooltip-bg: light-dark(#f5f5f7, #2a2a2e);
@@ -130,7 +140,7 @@ button {
   color: var(--button-text);
   cursor: pointer;
   border: none;
-  border-radius: 3pt;
+  border-radius: var(--radius-sm);
   background: var(--button-bg);
   padding: 2pt 4pt;
   font-weight: 500;
@@ -143,13 +153,83 @@ a {
 a:hover {
   color: var(--link-hover);
 }
-a.link {
-  padding: 0 4pt;
-  background-color: var(--nav-bg);
-  border-radius: 3pt;
+:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
 }
-a.link[aria-current='page'] {
-  color: mediumseagreen;
+.card,
+.docs-grid a {
+  background: var(--card-bg-gradient);
+  border: 1px solid var(--card-border);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.card {
+  border-radius: var(--radius-md);
+}
+.card:hover,
+.docs-grid a:hover {
+  transform: translateY(-2px);
+  border-color: var(--card-hover-border);
+  box-shadow: 0 4px 20px var(--shadow);
+}
+.pill {
+  background: var(--card-bg);
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+.pill:hover {
+  background: var(--nav-bg);
+}
+.muted {
+  color: var(--text-secondary);
+}
+.meta-row {
+  display: flex;
+  gap: 0.6em;
+  place-content: center;
+  flex-wrap: wrap;
+}
+ul.grid > li.card {
+  padding: 0.8em;
+  display: grid;
+  gap: 0.6em;
+}
+.docs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5em;
+  width: 100%;
+  max-width: min(96vw, 1400px);
+  margin: 0 auto 5em;
+}
+.docs-grid > p {
+  display: contents;
+}
+.docs-grid a {
+  text-align: center;
+  display: grid;
+  font-weight: bold;
+  color: inherit;
+  padding: 8pt 16pt;
+  border-radius: var(--radius-lg);
+}
+.docs-grid a:only-child {
+  justify-self: center;
+}
+.docs-grid a:has(img) {
+  padding: 8pt 5pt;
+  grid-template-rows: auto auto;
+}
+.docs-grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  margin: 0;
 }
 /* invert monochrome logos so they stay visible against the page background */
 html[data-theme='light'] img[data-color-invert='light'],
@@ -163,10 +243,13 @@ h1 {
   margin: 0.5em 0;
 }
 h2.section-title {
+  display: flex;
+  place-content: center;
+  place-items: center;
+  gap: 0.25em;
   font-size: 2.2rem;
   font-weight: 300;
   margin: 1.5em 0 1em;
-  text-align: center;
 }
 :where(h1, h2, h3, h4, h5, h6) {
   text-wrap: balance;
@@ -176,7 +259,7 @@ h2.section-title {
 }
 :is(h2, h3, h4, h5, h6):target,
 .toc-clicked {
-  color: cornflowerblue;
+  color: var(--link-color);
 }
 :where(h2, h3, h4, h5, h6) a[aria-hidden='true'] {
   margin-left: 4pt;
@@ -206,9 +289,6 @@ pre code {
   background-color: transparent;
   padding: 0;
 }
-ul {
-  padding-left: 1em;
-}
 ul.grid {
   padding: 0;
   margin: 1em auto;
@@ -220,11 +300,33 @@ ul.grid {
   list-style: none;
   container-type: inline-size;
 }
-ul.grid > li > h3 {
-  margin: 8pt 0 5pt;
+ul.grid > li.card > h3 {
+  margin: 0;
+  font-weight: 500;
+  text-align: center;
+}
+ul.grid > li.card > h3 a {
   display: flex;
   place-content: center;
   place-items: center;
+  gap: 0.4em;
+}
+ul.grid > li.card > h3 img {
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+.stat-link {
+  display: flex;
+  gap: 0.3em;
+  place-items: center;
+  padding: 0.2em 0.6em;
+  color: var(--text-secondary) !important;
+}
+.stat-link:hover {
+  color: var(--text-color) !important;
+}
+.card-description {
+  margin: 0;
 }
 label {
   font-weight: 600;
@@ -280,10 +382,6 @@ img.banner {
   object-fit: cover;
   width: 100%;
 }
-section.landing {
-  flex: 1;
-  max-width: 60em;
-}
 p {
   margin: 0.8em 0 0;
   line-height: 1.7;
@@ -294,9 +392,6 @@ small {
 }
 strong {
   font-weight: 600;
-}
-em {
-  color: var(--text-secondary);
 }
 
 ::selection {

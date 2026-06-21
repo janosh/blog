@@ -4,7 +4,11 @@
   import type { HTMLAttributes } from 'svelte/elements'
   import { tooltip } from 'svelte-multiselect/attachments'
 
-  let { papers, hovered_ids = $bindable([]), ...rest }: HTMLAttributes<HTMLDivElement> & {
+  let {
+    papers,
+    hovered_ids = $bindable([]),
+    ...rest
+  }: HTMLAttributes<HTMLDivElement> & {
     papers: Reference[]
     hovered_ids?: string[]
   } = $props()
@@ -13,8 +17,6 @@
     year: number
     week: number
     papers: Reference[]
-    count: number
-    date: Date
   }
   let grid_data: WeekData[][] = $state([])
   let years: number[] = $state([])
@@ -36,20 +38,20 @@
     }
 
     const all_years = Array.from(papers_by_week.keys()).map((key) =>
-      parseInt(key.split(`-`)[0], 10)
+      parseInt(key.split(`-`)[0], 10),
     )
     const [min_year, max_year] = [Math.min(...all_years), Math.max(...all_years)]
     years = Array.from({ length: max_year - min_year + 1 }, (_, idx) => min_year + idx)
 
-    max_count = Math.max(...Array.from(papers_by_week.values()).map((p) => p.length))
+    max_count = Math.max(
+      ...Array.from(papers_by_week.values()).map((week_papers) => week_papers.length),
+    )
 
     grid_data = years.map((year) =>
       Array.from({ length: 52 }, (_, week) => {
         const key = `${year}-${week + 1}`
-        const week_papers = papers_by_week.get(key) ?? []
-        const date = new Date(year, 0, 1 + (week * 7))
-        return { year, week: week + 1, papers: week_papers, count: week_papers.length, date }
-      })
+        return { year, week: week + 1, papers: papers_by_week.get(key) ?? [] }
+      }),
     )
   })
 
@@ -66,15 +68,21 @@
   }
 
   function format_tip(week: WeekData): string {
-    const start = new Date(week.date)
+    const count = week.papers.length
+    const start = new Date(week.year, 0, 1 + (week.week - 1) * 7)
     const end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000)
     const range = `${start.toLocaleDateString(`en-US`, { month: `short`, day: `numeric` })} - ${end.toLocaleDateString(`en-US`, { month: `short`, day: `numeric` })}, ${week.year}`
-    if (week.count === 0) return `W${week.week} - ${range}`
-    const items = week.papers.map((paper, idx) => {
-      const authors = paper.author?.slice(0, 3).map((auth) => `${auth.given} ${auth.family}`).join(`, `) ?? ``
-      const et_al = paper.author && paper.author.length > 3 ? ` et al.` : ``
-      return `${idx + 1}. ${paper.title}<br><small>${authors}${et_al}</small>`
-    }).join(`<br>`)
+    if (count === 0) return `W${week.week} - ${range}`
+    const items = week.papers
+      .map((paper, idx) => {
+        const authors = paper.author
+          .slice(0, 3)
+          .map((auth) => `${auth.given} ${auth.family}`)
+          .join(`, `)
+        const et_al = paper.author.length > 3 ? ` et al.` : ``
+        return `${idx + 1}. ${paper.title}<br><small>${authors}${et_al}</small>`
+      })
+      .join(`<br>`)
     return `${range}<br>${items}`
   }
 </script>
@@ -89,17 +97,16 @@
   <div class="weeks-grid">
     {#each grid_data as year_data, year_idx (year_idx)}
       <div class="year-row">
-        {#each year_data as week_data (JSON.stringify(week_data))}
+        {#each year_data as week_data (`${week_data.year}-${week_data.week}`)}
           <div
             class="week-tile"
             role="gridcell"
             tabindex="-1"
-            style:background-color={get_color(week_data.count)}
+            style:background-color={get_color(week_data.papers.length)}
             {@attach tooltip({ content: format_tip(week_data) })}
-            onmouseenter={() => hovered_ids = week_data.papers.map((p) => p.id)}
-            onmouseleave={() => hovered_ids = []}
-          >
-          </div>
+            onmouseenter={() => (hovered_ids = week_data.papers.map((paper) => paper.id))}
+            onmouseleave={() => (hovered_ids = [])}
+          ></div>
         {/each}
       </div>
     {/each}
