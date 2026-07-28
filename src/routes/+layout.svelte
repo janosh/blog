@@ -3,7 +3,7 @@
   import { page } from '$app/state'
   import { Footer } from '$lib'
   import type { Snippet } from 'svelte'
-  import { CmdPalette, CopyButton } from 'svelte-multiselect'
+  import { CommandMenu, CopyButton } from 'svelte-widgets'
   // oxlint-disable-next-line no-unassigned-import
   import '../app.css'
 
@@ -33,7 +33,7 @@
   ]
 </script>
 
-<CmdPalette
+<CommandMenu
   {actions}
   placeholder="Go to..."
   inputStyle="background: transparent; font-size: inherit; outline: none; border: none"
@@ -66,6 +66,10 @@
   }
   @media print {
     a[href='/'] {
+      display: none;
+    }
+    /* global: the footer element comes from svelte-widgets, so scoped styles miss it */
+    :global(footer) {
       display: none;
     }
   }

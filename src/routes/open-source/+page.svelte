@@ -1,7 +1,8 @@
 <script lang="ts">
   import { sort_oss_projects } from '$lib'
   import Icon from '@iconify/svelte'
-  import { highlight_matches } from 'svelte-multiselect/attachments'
+  import { ButtonGroup } from 'svelte-widgets'
+  import { highlight_matches } from 'svelte-widgets/attachments'
   import { flip } from 'svelte/animate'
 
   const { data } = $props()
@@ -29,11 +30,14 @@
 
 <div class="controls" style="color: var(--text-secondary)">
   Sort by
-  {#each sort_by_options as title (title)}
-    <button onclick={() => (sort_by = title)} class:active={sort_by === title}>
-      {title}
-    </button>
-  {/each}
+  <!-- ButtonGroup buttons are font: inherit, so pin them to the size and weight plain
+       buttons get from app.css plus the UA stylesheet -->
+  <ButtonGroup
+    options={sort_by_options}
+    bind:selected={sort_by}
+    label="Sort projects by"
+    style="font-size: 10pt; font-weight: 500"
+  />
   <input placeholder="Search projects..." bind:value={query} style="margin: 0 0 0 1em" />
 </div>
 
@@ -85,23 +89,24 @@
     gap: 6pt;
     margin: 1em 2em;
     flex-wrap: wrap;
-  }
-  button {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    padding: 4pt 8pt;
-    border-radius: var(--radius-lg);
-    transition:
-      transform 0.2s ease,
-      background 0.2s ease;
-  }
-  button:hover {
-    background: var(--nav-bg);
-    transform: translateY(-1px);
-  }
-  button.active {
-    background: var(--button-bg);
-    border-color: var(--card-hover-border);
+    --btn-group-gap: 6pt;
+    --btn-group-btn-padding: 4pt 8pt;
+    --btn-group-btn-radius: var(--radius-lg);
+    --btn-group-btn-bg: var(--card-bg);
+    --btn-group-btn-color: var(--button-text);
+    --btn-group-btn-border: 1px solid var(--card-border);
+    --btn-group-btn-hover-bg: var(--nav-bg);
+    --btn-group-btn-active-bg: var(--button-bg);
+    --btn-group-btn-active-border-color: var(--card-hover-border);
+    /* no custom property covers the hover lift, so reach into the group's buttons */
+    :global(button) {
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+    }
+    :global(button:hover) {
+      transform: translateY(-1px);
+    }
   }
   input {
     padding: 0.5em 1em;

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Reference } from '$lib'
   import { PAPER_SORT_KEYS } from '$lib/types'
-  import { highlight_matches, tooltip } from 'svelte-multiselect/attachments'
+  import { highlight_matches, tooltip } from 'svelte-widgets/attachments'
   import { flip } from 'svelte/animate'
   import type { HTMLAttributes } from 'svelte/elements'
   import { extract_citations, truncate_authors } from '.'

@@ -12,7 +12,7 @@ tags:
 ---
 
 <script>
-  import { highlight_matches } from 'svelte-multiselect/attachments'
+  import { highlight_matches } from 'svelte-widgets/attachments'
 
   let query = 'adipisicing'
   // must match the name passed to ::highlight() in below, defaults to 'highlight-match'
@@ -28,7 +28,7 @@ Here's a simple Svelte component that uses this action:
 
 Type a query: <input bind:value={query} />
 
-<blockquote use:highlight_matches={{ query, css_class }}>
+<blockquote {@attach highlight_matches({ query, css_class })}>
   Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis nihil excepturi in earum reiciendis perferendis eveniet eum repudiandae! Assumenda dolorem numquam ullam cum vel ad voluptates voluptatum corporis id vero.
   Reprehenderit quibusdam, incidunt natus sequi officiis perferendis ullam est ea, sed officia dolores similique consequatur reiciendis, voluptatibus vero. Assumenda vero repellendus sit, id possimus consequatur accusantium sint minus voluptatum exercitationem.
   Repudiandae consectetur, eius odio esse perspiciatis dolores magnam quia et animi reiciendis, aperiam id a delectus, beatae porro voluptates commodi nesciunt praesentium modi molestiae maiores deleniti? Ab veritatis ducimus veniam.
@@ -145,11 +145,13 @@ function update_highlights(node: Node, ops: HighlightOptions) {
 
 ## Update
 
-I recently converted this action to an attachment in `svelte-multiselect` (`npm install svelte-multiselect`) and can now be used like this:
+I recently converted this action to an attachment in `svelte-multiselect`, which has since
+been renamed to `svelte-widgets` (`npm install svelte-widgets`), and can now be used like
+this:
 
 ```svelte
 <script>
-  import { highlight_matches } from 'svelte-multiselect/attachments'
+  import { highlight_matches } from 'svelte-widgets/attachments'
 
   let query = 'quick'
 </script>
