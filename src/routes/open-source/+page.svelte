@@ -1,7 +1,7 @@
 <script lang="ts">
   import { sort_oss_projects } from '$lib'
-  import Icon from '@iconify/svelte'
-  import { ButtonGroup } from 'svelte-widgets'
+  import { ButtonGroup, Icon } from 'svelte-widgets'
+  import { GitCommit, GitHub, OpenSource, People } from 'svelte-widgets/icons'
   import { highlight_matches } from 'svelte-widgets/attachments'
   import { flip } from 'svelte/animate'
 
@@ -24,7 +24,7 @@
 </script>
 
 <h2 class="section-title">
-  <Icon inline icon="ri:open-source-line" />
+  <Icon icon={OpenSource} />
   Open Source
 </h2>
 
@@ -57,20 +57,20 @@
       <div class="project-stats meta-row">
         {#if stars}
           <a href="{repo}/stargazers" class="stat-link pill">
-            <Icon inline icon="octicon:mark-github" />
+            <Icon icon={GitHub} />
             <span>{stars} ⭐</span>
           </a>
         {/if}
 
         {#if commits}
           <a href="{repo}/commits?author=janosh" class="stat-link pill">
-            <Icon inline icon="octicon:git-commit" />
+            <Icon icon={GitCommit} />
             <span>{commits} <small>commits</small></span>
           </a>
         {/if}
 
         <a href="{repo}/graphs/contributors" class="stat-link pill">
-          <Icon inline icon="octicon:people-16" />
+          <Icon icon={People} />
           <span>{role ?? (repo.includes(`/janosh/`) ? `Lead` : `Contributor`)}</span>
         </a>
       </div>

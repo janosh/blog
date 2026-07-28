@@ -1,16 +1,15 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>janosh.dev</title>
     <meta name="author" content="Janosh Riebesell" />
     <meta name="color-scheme" content="light dark" />
 
     <!-- Theme switching (prevent flash before Svelte hydrates) -->
     <script>
-      const saved = localStorage.theme
+      const mode = localStorage.theme
       const theme =
-        saved === 'light' || saved === 'dark'
-          ? saved
+        mode === 'light' || mode === 'dark'
+          ? mode
           : matchMedia('(prefers-color-scheme: dark)').matches
             ? 'dark'
             : 'light'

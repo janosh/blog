@@ -221,12 +221,13 @@ ul.grid > li.card {
   justify-self: center;
 }
 .docs-grid a:has(img) {
-  padding: 8pt 5pt;
+  padding: 4pt;
+  gap: 0.3em;
   grid-template-rows: auto auto;
 }
 .docs-grid img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: auto;
   object-fit: contain;
   border-radius: var(--radius-sm);
   margin: 0;
@@ -396,4 +397,8 @@ strong {
 
 ::selection {
   background-color: var(--selection);
+}
+::highlight(page-search-match) {
+  background: var(--page-search-highlight-bg, light-dark(#ffe07a, #806300));
+  color: var(--page-search-highlight-color, light-dark(#513a00, #fff3ba));
 }

@@ -18,6 +18,8 @@ jobs:
 
       # use the project's pinned pnpm (packageManager field) via corepack
       - run: corepack enable && pnpm install
+        env:
+          PNPM_CONFIG_DANGEROUSLY_ALLOW_ALL_BUILDS: true
 
       - name: Lint and format check
         run: pnpm exec vp check

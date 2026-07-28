@@ -1,17 +1,22 @@
 <script>
+  import { FullscreenButton } from 'svelte-widgets'
   import Resizable from './Resizable.svelte'
 
   let size = $state({ width: 0, height: 0 })
-
-  // geometric Bayes state
+  let container = $state()
   let prob = $state({ H: 20, EGivenH: 40, EGivenNotH: 20 })
-  // derived state
   let pNotH = $derived(100 - prob.H)
   let pNotEGivenH = $derived(100 - prob.EGivenH)
   let pHGivenE = $derived((prob.EGivenH * prob.H) / (prob.EGivenH + prob.EGivenNotH))
 </script>
 
-<div id="container" bind:clientHeight={size.height} bind:clientWidth={size.width}>
+<div
+  id="container"
+  bind:this={container}
+  bind:clientHeight={size.height}
+  bind:clientWidth={size.width}
+>
+  <FullscreenButton placement="corner" wrapper={container} />
   {#if size.width && size.height}
     <Resizable
       parent_height={size.height}
@@ -71,6 +76,9 @@
   #container {
     position: relative;
     background: #434343;
+    --fullscreen-btn-bg: #0007;
+    --fullscreen-btn-color: white;
+    --fullscreen-btn-opacity: 0.85;
     width: 50vw;
     height: 50vw;
     max-height: 600px;
@@ -80,7 +88,7 @@
       2px 0 0 0 white,
       0 2px 0 0 white,
       2px 2px 0 0 white,
-      /* Just to fix the corner */ 2px 0 0 0 white inset,
+      2px 0 0 0 white inset,
       0 2px 0 0 white inset;
   }
   span {

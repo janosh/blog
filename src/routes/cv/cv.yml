@@ -1,20 +1,15 @@
 social:
   - name: GitHub
-    icon: octicon:mark-github
     url: https://github.com/janosh
   - name: Google Scholar
-    icon: academicons:google-scholar-square
     url: https://scholar.google.com/citations?user=Lfw6Id0AAAAJ
     style: 'transform: scale(1.15);'
   - name: LinkedIn
-    icon: bi:linkedin
     url: https://linkedin.com/in/janosh-riebesell
   # - name: X
-  #   icon: fa6-brands:x-twitter
   #   url: https://x.com/jrib_
   #   style: 'transform: scale(1.2);'
   - name: Email
-    icon: mdi:email
     url: mailto:janosh.riebesell@gmail.com
     style: 'transform: translateY(-2px) scale(1.25); vertical-align: middle;'
 
@@ -50,72 +45,56 @@ education:
 
 skills:
   - name: Python
-    icon: mdi:language-python
     score: 10
     href: https://github.com/janosh?tab=repositories&language=python
     site: https://python.org
   - name: TypeScript
-    icon: mdi:language-typescript
     score: 10
     href: https://github.com/janosh?tab=repositories&language=typescript
     site: https://typescriptlang.org
   - name: Svelte
-    icon: carbon:logo-svelte
     score: 10
     href: https://github.com/janosh?tab=repositories&language=svelte
     site: https://svelte.dev
   - name: C
-    icon: mdi:language-c
     score: 3
     site: https://wikipedia.org/wiki/C_(programming_language)
   - name: Git
-    icon: mdi:git
     score: 7
     site: https://git-scm.com
   - name: Mathematica
-    icon: simple-icons:wolframmathematica
     score: 4
     site: https://wolfram.com/mathematica
   - name: REST
-    icon: mdi:api
     score: 7
     site: https://wikipedia.org/wiki/Representational_state_transfer
   - name: MongoDB
-    icon: simple-icons:mongodb
     score: 8
     site: https://mongodb.com
   - name: GraphQL
-    icon: simple-icons:graphql
     score: 5
     site: https://graphql.org
   - name: PyTorch
-    icon: simple-icons:pytorch
     score: 8
     href: https://github.com/janosh?tab=repositories&language=python
     site: https://pytorch.org
   - name: Rust
-    icon: simple-icons:rust
     score: 7
     site: https://rust-lang.org
   - name: React
-    icon: simple-icons:react
     score: 8
     site: https://reactjs.org
   - name: Node.js
-    icon: simple-icons:node-dot-js
     score: 9
     site: https://nodejs.org
   - name: Deno
-    icon: simple-icons:deno
     score: 9
     site: https://deno.land
   - name: vitest
-    icon: simple-icons:vitest
     score: 9
     href: https://github.com/janosh?tab=repositories&language=svelte
     site: https://vitejs.dev
   - name: PlayWright
-    icon: simple-icons:playwright
     score: 8
     site: https://playwright.dev
   - name: JAX
@@ -125,35 +104,31 @@ skills:
 
 hobbies:
   - name: photography
-    icon: mdi:camera
     href: https://youtube.com/@jrib
   - name: hiking
-    icon: mdi:map-marker-distance
     href: https://komoot.com/user/179035526626
   - name: cycling
-    icon: mdi:bike
   - name: climbing
-    icon: map:climbing
 
 nationality:
   - title: Canadian
-    icon: twemoji:flag-canada
+    flag: 🇨🇦
   - title: German
-    icon: twemoji:flag-germany
+    flag: 🇩🇪
 
 languages:
   - name: English
     level: advanced
-    icon: twemoji:flag-united-states
+    flag: 🇺🇸
   - name: German
     level: advanced
-    icon: twemoji:flag-germany
+    flag: 🇩🇪
   - name: French
     level: intermediate
-    icon: twemoji:flag-france
+    flag: 🇫🇷
   - name: Spanish
     level: basic
-    icon: twemoji:flag-spain
+    flag: 🇪🇸
 
 community:
   - name: Associate Editor IOP AI for Science

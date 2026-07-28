@@ -17,4 +17,7 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           # excluded URLs are valid but unreachable from CI runners (TLS/datacenter firewall) or private (404 for anonymous)
-          args: --exclude '%7B' --exclude '^file://' --exclude 'aspell\.net|physik\.uni-hamburg\.de|theorie\.physnet\.uni-hamburg\.de|qu\.uni-hamburg\.de|ita\.uni-heidelberg\.de|github\.com/janosh/thesis' --root-dir . --accept 100..=103,200..=299,403,429,502,503,999 -- ./**/*.{md,svelte,ts,yml,yaml}
+          # roughly 200 live third-party links get hit per run, so one slow host used to fail the
+          # whole merge. lychee defaults to 128 requests in flight, 20s timeout and 3 retries 1s
+          # apart, which is enough load to time out small academic servers we do not control.
+          args: --exclude '%7B' --exclude '^file://' --exclude 'aspell\.net|physik\.uni-hamburg\.de|theorie\.physnet\.uni-hamburg\.de|qu\.uni-hamburg\.de|ita\.uni-heidelberg\.de|github\.com/janosh/thesis|camphysoc\.co\.uk|doi\.org/10\.17863|repository\.cam\.ac\.uk' --root-dir . --accept 100..=103,200..=299,403,429,502,503,999 --max-concurrency 16 --timeout 30 --max-retries 5 --retry-wait-time 2 -- ./**/*.{md,svelte,ts,yml,yaml}

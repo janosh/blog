@@ -1,4 +1,4 @@
-import { config } from '@janosh/vite-config'
+import { make_config } from 'svelte-widgets/vite-config'
 import rollup_yaml from '@rollup/plugin-yaml'
 import { sveltekit } from '@sveltejs/kit/vite'
 import { dump, load } from 'js-yaml'
@@ -75,7 +75,7 @@ try {
 }
 
 export default defineConfig({
-  ...config, // shared lint/fmt/build from @janosh/vite-config (dotfiles)
+  ...make_config(),
   plugins: [sveltekit(), rollup_yaml()],
 
   server: {
