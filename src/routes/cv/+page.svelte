@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { oss_sort_keys, PaperGrid, sort_oss_projects, SortButtons } from '$lib'
+  import { oss_sort_keys, PaperGrid, sort_oss_projects } from '$lib'
   import type { OssSortKey, SortOrder } from '$lib/oss'
   import papers from '$lib/papers.yaml'
   import { PAPER_SORT_KEYS } from '$lib/types'
   import Icon from '@iconify/svelte'
-  import { ThemeToggle } from 'svelte-multiselect'
+  import { ButtonGroup, ThemeToggle } from 'svelte-widgets'
+  import { format_print_filename, print_element } from 'svelte-widgets/print'
   import type { ComponentProps } from 'svelte'
   import { flip } from 'svelte/animate'
   import cv from './cv.yml'
-  import { print_cv } from './index'
   import Intro from './intro.md'
   import Papers from './Papers.svelte'
 
@@ -21,13 +21,14 @@
   let sort_oss_order: SortOrder = $state(`desc`)
   let hovered_paper_ids: string[] = $state([])
   let pdf_menu: HTMLDetailsElement | undefined = $state()
+  let cv_main: HTMLElement | undefined = $state()
 
   const paper_sort_keys = [
-    [PAPER_SORT_KEYS.date, `Sort by date`],
-    [PAPER_SORT_KEYS.title, `Sort by title`],
-    [PAPER_SORT_KEYS.author, `Sort by first-author last name`],
-    [PAPER_SORT_KEYS.first_author, `First-author papers to the top`],
-    [PAPER_SORT_KEYS.citations, `Sort by citations`],
+    { value: PAPER_SORT_KEYS.date, tooltip: `Sort by date` },
+    { value: PAPER_SORT_KEYS.title, tooltip: `Sort by title` },
+    { value: PAPER_SORT_KEYS.author, tooltip: `Sort by first-author last name` },
+    { value: PAPER_SORT_KEYS.first_author, tooltip: `First-author papers to the top` },
+    { value: PAPER_SORT_KEYS.citations, tooltip: `Sort by citations` },
   ] as const
 
   const links = { target: `_blank`, rel: `noreferrer` }
@@ -42,11 +43,19 @@
     if (target instanceof Node && !pdf_menu?.contains(target))
       pdf_menu?.removeAttribute(`open`)
   }
+
+  function print_cv(single_page: boolean = false): void {
+    if (!cv_main) throw new Error(`cannot print CV, <main> is not mounted`)
+    print_element(cv_main, {
+      filename: format_print_filename(`janosh-cv`),
+      single_page,
+    })
+  }
 </script>
 
 <svelte:window onpointerdown={close_pdf_menu} />
 
-<main>
+<main bind:this={cv_main}>
   <section class="title">
     <h1>Janosh Riebesell - CV</h1>
 
@@ -62,11 +71,18 @@
 
     <h2 style="margin-block: 1em;">
       <Icon inline icon="iconoir:journal" />&nbsp; Publications
-      <SortButtons
-        bind:sort_by={sort_papers_by}
-        sort_keys={paper_sort_keys}
-        bind:sort_order={sort_papers_order}
-      />
+      <span class="sort-controls">
+        Sort by
+        <!-- ButtonGroup buttons are font: inherit, so the label's weight 100 would
+             otherwise bleed into them; restore the app.css button baseline -->
+        <ButtonGroup
+          options={paper_sort_keys}
+          bind:selected={sort_papers_by}
+          bind:sort_order={sort_papers_order}
+          label="Sort publications by"
+          style="font-weight: 500"
+        />
+      </span>
     </h2>
     <PaperGrid
       papers={papers.references}
@@ -81,13 +97,15 @@
     />
     <h2>
       <Icon inline icon="ri:open-source-line" />&nbsp; Open Source
-      <SortButtons
-        label=""
-        bind:sort_by={sort_oss_by}
-        sort_keys={oss_sort_keys}
-        bind:sort_order={sort_oss_order}
-        as="span"
-      />
+      <span class="sort-controls">
+        <ButtonGroup
+          options={oss_sort_keys}
+          bind:selected={sort_oss_by}
+          bind:sort_order={sort_oss_order}
+          label="Sort projects by"
+          style="font-weight: 500"
+        />
+      </span>
     </h2>
 
     <ul class="oss">
@@ -245,7 +263,7 @@
     </summary>
     <div>
       <button onclick={() => print_cv()}>Multi-page</button>
-      <button onclick={() => print_cv({ single_page: true })}>Single tall page</button>
+      <button onclick={() => print_cv(true)}>Single tall page</button>
     </div>
   </details>
 </div>
@@ -276,6 +294,24 @@
   h2 {
     position: relative;
     margin: 1.5em 0 0.5em;
+  }
+  .sort-controls {
+    display: flex;
+    place-items: center;
+    gap: 5pt;
+    position: absolute;
+    right: 0;
+    bottom: 4pt;
+    font-weight: 100;
+    font-size: 9pt;
+    --btn-group-gap: 5pt;
+    --btn-group-btn-padding: 1pt 4pt;
+    --btn-group-btn-radius: var(--radius-sm);
+    --btn-group-btn-border: none;
+    --btn-group-btn-bg: var(--nav-bg);
+    --btn-group-btn-color: var(--text-secondary);
+    --btn-group-btn-hover-bg: var(--nav-bg);
+    --btn-group-btn-active-bg: var(--accent-bg);
   }
   a {
     color: inherit;
@@ -434,6 +470,7 @@
   }
   @media print {
     .cv-controls,
+    .sort-controls,
     :global(.paper-graph) {
       display: none !important;
     }

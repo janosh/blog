@@ -46,7 +46,7 @@ export function extract_citations(note: string | undefined): {
     /Citations: (?<count>\d+) \((?<database>[^)]+)\)/g,
   )) {
     if (groups === undefined) continue
-    const citation_count = parseInt(groups.count, 10)
+    const citation_count = Math.trunc(Number(groups.count))
     if (citation_count > citations) {
       citations = citation_count
       citation_database = groups.database
@@ -54,56 +54,4 @@ export function extract_citations(note: string | undefined): {
   }
 
   return { citations, citation_database }
-}
-
-function format_print_filename(): string {
-  const date = new Date()
-  const year = date.getFullYear()
-  const month = String(date.getMonth() + 1).padStart(2, `0`)
-  const day = String(date.getDate()).padStart(2, `0`)
-  return `janosh-cv-${year}-${month}-${day}`
-}
-
-export function print_cv({ single_page = false }: { single_page?: boolean } = {}): void {
-  const original_title = document.title
-  const print_title = format_print_filename()
-  let style: HTMLStyleElement | null = null
-
-  const cleanup = () => {
-    document.title = original_title
-    style?.remove()
-  }
-
-  document.title = print_title
-  globalThis.addEventListener(`afterprint`, cleanup, { once: true })
-
-  if (!single_page) {
-    globalThis.print()
-    return
-  }
-
-  const main = document.querySelector(`main`)
-  if (!(main instanceof HTMLElement)) {
-    cleanup()
-    return
-  }
-
-  const main_css = `width: 210mm !important; max-width: none !important; margin: 0 !important; padding: 2em !important; box-sizing: border-box !important; box-shadow: none !important;`
-  const visible_css = `height: auto !important; max-height: none !important; overflow: visible !important;`
-
-  style = document.createElement(`style`)
-  document.head.append(style)
-
-  void main.offsetHeight // Force layout before measuring
-  const height_mm = Math.ceil((main.getBoundingClientRect().height * 25.4) / 96)
-
-  style.textContent = `
-    @media print {
-      @page { size: 210mm ${height_mm}mm; margin: 0; }
-      main { ${main_css} }
-      html, body, main { ${visible_css} }
-    }
-  `
-
-  globalThis.print()
 }

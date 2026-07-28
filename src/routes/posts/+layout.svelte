@@ -5,7 +5,7 @@
   import { repository } from '$root/package.json'
   import Icon from '@iconify/svelte'
   import type { Snippet } from 'svelte'
-  import { heading_anchors, PrevNext } from 'svelte-multiselect'
+  import { heading_anchors, PrevNext } from 'svelte-widgets'
   import type { PageData } from '../$types'
 
   let { data, children }: { data: PageData; children?: Snippet<[]> } = $props()

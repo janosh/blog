@@ -3,9 +3,9 @@ import type { Config } from '@sveltejs/kit'
 import { mdsvex } from 'mdsvex'
 import katex from 'rehype-katex-svelte'
 import math from 'remark-math'
-import { heading_ids } from 'svelte-multiselect/heading-anchors'
-import { starry_night_highlighter } from 'svelte-multiselect/live-examples'
 import { importAssets } from 'svelte-preprocess-import-assets'
+import { heading_ids } from 'svelte-widgets/heading-anchors'
+import { starry_night_highlighter } from 'svelte-widgets/live-examples'
 
 const macros: Record<string, string> = {
   // Infinitesimal differential (used in derivatives and integrals)

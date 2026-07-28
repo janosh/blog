@@ -4,9 +4,9 @@ export type OssSortKey = (typeof OSS_SORT_KEYS)[keyof typeof OSS_SORT_KEYS]
 export type SortOrder = `asc` | `desc`
 
 export const oss_sort_keys = [
-  [OSS_SORT_KEYS.commits, `Sort by commits`],
-  [OSS_SORT_KEYS.stars, `Sort by stars`],
-  [OSS_SORT_KEYS.name, `Sort by name`],
+  { value: OSS_SORT_KEYS.commits, tooltip: `Sort by commits` },
+  { value: OSS_SORT_KEYS.stars, tooltip: `Sort by stars` },
+  { value: OSS_SORT_KEYS.name, tooltip: `Sort by name` },
 ] as const
 
 export function sort_oss_projects<

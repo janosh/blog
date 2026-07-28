@@ -4,7 +4,7 @@
   import type { FrontMatter } from '$lib'
   import { repository } from '$root/package.json'
   import Icon from '@iconify/svelte'
-  import Select from 'svelte-multiselect'
+  import Select from 'svelte-widgets'
   import { flip } from 'svelte/animate'
 
   type Option = { label: string; count: number }

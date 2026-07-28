@@ -13,7 +13,7 @@ tags:
 
 <script>
   import GeometricBayes from './GeometricBayes.svelte'
-  import YouTubeEmbed from '$lib/LiteYouTubeEmbed.svelte'
+  import { LiteYouTubeEmbed as YouTubeEmbed } from 'svelte-widgets'
   import { page } from '$app/state'
 
   const file = encodeURIComponent(`src/routes/${page.route.id}/+page.md`)

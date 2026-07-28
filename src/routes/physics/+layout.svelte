@@ -1,7 +1,7 @@
 <script lang="ts">
   import { dev } from '$app/environment'
   import { repository } from '$root/package.json'
-  import { heading_anchors } from 'svelte-multiselect'
+  import { heading_anchors } from 'svelte-widgets'
 
   let { data, children } = $props()
   let { title, cover, slug } = $derived(data.frontmatter)
