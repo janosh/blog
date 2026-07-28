@@ -1,4 +1,4 @@
-import { config } from '@janosh/vite-config'
+import { make_config } from 'svelte-widgets/vite-config'
 import rollup_yaml from '@rollup/plugin-yaml'
 import { sveltekit } from '@sveltejs/kit/vite'
 import { dump, load } from 'js-yaml'
@@ -74,8 +74,10 @@ try {
   console.error(`No GitHub token found, skipping GitHub API calls`)
 }
 
+const config = make_config()
+
 export default defineConfig({
-  ...config, // shared lint/fmt/build from @janosh/vite-config (dotfiles)
+  ...config, // shared lint/fmt/build
   plugins: [sveltekit(), rollup_yaml()],
 
   server: {

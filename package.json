@@ -19,7 +19,6 @@
   "type": "module",
   "devDependencies": {
     "@iconify/svelte": "^5.2.2",
-    "@janosh/vite-config": "github:janosh/dotfiles",
     "@rollup/plugin-yaml": "^5.0.0",
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.68.0",
@@ -33,7 +32,7 @@
     "svelte": "^5.56.4",
     "svelte-check": "^4.7.1",
     "svelte-preprocess-import-assets": "^1.1.0",
-    "svelte-widgets": "^1.0.0",
+    "svelte-widgets": "^1.1.0",
     "vite-plus": "0.2.5"
   },
   "packageManager": "pnpm@11.5.0"
