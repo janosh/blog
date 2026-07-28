@@ -67,7 +67,6 @@ export type Project = {
 
 export type Skill = {
   name: string
-  icon?: string
   svg?: string
   score: number
   href?: string
@@ -76,8 +75,7 @@ export type Skill = {
 
 export type Hobby = {
   name: string
-  icon: string
-  href: string
+  href?: string
 }
 
 export type Volunteer = {
@@ -107,12 +105,16 @@ export type Community = {
 export type Language = {
   name: string
   level: string
-  icon: string
+  flag: string
+}
+
+export type Nationality = {
+  title: string
+  flag: string
 }
 
 export type Social = {
   name: string
-  icon: string
   url: string
   style?: string
 }

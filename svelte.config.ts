@@ -1,10 +1,9 @@
 import adapter from '@sveltejs/adapter-static'
 import type { Config } from '@sveltejs/kit'
 import { mdsvex } from 'mdsvex'
-import katex from 'rehype-katex-svelte'
-import math from 'remark-math'
 import { importAssets } from 'svelte-preprocess-import-assets'
 import { heading_ids } from 'svelte-widgets/heading-anchors'
+import { katex_preprocess } from 'svelte-widgets/katex'
 import { starry_night_highlighter } from 'svelte-widgets/live-examples'
 
 const macros: Record<string, string> = {
@@ -48,18 +47,18 @@ for (let index = 65; index <= 90; index++) {
   macros[`\\${letter}bb`] = `\\mathbb{${letter}}`
 }
 
+const katex = katex_preprocess({ macros, errorColor: `#cc0000` })
+
 export default {
   extensions: [`.svelte`, `.svx`, `.md`],
 
   preprocess: [
+    katex.before,
     mdsvex({
-      rehypePlugins: [[katex, { macros, throwOnError: false, errorColor: `#cc0000` }]],
-      // remark-math@3.0.0 pinned due to mdsvex, see
-      // https://github.com/kwshi/rehype-katex-svelte#usage
-      remarkPlugins: [math],
       extensions: [`.svx`, `.md`],
       highlight: { highlighter: starry_night_highlighter },
     }),
+    katex.after,
     heading_ids(),
     importAssets({
       sources: (default_sources) => [

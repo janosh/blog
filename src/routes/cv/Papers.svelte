@@ -12,7 +12,6 @@
     target_author = `J. Riebesell`,
     sort_by = `title`,
     sort_order = `asc`,
-    hovered_ids = [],
     highlight_props = {
       query: target_author.toLowerCase(),
       css_class: `highlight-match`,
@@ -24,7 +23,6 @@
     target_author?: string
     sort_by?: `title` | `date` | `author` | `first author` | `citations`
     sort_order?: `asc` | `desc`
-    hovered_ids?: string[]
     highlight_props?: Parameters<typeof highlight_matches>[0]
   } & HTMLAttributes<HTMLOListElement> = $props()
 
@@ -34,35 +32,28 @@
     references.map((ref) => ({ ...ref, ...extract_citations(ref.note) })),
   )
 
-  const date_num = (ref: Reference): number => {
-    const { year, month } = ref.issued[0]
-    return 100 * year + month
-  }
+  const date_num = (ref: Reference): number =>
+    100 * ref.issued[0].year + ref.issued[0].month
 
   const sorted_references = $derived(
     processed_references.toSorted((ref_1, ref_2) => {
-      const sort_dir = sort_order === `asc` ? 1 : -1
-      if (sort_by === PAPER_SORT_KEYS.title) {
-        return ref_1.title.localeCompare(ref_2.title) * sort_dir
-      }
+      const dir = sort_order === `asc` ? 1 : -1
+      if (sort_by === PAPER_SORT_KEYS.title)
+        return ref_1.title.localeCompare(ref_2.title) * dir
       if (sort_by === PAPER_SORT_KEYS.date)
-        return (date_num(ref_1) - date_num(ref_2)) * sort_dir
-      if (sort_by === PAPER_SORT_KEYS.citations) {
-        return ((ref_2.citations ?? 0) - (ref_1.citations ?? 0)) * sort_dir
-      }
+        return (date_num(ref_1) - date_num(ref_2)) * dir
+      if (sort_by === PAPER_SORT_KEYS.citations)
+        return ((ref_2.citations ?? 0) - (ref_1.citations ?? 0)) * dir
 
-      const [author_idx_1, author_idx_2] = [
-        ref_1.author.findIndex((auth) => auth.family === target_family),
-        ref_2.author.findIndex((auth) => auth.family === target_family),
-      ]
+      const author_idx_1 = ref_1.author.findIndex((auth) => auth.family === target_family)
+      const author_idx_2 = ref_2.author.findIndex((auth) => auth.family === target_family)
       if (
         sort_by === PAPER_SORT_KEYS.first_author &&
         (author_idx_1 === -1 || author_idx_2 === -1)
       )
         return 0
       return (
-        (author_idx_1 - author_idx_2) *
-        (sort_by === PAPER_SORT_KEYS.author ? sort_dir : -sort_dir)
+        (author_idx_1 - author_idx_2) * (sort_by === PAPER_SORT_KEYS.author ? dir : -dir)
       )
     }),
   )
@@ -80,7 +71,7 @@
       ]
       return `${first_name}${family}`
     })}
-    <li animate:flip={{ duration: 400 }} class:grid-hovered={hovered_ids.includes(id)}>
+    <li animate:flip={{ duration: 400 }}>
       <h3 {id}>{title}</h3>
       {truncate_authors(authors_formatted.join(`, `), target_author)}
       &nbsp;&mdash;&nbsp;
@@ -89,11 +80,9 @@
         {#if journal}
           &nbsp;&mdash; <strong style="color: var(--text-secondary)">{journal}</strong>
         {/if}
-      {:else if href && (href.includes(`arxiv.org`) || href.includes(`arXiv`))}
-        <a {href}>{href.replace(`https://`, ``)}</a>
-        &nbsp;(preprint)
       {:else if href}
         <a {href}>{href.replace(`https://`, ``)}</a>
+        {#if href.toLowerCase().includes(`arxiv.org`)}&nbsp;(preprint){/if}
       {/if}
       {#if issued}
         &nbsp;&mdash;&nbsp; {issued[0].year}-{issued[0].month}
@@ -114,21 +103,16 @@
   ol {
     list-style: none;
     padding: 0;
-  }
-  ol > li {
-    font-weight: 300;
-    text-wrap: balance;
-    margin-block: 1em;
-    padding: 1pt 6pt;
-  }
-  ol > li > h3 {
-    margin: 2pt 0;
-    font-weight: 500;
-  }
-  ol > li.grid-hovered {
-    background: var(--nav-bg);
-    border-radius: 4pt;
-    transition: background 0.2s ease;
+    > li {
+      font-weight: 300;
+      text-wrap: balance;
+      margin-block: 1em;
+      padding: 1pt 6pt;
+      > h3 {
+        margin: 2pt 0;
+        font-weight: 500;
+      }
+    }
   }
   ::highlight(highlight-match) {
     color: var(--highlight);

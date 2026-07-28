@@ -3,9 +3,9 @@
   import { page } from '$app/state'
   import type { FrontMatter } from '$lib'
   import { repository } from '$root/package.json'
-  import Icon from '@iconify/svelte'
   import type { Snippet } from 'svelte'
-  import { heading_anchors, PrevNext } from 'svelte-widgets'
+  import { heading_anchors, Icon, PrevNext } from 'svelte-widgets'
+  import { Calendar } from 'svelte-widgets/icons'
   import type { PageData } from '../$types'
 
   let { data, children }: { data: PageData; children?: Snippet<[]> } = $props()
@@ -31,7 +31,7 @@
 <main style="max-width: 50em; margin: 0 auto" {@attach heading_anchors()}>
   <h1>{title}</h1>
   <time>
-    <Icon icon="carbon:calendar" inline />
+    <Icon icon={Calendar} />
     {date?.split(`T`)[0]}
   </time>
   {@render children?.()}
@@ -40,7 +40,7 @@
   <PrevNext items={data.posts.map((post) => [post.slug, post])} current={slug}>
     {#snippet children({ item, kind })}
       {@const { slug, title, date } = item[1] as FrontMatter}
-      <h3>
+      <h3 class="toc-exclude">
         <a href={slug}>
           {@html kind == `next` ? `Next &rarr;` : `&larr; Previous`}
           <br />

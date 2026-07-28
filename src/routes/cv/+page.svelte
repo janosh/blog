@@ -1,10 +1,24 @@
 <script lang="ts">
-  import { oss_sort_keys, PaperGrid, sort_oss_projects } from '$lib'
+  import { hobbies, skills, social } from '$lib/cv-icons'
+  import { oss_sort_keys, sort_oss_projects } from '$lib'
   import type { OssSortKey, SortOrder } from '$lib/oss'
   import papers from '$lib/papers.yaml'
   import { PAPER_SORT_KEYS } from '$lib/types'
-  import Icon from '@iconify/svelte'
-  import { ButtonGroup, ThemeToggle } from 'svelte-widgets'
+  import { ButtonGroup, Icon, Popover, ThemeToggle } from 'svelte-widgets'
+  import {
+    AccountGroup,
+    ChevronUp,
+    Education,
+    FilePdf,
+    GitHub,
+    Interests,
+    Journal,
+    Languages,
+    OpenSource,
+    SearchCountry,
+    SkillLevel,
+    Star,
+  } from 'svelte-widgets/icons'
   import { format_print_filename, print_element } from 'svelte-widgets/print'
   import type { ComponentProps } from 'svelte'
   import { flip } from 'svelte/animate'
@@ -19,8 +33,7 @@
   let sort_papers_order: PaperProps[`sort_order`] = $state(`desc`)
   let sort_oss_by: OssSortKey = $state(`commits`)
   let sort_oss_order: SortOrder = $state(`desc`)
-  let hovered_paper_ids: string[] = $state([])
-  let pdf_menu: HTMLDetailsElement | undefined = $state()
+  let pdf_menu_open = $state(false)
   let cv_main: HTMLElement | undefined = $state()
 
   const paper_sort_keys = [
@@ -35,17 +48,13 @@
   const sorted_oss_projects = $derived(
     sort_oss_projects(data.oss.projects, sort_oss_by, sort_oss_order),
   )
-  const sorted_skills = cv.skills.toSorted(
+  const sorted_skills = skills.toSorted(
     (skill_1, skill_2) => skill_2.score - skill_1.score,
   )
 
-  function close_pdf_menu({ target }: PointerEvent): void {
-    if (target instanceof Node && !pdf_menu?.contains(target))
-      pdf_menu?.removeAttribute(`open`)
-  }
-
-  function print_cv(single_page: boolean = false): void {
+  function print_cv(single_page = false): void {
     if (!cv_main) throw new Error(`cannot print CV, <main> is not mounted`)
+    pdf_menu_open = false
     print_element(cv_main, {
       filename: format_print_filename(`janosh-cv`),
       single_page,
@@ -53,15 +62,13 @@
   }
 </script>
 
-<svelte:window onpointerdown={close_pdf_menu} />
-
 <main bind:this={cv_main}>
   <section class="title">
     <h1>Janosh Riebesell - CV</h1>
 
     <address style="font-size: 1.2em">
-      {#each cv.social as { url, icon, style } (url)}
-        <a href={url} {...links}><Icon inline {icon} {style} /></a>
+      {#each social as { url, icon, style } (url)}
+        <a href={url} {...links}><Icon {icon} {style} /></a>
       {/each}
     </address>
   </section>
@@ -70,40 +77,26 @@
     <Intro />
 
     <h2 style="margin-block: 1em;">
-      <Icon inline icon="iconoir:journal" />&nbsp; Publications
+      <Icon icon={Journal} />&nbsp; Publications
       <span class="sort-controls">
         Sort by
-        <!-- ButtonGroup buttons are font: inherit, so the label's weight 100 would
-             otherwise bleed into them; restore the app.css button baseline -->
         <ButtonGroup
           options={paper_sort_keys}
           bind:selected={sort_papers_by}
           bind:sort_order={sort_papers_order}
           label="Sort publications by"
-          style="font-weight: 500"
         />
       </span>
     </h2>
-    <PaperGrid
-      papers={papers.references}
-      class="paper-graph"
-      bind:hovered_ids={hovered_paper_ids}
-    />
-    <Papers
-      {...papers}
-      sort_by={sort_papers_by}
-      sort_order={sort_papers_order}
-      hovered_ids={hovered_paper_ids}
-    />
+    <Papers {...papers} sort_by={sort_papers_by} sort_order={sort_papers_order} />
     <h2>
-      <Icon inline icon="ri:open-source-line" />&nbsp; Open Source
+      <Icon icon={OpenSource} />&nbsp; Open Source
       <span class="sort-controls">
         <ButtonGroup
           options={oss_sort_keys}
           bind:selected={sort_oss_by}
           bind:sort_order={sort_oss_order}
           label="Sort projects by"
-          style="font-weight: 500"
         />
       </span>
     </h2>
@@ -117,12 +110,12 @@
               <img src={logo_url} alt="{name} Logo" data-color-invert={color_invert} />
               {name}
             </a>
-            <a href={repo} {...links}><Icon inline icon="octicon:mark-github" /></a>
+            <a href={repo} {...links}><Icon icon={GitHub} /></a>
           </h4>
           <div class="oss-meta">
             {#if stars}
               <a href="{repo}/stargazers">
-                <small>{stars} <Icon inline icon="octicon:star" /></small>
+                <small>{stars} <Icon icon={Star} /></small>
               </a>
             {/if}
             {#if commits}
@@ -137,9 +130,7 @@
       {/each}
     </ul>
 
-    <h2>
-      <Icon inline icon="zondicons:education" />&nbsp; Education
-    </h2>
+    <h2><Icon icon={Education} />&nbsp; Education</h2>
     <ul>
       {#each cv.education as { title, thesis, date, href, uni } (title)}
         <li>
@@ -149,9 +140,7 @@
           </h4>
           Thesis title:<a href={thesis?.url}>{thesis?.title}</a>
           {#if thesis?.repo}
-            &nbsp;<a href={thesis.repo} {...links}>
-              <Icon inline icon="octicon:mark-github" />
-            </a>
+            &nbsp;<a href={thesis.repo} {...links}><Icon icon={GitHub} /></a>
           {/if}
         </li>
       {/each}
@@ -159,49 +148,34 @@
 
     <div class="side-by-side">
       <section>
-        <h2>
-          <Icon inline icon="gis:search-country" />&nbsp; Nationality
-        </h2>
+        <h2><Icon icon={SearchCountry} />&nbsp; Nationality</h2>
         <ul class="horizontal">
-          {#each cv.nationality as { title, icon } (title)}
-            <li>
-              <Icon inline {icon} />
-              &nbsp;{title}
-            </li>
+          {#each cv.nationality as { title, flag } (title)}
+            <li>{flag}&nbsp;{title}</li>
           {/each}
         </ul>
       </section>
 
       <section>
-        <h2>
-          <Icon inline icon="lucide:languages" />&nbsp; Languages
-        </h2>
+        <h2><Icon icon={Languages} />&nbsp; Languages</h2>
         <ul class="horizontal">
-          {#each cv.languages as { name, level, icon } (name)}
-            <li>
-              <Icon inline {icon} />
-              &nbsp;{name}
-              <Icon inline icon="carbon:skill-level-{level}" />
-            </li>
+          {#each cv.languages as { name, flag, level } (name)}
+            <li>{flag}&nbsp;{name} <small>({level})</small></li>
           {/each}
         </ul>
       </section>
     </div>
 
-    <h2>
-      <Icon inline icon="carbon:skill-level-advanced" />&nbsp; Programming Languages and
-      Tools
-    </h2>
+    <h2><Icon icon={SkillLevel} />&nbsp; Programming Languages and Tools</h2>
     <small style="white-space: nowrap">(emphasis &asymp; proficiency)</small>
     <ul class="skills">
       {#each sorted_skills as { name, icon, svg, score, href, site } (name)}
-        <!-- color based on score style="color: hsl({score * 20}, 100%, 40%)" -->
         <li style:font-weight={(score - 3) * 100}>
           <a href={href ?? site}>
             {#if svg}
               <img src={svg} alt="{name} logo" class="skill-svg" />
             {:else if icon}
-              <Icon inline {icon} />
+              <Icon {icon} />
             {/if}
             {name} <small>({score})</small>
           </a>
@@ -209,21 +183,12 @@
       {/each}
     </ul>
 
-    <h2>
-      <Icon inline icon="mdi:account-group" />
-      &nbsp; Community
-    </h2>
-    <ul style="margin-block: 1em; display: grid; gap: 1ex">
+    <h2><Icon icon={AccountGroup} />&nbsp; Community</h2>
+    <ul class="community">
       {#each cv.community as { name, date, href, img, role } (name)}
-        <li style="display: flex; gap: 1ex; place-items: center; justify-content: start">
+        <li>
           <a {href}>
-            <img
-              src={img}
-              alt="{name} Logo"
-              width="30"
-              height="30"
-              class="community-logo"
-            />
+            <img src={img} alt="{name} Logo" class="community-logo" />
           </a>
           <a {href}>{name}</a>
           {#if role}<span style="font-weight: lighter">{role}</span>{/if}
@@ -232,19 +197,14 @@
       {/each}
     </ul>
 
-    <h2>
-      <Icon inline icon="material-symbols:interests" />&nbsp; Hobbies
-    </h2>
+    <h2><Icon icon={Interests} />&nbsp; Hobbies</h2>
     <ul class="hobbies">
-      {#each cv.hobbies as { name, icon, href } (name)}
+      {#each hobbies as { name, icon, href } (name)}
         <li>
           {#if href}
-            <a {href}>
-              <Icon inline {icon} />
-              {name}
-            </a>
+            <a {href}><Icon {icon} /> {name}</a>
           {:else}
-            <Icon inline {icon} />
+            <Icon {icon} />
             {name}
           {/if}
         </li>
@@ -255,38 +215,33 @@
 
 <div class="cv-controls">
   <ThemeToggle tooltip={false} />
-  <details bind:this={pdf_menu} class="pdf-menu">
-    <summary>
-      <Icon icon="mdi:file-pdf-box" />
-      Export PDF
-      <Icon icon="mdi:chevron-up" />
-    </summary>
-    <div>
-      <button onclick={() => print_cv()}>Multi-page</button>
-      <button onclick={() => print_cv(true)}>Single tall page</button>
-    </div>
-  </details>
+  <Popover bind:open={pdf_menu_open} placement="top" match_width class="pdf-menu">
+    {#snippet trigger(props)}
+      <button type="button" class="pdf-menu-trigger" {...props}>
+        <Icon icon={FilePdf} />
+        Export PDF
+        <Icon icon={ChevronUp} />
+      </button>
+    {/snippet}
+    <button type="button" onclick={() => print_cv()}>Multi-page</button>
+    <button type="button" onclick={() => print_cv(true)}>Single tall page</button>
+  </Popover>
 </div>
 
 <style>
+  :global(body) {
+    background: color-mix(in srgb, var(--page-bg) 88%, var(--text-color) 12%);
+  }
   main {
     margin: 2em auto 100px;
     max-width: 50em;
-    background-color: var(--card-bg);
+    background: var(--page-bg);
     color: var(--text-color);
     padding: 3em;
-    border-radius: 2pt;
+    border-radius: var(--radius-md);
   }
   main :global(a) {
     color: var(--link-color);
-  }
-  h4 img {
-    width: 3ex;
-    height: 3ex;
-    margin-right: 5pt;
-  }
-  section.title {
-    grid-column: 1 / -1;
   }
   h1 {
     margin: 0 0 3pt;
@@ -312,6 +267,9 @@
     --btn-group-btn-color: var(--text-secondary);
     --btn-group-btn-hover-bg: var(--nav-bg);
     --btn-group-btn-active-bg: var(--accent-bg);
+    :global(button) {
+      font-weight: 500;
+    }
   }
   a {
     color: inherit;
@@ -333,22 +291,27 @@
     grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
     gap: 12pt;
     font-size: 14pt;
-  }
-  ul.oss > li {
-    display: grid;
-    grid-template-rows: subgrid;
-    grid-row: span 3;
-    gap: 2pt;
-  }
-  ul.oss > li > h4 {
-    margin: 0;
-    display: flex;
-    gap: 6pt;
-    place-items: center;
-  }
-  ul.oss > li > h4 a {
-    display: flex;
-    place-items: center;
+    > li {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 3;
+      gap: 2pt;
+      > h4 {
+        margin: 0;
+        display: flex;
+        gap: 6pt;
+        place-items: center;
+        a {
+          display: flex;
+          place-items: center;
+        }
+        img {
+          width: 3ex;
+          height: 3ex;
+          margin-right: 5pt;
+        }
+      }
+    }
   }
   .oss-meta {
     display: flex;
@@ -356,10 +319,10 @@
     place-items: center;
     font-size: 10pt;
     color: var(--text-secondary);
-  }
-  .oss-meta .langs {
-    font-weight: 200;
-    margin-left: auto;
+    .langs {
+      font-weight: 200;
+      margin-left: auto;
+    }
   }
   p {
     margin: 0;
@@ -380,17 +343,26 @@
     display: flex;
     gap: 2em;
     flex-wrap: wrap;
+    > section {
+      flex: 1;
+      min-width: 200px;
+    }
   }
-  .side-by-side > section {
-    flex: 1;
-    min-width: 200px;
+  ul.community {
+    margin-block: 1em;
+    display: grid;
+    gap: 1ex;
+    > li {
+      display: flex;
+      gap: 1ex;
+      place-items: center;
+    }
   }
   .community-logo {
     display: block;
     width: 30px;
     height: 30px;
     object-fit: contain;
-    margin: 0 1ex 0 0;
     border-radius: 50%;
     box-sizing: border-box;
     padding: 3px;
@@ -410,20 +382,16 @@
     align-items: center;
     gap: 8px;
     white-space: nowrap;
+    > :global(button),
+    .pdf-menu-trigger {
+      min-height: 28px;
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+    > :global(button) {
+      min-width: 28px;
+    }
   }
-  .cv-controls > :global(button),
-  .pdf-menu > summary {
-    min-height: 28px;
-  }
-  .cv-controls > :global(button) {
-    min-width: 28px;
-    box-shadow: 0 4px 12px var(--shadow);
-  }
-  .pdf-menu {
-    position: relative;
-    width: max-content;
-  }
-  .pdf-menu > summary {
+  .pdf-menu-trigger {
     background: var(--button-bg);
     color: var(--button-text);
     border: none;
@@ -434,49 +402,31 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 4px 12px var(--shadow);
-    list-style: none;
   }
-  .pdf-menu > summary::-webkit-details-marker {
-    display: none;
+  :global(.pdf-menu) {
+    --popover-padding: 0;
+    --popover-bg: var(--page-bg);
+    --popover-border: 1px solid var(--card-border);
+    --popover-shadow: 0 4px 12px var(--shadow);
   }
-  .pdf-menu > div {
-    position: absolute;
-    bottom: 100%;
-    right: 0;
-    width: 100%;
-    background: var(--card-bg);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px var(--shadow);
-    overflow: hidden;
-  }
-  .pdf-menu:not([open]) > div {
-    display: none;
-  }
-  .pdf-menu button {
-    background: var(--card-bg);
-    color: var(--link-color);
-    border: none;
-    border-radius: 0;
-    padding: 8px 12px;
-    cursor: pointer;
+  :global(.pdf-menu button) {
     display: block;
     width: 100%;
-    box-sizing: border-box;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    color: var(--link-color);
     text-align: left;
+    cursor: pointer;
   }
-  .pdf-menu button:hover {
+  :global(.pdf-menu button:hover) {
     background: var(--nav-bg);
   }
   @media print {
     .cv-controls,
-    .sort-controls,
-    :global(.paper-graph) {
+    .sort-controls {
       display: none !important;
-    }
-    /* Ensure colors show in PDF for both paper components */
-    :global(:is(.week-tile, .legend-tile, .timeline-line, .marker-bar)) {
-      print-color-adjust: exact !important;
     }
     @page {
       margin: 0.6in;
@@ -487,17 +437,14 @@
       padding: 2em;
       box-shadow: none;
     }
-    /* Keep section and publication titles with their content */
     section.body :global(:is(h2, h3)) {
       page-break-after: avoid;
       break-after: avoid;
     }
-    /* Keep publication metadata with titles */
     small {
       page-break-before: avoid;
       break-before: avoid;
     }
-    /* Keep publication list items together */
     section.body :global(ol li) {
       page-break-inside: avoid;
       break-inside: avoid;

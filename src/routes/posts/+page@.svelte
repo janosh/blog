@@ -3,8 +3,8 @@
   import { page } from '$app/state'
   import type { FrontMatter } from '$lib'
   import { repository } from '$root/package.json'
-  import Icon from '@iconify/svelte'
-  import Select from 'svelte-widgets'
+  import { Icon, MultiSelect } from 'svelte-widgets'
+  import { Article, Calendar, Tag } from 'svelte-widgets/icons'
   import { flip } from 'svelte/animate'
 
   type Option = { label: string; count: number }
@@ -47,11 +47,11 @@
 <img src="./blog-banner.svg" alt="Banner" class="banner" />
 
 <h2 class="section-title">
-  <Icon inline icon="ri:article-line" />
+  <Icon icon={Article} />
   Posts
 </h2>
 
-<Select
+<MultiSelect
   options={top_tags.map(([label, count]) => ({ label, count }))}
   placeholder="Filter by tag"
   bind:selected={active_tags}
@@ -64,7 +64,7 @@
       {tag.count}
     </span>
   {/snippet}
-</Select>
+</MultiSelect>
 
 <ul class="grid" style="margin: 4em auto; gap: 3ex">
   {#each visible_posts as post (post.title)}
@@ -80,11 +80,11 @@
       </a>
       <small>
         <time>
-          <Icon icon="carbon:calendar" inline />
+          <Icon icon={Calendar} />
           {date?.split(`T`)[0]}
         </time>
       </small>
-      <small><Icon icon="carbon:tag" inline /> {tags?.join(`, `)}</small>
+      <small><Icon icon={Tag} /> {tags?.join(`, `)}</small>
     </li>
   {/each}
   <li style="visibility: hidden"></li>

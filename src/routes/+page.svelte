@@ -1,8 +1,9 @@
 <script lang="ts">
+  import { social } from '$lib/cv-icons'
   import oss from '$lib/oss.yml'
   import { references } from '$lib/papers.yaml'
-  import Icon from '@iconify/svelte'
-  import cv from './cv/cv.yml'
+  import { Icon } from 'svelte-widgets'
+  import { CvSquare, Newspaper } from 'svelte-widgets/icons'
   import OpenSource from './open-source/+page.svelte'
   import Physics from './physics/+page@.md'
 
@@ -56,12 +57,10 @@
 <h1>Janosh</h1>
 
 <address>
-  {#each cv.social as { url, icon, style } (url)}
-    <a href={url} target="_blank" rel="noreferrer"><Icon inline {icon} {style} /></a>
+  {#each social as { url, icon, style } (url)}
+    <a href={url} target="_blank" rel="noreferrer"><Icon {icon} {style} /></a>
   {/each}
-  <a href="/cv">
-    <Icon inline icon="academicons:cv-square" style="transform: scale(1.1)" />
-  </a>
+  <a href="/cv"><Icon icon={CvSquare} style="transform: scale(1.1)" /></a>
 </address>
 
 <div class="intro">
@@ -73,7 +72,7 @@
 </div>
 
 <h2 class="section-title">
-  <Icon inline icon="mdi:newspaper" />
+  <Icon icon={Newspaper} />
   Recent Work
 </h2>
 <ul class="recent grid">

@@ -9,14 +9,15 @@ cover:
 <script lang="ts">
   import { DocsGrid } from '$lib'
   import { bugs } from '$root/package.json'
-  import Icon from '@iconify/svelte'
+  import { Icon } from 'svelte-widgets'
+  import { Atom } from 'svelte-widgets/icons'
 </script>
 
 <img src="./planets.svg" alt={cover.caption} class="banner" />
 
 <section>
   <h2 class="section-title">
-    <Icon inline icon="mdi:atom" /> Notes on Physics
+    <Icon icon={Atom} /> Notes on Physics
   </h2>
 
 This is a compilation of notes and solutions to problem sheets for some of the physics lectures I took, most of them in <a href="https://google.com/search?q=Heidelberg" target="_blank" rel="noopener">Heidelberg</a>. Hopefully, they can be useful to others. If you find errors, please <a href={bugs} target="_blank" rel="noopener">open an issue</a>.

@@ -17,24 +17,27 @@
   "author": "Janosh Riebesell <janosh.riebesell@gmail.com>",
   "repository": "https://github.com/janosh/blog",
   "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build && pagefind --site build --exclude-selectors \"pre, details, .katex\"",
+    "preview": "vite preview"
+  },
   "devDependencies": {
-    "@iconify/svelte": "^5.2.2",
-    "@janosh/vite-config": "github:janosh/dotfiles",
     "@rollup/plugin-yaml": "^5.0.0",
     "@sveltejs/adapter-static": "^3.0.10",
-    "@sveltejs/kit": "^2.68.0",
-    "@types/node": "^26.0.1",
+    "@sveltejs/kit": "^2.70.2",
+    "@types/node": "^26.1.2",
     "@wooorm/starry-night": "^3.10.0",
-    "js-yaml": "^5.2.0",
-    "matterviz": "^0.4.1",
-    "mdsvex": "^0.12.7",
-    "rehype-katex-svelte": "^1.2.0",
-    "remark-math": "3.0.1",
-    "svelte": "^5.56.4",
-    "svelte-check": "^4.7.1",
+    "js-yaml": "^5.2.2",
+    "katex": "^0.16.47",
+    "matterviz": "^0.4.3",
+    "mdsvex": "^0.12.8",
+    "pagefind": "^1.5.2",
+    "svelte": "^5.56.8",
+    "svelte-check": "^4.7.4",
     "svelte-preprocess-import-assets": "^1.1.0",
-    "svelte-widgets": "^1.0.0",
-    "vite-plus": "0.2.5"
+    "svelte-widgets": "^1.4.0",
+    "vite-plus": "^0.2.6"
   },
   "packageManager": "pnpm@11.5.0"
 }
