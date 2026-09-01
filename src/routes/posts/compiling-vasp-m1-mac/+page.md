@@ -12,17 +12,17 @@ tags:
 
 > This post started out [as a gist](https://gist.github.com/janosh/a484f3842b600b60cd575440e99455c0). There's some Q&A there that may be useful.
 
-**Written by Alex Ganose [@utf](https://github.com/utf) and Janosh Riebesell [@janosh](https://github.com/janosh). Last updated on 2024-03-30.**
+**Written by [Alex Ganose](https://profiles.imperial.ac.uk/a.ganose/about) [@utf](https://github.com/utf) and Janosh Riebesell [@janosh](https://github.com/janosh). Last updated on 2024-03-30.**
 
-Follow these steps to compile VASP on an M1 Mac:
+Follow these steps to compile [VASP](https://www.vasp.at/) on an M1 Mac:
 
-1. Install Xcode command line tools:
+1. Install [Xcode command line tools](https://developer.apple.com/xcode/resources/):
 
    ```sh
    xcode-select --install
    ```
 
-2. Install dependencies using Homebrew:
+2. Install dependencies using [Homebrew](https://brew.sh/):
 
    ```sh
    brew install gcc openmpi scalapack fftw qd openblas

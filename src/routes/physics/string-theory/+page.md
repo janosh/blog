@@ -6,25 +6,21 @@ cover:
   url: https://vecteezy.com/vector-art/274839-abstract-background-vector
 ---
 
-<script>
-  import { DocsGrid } from '$lib'
-</script>
-
-My notes and solutions for the final exam and the exercises handed out in the string theory lecture read by [Prof. Timo Weigand](https://qu.uni-hamburg.de/cluster/team/weigand.html) at Heidelberg University in the winter semester of 2015/16.
+My notes and solutions for the final exam and the exercises handed out in the string theory lecture read by [Prof. Timo Weigand](https://qu.uni-hamburg.de/cluster/team/weigand.html) at [Heidelberg University](https://www.uni-heidelberg.de/en) in the winter semester of 2015/16.
 
 ## Exam
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Exam solution](./thumbnails/exam-sol.webp) Exam solution](./pdfs/exam-sol.pdf)
 
 [![Exam sheet](./thumbnails/exam-sheet.webp) Exam sheet](./pdfs/exam-sheet.pdf)
 
-</DocsGrid>
+</div>
 
 ## Exercises
 
-<DocsGrid minWidth="8em" align="center">
+<div class="docs-grid">
 
 [![Exercise 1](./thumbnails/sol-01.webp) Exercise 1](./pdfs/sol-01.pdf)
 
@@ -42,6 +38,6 @@ My notes and solutions for the final exam and the exercises handed out in the st
 
 [![Exercise 9](./thumbnails/sol-09.webp) Exercise 9](./pdfs/sol-09.pdf)
 
-</DocsGrid>
+</div>
 
 > The lecture website was deleted but used to be on Timo's staff page and can still be found on the [Internet Archive](https://web.archive.org/web/20160226230209/http://www.thphys.uni-heidelberg.de/~weigand/Strings-2015.html).

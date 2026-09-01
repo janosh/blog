@@ -11,9 +11,9 @@ tags:
   - JS
 ---
 
-> This post assumes you're using React (16.8 or later).
+> This post assumes you're using [React](https://react.dev/) (16.8 or later).
 
-One thing I like about `styled-components` is that it enables concise and declarative media queries (granted, regular media queries are already declarative[^1]). On this site, I use a file that exports the following `mediaQueries` object.
+One thing I like about [`styled-components`](https://styled-components.com/) is that it enables concise and declarative [media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries) (granted, regular media queries are already declarative[^1]). On this site, I use a file that exports the following `mediaQueries` object.
 
 ```js:title=src/utils/mediaQueries.js
 const min = width => `only screen and (min-width: ${width}em)`
@@ -88,7 +88,7 @@ export default function ResponsiveComponent(props) {
 }
 ```
 
-Note that JS media queries like `maxPhone` need to omit the `@media` prefix present in CSS media queries. `window.matchMedia(maxPhone)` then turns that string into a `query` object which becomes the JavaScript equivalent of `@media screen and (max-width: 30em)`. We call `useState` to manage whether or not the query currently matches the screen size, followed by `useEffect` which creates an event listener that updates the query status on window resizes. Finally, we return the `Mobile` or `Desktop` implementation of `ResponsiveComponent`, depending on the state of the query.
+Note that JS media queries like `maxPhone` need to omit the `@media` prefix present in CSS media queries. `window.matchMedia(maxPhone)` then turns that string into a `query` object which becomes the JavaScript equivalent of `@media screen and (max-width: 30em)`. We call [`useState`](https://react.dev/reference/react/useState) to manage whether or not the query currently matches the screen size, followed by [`useEffect`](https://react.dev/reference/react/useEffect) which creates an event listener that updates the query status on window resizes. Finally, we return the `Mobile` or `Desktop` implementation of `ResponsiveComponent`, depending on the state of the query.
 
 If you're server-side rendering (SSR), you'll need to wrap this code in a check that ensures the `window` object is defined.
 

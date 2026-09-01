@@ -1,60 +1,16 @@
 <script lang="ts">
   import { social } from '$lib/cv-icons'
-  import oss from '$lib/oss.yml'
-  import { references } from '$lib/papers.yaml'
   import { Icon } from 'svelte-widgets'
   import { CvSquare, Newspaper } from 'svelte-widgets/icons'
-  import OpenSource from './open-source/+page.svelte'
-  import Physics from './physics/+page@.md'
+  import OpenSource from '$lib/OpenSource.svelte'
+  import PhysicsNotes from './physics/PhysicsNotes.md'
+  import type { PageProps } from './$types'
 
-  const { data } = $props()
-
-  const cambridge_crest = `https://github.com/janosh/thesis/raw/main/figs/cambridge-crest.svg`
-
-  const projects = oss.projects.map((project) => {
-    if (!project.paper_key) return project
-    const paper = references.find((reference) => reference.id === project.paper_key)
-    if (paper) return { ...project, paper }
-    console.error(`Paper ${project.paper_key} not found`)
-    return project
-  })
-
-  // combine featured projects and PhD thesis into one date-sorted list for Recent Work
-  const date_num = (issued?: { year?: number; month?: number; day?: number }) =>
-    issued ? (issued.year ?? 0) * 1e4 + (issued.month ?? 0) * 100 + (issued.day ?? 0) : 0
-
-  const recent_work = [
-    ...projects
-      .filter((proj) => proj.featured)
-      .map((proj) => ({
-        name: proj.name,
-        url: proj.url,
-        logo: proj.logo,
-        color_invert: proj.color_invert,
-        description: proj.description,
-        issued: proj.paper?.issued?.[0],
-        links: [
-          { label: `Paper`, href: proj.paper?.URL },
-          { label: `Code`, href: proj.repo },
-        ],
-      })),
-    {
-      name: `PhD Thesis`,
-      url: `/physics/phd-thesis`,
-      logo: cambridge_crest,
-      color_invert: undefined,
-      description: `Towards Machine Learning Foundation Models for Materials Chemistry — Matbench Discovery, ML-guided dielectric discovery and the MACE-MP foundation model.`,
-      issued: { year: 2024 },
-      links: [
-        { label: `PDF`, href: `https://doi.org/10.17863/CAM.113233` },
-        { label: `Notes`, href: `/physics/phd-thesis` },
-      ],
-    },
-  ].toSorted((card1, card2) => date_num(card2.issued) - date_num(card1.issued))
+  const { data }: PageProps = $props()
 </script>
 
 <img src="./janosh.webp" alt="me" width="200" />
-<h1>Janosh</h1>
+<h1 id="janosh">Janosh</h1>
 
 <address>
   {#each social as { url, icon, style } (url)}
@@ -64,22 +20,22 @@
 </address>
 
 <div class="intro">
-  <p>
+  <p style="font-size: 1.1rem">
     <strong>Computational materials scientist</strong>. I work at
     <a href="https://periodic.com/">Periodic Labs</a> on high-throughput density functional
     theory (DFT) and machine-learning force fields (MLFFs) for atomistic simulations.
   </p>
 </div>
 
-<h2 class="section-title">
+<h2 id="recent-work" class="section-title">
   <Icon icon={Newspaper} />
   Recent Work
 </h2>
-<ul class="recent grid">
-  {#each recent_work as { name, url, logo, color_invert, description, issued, links } (name)}
-    <li class="card">
-      <h3>
-        <a href={url}>
+<ul class="recent grid" style="margin: 1.2em auto 1.5em">
+  {#each data.recent_work as { name, url, logo, color_invert, description, issued, links } (name)}
+    <li class="card" style="grid-template-rows: auto auto 1fr">
+      <h3 style="font-size: 1.2rem">
+        <a href={url} style="flex-wrap: wrap">
           <img src={logo} alt={name} data-color-invert={color_invert} />
           {name}
         </a>
@@ -97,9 +53,9 @@
   {/each}
 </ul>
 
-<OpenSource {data} />
+<OpenSource projects={data.projects} />
 
-<Physics />
+<PhysicsNotes />
 
 <style>
   img[alt='me'] {
@@ -134,21 +90,6 @@
     max-width: min(45em, 85vw);
     margin: 1em auto;
     text-align: center;
-  }
-  .intro p {
-    font-size: 1.1rem;
-  }
-  .recent {
-    margin: 1.2em auto 1.5em;
-  }
-  .recent > li {
-    grid-template-rows: auto auto 1fr;
-  }
-  .recent > li > h3 {
-    font-size: 1.2rem;
-  }
-  .recent > li > h3 a {
-    flex-wrap: wrap;
   }
   .recent > li > h3 img {
     width: 2.2em;

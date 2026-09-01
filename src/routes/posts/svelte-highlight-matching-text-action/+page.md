@@ -19,8 +19,8 @@ tags:
   const css_class = 'highlight-match'
 </script>
 
-I like the Svelte action API for how neatly it packages up modular functionality, like a power-up to HTML that nonetheless feels native, perhaps because it keeps your markup clean.
-The use case to highlight text matching a search query string comes up a lot so I'd like to share this `highlight_matches` action as an especially neat example of how to combine Svelte's minimal syntax with the GPU-accelerated power of the CSS Custom Highlight API (supported by all major browsers and easily scales to very long texts) to achieve a performant drop-in solution for highlighting text matches.
+I like the [Svelte action API](https://svelte.dev/docs/svelte/use) for how neatly it packages up modular functionality, like a power-up to HTML that nonetheless feels native, perhaps because it keeps your markup clean.
+The use case to highlight text matching a search query string comes up a lot so I'd like to share this `highlight_matches` action as an especially neat example of how to combine Svelte's minimal syntax with the GPU-accelerated power of the [CSS Custom Highlight API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API) (supported by all major browsers and easily scales to very long texts) to achieve a performant drop-in solution for highlighting text matches.
 
 ## Demo
 
@@ -75,7 +75,7 @@ Like any Svelte action, `highlight_matches` takes an `HTMLElement` and an `optio
 
 The `update_highlights` function is where the actual highlighting happens. It first clears any previous highlights. If the `query` is empty, `disabled` is true, or the CSS highlight API is not supported, it returns early.
 
-Otherwise, we create a `TreeWalker` to iterate over all text nodes in the DOM subtree rooted at the given node. It finds matches of the query in each text node and creates a `Range` object for each match. Finally, it creates a `Highlight` object from the ranges and adds it to the CSS highlight registry.
+Otherwise, we create a [`TreeWalker`](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker) to iterate over all text nodes in the DOM subtree rooted at the given node. It finds matches of the query in each text node and creates a [`Range`](https://developer.mozilla.org/en-US/docs/Web/API/Range) object for each match. Finally, it creates a [`Highlight`](https://developer.mozilla.org/en-US/docs/Web/API/Highlight) object from the ranges and adds it to the CSS highlight registry.
 
 Note that the action returns an object with an `update` which is needed to make it responsive to changes in the `query` string. Without it, the action would only run once on mount.
 
@@ -145,9 +145,7 @@ function update_highlights(node: Node, ops: HighlightOptions) {
 
 ## Update
 
-I recently converted this action to an attachment in `svelte-multiselect`, which has since
-been renamed to `svelte-widgets` (`npm install svelte-widgets`), and can now be used like
-this:
+I recently converted this action to an [attachment](https://svelte.dev/docs/svelte/@attach) in `svelte-multiselect`, which has since been renamed to [`svelte-widgets`](https://svelte-widgets.janosh.dev) (`npm install svelte-widgets`), and can now be used like this:
 
 ```svelte
 <script>

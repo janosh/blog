@@ -1,81 +1,62 @@
 <script lang="ts">
-  import { page } from '$app/state'
-  import { cover_url, type FrontMatter } from '$lib'
+  import { cover_url } from '$lib'
   import { Icon, MultiSelect } from 'svelte-widgets'
   import { Article, Calendar, Tag } from 'svelte-widgets/icons'
   import { flip } from 'svelte/animate'
+  import type { PageProps } from './$types'
 
-  type Option = { label: string; count: number }
-  let active_tags: Option[] = $state([])
+  const { data }: PageProps = $props()
 
-  const posts = (page.data?.posts ?? []) as FrontMatter[]
-  const tag_counts = posts
-    .flatMap((post) => post.tags)
-    .reduce((acc: Record<string, number>, tag) => {
-      acc[tag] = (acc[tag] ?? 0) + 1
-      return acc
-    }, {})
-  const all_tags = (Object.entries(tag_counts) as [string, number][]).toSorted(
-    ([, count_1], [, count_2]) => count_2 - count_1,
-  )
-  // check if any tags appear with different casing
-  const seen_lower = new Set<string>()
-  for (const [tag] of all_tags) {
-    const lower = tag.toLowerCase()
-    if (seen_lower.has(lower)) console.error(`Tag "${tag}" appears with different casing`)
-    seen_lower.add(lower)
-  }
-  const top_tags = all_tags.slice(0, 15).toSorted()
-
-  const matches_active_tags = (post: FrontMatter): boolean =>
-    active_tags.length === 0 ||
-    active_tags.some(({ label }) => post.tags?.includes(label))
-
+  let active_tags: typeof data.top_tags = $state([])
   const visible_posts = $derived(
-    posts
-      .filter(matches_active_tags)
-      .toSorted((post_1, post_2) => post_2.date.localeCompare(post_1.date)),
+    data.posts.filter(
+      ({ tags }) =>
+        active_tags.length === 0 || active_tags.some(({ label }) => tags.includes(label)),
+    ),
   )
 </script>
 
 <img src="./blog-banner.svg" alt="Banner" class="banner" />
 
-<h2 class="section-title">
+<h2 id="posts" class="section-title">
   <Icon icon={Article} />
   Posts
 </h2>
 
 <MultiSelect
-  options={top_tags.map(([label, count]) => ({ label, count }))}
+  options={data.top_tags}
   placeholder="Filter by tag"
-  bind:selected={active_tags}
-  closeDropdownOnSelect
+  bind:value={active_tags}
+  close_dropdown_on_select
 >
-  {#snippet option({ option })}
-    {@const tag = option as Option}
+  {#snippet option({ option: { label, count } })}
     <span style="display: flex; gap: 5pt; align-items: center">
-      {tag.label} <span style="flex: 1"></span>
-      {tag.count}
+      {label} <span style="flex: 1"></span>
+      {count}
     </span>
   {/snippet}
 </MultiSelect>
 
 <ul class="grid" style="margin: 4em auto; gap: 3ex">
-  {#each visible_posts as post (post.title)}
-    {@const { cover, slug, title, tags, date } = post}
+  {#each visible_posts as { cover, slug, title, tags, date } (slug)}
     {@const href = `/posts/${slug}`}
     <li animate:flip={{ duration: 400 }}>
       <h3><a {href}>{title}</a></h3>
       <a {href}>
-        <img src={cover_url(`posts`, slug, cover.img)} alt={cover.caption} />
+        <img
+          src={cover_url(`posts`, slug, cover.img)}
+          alt={cover.caption ?? title}
+          loading="lazy"
+          decoding="async"
+        />
       </a>
       <small>
         <time>
           <Icon icon={Calendar} />
-          {date?.split(`T`)[0]}
+          {date.split(`T`)[0]}
         </time>
       </small>
-      <small><Icon icon={Tag} /> {tags?.join(`, `)}</small>
+      <small><Icon icon={Tag} /> {tags.join(`, `)}</small>
     </li>
   {/each}
   <li style="visibility: hidden"></li>

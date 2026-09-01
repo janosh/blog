@@ -7,17 +7,13 @@ cover:
   caption: Graphene lattice
 ---
 
-<script>
-  import { DocsGrid } from '$lib'
-</script>
-
-I wrote my bachelor's thesis under the supervision of [Prof. Alexander Lichtenstein](https://theorie.physnet.uni-hamburg.de/group_magno/?page_id=43) at ITP Hamburg.
+I wrote my bachelor's thesis under the supervision of [Prof. Alexander Lichtenstein](https://theorie.physnet.uni-hamburg.de/group_magno/?page_id=43) at [ITP Hamburg](https://www.physik.uni-hamburg.de/en/th1.html).
 
 ## Topic
 
 In recent endeavors aiming to develop materials for next-generation processors, graphene-based van der Waals heterostructures have emerged as one of the most promising candidates (at least at the time, way back in 2014). It has been shown that interlayer binding in these two-dimensional crystal stacks is dominated by long-range molecular dispersion forces. This poses a challenge to popular (semi-)local approximations in the framework of density functional theory (DFT), requiring instead the use of highly expensive non-local approaches.
 
-In this work, we search for a computationally efficient method of modeling van der Waals heterostructures by modifying DFT’s conventional self-consistency cycle with Grimme et al.’s semi-empirical dispersion correction scheme.
+In this work, we search for a computationally efficient method of modeling van der Waals heterostructures by modifying DFT’s conventional self-consistency cycle with [Grimme et al.’s semi-empirical dispersion correction scheme](https://vasp.at/wiki/DFT-D2).
 
 To test this marriage, we assess its performance on the simple model system of G-hBN, a heterostructure consisting of single-layer graphene (G) bound to hexagonal boron nitride (hBN). We investigate a range of properties including equilibrium configurations, total energies as a function of interlayer separation, Young’s moduli, and band gaps.
 
@@ -30,8 +26,8 @@ Each of these features serves as a point of comparison for four different implem
 
 We report partial success with both LDA and modified GGA delivering realistic results in certain areas. We advise to refrain from using GGA and modified LDA on our specific test system of G-hBN as we have shown them to produce grossly under- and overestimated binding, respectively. We expect this behavior to hold true also for other van der Waals heterostructures.
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Thesis](./thesis.webp) Thesis](./thesis.pdf)
 
-</DocsGrid>
+</div>

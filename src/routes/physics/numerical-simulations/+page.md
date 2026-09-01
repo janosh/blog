@@ -4,11 +4,7 @@ cover:
   img: droplet.webp
 ---
 
-<script>
-  import { DocsGrid } from '$lib'
-</script>
-
-[Numerical Simulations](https://www.h-its.org/2014/11/10/lecture-fundamentals-of-simulation-methods/) was a particularly enjoyable course given by [Prof. Volker Springel](https://www.imprs-astro.mpg.de/content/prof-dr-volker-springel) in the winter term 2015/16 at Heidelberg University.
+[Numerical Simulations](https://www.h-its.org/2014/11/10/lecture-fundamentals-of-simulation-methods/) was a particularly enjoyable course given by [Prof. Volker Springel](https://www.imprs-astro.mpg.de/content/prof-dr-volker-springel) in the winter term 2015/16 at [Heidelberg University](https://www.uni-heidelberg.de/en).
 
 Below are solutions to all the exercises as well as to the mock and the final exam.
 
@@ -16,7 +12,7 @@ The corresponding codes can be found in [this repo](https://github.com/janosh/nu
 
 ## Exam
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Exam solution](./thumbnails/exam-sol.webp) Exam solution](./pdfs/exam-sol.pdf)
 
@@ -24,11 +20,11 @@ The corresponding codes can be found in [this repo](https://github.com/janosh/nu
 
 [![Exam sheet](./thumbnails/exam-sheet.webp) Exam sheet](./pdfs/exam-sheet.pdf)
 
-</DocsGrid>
+</div>
 
 ## Exercises
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Exercise 1](./thumbnails/sol-01.webp) Exercise 1](./pdfs/sol-01.pdf)
 
@@ -50,4 +46,4 @@ The corresponding codes can be found in [this repo](https://github.com/janosh/nu
 
 [![Exercise 10](./thumbnails/sol-10.webp) Exercise 10](./pdfs/sol-10.pdf)
 
-</DocsGrid>
+</div>

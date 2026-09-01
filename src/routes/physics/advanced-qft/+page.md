@@ -7,17 +7,13 @@ cover:
   caption: Particle collision
 ---
 
-<script>
-  import { DocsGrid } from '$lib'
-</script>
-
-Advanced quantum field theory was given by [Prof. Jürgen Berges](https://www.thphys.uni-heidelberg.de/~berges/people.htm) at Heidelberg University in the summer of 2015.
+Advanced quantum field theory was given by [Prof. Jürgen Berges](https://www.thphys.uni-heidelberg.de/~berges/people.htm) at [Heidelberg University](https://www.uni-heidelberg.de/en) in the summer of 2015.
 
 Below is some material I used to prepare for the exam as well as all the assignment sheets and my solutions.
 
 ## Exam Preparation
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Plehn exam](./thumbnails/plehn-exam.webp) Plehn exam](./pdfs/plehn-exam.pdf)
 
@@ -27,11 +23,11 @@ Below is some material I used to prepare for the exam as well as all the assignm
 
 [![Relevant exercises](./thumbnails/relevant-exercises.webp) Relevant exercises](./pdfs/relevant-exercises.pdf)
 
-</DocsGrid>
+</div>
 
 ## Exercises
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Exercise 1](./thumbnails/ex-01.webp) Exercise 1](./pdfs/ex-01.pdf)
 
@@ -77,4 +73,4 @@ Below is some material I used to prepare for the exam as well as all the assignm
 
 [![Solution 11](./thumbnails/sol-11.webp) Solution 11](./pdfs/sol-11.pdf)
 
-</DocsGrid>
+</div>

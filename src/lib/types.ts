@@ -4,13 +4,10 @@ export type FrontMatter = {
   date: string
   cover: {
     img: string
-    src: string
     url: string
     caption?: string
     origin?: string
   }
-  path: string
-  file: string
   tags: string[]
 }
 
@@ -29,23 +26,37 @@ export type Education = {
   }
 }
 
+export type Experience = {
+  organization: string
+  href: string
+  role?: string
+  dates: string
+  contributions: string[]
+}
+
+export type CvProject = {
+  name: string
+  role: NonNullable<Project[`role`]>
+  contribution: string
+}
+
 export type Reference = {
   title: string
   id: string
   author: { family: string; given: string }[]
   DOI?: string
   URL?: string
-  issued: { year: number; month: number; day: number }[]
-  accessed: { year: number; month: number; day: number }[]
-  page?: string
-  type: string
-  ISSN?: string
-  arxiv?: string
-  icon?: string
+  issued: { year: number; month?: number; day?: number }[]
   'container-title'?: string
-  citations?: number
-  citation_database?: string
   note?: string
+}
+
+export type Publication = Pick<Reference, 'id' | 'title' | 'DOI' | 'URL'> & {
+  authors: ({ name: string; is_me: boolean } | null)[]
+  issued: Reference['issued'][number]
+  journal?: string
+  citations: number
+  citation_database: string
 }
 
 export type Project = {
@@ -56,42 +67,30 @@ export type Project = {
   repo: string
   role?: `Lead` | `Maintainer` | `Contributor` | `Former staff member`
   description: string
-  stars: number
-  commits: number
+  // absent for org links (github.com/org#anchor) that have no repo to query
+  stars?: number
+  commits?: number
   pypi?: string
   languages: string[]
   paper_key?: string // Zotero BibTeX ID
-  paper?: Reference
   featured?: boolean
 }
 
 export type Skill = {
   name: string
   svg?: string
-  score: number
   href?: string
   site?: string
+}
+
+export type SkillGroup = {
+  name: string
+  items: Skill[]
 }
 
 export type Hobby = {
   name: string
   href?: string
-}
-
-export type Volunteer = {
-  name: string
-  description: string
-  date: string
-  href: string
-  logo: string
-  role: string
-}
-
-export type Award = {
-  name: string
-  description: string
-  date: string
-  href: string
 }
 
 export type Community = {
@@ -119,16 +118,5 @@ export type Social = {
   style?: string
 }
 
-export const PAPER_SORT_KEYS = {
-  date: `date`,
-  title: `title`,
-  author: `author`,
-  first_author: `first author`,
-  citations: `citations`,
-} as const
-
-export const OSS_SORT_KEYS = {
-  commits: `commits`,
-  stars: `stars`,
-  name: `name`,
-} as const
+export type OssSortKey = `commits` | `stars` | `name`
+export type SortOrder = `asc` | `desc`

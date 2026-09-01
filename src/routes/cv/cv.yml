@@ -13,6 +13,52 @@ social:
     url: mailto:janosh.riebesell@gmail.com
     style: 'transform: translateY(-2px) scale(1.25); vertical-align: middle;'
 
+experience:
+  - organization: Periodic Labs
+    href: https://periodic.com
+    role: Member of Technical Staff
+    dates: Sep 2025 – present
+    contributions:
+      - Develop high-throughput density functional theory workflows and machine-learning force fields for atomistic simulations.
+  - organization: Radical AI
+    href: https://radical-ai.com
+    dates: Apr 2024 – Jun 2025
+    contributions:
+      - Worked on machine-learning interatomic potentials and robotic laboratories.
+  - organization: Materials Project
+    href: https://materialsproject.org
+    dates: Jul 2022 – Dec 2023
+    contributions:
+      - Contributed to CHGNet and MACE-MP foundation models for atomistic simulations.
+      - Developed high-throughput workflows generating reference datasets for interatomic-potential training.
+
+selected_projects:
+  - name: Matbench Discovery
+    role: Maintainer
+    contribution: Developed a benchmark evaluating machine-learning models in realistic crystal-discovery campaigns.
+  - name: TorchSim
+    role: Maintainer
+    contribution: Co-develop a PyTorch-native engine for batched atomistic simulations.
+  - name: CHGNet
+    role: Maintainer
+    contribution: Helped develop a charge-informed interatomic potential.
+  - name: MACE Foundation Models
+    role: Contributor
+    contribution: Helped train and evaluate MACE-MP for atomistic simulations.
+  - name: pymatgen
+    role: Maintainer
+    contribution: Python materials-analysis library powering the Materials Project.
+  - name: atomate2
+    role: Maintainer
+    contribution: Implemented MatPES PBE and r2SCAN workflows generating reference data for universal interatomic potentials.
+
+selected_publications:
+  - riebesell_matbench_2025
+  - cohen_torchsim_2025
+  - deng_chgnet_2023
+  - batatia_foundation_2023
+  - riebesell_discovery_2024
+
 education:
   - title: PhD Student
     uni: University of Cambridge
@@ -21,7 +67,7 @@ education:
     thesis:
       title: Towards Machine Learning Foundation Models for Materials Chemistry
       url: https://doi.org/10.17863/CAM.113233
-      # repo: https://github.com/janosh/thesis
+      repo: https://github.com/janosh/thesis
     logo: https://upload.wikimedia.org/wikipedia/commons/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg
   - title: MPhil in Scientific Computing
     uni: University of Cambridge
@@ -34,73 +80,59 @@ education:
     uni: ITP Heidelberg
     thesis:
       title: Functional Renormalization Group Analytically Continued to Finite Temperatures
+      url: /physics/masters-thesis
     href: https://physik.uni-heidelberg.de?lang=en
     logo: https://physik.uni-heidelberg.de/images/Logo_NEU_Fak_Phys_Astr_rot_schwarz_en.svg
   - title: BSc in Physics
     uni: Hamburg University
     thesis:
       title: van der Waals Corrections for Density Functional Theory - DFT+D2 applied to Graphene-hBN-Heterostructures
+      url: /physics/bachelors-thesis
     href: https://physik.uni-hamburg.de/en.html
     logo: https://upload.wikimedia.org/wikipedia/commons/9/98/UHH_Universit%C3%A4t_Hamburg_Logo.svg
 
 skills:
-  - name: Python
-    score: 10
-    href: https://github.com/janosh?tab=repositories&language=python
-    site: https://python.org
-  - name: TypeScript
-    score: 10
-    href: https://github.com/janosh?tab=repositories&language=typescript
-    site: https://typescriptlang.org
-  - name: Svelte
-    score: 10
-    href: https://github.com/janosh?tab=repositories&language=svelte
-    site: https://svelte.dev
-  - name: C
-    score: 3
-    site: https://wikipedia.org/wiki/C_(programming_language)
-  - name: Git
-    score: 7
-    site: https://git-scm.com
-  - name: Mathematica
-    score: 4
-    site: https://wolfram.com/mathematica
-  - name: REST
-    score: 7
-    site: https://wikipedia.org/wiki/Representational_state_transfer
-  - name: MongoDB
-    score: 8
-    site: https://mongodb.com
-  - name: GraphQL
-    score: 5
-    site: https://graphql.org
-  - name: PyTorch
-    score: 8
-    href: https://github.com/janosh?tab=repositories&language=python
-    site: https://pytorch.org
-  - name: Rust
-    score: 7
-    site: https://rust-lang.org
-  - name: React
-    score: 8
-    site: https://reactjs.org
-  - name: Node.js
-    score: 9
-    site: https://nodejs.org
-  - name: Deno
-    score: 9
-    site: https://deno.land
-  - name: vitest
-    score: 9
-    href: https://github.com/janosh?tab=repositories&language=svelte
-    site: https://vitejs.dev
-  - name: PlayWright
-    score: 8
-    site: https://playwright.dev
-  - name: JAX
-    svg: https://upload.wikimedia.org/wikipedia/commons/8/86/Google_JAX_logo.svg
-    score: 4
-    site: https://docs.jax.dev
+  - name: Scientific computing
+    items:
+      - name: Python
+        href: https://github.com/janosh?tab=repositories&language=python
+        site: https://python.org
+      - name: Rust
+        site: https://rust-lang.org
+      - name: PyTorch
+        href: https://github.com/janosh?tab=repositories&language=python
+        site: https://pytorch.org
+      - name: JAX
+        svg: https://upload.wikimedia.org/wikipedia/commons/8/86/Google_JAX_logo.svg
+        site: https://docs.jax.dev
+  - name: Tooling
+    items:
+      - name: Git
+        site: https://git-scm.com
+      - name: Slurm
+        site: https://slurm.schedmd.com
+      - name: Node.js
+        site: https://nodejs.org
+      - name: Deno
+        site: https://deno.land
+      - name: Vite
+        site: https://vite.dev
+      - name: PlayWright
+        site: https://playwright.dev
+  - name: Web
+    items:
+      - name: TypeScript
+        href: https://github.com/janosh?tab=repositories&language=typescript
+        site: https://typescriptlang.org
+      - name: Svelte
+        href: https://github.com/janosh?tab=repositories&language=svelte
+        site: https://svelte.dev
+      - name: React
+        site: https://reactjs.org
+      - name: REST
+        site: https://wikipedia.org/wiki/Representational_state_transfer
+      - name: MongoDB
+        site: https://mongodb.com
 
 hobbies:
   - name: photography
@@ -137,17 +169,17 @@ community:
     img: https://ioppublishing.org/wp-content/uploads/2019/02/iop_logo.png.webp
   - name: Nature Computational Science
     date: 2025 - present
-    role: frequent reviewer
+    role: reviewer
     href: https://www.nature.com/natcomputsci
     img: https://pbs.twimg.com/profile_images/1259876609533906946/ZDr36zYH_400x400.jpg
   - name: Digital Discovery
     date: 2024 - present
-    role: frequent reviewer
-    href: https://www.rsc.org/publishing/journals/digital-discovery
+    role: reviewer
+    href: https://pubs.rsc.org/en/journals/journalissues/dd
     img: https://pbs.twimg.com/profile_images/1407354102586261511/znhbefSm_400x400.png
   - name: NPJ Computational Materials
     date: 2024 - present
-    role: frequent reviewer
+    role: reviewer
     href: https://www.nature.com/npjcompumats
     img: https://images.squarespace-cdn.com/content/v1/5e48a7c3d218a94af2a7c7d9/1600288102536-U6R1OGNEPGTGYQE9M4PH/npj.jpg
   - name: Cambridge Physical Society

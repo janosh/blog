@@ -7,27 +7,23 @@ cover:
   url: https://en.wikipedia.org/wiki/Tests_of_general_relativity#/media/File:Spacetime_lattice_analogy.svg
 ---
 
-<script>
-  import { DocsGrid } from '$lib'
-</script>
-
-I attended the lecture on General relativity by [Prof. Björn Schäfer](http://www.ita.uni-heidelberg.de/~spirou) at Heidelberg University in the summer of 2015.
+I attended the lecture on General relativity by [Prof. Björn Schäfer](http://www.ita.uni-heidelberg.de/~spirou) at [Heidelberg University](https://www.uni-heidelberg.de/en) in the summer of 2015.
 
 Below are solutions to the exercises and the mock exam.
 
 ## Exam material
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Exam sheet](./thumbnails/exam-sheet.webp) Exam sheet](./pdfs/exam-sheet.pdf)
 
 [![Mock exam](./thumbnails/mock-exam.webp) Mock exam](./pdfs/mock-exam.pdf)
 
-</DocsGrid>
+</div>
 
 ## Exercises
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Exercise 1](./thumbnails/ex-01.webp) Exercise 1](./pdfs/ex-01.pdf)
 
@@ -81,4 +77,4 @@ Below are solutions to the exercises and the mock exam.
 
 [![Solution 13](./thumbnails/sol-13.webp) Solution 13](./pdfs/sol-13.pdf)
 
-</DocsGrid>
+</div>

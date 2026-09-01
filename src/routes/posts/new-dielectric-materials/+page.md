@@ -11,12 +11,12 @@ tags:
 ---
 
 <script>
-  import { references } from '$lib/papers.yaml'
-  import { projects } from '$lib/oss.yml'
-  import { Structure } from 'matterviz'
+  import papers from '$lib/papers.yaml'
+  import oss from '$lib/oss.yml'
+  import StructureDemo from './StructureDemo.svelte'
 
-  const diel_paper = references.find((ref) => ref.id === `riebesell_discovery_2024`)
-  const matterviz = projects.find((proj) => proj.name === `MatterViz`)
+  const diel_paper = papers.references.find((ref) => ref.id === `riebesell_discovery_2024`)
+  const matterviz = oss.projects.find((proj) => proj.name === `MatterViz`)
 
   const structs = import.meta.glob(`./*.json`, { eager: true, import: 'default' })
 </script>
@@ -25,7 +25,7 @@ tags:
 
 ```svelte
 <script>
-  import { Structure } from 'matterviz'
+  import { Structure } from 'matterviz/structure'
 
   // parse all JSON files in this directory
   const structs = import.meta.glob(`./*.json`, { eager: true, import: 'default' })
@@ -42,8 +42,6 @@ Here's what this code renders:
 <div style="display: grid; gap: 3em; margin-top: 2em;">
   {#each Object.entries(structs) as [name, structure]}
     {@const [formula, spacegroup] = name.match(/\.\/(.+)-(.+)\.json/).slice(1)}
-    <Structure {structure} --struct-bg-fullscreen="var(--page-bg)">
-      <h2 style="position: absolute; top: 0; left: 0; z-index: 1; margin: 0; left: 1em; top: 1ex;">{formula} ({spacegroup})</h2>
-    </Structure>
+    <StructureDemo {structure} title={`${formula} (${spacegroup})`} />
   {/each}
 </div>
