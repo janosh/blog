@@ -10,6 +10,9 @@
   import { apply_theme_mode } from 'svelte-widgets/theme'
   // oxlint-disable-next-line no-unassigned-import
   import '../app.css'
+  // KaTeX CSS pinned to the installed version (the markup katex_preprocess emits must match it)
+  // oxlint-disable-next-line no-unassigned-import
+  import 'katex/dist/katex.min.css'
 
   let { children }: { children?: Snippet<[]> } = $props()
 

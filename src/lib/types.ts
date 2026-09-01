@@ -21,7 +21,7 @@ export type Education = {
   href: string
   logo: string
   description?: string
-  date: string
+  date?: string
   thesis?: {
     title?: string
     url?: string

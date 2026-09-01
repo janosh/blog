@@ -53,7 +53,7 @@
   ].toSorted((card1, card2) => date_num(card2.issued) - date_num(card1.issued))
 </script>
 
-<img src="./janosh.jpg" alt="me" width="200" />
+<img src="./janosh.webp" alt="me" width="200" />
 <h1>Janosh</h1>
 
 <address>

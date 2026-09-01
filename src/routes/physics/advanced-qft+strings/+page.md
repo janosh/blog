@@ -1,7 +1,7 @@
 ---
 title: Advanced QFT and String Theory
 cover:
-  img: string-theory-blackboard.jpg
+  img: string-theory-blackboard.webp
   origin: National University of Singapore
   url: https://news.nus.edu.sg/worlds-top-theorists-take-on-the-theory-of-everything/
   caption: String theory blackboard
@@ -19,11 +19,11 @@ Below are four transcripts of past oral exams on similar topics that I used to p
 
 <DocsGrid>
 
-[![Transcript](./thumbnails/transcript.png) Transcript](./pdfs/transcript.pdf)
+[![Transcript](./thumbnails/transcript.webp) Transcript](./pdfs/transcript.pdf)
 
-[![QFT summary](./thumbnails/qft-summary.png) QFT summary](./pdfs/qft-summary.pdf)
+[![QFT summary](./thumbnails/qft-summary.webp) QFT summary](./pdfs/qft-summary.pdf)
 
-[![String theory summary](./thumbnails/string-theory-summary.png) String theory summary](./pdfs/string-theory-summary.pdf)
+[![String theory summary](./thumbnails/string-theory-summary.webp) String theory summary](./pdfs/string-theory-summary.pdf)
 
 </DocsGrid>
 
@@ -31,12 +31,12 @@ Below are four transcripts of past oral exams on similar topics that I used to p
 
 <DocsGrid>
 
-[![Berges 2015](./thumbnails/berges-2015.png) Berges 2015](./pdfs/berges-2015.pdf)
+[![Berges 2015](./thumbnails/berges-2015.webp) Berges 2015](./pdfs/berges-2015.pdf)
 
-[![Jäckel 2014](./thumbnails/jaeckel-2014.png) Jäckel 2014](./pdfs/jaeckel-2014.pdf)
+[![Jäckel 2014](./thumbnails/jaeckel-2014.webp) Jäckel 2014](./pdfs/jaeckel-2014.pdf)
 
-[![Weigand 2014](./thumbnails/weigand-2014.png) Weigand 2014](./pdfs/weigand-2014.pdf)
+[![Weigand 2014](./thumbnails/weigand-2014.webp) Weigand 2014](./pdfs/weigand-2014.pdf)
 
-[![Weigand 2015](./thumbnails/weigand-2015.png) Weigand 2015](./pdfs/weigand-2015.pdf)
+[![Weigand 2015](./thumbnails/weigand-2015.webp) Weigand 2015](./pdfs/weigand-2015.pdf)
 
 </DocsGrid>

@@ -1,8 +1,6 @@
 <script lang="ts">
-  import { dev } from '$app/environment'
   import { page } from '$app/state'
-  import type { FrontMatter } from '$lib'
-  import { repository } from '$root/package.json'
+  import { cover_url, type FrontMatter } from '$lib'
   import type { Snippet } from 'svelte'
   import { heading_anchors, Icon, PrevNext } from 'svelte-widgets'
   import { Calendar } from 'svelte-widgets/icons'
@@ -17,16 +15,7 @@
   let { title, cover, date, slug } = $derived(post)
 </script>
 
-{#if dev}
-  {#await import(`./${slug}/${cover?.img?.replace(`.svg`, ``)}.svg`) then svg}
-    <img src={svg.default} alt={cover?.caption} />
-  {/await}
-{:else}
-  <img
-    src="{repository}/raw/main/src/routes/posts/{slug}/{cover.img}"
-    alt={cover.caption}
-  />
-{/if}
+<img src={cover_url(`posts`, slug, cover.img)} alt={cover.caption ?? title} />
 
 <main style="max-width: 50em; margin: 0 auto" {@attach heading_anchors()}>
   <h1>{title}</h1>
@@ -47,7 +36,7 @@
           <small>{title}</small>
         </a>
         <br />
-        <time>{new Date(date).toISOString().split?.(`T`)[0]}</time>
+        <time>{date.split(`T`)[0]}</time>
       </h3>
     {/snippet}
   </PrevNext>

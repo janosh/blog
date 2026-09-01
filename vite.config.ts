@@ -29,6 +29,8 @@ async function fetch_github_data(gh_token: string) {
   const results = await Promise.allSettled(
     projects.map(async (project) => {
       const handle = project.repo.replace(`https://github.com/`, ``)
+      // org links like github.com/materialsproject#contributors have no repo to query
+      if (!/^[\w.-]+\/[\w.-]+$/.test(handle)) return
 
       const repo_resp = await fetch(`https://api.github.com/repos/${handle}`, auth)
       if (!repo_resp.ok) {

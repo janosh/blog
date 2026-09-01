@@ -9,7 +9,7 @@
     AccountGroup,
     ChevronUp,
     Education,
-    FilePdf,
+    FilePDF,
     GitHub,
     Interests,
     Journal,
@@ -136,7 +136,7 @@
         <li>
           <h4 style="margin: 2ex 0 1ex">
             <a {href}>{title}</a>
-            <span style="font-weight: 200"> - {uni}{date ? ` &bull; ${date}` : ``}</span>
+            <span style="font-weight: 200"> - {uni}{date ? ` • ${date}` : ``}</span>
           </h4>
           Thesis title:<a href={thesis?.url}>{thesis?.title}</a>
           {#if thesis?.repo}
@@ -218,7 +218,7 @@
   <Popover bind:open={pdf_menu_open} placement="top" match_width class="pdf-menu">
     {#snippet trigger(props)}
       <button type="button" class="pdf-menu-trigger" {...props}>
-        <Icon icon={FilePdf} />
+        <Icon icon={FilePDF} />
         Export PDF
         <Icon icon={ChevronUp} />
       </button>

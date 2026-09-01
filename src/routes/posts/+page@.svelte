@@ -1,8 +1,6 @@
 <script lang="ts">
-  import { dev } from '$app/environment'
   import { page } from '$app/state'
-  import type { FrontMatter } from '$lib'
-  import { repository } from '$root/package.json'
+  import { cover_url, type FrontMatter } from '$lib'
   import { Icon, MultiSelect } from 'svelte-widgets'
   import { Article, Calendar, Tag } from 'svelte-widgets/icons'
   import { flip } from 'svelte/animate'
@@ -28,10 +26,6 @@
     seen_lower.add(lower)
   }
   const top_tags = all_tags.slice(0, 15).toSorted()
-  const local_covers = import.meta.glob<string>(`./*/*.{avif,jpg,jpeg,png,svg,webp}`, {
-    eager: true,
-    import: `default`,
-  })
 
   const matches_active_tags = (post: FrontMatter): boolean =>
     active_tags.length === 0 ||
@@ -70,13 +64,10 @@
   {#each visible_posts as post (post.title)}
     {@const { cover, slug, title, tags, date } = post}
     {@const href = `/posts/${slug}`}
-    {@const cover_src =
-      (dev && local_covers[`./${slug}/${cover.img}`]) ||
-      `${repository}/raw/main/src/routes/posts/${slug}/${cover.img}`}
     <li animate:flip={{ duration: 400 }}>
       <h3><a {href}>{title}</a></h3>
       <a {href}>
-        <img src={cover_src} alt={cover.caption} />
+        <img src={cover_url(`posts`, slug, cover.img)} alt={cover.caption} />
       </a>
       <small>
         <time>

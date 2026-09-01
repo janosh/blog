@@ -2,7 +2,7 @@
 title: Master's Thesis
 slug: /masters-thesis
 cover:
-  img: heidelberg-castle-at-night.jpg
+  img: heidelberg-castle-at-night.webp
   origin: Alex Meyer
   url: https://locationscout.net/germany/3596-philosophenweg-heidelberg
   caption: Heidelberg castle at night
@@ -20,6 +20,6 @@ Functional renormalization group equations are analytically continued from imagi
 
 <DocsGrid>
 
-[![Thesis](./thesis.png) Thesis](./thesis.pdf)
+[![Thesis](./thesis.webp) Thesis](./thesis.pdf)
 
 </DocsGrid>

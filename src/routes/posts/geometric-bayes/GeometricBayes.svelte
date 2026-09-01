@@ -7,7 +7,13 @@
   let prob = $state({ H: 20, EGivenH: 40, EGivenNotH: 20 })
   let pNotH = $derived(100 - prob.H)
   let pNotEGivenH = $derived(100 - prob.EGivenH)
-  let pHGivenE = $derived((prob.EGivenH * prob.H) / (prob.EGivenH + prob.EGivenNotH))
+  // Bayes: p(H|E) = p(E|H) p(H) / [p(E|H) p(H) + p(E|¬H) p(¬H)], i.e. the share of the
+  // evidence area (both bottom rectangles) that lies inside the hypothesis rectangle
+  let pHGivenE = $derived.by(() => {
+    const p_evidence = prob.EGivenH * prob.H + prob.EGivenNotH * pNotH
+    // no evidence area means p(H|E) is undefined, show 0 instead of NaN
+    return p_evidence === 0 ? 0 : (100 * prob.EGivenH * prob.H) / p_evidence
+  })
 </script>
 
 <div

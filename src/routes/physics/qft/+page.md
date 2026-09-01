@@ -1,7 +1,7 @@
 ---
 title: Quantum Field Theory
 cover:
-  img: lhc-atlas.jpg
+  img: lhc-atlas.webp
   caption: Atlas detector at the LHC
 ---
 
@@ -15,26 +15,26 @@ This is a collection of mock exams with my solutions and exercise as well as lec
 
 <DocsGrid>
 
-[![Berges midterm exam](./thumbnails/berges-midterm-exam.png) Berges midterm exam](./pdfs/berges-midterm-exam.pdf)
+[![Berges midterm exam](./thumbnails/berges-midterm-exam.webp) Berges midterm exam](./pdfs/berges-midterm-exam.pdf)
 
-[![Berges midterm solution](./thumbnails/berges-midterm-solution.png) Berges midterm solution](./pdfs/berges-midterm-solution.pdf)
+[![Berges midterm solution](./thumbnails/berges-midterm-solution.webp) Berges midterm solution](./pdfs/berges-midterm-solution.pdf)
 
-[![Bies model exam](./thumbnails/bies-model-exam.png) Bies model exam](./pdfs/bies-model-exam.pdf)
+[![Bies model exam](./thumbnails/bies-model-exam.webp) Bies model exam](./pdfs/bies-model-exam.pdf)
 
-[![Exercise revision 1](./thumbnails/exercise-revision-1.png) Exercise revision 1](./pdfs/exercise-revision-1.pdf)
+[![Exercise revision 1](./thumbnails/exercise-revision-1.webp) Exercise revision 1](./pdfs/exercise-revision-1.pdf)
 
-[![Exercise revision 2](./thumbnails/exercise-revision-2.png) Exercise revision 2](./pdfs/exercise-revision-2.pdf)
+[![Exercise revision 2](./thumbnails/exercise-revision-2.webp) Exercise revision 2](./pdfs/exercise-revision-2.pdf)
 
-[![Imperial college exam](./thumbnails/imperial-college-exam.png) Imperial college exam](./pdfs/imperial-college-exam.pdf)
+[![Imperial college exam](./thumbnails/imperial-college-exam.webp) Imperial college exam](./pdfs/imperial-college-exam.pdf)
 
-[![Imperial college solution](./thumbnails/imperial-college-solution.png) Imperial college solution](./pdfs/imperial-college-solution.pdf)
+[![Imperial college solution](./thumbnails/imperial-college-solution.webp) Imperial college solution](./pdfs/imperial-college-solution.pdf)
 
-[![Lecture revisions](./thumbnails/lecture-revisions.png) Lecture revisions](./pdfs/lecture-revisions.pdf)
+[![Lecture revisions](./thumbnails/lecture-revisions.webp) Lecture revisions](./pdfs/lecture-revisions.pdf)
 
-[![Plehn exam](./thumbnails/plehn-exam.png) Plehn exam](./pdfs/plehn-exam.pdf)
+[![Plehn exam](./thumbnails/plehn-exam.webp) Plehn exam](./pdfs/plehn-exam.pdf)
 
-[![Weigand exam 1](./thumbnails/weigand-exam-1.png) Weigand exam 1](./pdfs/weigand-exam-1.pdf)
+[![Weigand exam 1](./thumbnails/weigand-exam-1.webp) Weigand exam 1](./pdfs/weigand-exam-1.pdf)
 
-[![Weigand exam 2](./thumbnails/weigand-exam-2.png) Weigand exam 2](./pdfs/weigand-exam-2.pdf)
+[![Weigand exam 2](./thumbnails/weigand-exam-2.webp) Weigand exam 2](./pdfs/weigand-exam-2.pdf)
 
 </DocsGrid>

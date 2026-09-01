@@ -1,25 +1,16 @@
 <script lang="ts">
-  import { dev } from '$app/environment'
-  import { repository } from '$root/package.json'
+  import { cover_url } from '$lib'
   import { heading_anchors } from 'svelte-widgets'
 
   let { data, children } = $props()
   let { title, cover, slug } = $derived(data.frontmatter)
-
-  const local_covers = import.meta.glob<string>(`./*/*.{avif,jpg,jpeg,png,svg,webp}`, {
-    eager: true,
-    import: `default`,
-  })
-
-  let cover_src = $derived(
-    cover.img.startsWith(`http`)
-      ? cover.img
-      : (dev && local_covers[`./${slug}/${cover.img}`]) ||
-          `${repository}/raw/main/src/routes/physics/${slug}/${cover.img}`,
-  )
 </script>
 
-<img src={cover_src} alt={cover.caption} class:thesis-cover={slug === `phd-thesis`} />
+<img
+  src={cover_url(`physics`, slug, cover.img)}
+  alt={cover.caption ?? title}
+  class:thesis-cover={slug === `phd-thesis`}
+/>
 <h1>{title}</h1>
 
 <main style="max-width: 55em; margin: 1em auto" {@attach heading_anchors()}>

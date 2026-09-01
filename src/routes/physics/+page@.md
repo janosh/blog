@@ -13,7 +13,7 @@ cover:
   import { Atom } from 'svelte-widgets/icons'
 </script>
 
-<img src="./planets.svg" alt={cover.caption} class="banner" />
+<img src="./planets.svg" alt="Planets orbiting in an ultraviolet galaxy" class="banner" />
 
 <section>
   <h2 class="section-title">
@@ -26,27 +26,27 @@ This is a compilation of notes and solutions to problem sheets for some of the p
 
 <DocsGrid>
 
-[String Theory ![Cross section of the quintic Calabi–Yau manifold](./string-theory/calabi-yau.png)](physics/string-theory)
+[String Theory ![Cross section of the quintic Calabi–Yau manifold](./string-theory/calabi-yau.webp)](physics/string-theory)
 
-[QFT ![Feynman diagram of electron-quark scattering](./qft/electron-quark-scattering.png)](physics/qft)
+[QFT ![Feynman diagram of electron-quark scattering](./qft/electron-quark-scattering.webp)](physics/qft)
 
-[Advanced QFT ![Standard model interactions](./advanced-qft/standard-model-interactions.png)](physics/advanced-qft)
+[Advanced QFT ![Standard model interactions](./advanced-qft/standard-model-interactions.webp)](physics/advanced-qft)
 
-[General Relativity ![Cosmic microwave background](./general-relativity/sun-earth-spacetime.jpg)](physics/general-relativity)
+[General Relativity ![Cosmic microwave background](./general-relativity/sun-earth-spacetime.webp)](physics/general-relativity)
 
-[Group Theory ![Rubik's cube](./group-theory/rubiks-cube.png)](physics/group-theory)
+[Group Theory ![Rubik's cube](./group-theory/rubiks-cube.webp)](physics/group-theory)
 
-[Numerical Simulations ![Double pendulum](./numerical-simulations/double-pendulum.jpg)](physics/numerical-simulations)
+[Numerical Simulations ![Double pendulum](./numerical-simulations/double-pendulum.webp)](physics/numerical-simulations)
 
-[Atomic Physics ![Electron excitations in an atomic shell](./atomic-physics/excited-electrons.png)](physics/atomic-physics)
+[Atomic Physics ![Electron excitations in an atomic shell](./atomic-physics/excited-electrons.webp)](physics/atomic-physics)
 
-[Statistical Physics ![Phase space trajectory](./statistical-physics/phase-space-trajectory.png)](physics/statistical-physics)
+[Statistical Physics ![Phase space trajectory](./statistical-physics/phase-space-trajectory.webp)](physics/statistical-physics)
 
-[QFT + Strings ![Keep calm](./advanced-qft+strings/keep-calm.png)](physics/advanced-qft+strings)
+[QFT + Strings ![Keep calm](./advanced-qft+strings/keep-calm.webp)](physics/advanced-qft+strings)
 
-[Bachelor's Thesis ![Graphene band structure](./bachelors-thesis/graphene-band-structure.png)](physics/bachelors-thesis)
+[Bachelor's Thesis ![Graphene band structure](./bachelors-thesis/graphene-band-structure.webp)](physics/bachelors-thesis)
 
-[Master's Thesis ![Absolute value of Bose-Einstein distribution over complex plane](./masters-thesis/complex-bose-einstein-distribution.png)](physics/masters-thesis)
+[Master's Thesis ![Absolute value of Bose-Einstein distribution over complex plane](./masters-thesis/complex-bose-einstein-distribution.webp)](physics/masters-thesis)
 
 [PhD Thesis ![Thesis cover](https://github.com/janosh/thesis/raw/main/figs/thesis-cover.svg)](physics/phd-thesis)
 

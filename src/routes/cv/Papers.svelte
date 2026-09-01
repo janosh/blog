@@ -43,7 +43,7 @@
       if (sort_by === PAPER_SORT_KEYS.date)
         return (date_num(ref_1) - date_num(ref_2)) * dir
       if (sort_by === PAPER_SORT_KEYS.citations)
-        return ((ref_2.citations ?? 0) - (ref_1.citations ?? 0)) * dir
+        return ((ref_1.citations ?? 0) - (ref_2.citations ?? 0)) * dir
 
       const author_idx_1 = ref_1.author.findIndex((auth) => auth.family === target_family)
       const author_idx_2 = ref_2.author.findIndex((auth) => auth.family === target_family)

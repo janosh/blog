@@ -1,7 +1,7 @@
 ---
 title: Bachelor's Thesis
 cover:
-  img: graphene.jpg
+  img: graphene.webp
   origin: Wikipedia
   url: https://en.wikipedia.org/wiki/Graphene#/media/File:Graphen.jpg
   caption: Graphene lattice
@@ -32,6 +32,6 @@ We report partial success with both LDA and modified GGA delivering realistic re
 
 <DocsGrid>
 
-[![Thesis](./thesis.png) Thesis](./thesis.pdf)
+[![Thesis](./thesis.webp) Thesis](./thesis.pdf)
 
 </DocsGrid>
