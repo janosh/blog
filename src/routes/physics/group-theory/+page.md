@@ -4,17 +4,13 @@ cover:
   img: symmetric-fern.webp
 ---
 
-<script>
-  import { DocsGrid } from '$lib'
-</script>
-
-In the summer of 2015, [Prof. Daniel Roggenkamp](https://www.thphys.uni-heidelberg.de/~roggenkamp) gave a small but insightful lecture on group theory and its applications in physics at Heidelberg University.
+In the summer of 2015, [Prof. Daniel Roggenkamp](https://www.thphys.uni-heidelberg.de/~roggenkamp) gave a small but insightful lecture on group theory and its applications in physics at [Heidelberg University](https://www.uni-heidelberg.de/en).
 
 Below are lecture notes and solutions to the exercises.
 
 ## Lecture notes
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Lecture 1](./thumbnails/lec-01.webp) Lecture 1](./pdfs/lec-01.pdf)
 
@@ -30,11 +26,11 @@ Below are lecture notes and solutions to the exercises.
 
 [![Lecture 7](./thumbnails/lec-07.webp) Lecture 7](./pdfs/lec-07.pdf)
 
-</DocsGrid>
+</div>
 
 ## Exercises
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Exercise 1](./thumbnails/ex-01.png) Exercise 1](./pdfs/ex-01.pdf)
 
@@ -48,4 +44,4 @@ Below are lecture notes and solutions to the exercises.
 
 [![Solution 3](./thumbnails/sol-03.webp) Solution 3](./pdfs/sol-03.pdf)
 
-</DocsGrid>
+</div>

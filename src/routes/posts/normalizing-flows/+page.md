@@ -39,7 +39,7 @@ The cool thing about FGNs is that a sufficiently accurate proxy for the posterio
 
 The problem that normalizing flows aim to address is turning a simple distribution into a complex, multi-modal one in an invertible manner. Why would we want to do that? Training a machine learning model usually means tuning its parameters to maximize the probability of observed training data under the model. To quantify this probability, we have to assume some probability distribution as the model's output. In classification, this is typically a categorical distribution and in regression usually a Gaussian, mostly because it's the only non-uniform continuous distribution we really know how to deal with. However, assuming the model output to be distributed according to a Gaussian is problematic because the world is complicated and the true probability density function (PDF) of actual data will in general be completely unlike a Gaussian.
 
-Luckily, we can take a simple distribution like a Gaussian, sample from it and then transform those samples using smooth bijective functions which essentially performs a change of variables in probability distributions. Repeating this process multiple times can quickly result in a complex PDF for the transformed variable. Danilo Rezende formalized this in [his 2015 paper](https://arxiv.org/abs/1505.05770) on normalizing flows.
+Luckily, we can take a simple distribution like a Gaussian, sample from it and then transform those samples using smooth bijective functions which essentially performs a change of variables in probability distributions. Repeating this process multiple times can quickly result in a complex PDF for the transformed variable. [Danilo Rezende](https://danilorezende.com/) formalized this in [his 2015 paper](https://arxiv.org/abs/1505.05770) on normalizing flows.
 
 ## Definition
 
@@ -312,9 +312,9 @@ $$
 
 To learn more about normalizing flows, here are some resources to take you further.
 
-- Ari Seff created a [super helpful 3blue1brown-style video](https://youtube.com/watch?v=i7LjDvsLWCg) explaining the basics of normalizing flows.
-- Some of the guys at DeepMind involved in the development of NFs [published a very thorough and very readable review article](https://arxiv.org/abs/1912.02762) on the subject just days after I published this post. (I updated this post with some of the insights I gained there.)
-- Andrej Karpathy created [a repo with PyTorch implementations of the most commonly used flows](https://github.com/karpathy/pytorch-normalizing-flows) (also just days after this post).
-- PyMC3 has a [very helpful notebook](https://www.pymc.io/projects/examples/en/2022.01.0/variational_inference/normalizing_flows_overview.html) showcasing how to work with flows in practice and comparing it to their NUTS-based HMC implementation.
+- [Ari Seff](https://www.ariseff.com/) created a [super helpful 3blue1brown-style video](https://youtube.com/watch?v=i7LjDvsLWCg) explaining the basics of normalizing flows.
+- Some of the guys at [DeepMind](https://deepmind.google/) involved in the development of NFs [published a very thorough and very readable review article](https://arxiv.org/abs/1912.02762) on the subject just days after I published this post. (I updated this post with some of the insights I gained there.)
+- [Andrej Karpathy](https://karpathy.ai/) created [a repo with PyTorch implementations of the most commonly used flows](https://github.com/karpathy/pytorch-normalizing-flows) (also just days after this post).
+- [PyMC3](https://www.pymc.io/) has a [very helpful notebook](https://www.pymc.io/projects/examples/en/2022.01.0/variational_inference/normalizing_flows_overview.html) showcasing how to work with flows in practice and comparing it to their [NUTS-based HMC implementation](https://www.pymc.io/projects/docs/en/stable/api/generated/pymc.step_methods.hmc.NUTS.html).
 
 > I also started this much more up-to-date [collection on NFs](https://github.com/janosh/awesome-normalizing-flows) that's received an unexpected amount of attention. Feel free to submit PRs to gather even more sources/advice/applications.

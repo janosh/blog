@@ -1,19 +1,14 @@
-<script>
+<script lang="ts">
   import { FullscreenButton } from 'svelte-widgets'
-  import Resizable from './Resizable.svelte'
+  import { posterior_pct } from './bayes'
+  import ProbabilityRegion from './ProbabilityRegion.svelte'
 
   let size = $state({ width: 0, height: 0 })
-  let container = $state()
-  let prob = $state({ H: 20, EGivenH: 40, EGivenNotH: 20 })
-  let pNotH = $derived(100 - prob.H)
-  let pNotEGivenH = $derived(100 - prob.EGivenH)
-  // Bayes: p(H|E) = p(E|H) p(H) / [p(E|H) p(H) + p(E|¬H) p(¬H)], i.e. the share of the
-  // evidence area (both bottom rectangles) that lies inside the hypothesis rectangle
-  let pHGivenE = $derived.by(() => {
-    const p_evidence = prob.EGivenH * prob.H + prob.EGivenNotH * pNotH
-    // no evidence area means p(H|E) is undefined, show 0 instead of NaN
-    return p_evidence === 0 ? 0 : (100 * prob.EGivenH * prob.H) / p_evidence
-  })
+  let container: HTMLDivElement | undefined = $state()
+  let p_h = $state(20)
+  let p_e_given_h = $state(40)
+  let p_e_given_not_h = $state(20)
+  const posterior = $derived(posterior_pct(p_h, p_e_given_h, p_e_given_not_h))
 </script>
 
 <div
@@ -24,56 +19,39 @@
 >
   <FullscreenButton placement="corner" wrapper={container} />
   {#if size.width && size.height}
-    <Resizable
-      parent_height={size.height}
-      parent_width={size.width}
-      bind:width={prob.H}
-      bind:height={pNotEGivenH}
-      color="teal"
-      resizable="x"
-      handle_position="top: 0%; left: 100%"
-    >
-      <span style="left: 50%; top: 0; transform: translate(-50%, calc(-100% - 1ex))">
-        p(H) =
-        {Math.round(prob.H)}%
-      </span>
-    </Resizable>
-    <Resizable
-      parent_height={size.height}
-      parent_width={size.width}
-      bind:width={prob.H}
-      bind:height={prob.EGivenH}
-      color="DeepSkyBlue"
-      resizable="y"
-      pos="bottom: 0; left: 0;"
-    >
-      <span style="left: 0; top: 50%; transform: translate(calc(-100% - 1ex), -50%)">
-        p(E|H) =
-        {Math.round(prob.EGivenH)}%
-      </span>
-    </Resizable>
-    <Resizable
-      parent_height={size.height}
-      parent_width={size.width}
-      bind:width={pNotH}
-      bind:height={prob.EGivenNotH}
-      color="SteelBlue"
-      resizable="y"
-      pos="bottom: 0; right: 0;"
-      handle_position="top: 0%; left: 100%"
-    >
-      <span style="right: 0; top: 50%; transform: translate(calc(100% + 1ex), -50%)">
-        p(E|&not;H) =
-        {Math.round(prob.EGivenNotH)}%
-      </span>
-    </Resizable>
+    <ProbabilityRegion
+      {size}
+      dimension="width"
+      bind:probability={p_h}
+      label="p(H)"
+      style="top: 0; left: 0; width: {p_h}%; height: {100 -
+        p_e_given_h}%; background: teal"
+      label_style="left: 50%; top: 0; transform: translate(-50%, calc(-100% - 1ex))"
+    />
+    <ProbabilityRegion
+      {size}
+      dimension="height"
+      bind:probability={p_e_given_h}
+      label="p(E|H)"
+      style="bottom: 0; left: 0; width: {p_h}%; height: {p_e_given_h}%; background: DeepSkyBlue"
+      label_style="left: 0; top: 50%; transform: translate(calc(-100% - 1ex), -50%)"
+    />
+    <ProbabilityRegion
+      {size}
+      dimension="height"
+      bind:probability={p_e_given_not_h}
+      label="p(E|¬H)"
+      style="bottom: 0; right: 0; width: {100 -
+        p_h}%; height: {p_e_given_not_h}%; background: SteelBlue"
+      label_style="right: 0; top: 50%; transform: translate(calc(100% + 1ex), -50%)"
+    />
   {/if}
 </div>
 <div id="result" style:width="{size.width}px">
-  <div style:width="{pHGivenE}%">
+  <div style:width="{posterior}%">
     <span style="right: 50%; bottom: 0; transform: translate(50%, calc(100% + 1ex))">
       p(H|E) =
-      {Math.round(pHGivenE)}%
+      {Math.round(posterior)}%
     </span>
   </div>
 </div>
@@ -85,8 +63,8 @@
     --fullscreen-btn-bg: #0007;
     --fullscreen-btn-color: white;
     --fullscreen-btn-opacity: 0.85;
-    width: 50vw;
-    height: 50vw;
+    width: min(50vw, calc(100vw - 13rem));
+    height: min(50vw, calc(100vw - 13rem));
     max-height: 600px;
     max-width: 600px;
     margin: 3em auto;
@@ -100,6 +78,7 @@
   span {
     position: absolute;
     white-space: nowrap;
+    font-size: clamp(0.75rem, 2.5vw, 1rem);
   }
   #result {
     margin: auto;

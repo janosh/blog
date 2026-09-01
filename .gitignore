@@ -1,10 +1,4 @@
-# dependencies
 node_modules
-
-# production build
 .svelte-kit
 build
-
-# secrets
 .env
-package-lock.json

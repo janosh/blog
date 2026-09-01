@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Janosh Riebesell" />
     <meta name="color-scheme" content="light dark" />
 
@@ -17,33 +19,20 @@
       document.documentElement.dataset.theme = theme
     </script>
 
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="janosh.dev" />
-    <meta
-      name="description"
-      content="I write about physics, materials science and sustainability."
-    />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <meta
-      property="og:title"
-      content="janosh.dev - physics, materials science, sustainability"
-    />
-    <meta property="og:image" content="https://janosh.dev/favicon.svg" />
-    <meta
-      property="og:description"
-      content="I write about physics, materials science and sustainability."
-    />
-
     <script
       defer
       data-domain="janosh.dev"
       src="https://plausible.io/js/plausible.js"
     ></script>
 
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="janosh.dev posts"
+      href="/rss.xml"
+    />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="icon" href="/favicon.svg" />
-    <!-- <link rel="manifest" href="/manifest.json" crossorigin="use-credentials" /> -->
 
     %sveltekit.head%
   </head>

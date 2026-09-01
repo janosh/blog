@@ -13,7 +13,7 @@ tags:
 
 > This post is without original content, providing merely a summary of the first 3 sections of [Michael Betancourt](https://betanalpha.github.io)'s excellent [introduction to Hamiltonian Monte Carlo](https://arxiv.org/abs/1701.02434). Most images were taken from there and slightly modified.
 
-Hamiltonian Monte Carlo (HMC) was originally developed by [Duane et al.](https://linkinghub.elsevier.com/retrieve/pii/037026938791197X) in the late 1980s as Hybrid Monte Carlo in the context of Quantum Chromodynamics, specifically, lattice computations that attempted to understand the structure of protons and neutrons comprising atomic nuclei. Radford Neal was the first to realize the potential of HMC in applied statistics as part of his [pioneering work in the mid-1990s on Bayesian neural networks](https://www.cs.toronto.edu/~radford/ftp/thesis.pdf).
+Hamiltonian Monte Carlo (HMC) was originally developed by [Duane et al.](https://linkinghub.elsevier.com/retrieve/pii/037026938791197X) in the late 1980s as Hybrid Monte Carlo in the context of Quantum Chromodynamics, specifically, lattice computations that attempted to understand the structure of protons and neutrons comprising atomic nuclei. [Radford Neal](https://glizen.com/radfordneal/) was the first to realize the potential of HMC in applied statistics as part of his [pioneering work in the mid-1990s on Bayesian neural networks](https://www.cs.toronto.edu/~radford/ftp/thesis.pdf).
 
 Over the ensuing decades, HMC made a rather reluctant entry into modern statistics. This is mostly due to two reasons:
 
@@ -274,9 +274,9 @@ Generating a transition from the current position in sample space $\vec q$ requi
 - The go-to paper for a more in-depth and more theory-heavy introduction to HMC is [MCMC using Hamiltonian dynamics](https://arxiv.org/abs/1206.1901), a review from 2011 by Radford Neal, the guy who originally ported the method from physics to statistics.
 - Two really nice blog posts with awesome animations illustrating the different sampling behavior of Metropolis Hastings and HMC:
   - [Alex Rogozhnikov](https://arogozhnikov.github.io/2016/12/19/markov_chain_monte_carlo.html)
-  - [Richard McElreath](http://elevanth.org/blog/2017/11/28/build-a-better-markov-chain) (MPI for Evolutionary Anthropology in Leipzig)
+  - [Richard McElreath](http://elevanth.org/blog/2017/11/28/build-a-better-markov-chain) ([MPI for Evolutionary Anthropology](https://www.eva.mpg.de/) in Leipzig)
 - There are also some interesting HMC questions on StackExchange:
   - [HMC: Intuition and justification behind a Gaussian-distributed momentum variable?](https://stats.stackexchange.com/questions/320200)
   - [HMC Mass Matrix Terminology](https://stats.stackexchange.com/questions/229106)
 
-If this post got you excited about HMC and asymptotically exact posterior inference even in high-dimensional distributions and you want to start getting your own hands dirty, I highly recommend the post ["A tour of probabilistic programming language APIs"](https://colcarroll.github.io/ppl-api) by Colin Carroll where he compares many (all?) of the currently available frameworks that implement HMC-sampling and what they each have to offer.
+If this post got you excited about HMC and asymptotically exact posterior inference even in high-dimensional distributions and you want to start getting your own hands dirty, I highly recommend the post ["A tour of probabilistic programming language APIs"](https://colcarroll.github.io/ppl-api) by [Colin Carroll](https://colindcarroll.com/) where he compares many (all?) of the currently available frameworks that implement HMC-sampling and what they each have to offer.

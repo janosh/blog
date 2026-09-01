@@ -8,17 +8,13 @@ cover:
   caption: Bose-Einstein condensate
 ---
 
-<script>
-  import { DocsGrid } from '$lib'
-</script>
-
-I had the pleasure of attending a lecture on statistical physics by [Prof. Manfred Salmhofer](https://www.thphys.uni-heidelberg.de/~salmhofer) at Heidelberg University in the fall of 2016.
+I had the pleasure of attending a lecture on statistical physics by [Prof. Manfred Salmhofer](https://www.thphys.uni-heidelberg.de/~salmhofer) at [Heidelberg University](https://www.uni-heidelberg.de/en) in the fall of 2016.
 
 Below you can find solutions to all the exercises as well as the final exam.
 
 ## Exam and Prep
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Final exam](./thumbnails/final-exam.webp) Final exam](./pdfs/final-exam.pdf)
 
@@ -28,11 +24,11 @@ Below you can find solutions to all the exercises as well as the final exam.
 
 [![Fock spaces](./thumbnails/fock-spaces.webp) Fock spaces](./pdfs/fock-spaces.pdf)
 
-</DocsGrid>
+</div>
 
 ## Exercises
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Exercise 1](./thumbnails/sol-01.webp) Exercise 1](./pdfs/sol-01.pdf)
 
@@ -56,4 +52,4 @@ Below you can find solutions to all the exercises as well as the final exam.
 
 [![Exercise 11](./thumbnails/sol-11.webp) Exercise 11](./pdfs/sol-11.pdf)
 
-</DocsGrid>
+</div>

@@ -36,72 +36,27 @@ html[data-theme='dark'] {
 }
 
 :root {
-  /* Light theme colors */
-  --light-bg: #f8f9fa;
-  --light-text: #212529;
-  --light-text-secondary: #6c757d;
-  --light-link: #085ddd;
-  --light-link-hover: #fd7e14;
-  --light-code-bg: rgba(0, 123, 255, 0.1);
-  --light-pre-bg: rgba(0, 0, 0, 0.04);
-  --light-button-bg: #dee2e6;
-  --light-button-text: #333;
-  --light-border: rgba(0, 0, 0, 0.125);
-  --light-highlight: #17a2b8;
-  --light-blockquote-bg: rgba(0, 0, 0, 0.05);
-  --light-input-bg: rgba(0, 0, 0, 0.1);
-  --light-table-odd: rgba(0, 0, 0, 0.05);
-  --light-nav-bg: rgba(0, 0, 0, 0.05);
-  --light-card-bg: rgba(255, 255, 255, 0.8);
-  --light-card-border: rgba(0, 0, 0, 0.1);
-  --light-shadow: rgba(0, 0, 0, 0.1);
-  --light-selection: rgba(0, 123, 255, 0.2);
-  --light-accent-bg: #dbdab4;
-
-  /* Dark theme colors */
-  --dark-bg: #061e25;
-  --dark-text: rgb(208, 208, 208);
-  --dark-text-secondary: rgb(140, 140, 140);
-  --dark-link: cornflowerblue;
-  --dark-link-hover: orange;
-  --dark-code-bg: rgba(0, 255, 255, 0.1);
-  --dark-pre-bg: rgba(255, 255, 255, 0.04);
-  --dark-button-bg: rgb(59, 59, 59);
-  --dark-button-text: rgb(208, 208, 208);
-  --dark-border: rgba(255, 255, 255, 0.125);
-  --dark-highlight: mediumaquamarine;
-  --dark-blockquote-bg: rgba(255, 255, 255, 0.1);
-  --dark-input-bg: rgba(0, 0, 0, 0.6);
-  --dark-table-odd: black;
-  --dark-nav-bg: rgba(255, 255, 255, 0.1);
-  --dark-card-bg: rgba(0, 0, 0, 0.3);
-  --dark-card-border: rgba(255, 255, 255, 0.1);
-  --dark-shadow: rgba(0, 0, 0, 0.3);
-  --dark-selection: rgba(0, 255, 255, 0.2);
-  --dark-accent-bg: #534027;
-
-  /* Use light-dark() function to switch between themes */
-  --page-bg: light-dark(var(--light-bg), var(--dark-bg));
-  --text-color: light-dark(var(--light-text), var(--dark-text));
-  --text-secondary: light-dark(var(--light-text-secondary), var(--dark-text-secondary));
-  --link-color: light-dark(var(--light-link), var(--dark-link));
-  --link-hover: light-dark(var(--light-link-hover), var(--dark-link-hover));
-  --code-bg: light-dark(var(--light-code-bg), var(--dark-code-bg));
-  --pre-bg: light-dark(var(--light-pre-bg), var(--dark-pre-bg));
-  --button-bg: light-dark(var(--light-button-bg), var(--dark-button-bg));
-  --button-text: light-dark(var(--light-button-text), var(--dark-button-text));
-  --border: light-dark(var(--light-border), var(--dark-border));
-  --highlight: light-dark(var(--light-highlight), var(--dark-highlight));
-  --blockquote-bg: light-dark(var(--light-blockquote-bg), var(--dark-blockquote-bg));
-  --input-bg: light-dark(var(--light-input-bg), var(--dark-input-bg));
-  --table-odd: light-dark(var(--light-table-odd), var(--dark-table-odd));
-  --nav-bg: light-dark(var(--light-nav-bg), var(--dark-nav-bg));
-  --card-bg: light-dark(var(--light-card-bg), var(--dark-card-bg));
-  --card-border: light-dark(var(--light-card-border), var(--dark-card-border));
-  --shadow: light-dark(var(--light-shadow), var(--dark-shadow));
-  --selection: light-dark(var(--light-selection), var(--dark-selection));
-  --struct-bg: light-dark(var(--light-pre-bg), var(--dark-pre-bg));
-  --accent-bg: light-dark(var(--light-accent-bg), var(--dark-accent-bg));
+  --page-bg: light-dark(#f8f9fa, #061e25);
+  --text-color: light-dark(#212529, rgb(208, 208, 208));
+  --text-secondary: light-dark(#6c757d, rgb(140, 140, 140));
+  --link-color: light-dark(#085ddd, cornflowerblue);
+  --link-hover: light-dark(#fd7e14, orange);
+  --code-bg: light-dark(rgba(0, 123, 255, 0.1), rgba(0, 255, 255, 0.1));
+  --pre-bg: light-dark(rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0.04));
+  --button-bg: light-dark(#dee2e6, rgb(59, 59, 59));
+  --button-text: light-dark(#333, rgb(208, 208, 208));
+  --border: light-dark(rgba(0, 0, 0, 0.125), rgba(255, 255, 255, 0.125));
+  --highlight: light-dark(#17a2b8, mediumaquamarine);
+  --blockquote-bg: light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.1));
+  --input-bg: light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6));
+  --table-odd: light-dark(rgba(0, 0, 0, 0.05), black);
+  --nav-bg: light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.1));
+  --card-bg: light-dark(rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.3));
+  --card-border: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+  --shadow: light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+  --selection: light-dark(rgba(0, 123, 255, 0.2), rgba(0, 255, 255, 0.2));
+  --struct-bg: light-dark(rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0.04));
+  --accent-bg: light-dark(#dbdab4, #534027);
 
   --body-max-width: min(90vw, 1100px);
   --radius-sm: 3pt;
@@ -114,8 +69,6 @@ html[data-theme='dark'] {
     var(--card-bg),
     color-mix(in srgb, var(--card-bg) 60%, var(--nav-bg) 40%)
   );
-  --sms-options-bg: light-dark(var(--light-bg), var(--dark-bg));
-  --sms-text-color: light-dark(var(--light-text), var(--dark-text));
   --tooltip-bg: light-dark(#f5f5f7, #2a2a2e);
 }
 body {
@@ -133,8 +86,20 @@ body {
     color 0.3s;
 }
 main {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
   padding: calc(1ex + 2vw);
   flex: 1;
+  overflow-wrap: anywhere;
+}
+main img {
+  max-width: 100%;
+  height: auto;
+}
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 button {
   color: var(--button-text);
@@ -329,13 +294,6 @@ ul.grid > li.card > h3 img {
 .card-description {
   margin: 0;
 }
-label {
-  font-weight: 600;
-  cursor: pointer;
-}
-main > img {
-  width: 100%;
-}
 table {
   border-collapse: collapse;
   width: 100%;
@@ -359,12 +317,6 @@ blockquote p:first-child {
 }
 blockquote p:last-child {
   margin-bottom: 0;
-}
-aside.toc.desktop {
-  position: fixed;
-  top: 3em;
-  left: calc(50vw + 50em / 2);
-  max-width: 16em;
 }
 input {
   background-color: var(--input-bg);
@@ -399,6 +351,6 @@ strong {
   background-color: var(--selection);
 }
 ::highlight(page-search-match) {
-  background: var(--page-search-highlight-bg, light-dark(#ffe07a, #806300));
-  color: var(--page-search-highlight-color, light-dark(#513a00, #fff3ba));
+  background: light-dark(#ffe07a, #806300);
+  color: light-dark(#513a00, #fff3ba);
 }
