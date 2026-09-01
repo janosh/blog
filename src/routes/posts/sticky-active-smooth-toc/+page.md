@@ -28,7 +28,7 @@ Just so we're on the same page, here are two important points.
    - **Active**: The ToC highlights the heading that's closest to the reader's current position to act as a "progress bar".
    - **Smooth**: When a user clicks a heading in the ToC, the viewport smoothly scrolls there (without adding to the browser history so that clicking the back button will always send the reader back to the previous page).
 
-3. Positioning the ToC to the side of the main text relies on CSS grid. If you're not using `grid` this can very likely be achieved in other ways too but will require some small modifications on your part.
+3. Positioning the ToC to the side of the main text relies on [CSS grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout). If you're not using `grid` this can very likely be achieved in other ways too but will require some small modifications on your part.
 
 Enough talking! Let's see the code.
 

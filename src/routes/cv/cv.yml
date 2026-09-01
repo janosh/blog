@@ -34,12 +34,14 @@ education:
     uni: ITP Heidelberg
     thesis:
       title: Functional Renormalization Group Analytically Continued to Finite Temperatures
+      url: /physics/masters-thesis
     href: https://physik.uni-heidelberg.de?lang=en
     logo: https://physik.uni-heidelberg.de/images/Logo_NEU_Fak_Phys_Astr_rot_schwarz_en.svg
   - title: BSc in Physics
     uni: Hamburg University
     thesis:
       title: van der Waals Corrections for Density Functional Theory - DFT+D2 applied to Graphene-hBN-Heterostructures
+      url: /physics/bachelors-thesis
     href: https://physik.uni-hamburg.de/en.html
     logo: https://upload.wikimedia.org/wikipedia/commons/9/98/UHH_Universit%C3%A4t_Hamburg_Logo.svg
 
@@ -92,8 +94,7 @@ skills:
     site: https://deno.land
   - name: vitest
     score: 9
-    href: https://github.com/janosh?tab=repositories&language=svelte
-    site: https://vitejs.dev
+    site: https://vitest.dev
   - name: PlayWright
     score: 8
     site: https://playwright.dev
@@ -143,7 +144,7 @@ community:
   - name: Digital Discovery
     date: 2024 - present
     role: frequent reviewer
-    href: https://www.rsc.org/publishing/journals/digital-discovery
+    href: https://pubs.rsc.org/en/journals/journalissues/dd
     img: https://pbs.twimg.com/profile_images/1407354102586261511/znhbefSm_400x400.png
   - name: NPJ Computational Materials
     date: 2024 - present

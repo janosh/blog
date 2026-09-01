@@ -1,7 +1,16 @@
 /// <reference types="@sveltejs/kit" />
-/// <reference types="mdsvex/globals" />
 
 declare module '*.md'
+
+namespace App {
+  type FrontMatter = import('$lib/types').FrontMatter // oxlint-disable-line typescript/consistent-type-imports
+  interface PageData {
+    // set by the posts layout on /posts/[slug]
+    post?: FrontMatter
+    // set by the physics layout on /physics/[slug]
+    frontmatter?: FrontMatter
+  }
+}
 declare module '*package.json'
 
 declare module '*cv.yml' {
@@ -13,8 +22,6 @@ declare module '*cv.yml' {
     hobbies: types.Hobby[]
     nationality: types.Nationality[]
     languages: types.Language[]
-    volunteer: types.Volunteer[]
-    awards: types.Award[]
     community: types.Community[]
   }
   export default cv
@@ -30,5 +37,6 @@ declare module '*oss.yml' {
 
 declare module '*papers.yaml' {
   import type { Reference } from '$lib/types'
-  export const references: Reference[]
+  const papers: { references: Reference[] }
+  export default papers
 }

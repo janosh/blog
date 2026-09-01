@@ -1,18 +1,12 @@
 <script lang="ts">
-  import { page } from '$app/state'
   import { cover_url, type FrontMatter } from '$lib'
-  import type { Snippet } from 'svelte'
   import { heading_anchors, Icon, PrevNext } from 'svelte-widgets'
   import { Calendar } from 'svelte-widgets/icons'
-  import type { PageData } from '../$types'
+  import type { LayoutProps } from './$types'
 
-  let { data, children }: { data: PageData; children?: Snippet<[]> } = $props()
+  let { data, children }: LayoutProps = $props()
 
-  let post = $derived.by(() => {
-    if (!data.post) throw new Error(`Post ${page.url.pathname} not found`)
-    return data.post
-  })
-  let { title, cover, date, slug } = $derived(post)
+  let { title, cover, date, slug } = $derived(data.post)
 </script>
 
 <img src={cover_url(`posts`, slug, cover.img)} alt={cover.caption ?? title} />
@@ -21,9 +15,9 @@
   <h1>{title}</h1>
   <time>
     <Icon icon={Calendar} />
-    {date?.split(`T`)[0]}
+    {date.split(`T`)[0]}
   </time>
-  {@render children?.()}
+  {@render children()}
 
   <br />
   <PrevNext items={data.posts.map((post) => [post.slug, post])} current={slug}>
@@ -31,7 +25,7 @@
       {@const { slug, title, date } = item[1] as FrontMatter}
       <h3 class="toc-exclude">
         <a href={slug}>
-          {@html kind == `next` ? `Next &rarr;` : `&larr; Previous`}
+          {kind === `next` ? `Next →` : `← Previous`}
           <br />
           <small>{title}</small>
         </a>

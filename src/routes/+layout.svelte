@@ -2,19 +2,19 @@
   import { dev } from '$app/environment'
   import { afterNavigate, goto } from '$app/navigation'
   import { page } from '$app/state'
-  import { Footer } from '$lib'
-  import { repository } from '$root/package.json'
-  import type { Snippet } from 'svelte'
+  import { cover_url, Footer } from '$lib'
+  import { search_actions } from '$lib/search'
+  import { homepage, repository } from '$root/package.json'
   import { CopyButton, GitHubCorner, PageSearch, Toc } from 'svelte-widgets'
   import { highlight_matches } from 'svelte-widgets/attachments'
-  import { apply_theme_mode } from 'svelte-widgets/theme'
+  import type { LayoutProps } from './$types'
   // oxlint-disable-next-line no-unassigned-import
   import '../app.css'
-  // KaTeX CSS pinned to the installed version (the markup katex_preprocess emits must match it)
+  // KaTeX CSS must match the version rendering the Markdown math.
   // oxlint-disable-next-line no-unassigned-import
   import 'katex/dist/katex.min.css'
 
-  let { children }: { children?: Snippet<[]> } = $props()
+  let { children }: LayoutProps = $props()
 
   let page_search_query = $state(``)
   const section_titles: Record<string, string> = {
@@ -24,24 +24,17 @@
     '/cv': `CV`,
   }
 
-  const page_title = $derived.by(() => {
-    const title =
-      section_titles[page.route.id ?? ``] ??
-      page.data.post?.title ??
-      (page.data.frontmatter as { title?: string } | undefined)?.title
-    return typeof title === `string` ? `${title} · janosh.dev` : `janosh.dev`
+  const site_description = `I write about physics, materials science and sustainability.`
+  // post or physics frontmatter of the current page (undefined on index/list pages)
+  const frontmatter = $derived(page.data.post ?? page.data.frontmatter)
+  const title = $derived(section_titles[page.route.id ?? ``] ?? frontmatter?.title)
+  const page_title = $derived(title ? `${title} · janosh.dev` : `janosh.dev`)
+  const og_image = $derived.by(() => {
+    if (!frontmatter) return `${homepage}/favicon.svg`
+    const section = page.data.post ? `posts` : `physics`
+    return new URL(cover_url(section, frontmatter.slug, frontmatter.cover.img), homepage)
+      .href
   })
-
-  const fallback_actions = [
-    ...Object.keys(import.meta.glob(`./**/+page.{svx,svelte,md}`)).map((filename) => {
-      const parts = filename.split(`/`).filter((part) => !part.startsWith(`(`))
-      const route = `/${parts.slice(1, -1).join(`/`)}`
-      return { label: route, action: () => goto(route) }
-    }),
-    { label: `🌞 Light theme`, action: () => apply_theme_mode(`light`) },
-    { label: `🌙 Dark theme`, action: () => apply_theme_mode(`dark`) },
-    { label: `🖥️ System theme`, action: () => apply_theme_mode(`system`) },
-  ]
 
   // pagefind only exists after build; stub in dev to avoid HTML-as-JS reimports
   const load_pagefind = dev ? async () => ({ search: async () => null }) : undefined
@@ -52,10 +45,24 @@
 <svelte:head>
   <title>{page_title}</title>
   <meta data-pagefind-meta="title[content]" content={page_title} />
+  <meta name="description" content={site_description} />
+  <meta property="og:site_name" content="janosh.dev" />
+  <meta property="og:type" content={page.data.post ? `article` : `website`} />
+  <meta property="og:title" content={page_title} />
+  <meta property="og:description" content={site_description} />
+  <meta property="og:url" content={`${homepage}${page.url.pathname}`} />
+  <meta property="og:image" content={og_image} />
+  <meta name="twitter:card" content="summary_large_image" />
+  {#if page.data.post}
+    <meta property="article:published_time" content={page.data.post.date} />
+    {#each page.data.post.tags as tag (tag)}
+      <meta property="article:tag" content={tag} />
+    {/each}
+  {/if}
 </svelte:head>
 
 <PageSearch
-  {fallback_actions}
+  fallback_actions={search_actions}
   {load_pagefind}
   navigate={async (url, { query }) => {
     await goto(url)
@@ -64,9 +71,9 @@
   }}
   strip_html_suffix
   placeholder="Search or go to..."
-  inputStyle="background: transparent; font-size: inherit; outline: none; border: none"
-  liOptionStyle="padding: 3pt 5pt; border-left: none"
-  ulOptionsStyle="padding: 0"
+  input_style="background: transparent; font-size: inherit; outline: none; border: none"
+  li_option_style="padding: 3pt 5pt; border-left: none"
+  ul_options_style="padding: 0"
 />
 <CopyButton global />
 <GitHubCorner href={repository} data-github-corner />
@@ -84,15 +91,16 @@
     duration_ms: 8000,
   })}
 >
-  {@render children?.()}
+  {@render children()}
 </div>
 
 {#if page.url.pathname !== `/cv`}
   <Toc
-    headingSelector="main :where(h2, h3)"
+    dynamic
+    heading_selector="main :where(h2, h3)"
     breakpoint={1100}
-    minItems={3}
-    openButtonProps={{ style: `display: flex; padding: 3px;` }}
+    min_items={3}
+    open_button_props={{ style: `display: flex; padding: 3px;` }}
     --toc-mobile-bg="var(--card-bg)"
     --toc-padding="1em 0 1em 1em"
     --toc-active-color="var(--link-color)"

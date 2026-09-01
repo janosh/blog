@@ -10,7 +10,7 @@ tags:
 
 Do you sometimes find yourself typing commit messages in a hurry, immediately pushing to GitHub and only noticing too late that you've made a bunch of typos? It's happened to me often enough that I decided my commit messages need a spellchecker.
 
-The good news is, `git` has your back here. A `commit-msg` hook makes this really easy. Hooks are simply shell scripts with a [name `git` recognizes](https://git-scm.com/docs/githooks) and placed in a directory where `git` is looking for hooks. According to the [`git` docs](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks):
+The good news is, `git` has your back here. A [`commit-msg` hook](https://git-scm.com/docs/githooks#_commit_msg) makes this really easy. Hooks are simply shell scripts with a [name `git` recognizes](https://git-scm.com/docs/githooks) and placed in a directory where `git` is looking for hooks. According to the [`git` docs](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks):
 
 > The `commit-msg` hook takes one parameter, the path to a temporary file that contains the commit message written by the developer. If this script exits non-zero, `git` aborts the commit process, so you can use it to validate your project state or commit message before allowing a commit to go through.
 
@@ -71,7 +71,7 @@ if [ -t 1 ]; then
 fi
 ```
 
-Finally, make sure you have [`aspell`](https://aspell.net) (or a similar command line spellchecker) installed and in your path. With Homebrew on macOS, it's as simple `brew install aspell`. Similarly, on Linux: `apt-get install aspell`.
+Finally, make sure you have [`aspell`](https://aspell.net) (or a similar command line spellchecker) installed and in your path. With [Homebrew](https://brew.sh/) on macOS, it's as simple `brew install aspell`. Similarly, on Linux: `apt-get install aspell`.
 
 That's it. Next time you type a commit message of questionable spelling, `git` will provide you with a list of all potential typos and ask if you want to abort to modify the message or proceed anyway.
 

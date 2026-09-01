@@ -1,5 +1,5 @@
 // Attach statically imported svelte-widgets glyphs to CV YAML rows so the bundler can
-// tree-shake unused ones. Lookup keys are the YAML `name` fields.
+// tree-shake unused ones.
 import type { IconData } from 'svelte-widgets'
 import {
   API,
@@ -7,7 +7,6 @@ import {
   Camera,
   CLang,
   Climbing,
-  Contact,
   Deno,
   Git,
   GitHub,
@@ -25,18 +24,17 @@ import {
   Rust,
   Svelte,
   TypeScript,
+  Email,
   Vitest,
 } from 'svelte-widgets/icons'
 import cv from '../routes/cv/cv.yml'
 
-const SOCIAL_ICONS = {
+// keys are the YAML `name` fields of social links, skills and hobbies
+const ICONS: Record<string, IconData> = {
   GitHub,
   'Google Scholar': GoogleScholar,
   LinkedIn,
-  Email: Contact,
-} as const satisfies Record<string, IconData>
-
-const SKILL_ICONS = {
+  Email,
   Python,
   TypeScript,
   Svelte,
@@ -53,37 +51,28 @@ const SKILL_ICONS = {
   Deno,
   vitest: Vitest,
   PlayWright: Playwright,
-} as const satisfies Record<string, IconData>
-
-const HOBBY_ICONS = {
   photography: Camera,
   hiking: Hiking,
   cycling: Bike,
   climbing: Climbing,
-} as const satisfies Record<string, IconData>
+}
 
-const require_icon = (
-  map: Record<string, IconData>,
-  key: string,
-  kind: string,
-): IconData => {
-  const icon = map[key]
-  if (!icon) throw new Error(`No svelte-widgets glyph mapped for ${kind} "${key}"`)
+const require_icon = (name: string): IconData => {
+  const icon: IconData | undefined = ICONS[name]
+  if (!icon) throw new Error(`No svelte-widgets glyph mapped for "${name}"`)
   return icon
 }
 
 export const social = cv.social.map((entry) => ({
   ...entry,
-  icon: require_icon(SOCIAL_ICONS, entry.name, `social`),
+  icon: require_icon(entry.name),
 }))
-
-export const skills = cv.skills.map((entry) => ({
-  ...entry,
-  // SVG logos skip the icon map; everything else must resolve to a glyph.
-  icon: entry.svg ? undefined : require_icon(SKILL_ICONS, entry.name, `skill`),
-}))
-
 export const hobbies = cv.hobbies.map((entry) => ({
   ...entry,
-  icon: require_icon(HOBBY_ICONS, entry.name, `hobby`),
+  icon: require_icon(entry.name),
+}))
+// SVG logos skip the icon map; everything else must resolve to a glyph
+export const skills = cv.skills.map((entry) => ({
+  ...entry,
+  icon: entry.svg ? undefined : require_icon(entry.name),
 }))

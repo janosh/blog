@@ -12,12 +12,12 @@ tags:
   - Statistics
 ---
 
-I recently started using [Scikit-Optimize](https://scikit-optimize.github.io/) (`skopt` for short) to run Bayesian optimization on the hyperparameters of a set of fully-connected neural networks. The hyperparameters I optimized were
+I recently started using [Scikit-Optimize](https://scikit-optimize.github.io/) (`skopt` for short) to run [Bayesian optimization](https://scikit-optimize.readthedocs.io/en/latest/auto_examples/bayesian-optimization.html) on the hyperparameters of a set of fully-connected neural networks. The hyperparameters I optimized were
 
 - the number of dense layers $n_L$
 - the optimizer's learning rate $r_l$
 - the numbers of nodes in each layer $N_\text{n} = \{n_{\text{n},i}\}_{i=1}^{n_L}$
-- the dropout rates for the Monte Carlo dropout layers preceding every dense layer $R_\text{d} = \{r_{\text{d},i}\}_{i=1}^{n_L}$
+- the dropout rates for the [Monte Carlo dropout](https://arxiv.org/abs/1506.02142) layers preceding every dense layer $R_\text{d} = \{r_{\text{d},i}\}_{i=1}^{n_L}$
 - the activation functions $A = \{a_i\}_{i=1}^{n_L}$ for each layer
 
 Right there I had a use case that `skopt` doesn't appear to cover - at least not out of the box. The difficulty is that the last three items in the list depend on the value of the first one. That's an ill-posed optimization problem. We'd be trying to minimize a loss function $L_\theta$ -- in this case the mean squared error over the validation set -- parameterized by the vector $\vec\theta = (n_L, r_l, N_\text{n}, R_\text{d}, A)$ over a parameter space $\Scal$ which depends itself on the current parameters $\vec\theta$, i.e.

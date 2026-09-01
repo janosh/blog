@@ -1,9 +1,12 @@
 <script lang="ts">
   import { hobbies, skills, social } from '$lib/cv-icons'
-  import { oss_sort_keys, sort_oss_projects } from '$lib'
-  import type { OssSortKey, SortOrder } from '$lib/oss'
-  import papers from '$lib/papers.yaml'
-  import { PAPER_SORT_KEYS } from '$lib/types'
+  import {
+    oss_sort_keys,
+    type OssSortKey,
+    type PaperSortKey,
+    sort_oss_projects,
+    type SortOrder,
+  } from '$lib'
   import { ButtonGroup, Icon, Popover, ThemeToggle } from 'svelte-widgets'
   import {
     AccountGroup,
@@ -19,52 +22,48 @@
     SkillLevel,
     Star,
   } from 'svelte-widgets/icons'
-  import { format_print_filename, print_element } from 'svelte-widgets/print'
-  import type { ComponentProps } from 'svelte'
   import { flip } from 'svelte/animate'
+  import type { PageProps } from './$types'
   import cv from './cv.yml'
-  import Intro from './intro.md'
+  import { print_cv, sort_papers } from './index'
   import Papers from './Papers.svelte'
+  import Intro from './intro.md'
 
-  const { data } = $props()
+  const { data }: PageProps = $props()
 
-  type PaperProps = ComponentProps<typeof Papers>
-  let sort_papers_by: PaperProps[`sort_by`] = $state(`date`)
-  let sort_papers_order: PaperProps[`sort_order`] = $state(`desc`)
+  let sort_papers_by: PaperSortKey = $state(`date`)
+  let sort_papers_order: SortOrder = $state(`desc`)
   let sort_oss_by: OssSortKey = $state(`commits`)
   let sort_oss_order: SortOrder = $state(`desc`)
   let pdf_menu_open = $state(false)
   let cv_main: HTMLElement | undefined = $state()
 
   const paper_sort_keys = [
-    { value: PAPER_SORT_KEYS.date, tooltip: `Sort by date` },
-    { value: PAPER_SORT_KEYS.title, tooltip: `Sort by title` },
-    { value: PAPER_SORT_KEYS.author, tooltip: `Sort by first-author last name` },
-    { value: PAPER_SORT_KEYS.first_author, tooltip: `First-author papers to the top` },
-    { value: PAPER_SORT_KEYS.citations, tooltip: `Sort by citations` },
+    { value: `date`, tooltip: `Sort by date` },
+    { value: `title`, tooltip: `Sort by title` },
+    { value: `author`, tooltip: `Sort by first-author last name` },
+    { value: `first author`, tooltip: `First-author papers to the top` },
+    { value: `citations`, tooltip: `Sort by citations` },
   ] as const
 
   const links = { target: `_blank`, rel: `noreferrer` }
   const sorted_oss_projects = $derived(
-    sort_oss_projects(data.oss.projects, sort_oss_by, sort_oss_order),
+    sort_oss_projects(data.projects, sort_oss_by, sort_oss_order),
   )
   const sorted_skills = skills.toSorted(
     (skill_1, skill_2) => skill_2.score - skill_1.score,
   )
 
-  function print_cv(single_page = false): void {
+  function export_pdf(single_page = false): void {
     if (!cv_main) throw new Error(`cannot print CV, <main> is not mounted`)
     pdf_menu_open = false
-    print_element(cv_main, {
-      filename: format_print_filename(`janosh-cv`),
-      single_page,
-    })
+    print_cv(cv_main, single_page)
   }
 </script>
 
-<main bind:this={cv_main}>
+<main bind:this={cv_main} data-cv>
   <section class="title">
-    <h1>Janosh Riebesell - CV</h1>
+    <h1 id="janosh-riebesell-cv">Janosh Riebesell - CV</h1>
 
     <address style="font-size: 1.2em">
       {#each social as { url, icon, style } (url)}
@@ -76,7 +75,7 @@
   <section class="body">
     <Intro />
 
-    <h2 style="margin-block: 1em;">
+    <h2 id="publications-sort-by" style="margin-block: 1em;">
       <Icon icon={Journal} />&nbsp; Publications
       <span class="sort-controls">
         Sort by
@@ -88,8 +87,10 @@
         />
       </span>
     </h2>
-    <Papers {...papers} sort_by={sort_papers_by} sort_order={sort_papers_order} />
-    <h2>
+    <Papers
+      publications={sort_papers(data.publications, sort_papers_by, sort_papers_order)}
+    />
+    <h2 id="open-source">
       <Icon icon={OpenSource} />&nbsp; Open Source
       <span class="sort-controls">
         <ButtonGroup
@@ -125,12 +126,12 @@
               <small class="langs">{languages.slice(0, 3).join(`, `)}</small>
             {/if}
           </div>
-          <p>{@html description}</p>
+          <div class="project-description">{@html description}</div>
         </li>
       {/each}
     </ul>
 
-    <h2><Icon icon={Education} />&nbsp; Education</h2>
+    <h2 id="education"><Icon icon={Education} />&nbsp; Education</h2>
     <ul>
       {#each cv.education as { title, thesis, date, href, uni } (title)}
         <li>
@@ -148,7 +149,7 @@
 
     <div class="side-by-side">
       <section>
-        <h2><Icon icon={SearchCountry} />&nbsp; Nationality</h2>
+        <h2 id="nationality"><Icon icon={SearchCountry} />&nbsp; Nationality</h2>
         <ul class="horizontal">
           {#each cv.nationality as { title, flag } (title)}
             <li>{flag}&nbsp;{title}</li>
@@ -157,7 +158,7 @@
       </section>
 
       <section>
-        <h2><Icon icon={Languages} />&nbsp; Languages</h2>
+        <h2 id="languages"><Icon icon={Languages} />&nbsp; Languages</h2>
         <ul class="horizontal">
           {#each cv.languages as { name, flag, level } (name)}
             <li>{flag}&nbsp;{name} <small>({level})</small></li>
@@ -166,7 +167,9 @@
       </section>
     </div>
 
-    <h2><Icon icon={SkillLevel} />&nbsp; Programming Languages and Tools</h2>
+    <h2 id="programming-languages-and-tools">
+      <Icon icon={SkillLevel} />&nbsp; Programming Languages and Tools
+    </h2>
     <small style="white-space: nowrap">(emphasis &asymp; proficiency)</small>
     <ul class="skills">
       {#each sorted_skills as { name, icon, svg, score, href, site } (name)}
@@ -183,7 +186,7 @@
       {/each}
     </ul>
 
-    <h2><Icon icon={AccountGroup} />&nbsp; Community</h2>
+    <h2 id="community"><Icon icon={AccountGroup} />&nbsp; Community</h2>
     <ul class="community">
       {#each cv.community as { name, date, href, img, role } (name)}
         <li>
@@ -197,7 +200,7 @@
       {/each}
     </ul>
 
-    <h2><Icon icon={Interests} />&nbsp; Hobbies</h2>
+    <h2 id="hobbies"><Icon icon={Interests} />&nbsp; Hobbies</h2>
     <ul class="hobbies">
       {#each hobbies as { name, icon, href } (name)}
         <li>
@@ -223,8 +226,8 @@
         <Icon icon={ChevronUp} />
       </button>
     {/snippet}
-    <button type="button" onclick={() => print_cv()}>Multi-page</button>
-    <button type="button" onclick={() => print_cv(true)}>Single tall page</button>
+    <button type="button" onclick={() => export_pdf()}>Multi-page</button>
+    <button type="button" onclick={() => export_pdf(true)}>Single tall page</button>
   </Popover>
 </div>
 
@@ -247,16 +250,18 @@
     margin: 0 0 3pt;
   }
   h2 {
-    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 0.3em;
     margin: 1.5em 0 0.5em;
   }
   .sort-controls {
     display: flex;
     place-items: center;
     gap: 5pt;
-    position: absolute;
-    right: 0;
-    bottom: 4pt;
+    flex-wrap: wrap;
+    margin-left: auto;
     font-weight: 100;
     font-size: 9pt;
     --btn-group-gap: 5pt;
@@ -288,7 +293,7 @@
   }
   ul.oss {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20em), 1fr));
     gap: 12pt;
     font-size: 14pt;
     > li {
@@ -324,10 +329,12 @@
       margin-left: auto;
     }
   }
-  p {
-    margin: 0;
+  .project-description {
     font-size: 10pt;
     font-weight: 300;
+    :global(p) {
+      margin: 0;
+    }
   }
   .skill-svg {
     height: 1em;
@@ -392,13 +399,9 @@
     }
   }
   .pdf-menu-trigger {
-    background: var(--button-bg);
-    color: var(--button-text);
-    border: none;
     border-radius: 8px;
     padding: 2px 3px 2px 6px;
     font-size: 14px;
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -413,15 +416,22 @@
     display: block;
     width: 100%;
     padding: 8px 12px;
-    border: none;
     border-radius: 0;
     background: transparent;
     color: var(--link-color);
     text-align: left;
-    cursor: pointer;
   }
   :global(.pdf-menu button:hover) {
     background: var(--nav-bg);
+  }
+  @media (max-width: 600px) {
+    main {
+      padding: 1.25em;
+    }
+    .sort-controls {
+      flex-basis: 100%;
+      margin: 0.5em 0 0;
+    }
   }
   @media print {
     .cv-controls,
@@ -438,15 +448,12 @@
       box-shadow: none;
     }
     section.body :global(:is(h2, h3)) {
-      page-break-after: avoid;
       break-after: avoid;
     }
     small {
-      page-break-before: avoid;
       break-before: avoid;
     }
     section.body :global(ol li) {
-      page-break-inside: avoid;
       break-inside: avoid;
     }
   }

@@ -7,17 +7,13 @@ cover:
   caption: String theory blackboard
 ---
 
-<script>
-  import { DocsGrid } from '$lib'
-</script>
-
-In May 2016, I had my oral exam on string theory and advanced quantum field theory with [Prof. Timo Weigand](https://www.thphys.uni-heidelberg.de/~weigand).
+In May 2016, I had my oral exam on [string theory](/physics/string-theory) and [advanced quantum field theory](/physics/advanced-qft) with [Prof. Timo Weigand](https://www.thphys.uni-heidelberg.de/~weigand).
 
 Below are four transcripts of past oral exams on similar topics that I used to prepare for my own. I also uploaded a transcript of my exam with Timo and summaries of his lecture notes on string theory and advanced QFT that I wrote to help me memorize them.
 
 ## Transcript and summaries
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Transcript](./thumbnails/transcript.webp) Transcript](./pdfs/transcript.pdf)
 
@@ -25,11 +21,11 @@ Below are four transcripts of past oral exams on similar topics that I used to p
 
 [![String theory summary](./thumbnails/string-theory-summary.webp) String theory summary](./pdfs/string-theory-summary.pdf)
 
-</DocsGrid>
+</div>
 
 ## Past exams
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Berges 2015](./thumbnails/berges-2015.webp) Berges 2015](./pdfs/berges-2015.pdf)
 
@@ -39,4 +35,4 @@ Below are four transcripts of past oral exams on similar topics that I used to p
 
 [![Weigand 2015](./thumbnails/weigand-2015.webp) Weigand 2015](./pdfs/weigand-2015.pdf)
 
-</DocsGrid>
+</div>

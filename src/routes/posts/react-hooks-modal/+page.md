@@ -40,7 +40,7 @@ const Modal = ({ open, closeModal, children }) => {
 export default Modal
 ```
 
-And here are the styled components imported on line 3.
+And here are the [styled components](https://styled-components.com/) imported on line 3.
 
 ```js:title=src/components/modal/styles.js
 import styled from 'styled-components'
@@ -171,7 +171,7 @@ const mapStateToProps = (state, { name }) => {
 export default connect(mapStateToProps)(Modal)
 ```
 
-Admittedly this component is bloated further by using Redux but even without it, it's much harder to read and maintain. I'd call this use case a definite win for React Hooks!
+Admittedly this component is bloated further by using [Redux](https://redux.js.org/) but even without it, it's much harder to read and maintain. I'd call this use case a definite win for React Hooks!
 
 ## Semantic HTML
 
@@ -184,7 +184,7 @@ export const ModalDiv = styled.dialog`
 `
 ```
 
-and then maybe use the `::backdrop` pseudo-element for the modal background.
+and then maybe use the [`::backdrop` pseudo-element](https://developer.mozilla.org/en-US/docs/Web/CSS/::backdrop) for the modal background.
 
 ```js
 export const ModalDiv = styled.dialog`
@@ -194,7 +194,7 @@ export const ModalDiv = styled.dialog`
 `
 ```
 
-However, bear in mind that using `::backdrop` would make it more difficult to close the modal on clicks outside of it, i.e. on the background. This is because React is unable to attach `onClick` event handlers to pseudo-elements and it seems unlikely this will change down the road. A workaround would be to use the new `useRef` and `useEffect` hook to create an event listener on the browser's `window` object that checks for the target of the `click` event. That would complicate things a little, though, since the listener would have to trigger on _all_ clicks and check that the modal doesn't include the target before closing. Something like so:
+However, bear in mind that using `::backdrop` would make it more difficult to close the modal on clicks outside of it, i.e. on the background. This is because React is unable to attach `onClick` event handlers to pseudo-elements and it seems unlikely this will change down the road. A workaround would be to use the new [`useRef`](https://react.dev/reference/react/useRef) and [`useEffect`](https://react.dev/reference/react/useEffect) hook to create an event listener on the browser's `window` object that checks for the target of the `click` event. That would complicate things a little, though, since the listener would have to trigger on _all_ clicks and check that the modal doesn't include the target before closing. Something like so:
 
 ```jsx:title=components/modal/index.js
 import React, { useRef, useEffect } from 'react'

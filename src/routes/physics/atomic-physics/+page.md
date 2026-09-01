@@ -8,25 +8,21 @@ cover:
   caption: Hydrogen wave functions
 ---
 
-<script>
-  import { DocsGrid } from '$lib'
-</script>
-
 Atomic physics was an undergrad lecture jointly held by [Prof. Klaus Sengstock](https://physik.uni-hamburg.de/en/ilp/sengstock/personen/sengstock) and [Prof. Henning Moritz](https://physik.uni-hamburg.de/en/ilp/moritz/personen/moritz).
 
 Below are solutions to the exercise sheets as well as the final exam. Fair warning though, it's all in German.
 
 ## Exam Preparation
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Mock exam](./thumbnails/mock-exam.webp) Mock exam](./pdfs/mock-exam.pdf)
 
-</DocsGrid>
+</div>
 
 ## Exercises
 
-<DocsGrid>
+<div class="docs-grid">
 
 [![Exercise 1](./thumbnails/sol-01.webp) Exercise 1](./pdfs/sol-01.pdf)
 
@@ -48,4 +44,4 @@ Below are solutions to the exercise sheets as well as the final exam. Fair warni
 
 [![Exercise 10](./thumbnails/sol-10.webp) Exercise 10](./pdfs/sol-10.pdf)
 
-</DocsGrid>
+</div>

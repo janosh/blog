@@ -9,7 +9,7 @@ tags:
   - JS
 ---
 
-If you’re running a Gatsby blog (or any React-powered blog for that matter) and you’ve started adding some content to it, the next thing to think about is how to increase engagement among your visitors. A great way to do that is to allow them to ask questions and express their views on what you’ve written. This will make your blog seem much more lively and interactive. The good news is, this is easy. I just went through that process and the only thing that took time was deciding which service to use.
+If you’re running a [Gatsby](https://www.gatsbyjs.com/) blog (or any [React](https://react.dev/)-powered blog for that matter) and you’ve started adding some content to it, the next thing to think about is how to increase engagement among your visitors. A great way to do that is to allow them to ask questions and express their views on what you’ve written. This will make your blog seem much more lively and interactive. The good news is, this is easy. I just went through that process and the only thing that took time was deciding which service to use.
 
 ## Available services
 
