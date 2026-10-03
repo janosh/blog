@@ -52,11 +52,10 @@ const svelte_config = {
 }
 
 export default {
-  resolve: { dedupe: [`svelte`] },
   ...make_config(),
   plugins: [sveltekit(svelte_config), yaml_plugin()],
 
-  server: { port: 3000, fs: { allow: [`..`] } },
+  server: { port: 3000 },
   preview: { port: 3000 },
 
   test: {
