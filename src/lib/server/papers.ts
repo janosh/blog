@@ -1,6 +1,6 @@
-import { date_num } from '$lib'
-import papers from '$lib/papers.yaml'
-import type { Publication, Reference } from '$lib/types'
+import { date_num } from '#lib'
+import papers from '#lib/papers.yaml'
+import type { Publication, Reference } from '#lib/types.js'
 
 // Prepare the CV's fixed three-author display once, before sending it to the browser.
 export function prepare_publication(reference: Reference): Publication {

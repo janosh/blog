@@ -11,8 +11,8 @@ tags:
 ---
 
 <script>
-  import papers from '$lib/papers.yaml'
-  import oss from '$lib/oss.yml'
+  import papers from '#lib/papers.yaml'
+  import oss from '#lib/oss.yml'
   import StructureDemo from './StructureDemo.svelte'
 
   const diel_paper = papers.references.find((ref) => ref.id === `riebesell_discovery_2024`)

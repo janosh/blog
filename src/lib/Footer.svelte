@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { repository } from '$root/package.json'
+  import { repository } from '#root/package.json'
   import { Footer, ThemeToggle } from 'svelte-widgets'
   import { GitHub } from 'svelte-widgets/icons'
 </script>

@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import { load } from 'js-yaml'
-import { update_oss } from '../scripts/update-oss'
+import { update_oss } from '../scripts/update-oss.js'
 import { expect, it, vi } from 'vite-plus/test'
 
 const repo = `https://github.com/janosh/blog`

@@ -32,7 +32,6 @@ for (let index = 65; index <= 90; index++) {
   macros[`\\${letter}bb`] = `\\mathbb{${letter}}`
 }
 
-// Inline SvelteKit config: adapter and alias are top-level Kit options.
 const svelte_config = {
   extensions: [`.svelte`, `.md`],
 
@@ -48,7 +47,6 @@ const svelte_config = {
   ],
 
   adapter: adapter(),
-  alias: { $root: `.` },
 }
 
 export default {

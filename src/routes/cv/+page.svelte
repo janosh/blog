@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { hobbies, skill_groups, social } from '$lib/cv-icons'
+  import { hobbies, skill_groups, social } from '#lib/cv-icons.js'
   import { Icon, Popover, ThemeToggle } from 'svelte-widgets'
   import {
     AccountGroup,
@@ -18,7 +18,7 @@
   } from 'svelte-widgets/icons'
   import type { PageProps } from './$types'
   import cv from './cv.yml'
-  import { print_cv } from './index'
+  import { print_cv } from './index.js'
   import Papers from './Papers.svelte'
   import Intro from './intro.md'
 

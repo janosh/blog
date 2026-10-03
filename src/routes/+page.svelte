@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { social } from '$lib/cv-icons'
+  import { social } from '#lib/cv-icons.js'
   import { Icon } from 'svelte-widgets'
   import { CvSquare, Newspaper } from 'svelte-widgets/icons'
-  import OpenSource from '$lib/OpenSource.svelte'
+  import OpenSource from '#lib/OpenSource.svelte'
   import PhysicsNotes from './physics/PhysicsNotes.md'
   import type { PageProps } from './$types'
 

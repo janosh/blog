@@ -17,13 +17,18 @@
   "author": "Janosh Riebesell <janosh.riebesell@gmail.com>",
   "repository": "https://github.com/janosh/blog",
   "type": "module",
+  "imports": {
+    "#lib": "./src/lib/index.js",
+    "#lib/*": "./src/lib/*",
+    "#root/*": "./*"
+  },
   "scripts": {
     "build": "vp build && pagefind --site build --exclude-selectors \"pre, details, .katex\"",
     "update-oss": "node scripts/update-oss.ts"
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "^3.0.10",
-    "@sveltejs/kit": "^2.70.3",
+    "@sveltejs/adapter-static": "^4.0.0",
+    "@sveltejs/kit": "^3.0.0",
     "@types/node": "^26.6.2",
     "@wooorm/starry-night": "^3.11.0",
     "js-yaml": "^5.4.2",

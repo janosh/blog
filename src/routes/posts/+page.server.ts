@@ -1,4 +1,4 @@
-import { posts } from '$lib/server/posts'
+import { posts } from '#lib/server/posts.js'
 
 const tag_groups = Map.groupBy(
   posts.flatMap(({ tags }) => tags),

@@ -1,3 +1,3 @@
-import { projects } from '$lib/server/oss'
+import { projects } from '#lib/server/oss.js'
 
 export const load = () => ({ projects })
