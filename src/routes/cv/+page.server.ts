@@ -1,6 +1,6 @@
-import { projects } from '$lib/server/oss'
-import { publications } from '$lib/server/papers'
-import { date_num } from '$lib'
+import { projects } from '#lib/server/oss.js'
+import { publications } from '#lib/server/papers.js'
+import { date_num } from '#lib'
 import cv from './cv.yml'
 
 export const load = () => ({

@@ -1,6 +1,6 @@
-import { site_routes } from '$lib'
-import { posts } from '$lib/server/posts'
-import { homepage } from '$root/package.json'
+import { site_routes } from '#lib'
+import { posts } from '#lib/server/posts.js'
+import { homepage } from '#root/package.json'
 
 export const prerender = true
 

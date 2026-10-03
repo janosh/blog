@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cover_url } from '$lib'
+  import { cover_url } from '#lib'
   import { heading_anchors } from 'svelte-widgets'
   import type { LayoutProps } from './$types'
 

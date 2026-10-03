@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Publication } from '$lib'
+  import type { Publication } from '#lib'
   import { tooltip } from 'svelte-widgets/attachments'
-  import { format_publication_date } from './index'
+  import { format_publication_date } from './index.js'
 
   const { publications }: { publications: Publication[] } = $props()
 </script>

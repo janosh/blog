@@ -1,4 +1,4 @@
-import { posts } from '$lib/server/posts'
+import { posts } from '#lib/server/posts.js'
 import { error } from '@sveltejs/kit'
 
 export function load({ route }: { route: { id: string | null } }) {

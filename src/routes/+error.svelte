@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state'
-  import { bugs, name } from '$root/package.json'
+  import { bugs, name } from '#root/package.json'
   import { Icon } from 'svelte-widgets'
   import { GitHub } from 'svelte-widgets/icons'
 

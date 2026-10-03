@@ -1,6 +1,6 @@
 <script lang="ts">
   import { FullscreenButton } from 'svelte-widgets'
-  import { posterior_pct } from './bayes'
+  import { posterior_pct } from './bayes.js'
   import ProbabilityRegion from './ProbabilityRegion.svelte'
 
   let size = $state({ width: 0, height: 0 })
