@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cover_url } from '$lib'
+  import { cover_url } from '#lib'
   import { Icon, MultiSelect } from 'svelte-widgets'
   import { Article, Calendar, Tag } from 'svelte-widgets/icons'
   import { flip } from 'svelte/animate'

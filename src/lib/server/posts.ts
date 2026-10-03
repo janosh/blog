@@ -1,4 +1,4 @@
-import type { FrontMatter } from '$lib/types'
+import type { FrontMatter } from '#lib/types.js'
 
 // Frontmatter of every blog post, newest first. Server-only so the markdown modules
 // never end up in the client bundle.

@@ -1,7 +1,7 @@
-import { date_num } from '$lib'
-import oss from '$lib/oss.yml'
-import papers from '$lib/papers.yaml'
-import { projects } from '$lib/server/oss'
+import { date_num } from '#lib'
+import oss from '#lib/oss.yml'
+import papers from '#lib/papers.yaml'
+import { projects } from '#lib/server/oss.js'
 
 // featured projects and the PhD thesis as one date-sorted list for Recent Work
 const recent_work = [

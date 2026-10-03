@@ -1,4 +1,4 @@
-import oss from '$lib/oss.yml'
+import oss from '#lib/oss.yml'
 import { assert_ok, create_markdown } from 'svelte-widgets/markdown'
 
 const engine = create_markdown({ typography: true, frontmatter: false })

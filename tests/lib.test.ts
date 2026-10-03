@@ -1,14 +1,14 @@
-import { cover_url, date_num, site_routes, sort_oss_projects, when_visible } from '$lib'
+import { cover_url, date_num, site_routes, sort_oss_projects, when_visible } from '#lib'
 import { goto } from '$app/navigation'
-import { posterior_pct } from '$root/src/routes/posts/geometric-bayes/bayes'
+import { posterior_pct } from '../src/routes/posts/geometric-bayes/bayes.js'
 import { apply_theme_mode } from 'svelte-widgets/theme'
-import { search_actions } from '$lib/search'
-import { load as load_home } from '../src/routes/+page.server'
-import { load as load_oss } from '../src/routes/open-source/+page.server'
-import { load as load_posts } from '../src/routes/posts/+page.server'
-import { load as load_post } from '../src/routes/posts/+layout.server'
+import { search_actions } from '#lib/search.js'
+import { load as load_home } from '../src/routes/+page.server.js'
+import { load as load_oss } from '../src/routes/open-source/+page.server.js'
+import { load as load_posts } from '../src/routes/posts/+page.server.js'
+import { load as load_post } from '../src/routes/posts/+layout.server.js'
 import OpenSourcePage from '../src/routes/open-source/+page.svelte'
-import OpenSource from '$lib/OpenSource.svelte'
+import OpenSource from '#lib/OpenSource.svelte'
 import Posts from '../src/routes/posts/+page@.svelte'
 import PostLayout from '../src/routes/posts/+layout.svelte'
 import StructureDemo from '../src/routes/posts/new-dielectric-materials/StructureDemo.svelte'
@@ -30,7 +30,7 @@ vi.mock(import(`svelte-widgets/theme`), async (import_original) => ({
   ...(await import_original()),
   apply_theme_mode: vi.fn(),
 }))
-vi.mock(`$lib/server/posts`, () => ({
+vi.mock(`#lib/server/posts.js`, () => ({
   posts: [
     {
       slug: `example`,
@@ -41,7 +41,7 @@ vi.mock(`$lib/server/posts`, () => ({
     },
   ],
 }))
-vi.mock(`$lib/oss.yml`, () => ({
+vi.mock(`#lib/oss.yml`, () => ({
   default: {
     projects: [
       {
@@ -77,7 +77,7 @@ it(`loads shared projects, sorted featured work, and matched post metadata`, () 
   expect(() => load_post({ route: { id: `/posts/missing` } })).toThrow(
     expect.objectContaining({
       status: 404,
-      body: { message: `Post /posts/missing not found` },
+      body: { message: `Post /posts/missing not found`, status: 404 },
     }),
   )
   expect(projects[1].description).toMatch(

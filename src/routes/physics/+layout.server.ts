@@ -1,4 +1,4 @@
-import type { FrontMatter } from '$lib/types'
+import type { FrontMatter } from '#lib/types.js'
 import { error } from '@sveltejs/kit'
 
 export const load = ({ route }: { route: { id: string | null } }) => {

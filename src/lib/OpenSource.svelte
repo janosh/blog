@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { oss_sort_keys, type OssSortKey, type Project, sort_oss_projects } from '$lib'
+  import { oss_sort_keys, type OssSortKey, type Project, sort_oss_projects } from '#lib'
   import { ButtonGroup, Icon } from 'svelte-widgets'
   import { GitCommit, GitHub, OpenSource, People } from 'svelte-widgets/icons'
   import { highlight_matches } from 'svelte-widgets/attachments'

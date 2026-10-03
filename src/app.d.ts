@@ -1,9 +1,7 @@
-/// <reference types="@sveltejs/kit" />
-
 declare module '*.md'
 
 namespace App {
-  type FrontMatter = import('$lib/types').FrontMatter // oxlint-disable-line typescript/consistent-type-imports
+  type FrontMatter = import('#lib/types.js').FrontMatter // oxlint-disable-line typescript/consistent-type-imports
   interface PageData {
     // set by the posts layout on /posts/[slug]
     post?: FrontMatter
@@ -11,10 +9,9 @@ namespace App {
     frontmatter?: FrontMatter
   }
 }
-declare module '*package.json'
 
 declare module '*cv.yml' {
-  import type * as types from '$lib/types'
+  import type * as types from '#lib/types.js'
   const cv: {
     social: types.Social[]
     experience: types.Experience[]
@@ -31,7 +28,7 @@ declare module '*cv.yml' {
 }
 
 declare module '*oss.yml' {
-  import type * as types from '$lib/types'
+  import type * as types from '#lib/types.js'
   const oss: {
     projects: types.Project[]
   }
@@ -39,7 +36,7 @@ declare module '*oss.yml' {
 }
 
 declare module '*papers.yaml' {
-  import type { Reference } from '$lib/types'
+  import type { Reference } from '#lib/types.js'
   const papers: { references: Reference[] }
   export default papers
 }

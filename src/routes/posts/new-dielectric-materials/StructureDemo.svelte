@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { when_visible } from '$lib'
+  import { when_visible } from '#lib'
   import type { AnyStructure } from 'matterviz/structure'
   import { slugify_heading } from 'svelte-widgets/heading-anchors'
 

@@ -1,5 +1,5 @@
 import { format_print_filename, print_page } from 'svelte-widgets/print'
-import type { Publication } from '$lib/types'
+import type { Publication } from '#lib/types.js'
 
 const month_year = new Intl.DateTimeFormat(`en-GB`, {
   month: `short`,

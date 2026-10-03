@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cover_url } from '$lib'
+  import { cover_url } from '#lib'
   import { heading_anchors, Icon, PrevNext } from 'svelte-widgets'
   import { Calendar } from 'svelte-widgets/icons'
   import type { LayoutProps } from './$types'

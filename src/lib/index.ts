@@ -1,8 +1,8 @@
-import type { OssSortKey, Project, Reference, SortOrder } from './types'
+import type { OssSortKey, Project, Reference, SortOrder } from './types.js'
 import type { Attachment } from 'svelte/attachments'
 
 export { default as Footer } from './Footer.svelte'
-export type * from './types'
+export type * from './types.js'
 
 // A partial date sorts at the start of its known year or month.
 export const date_num = ({ year, month = 0, day = 0 }: Reference[`issued`][number]) =>

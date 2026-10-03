@@ -1,10 +1,10 @@
-import { site_routes } from '$lib'
-import { posts } from '$lib/server/posts'
-import { homepage } from '$root/package.json'
-import { GET as get_rss } from '$root/src/routes/rss.xml/+server'
-import { GET as get_sitemap } from '$root/src/routes/sitemap.xml/+server'
-import { load as load_post } from '$root/src/routes/posts/+layout.server'
-import { load as load_physics } from '$root/src/routes/physics/+layout.server'
+import { site_routes } from '#lib'
+import { posts } from '#lib/server/posts.js'
+import { homepage } from '../package.json'
+import { GET as get_rss } from '../src/routes/rss.xml/+server.js'
+import { GET as get_sitemap } from '../src/routes/sitemap.xml/+server.js'
+import { load as load_post } from '../src/routes/posts/+layout.server.js'
+import { load as load_physics } from '../src/routes/physics/+layout.server.js'
 import { expect, it } from 'vite-plus/test'
 
 it.each([

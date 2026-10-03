@@ -1,13 +1,13 @@
-import { format_publication_date, print_cv } from '$root/src/routes/cv'
+import { format_publication_date, print_cv } from '../src/routes/cv/index.js'
 import {
   extract_citations,
   prepare_publication,
   publications as source_publications,
-} from '$lib/server/papers'
-import type { Reference } from '$lib/types'
-import papers from '$lib/papers.yaml'
+} from '#lib/server/papers.js'
+import type { Reference } from '#lib/types.js'
+import papers from '#lib/papers.yaml'
 import cv from '../src/routes/cv/cv.yml'
-import { load as load_cv } from '../src/routes/cv/+page.server'
+import { load as load_cv } from '../src/routes/cv/+page.server.js'
 import Cv from '../src/routes/cv/+page.svelte'
 import Papers from '../src/routes/cv/Papers.svelte'
 import { render } from 'svelte/server'

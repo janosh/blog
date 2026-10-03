@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { bugs } from '$root/package.json'
+  import { bugs } from '#root/package.json'
   import { Icon } from 'svelte-widgets'
   import { Atom } from 'svelte-widgets/icons'
 </script>

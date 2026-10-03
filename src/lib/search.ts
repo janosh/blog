@@ -1,5 +1,5 @@
 import { goto } from '$app/navigation'
-import { site_routes } from '$lib'
+import { site_routes } from '#lib'
 import type { CmdAction } from 'svelte-widgets'
 import { apply_theme_mode } from 'svelte-widgets/theme'
 
