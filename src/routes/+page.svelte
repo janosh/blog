@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { format_issued } from '#lib'
+  import { asset_url, format_issued } from '#lib'
   import { social } from '#lib/cv-icons.js'
   import { Icon } from 'svelte-widgets'
   import { CvSquare, Newspaper } from 'svelte-widgets/icons'
@@ -37,7 +37,11 @@
     <li class="card" style="grid-template-rows: auto auto 1fr">
       <h3 style="font-size: 1.2rem">
         <a href={url} style="flex-wrap: wrap">
-          <img src={logo} alt={name} data-color-invert={color_invert} />
+          <img
+            src={logo && asset_url(logo)}
+            alt={name}
+            data-color-invert={color_invert}
+          />
           {name}
         </a>
       </h3>

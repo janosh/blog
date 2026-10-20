@@ -1,8 +1,8 @@
 ---
 title: PhD Thesis
 cover:
-  img: https://github.com/janosh/thesis/raw/main/figs/thesis-cover.svg
-  caption: Thesis cover — crystal structure motif
+  img: banner.webp
+  caption: Message passing on the crystal graph of Bi₂Zr₂O₇ pyrochlore, one of the dielectrics from this thesis. Starting from a Zr atom, information spreads one chemical bond per step (yellow to violet), the way a graph neural network force field such as MACE gathers each atom's neighborhood before predicting its energy and forces.
 ---
 
 I wrote my PhD thesis [_Towards Machine Learning Foundation Models for Materials Chemistry_](https://doi.org/10.17863/CAM.113233) under the supervision of [Alpha Lee](https://www.alpha-lee.com/alphalee) and [Ulrich Keyser](https://people.phy.cam.ac.uk/ufk20/) at the [University of Cambridge](https://www.cam.ac.uk/) [Cavendish Laboratory](https://www.phy.cam.ac.uk/), submitted in 2024.

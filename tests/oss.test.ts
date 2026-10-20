@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import { parse_yaml } from 'svelte-widgets/yaml'
-import { update_oss } from '../scripts/update-oss.js'
+import { update_oss } from '../src/lib/update-oss.js'
 import { expect, it, vi } from 'vite-plus/test'
 
 const repo = `https://github.com/janosh/blog`

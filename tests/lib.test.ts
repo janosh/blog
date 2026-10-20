@@ -239,7 +239,7 @@ it.each([
 
 it.each([
   [`posts`, `hmc-intro`, `bell-curves.svg`, /bell-curves.*\.svg$/],
-  [`physics`, `qft`, `lhc-atlas.webp`, /lhc-atlas.*\.webp$/],
+  [`physics`, `qft`, `banner.webp`, /banner.*\.webp$/],
   [`posts`, `hmc-intro`, `https://a.b/c`, /^https:\/\/a\.b\/c$/],
 ] as const)(`resolves cover %s/%s/%s`, (section, slug, img, expected) => {
   expect(cover_url(section, slug, img)).toMatch(expected)
@@ -350,9 +350,9 @@ it(`marks only posts as og:type article with publish date and tags`, () => {
   const physics_head = render_head(`https://janosh.dev/physics/qft`, {
     title: `QFT`,
     slug: `qft`,
-    cover: { img: `lhc-atlas.webp` },
+    cover: { img: `banner.webp` },
   })
-  expect(physics_head).toContain(`physics/qft/lhc-atlas.webp"`)
+  expect(physics_head).toContain(`/og/physics/qft/banner.jpg"`)
   for (const head of [physics_head, render_head(`https://janosh.dev/posts/missing`)]) {
     expect(head).toContain(`<meta property="og:type" content="website"`)
     expect(head).not.toContain(`article:`)

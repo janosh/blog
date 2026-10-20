@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { asset_url } from '#lib'
   import { hobbies, skill_groups, social } from '#lib/cv-icons.js'
   import { Icon, Popover, ThemeToggle } from 'svelte-widgets'
   import {
@@ -76,7 +77,7 @@
 
     <ul class="oss">
       {#each data.projects as { url, color_invert, repo, name, contribution, role, stars, logo, languages, commits } (name)}
-        {@const logo_url = logo ?? `${url}/favicon.svg`}
+        {@const logo_url = logo ? asset_url(logo) : `${url}/favicon.svg`}
         <li>
           <header>
             <h4>
@@ -190,7 +191,7 @@
       {#each cv.community as { name, date, href, img, role } (name)}
         <li>
           <a {href}>
-            <img src={img} alt="{name} Logo" class="community-logo" />
+            <img src={asset_url(img)} alt="{name} Logo" class="community-logo" />
           </a>
           <a {href}>{name}</a>
           {#if role}<span style="font-weight: lighter">{role}</span>{/if}

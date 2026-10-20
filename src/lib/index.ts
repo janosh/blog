@@ -44,6 +44,10 @@ const cover_modules = import.meta.glob<string>(
   { import: 'default', eager: true },
 )
 
+// logos in src/lib, referenced by file name from oss.yml and cv.yml
+const lib_svgs = import.meta.glob<string>(`./*.svg`, { import: 'default', eager: true })
+export const asset_url = (src: string) => lib_svgs[`./${src}`] ?? src
+
 export function cover_url(
   section: `posts` | `physics`,
   slug: string,

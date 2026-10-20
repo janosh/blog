@@ -1,10 +1,8 @@
 ---
 title: Bachelor's Thesis
 cover:
-  img: graphene.webp
-  origin: Wikipedia
-  url: https://en.wikipedia.org/wiki/Graphene#/media/File:Graphen.jpg
-  caption: Graphene lattice
+  img: banner.webp
+  caption: Ray-traced graphene sheet receding to the horizon, 3.33 Å above a slightly larger hexagonal boron nitride lattice with alternating boron (amber) and nitrogen (blue) atoms
 ---
 
 I wrote my bachelor's thesis under the supervision of [Prof. Alexander Lichtenstein](https://theorie.physnet.uni-hamburg.de/group_magno/?page_id=43) at [ITP Hamburg](https://www.physik.uni-hamburg.de/en/th1.html).
@@ -28,6 +26,6 @@ We report partial success with both LDA and modified GGA delivering realistic re
 
 <div class="docs-grid">
 
-[![Thesis](./thesis.webp) Thesis](./thesis.pdf)
+[Thesis ![Thesis](./thesis.webp)](./thesis.pdf)
 
 </div>

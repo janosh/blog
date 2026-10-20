@@ -1,5 +1,6 @@
 <script lang="ts">
   import {
+    asset_url,
     oss_sort_keys,
     type OssSortKey,
     project_matches,
@@ -47,7 +48,7 @@
   {@attach highlight_matches({ query, css_class: `highlight-match` })}
 >
   {#each visible_projects as { url, repo, name, description, stars, logo, commits, role, color_invert, paper_url } (name)}
-    {@const logo_url = logo ?? `${url}/favicon.svg`}
+    {@const logo_url = logo ? asset_url(logo) : `${url}/favicon.svg`}
     <li class="card" animate:flip={{ duration: 400 }}>
       <h3>
         <a href={url ?? repo} target="_blank" rel="noreferrer">

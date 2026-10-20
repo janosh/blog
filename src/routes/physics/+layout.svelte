@@ -6,11 +6,7 @@
   let { data, children }: LayoutProps = $props()
 </script>
 
-<Cover
-  section="physics"
-  {...data.frontmatter}
-  --cover-position={data.frontmatter.slug === `phd-thesis` ? `center 15%` : undefined}
-/>
+<Cover section="physics" {...data.frontmatter} />
 <h1>{data.frontmatter.title}</h1>
 
 <main style="max-width: 55em; margin: 1em auto" {@attach heading_anchors()}>

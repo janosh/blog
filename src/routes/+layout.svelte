@@ -3,6 +3,8 @@
   import { afterNavigate, goto } from '$app/navigation'
   import { page } from '$app/state'
   import { cover_url, Footer } from '#lib'
+  import favicon_png from '#lib/favicon.png'
+  import favicon_svg from '#lib/favicon.svg'
   import { search_actions } from '#lib/search.js'
   import { homepage, repository } from '#root/package.json'
   import { CopyButton, GitHubCorner, PageSearch, Toc } from 'svelte-widgets'
@@ -32,14 +34,18 @@
   const title = $derived(section_titles[page.route.id ?? ``] ?? frontmatter?.title)
   const page_title = $derived(title ? `${title} · janosh.dev` : `janosh.dev`)
   const og_image = $derived.by(() => {
-    if (!frontmatter) return `${homepage}/favicon.png`
+    if (!frontmatter) return new URL(favicon_png, homepage).href
     const { slug, cover } = frontmatter
     const section = post ? `posts` : `physics`
-    if (!cover.img.endsWith(`.svg`))
-      return new URL(cover_url(section, slug, cover.img), homepage).href
-    // social sites don't render SVG, so local SVG covers get a prerendered PNG (routes/og)
-    if (cover.img.startsWith(`http`)) return `${homepage}/favicon.png`
-    return `${homepage}/og/${section}/${slug}/${cover.img.slice(0, -4)}.png`
+    const { stem, ext } = /^(?<stem>.+)\.(?<ext>\w+)$/u.exec(cover.img)?.groups ?? {}
+    if (cover.img.startsWith(`http`))
+      return ext === `svg` ? new URL(favicon_png, homepage).href : cover.img
+    // social sites don't render SVG (or reliably WebP/AVIF), so those covers get a
+    // prerendered PNG/JPEG copy (routes/og)
+    if (ext === `svg`) return `${homepage}/og/${section}/${slug}/${stem}.png`
+    if (ext === `webp` || ext === `avif`)
+      return `${homepage}/og/${section}/${slug}/${stem}.jpg`
+    return new URL(cover_url(section, slug, cover.img), homepage).href
   })
 
   // pagefind only exists after build; stub in dev to avoid HTML-as-JS reimports
@@ -50,6 +56,8 @@
 
 <svelte:head>
   <title>{page_title}</title>
+  <link rel="icon" href={favicon_svg} />
+  <link rel="apple-touch-icon" href={favicon_png} />
   <meta data-pagefind-meta="title[content]" content={page_title} />
   <meta name="description" content={site_description} />
   <meta property="og:site_name" content="janosh.dev" />

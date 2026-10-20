@@ -55,7 +55,7 @@ projects:
     url: https://torchsim.github.io/torch-sim
     repo: https://github.com/torchsim/torch-sim
     role: Maintainer
-    logo: /torch-sim-logo.svg
+    logo: torch-sim-logo.svg
     description: Torch-native, batchable, atomistic simulations.
     paper_key: cohen_torchsim_2025
     featured: true
@@ -233,7 +233,7 @@ projects:
     url: https://materialsproject.org
     repo: https://github.com/materialsproject#contributors
     role: Former staff member
-    logo: /materials-project-logo.svg
+    logo: materials-project-logo.svg
     description: Widely used database, website, API and OSS ecosystem built for computing properties of inorganic materials.
     paper_key: horton_accelerated_2025
     featured: true

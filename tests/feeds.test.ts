@@ -3,9 +3,11 @@ import { posts } from '#lib/server/posts.js'
 import { homepage } from '../package.json'
 import { GET as get_rss } from '../src/routes/rss.xml/+server.js'
 import { GET as get_sitemap } from '../src/routes/sitemap.xml/+server.js'
-import { GET as get_og_png } from '../src/routes/og/[section]/[slug]/[img].png/+server.js'
+import { GET as get_og } from '../src/routes/og/[section]/[slug]/[img]/+server.js'
 import { load as load_post } from '../src/routes/posts/+layout.server.js'
 import { load as load_physics } from '../src/routes/physics/+layout.server.js'
+import { existsSync, globSync, readFileSync } from 'node:fs'
+import sharp from 'sharp'
 import { expect, it } from 'vite-plus/test'
 
 it.each([
@@ -55,22 +57,44 @@ it(`sitemap lists page routes, with lastmod only on posts`, async () => {
   expect(xml).not.toContain(`undefined`)
 })
 
-type OgEvent = Parameters<typeof get_og_png>[0]
+type OgEvent = Parameters<typeof get_og>[0]
 const og_event = (params: OgEvent[`params`]) => ({ params }) as OgEvent
 
-it(`renders every local SVG cover as a PNG og:image and 404s unknown ones`, async () => {
-  const svg_covers = [
+it(`renders every local SVG cover as PNG and WebP cover as 1200x630 JPEG og:image`, async () => {
+  const physics = globSync(`src/routes/physics/*/+page.md`).map((file) => [
+    `physics`,
+    file.split(`/`).at(-2) ?? ``,
+    /^ {2}img: (?<img>\S+)$/mu.exec(readFileSync(file, `utf8`))?.groups?.img ?? ``,
+  ])
+  const covers = [
     ...posts.map(({ slug, cover }) => [`posts`, slug, cover.img]),
-    [`physics`, `string-theory`, `contour-map.svg`],
-  ].filter(([, , img]) => img.endsWith(`.svg`) && !img.startsWith(`http`))
-  expect(svg_covers.length).toBeGreaterThan(10)
-  for (const [section, slug, img] of svg_covers) {
-    const response = await get_og_png(og_event({ section, slug, img: img.slice(0, -4) }))
-    expect(response.headers.get(`content-type`)).toBe(`image/png`)
-    const bytes = new Uint8Array(await response.arrayBuffer())
-    expect(new TextDecoder().decode(bytes.slice(1, 4))).toBe(`PNG`)
+    ...physics,
+  ].filter(([, , img]) => /\.(?:svg|webp)$/u.test(img) && !img.startsWith(`http`))
+  expect(covers.filter(([, , img]) => img.endsWith(`.webp`)).length).toBeGreaterThan(10)
+  for (const [section, slug, img] of covers) {
+    const og_img = img.replace(/\.svg$/u, `.png`).replace(/\.webp$/u, `.jpg`)
+    const response = await get_og(og_event({ section, slug, img: og_img }))
+    const { format, width, height } = await sharp(await response.arrayBuffer()).metadata()
+    expect([format, response.headers.get(`content-type`)]).toEqual(
+      img.endsWith(`.svg`) ? [`png`, `image/png`] : [`jpeg`, `image/jpeg`],
+    )
+    if (img.endsWith(`.webp`)) expect([width, height]).toEqual([1200, 630])
   }
-  expect(() => get_og_png(og_event({ section: `posts`, slug: `x`, img: `y` }))).toThrow(
-    expect.objectContaining({ status: 404 }),
+  for (const img of [`y.png`, `y.jpg`, `banner.png`]) {
+    await expect(
+      get_og(og_event({ section: `physics`, slug: `qft`, img })),
+    ).rejects.toMatchObject({ status: 404 })
+  }
+})
+
+it(`ships a compiled PDF and card thumbnail next to every typeset physics note`, () => {
+  const sources = globSync(`src/routes/physics/**/pdfs/*.typ`)
+  expect(sources.length).toBeGreaterThan(0)
+  const missing = sources.flatMap((typ) =>
+    [
+      typ.replace(/\.typ$/u, `.pdf`),
+      typ.replace(`/pdfs/`, `/thumbnails/`).replace(/\.typ$/u, `.webp`),
+    ].filter((path) => !existsSync(path)),
   )
+  expect(missing).toEqual([])
 })

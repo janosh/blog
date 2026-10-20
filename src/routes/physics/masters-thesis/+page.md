@@ -1,10 +1,8 @@
 ---
 title: Master's Thesis
 cover:
-  img: heidelberg-castle-at-night.webp
-  origin: Alex Meyer
-  url: https://locationscout.net/germany/3596-philosophenweg-heidelberg
-  caption: Heidelberg castle at night
+  img: banner.webp
+  caption: Phase portrait of the Bose-Einstein distribution continued into the complex frequency plane, with poles at the bosonic Matsubara frequencies
 ---
 
 I wrote my master's thesis under the supervision of [Stefan Flörchinger](https://www.thphys.uni-heidelberg.de/~floerchinger), [Michael Scherer](https://www.physik.ruhr-uni-bochum.de/en/Professuren/prof-dr-scherer-michael/) and [Christof Wetterich](https://www.thphys.uni-heidelberg.de/~wetterich) at [ITP Heidelberg](https://www.thphys.uni-heidelberg.de/).
@@ -15,6 +13,6 @@ I wrote my master's thesis under the supervision of [Stefan Flörchinger](https:
 
 <div class="docs-grid">
 
-[![Thesis](./thesis.webp) Thesis](./thesis.pdf)
+[Thesis ![Thesis](./thesis.webp)](./thesis.pdf)
 
 </div>

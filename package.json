@@ -24,7 +24,8 @@
   },
   "scripts": {
     "build": "vp build && pagefind --site build --exclude-selectors \"pre, details, math\"",
-    "update-oss": "node scripts/update-oss.ts"
+    "build-notes": "node src/routes/physics/build-notes.ts",
+    "update-oss": "node src/lib/update-oss.ts"
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
@@ -34,6 +35,7 @@
     "@wooorm/starry-night": "^3.11.0",
     "matterviz": "^0.8.0",
     "pagefind": "^1.5.2",
+    "sharp": "^0.35.5",
     "svelte": "^5.57.2",
     "svelte-check": "^4.7.7",
     "svelte-widgets": "github:janosh/svelte-widgets#main",

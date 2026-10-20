@@ -1,9 +1,8 @@
 ---
 title: String Theory
 cover:
-  img: contour-map.svg
-  origin: Vecteezy
-  url: https://vecteezy.com/vector-art/274839-abstract-background-vector
+  img: banner.webp
+  caption: Worldsheet of an oscillating closed string, an exact Kibble-Turok solution of the Nambu-Goto equations, traced through time from left to right and colored by local string speed
 ---
 
 My notes and solutions for the final exam and the exercises handed out in the string theory lecture read by [Prof. Timo Weigand](https://qu.uni-hamburg.de/cluster/team/weigand.html) at [Heidelberg University](https://www.uni-heidelberg.de/en) in the winter semester of 2015/16.
@@ -12,9 +11,9 @@ My notes and solutions for the final exam and the exercises handed out in the st
 
 <div class="docs-grid">
 
-[![Exam solution](./thumbnails/exam-sol.webp) Exam solution](./pdfs/exam-sol.pdf)
+[Exam solution ![Exam solution](./thumbnails/exam-solution.webp)](./pdfs/exam-solution.pdf)
 
-[![Exam sheet](./thumbnails/exam-sheet.webp) Exam sheet](./pdfs/exam-sheet.pdf)
+[Exam sheet ![Exam sheet](./thumbnails/exam-sheet.webp)](./pdfs/exam-sheet.pdf)
 
 </div>
 
@@ -22,21 +21,21 @@ My notes and solutions for the final exam and the exercises handed out in the st
 
 <div class="docs-grid">
 
-[![Exercise 1](./thumbnails/sol-01.webp) Exercise 1](./pdfs/sol-01.pdf)
+[Exercise 1 ![Exercise 1](./thumbnails/solution-01.webp)](./pdfs/solution-01.pdf)
 
-[![Exercise 2](./thumbnails/sol-02.webp) Exercise 2](./pdfs/sol-02.pdf)
+[Exercise 2 ![Exercise 2](./thumbnails/solution-02.webp)](./pdfs/solution-02.pdf)
 
-[![Exercise 3](./thumbnails/sol-03.webp) Exercise 3](./pdfs/sol-03.pdf)
+[Exercise 3 ![Exercise 3](./thumbnails/solution-03.webp)](./pdfs/solution-03.pdf)
 
-[![Exercise 4](./thumbnails/sol-04.webp) Exercise 4](./pdfs/sol-04.pdf)
+[Exercise 4 ![Exercise 4](./thumbnails/solution-04.webp)](./pdfs/solution-04.pdf)
 
-[![Exercise 5](./thumbnails/sol-05.webp) Exercise 5](./pdfs/sol-05.pdf)
+[Exercise 5 ![Exercise 5](./thumbnails/solution-05.webp)](./pdfs/solution-05.pdf)
 
-[![Exercise 7](./thumbnails/sol-07.webp) Exercise 7](./pdfs/sol-07.pdf)
+[Exercise 7 ![Exercise 7](./thumbnails/solution-07.webp)](./pdfs/solution-07.pdf)
 
-[![Exercise 8](./thumbnails/sol-08.webp) Exercise 8](./pdfs/sol-08.pdf)
+[Exercise 8 ![Exercise 8](./thumbnails/solution-08.webp)](./pdfs/solution-08.pdf)
 
-[![Exercise 9](./thumbnails/sol-09.webp) Exercise 9](./pdfs/sol-09.pdf)
+[Exercise 9 ![Exercise 9](./thumbnails/solution-09.webp)](./pdfs/solution-09.pdf)
 
 </div>
 
