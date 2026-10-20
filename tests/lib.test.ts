@@ -1,5 +1,14 @@
-import { cover_url, date_num, site_routes, sort_oss_projects, when_visible } from '#lib'
+import {
+  cover_url,
+  date_num,
+  format_issued,
+  project_matches,
+  site_routes,
+  sort_oss_projects,
+  when_visible,
+} from '#lib'
 import { goto } from '$app/navigation'
+import { page } from '$app/state'
 import { posterior_pct } from '../src/routes/posts/geometric-bayes/bayes.js'
 import { apply_theme_mode } from 'svelte-widgets/theme'
 import { search_actions } from '#lib/search.js'
@@ -63,7 +72,7 @@ vi.mock(`#lib/oss.yml`, () => ({
 it(`loads shared projects, sorted featured work, and matched post metadata`, () => {
   const { projects, recent_work } = load_home()
   const post_page = load_post({ route: { id: `/posts/example` } })
-  expect(post_page.post).toMatchObject({ slug: `example` })
+  expect(post_page.frontmatter).toMatchObject({ slug: `example` })
   expect(load_oss().projects).toBe(projects)
   expect(load_posts().top_tags).toEqual([{ label: `TypeScript`, count: 1 }])
   expect(recent_work.map(({ name }) => name)).toEqual([`PhD Thesis`, `Separator`])
@@ -101,6 +110,9 @@ it.each([
     )
     expect(body).not.toContain(`#contributors/graphs/contributors`)
     expect(body).toMatch(/aria-checked="true"[^>]*data-value="commits"/u)
+    // only the project with a paper_key gets a Paper pill, linking its resolved URL
+    expect(body.match(/<span>Paper<\/span>/gu)).toHaveLength(1)
+    expect(body).toContain(`href="https://arxiv.org/abs/2401.00096v1"`)
   },
 )
 
@@ -190,7 +202,7 @@ it.each([0, 1, 2])(
     }))
     const { body } = render(PostLayout, {
       props: {
-        data: { posts, post: posts[current_idx] },
+        data: { posts, frontmatter: posts[current_idx] },
         params: {},
         children: createRawSnippet(() => ({ render: () => `<p>Post content</p>` })),
       },
@@ -272,3 +284,100 @@ it.each([
     expect(posterior_pct(p_h, p_e_given_h, p_e_given_not_h)).toBeCloseTo(expected, 10)
   },
 )
+
+it.each([
+  [`MACE`, true],
+  [`foundation model`, true],
+  [`python`, true],
+  [`strong`, false], // inside <strong> markup only
+  [`https`, false], // URLs are not searchable
+  [``, true],
+])(`project search for %j matches=%s`, (query, expected) => {
+  const project = {
+    name: `MACE`,
+    description: `<p>A <strong>foundation model</strong> at <a href="https://x.y">x</a></p>`,
+    languages: [`Python`],
+  }
+  expect(project_matches(project, query)).toBe(expected)
+  const { languages: _, ...no_languages } = project
+  expect(project_matches(no_languages, query)).toBe(expected && query !== `python`)
+})
+
+it.each([
+  [{ year: 2025 }, `2025`],
+  [{ year: 2025, month: 1 }, `Jan 2025`],
+  [{ year: 2024, month: 7, day: 17 }, `Jul 2024`],
+  [{ year: 2023, month: 12 }, `Dec 2023`],
+])(
+  `formats publication date %j without inventing missing precision`,
+  (issued, expected) => {
+    expect(format_issued(issued)).toBe(expected)
+  },
+)
+
+const render_head = (url: string, frontmatter?: App.PageData[`frontmatter`]) => {
+  Object.assign(page, {
+    url: new URL(url),
+    route: { id: new URL(url).pathname },
+    data: { frontmatter },
+  })
+  return render(Layout, {
+    props: {
+      data: {},
+      params: {},
+      children: createRawSnippet(() => ({ render: () => `` })),
+    },
+  }).head
+}
+
+it(`marks only posts as og:type article with publish date and tags`, () => {
+  const post_head = render_head(`https://janosh.dev/posts/normalizing-flows`, {
+    title: `Flows`,
+    slug: `normalizing-flows`,
+    cover: { img: `abstract-flow.svg` },
+    date: `2026-09-01`,
+    tags: [`TypeScript`],
+  })
+  expect(post_head).toContain(`<meta property="og:type" content="article"`)
+  expect(post_head).toContain(
+    `<meta property="article:published_time" content="2026-09-01"`,
+  )
+  expect(post_head).toContain(`<meta property="article:tag" content="TypeScript"`)
+  expect(post_head).toContain(
+    `content="https://janosh.dev/og/posts/normalizing-flows/abstract-flow.png"`,
+  )
+
+  const physics_head = render_head(`https://janosh.dev/physics/qft`, {
+    title: `QFT`,
+    slug: `qft`,
+    cover: { img: `lhc-atlas.webp` },
+  })
+  expect(physics_head).toContain(`physics/qft/lhc-atlas.webp"`)
+  for (const head of [physics_head, render_head(`https://janosh.dev/posts/missing`)]) {
+    expect(head).toContain(`<meta property="og:type" content="website"`)
+    expect(head).not.toContain(`article:`)
+  }
+  render_head(`https://janosh.dev/posts`) // restore the default mock page
+})
+
+it.each([
+  [
+    { origin: `Vecteezy`, url: `https://vecteezy.com/x` },
+    `Cover: <a href="https://vecteezy.com/x">Vecteezy</a>`,
+  ],
+  [{ origin: `Alex Meyer` }, `Cover: Alex Meyer</small>`], // no url: plain text, no dead link
+  [{}, undefined],
+])(`credits cover source %j`, (credit, expected) => {
+  const [post] = load_posts().posts
+  const cover = { img: `https://example.com/cover.svg`, ...credit }
+  const { body } = render(PostLayout, {
+    props: {
+      data: { posts: [post], frontmatter: { ...post, cover } },
+      params: {},
+      children: createRawSnippet(() => ({ render: () => `<p>Post content</p>` })),
+    },
+  })
+  const html = body.replaceAll(/<!--[^>]*-->/gu, ``).replaceAll(/\s+/gu, ` `)
+  if (expected) expect(html).toContain(expected)
+  else expect(html).not.toContain(`Cover:`)
+})

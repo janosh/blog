@@ -18,36 +18,33 @@
   bind:clientWidth={size.width}
 >
   <FullscreenButton placement="corner" wrapper={container} />
-  {#if size.width && size.height}
-    <ProbabilityRegion
-      {size}
-      dimension="width"
-      bind:probability={p_h}
-      label="p(H)"
-      style="top: 0; left: 0; width: {p_h}%; height: {100 -
-        p_e_given_h}%; background: teal"
-      label_style="left: 50%; top: 0; transform: translate(-50%, calc(-100% - 1ex))"
-    />
-    <ProbabilityRegion
-      {size}
-      dimension="height"
-      bind:probability={p_e_given_h}
-      label="p(E|H)"
-      style="bottom: 0; left: 0; width: {p_h}%; height: {p_e_given_h}%; background: DeepSkyBlue"
-      label_style="left: 0; top: 50%; transform: translate(calc(-100% - 1ex), -50%)"
-    />
-    <ProbabilityRegion
-      {size}
-      dimension="height"
-      bind:probability={p_e_given_not_h}
-      label="p(E|¬H)"
-      style="bottom: 0; right: 0; width: {100 -
-        p_h}%; height: {p_e_given_not_h}%; background: SteelBlue"
-      label_style="right: 0; top: 50%; transform: translate(calc(100% + 1ex), -50%)"
-    />
-  {/if}
+  <ProbabilityRegion
+    {size}
+    dimension="width"
+    bind:probability={p_h}
+    label="p(H)"
+    style="top: 0; left: 0; width: {p_h}%; height: {100 - p_e_given_h}%; background: teal"
+    label_style="left: 50%; top: 0; transform: translate(-50%, calc(-100% - 1ex))"
+  />
+  <ProbabilityRegion
+    {size}
+    dimension="height"
+    bind:probability={p_e_given_h}
+    label="p(E|H)"
+    style="bottom: 0; left: 0; width: {p_h}%; height: {p_e_given_h}%; background: DeepSkyBlue"
+    label_style="left: 0; top: 50%; transform: translate(calc(-100% - 1ex), -50%)"
+  />
+  <ProbabilityRegion
+    {size}
+    dimension="height"
+    bind:probability={p_e_given_not_h}
+    label="p(E|¬H)"
+    style="bottom: 0; right: 0; width: {100 -
+      p_h}%; height: {p_e_given_not_h}%; background: SteelBlue"
+    label_style="right: 0; top: 50%; transform: translate(calc(100% + 1ex), -50%)"
+  />
 </div>
-<div id="result" style:width="{size.width}px">
+<div id="result">
   <div style:width="{posterior}%">
     <span style="right: 50%; bottom: 0; transform: translate(50%, calc(100% + 1ex))">
       p(H|E) =
@@ -81,6 +78,8 @@
     font-size: clamp(0.75rem, 2.5vw, 1rem);
   }
   #result {
+    width: min(50vw, calc(100vw - 13rem));
+    max-width: 600px;
     margin: auto;
     height: 100px;
     box-sizing: border-box;

@@ -2,7 +2,7 @@
 
 import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
-import { dump, load } from 'js-yaml'
+import { parse_yaml, stringify_yaml } from 'svelte-widgets/yaml'
 
 const is_record = (value: unknown): value is Record<string, unknown> =>
   typeof value === `object` && value !== null
@@ -59,7 +59,7 @@ async function update_project(project: GhProject, gh_token: string): Promise<voi
 export async function update_oss(gh_token: string): Promise<void> {
   const filename = new URL(`../src/lib/oss.yml`, import.meta.url)
   const source = fs.readFileSync(filename, `utf8`)
-  const oss_data: unknown = load(source)
+  const oss_data: unknown = parse_yaml(source)
   if (!is_record(oss_data) || !Array.isArray(oss_data.projects)) {
     throw new TypeError(`Invalid oss.yml structure`)
   }
@@ -74,7 +74,7 @@ export async function update_oss(gh_token: string): Promise<void> {
   if (fs.readFileSync(filename, `utf8`) !== source) {
     throw new Error(`oss.yml changed during the GitHub refresh; refusing to overwrite it`)
   }
-  fs.writeFileSync(filename, dump(oss_data, { lineWidth: -1 }))
+  fs.writeFileSync(filename, stringify_yaml(oss_data, { lineWidth: -1 }))
 }
 
 if (import.meta.main) {

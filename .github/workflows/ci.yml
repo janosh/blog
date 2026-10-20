@@ -8,16 +8,15 @@ on:
   workflow_dispatch:
 
 permissions:
-  pages: write
-  id-token: write
+  contents: read
 
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
 
@@ -26,8 +25,8 @@ jobs:
         run: corepack enable && pnpm install
         env:
           PNPM_CONFIG_DANGEROUSLY_ALLOW_ALL_BUILDS: true
-          # Git dependencies use npm to prepare; svelte-widgets' dev-only Vitest/Vite+ peers conflict.
-          NPM_CONFIG_LEGACY_PEER_DEPS: true
+          # matterviz depends on svelte-widgets via GitHub
+          PNPM_CONFIG_BLOCK_EXOTIC_SUBDEPS: false
 
       - name: Lint and format check
         run: pnpm exec vp check
@@ -41,7 +40,7 @@ jobs:
   link-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Discover broken links
         uses: lycheeverse/lychee-action@v2
@@ -56,9 +55,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
 
@@ -66,7 +65,7 @@ jobs:
 
       - run: pnpm run build
 
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: build
 
@@ -74,9 +73,12 @@ jobs:
     if: github.ref == 'refs/heads/main'
     needs: [build, check]
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - id: deploy
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

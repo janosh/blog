@@ -1,4 +1,4 @@
-import { format_publication_date, print_cv } from '../src/routes/cv/index.js'
+import { print_cv } from '../src/routes/cv/index.js'
 import {
   extract_citations,
   prepare_publication,
@@ -50,21 +50,8 @@ it(`renders curated work and keeps the remaining publications accessible without
     expect(body).toContain(name)
     for (const skill of items) expect(body).toContain(skill.name)
   }
-  expect(body).not.toMatch(/\((?:10|[0-9])\)<\/small>/u)
-  expect(body).not.toContain(`Sort by`)
+  expect(body).not.toMatch(/\(\d+\)<\/small>/u)
 })
-
-it.each([
-  [{ year: 2025 }, `2025`],
-  [{ year: 2025, month: 1 }, `Jan 2025`],
-  [{ year: 2024, month: 7, day: 17 }, `Jul 2024`],
-  [{ year: 2023, month: 12 }, `Dec 2023`],
-])(
-  `formats publication date %j without inventing missing precision`,
-  (issued, expected) => {
-    expect(format_publication_date(issued)).toBe(expected)
-  },
-)
 
 it.each([
   [

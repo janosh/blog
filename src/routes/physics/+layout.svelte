@@ -1,31 +1,18 @@
 <script lang="ts">
-  import { cover_url } from '#lib'
+  import { Cover } from '#lib'
   import { heading_anchors } from 'svelte-widgets'
   import type { LayoutProps } from './$types'
 
   let { data, children }: LayoutProps = $props()
-  let { title, cover, slug } = $derived(data.frontmatter)
 </script>
 
-<img
-  src={cover_url(`physics`, slug, cover.img)}
-  alt={cover.caption ?? title}
-  class:thesis-cover={slug === `phd-thesis`}
+<Cover
+  section="physics"
+  {...data.frontmatter}
+  --cover-position={data.frontmatter.slug === `phd-thesis` ? `center 15%` : undefined}
 />
-<h1>{title}</h1>
+<h1>{data.frontmatter.title}</h1>
 
 <main style="max-width: 55em; margin: 1em auto" {@attach heading_anchors()}>
   {@render children()}
 </main>
-
-<style>
-  img {
-    margin: 0;
-    height: 30vh;
-    object-fit: cover;
-    width: 100%;
-  }
-  img.thesis-cover {
-    object-position: center 15%;
-  }
-</style>

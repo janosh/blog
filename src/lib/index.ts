@@ -1,12 +1,24 @@
 import type { OssSortKey, Project, Reference, SortOrder } from './types.js'
 import type { Attachment } from 'svelte/attachments'
 
+export { default as Cover } from './Cover.svelte'
 export { default as Footer } from './Footer.svelte'
 export type * from './types.js'
 
 // A partial date sorts at the start of its known year or month.
 export const date_num = ({ year, month = 0, day = 0 }: Reference[`issued`][number]) =>
   year * 10000 + month * 100 + day
+
+const month_year = new Intl.DateTimeFormat(`en-GB`, {
+  month: `short`,
+  year: `numeric`,
+  timeZone: `UTC`,
+})
+
+export const format_issued = ({ year, month }: Reference[`issued`][number]) =>
+  month === undefined
+    ? String(year)
+    : month_year.format(new Date(Date.UTC(year, month - 1)))
 
 // Run once near the viewport, and release the observer on activation or unmount.
 export const when_visible =
@@ -26,11 +38,10 @@ export const when_visible =
 
 // Cover images live next to their +page.md. Bundle them all so posts/physics layouts and
 // index pages can resolve `cover.img` from frontmatter to a hashed asset URL.
-// Rolldown (vite 8) ignores `import: 'default'` on eager globs and yields module namespaces,
-// hence the explicit `.default`
-const cover_modules = import.meta.glob<{ default: string }>(
+const cover_modules = import.meta.glob<string>(
   `/src/routes/{posts,physics}/*/*.{avif,jpg,jpeg,png,svg,webp}`,
-  { eager: true },
+  // Rolldown's production glob parser requires string literals for these options.
+  { import: 'default', eager: true },
 )
 
 export function cover_url(
@@ -39,7 +50,7 @@ export function cover_url(
   img: string,
 ): string {
   if (img.startsWith(`http`)) return img
-  const src = cover_modules[`/src/routes/${section}/${slug}/${img}`]?.default
+  const src = cover_modules[`/src/routes/${section}/${slug}/${img}`]
   if (!src) throw new Error(`cover ${img} not found in src/routes/${section}/${slug}`)
   return src
 }
@@ -52,6 +63,20 @@ export const site_routes = Object.keys(
   const parts = file.split(`/`).filter((part) => !part.startsWith(`(`))
   return `/${parts.slice(3, -1).join(`/`)}`
 })
+
+// Match a project's name, description text (not markup or URLs) and languages.
+export const project_matches = (
+  {
+    name,
+    description,
+    languages = [],
+  }: Pick<Project, `name` | `description` | `languages`>,
+  query: string,
+) =>
+  [name, description.replaceAll(/<[^>]*>/gu, ` `), ...languages]
+    .join(` `)
+    .toLowerCase()
+    .includes(query.toLowerCase())
 
 export const oss_sort_keys = [
   { value: `commits`, tooltip: `Sort by commits` },

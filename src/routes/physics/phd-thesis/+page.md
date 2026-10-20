@@ -1,6 +1,5 @@
 ---
 title: PhD Thesis
-slug: /phd-thesis
 cover:
   img: https://github.com/janosh/thesis/raw/main/figs/thesis-cover.svg
   caption: Thesis cover — crystal structure motif

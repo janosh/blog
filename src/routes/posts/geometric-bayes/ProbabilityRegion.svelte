@@ -22,6 +22,7 @@
   const resize: Attachment<HTMLDivElement> = (node) =>
     resizable({
       edges: [dimension === `width` ? `right` : `top`],
+      labels: { handle: () => `Adjust ${label}` },
       min_width: 0,
       min_height: 0,
       max_width: () => size.width,
@@ -50,9 +51,7 @@
     font-size: clamp(0.75rem, 2.5vw, 1rem);
   }
   .resizable {
-    touch-action: none;
     position: absolute;
-    will-change: transform;
     /* use box-shadow instead of border to achieve border collapse: https://stackoverflow.com/a/28807765 */
     box-shadow:
       2px 0 0 0 white,

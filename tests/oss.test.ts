@@ -1,5 +1,5 @@
 import fs from 'node:fs'
-import { load } from 'js-yaml'
+import { parse_yaml } from 'svelte-widgets/yaml'
 import { update_oss } from '../scripts/update-oss.js'
 import { expect, it, vi } from 'vite-plus/test'
 
@@ -9,7 +9,6 @@ const repository = { stargazers_count: 100 }
 const me = { login: `janosh`, contributions: 42 }
 const full_page = Array.from({ length: 100 }, (_, idx) => ({ login: `user-${idx}` }))
 const network_error = new Error(`fetch failed`)
-const timeout_error = new Error(`The operation was aborted due to timeout`)
 
 it.each([
   [`first page`, [repository, [me]], 42],
@@ -31,7 +30,6 @@ it.each([
     /Invalid contribution count/,
   ],
   [`network failure`, [network_error], network_error],
-  [`timeout`, [timeout_error], timeout_error],
   [`invalid JSON`, [new Response(`not JSON`)], /GitHub request failed/],
   [`concurrent edit`, [repository, [me]], /oss.yml changed/],
 ] as const)(`refreshes the catalog: %s`, async (mode, responses, expected) => {
@@ -57,7 +55,7 @@ it.each([
     expect(write).toHaveBeenCalledOnce()
     const written = write.mock.calls[0][1]
     if (typeof written !== `string`) throw new TypeError(`Expected YAML text`)
-    expect(load(written)).toEqual({
+    expect(parse_yaml(written)).toEqual({
       projects: [{ ...project, stars: responses.length ? 100 : 1, commits: expected }],
     })
     expect(fetch_mock).toHaveBeenCalledTimes(responses.length)

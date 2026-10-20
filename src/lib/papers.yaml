@@ -597,6 +597,361 @@ references:
     title-short: Atomate2
     URL: https://pubs.rsc.org/en/content/articlelanding/2025/dd/d5dd00019j
 
+  - id: george_pymatgen_2026
+    accessed:
+      - year: 2026
+        month: 10
+        day: 19
+    author:
+      - family: George
+        given: Janine
+      - family: Horton
+        given: Matthew K.
+      - family: Kaplan
+        given: Aaron D.
+      - family: Kavanagh
+        given: Seán R.
+      - family: Riebesell
+        given: Janosh
+      - family: Rosen
+        given: Andrew S.
+      - family: Yang
+        given: Haoyu
+      - family: Adams
+        given: Felix
+      - family: Amachraa
+        given: Mahdi
+      - family: Andriuc
+        given: Oxana
+      - family: Ashour
+        given: Omar A.
+      - family: Bajaj
+        given: Saurabh
+      - family: Banyas
+        given: Ella
+      - family: Barroso-Luque
+        given: Luis
+      - family: Berket
+        given: Karlo
+      - family: Bernstein
+        given: Noam
+      - family: Bhardwaj
+        given: Arpit
+      - family: Bhatti
+        given: Ali Hussain Umar
+      - family: Blau
+        given: Samuel M.
+      - family: Bocklund
+        given: Brandon
+      - family: Bonkowski
+        given: Alexander
+      - family: Broberg
+        given: Danny
+      - family: Brunin
+        given: Guillaume
+      - family: Bystrom
+        given: Kyle
+      - family: Cardot
+        given: Charles A.
+      - family: Chang
+        given: Rees
+      - family: Chen
+        given: Chi
+      - family: Chen
+        given: Wei
+      - family: Chen
+        given: Xin
+      - family: Chiang
+        given: Yuan
+      - family: Choudhary
+        given: Kamal
+      - family: Cohen
+        given: Orion A.
+      - family: Costa
+        given: Miguel D.
+      - family: Dacek
+        given: Stephen T.
+        suffix: III
+      - family: Jong
+        given: Maarten
+        non-dropping-particle: de
+      - family: Demeyere
+        given: Tom
+      - family: Dozier
+        given: Alan K.
+      - family: Dunn
+        given: Alexander
+      - family: Dwaraknath
+        given: Shyam
+      - family: Dylla
+        given: Maxwell T.
+      - family: Eimre
+        given: Kristjan
+      - family: Epstein
+        given: Alexander R.
+      - family: Ertural
+        given: Christina
+      - family: Esters
+        given: Marco
+      - family: Evans
+        given: Matthew L.
+      - family: Falke
+        given: Johannes
+      - family: Fekete
+        given: Adam
+      - family: Field
+        given: Bernard
+      - family: Fonari
+        given: Alexandr
+      - family: Frey
+        given: Nathan C.
+      - family: Gaines
+        given: Dale W.
+        suffix: II
+      - family: Ganose
+        given: Alex M.
+      - family: Giantomassi
+        given: Matteo
+      - family: Goodall
+        given: Rhys E. A.
+      - family: Gostin
+        given: Petre-Flaviu
+      - family: Gupta
+        given: Aayush
+      - family: Ha
+        given: Viet-Anh
+      - family: Hautier
+        given: Geoffroy
+      - family: Heinsdorf
+        given: Niclas
+      - family: Herbst
+        given: Michael F.
+      - family: Hou
+        given: Tingzheng
+      - family: Huck
+        given: Patrick
+      - family: Ikeda
+        given: Yuji
+      - family: Jackson
+        given: Adam J.
+      - family: Jayaraman
+        given: Saivenkataraman
+      - family: Kearns
+        given: Finn R.
+      - family: Kim
+        given: Sunghyun
+      - family: Kingsbury
+        given: Ryan S.
+      - family: Krajewski
+        given: Adam M.
+      - family: Kumagai
+        given: Yu
+      - family: Kuner
+        given: Matthew C.
+      - family: Laderer
+        given: William T.
+      - family: Li
+        given: Weitang
+      - family: Li
+        given: Xiang-Guo
+      - family: Liang
+        given: Yu Hsuan
+      - family: Liu
+        given: Hanyu
+      - family: Liu
+        given: Ke
+      - family: Liu
+        given: Miao
+      - family: Lutfi
+        given: Ahmad
+      - family: Marchand
+        given: Olivier
+      - family: McDermott
+        given: Matthew J.
+      - family: Medasani
+        given: Bharat K.
+      - family: Meng
+        given: Fanchen
+      - family: Miller
+        given: Kyle D.
+      - family: Miranda
+        given: Henrique
+      - family: Mohanakrishnan
+        given: Rohith Srinivaas
+      - family: Montoya
+        given: Joseph H.
+      - family: Moore
+        given: Guy C.
+      - family: Morgan
+        given: Benjamin J.
+      - family: Munro
+        given: Jason M.
+      - family: Muraoka
+        given: Koki
+      - family: Naik
+        given: Aakash A.
+      - family: O'Leary
+        given: Willis
+      - family: Onwuli
+        given: Anthony
+      - family: Park
+        given: Jaesuk
+      - family: Parsons
+        given: Drew F.
+      - family: Pei
+        given: Kai
+      - family: Petretto
+        given: Guido
+      - family: Purcell
+        given: Thomas A. R.
+      - family: Qi
+        given: Ji
+      - family: Qu
+        given: Xiaohui
+      - family: Radchenko
+        given: Ihor
+      - family: Rajput
+        given: Nav Nidhi
+      - family: Ricci
+        given: Francesco
+      - family: Rich
+        given: Benjamin S.
+      - family: Richards
+        given: William D.
+      - family: Rignanese
+        given: Gian-Marco
+      - family: Ruan
+        given: Xiaoxu
+      - family: Salvato Vallverdu
+        given: Germain
+      - family: Schmidt
+        given: Jonathan
+      - family: Shen
+        given: Jimmy-Xuan
+      - family: Shimogawa
+        given: Ryuichi
+      - family: Shinohara
+        given: Kohei
+      - family: Singh
+        given: Arunima K.
+      - family: Sivonxay
+        given: Eric
+      - family: Smeets
+        given: Stef
+      - family: Smidt
+        given: Tess E.
+      - family: Sobolev
+        given: Andrei
+      - family: Spotte-Smith
+        given: Evan Walter Clark
+      - family: Stihl
+        given: Christopher
+      - family: Sun
+        given: Wenhao
+      - family: Sundberg
+        given: Jack D.
+      - family: Suzuki
+        given: Yuta
+      - family: Talirz
+        given: Leopold
+      - family: Tang
+        given: Hanmei
+      - family: Taw
+        given: Eric
+      - family: Tezak
+        given: Cooper
+      - family: Therrien
+        given: Félix
+      - family: Thiel
+        given: Scott D.
+      - family: Torrisi
+        given: Steven B.
+      - family: Turiansky
+        given: Mark E.
+      - family: Ueltzen
+        given: Katharina
+      - family: Setten
+        given: Michiel J.
+        non-dropping-particle: van
+      - family: Vieten
+        given: Josua
+      - family: Vijay
+        given: Sudarshan
+      - family: Wagner
+        given: Nicholas
+      - family: Wan
+        given: Frank
+      - family: Wang
+        given: Amanda
+      - family: Wang
+        given: Jingyang
+      - family: Wang
+        given: Zhenbin
+      - family: Ward
+        given: Logan
+      - family: Warford
+        given: Thomas
+      - family: Waroquiers
+        given: David
+      - family: Wen
+        given: Mingjian
+      - family: Weser
+        given: Oskar
+      - family: Winner
+        given: Nicholas
+      - family: Winston
+        given: Donald
+      - family: Wolloch
+        given: Michael
+      - family: Wood
+        given: Brandon M.
+      - family: Woods-Robinson
+        given: Rachel
+      - family: Xiao
+        given: Yihan
+      - family: Xie
+        given: Yaoshu
+      - family: Yalcin
+        given: Firat
+      - family: Yang
+        given: Ruo Xi
+      - family: Ye
+        given: Weike
+      - family: Zarabadi-Poor
+        given: Pezhman
+      - family: Zeng
+        given: Jinzhe
+      - family: Zhao
+        given: Hongsheng
+      - family: Zheng
+        given: Kaifeng
+      - family: Zhu
+        given: He
+      - family: Zhu
+        given: Zhuoying
+      - family: Zimmermann
+        given: Nils E. R.
+      - family: Zügner
+        given: Daniel
+      - family: Persson
+        given: Kristin A.
+      - family: Jain
+        given: Anubhav
+      - family: Ong
+        given: Shyue Ping
+    citation-key: george_pymatgen_2026
+    DOI: 10.48550/arXiv.2610.23538
+    issued:
+      - year: 2026
+        month: 10
+        day: 16
+    number: arXiv:2610.23538
+    publisher: arXiv
+    source: arXiv.org
+    title: >-
+      pymatgen: 15 years of community growth, new functionality, and future
+      prospects
+    URL: https://arxiv.org/abs/2610.23538
   - id: horton_accelerated_2025
     accessed:
       - year: 2025

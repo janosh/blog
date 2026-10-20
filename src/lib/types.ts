@@ -1,15 +1,17 @@
-export type FrontMatter = {
+// page frontmatter (slug derived from its directory); posts add date and tags
+export type PageMeta = {
   title: string
   slug: string
-  date: string
   cover: {
     img: string
-    url: string
     caption?: string
+    // image credit: source name and link
     origin?: string
+    url?: string
   }
-  tags: string[]
 }
+
+export type PostMeta = PageMeta & { date: string; tags: string[] }
 
 export type Education = {
   title: string
@@ -18,9 +20,8 @@ export type Education = {
   href: string
   logo: string
   description?: string
-  date?: string
-  thesis?: {
-    title?: string
+  thesis: {
+    title: string
     url?: string
     repo?: string
   }
@@ -71,8 +72,9 @@ export type Project = {
   stars?: number
   commits?: number
   pypi?: string
-  languages: string[]
+  languages?: string[]
   paper_key?: string // Zotero BibTeX ID
+  paper_url?: string // resolved from paper_key by lib/server/oss.ts
   featured?: boolean
 }
 

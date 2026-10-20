@@ -1,6 +1,5 @@
 ---
 title: General Relativity
-slug: /general-relativity
 cover:
   img: general-relativity.svg
   origin: Wikipedia

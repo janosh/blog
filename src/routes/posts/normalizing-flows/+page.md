@@ -55,7 +55,7 @@ $$
 
 $p_z(\vec z)$ is called the_base distribution_of the model. It's usually a diagonal-covariance Gaussian. (To connect terminology with latent-variable models such as VAEs, $p_z(\vec z)$ is also sometimes referred to as the prior and $\vec z$ as the latent variable. However, as [Papamakarios et al. rightly point out in their excellent review](https://arxiv.org/abs/1912.02762), $\vec z$ is not actually latent (unobserved) since knowing $\vec x$ uniquely determines the corresponding $\vec z = f^{-1}(\vec x)$.)
 
-The transformation $f$ and base distribution $p_z(\vec z)$ are the_only_two defining properties of a flow model. Both may have their own parameters denoted $\vec\phi$ and $\vec\psi$, respectively. Together, $f*\vec\phi$ and $p*z(\vec z; \psi)$ induce a family of distributions over $\vec x$ parameterized by $\vec\theta = \{\vec\phi, \vec\psi\}$ (as usual in variational inference). If we're doing posterior inference, we can only get as close to the true posterior as the most similar member of this family. (We won't always indicate the dependence on these parameters to simplify notation but in the following, $f$ actually refers to $f*\vec\phi$ and $p_z(\vec z)$ to $p_z(\vec z; \psi)$.)
+The transformation $f$ and base distribution $p_z(\vec z)$ are the _only two_ defining properties of a flow model. Both may have their own parameters denoted $\vec\phi$ and $\vec\psi$, respectively. Together, $f_{\vec\phi}$ and $p_z(\vec z; \psi)$ induce a family of distributions over $\vec x$ parameterized by $\vec\theta = \{\vec\phi, \vec\psi\}$ (as usual in variational inference). If we're doing posterior inference, we can only get as close to the true posterior as the most similar member of this family. (We won't always indicate the dependence on these parameters to simplify notation but in the following, $f$ actually refers to $f_{\vec\phi}$ and $p_z(\vec z)$ to $p_z(\vec z; \psi)$.)
 
 ### Change of Variables for Probability Distributions
 
@@ -162,11 +162,11 @@ Of course, before using it, we first need to fit the model.
 
 ## Fitting a Normalizing Flow
 
-As with many probabilistic models, we fit a normalizing flow by minimizing the divergence between its output $p_x(\vec x; \vec\psi)$ and the target distribution $p_x^*(\vec x)$. The knobs and dials at our disposal are the model's parameters $\vec\theta = \{ \vec\phi, \vec\psi \}$ for the base distribution $p_z(\vec z; \vec\psi)$ and the transformation $f_\vec\phi$. By far the most common measure of discrepancy between $p_x(\vec x; \vec\psi)$ and $p_x^*(\vec x)$ is the Kullback–Leibler (KL) divergence. There are two equivalent ways of expressing it. Which one to choose depends on whether it's easier to sample from the target or the base distribution.
+As with many probabilistic models, we fit a normalizing flow by minimizing the divergence between its output $p_x(\vec x; \vec\psi)$ and the target distribution $p_x^{\ast}(\vec x)$. The knobs and dials at our disposal are the model's parameters $\vec\theta = \{ \vec\phi, \vec\psi \}$ for the base distribution $p_z(\vec z; \vec\psi)$ and the transformation $f_{\vec\phi}$. By far the most common measure of discrepancy between $p_x(\vec x; \vec\psi)$ and $p_x^{\ast}(\vec x)$ is the Kullback–Leibler (KL) divergence. There are two equivalent ways of expressing it. Which one to choose depends on whether it's easier to sample from the target or the base distribution.
 
 ### Sampling the target density
 
-This loss function is useful in cases where we have or can generate samples from the target distribution $p_x^*(\vec x)$.
+This loss function is useful in cases where we have or can generate samples from the target distribution $p_x^{\ast}(\vec x)$.
 
 $$
 \begin{aligned}
@@ -179,7 +179,7 @@ $$
 \end{aligned}
 $$
 
-Given a set of samples $\{\vec x_n\}_{n=1}^N$ from $p_x^*(\vec x)$, we can obtain an unbiased Monte Carlo estimate of $\Lcal(\vec\theta)$ as
+Given a set of samples $\{\vec x_n\}_{n=1}^N$ from $p_x^{\ast}(\vec x)$, we can obtain an unbiased Monte Carlo estimate of $\Lcal(\vec\theta)$ as
 
 $$
 \Lcal(\vec\theta)
@@ -197,7 +197,7 @@ $$
 \end{aligned}
 $$
 
-Finding a minimum of eq. (5) is equivalent to finding the maximum likelihood estimates for the flow model's parameters given the samples $\{\vec x_n\}_{n=1}^N$. Thus to fit a flow to maximum likelihood, besides sampling from $p_x^*(\vec x)$, we need to be able to differentiate the transformation $f_{\vec\phi}^{-1}(\vec x)$, its Jacobian determinant $\det J_{f_{\vec\phi}^{-1}}(\vec x)$ and the base density $p_z(\vec z; \vec\psi)$.
+Finding a minimum of eq. (5) is equivalent to finding the maximum likelihood estimates for the flow model's parameters given the samples $\{\vec x_n\}_{n=1}^N$. Thus to fit a flow to maximum likelihood, besides sampling from $p_x^{\ast}(\vec x)$, we need to be able to differentiate the transformation $f_{\vec\phi}^{-1}(\vec x)$, its Jacobian determinant $\det J_{f_{\vec\phi}^{-1}}(\vec x)$ and the base density $p_z(\vec z; \vec\psi)$.
 
 ### Sampling the base density
 
@@ -212,7 +212,7 @@ $$
 \end{aligned}
 $$
 
-We used eqs. (1) and (2) in the last step to replace $\vec x$ with $\vec z$. This loss function comes in handy if we can sample from the base density $p_z(\vec z)$ and are able to evaluate the target density $p_x^*(\vec x)$ (at least up to a normalizing constant which becomes an additive constant under the log and drops out in the gradient).
+We used eqs. (1) and (2) in the last step to replace $\vec x$ with $\vec z$. This loss function comes in handy if we can sample from the base density $p_z(\vec z)$ and are able to evaluate the target density $p_x^{\ast}(\vec x)$ (at least up to a normalizing constant which becomes an additive constant under the log and drops out in the gradient).
 
 By generating a set of samples $\{\vec z_n\}_{n=1}^N$ from $p_z(\vec z; \vec\psi)$, the gradient of $\Lcal(\vec\theta)$ can be estimated as
 
@@ -221,11 +221,11 @@ $$
 \approx -\frac{1}{N} \sum_{n=1}^N \nabla_{\vec\phi} \log\left| \det J_{f_{\vec\phi}}(\vec z_n) \right| + \nabla_{\vec\phi}\log p_z^*\bigl(f_{\vec\phi}(\vec z_n)\bigr).
 $$
 
-The gradient with respect to $\vec\psi$ isn't strictly necessary since any adjustment to the parameters of the base distribution $p_z(\vec z; \vec\psi)$ can be absorbed into the transformation $f_\vec\phi$. We can fit with respect to $\vec\phi$ only without loss of generality.
+The gradient with respect to $\vec\psi$ isn't strictly necessary since any adjustment to the parameters of the base distribution $p_z(\vec z; \vec\psi)$ can be absorbed into the transformation $f_{\vec\phi}$. We can fit with respect to $\vec\phi$ only without loss of generality.
 
-This loss function requires that we be able to differentiate $f_\vec\phi$ and its Jacobian determinant. It works even if we can't evaluate the base density nor perform the inverse transform $f_{\vec\phi}^{-1}$. (Of course, we will still need these if we want to evaluate the fitted model's density.)
+This loss function requires that we be able to differentiate $f_{\vec\phi}$ and its Jacobian determinant. It works even if we can't evaluate the base density nor perform the inverse transform $f_{\vec\phi}^{-1}$. (Of course, we will still need these if we want to evaluate the fitted model's density.)
 
-This loss function is chosen when using normalizing flows in the context of e.g. _variational inference_ or _model distillation_. The latter is an exciting application in which a flow model is trained to replace a target model whose density $p_x^*(\vec x)$ can be evaluated but is otherwise inconvenient, e.g. difficult to sample. Two examples of model distillation with flows are [Parallel WaveNets by van den Oord et al.](https://arxiv.org/abs/1711.10433) and [Boltzmann Generators by Noé et al](https://arxiv.org/abs/1812.01729).
+This loss function is chosen when using normalizing flows in the context of e.g. _variational inference_ or _model distillation_. The latter is an exciting application in which a flow model is trained to replace a target model whose density $p_x^{\ast}(\vec x)$ can be evaluated but is otherwise inconvenient, e.g. difficult to sample. Two examples of model distillation with flows are [Parallel WaveNets by van den Oord et al.](https://arxiv.org/abs/1711.10433) and [Boltzmann Generators by Noé et al](https://arxiv.org/abs/1812.01729).
 
 ---
 

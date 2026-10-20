@@ -1,7 +1,6 @@
 <script lang="ts">
-  import type { Publication } from '#lib'
+  import { format_issued, type Publication } from '#lib'
   import { tooltip } from 'svelte-widgets/attachments'
-  import { format_publication_date } from './index.js'
 
   const { publications }: { publications: Publication[] } = $props()
 </script>
@@ -25,7 +24,7 @@
       {:else if href?.toLowerCase().includes(`arxiv.org`)}
         &nbsp;&mdash;&nbsp; preprint
       {/if}
-      &nbsp;&mdash;&nbsp; {format_publication_date(issued)}
+      &nbsp;&mdash;&nbsp; {format_issued(issued)}
       {#if DOI}&nbsp;· <a href={paper_url}>DOI</a>{/if}
       {#if citations}
         &nbsp;&mdash;&nbsp; <span

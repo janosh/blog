@@ -8,7 +8,7 @@ export const GET = () => {
   const urls = site_routes.map((route) => {
     // posts carry a publication date, everything else is undated
     const post = posts.find(({ slug }) => route === `/posts/${slug}`)
-    const lastmod = post ? `<lastmod>${post.date.split(`T`)[0]}</lastmod>` : ``
+    const lastmod = post ? `<lastmod>${post.date}</lastmod>` : ``
     return `<url><loc>${homepage}${route}</loc>${lastmod}</url>`
   })
 

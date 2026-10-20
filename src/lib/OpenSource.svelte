@@ -1,7 +1,13 @@
 <script lang="ts">
-  import { oss_sort_keys, type OssSortKey, type Project, sort_oss_projects } from '#lib'
+  import {
+    oss_sort_keys,
+    type OssSortKey,
+    project_matches,
+    type Project,
+    sort_oss_projects,
+  } from '#lib'
   import { ButtonGroup, Icon } from 'svelte-widgets'
-  import { GitCommit, GitHub, OpenSource, People } from 'svelte-widgets/icons'
+  import { GitCommit, GitHub, OpenSource, Paper, People } from 'svelte-widgets/icons'
   import { highlight_matches } from 'svelte-widgets/attachments'
   import { flip } from 'svelte/animate'
 
@@ -11,9 +17,7 @@
   let query = $state(``)
   const visible_projects = $derived(
     sort_oss_projects(
-      projects.filter((project) =>
-        JSON.stringify(project).toLowerCase().includes(query.toLowerCase()),
-      ),
+      projects.filter((project) => project_matches(project, query)),
       sort_by,
       sort_by === `name` ? `asc` : `desc`,
     ),
@@ -42,7 +46,7 @@
   class="projects grid"
   {@attach highlight_matches({ query, css_class: `highlight-match` })}
 >
-  {#each visible_projects as { url, repo, name, description, stars, logo, commits, role, color_invert } (name)}
+  {#each visible_projects as { url, repo, name, description, stars, logo, commits, role, color_invert, paper_url } (name)}
     {@const logo_url = logo ?? `${url}/favicon.svg`}
     <li class="card" animate:flip={{ duration: 400 }}>
       <h3>
@@ -73,6 +77,13 @@
           <Icon icon={People} />
           <span>{role ?? (repo.includes(`/janosh/`) ? `Lead` : `Contributor`)}</span>
         </a>
+
+        {#if paper_url}
+          <a href={paper_url} class="stat-link pill">
+            <Icon icon={Paper} />
+            <span>Paper</span>
+          </a>
+        {/if}
       </div>
       <div class="project-description card-description muted">{@html description}</div>
     </li>
@@ -118,7 +129,7 @@
   }
   input:focus {
     outline: none;
-    border-color: var(--button-bg);
+    border-color: var(--card-hover-border);
     background: var(--nav-bg);
   }
   .projects {

@@ -1,6 +1,5 @@
 ---
 title: Master's Thesis
-slug: /masters-thesis
 cover:
   img: heidelberg-castle-at-night.webp
   origin: Alex Meyer

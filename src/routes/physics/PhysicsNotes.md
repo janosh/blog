@@ -5,6 +5,7 @@
 </script>
 
 <img src="./planets.svg" alt="Planets orbiting in an ultraviolet galaxy" class="banner" />
+<small class="credit">Banner: <a href="https://vecteezy.com/vector-art/190741-ultra-violet-galactic-background-free-vector">Vecteezy</a></small>
 
 <section>
   <h2 id="notes-on-physics" class="section-title">
@@ -15,31 +16,31 @@ This is a compilation of notes and solutions to problem sheets for some of the p
 
 </section>
 
-<div class="docs-grid">
+<div class="docs-grid topics">
 
-[String Theory ![Cross section of the quintic Calabi–Yau manifold](./string-theory/calabi-yau.webp)](physics/string-theory)
+[String Theory ![Hanson's cross-section of the quintic Calabi–Yau manifold](./string-theory/calabi-yau-quintic.webp)](/physics/string-theory)
 
-[QFT ![Feynman diagram of electron-quark scattering](./qft/electron-quark-scattering.webp)](physics/qft)
+[QFT ![Feynman diagram of electron-positron annihilation into a quark, antiquark and gluon](./qft/electron-positron-annihilation.svg)](/physics/qft)
 
-[Advanced QFT ![Standard model interactions](./advanced-qft/standard-model-interactions.webp)](physics/advanced-qft)
+[Advanced QFT ![One-loop running of the Standard Model gauge couplings](./advanced-qft/running-gauge-couplings.svg)](/physics/advanced-qft)
 
-[General Relativity ![Cosmic microwave background](./general-relativity/sun-earth-spacetime.webp)](physics/general-relativity)
+[General Relativity ![Flamm's paraboloid embedding of Schwarzschild spacetime with an orbit and a bent light ray](./general-relativity/curved-spacetime-embedding.webp)](/physics/general-relativity)
 
-[Group Theory ![Rubik's cube](./group-theory/rubiks-cube.webp)](physics/group-theory)
+[Group Theory ![SU(3) weight diagram of the baryon octet](./group-theory/eightfold-way-baryon-octet.svg)](/physics/group-theory)
 
-[Numerical Simulations ![Double pendulum](./numerical-simulations/double-pendulum.webp)](physics/numerical-simulations)
+[Numerical Simulations ![Two double pendulums diverging from nearly identical initial conditions](./numerical-simulations/chaotic-double-pendulum.webp)](/physics/numerical-simulations)
 
-[Atomic Physics ![Electron excitations in an atomic shell](./atomic-physics/excited-electrons.webp)](physics/atomic-physics)
+[Atomic Physics ![Hydrogen energy levels with the Lyman, Balmer and Paschen series](./atomic-physics/hydrogen-spectral-series.svg)](/physics/atomic-physics)
 
-[Statistical Physics ![Phase space trajectory](./statistical-physics/phase-space-trajectory.webp)](physics/statistical-physics)
+[Statistical Physics ![Ising model magnetization with lattice snapshots below, at and above the critical temperature](./statistical-physics/ising-model-phase-transition.svg)](/physics/statistical-physics)
 
-[QFT + Strings ![Keep calm](./advanced-qft+strings/keep-calm.webp)](physics/advanced-qft+strings)
+[QFT + Strings ![A particle worldline splitting at a vertex versus a smooth string worldsheet](./advanced-qft+strings/particle-vs-string-interactions.svg)](/physics/advanced-qft+strings)
 
-[Bachelor's Thesis ![Graphene band structure](./bachelors-thesis/graphene-band-structure.webp)](physics/bachelors-thesis)
+[Bachelor's Thesis ![Moiré superlattice of graphene on hexagonal boron nitride](./bachelors-thesis/graphene-on-hbn-moire.webp)](/physics/bachelors-thesis)
 
-[Master's Thesis ![Absolute value of Bose-Einstein distribution over complex plane](./masters-thesis/complex-bose-einstein-distribution.webp)](physics/masters-thesis)
+[Master's Thesis ![Absolute value of the Bose-Einstein distribution over the complex plane](./masters-thesis/bose-einstein-distribution-3d.webp)](/physics/masters-thesis)
 
-[PhD Thesis ![Thesis cover](https://github.com/janosh/thesis/raw/main/figs/thesis-cover.svg)](physics/phd-thesis)
+[PhD Thesis ![Thesis cover](https://github.com/janosh/thesis/raw/main/figs/thesis-cover.svg)](/physics/phd-thesis)
 
 </div>
 
@@ -47,6 +48,16 @@ This is a compilation of notes and solutions to problem sheets for some of the p
   section {
     text-align: center;
     max-width: 50em;
-    margin: 2em auto 2em;
+    margin: 2em auto;
+  }
+  /* local topic thumbnails are Typst diagrams from janosh/diagrams on transparent
+     backgrounds; recolor them like that repo's dark previews, except the shaded
+     Calabi-Yau render, which (like its preserve_colors source) keeps its colors */
+  :global(html[data-theme='dark']) .topics :global(img:not([src^='http'], [src*='calabi-yau'])) {
+    filter: invert(0.9) hue-rotate(180deg);
+  }
+  /* fill the grid column even when a diagram is narrower than it (docs-grid centers cards) */
+  .topics :global(a) {
+    width: 100%;
   }
 </style>

@@ -1,10 +1,12 @@
 import adapter from '@sveltejs/adapter-static'
 import { sveltekit } from '@sveltejs/kit/vite'
-import { create_markdown, markdown } from 'svelte-widgets/markdown'
+import { create_markdown } from 'svelte-widgets/markdown'
+import { markdown_vite } from 'svelte-widgets/markdown/vite'
 import { asset_imports } from 'svelte-widgets/assets'
 import { default_highlighter } from 'svelte-widgets/highlight'
 import { make_config } from 'svelte-widgets/vite-config'
 import { yaml_plugin } from 'svelte-widgets/yaml'
+import { homepage } from './package.json' with { type: 'json' }
 
 const macros: Record<string, string> = {
   // Infinitesimal differential (used in derivatives and integrals)
@@ -32,26 +34,28 @@ for (let index = 65; index <= 90; index++) {
   macros[`\\${letter}bb`] = `\\mathbb{${letter}}`
 }
 
+// markdown_vite also serves `page.md?metadata` imports (frontmatter as JSON, no compile)
+const docs = markdown_vite(
+  create_markdown({
+    math: { macros, errorColor: `#cc0000` },
+    typography: true,
+    highlight: default_highlighter.highlight,
+  }),
+)
+
 const svelte_config = {
   extensions: [`.svelte`, `.md`],
 
-  preprocess: [
-    markdown(
-      create_markdown({
-        math: { macros, errorColor: `#cc0000` },
-        typography: true,
-        highlight: default_highlighter.highlight,
-      }),
-    ),
-    asset_imports(),
-  ],
+  preprocess: [docs.preprocess, asset_imports()],
 
   adapter: adapter(),
+  // lets the prerender crawler follow absolute og:image URLs (e.g. PNG copies of SVG covers)
+  paths: { origin: homepage },
 }
 
 export default {
   ...make_config(),
-  plugins: [sveltekit(svelte_config), yaml_plugin()],
+  plugins: [sveltekit(svelte_config), docs.plugin, yaml_plugin()],
 
   server: { port: 3000 },
   preview: { port: 3000 },

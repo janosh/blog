@@ -1,21 +1,21 @@
 <script lang="ts">
-  import { cover_url } from '#lib'
+  import { Cover } from '#lib'
   import { heading_anchors, Icon, PrevNext } from 'svelte-widgets'
   import { Calendar } from 'svelte-widgets/icons'
   import type { LayoutProps } from './$types'
 
   let { data, children }: LayoutProps = $props()
 
-  let { title, cover, date, slug } = $derived(data.post)
+  let { title, date, slug } = $derived(data.frontmatter)
 </script>
 
-<img src={cover_url(`posts`, slug, cover.img)} alt={cover.caption ?? title} />
+<Cover section="posts" {...data.frontmatter} --cover-height="50vh" />
 
 <main style="max-width: 50em; margin: 0 auto" {@attach heading_anchors()}>
   <h1>{title}</h1>
   <time>
     <Icon icon={Calendar} />
-    {date.split(`T`)[0]}
+    {date}
   </time>
   {@render children()}
 
@@ -33,20 +33,13 @@
           <small>{label}</small>
         </a>
         <br />
-        <time>{date.split(`T`)[0]}</time>
+        <time>{date}</time>
       </h3>
     {/snippet}
   </PrevNext>
 </main>
 
 <style>
-  img {
-    margin: 0;
-    height: 50vh;
-    width: 100%;
-    object-fit: cover;
-    background: linear-gradient(-45deg, var(--card-bg), var(--nav-bg), var(--border));
-  }
   time {
     font-weight: lighter;
     font-size: 10pt;

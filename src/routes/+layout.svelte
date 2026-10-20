@@ -10,9 +10,9 @@
   import type { LayoutProps } from './$types'
   // oxlint-disable-next-line no-unassigned-import
   import '../app.css'
-  // KaTeX CSS must match the version rendering the Markdown math.
+  // Temml styles for the MathML that Markdown math renders to
   // oxlint-disable-next-line no-unassigned-import
-  import 'katex/dist/katex.min.css'
+  import 'temml/dist/Temml-Local.css'
 
   let { children }: LayoutProps = $props()
 
@@ -26,14 +26,20 @@
 
   const site_description = `I write about physics, materials science and sustainability.`
   // post or physics frontmatter of the current page (undefined on index/list pages)
-  const frontmatter = $derived(page.data.post ?? page.data.frontmatter)
+  const frontmatter = $derived(page.data.frontmatter)
+  // only posts have a publish date (physics pages and 404s don't)
+  const post = $derived(frontmatter && `date` in frontmatter ? frontmatter : undefined)
   const title = $derived(section_titles[page.route.id ?? ``] ?? frontmatter?.title)
   const page_title = $derived(title ? `${title} · janosh.dev` : `janosh.dev`)
   const og_image = $derived.by(() => {
-    if (!frontmatter) return `${homepage}/favicon.svg`
-    const section = page.data.post ? `posts` : `physics`
-    return new URL(cover_url(section, frontmatter.slug, frontmatter.cover.img), homepage)
-      .href
+    if (!frontmatter) return `${homepage}/favicon.png`
+    const { slug, cover } = frontmatter
+    const section = post ? `posts` : `physics`
+    if (!cover.img.endsWith(`.svg`))
+      return new URL(cover_url(section, slug, cover.img), homepage).href
+    // social sites don't render SVG, so local SVG covers get a prerendered PNG (routes/og)
+    if (cover.img.startsWith(`http`)) return `${homepage}/favicon.png`
+    return `${homepage}/og/${section}/${slug}/${cover.img.slice(0, -4)}.png`
   })
 
   // pagefind only exists after build; stub in dev to avoid HTML-as-JS reimports
@@ -47,15 +53,15 @@
   <meta data-pagefind-meta="title[content]" content={page_title} />
   <meta name="description" content={site_description} />
   <meta property="og:site_name" content="janosh.dev" />
-  <meta property="og:type" content={page.data.post ? `article` : `website`} />
+  <meta property="og:type" content={post ? `article` : `website`} />
   <meta property="og:title" content={page_title} />
   <meta property="og:description" content={site_description} />
   <meta property="og:url" content={`${homepage}${page.url.pathname}`} />
   <meta property="og:image" content={og_image} />
-  <meta name="twitter:card" content="summary_large_image" />
-  {#if page.data.post}
-    <meta property="article:published_time" content={page.data.post.date} />
-    {#each page.data.post.tags as tag (tag)}
+  <meta name="twitter:card" content={frontmatter ? `summary_large_image` : `summary`} />
+  {#if post}
+    <meta property="article:published_time" content={post.date} />
+    {#each post.tags as tag (tag)}
       <meta property="article:tag" content={tag} />
     {/each}
   {/if}

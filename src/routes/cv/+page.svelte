@@ -95,7 +95,8 @@
                 </a>
               {/if}
               {#if commits}
-                <a href="{repo}/graphs/contributors"><small>{commits} commits</small></a>
+                <a href="{repo}/commits?author=janosh"><small>{commits} commits</small></a
+                >
               {/if}
               {#if languages}
                 <small class="langs">{languages.slice(0, 3).join(`, `)}</small>
@@ -118,14 +119,15 @@
 
     <h2 id="education"><Icon icon={Education} />&nbsp; Education</h2>
     <ul>
-      {#each cv.education as { title, thesis, date, href, uni } (title)}
+      {#each cv.education as { title, thesis, href, uni } (title)}
         <li>
           <h4 style="margin: 2ex 0 1ex">
             <a {href}>{title}</a>
-            <span style="font-weight: 200"> - {uni}{date ? ` • ${date}` : ``}</span>
+            <span style="font-weight: 200"> - {uni}</span>
           </h4>
-          Thesis:&nbsp;<a href={thesis?.url}>{thesis?.title}</a>
-          {#if thesis?.repo}
+          Thesis:&nbsp;{#if thesis.url}<a href={thesis.url}>{thesis.title}</a
+            >{:else}{thesis.title}{/if}
+          {#if thesis.repo}
             &nbsp;<a
               href={thesis.repo}
               aria-label="GitHub repository for {thesis.title}"
@@ -257,9 +259,6 @@
     margin-left: auto;
     font-weight: 400;
     font-size: 9pt;
-  }
-  a {
-    color: inherit;
   }
   address {
     display: flex;
@@ -476,7 +475,6 @@
     main {
       margin: 0;
       padding: 2em;
-      box-shadow: none;
     }
     section.body :global(:is(h2, h3)) {
       break-after: avoid;

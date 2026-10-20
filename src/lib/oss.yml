@@ -3,6 +3,7 @@ projects:
     url: https://pymatgen.org
     logo: https://github.com/janosh/blog/assets/30958850/db9aa145-7281-40e9-aaa7-123f63beb7f9
     repo: https://github.com/materialsproject/pymatgen
+    paper_key: george_pymatgen_2026
     role: Maintainer
     description: One of the largest and most popular open source materials analysis codes that defines classes for structures, molecules, slabs, etc. and interfaces seamlessly with various other materials codes. It also powers the [Materials Project](https://materialsproject.org).
     languages:
@@ -113,7 +114,7 @@ projects:
     commits: 104
   - name: Normalizing Flows
     repo: https://github.com/janosh/awesome-normalizing-flows
-    logo: https://api.iconify.design/logos:awesome.svg?color=%23888888
+    logo: https://api.iconify.design/logos/awesome.svg?color=%23888888
     description: Curated list of resources for learning and using [normalizing flows](/posts/normalizing-flows), a powerful tool in ML for modeling probability distributions.
     languages:
       - Python
@@ -189,6 +190,7 @@ projects:
       - Roff
   - name: Svelte Widgets
     url: https://svelte-widgets.janosh.dev
+    logo: https://raw.githubusercontent.com/janosh/svelte-widgets/main/src/site/favicon.svg
     repo: https://github.com/janosh/svelte-widgets
     description: Keyboard-friendly, accessible and customizable Svelte components incl. [MultiSelect](https://svelte-widgets.janosh.dev/multiselect), [Toc](https://svelte-widgets.janosh.dev/toc), [PageSearch](https://svelte-widgets.janosh.dev/command-menu#pagesearch) and more.
     languages:

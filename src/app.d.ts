@@ -1,12 +1,11 @@
 declare module '*.md'
 
 namespace App {
-  type FrontMatter = import('#lib/types.js').FrontMatter // oxlint-disable-line typescript/consistent-type-imports
+  type PageMeta = import('#lib/types.js').PageMeta // oxlint-disable-line typescript/consistent-type-imports
+  type PostMeta = import('#lib/types.js').PostMeta // oxlint-disable-line typescript/consistent-type-imports
   interface PageData {
-    // set by the posts layout on /posts/[slug]
-    post?: FrontMatter
-    // set by the physics layout on /physics/[slug]
-    frontmatter?: FrontMatter
+    // set by the posts and physics layouts on /posts/[slug] and /physics/[slug]
+    frontmatter?: PageMeta | PostMeta
   }
 }
 

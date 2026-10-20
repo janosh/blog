@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { format_issued } from '#lib'
   import { social } from '#lib/cv-icons.js'
   import { Icon } from 'svelte-widgets'
   import { CvSquare, Newspaper } from 'svelte-widgets/icons'
@@ -44,9 +45,7 @@
         {#each links as { label, href } (label)}
           <a class="pill" {href}>{label}</a>
         {/each}
-        {#if issued}
-          <time class="pill muted">{Object.values(issued).join(`-`)}</time>
-        {/if}
+        <time class="pill muted">{format_issued(issued)}</time>
       </div>
       <p class="project-description card-description muted">{description}</p>
     </li>

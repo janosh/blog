@@ -1,16 +1,4 @@
 import { format_print_filename, print_page } from 'svelte-widgets/print'
-import type { Publication } from '#lib/types.js'
-
-const month_year = new Intl.DateTimeFormat(`en-GB`, {
-  month: `short`,
-  year: `numeric`,
-  timeZone: `UTC`,
-})
-
-export const format_publication_date = ({ year, month }: Publication[`issued`]) =>
-  month === undefined
-    ? String(year)
-    : month_year.format(new Date(Date.UTC(year, month - 1)))
 
 let reset_page_size: (() => void) | undefined
 

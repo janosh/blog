@@ -1,6 +1,5 @@
 ---
 title: Statistical Physics
-slug: /statistical-physics
 cover:
   img: bose-einstein-condensate.webp
   origin: Wikipedia

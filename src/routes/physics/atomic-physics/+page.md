@@ -1,6 +1,5 @@
 ---
 title: Atomic Physics
-slug: /atomic-physics
 cover:
   img: hydrogen-wave-functions.webp
   origin: Wikipedia

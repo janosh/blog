@@ -53,7 +53,7 @@
       <small>
         <time>
           <Icon icon={Calendar} />
-          {date.split(`T`)[0]}
+          {date}
         </time>
       </small>
       <small><Icon icon={Tag} /> {tags.join(`, `)}</small>

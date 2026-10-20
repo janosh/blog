@@ -1,7 +1,6 @@
-@import '@wooorm/starry-night/style/both';
+@import '@wooorm/starry-night/style/light';
 
-/* starry-night dark theme overrides for manual theme toggle
-   (mirrors @media (prefers-color-scheme: dark) from style/both) */
+/* starry-night dark syntax colors, applied via data-theme (set before first paint in app.html) */
 html[data-theme='dark'] {
   --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
   --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
@@ -43,12 +42,12 @@ html[data-theme='dark'] {
   --link-hover: light-dark(#fd7e14, orange);
   --code-bg: light-dark(rgba(0, 123, 255, 0.1), rgba(0, 255, 255, 0.1));
   --pre-bg: light-dark(rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0.04));
-  --button-bg: light-dark(#dee2e6, rgb(59, 59, 59));
+  --button-bg: light-dark(#eef0f2, rgb(59, 59, 59));
   --button-text: light-dark(#333, rgb(208, 208, 208));
   --border: light-dark(rgba(0, 0, 0, 0.125), rgba(255, 255, 255, 0.125));
   --highlight: light-dark(#17a2b8, mediumaquamarine);
   --blockquote-bg: light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.1));
-  --input-bg: light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6));
+  --input-bg: light-dark(rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.6));
   --table-odd: light-dark(rgba(0, 0, 0, 0.05), black);
   --nav-bg: light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.1));
   --card-bg: light-dark(rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.3));
@@ -56,7 +55,6 @@ html[data-theme='dark'] {
   --shadow: light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
   --selection: light-dark(rgba(0, 123, 255, 0.2), rgba(0, 255, 255, 0.2));
   --struct-bg: light-dark(rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0.04));
-  --accent-bg: light-dark(#dbdab4, #534027);
 
   --body-max-width: min(90vw, 1100px);
   --radius-sm: 3pt;
@@ -97,7 +95,7 @@ main img {
   max-width: 100%;
   height: auto;
 }
-.katex-display {
+math[display='block'] {
   overflow-x: auto;
   overflow-y: hidden;
 }
@@ -165,11 +163,13 @@ ul.grid > li.card {
 }
 .docs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  /* auto-fit drops empty tracks, so grids with few cards center them instead of packing
+     them into the leftmost columns (cards are capped below so a lone one stays card-sized) */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5em;
   width: 100%;
   max-width: min(96vw, 1400px);
-  margin: 0 auto 5em;
+  margin: 1.5em auto 5em;
 }
 .docs-grid > p {
   display: contents;
@@ -177,18 +177,17 @@ ul.grid > li.card {
 .docs-grid a {
   text-align: center;
   display: grid;
+  justify-self: center;
+  box-sizing: border-box;
+  max-width: 360px;
   font-weight: bold;
   color: inherit;
   padding: 8pt 16pt;
   border-radius: var(--radius-lg);
 }
-.docs-grid a:only-child {
-  justify-self: center;
-}
 .docs-grid a:has(img) {
   padding: 4pt;
   gap: 0.3em;
-  grid-template-rows: auto auto;
 }
 .docs-grid img {
   width: 100%;
@@ -228,7 +227,7 @@ h2.section-title {
   color: var(--link-color);
 }
 :where(h2, h3, h4, h5, h6) a[aria-hidden='true'] {
-  margin-left: 4pt;
+  --heading-anchor-gap: calc(0.3em + 4pt);
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -329,6 +328,13 @@ input {
 ::highlight(highlight-match) {
   color: var(--highlight);
   text-decoration: underline;
+}
+/* image source credit under covers and banners */
+small.credit {
+  display: block;
+  text-align: right;
+  margin: 2pt 1em 0;
+  font-size: 8pt;
 }
 img.banner {
   max-height: 25em;
