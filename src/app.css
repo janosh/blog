@@ -121,7 +121,7 @@ a:hover {
   outline-offset: 2px;
 }
 .card,
-.docs-grid a {
+.docs-grid a:not(.source) {
   background: var(--card-bg-gradient);
   border: 1px solid var(--card-border);
   transition:
@@ -133,7 +133,7 @@ a:hover {
   border-radius: var(--radius-md);
 }
 .card:hover,
-.docs-grid a:hover {
+.docs-grid a:not(.source):hover {
   transform: translateY(-2px);
   border-color: var(--card-hover-border);
   box-shadow: 0 4px 20px var(--shadow);
@@ -174,7 +174,14 @@ ul.grid > li.card {
 .docs-grid > p {
   display: contents;
 }
-.docs-grid a {
+/* original problem sheets, collapsed below the solutions that already quote them */
+.problem-sheets > summary {
+  width: fit-content;
+  margin: -3em auto 0;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+.docs-grid a:not(.source) {
   text-align: center;
   display: grid;
   justify-self: center;

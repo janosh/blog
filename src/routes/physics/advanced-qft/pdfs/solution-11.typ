@@ -99,21 +99,22 @@ In $d > 4$, $g_lambda^*$ must be negative for $beta_lambda$ to be zero. However,
 The calculation required to show this was already performed in QFT I in the context of Yukawa theory in order to obtain its potential $V(r) = -g^2/(4 pi) 1/r e^(-m_phi r)$. That in mind, we allow ourselves to be brief here. Firstly, we note that $ex(phi(x) phi(y))$ is just the free propagator $D(x - y)$:
 $
   ex(phi(x) phi(0)) = D(x) & = integral (dd(3, p))/(2 pi)^3 e^(-i p x)/(2 E_p) = e^(-i E_p t)/(2 (2 pi)^3) integral dd(3, p) e^(i arrow(p) dot arrow(x))/sqrt(|arrow(p)|^2 + m^2) \
-  & = e^(-i E_p t)/(4 pi^2) integral_0^oo dd(p) |arrow(p)|^2 (e^(i |arrow(p)| |arrow(x)|) - e^(-i |arrow(p)| |arrow(x)|))/(i |arrow(p)| |arrow(x)|) 1/sqrt(|arrow(p)|^2 + m^2) \
-  & = e^(-i E_p t)/(4 pi^2 i |arrow(x)|) integral_(-oo)^oo dd(p) (|arrow(p)| e^(i |arrow(p)| |arrow(x)|))/sqrt(|arrow(p)|^2 + m^2).
+  & = e^(-i E_p t)/(8 pi^2) integral_0^oo dd(p) |arrow(p)|^2 (e^(i |arrow(p)| |arrow(x)|) - e^(-i |arrow(p)| |arrow(x)|))/(i |arrow(p)| |arrow(x)|) 1/sqrt(|arrow(p)|^2 + m^2) \
+  & = e^(-i E_p t)/(8 pi^2 i |arrow(x)|) integral_(-oo)^oo dd(p) (|arrow(p)| e^(i |arrow(p)| |arrow(x)|))/sqrt(|arrow(p)|^2 + m^2).
 $
-This can be evaluated as a complex contour integral by closing the integration in the upper complex plane, thereby picking up the pole at $|arrow(p)| = +i m$. In the end, setting w.l.o.g. $t = 0$, we get
-$ ex(phi(x) phi(0)) = 1/(4 pi |arrow(x)|) e^(-m |arrow(x)|) prop e^(-|arrow(x)| \/ xi), quad "if" xi = 1/m. $
+This can be evaluated as a complex contour integral by deforming the integration into the upper complex plane, where it wraps around the branch cut starting at $|arrow(p)| = +i m$. In the end, setting w.l.o.g. $t = 0$, we get for large $|arrow(x)|$
+$ ex(phi(x) phi(0)) prop e^(-m |arrow(x)|) = e^(-|arrow(x)| \/ xi), quad "if" xi = 1/m. $
 We go on to show that $xi = g_m^(-nu) (mu^*)$ by using eq. (3), i.e.
 $ g_m (lambda(mu)) = g_m (lambda^*) (mu/mu^*)^(-1/nu) quad ==> quad mu^* /mu = ((g_m (mu^*))/(g_m (lambda(mu))))^(-nu) $
 to rewrite
 $ xi = mu^* /p_0 = ((g_m (mu^*))/(g_m (p_0)))^(-nu) = g_m^(-nu) (mu^*), quad "since" g_m (p_0) = 1. $
-Since $xi = 1/m$ and $g_m = m/mu$,
-$ 1/m = (m/mu)^(-nu) quad ==> quad ln(m) = nu ln(m/mu), quad nu = 1/(1 - ln(mu) \/ ln(m)). $
+At the Wilson-Fisher fixed point of part b), $gamma_(phi^2) = g_lambda^* \/ (16 pi^2) = (4 - d)/3$, so that by part a)
+$ nu = 1/(2 - gamma_(phi^2)) = 1/(2 - (4 - d)/3) = 3/(d + 2), $
+e.g. $nu = 3/5$ in $d = 3$ dimensions.
 
 #task(label: "d")[According to Landau theory, a ferromagnet can be described by a 3-dim. Euclidean field theory of the form $cal(L) = 1/2 (nabla M)^2 + b (T - T_c) M^2 + c M^4$. Argue that near $T_c$ the correlation length $xi$ diverges.]
 
-$ phi <--> M, quad m^2/2 <--> b (T - T_c), quad lambda/4! <--> c quad --> quad xi prop 1/(T - T_c) attach(-->, t: T -> T_c) oo. $
+$ phi <--> M, quad m^2/2 <--> b (T - T_c), quad lambda/4! <--> c quad --> quad xi = 1/m prop (T - T_c)^(-1/2) attach(-->, t: T -> T_c) oo. $
 
 = Problem 11.2 (Fermion-anti-fermion annihilation in Yang-Mills theory at tree-level)
 
@@ -141,7 +142,7 @@ where $f^(a b c)$ are the structure constants of $G$. They are independent of th
 $ D_mu = partial_mu - i g A_mu^a t_r^a. $
 To give a comprehensive list of Feynman rules for Yang-Mills theory, we first derive the propagators and then expand the Lagrangian to investigate the interaction terms. The fermion propagator is given by
 $ ex(psi_(alpha i) (x) overline(psi)_(beta j) (y)) = integral (dd(4, p))/(2 pi)^4 (i/(sl(p) - m))_(alpha beta) delta_(i j) e^(-i p (x - y)), $
-with $alpha, beta$ Dirac indices, and $i, j in {1, 2, ..., dim(G)}$ indices of the symmetry group. The propagator of the vector fields is
+with $alpha, beta$ Dirac indices, and $i, j in {1, 2, ..., dim(r)}$ indices of the representation $r$. The propagator of the vector fields is
 $ ex(A_mu^a (x) A_nu^b (y)) = integral (dd(4, k))/(2 pi)^4 ((-i g_(mu nu))/k^2) delta^(a b) e^(-i k (x - y)), $
 where again $a, b in {1, 2, ..., dim(G)}$. To derive Feynman rules for the vertices, we look for terms beyond quadratic order in the fields:
 $
@@ -269,20 +270,16 @@ With these rules, we are finally equipped to compute some actual diagrams. The o
   supplement: [Fig.],
 )
 
-Using our above Feynman rules, we obtain the following expression for the sum of the first two diagrams ($t$- and $u$-channel):
+Using our above Feynman rules, we obtain the following expression for the sum of the first two diagrams ($t$- and $u$-channel), where the internal fermion carries momentum $q = p_2 - k_2 = k_1 - p_1$ and $q' = p_2 - k_1 = k_2 - p_1$, respectively (Dirac and colour indices contracted implicitly):
 $
-  i M_(1,2) & = overline(v)_alpha^i (p_1) i g gamma^mu t_r^a epsilon_mu^(*a) (k_1) (i/(sl(q) - m))_(alpha beta) delta_(i j) epsilon_nu^(*b) (k_2) i g gamma^nu t_r^b u_beta^j (p_2), quad && q = p_1 - k_1 \
-  & quad + overline(v)_alpha^i (p_1) i g gamma^nu t_r^b epsilon_nu^(*b) (k_2) (i/(sl(q)' - m))_(alpha beta) delta_(i j) epsilon_mu^(*a) (k_1) i g gamma^mu t_r^a u_beta^j (p_2), quad && q' = -(p_1 - k_2) \
-  & = (i g)^2 overline(v)_alpha^i (p_1) [gamma^mu t_r^a (i/(sl(p)_1 - sl(k)_1 - m))_(alpha beta) gamma^nu t_r^b - gamma^nu t_r^b (i/(sl(p)_1 - sl(k)_2 - m))_(alpha beta) gamma^mu t_r^a] u_beta^i (p_2) epsilon_mu^(*a) (k_1) epsilon_nu^(*b) (k_2) \
-  & = (i g)^2 overline(v)(p_1) [gamma^mu t_r^a i/(sl(p)_1 - sl(k)_1 - m) gamma^nu t_r^b + gamma^nu t_r^b i/(sl(p)_1 - sl(k)_2 - m) gamma^mu t_r^a] u(p_2) epsilon_mu^(*a) (k_1) epsilon_nu^(*b) (k_2) \
+  i M_(1,2) & = (i g)^2 overline(v)(p_1) [gamma^mu t_r^a i/(sl(p)_2 - sl(k)_2 - m) gamma^nu t_r^b + gamma^nu t_r^b i/(sl(p)_2 - sl(k)_1 - m) gamma^mu t_r^a] u(p_2) epsilon_mu^(*a) (k_1) epsilon_nu^(*b) (k_2) \
   & = i M_(1,2)^(mu nu a b) epsilon_mu^(*a) (k_1) epsilon_nu^(*b) (k_2).
 $
 We now investigate $i M_(1,2)$ for the case that one of the gauge boson polarization vectors is given by $epsilon_nu^(*b) (k_2) = (k_2)_nu$:
-$ i M_(1,2) = (i g)^2 overline(v)(p_1) [gamma^mu t_r^a i/(sl(p)_1 - sl(k)_1 - m) sl(k)_2 t_r^b - sl(k)_2 t_r^b i/(sl(p)_1 - sl(k)_2 - m) gamma^mu t_r^a] u(p_2) epsilon_mu^(*a) (k_1). $
-Using now, as hinted, $(sl(p)_2 - m) u(p_2) = 0 = overline(v)(p_1) (sl(p)_1 + m)$, we can add these to $sl(k)_2$ without changing $i M_(1,2)$. Since $p_1 - k_1 = -(p_2 - k_2)$ and $p_1 - k_2 = -(p_2 - k_1)$, this exactly cancels the denominators,
+$ i M_(1,2) = (i g)^2 overline(v)(p_1) [gamma^mu t_r^a i/(sl(p)_2 - sl(k)_2 - m) sl(k)_2 t_r^b + sl(k)_2 t_r^b i/(sl(p)_2 - sl(k)_1 - m) gamma^mu t_r^a] u(p_2) epsilon_mu^(*a) (k_1). $
+Using now, as hinted, $(sl(p)_2 - m) u(p_2) = 0 = overline(v)(p_1) (sl(p)_1 + m)$, we can write $sl(k)_2 u(p_2) = -(sl(p)_2 - sl(k)_2 - m) u(p_2)$ and, since $k_2 - p_1 = p_2 - k_1$, $overline(v)(p_1) sl(k)_2 = overline(v)(p_1) (sl(p)_2 - sl(k)_1 - m)$. This exactly cancels the denominators,
 $
-  i M_(1,2) & = (i g)^2 overline(v)(p_1) [gamma^mu t_r^a (-i (sl(p)_2 - sl(k)_2 - m))/(sl(p)_1 - sl(k)_1 - m) t_r^b - t_r^b (-i (sl(p)_1 - sl(k)_2 - m))/(sl(p)_1 - sl(k)_2 - m) gamma^mu t_r^a] u(p_2) epsilon_mu^(*a) (k_1) \
-  & = (i g)^2 overline(v)(p_1) [gamma^mu t_r^a (-i) t_r^b - t_r^b (-i) gamma^mu t_r^a] u(p_2) epsilon_mu^(*a) (k_1) \
+  i M_(1,2) & = (i g)^2 overline(v)(p_1) [gamma^mu t_r^a (-i) t_r^b + t_r^b (i) gamma^mu t_r^a] u(p_2) epsilon_mu^(*a) (k_1) \
   & = -i (i g)^2 overline(v)(p_1) gamma^mu [t_r^a, t_r^b] u(p_2) epsilon_mu^(*a) (k_1).
 $
 
@@ -329,7 +326,7 @@ There is likely a mistake in this exercise. To arrive at eq. (9), the polarizati
 $ epsilon^plus.minus (k) = 1/(sqrt(2) |arrow(k)|) (k^0, plus.minus arrow(k)). $
 Taking our intermediate result for $i M_3$ from part b),
 $ i M_3 = i g overline(v)(p_1) gamma_rho t_r^c u(p_2) (-i)/k_3^2 g f^(a b c) \(g^(mu rho) k_3^2 - underbrace(k_3^mu k_3^rho, "0, see b)") - g^(mu rho) underbrace(k_1^2, "0, on-shell") + k_1^mu k_1^rho\) (epsilon_mu^+ (k_1))/(sqrt(2) |arrow(k)_1|), $
-where we already inserted $epsilon_mu^(*a) (k_1) = epsilon^+ (k_1)$ and $epsilon_nu^(*b) (k_2) = epsilon^- (k_2)$, but with our renormalization, we find that the last term no longer vanishes. It now yields
+where we already inserted $epsilon_mu^(*a) (k_1) = epsilon^+ (k_1)$ and $epsilon_nu^(*b) (k_2) = epsilon^- (k_2)$, but with our normalization, we find that the last term no longer vanishes. It now yields
 $
   & i g overline(v)(p_1) gamma_rho t_r^c u(p_2) (-i)/k_3^2 g f^(a b c) k_1^rho/(sqrt(2) |arrow(k)_1|) 1/(sqrt(2) |arrow(k)_2|) underbrace(k_1^mu (k_1)_mu, (k_1^0)^2 + |arrow(k)_1|^2 = 2 |arrow(k)_1|^2) \
   & = i g overline(v)(p_1) gamma_rho t_r^c u(p_2) (-i)/k_3^2 g f^(a b c) k_1^rho (|arrow(k)_1|)/(|arrow(k)_2|).

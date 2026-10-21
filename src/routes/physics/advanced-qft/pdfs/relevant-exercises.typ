@@ -165,10 +165,10 @@ $
 where $integral dd(Omega_d) = (2 pi^(d\/2))/Gamma(d/2)$. We substitute $x = m^2/(k_E^2 + m^2)$, $dif x = -(2 m^2 k_E)/(k_E^2 + m^2)^2 dif k_E$, $k_E = m (1/x - 1)^(1\/2)$:
 $
   delta_m & = -(2 pi^(d\/2) lambda)/(2 (2 pi)^d Gamma(d/2)) integral (-(k_E^2 + m^2)^2/(2 m^2 k_E) dif x) k_E^(d-1)/(k_E^2 + m^2) \
-  & = lambda/(2 (4 pi)^(d\/2) Gamma(d/2)) integral dd(x) 1/x k_E^(d-2) = (m^(d-2) lambda)/(2 (4 pi)^(d\/2) Gamma(d/2)) integral dd(x) underbrace(1/x (1/x - 1)^(d/2 - 1), x^(-d\/2) (1 - x)^(d/2 - 1)) \
-  & = (m^(d-2) lambda)/(2 (4 pi)^(d\/2) Gamma(d/2)) (Gamma(1 - d/2) Gamma(d/2))/Gamma(1 - d/2 + d/2) = (lambda m^(d-2))/(2 (4 pi)^(d\/2)) underbrace(Gamma(1 - d/2), Gamma(2 - d\/2)/(1 - d\/2)) \
-  & = (lambda m^(2 - epsilon))/(2 (4 pi)^(2 - epsilon\/2)) Gamma(epsilon/2)/(-(1 - epsilon/2)) = -(lambda m^(2 - epsilon))/(2 (4 pi)^(2 - epsilon\/2)) (1 + epsilon/2 + cal(O)(epsilon^2)) (2/epsilon - gamma + cal(O)(epsilon)) \
-  & stretch(->)^(epsilon -> 0) -(m^2 lambda)/(2 (4 pi)^2) (2/epsilon - gamma + 1) = -(m^2 lambda)/(32 pi^2) (2/epsilon - gamma + 1).
+  & = -lambda/(2 (4 pi)^(d\/2) Gamma(d/2)) integral_0^1 dd(x) 1/x k_E^(d-2) = -(m^(d-2) lambda)/(2 (4 pi)^(d\/2) Gamma(d/2)) integral_0^1 dd(x) underbrace(1/x (1/x - 1)^(d/2 - 1), x^(-d\/2) (1 - x)^(d/2 - 1)) \
+  & = -(m^(d-2) lambda)/(2 (4 pi)^(d\/2) Gamma(d/2)) (Gamma(1 - d/2) Gamma(d/2))/Gamma(1 - d/2 + d/2) = -(lambda m^(d-2))/(2 (4 pi)^(d\/2)) underbrace(Gamma(1 - d/2), Gamma(2 - d\/2)/(1 - d\/2)) \
+  & = -(lambda m^(2 - epsilon))/(2 (4 pi)^(2 - epsilon\/2)) Gamma(epsilon/2)/(-(1 - epsilon/2)) = (lambda m^(2 - epsilon))/(2 (4 pi)^(2 - epsilon\/2)) (1 + epsilon/2 + cal(O)(epsilon^2)) (2/epsilon - gamma + cal(O)(epsilon)) \
+  & stretch(->)^(epsilon -> 0) (m^2 lambda)/(2 (4 pi)^2) (2/epsilon - gamma + 1) = (m^2 lambda)/(32 pi^2) (2/epsilon - gamma + 1).
 $
 In the end, we found $M^2 (p^2) = 0 thick forall p$, at least to one-loop order. This is a surprising result and a specialty of $phi^4$ theory in $d = 4$ dimensions.
 
@@ -321,7 +321,7 @@ $
   & quad + 1/2 delta_phi (partial phi)^2 - 1/2 delta_m phi^2 + overline(Psi) (i delta_Psi fsl(partial) - delta_M) Psi - i delta_g phi overline(Psi) gamma^5 Psi - delta_lambda/4! phi^4
 $
 into renormalized fields, $phi = Z_phi^(-1\/2) phi_0$, and parameters $m$, $M$, $g$, and the counterterms,
-$ delta_phi = Z_phi - 1, quad delta_m = m_0 Z - m, quad delta_Psi = Z_Psi - 1, quad delta_M = M_0 Z - M, quad delta_g = g Z_phi^(1\/2) Z_Psi, quad delta_lambda = lambda_0 Z^2 - lambda: $
+$ delta_phi = Z_phi - 1, quad delta_m = m_0^2 Z_phi - m^2, quad delta_Psi = Z_Psi - 1, quad delta_M = M_0 Z_Psi - M, quad delta_g = g_0 Z_phi^(1\/2) Z_Psi - g, quad delta_lambda = lambda_0 Z_phi^2 - lambda: $
 #align(center, grid(
   columns: 3,
   column-gutter: 1em,
@@ -364,33 +364,30 @@ $
   & = #fd({ sc((0, 0), (2.4, 0)) }) + overbrace(i M^2 (p^2)|_"1-loop", = 0 "at" p^2 = m^2),
 $
 $
-  #scalar-tadpole & = -i/2 lambda integral (dd(4, k))/(2 pi)^4 i/(k^2 - m^2) = -(i m^2 lambda)/(32 pi^2) (2/epsilon - gamma + 1 + ln(4 pi)), \
-  #fermion-bubble() & = -g^2 integral (dd(4, k))/(2 pi)^4 tr(gamma^5 (fsl(k) + M) gamma^5 (fsl(k) + fsl(p) + M))/((k^2 - M^2)((k + p)^2 - M^2)),
+  #scalar-tadpole & = -i/2 lambda integral (dd(4, k))/(2 pi)^4 i/(k^2 - m^2) = (i m^2 lambda)/(32 pi^2) (2/epsilon - gamma + 1 + ln(4 pi)), \
+  #fermion-bubble() & = -g^2 integral (dd(4, k))/(2 pi)^4 tr(gamma^5 (i (fsl(k) + M))/(k^2 - M^2) gamma^5 (i (fsl(k) + fsl(p) + M))/((k + p)^2 - M^2)) = g^2 integral (dd(4, k))/(2 pi)^4 tr(gamma^5 (fsl(k) + M) gamma^5 (fsl(k) + fsl(p) + M))/((k^2 - M^2)((k + p)^2 - M^2)),
 $
 $ tr(gamma^5 (fsl(k) + M) gamma^5 (fsl(k) + fsl(p) + M)) = tr(-fsl(k)^2 - fsl(k) fsl(p) + fsl(p) M + M^2) = 4 (M^2 - k^2 - k dot p). $
 For the denominator, we use a Feynman parametrization,
 $
   (k^2 - M^2)^(-1) ((k + p)^2 - M^2)^(-1) & = integral_0^1 dd(x) 1/[x ((k + p)^2 - M^2) + (1 - x)(k^2 - M^2)]^2, \
-  x ((k + p)^2 - M^2) + (1 - x)(k^2 - M^2) & = x p^2 + 2 x k p + k^2 - M^2 = (underbrace(k + x p, l))^2 underbrace(- x (1 - x) p^2 - M^2, -Delta),
+  x ((k + p)^2 - M^2) + (1 - x)(k^2 - M^2) & = x p^2 + 2 x k p + k^2 - M^2 = (underbrace(k + x p, l))^2 underbrace(+ x (1 - x) p^2 - M^2, -Delta),
 $
 $
-  #fermion-bubble(top: $k$, bottom: $p + k$) & = 4 g^2 integral (dd(d, k))/(2 pi)^d integral_0^1 dd(x) (k^2 - M^2 + k p)/(l^2 - Delta)^2 = 4 g^2 integral (dd(d, l))/(2 pi)^d integral_0^1 dd(x) (l^2 - overbrace(2 x l p, 0) + x^2 p^2 - M^2 + overbrace(l p, 0) - x p^2)/(l^2 - Delta)^2 \
-  & = 4 g^2 integral (dd(d, l))/(2 pi)^d integral_0^1 dd(x) (l^2 - x (1 - x) p^2 - M^2)/(l^2 - Delta)^2.
+  #fermion-bubble(top: $k$, bottom: $p + k$) & = -4 g^2 integral (dd(d, k))/(2 pi)^d integral_0^1 dd(x) (k^2 - M^2 + k p)/(l^2 - Delta)^2 = -4 g^2 integral (dd(d, l))/(2 pi)^d integral_0^1 dd(x) (l^2 - overbrace(2 x l p, 0) + x^2 p^2 - M^2 + overbrace(l p, 0) - x p^2)/(l^2 - Delta)^2 \
+  & = -4 g^2 integral (dd(d, l))/(2 pi)^d integral_0^1 dd(x) (l^2 - x (1 - x) p^2 - M^2)/(l^2 - Delta)^2.
 $
 Using the formulae of dimensional regularization,
 $
   integral (dd(d, l))/(2 pi)^d 1/(l^2 - Delta)^n & = (i (-1)^n)/(4 pi)^(d\/2) Gamma(n - d/2)/Gamma(n) Delta^(d/2 - n), \
-  integral (dd(d, l))/(2 pi)^d l^2/(l^2 - Delta)^n & = (i (-1)^(n-1))/(4 pi)^(d\/2) Gamma(n - d/2 - 1)/Gamma(n) Delta^(1 + d/2 - n),
+  integral (dd(d, l))/(2 pi)^d l^2/(l^2 - Delta)^n & = (i (-1)^(n-1))/(4 pi)^(d\/2) d/2 Gamma(n - d/2 - 1)/Gamma(n) Delta^(1 + d/2 - n),
 $
 we get
 $
-  #fermion-bubble(top: $k$, bottom: $p + k$) & = 4 g^2 integral_0^1 dd(x) ((-i Gamma(1 - d/2))/(4 pi)^(d\/2) Delta^(d/2 - 1) - (i Gamma(2 - d/2))/(4 pi)^(d\/2) Delta^(d/2 - 2) (x (1 - x) p^2 + M^2)) \
-  & = -(4 i g^2)/(4 pi)^(d\/2) integral_0^1 dd(x) Gamma(underbrace(2 - d/2, epsilon\/2)) underbrace((1 - 1/(1 - epsilon\/2)), epsilon\/2 + cal(O)(epsilon^2)) Delta^(d/2 - 1) \
-  & = -(4 i g^2)/(16 pi^2) (4 pi)^(epsilon\/2) (2/epsilon - gamma + cal(O)(epsilon)) (epsilon/2 + cal(O)(epsilon^2)) integral_0^1 dd(x) (x (1 - x) p^2 + M^2)^(1 - epsilon\/2) \
-  & = -(i g^2)/(4 pi^2) (1 + epsilon/2 ln(4 pi) + cal(O)(epsilon^2)) (2/epsilon - gamma + 1 + cal(O)(epsilon)) integral_0^1 dd(x) [x (1 - x) p^2 + M^2] [1 - epsilon/2 (x (1 - x) p^2 + M^2) + cal(O)(epsilon^2)] \
-  & = -(i g^2)/(4 pi^2) (2/epsilon - gamma + 1 + ln(4 pi) + cal(O)(epsilon)) integral_0^1 dd(x) [x (1 - x) p^2 + M^2 - epsilon/2 (x (1 - x) p^2 + M^2)^2 + cal(O)(epsilon^2)] \
-  & = -(i g^2)/(4 pi^2) (2/epsilon - gamma + 1 + ln(4 pi)) [p^2/6 + M^2 - epsilon/2 (p^4/30 + p^2/3 M^2 + M^4) + cal(O)(epsilon^2)] \
-  & = -(i g^2)/(4 pi^2) [(2/epsilon - gamma + 1 + ln(4 pi)) (p^2/6 + M^2) - (p^4/30 + p^2/3 M^2 + M^4)].
+  #fermion-bubble(top: $k$, bottom: $p + k$) & = -4 g^2 integral_0^1 dd(x) ((-i d/2 Gamma(1 - d/2))/(4 pi)^(d\/2) Delta^(d/2 - 1) - (i Gamma(2 - d/2))/(4 pi)^(d\/2) Delta^(d/2 - 2) (x (1 - x) p^2 + M^2)) \
+  & = -(4 i g^2)/(4 pi)^(d\/2) integral_0^1 dd(x) Gamma(2 - d/2) Delta^(d/2 - 2) ((d/2)/(d/2 - 1) Delta - x (1 - x) p^2 - M^2) \
+  & stretch(->)^(epsilon -> 0) -(8 i g^2)/(16 pi^2 epsilon) integral_0^1 dd(x) (2 Delta - x (1 - x) p^2 - M^2) + "finite" = -(8 i g^2)/(16 pi^2 epsilon) integral_0^1 dd(x) (M^2 - 3 x (1 - x) p^2) + "finite" \
+  & = (i g^2)/(4 pi^2) (p^2 - 2 M^2)/epsilon + "finite terms".
 $
 
 = Problem 10.1 (One-loop $beta$-function in QED)

@@ -137,7 +137,7 @@ $
   "sign"(lambda_(00)) & = epsilon = plus.minus 1 quad && (+1: "orthochronous, time-direction preserved").
 $
 The connected component of $e in "O"(1, 3)$ is called $"O"(1, 3)_0 lt.closed "O"(1, 3)$,
-$ "O"(1, 3) \/ "O"(1, 3)_0 = ZZ_2 times ZZ_2 = {bb(1), P, T, P T}, quad P = -bb(1)_4 "parity reversal", quad T = bmat(-1, 0; 0, bb(1)_3) "time reversal". $
+$ "O"(1, 3) \/ "O"(1, 3)_0 = ZZ_2 times ZZ_2 = {bb(1), P, T, P T}, quad P = bmat(1, 0; 0, -bb(1)_3) "parity reversal", quad T = bmat(-1, 0; 0, bb(1)_3) "time reversal", quad P T = -bb(1)_4. $
 
 == Lie algebra $frak(o)(1, 3)$
 
@@ -165,7 +165,7 @@ $
 $ "SL"_2 (CC) = {A in "Mat"(2, 2, CC) | det(A) = 1}, $
 $
   frak(s l)_2 (CC) & = {a in "Mat"(2, 2, CC) | tr(a) = 0} \
-  & = "span"_CC {j_1 = i/2 sigma_1 = 1/2 mat(0, i; i, 0), j_2 = i/2 sigma_2 = 1/2 mat(0, 1; -1, 0), j_3 = i/2 sigma_3 = 1/2 mat(i, 0; 0, -i)},
+  & = "span"_CC {j_1 = -i/2 sigma_1 = 1/2 mat(0, -i; -i, 0), j_2 = -i/2 sigma_2 = 1/2 mat(0, -1; 1, 0), j_3 = -i/2 sigma_3 = 1/2 mat(-i, 0; 0, i)},
 $
 where $sigma_i$ are the Pauli matrices, and
 $ [j_a, j_b] = sum_c epsilon_(a b c) j_c $
@@ -173,7 +173,7 @@ $-->$ complex 3-dimensional Lie algebra.
 
 Choose a real structure:
 $ frak(s l)_2 (CC) = "span"_RR {j_1, j_2, j_3} times.o_RR CC, $
-$ phi: (frak(s l)_2 (CC))_RR -> frak(o)(1, 3), quad j_a |-> omega_a, quad -i j_a |-> K_a $
+$ phi: (frak(s l)_2 (CC))_RR -> frak(o)(1, 3), quad j_a |-> omega_a, quad i j_a |-> K_a $
 is an isomorphism of real Lie algebras. $"SL"(2, CC)$ is in fact simply connected!
 
 $==>$ $phi$ integrates to a unique
@@ -193,11 +193,11 @@ Check: $dif Psi_e = phi ==> Psi = phi.alt$.
 $A(t)$ path in $"SL"(2, CC)$: $A(0) = bb(1)$, $dot(A)(0) = a$,
 $ dif / (dif t)|_(t=0) A(t) sigma(x) A^dagger (t) = a sigma(x) + sigma(x) a^dagger = sigma((dif Psi_e a) x), $
 $
-  a = j_i = i/2 sigma_i & ==> dif / (dif t)|_(t=0) A(t) sigma(x) A^dagger (t) = i/2 [sigma_i, sigma(x)] = sum sigma_c (omega_i x)_c = sigma(omega_i x), \
-  a = -i j_i & ==> dif / (dif t)|_(t=0) A(t) sigma(x) A^dagger (t) = sigma(K_i x),
+  a = j_i = -i/2 sigma_i & ==> dif / (dif t)|_(t=0) A(t) sigma(x) A^dagger (t) = -i/2 [sigma_i, sigma(x)] = sum sigma_c (omega_i x)_c = sigma(omega_i x), \
+  a = i j_i = 1/2 sigma_i & ==> dif / (dif t)|_(t=0) A(t) sigma(x) A^dagger (t) = sigma(K_i x),
 $
 $
-  & ==> phi = dif Psi_e: j_i |-> omega_i, quad -i j_i |-> K_i \
+  & ==> phi = dif Psi_e: j_i |-> omega_i, quad i j_i |-> K_i \
   & ==> Psi = phi.alt, \
   & ker(phi.alt) = {A in "SL"(2, CC) | A sigma A^dagger = sigma thin forall sigma} = {plus.minus bb(1)_2}.
 $

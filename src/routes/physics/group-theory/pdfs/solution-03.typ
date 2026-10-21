@@ -32,7 +32,8 @@
 The hook length of a box in a Young tableau is the number of boxes beneath or to the right of the box in the diagram, counting the box itself.
 
 Let $rho^lambda$ be the irreducible repr. of $S_n$ associated with the partition $lambda$, then the hook rule states the dimension of $rho^lambda$ to be $n!$ over the hook lengths in the Young diagram of shape $lambda$, i.e. in this instance
-$ dim(rho^lambda) = (n!) / ((n - k) + k) = (n - 1)!, quad "Young diagram:" #h(0.5em) #hook-diagram $
+$ dim(rho^lambda) = (n!) / (n dot (n - k - 1)! dot k!) = binom(n - 1, k), quad "Young diagram:" #h(0.5em) #hook-diagram $
+since the corner box has hook length $n$, the remaining boxes of the first row have hook lengths $n - k - 1, ..., 1$ and the remaining boxes of the first column $k, ..., 1$.
 
 #task(label: "b")[Construct the character table of $S_4$ by using the Frobenius formula.]
 
@@ -94,7 +95,7 @@ this yields the desired information.
 
 Every matrix (Lie) group is a subgroup of the general linear group $"GL"(n, KK)$,
 $ "GL"(n, KK) = {A in "Mat"(n, n, KK) | det(A) != 0}, $
-i.e. the group of all invertible $n times n$ matrices over $KK$. Since the (standard) Lie bracket for Lie algebras of the matrix groups is simply the matrix commutator given by $[A, B] = A B - B A$ for $A, B in "GL"(n, KK)$, we calculate (cancelling terms marked in matching colors)
+i.e. the group of all invertible $n times n$ matrices over $KK$. Since the (standard) Lie bracket for Lie algebras of the matrix groups is simply the matrix commutator given by $[A, B] = A B - B A$ for $A, B in "Mat"(n, n, KK)$, we calculate (cancelling terms marked in matching colors)
 #let c1(x) = text(fill: rgb("#1f5fa8"), x)
 #let c2(x) = text(fill: rgb("#b22222"), x)
 #let c3(x) = text(fill: rgb("#2e7d32"), x)
@@ -105,7 +106,7 @@ $
   & quad + c1(B C A) - c4(C A B) - c5(B A C) + c2(A C B) \
   & quad + c4(C A B) - A B C - c3(C B A) + c5(B A C) = 0,
 $
-which holds for all $A, B, C in "GL"(n, KK)$ and therefore for all possible elements of matrix groups.
+which holds for all $A, B, C in "Mat"(n, n, KK)$ and therefore for all possible elements of matrix groups.
 
 = Exercise 3 ($"SU"(2)$)
 
@@ -167,19 +168,20 @@ Both assertions concerning the structure of the Lie algebras $frak(s u)(2)$ and 
 
 Now on to the isomorphy between $frak(s u)(2)$ and $frak(s o)(3)$. We can show this relation using the group homomorphism $Phi: "SU"(2) -> "SO"(3)$ to construct an isomorphism $phi: frak(s u)(2) -> frak(s o)(3)$.
 
-We start by expressing $Phi$ using abstract index notation. Let $f(arrow(x))$ be a function of position $arrow(x)$, $underline(R) in "SO"(3)$ a rotation matrix and $underline(U)$ a unitary transformation, the image of $Phi(underline(R))$ in $"SU"(2)$. Then
+We start by expressing $Phi$ using abstract index notation. Let $f(arrow(x))$ be a function of position $arrow(x)$, $underline(U) in "SU"(2)$ and $underline(R) = Phi(underline(U)) in "SO"(3)$ the corresponding rotation matrix. Then
 $
   f(underline(R) arrow(x)) & = f(Phi(underline(U)) arrow(x)) = underline(U) f(arrow(x)) underline(U)^dagger, \
   underline(R)^i_j x^j underline(sigma)_i & = underline(U) x^j underline(sigma)_j underline(U)^dagger.
 $
-Differentiating at $t = 0$ and setting $(dif underline(R)) / (dif t)|_(t=0) = underline(X) in frak(s o)(3)$, $underline(U)(0) = bb(1)_2$ and $(dif underline(U)) / (dif t)|_(t=0) = underline(A) = a^i underline(s)_i in frak(s u)(2)$, we obtain
+Differentiating at $t = 0$ and setting $(dif underline(R)) / (dif t)|_(t=0) = underline(X) in frak(s o)(3)$, $underline(U)(0) = bb(1)_2$ and $(dif underline(U)) / (dif t)|_(t=0) = underline(A) = a^i underline(s)_i in frak(s u)(2)$ with $underline(s)_i = -i/2 underline(sigma)_i$, we obtain
 $
   underline(X)^i_j x^j underline(sigma)_i & = underline(A) x^j underline(sigma)_j + x^j underline(sigma)_j underline(A)^dagger, \
   x^j underline(X)^i_j underline(sigma)_i & = x^j (underline(A) underline(sigma)_j - underline(sigma)_j underline(A)) = x^j [underline(A), underline(sigma)_j] = x^j [a^i underline(s)_i, underline(sigma)_j] \
   & = -i/2 x^j a^i [underline(sigma)_i, underline(sigma)_j] = -i/2 x^j a^i (2 i epsilon_(i j)^k underline(sigma)_k) \
-  & = x^j a^i epsilon_(i j)^k underline(sigma)_k = x^j (-a^k epsilon_(k j)^i) underline(sigma)_i \
+  & = x^j a^i epsilon_(i j)^k underline(sigma)_k = x^j (a^k epsilon_(k j)^i) underline(sigma)_i \
   & =: x^j phi(underline(A))^i_j underline(sigma)_i.
 $
 So the isomorphism between $frak(s u)(2)$ and $frak(s o)(3)$ is given by
-$ phi(underline(A))^i_j = epsilon^i_(j k) a^k: frak(s u)(2) -> frak(s o)(3). $
+$ phi(underline(A))^i_j = -epsilon^i_(j k) a^k: frak(s u)(2) -> frak(s o)(3), $
+which maps the basis $underline(s)_k$ of $frak(s u)(2)$ onto the basis $o_k$ of $frak(s o)(3)$ given above.
 With this knowledge, we can say that because Lie algebras are locally identical to their corresponding Lie groups, $"SU"(2)$ and $"SO"(3)$ are locally isomorphic.

@@ -51,7 +51,7 @@ The same holds for $partial^mu$ as can be seen from the following:
 $ partial'^mu := partial/(partial x'_mu) = (partial x_nu)/(partial x'_mu) partial/(partial x_nu) = Lambda^mu_(#hide($mu$) nu) partial/(partial x_nu) = Lambda^mu_(#hide($mu$) nu) partial^nu, $
 where the Lorentz transformation comes from the fact that
 $ (x')^2 = x'_mu x'^mu = x'_mu Lambda^mu_(#hide($mu$) nu) x^nu attach(=, t: !) x_nu x^nu = x^2 quad ==> quad x_nu = x'_mu Lambda^mu_(#hide($mu$) nu). $
-Therefore, $F^(mu nu)$ transforms like a 4-matrix, i.e.
+Therefore, $F^(mu nu)$ transforms like a rank-2 tensor, i.e.
 $
   F'^(mu nu) & = partial'^mu A'^nu - partial'^nu A'^mu = Lambda^mu_(#hide($mu$) alpha) partial^alpha Lambda^nu_(#hide($nu$) beta) A^beta - Lambda^nu_(#hide($nu$) beta) partial^beta Lambda^mu_(#hide($mu$) alpha) A^alpha \
   & = Lambda^mu_(#hide($mu$) alpha) Lambda^nu_(#hide($nu$) beta) (partial^alpha A^beta - partial^beta A^alpha) = Lambda^mu_(#hide($mu$) alpha) Lambda^nu_(#hide($nu$) beta) F^(alpha beta).
@@ -65,11 +65,10 @@ $
 
 We need to calculate two terms for which an expression of $cal(L)$ in terms of the gauge potential $A^mu$ will come in handy. We have
 $
-  cal(L) & = -1/4 (partial_mu A_nu - partial_nu A_mu)(partial^mu A^nu - partial^nu A^mu) = -1/4 (partial^2 A^2 - partial_mu A^mu partial^nu A_nu - partial^mu A_mu partial_nu A^nu + partial^2 A^2) \
-  & = 1/2 (partial_mu A^mu partial_nu A^nu - partial^2 A^2),
+  cal(L) & = -1/4 (partial_mu A_nu - partial_nu A_mu)(partial^mu A^nu - partial^nu A^mu) = -1/2 (partial_mu A_nu partial^mu A^nu - partial_mu A_nu partial^nu A^mu),
 $
 $
-  cases(reverse: #true, gap: #0.8em, display(partial_nu (partial cal(L))/(partial(partial_nu A^mu)) = partial_nu 1/2 (partial_mu A^nu - partial^nu A_mu) = 1/2 partial_nu F_mu^(#hide($mu$) nu)), display((partial cal(L))/(partial A^mu) = 0)) quad partial_nu F_mu^(#hide($mu$) nu) = partial^nu F_(mu nu) = 0.
+  cases(reverse: #true, gap: #0.8em, display(partial_nu (partial cal(L))/(partial(partial_nu A^mu)) = -partial_nu (partial^nu A_mu - partial_mu A^nu) = partial_nu F_mu^(#hide($mu$) nu)), display((partial cal(L))/(partial A^mu) = 0)) quad partial_nu F_mu^(#hide($mu$) nu) = partial^nu F_(mu nu) = 0.
 $
 
 = Problem 2.1 (Canonical commutation relations)
@@ -255,9 +254,9 @@ $
 $
 from which we gather that the Hamiltonian given by $H = P^0$ is non-negative, i.e.
 $ chevron.l Psi | H | Psi chevron.r = integral (dd(3, p))/(2 pi)^3 E_p chevron.l Psi | (a^dagger (arrow(p)) a(arrow(p)) + b^dagger (arrow(p)) b(arrow(p))) | Psi chevron.r >= 0 quad forall Psi, $
-where we require that $Psi in cal(F)$, meaning $Psi$ must be an element of the Fock space and therefore an eigenstate to the number operators
+where we require that $Psi in cal(F)$, meaning $Psi$ must be an element of the Fock space, on which the number operators
 $ n_+ (arrow(p)) = a^dagger (arrow(p)) a(arrow(p)) quad "and" quad n_- (arrow(p)) = b^dagger (arrow(p)) b(arrow(p)) $
-and the Hamiltonian. From $chevron.l Psi | H | Psi chevron.r >= 0 med forall Psi in cal(F)$, we can deduce that there exists a state that fulfills
+are positive semi-definite, $chevron.l Psi | a^dagger a | Psi chevron.r = ||a |Psi chevron.r||^2 >= 0$. From $chevron.l Psi | H | Psi chevron.r >= 0 med forall Psi in cal(F)$, we can deduce that there exists a state that fulfills
 $ a(arrow(p)) |0 chevron.r = 0 quad forall arrow(p). $
 Otherwise, successive action of $a(arrow(p))$ on any state $|Psi chevron.r$ would lead to negative eigenvalues since
 $ P^mu a(arrow(p)) |k chevron.r = a(arrow(p)) P^mu |k chevron.r - p^mu a(arrow(p)) |k chevron.r = a(arrow(p)) k^mu |k chevron.r - p^mu a(arrow(p)) |k chevron.r = (k^mu - p^mu) a(arrow(p)) |k chevron.r, $
@@ -317,10 +316,11 @@ $
 
 #task(label: "b")[What is a representation $t^a$ of a Lie algebra?]
 
-An $n$-dimensional representation $R$ of a group $G$ (in this case a Lie algebra) is an automorphism, i.e. an invertible linear map,
-$ R: G --> "End"(V), quad R(x) = f, $
-where $x in G$ and $f: V -> V$ is an endomorphism of some vector space $V$. Further, a representation $R$ needs to be compatible with the group action $(dot, dot)$ of $G$, meaning for $x, y in G$
-$ R(x) compose R(y) = R((x, y)), quad R(x^(-1)) = R^(-1) (x). $
+An $n$-dimensional representation $R$ of a group $G$ is a homomorphism (not necessarily invertible)
+$ R: G --> "GL"(V), quad R(x) = f, $
+where $x in G$ and $f: V -> V$ is an invertible linear map on some $n$-dimensional vector space $V$. Being a homomorphism, $R$ is compatible with the group multiplication of $G$, meaning for $x, y in G$
+$ R(x) compose R(y) = R(x y), quad R(x^(-1)) = R^(-1) (x). $
+Correspondingly, a representation of a Lie algebra is a linear map $T^a |-> t^a in "End"(V)$ that preserves the Lie bracket, i.e. a set of $n times n$ matrices $t^a$ obeying the same commutation relations $[t^a, t^b] = i f^(a b c) t^c$ as the generators in eq. (3).
 
 #task(label: "c")[
   Assume that the generators in some representation $r$ are normalized according to
@@ -343,7 +343,7 @@ $
   0 & = f^(a d e) f^(b c d) + f^(b d e) f^(c a d) + f^(c d e) f^(a b d) = (-1)^2 f^(c b d) f^(d a e) - f^(c a d) f^(d b e) + f^(a b d) f^(c d e) \
   & = -(t_G^b)_(c d) (t_G^a)_(d e) + (t_G^a)_(c d) (t_G^b)_(d e) - i f^(a b d) (t_G^d)_(c e) \
   & attach(=, t: c <-> d) (t_G^a)_(d c) (t_G^b)_(c e) - (t_G^b)_(d c) (t_G^a)_(c e) - i f^(a b c) (t_G^c)_(d e) \
-  & = [(t_G^a)_(d c), (t_G^b)_(c e)] - i f^(a b c) (t_G^c)_(d e) quad ==> quad [(t_G^a)_(d c), (t_G^b)_(c e)] = i f^(a b c) (t_G^c)_(d e).
+  & = ([t_G^a, t_G^b])_(d e) - i f^(a b c) (t_G^c)_(d e) quad ==> quad [t_G^a, t_G^b] = i f^(a b c) t_G^c.
 $
 
 = Problem 7.2 (Feynman rules in $phi^3$-theory)
@@ -516,7 +516,7 @@ $
   & = sum_(r = 1)^2 mat(sqrt(sigma_mu p^mu) xi_r (sqrt(sigma_mu p_mu) xi_r)^dagger, sqrt(sigma_mu p^mu) xi_r (sqrt(sigma_mu p^mu) xi_r)^dagger; sqrt(sigma_mu p_mu) xi_r (sqrt(sigma_mu p_mu) xi_r)^dagger, sqrt(sigma_mu p_mu) xi_r (sqrt(sigma_mu p^mu) xi_r)^dagger) \
   & = sum_(r = 1)^2 mat(sqrt(sigma_mu p^mu sigma_nu p_nu) xi_r xi_r^dagger, sigma_mu p^mu xi_r xi_r^dagger; sigma_mu p_mu xi_r xi_r^dagger, sqrt(sigma_mu p_mu sigma_nu p^nu) xi_r xi_r^dagger) = mat(m bb(1)_2, sigma_mu p^mu; sigma_mu p_mu, m bb(1)_2) = gamma dot p + m.
 $
-The same holds for $sum_(r = 1)^2 v_r overline(v)_r$ except for an overall minus sign. Therefore
+The analogous calculation gives $sum_(r = 1)^2 v_r overline(v)_r = gamma dot p - m$, i.e. the sign of the mass term flips. Therefore
 $ Lambda_+ = sum_(r = 1)^2 1/(2 m) u_r overline(u)_r = 1/(2 m) (gamma dot p + m), quad Lambda_- = -sum_(r = 1)^2 1/(2 m) v_r overline(v)_r = -1/(2 m) (gamma dot p - m). $
 
 = Problem 9.2 (Gamma matrices and $"SO"(1, 3)$)
@@ -599,7 +599,7 @@ $
   S^i & = i/4 epsilon_(i j k) gamma^j gamma^k = i/4 epsilon_(i j k) mat(0, sigma_j; -sigma_j, 0) mat(0, sigma_k; -sigma_k, 0) = i/4 epsilon_(i j k) mat(-sigma_j sigma_k, 0; 0, -sigma_j sigma_k) = i/4 (-2 i) mat(sigma^i, 0; 0, sigma^i) = 1/2 mat(sigma^i, 0; 0, sigma^i), \
   gamma^5 & = i gamma^0 gamma^1 gamma^2 gamma^3 = i gamma^0 gamma^1 mat(-sigma_2 sigma_3, 0; 0, -sigma_2 sigma_3) = i gamma^0 mat(0, -sigma_1 sigma_2 sigma_3; sigma_1 sigma_2 sigma_3, 0) = i mat(0, -sigma_1 sigma_2 sigma_3; -sigma_1 sigma_2 sigma_3, 0) = mat(0, bb(1)_2; bb(1)_2, 0),
 $
-where we used in the last step that the Pauli matrices are involutory, i.e. $-i sigma_1 sigma_2 sigma_3 = bb(1)_2$. Since $S^(kappa lambda)$ satisfies the Lorentz algebra, we showed that the $S^i$ are a subalgebra of $"so"(1, 3)$. The explicit form of $S^i$ is block diagonal, where each block alone satisfies the $"su"(2)$ algebra. Since the blocks are 2-dimensional, the $S^i$ form a $1/2 plus.o 1/2$ representation.
+where we used in the last step that $sigma_1 sigma_2 = i sigma_3$ and $sigma_3^2 = bb(1)_2$, i.e. $-i sigma_1 sigma_2 sigma_3 = bb(1)_2$. Since $S^(kappa lambda)$ satisfies the Lorentz algebra, we showed that the $S^i$ are a subalgebra of $"so"(1, 3)$. The explicit form of $S^i$ is block diagonal, where each block alone satisfies the $"su"(2)$ algebra. Since the blocks are 2-dimensional, the $S^i$ form a $1/2 plus.o 1/2$ representation.
 
 = Problem 9.4 (Global symmetries of the free Dirac action)
 
@@ -618,10 +618,11 @@ Again, from comparing the above to an expansion in orders of variations,
 $ cal(L) -> cal(L) + epsilon^nu delta_nu cal(L) + cal(O)(epsilon^2), $
 we get that $delta_nu cal(L) = -partial_nu cal(L) = -partial_mu eta^mu_(#hide($mu$) nu) cal(L)$. $(F^mu)_nu$ as in $delta_nu cal(L) = partial_mu (F^mu)_nu$ is given by $(F^mu)_nu = -eta^mu_(#hide($mu$) nu) cal(L)$. Even though the first variation of the second degree of freedom of the Dirac field $delta Psi^dagger (x)$ appears in the Noether current as well, it does not need to be computed here because its prefactor $(partial cal(L))/(partial(partial_mu Psi^dagger)) = 0$ vanishes. The four Noether currents $(j^mu)_nu$ (one for each continuous symmetry parameter in $epsilon^nu$) can be written as
 $ (j^mu)_nu = (partial cal(L))/(partial(partial_mu Psi)) delta_nu Psi + (partial cal(L))/(partial(partial_mu Psi^dagger)) delta_nu Psi^dagger - (F^mu)_nu = overline(Psi) i gamma^mu (-partial_nu Psi) + eta^mu_(#hide($mu$) nu) cal(L). $
-Therefore, the energy-momentum tensor $T^(mu nu) = (j^mu)^nu$ on-shell, i.e. using $(i gamma^mu partial_mu - m) Psi = 0$ in the Lagrangian, reads
-$ T^(mu nu) = -i overline(Psi) gamma^mu partial^nu Psi. $
-The conserved 4-momentum operator $P^mu := T^(mu 0)$ and the Hamiltonian $H := T^(0 0)$ are
-$ P^mu = -i overline(Psi) gamma^mu partial_t Psi, quad H = -i overline(Psi) gamma^0 partial_t Psi = -i Psi^dagger partial_t Psi. $
+The overall sign of a Noether current is a matter of convention. Choosing it such that the energy comes out positive, the energy-momentum tensor $T^(mu nu) = -(j^mu)^nu$ on-shell, i.e. using $(i gamma^mu partial_mu - m) Psi = 0$ so that $cal(L) = 0$, reads
+$ T^(mu nu) = i overline(Psi) gamma^mu partial^nu Psi. $
+The conserved 4-momentum operator $P^mu := integral dd(3, x) T^(0 mu)$ and the Hamiltonian $H := P^0$ are
+$ P^mu = integral dd(3, x) i Psi^dagger partial^mu Psi, quad H = integral dd(3, x) i Psi^dagger partial_t Psi. $
+With the canonical momentum $pi = (partial cal(L))/(partial dot(Psi)) = i Psi^dagger$, the canonical Hamiltonian is $integral dd(3, x) (pi dot(Psi) - cal(L)) = integral dd(3, x) i Psi^dagger partial_t Psi$ on-shell, in agreement with $P^0$.
 
 #task(label: "b")[
   Give the infinitesimal version of the transformation of the Dirac spinor under a Lorentz transformation
@@ -634,9 +635,9 @@ $ P^mu = -i overline(Psi) gamma^mu partial_t Psi, quad H = -i overline(Psi) gamm
 To find the spinor representation of the Lorentz algebra $"so"(1, 3)$ we start from the Clifford algebra $"Cliff"(1, 3)$ defined as the algebra spanned by $n times n$-matrices $(gamma^mu)^A_(#hide($A$) B)$, $mu in {0, 1, 2, 3}$ and $A, B in {1, dots, n}$ such that the following anticommutator is fulfilled:
 $ {gamma^mu, gamma^nu} = gamma^mu gamma^nu + gamma^nu gamma^mu = 2 eta^(mu nu) bb(1)_4. $
 The central point is that given matrices $(gamma^mu)^A_(#hide($A$) B)$ as above, the objects $(S^(rho sigma))^A_(#hide($A$) B)$ defined as
-$ (S^(rho sigma))^A_(#hide($A$) B) := 1/4 [gamma^rho, gamma^sigma]^A_(#hide($A$) B) $
-form a representation of $"so"(1, 3)$, meaning they obey the Lorentz algebra's defining relation $Lambda^mu_(#hide($mu$) rho) Lambda^nu_(#hide($nu$) sigma) eta^(rho sigma) = eta^(mu nu)$ when expanded (to second order):
-$ [S^(rho sigma), S^(tau kappa)] = -i (eta^(rho kappa) S^(sigma tau) + eta^(sigma tau) S^(rho kappa) - eta^(rho tau) S^(sigma kappa) - eta^(sigma kappa) S^(rho tau)). $
+$ (S^(rho sigma))^A_(#hide($A$) B) := i/4 [gamma^rho, gamma^sigma]^A_(#hide($A$) B) $
+form a representation of $"so"(1, 3)$, meaning they obey the same commutation relations as the generators $cal(J)^(rho sigma)$ of the Lorentz algebra (cf. problem 9.2 b) with $S^(rho sigma) -> -i S^(rho sigma)$):
+$ [S^(rho sigma), S^(tau kappa)] = i (eta^(rho kappa) S^(sigma tau) + eta^(sigma tau) S^(rho kappa) - eta^(rho tau) S^(sigma kappa) - eta^(sigma kappa) S^(rho tau)). $
 Thus, every representation of $"Cliff"(1, 3)$ induces a representation of $"so"(1, 3)$. Now, as stated in the problem, a finite Lorentz transformation $Lambda^mu_(#hide($mu$) nu)$ is given by
 $ Lambda^mu_(#hide($mu$) nu) = [e^(-i/2 omega_(rho sigma) cal(J)^(rho sigma))]^mu_(#hide($mu$) nu), quad "where" quad (cal(J)^(rho sigma))^(mu nu) := i (eta^(rho mu) eta^(sigma nu) - eta^(rho nu) eta^(sigma mu)). $
 A spinor representation for every one of these $Lambda in "SO"(1, 3)$ is given by
@@ -684,7 +685,7 @@ $
   & = -sum_s integral (dd(3, p))/(2 pi)^3 (a_s^dagger (p) a_s (p) - b_s^dagger (p) b_s (p)) - 2 integral dd(3, p) delta^((3)) (0),
 $
 where we exploited the spinor identities
-$ u_s^dagger (p) u_r (p) = 2 E_p delta_(r s) = v_s^dagger (p) v_r (p) quad "and" quad u_s^dagger (p) v_r (q) = 0 = v_s^dagger (p) u_r (q) $
+$ u_s^dagger (arrow(p)) u_r (arrow(p)) = 2 E_p delta_(r s) = v_s^dagger (arrow(p)) v_r (arrow(p)) quad "and" quad u_s^dagger (arrow(p)) v_r (-arrow(p)) = 0 = v_s^dagger (-arrow(p)) u_r (arrow(p)) $
 and the anticommutation relation of $b_s (p)$ and $b_r^dagger (q)$,
 $ {b_s (p), b_r^dagger (q)} = (2 pi)^3 delta_(r s) delta^((3)) (arrow(p) - arrow(q)). $
 The second term in $Q$ is clearly divergent but independent of both $p$ and $x$. It is just an added constant lacking physical meaning. Before applying the charge operator to physical states, this term must be dropped.
@@ -815,7 +816,7 @@ $
   overline(Psi)(x) gamma^5 Psi(x) & Lto Psi^dagger xL S^dagger (Lambda) gamma^0 gamma^5 S(Lambda) Psi xL = Psi^dagger xL gamma^0 S^(-1) (Lambda) gamma^5 S(Lambda) Psi xL \
   & = overline(Psi) xL gamma^5 S^(-1) (Lambda) S(Lambda) Psi xL = overline(Psi) xL gamma^5 Psi xL,
 $
-where we used that $[S^(-1) (Lambda), gamma^5] = 0$ since $S^(-1) (Lambda) = e^(i/2 omega_(mu nu) S^(mu nu))$ and $S^(mu nu) = 1/2 (gamma^mu gamma^nu - eta^(mu nu))$.
+where we used that $[S^(-1) (Lambda), gamma^5] = 0$ since $S^(-1) (Lambda) = e^(i/2 omega_(mu nu) S^(mu nu))$ and $S^(mu nu) prop [gamma^mu, gamma^nu]$ commutes with $gamma^5$.
 $
   overline(Psi)(x) gamma^mu Psi(x) & Pto Psi^dagger xP S^dagger (P) gamma^0 gamma^mu S(P) Psi xP = overline(Psi) xP underbrace(gamma^0 gamma^0, bb(1)_4) gamma_mu Psi xP = overline(Psi) xP gamma_mu Psi xP, \
   overline(Psi)(x) gamma^mu Psi(x) & Lto Psi^dagger xL S^dagger (Lambda) gamma^0 gamma^mu S(Lambda) Psi xL = overline(Psi) xL underbrace(S^(-1) (Lambda) gamma^mu S(Lambda), Lambda^mu_(#hide($mu$) nu) gamma^nu) Psi xL, \
@@ -860,28 +861,27 @@ $
       (a2, (2.1, -0.75), $e^- med k, r$, true, "north"),
       (a2, (-0.6, 0.75), $e^- med p', s'$, false, "south"),
     ), $q = p - k'$, qpos: "north") \
-  & = overline(u)_(s') (p') u_s (p) (-i g) i/((p - p')^2 - m_phi^2) (-i g) overline(u)_(r') (k') u_r (k) - overline(u)_(r') (k) u_s (p) (-i g) i/((p - k)^2 - m_phi^2) (-i g) overline(u)_(s') (p') u_r (k) \
-  & = -i g^2 (overline(u)_(s') (p') u_s (p) 1/((p - p')^2 - m_phi^2) overline(u)_(r') (k') u_r (k) - overline(u)_(r') (k) u_s (p) 1/((p - k)^2 - m_phi^2) overline(u)_(s') (p') u_r (k)).
+  & = overline(u)_(s') (p') u_s (p) (-i g) i/((p - p')^2 - m_phi^2) (-i g) overline(u)_(r') (k') u_r (k) - overline(u)_(r') (k') u_s (p) (-i g) i/((p - k')^2 - m_phi^2) (-i g) overline(u)_(s') (p') u_r (k) \
+  & = -i g^2 (overline(u)_(s') (p') u_s (p) 1/((p - p')^2 - m_phi^2) overline(u)_(r') (k') u_r (k) - overline(u)_(r') (k') u_s (p) 1/((p - k')^2 - m_phi^2) overline(u)_(s') (p') u_r (k)).
 $
 
 #task(label: "b")[Electron-positron scattering: $e^- + e^+ -> e^- + e^+$.]
 
-This so-called Bhabha scattering also has two diagrams contributing to the scattering amplitude at tree-level. While the second diagram from part a) is no longer an option because the particles are no longer indistinguishable, we can now have electron-positron annihilation, i.e. an s-channel diagram:
-#let (b1, b2) = ((0.8, 0.45), (0.8, -0.45))
+This so-called Bhabha scattering also has two diagrams contributing to the scattering amplitude at tree-level. While the second diagram from part a) is no longer an option because the particles are no longer indistinguishable, we can now have electron-positron annihilation, i.e. an s-channel diagram. It enters with a relative minus sign from Fermi statistics:
 $
   i cal(M) & = #tree(a1, a2, (
       (a1, (-0.6, -0.75), $e^- med p, s$, true, "north"),
       (a1, (-0.6, 0.75), $e^- med p', s'$, false, "south"),
       (a2, (2.1, 0.75), $e^+ med k, r$, true, "south"),
       (a2, (2.1, -0.75), $e^+ med k', r'$, false, "north"),
-    ), $q = p - p'$, qpos: "north") + #tree(b1, b2, (
-      (b1, (0, 1.05), $e^+ med k, r$, true, "south"),
-      (b1, (1.6, 1.05), $e^- med p', s'$, false, "south"),
-      (b2, (0, -1.05), $e^- med p, s$, true, "north"),
-      (b2, (1.6, -1.05), $e^+ med k', r'$, false, "north"),
-    ), $q = p + k'$, qpos: "west", qpad: 0.1) \
-  & = overline(u)_(s') (p') u_s (p) (-i g) i/((p - p')^2 - m_phi^2) (-i g) overline(v)_r (k) v_(r') (k') + overline(v)_(r') (k') u_s (p) (-i g) i/((p + k')^2 - m_phi^2) (-i g) overline(u)_(s') (p') v_r (k) \
-  & = -i g^2 (overline(u)_(s') (p') u_s (p) 1/((p - p')^2 - m_phi^2) overline(v)_r (k) v_(r') (k') + overline(v)_(r') (k') u_s (p) 1/((p + k')^2 - m_phi^2) overline(u)_(s') (p') v_r (k)).
+    ), $q = p - p'$, qpos: "north") - #tree(a1, a2, (
+      (a1, (-0.6, -0.75), $e^- med p, s$, true, "north"),
+      (a1, (-0.6, 0.75), $e^+ med k, r$, true, "south"),
+      (a2, (2.1, 0.75), $e^- med p', s'$, false, "south"),
+      (a2, (2.1, -0.75), $e^+ med k', r'$, false, "north"),
+    ), $q = p + k$, qpos: "north") \
+  & = overline(u)_(s') (p') u_s (p) (-i g) i/((p - p')^2 - m_phi^2) (-i g) overline(v)_r (k) v_(r') (k') - overline(v)_r (k) u_s (p) (-i g) i/((p + k)^2 - m_phi^2) (-i g) overline(u)_(s') (p') v_(r') (k') \
+  & = -i g^2 (overline(u)_(s') (p') u_s (p) 1/((p - p')^2 - m_phi^2) overline(v)_r (k) v_(r') (k') - overline(v)_r (k) u_s (p) 1/((p + k)^2 - m_phi^2) overline(u)_(s') (p') v_(r') (k')).
 $
 
 = Problem 11.2 (The Klein--Nishina formula for Compton scattering)
@@ -895,7 +895,7 @@ $
   $ i cal(M) = -i e^2 epsilon_mu^* (k', lambda') epsilon_nu (k, lambda) overline(u)_(s') (p') ((gamma^mu cancel(k) gamma^nu + 2 gamma^mu p^nu)/(2 p k) + (gamma^nu cancel(k)' gamma^mu - 2 gamma^nu p^mu)/(2 p k')) u_s (p). $
 ]
 
-At tree-level, Compton scattering can take place in the form of two distinct processes. In $e^- + gamma -> e^- + gamma$, the electron can either first absorb, then emit a photon, making it an s-channel diagram, or first emit, then absorb a photon, which results in t-channel scattering:
+At tree-level, Compton scattering can take place in the form of two distinct processes. In $e^- + gamma -> e^- + gamma$, the electron can either first absorb, then emit a photon, making it an s-channel diagram, or first emit, then absorb a photon, which results in u-channel scattering:
 #import "@preview/cetz:0.5.2": decorations
 #let photon(a, b) = decorations.wave(draw.line(a, b), amplitude: 0.09, segment-length: 0.18)
 #let compton(crossed: false) = fd({

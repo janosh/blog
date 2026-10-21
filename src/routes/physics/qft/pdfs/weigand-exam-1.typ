@@ -186,10 +186,11 @@ Non-trivial scattering excludes the term $delta_(f i)$ from the $S$-matrix eleme
 #task(label: "c")[Write down the invariant matrix element $i cal(M)$ for this process.]
 
 $
-  i cal(M) & = i overline(u)_s (p) v_r (k) (-i e gamma^nu) ((-i eta_(mu nu))/(p + k)^2 + (-i eta_(mu nu))/(p - p')^2) (-i e gamma^mu) u_s (p) overline(v)_r (k) \
-  & = -e^2 overline(u)_s (p) v_r (k) gamma^mu eta_(mu nu) gamma^nu (1/(p + k)^2 + 1/(p - p')^2) u_s (p) overline(v)_r (k) \
-  & = -4 e^2 overline(u)_s (p) v_r (k) (1/(p + k)^2 + 1/(p - p')^2) u_s (p) overline(v)_r (k).
+  i cal(M) & = overline(u)_(s') (p') (-i e gamma^mu) u_s (p) (-i eta_(mu nu))/(p - p')^2 overline(v)_r (k) (-i e gamma^nu) v_(r') (k') \
+  & quad - overline(u)_(s') (p') (-i e gamma^mu) v_(r') (k') (-i eta_(mu nu))/(p + k)^2 overline(v)_r (k) (-i e gamma^nu) u_s (p) \
+  & = i e^2 ((overline(u)_(s') (p') gamma^mu u_s (p) thin overline(v)_r (k) gamma_mu v_(r') (k'))/(p - p')^2 - (overline(u)_(s') (p') gamma^mu v_(r') (k') thin overline(v)_r (k) gamma_mu u_s (p))/(p + k)^2),
 $
+where the relative minus sign between the $t$- and $s$-channel diagrams stems from Fermi statistics.
 
 #task(label: "d")[As b) but this time the Feynman diagrams of order $e^4$.]
 
@@ -327,22 +328,14 @@ Furthermore, from $cal(L) = cal(L)'$ we can deduce that
 $ cal(L) -> cal(L)' = cal(L) + theta underbrace(delta cal(L), 0) + underbrace(cal(O)(theta^2), 0), quad "i.e. since" delta cal(L) = partial_mu F^mu, quad F^mu = 0. $
 Then, using the definition of the Noether current, we find
 $ j^mu := (partial cal(L))/(partial(partial_mu phi)) delta phi + (partial cal(L))/(partial(partial_mu phi^dagger)) delta phi^dagger - F^mu = (D^mu phi)^dagger i e phi + (D^mu phi)(-i e phi^dagger). $
-From this, the Noether charge can be calculated by integrating the current's zero component over space
+From this, the Noether charge can be calculated by integrating the current's zero component over space. Using the mode expansion of the free field (i.e. to zeroth order in $e$ inside $D^0$, so that $D^0 phi -> dot(phi)$),
+$ phi(x) = integral (dd(3, p))/(2 pi)^3 1/sqrt(2 E_p) (a_p e^(-i p x) + b_p^dagger e^(i p x)), $
+the terms oscillating as $e^(plus.minus 2 i E_p t)$ cancel after the $x$-integration and we find
 $
-  Q & = integral dd(3, x) j^0 (t, arrow(x)) = integral dd(3, x) i e (phi (D^0 phi)^dagger - phi^dagger D^0 phi) \
-  & = i e integral (dd(3, p))/(2 pi)^3 1/sqrt(2 E_p) integral (dd(3, q))/(2 pi)^3 1/sqrt(2 E_q) integral dd(3, x) (e^(-i p x) (a_p + b_(-p)^dagger) (D^0 e^(-i q x) (a_q + b_(-q)^dagger))^dagger \
-    & #h(14em) - e^(i p x) (a_p^dagger + b_(-p)) D^0 e^(-i q x) (a_q + b_(-q)^dagger)) \
-  & = i e integral (dd(3, p))/(2 pi)^3 1/sqrt(2 E_p) integral (dd(3, q))/(2 pi)^3 1/sqrt(2 E_q) integral dd(3, x) (e^(-i p x) (a_p + b_(-p)^dagger) (i E_q - i e A^0) e^(i q x) (a_q^dagger + b_(-q)) \
-    & #h(14em) - e^(i p x) (a_p^dagger + b_(-p)) (-i E_q + i e A^0) e^(-i q x) (a_q + b_(-q)^dagger)) \
-  & = -e integral (dd(3, p))/(2 pi)^3 1/sqrt(2 E_p) integral (dd(3, q))/(2 pi)^3 1/sqrt(2 E_q) ((2 pi)^3 delta^((3)) (arrow(q) - arrow(p)) e^(i (E_q - E_p) t) (E_q - e A^0) (a_p + b_(-p)^dagger)(a_q^dagger + b_(-q)) \
-    & #h(14em) + (2 pi)^3 delta^((3)) (arrow(p) - arrow(q)) e^(i (E_p - E_q) t) (E_q - e A^0) (a_p^dagger + b_(-p))(a_q + b_(-q)^dagger)) \
-  & = -e integral (dd(3, p))/(2 pi)^3 1/(2 E_p) ((E_p - e A^0)(a_p + b_(-p)^dagger)(a_p^dagger + b_(-p)) + (E_p - e A^0)(a_p^dagger + b_(-p))(a_p + b_(-p)^dagger)) \
-  & = -e integral (dd(3, p))/(2 pi)^3 (1/2 - (e A^0)/(2 E_p)) (a_p a_p^dagger + a_p b_(-p) + b_(-p)^dagger a_p^dagger + b_(-p)^dagger b_(-p) \
-    & #h(14em) + a_p^dagger a_p + a_p^dagger b_(-p)^dagger + b_(-p) a_p + b_(-p) b_(-p)^dagger) \
-  & = -e integral (dd(3, p))/(2 pi)^3 (1/2 - (e A^0)/(2 E_p)) (2 a_p^dagger a_p + (2 pi)^3 delta^((3)) (arrow(p) - arrow(p)) + 2 a_p b_(-p) + 2 a_p^dagger b_(-p)^dagger \
-    & #h(14em) + 2 b_p^dagger b_p + (2 pi)^3 delta^((3)) (arrow(p) - arrow(p))) \
-  & = -e integral (dd(3, p))/(2 pi)^3 (1 - (e A^0)/E_p) (a_p^dagger a_p + b_p^dagger b_p + a_p b_(-p) + a_p^dagger b_(-p)^dagger) - e integral dd(3, p) (1 - (e A^0)/E_p) delta^((3)) (arrow(0)).
+  Q & = integral dd(3, x) j^0 (t, arrow(x)) = i e integral dd(3, x) (phi dot(phi)^dagger - phi^dagger dot(phi)) = -e integral (dd(3, p))/(2 pi)^3 (a_p^dagger a_p - b_p b_p^dagger) \
+  & = -e integral (dd(3, p))/(2 pi)^3 (a_p^dagger a_p - b_p^dagger b_p) + "const",
 $
+where the infinite constant from reordering $b_p b_p^dagger$ is dropped by normal ordering.
 
 #task(label: "c")[Expand the Lagrangian in terms of the interaction terms and state the Feynman rules for the vertices of scalar QED. _Hint:_ What does a derivative $partial^mu$ correspond to in momentum space?]
 

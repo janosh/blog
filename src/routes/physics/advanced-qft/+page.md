@@ -5,6 +5,10 @@ cover:
   caption: Simulated bubble chamber event with pion beam tracks, V0 decays and an electron-positron pair spiralling as it loses energy
 ---
 
+<script>
+  import Note from '../Note.svelte'
+</script>
+
 Advanced quantum field theory was given by [Prof. Jürgen Berges](https://www.thphys.uni-heidelberg.de/~berges/people.htm) at [Heidelberg University](https://www.uni-heidelberg.de/en) in the summer of 2015.
 
 Below is some material I used to prepare for the exam as well as all the assignment sheets and my solutions.
@@ -13,13 +17,13 @@ Below is some material I used to prepare for the exam as well as all the assignm
 
 <div class="docs-grid">
 
-[Plehn exam ![Plehn exam](./thumbnails/plehn-exam.webp)](./pdfs/plehn-exam.pdf)
+<Note file="plehn-exam" title="Plehn exam" />
 
-[Plehn exam solution ![Plehn exam solution](./thumbnails/plehn-exam-solution.webp)](./pdfs/plehn-exam-solution.pdf)
+<Note file="plehn-exam-solution" title="Plehn exam solution" />
 
-[Exam sheet ![Exam sheet](./thumbnails/exam-sheet.webp)](./pdfs/exam-sheet.pdf)
+<Note file="exam-sheet" title="Exam sheet" />
 
-[Relevant exercises ![Relevant exercises](./thumbnails/relevant-exercises.webp)](./pdfs/relevant-exercises.pdf)
+<Note file="relevant-exercises" title="Relevant exercises" />
 
 </div>
 
@@ -27,48 +31,57 @@ Below is some material I used to prepare for the exam as well as all the assignm
 
 <div class="docs-grid">
 
-[Exercise 1 ![Exercise 1](./thumbnails/exercise-01.webp)](./pdfs/exercise-01.pdf)
+<Note file="solution-01" title="Solution 1" />
 
-[Exercise 2 ![Exercise 2](./thumbnails/exercise-02.webp)](./pdfs/exercise-02.pdf)
+<Note file="solution-02" title="Solution 2" />
 
-[Exercise 3 ![Exercise 3](./thumbnails/exercise-03.webp)](./pdfs/exercise-03.pdf)
+<Note file="solution-03" title="Solution 3" />
 
-[Exercise 4 ![Exercise 4](./thumbnails/exercise-04.webp)](./pdfs/exercise-04.pdf)
+<Note file="solution-04" title="Solution 4" />
 
-[Exercise 5 ![Exercise 5](./thumbnails/exercise-05.webp)](./pdfs/exercise-05.pdf)
+<Note file="solution-05" title="Solution 5" />
 
-[Exercise 6 ![Exercise 6](./thumbnails/exercise-06.webp)](./pdfs/exercise-06.pdf)
+<Note file="solution-06" title="Solution 6" />
 
-[Exercise 7 ![Exercise 7](./thumbnails/exercise-07.webp)](./pdfs/exercise-07.pdf)
+<Note file="solution-07" title="Solution 7" />
 
-[Exercise 8 ![Exercise 8](./thumbnails/exercise-08.webp)](./pdfs/exercise-08.pdf)
+<Note file="solution-08" title="Solution 8" />
 
-[Exercise 9 ![Exercise 9](./thumbnails/exercise-09.webp)](./pdfs/exercise-09.pdf)
+<Note file="solution-09" title="Solution 9" />
 
-[Exercise 10 ![Exercise 10](./thumbnails/exercise-10.webp)](./pdfs/exercise-10.pdf)
+<Note file="solution-10" title="Solution 10" />
 
-[Exercise 11 ![Exercise 11](./thumbnails/exercise-11.webp)](./pdfs/exercise-11.pdf)
-
-[Solution 1 ![Solution 1](./thumbnails/solution-01.webp)](./pdfs/solution-01.pdf)
-
-[Solution 2 ![Solution 2](./thumbnails/solution-02.webp)](./pdfs/solution-02.pdf)
-
-[Solution 3 ![Solution 3](./thumbnails/solution-03.webp)](./pdfs/solution-03.pdf)
-
-[Solution 4 ![Solution 4](./thumbnails/solution-04.webp)](./pdfs/solution-04.pdf)
-
-[Solution 5 ![Solution 5](./thumbnails/solution-05.webp)](./pdfs/solution-05.pdf)
-
-[Solution 6 ![Solution 6](./thumbnails/solution-06.webp)](./pdfs/solution-06.pdf)
-
-[Solution 7 ![Solution 7](./thumbnails/solution-07.webp)](./pdfs/solution-07.pdf)
-
-[Solution 8 ![Solution 8](./thumbnails/solution-08.webp)](./pdfs/solution-08.pdf)
-
-[Solution 9 ![Solution 9](./thumbnails/solution-09.webp)](./pdfs/solution-09.pdf)
-
-[Solution 10 ![Solution 10](./thumbnails/solution-10.webp)](./pdfs/solution-10.pdf)
-
-[Solution 11 ![Solution 11](./thumbnails/solution-11.webp)](./pdfs/solution-11.pdf)
+<Note file="solution-11" title="Solution 11" />
 
 </div>
+
+<details class="problem-sheets">
+<summary>Original problem sheets</summary>
+
+<div class="docs-grid">
+
+<Note file="exercise-01" title="Exercise 1" />
+
+<Note file="exercise-02" title="Exercise 2" />
+
+<Note file="exercise-03" title="Exercise 3" />
+
+<Note file="exercise-04" title="Exercise 4" />
+
+<Note file="exercise-05" title="Exercise 5" />
+
+<Note file="exercise-06" title="Exercise 6" />
+
+<Note file="exercise-07" title="Exercise 7" />
+
+<Note file="exercise-08" title="Exercise 8" />
+
+<Note file="exercise-09" title="Exercise 9" />
+
+<Note file="exercise-10" title="Exercise 10" />
+
+<Note file="exercise-11" title="Exercise 11" />
+
+</div>
+
+</details>

@@ -118,7 +118,7 @@ $
   & = 1/H_0 integral_0^1 (dif a)/a (0.7 + 0.3/a^3)^(-1/2) = 0.9641 1/H_0 & "for" Omega_(0,Lambda) = 0.7, \
   & = 1/H_0 integral_0^1 (dif a)/a (1/a^3)^(-1/2) = 1/H_0 integral_0^1 dd(a) sqrt(a) = 1/H_0 lr(2/3 a^(3/2) |)_0^1 = 2/(3 H_0) & "for" Omega_(0,Lambda) = 0.
 $
-For $Omega_(0,Lambda) = 0.7$, we get an age for the universe of 13.1 Gyr. For $Omega_(0,Lambda) = 0$, this number reduces to 9 Gyr. Given what we know about the age of our Universe, $Omega_(0,Lambda) = 0.7$ is a much more realistic choice than $Omega_(0,Lambda) = 0$.
+With $1 \/ H_0 approx 14.4 "Gyr"$, we get an age for the universe of 13.9 Gyr for $Omega_(0,Lambda) = 0.7$. For $Omega_(0,Lambda) = 0$, this number reduces to 9.6 Gyr, younger than the oldest globular clusters. Only $Omega_(0,Lambda) = 0.7$ leaves room for 13.6 Gyr old globular clusters, so it is a much more realistic choice than $Omega_(0,Lambda) = 0$.
 
 = Problem 3 (Distance measurements) [10 points]
 
@@ -130,9 +130,9 @@ For $Omega_(0,Lambda) = 0.7$, we get an age for the universe of 13.1 Gyr. For $O
 #task(label: "a")[Assume $Omega = Omega_m = 1$. What does $H(a') = H_0 E(a')$ look like now? Solve the integral analytically, and rename $c/H_0 = chi_H$.]
 
 For $Omega = Omega_m = 1$, $H(a)$ takes the form
-$ H(a') = H_0 E(a') = H_0 a'^(-3). $
+$ H(a') = H_0 E(a') = H_0 a'^(-3\/2). $
 With this, the comoving distance becomes
-$ chi(a) = c integral_a^1 (dif a')/(a'^2 H_0 a'^(-3)) = c/H_0 integral_a^1 a' dif a' = chi_H 1/2 (1 - a^2). $
+$ chi(a) = c integral_a^1 (dif a')/(a'^2 H_0 a'^(-3\/2)) = c/H_0 integral_a^1 a'^(-1\/2) dif a' = 2 chi_H (1 - sqrt(a)). $
 
 #task(label: "b")[
   The transverse comoving distance $d_k$ is defined as
@@ -154,7 +154,7 @@ Because it has to account for the fact that spacetime is curved for $k != 0$.
   and therefore $d_L = chi(a) \/ a$. Give an argument why $L(chi) = L a^2$!
 ]
 
-The comoving luminosity $L(chi)$ increases quadratically with scale.
+Each photon's energy is redshifted by a factor $a$ on its way to us, and cosmological time dilation reduces the rate at which photons arrive by another factor $a$. Hence the received luminosity is $L(chi) = L a^2$.
 
 #task(label: "d")[
   The angular diameter distance $d_A$ of a structure that appears under the angle $alpha$ and has spatial extension $l_0$ is defined as
@@ -162,7 +162,7 @@ The comoving luminosity $L(chi)$ increases quadratically with scale.
   where $l_0$ is also stretched along with the cosmic expansion, such that the comoving size is $l(a) = l_0 \/ a$, i.e. $alpha = l_0/(a chi(a))$, and thus $d_A = a chi$. Argue why $l(a) = l_0 \/ a$!
 ]
 
-The spatial extension decreases linearly with scale.
+The structure has the fixed physical size $l_0$ at emission, when the scale factor was $a$. Comoving lengths are physical lengths divided by the scale factor, so its comoving size is $l(a) = l_0 \/ a$.
 
 = Problem 4 (Extra: Redshift galore) [5 points]
 

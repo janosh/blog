@@ -129,9 +129,9 @@
 
 #task(label: "a")[Given two spacetime points $x^mu$ and $y^mu$, show that if $(x - y)^2 > 0$, one can always find a frame in which the spatial distance vanishes, $x^i = y^i$. Show that if $(x - y)^2 < 0$, one can always find a frame where $x^0 = y^0$.]
 
-The defining relation of the Lorentz algebra $frak(s o)(1, 3)$ is
-$ Lambda^alpha_rho Lambda^gamma_sigma eta_(alpha gamma) = eta_(rho sigma), quad "where" quad eta_(alpha gamma) = eta_(rho sigma), $
-i.e. $frak(s o)(1, 3)$ is the set of all transformations that leave the metric invariant. For simplicity, we now consider a coordinate system in which it holds that
+The defining relation of the Lorentz group $O(1, 3)$ is
+$ Lambda^alpha_rho Lambda^gamma_sigma eta_(alpha gamma) = eta_(rho sigma), $
+i.e. $O(1, 3)$ is the set of all transformations that leave the metric invariant. For simplicity, we now consider a coordinate system in which it holds that
 $ Delta^mu = x^mu - y^mu = (Delta^0, arrow(Delta)) = (Delta^0, Delta^1, 0, 0). $
 We can then reduce the problem to two dimensions in which we transform by
 $ eta_2 = mat(1, 0; 0, -1) = Lambda^T mat(1, 0; 0, -1) Lambda = Lambda^T eta_2 Lambda, quad "with" quad Lambda = mat(cosh(alpha), -sinh(alpha); -sinh(alpha), cosh(alpha)), $
@@ -140,9 +140,7 @@ $ Delta'_2 = vec(Delta^(0'), Delta^(1')) = mat(cosh(alpha), -sinh(alpha); -sinh(
 We now have a system of equations in which we can set $Delta^(0') = Delta^(1') = 0$ to see what conditions arise for $Delta^0$ and $Delta^1$ when we demand $x_2$ and $y_2$ to occur at the same time and place respectively:
 #tagged(1, $ Delta^(0') = 0: quad Delta^0 cosh(alpha) = Delta^1 sinh(alpha) quad ==> quad Delta^0 = tanh(alpha) Delta^1, $)
 #tagged(2, $ Delta^(1') = 0: quad Delta^0 sinh(alpha) = Delta^1 cosh(alpha) quad ==> quad Delta^1 = tanh(alpha) Delta^0. $)
-Since $tanh(alpha) in (-1, 1) med forall alpha in RR$ and therefore in particular $tanh(alpha) < 1 med forall alpha in RR$, we have found that if $(x - y)^2 > 0$ or rather $(x_2 - y_2)^2 = Delta^2 = (Delta^0)^2 - (Delta^1)^2 > 0$, i.e. $Delta^0 > Delta^1$, we can indeed find such an $alpha$ that fulfills (1)
-$ Delta^0 = tanh(alpha) Delta^1, $
-which implies $Delta^(0') = 0$. In other words, if $(x - y)^2 > 0$ there exists such an $alpha$ that the reference frame reached by transforming with $Lambda(alpha)$ observes $x$ and $y$ to occur at the same time. However, there can be no $alpha in RR$ such that $Delta^1 = tanh(alpha) Delta^0$ in this setup. On the other hand, if we look at $(x - y)^2 < 0$ which amounts to $Delta^0 < Delta^1$, there can be no $alpha$ to fulfill (1) but instead (2) is possible, suggesting that for this setup, there is always a frame in which $x$ and $y$ happen at the same place.
+Since $tanh(alpha)$ takes every value in $(-1, 1)$ (and only those) as $alpha$ ranges over $RR$, eq. (2) can be solved for $alpha$ if and only if $|Delta^1| < |Delta^0|$, i.e. if $(x - y)^2 = (Delta^0)^2 - (Delta^1)^2 > 0$. In other words, if $(x - y)^2 > 0$ the reference frame reached by transforming with $Lambda(alpha)$, $tanh(alpha) = Delta^1 \/ Delta^0$, observes $x$ and $y$ to occur at the same place, $Delta^(1') = 0$, while eq. (1) has no solution. On the other hand, if $(x - y)^2 < 0$, which amounts to $|Delta^0| < |Delta^1|$, there can be no $alpha$ to fulfill (2) but instead (1) is solved by $tanh(alpha) = Delta^0 \/ Delta^1$, so there is always a frame in which $x$ and $y$ happen at the same time, $Delta^(0') = 0$.
 
 #task(label: "b")[Given a scalar field theory with Lagrangian $cal(L)(phi(x), partial_mu phi(x))$, show that the object $(partial cal(L)(x))/(partial(partial_mu phi(x)))$ transforms like a 4-vector under Lorentz transformations.]
 
@@ -165,7 +163,7 @@ $
   $ chevron.l p_I^1, ..., p_I^n | T exp(-i integral_(-oo)^oo H_I (t') dif t') | q_I^1, ..., q_I^n chevron.r. $
 ]
 
-#task(label: "a")[Critise this prescription from your understanding of the exact LSZ result and the underlying theory of asymptotic in- and outstates.]
+#task(label: "a")[Criticise this prescription from your understanding of the exact LSZ result and the underlying theory of asymptotic in- and outstates.]
 
 Asymptotic in- and outstates derive from the full interacting theory. Consequently, while not interacting with each other for $t -> plus.minus oo$, they perform self-interactions, thereby accounting for central features of the interacting theory such as the wavefunction renormalization $Z = 1 + cal(O)(lambda)$ and the fully renormalized mass $m != m_0$. In the Interaction picture perturbation theory approach, in- and outgoing states are modelled as free particle states which discards all of the above mentioned corrections. Moreover, these states are created from the free vacuum $|0 chevron.r$ as opposed to the vacuum of the full interacting theory $|Omega chevron.r$ used in the LSZ formalism.
 
@@ -262,6 +260,7 @@ $
 $ Psi^- |p_1, ..., p_n chevron.r = chevron.l p_1, ..., p_n | overline(Psi)^+ = 0, quad "where the" p_i "are an arbitrary number of fermions." $
 Inserting this one relevant term for the time-ordered product in eq. (1),
 $ S = -1/2 (-i g)^2 integral dd(4, x) integral dd(4, y) D_F^phi (x - y) chevron.l p, p' | overline(Psi)_x^- overline(Psi)_y^- Psi_x^+ Psi_y^+ | k, k' chevron.r, quad "where" quad |p, p' chevron.r = sqrt(2 E_p) sqrt(2 E_(p')) a_s^dagger (p) a_(s')^dagger (p') |0 chevron.r. $
+Note that from here on the roles of the momenta are swapped: $k, k'$ (spins $r, r'$) label the ingoing and $p, p'$ (spins $s, s'$) the outgoing fermions.
 We would like to commute the fields through the modes in the above expression. To do so, we calculate their commutation relations
 $
   {Psi^+ (x), a_s^dagger (p)} & = sum_(s') integral (dd(3, p'))/(2 pi)^3 e^(-i p' x)/sqrt(2 E_(p')) u_(s') (p') {a_(s') (p'), a_s^dagger (p)} = e^(-i p x)/sqrt(2 E_p) u_s (p), \
@@ -306,8 +305,8 @@ From the calculation performed in part b), we can guess the following Feynman ru
 - for every ingoing fermion $Psi$ of momentum $p$ and spin $s$, associate a factor of $u_s (p) hat(=)$ #rule-in
 - for every outgoing fermion $overline(Psi)$ of momentum $k$ and spin $r$, associate a factor of $overline(u)_r (k) hat(=)$ #rule-out
 - for every internal scalar $phi$ of momentum $q$, associate a factor of $i/(q^2 - m_phi^2) hat(=)$ #rule-scalar
-- for every vertex $-g phi overline(Psi) Psi$, associate a factor of $-i g (2 pi)^4 delta^((4)) (p + k - q) hat(=)$ #rule-vertex
-- integrate over undetermined internal momenta $integral dd(4, q_i)$
+- for every vertex $-g phi overline(Psi) Psi$, associate a factor of $-i g (2 pi)^4 delta^((4)) (p - k - q) hat(=)$ #rule-vertex
+- integrate over undetermined internal momenta $integral (dd(4, q_i))/(2 pi)^4$
 - sum up all distinct Feynman diagrams to given order (with a relative minus for every two fermions crossing).
 
 = Problem 11.2 (The Klein--Nishina formula)
@@ -316,7 +315,7 @@ From the calculation performed in part b), we can guess the following Feynman ru
 
 #task(label: "a")[
   Use the Feynman rules in the script to write down the tree-level Compton scattering amplitude and bring it into the form
-  $ i cal(M) = i e^2 epsilon_mu^* (k', lambda') epsilon_nu (k, lambda) overline(u)_(s') (p') ((gamma^mu fsl(k) gamma^nu + 2 gamma^mu p^nu)/(2 p k) + (gamma^nu fsl(k)' gamma^mu - 2 gamma^nu p^mu)/(2 p k')) u_s (p). $
+  $ i cal(M) = -i e^2 epsilon_mu^* (k', lambda') epsilon_nu (k, lambda) overline(u)_(s') (p') ((gamma^mu fsl(k) gamma^nu + 2 gamma^mu p^nu)/(2 p k) + (gamma^nu fsl(k)' gamma^mu - 2 gamma^nu p^mu)/(2 p k')) u_s (p). $
 ]
 
 Compton scattering has contributions from exactly two distinct fully connected, amputated diagrams at tree-level
@@ -340,7 +339,7 @@ $ i cal(M) = -i e^2 epsilon_mu^* (k', lambda') epsilon_nu (k, lambda) overline(u
 Electron-positron-to-muon-antimuon scattering has one diagram contributing at tree-level (leading order). The scattering amplitude therefore reads
 $
   i cal(M) = #ee-mumu & = overline(u)_(s') (p') (-i e gamma^mu) v_(r') (k') (-i eta_(mu nu))/q^2 overline(v)_r (k) (-i e gamma^nu) u_s (p) \
-  & = i e^2 overline(u)_(s') (p') gamma^mu v_(r') (k') 1/(p + k)^2 overline(v)_r (k) gamma_mu u_s (p) = i/2 e^2 overline(u)_(s') (p') gamma^mu v_(r') (k') 1/(m^2 + p k) overline(v)_r (k) gamma_mu u_s (p).
+  & = i e^2 overline(u)_(s') (p') gamma^mu v_(r') (k') 1/(p + k)^2 overline(v)_r (k) gamma_mu u_s (p) = i/2 e^2 overline(u)_(s') (p') gamma^mu v_(r') (k') 1/(m_e^2 + p k) overline(v)_r (k) gamma_mu u_s (p).
 $
 
 = Problem 9.3 (Trace identities)
@@ -400,7 +399,8 @@ $
   & = p_(1 alpha) p_(2 beta) p_(3 gamma) p_(4 delta) (8 eta^(gamma delta) eta^(alpha beta) - 8 eta^(beta delta) eta^(alpha gamma) + "Tr"((-gamma^delta gamma^alpha + 2 eta^(alpha delta)) gamma^beta gamma^gamma)) \
   & = p_(1 alpha) p_(2 beta) p_(3 gamma) p_(4 delta) (8 eta^(gamma delta) eta^(alpha beta) - 8 eta^(beta delta) eta^(alpha gamma) - "Tr"(gamma^delta gamma^alpha gamma^beta gamma^gamma) + 2 eta^(alpha delta) "Tr"(gamma^beta gamma^gamma)) \
   & = 8 (p_1 p_2)(p_3 p_4) - 8 (p_2 p_4)(p_1 p_3) + 8 (p_1 p_4)(p_2 p_3) - "Tr"(fsl(p)_4 fsl(p)_1 fsl(p)_2 fsl(p)_3) \
-  & = 8 [(p_1 p_2)(p_3 p_4) + (p_1 p_4)(p_2 p_3) - (p_1 p_3)(p_2 p_4)] - "Tr"(fsl(p)_1 fsl(p)_2 fsl(p)_3 fsl(p)_4).
+  & = 8 [(p_1 p_2)(p_3 p_4) + (p_1 p_4)(p_2 p_3) - (p_1 p_3)(p_2 p_4)] - "Tr"(fsl(p)_1 fsl(p)_2 fsl(p)_3 fsl(p)_4) \
+  ==> "Tr"(fsl(p)_1 fsl(p)_2 fsl(p)_3 fsl(p)_4) & = 4 [(p_1 p_2)(p_3 p_4) + (p_1 p_4)(p_2 p_3) - (p_1 p_3)(p_2 p_4)].
 $
 
 #task(label: "j")[Parts j) through n) are skipped due to negligible relevance w.r.t. the exam.]
@@ -480,7 +480,7 @@ $
 $
 Here, we can use that $delta(f(x)) = sum_(i=1)^n delta(x - x_i)/(|f'(x_i)|)$, where $i$ iterates over the (by necessity) finite set of simple zeros of $f(x)$. In this case
 $
-  delta^((1)) (2 E_3 - sqrt(s)) & = delta^((1)) (underbrace(2 sqrt(arrow(p)_3^2 + m^2), f(|arrow(p)_3|)) - sqrt(s)(|arrow(p)_3|)) = 1/(|f'(|arrow(p)_3|)|) delta^((1)) (f^(-1)(f(|arrow(p)_3|)) - f^(-1)(sqrt(s)(|arrow(p)_3|))) \
+  delta^((1)) (2 E_3 - sqrt(s)) & = delta^((1)) (underbrace(2 sqrt(arrow(p)_3^2 + m^2) - sqrt(s), f(|arrow(p)_3|))) = 1/(|f'(|arrow(p)_3|)|) delta^((1)) (|arrow(p)_3| - sqrt(s/4 - m^2)) \
   & = ((2 |arrow(p)_3|)/sqrt(arrow(p)_3^2 + m^2))^(-1) delta^((1)) (|arrow(p)_3| - sqrt(s/4 - m^2)).
 $
 Inserting this reformulation of the delta distribution into our integral gives

@@ -132,7 +132,7 @@ $
 where the left-hand side evaluates to
 $ ln(G(p'; lambda, mu)) |_mu^p = ln(G(p; lambda, mu)) - ln(i / mu^2 f(-1)) $
 $ ==> quad G(p; lambda, mu) = i / mu^2 f(-1) e^(2 integral_mu^p dif ln(p') gamma(lb(p'; lambda))) e^(-2 integral_mu^p dif ln(p')). $
-So $cal(F)(lb(p; lambda)) = f(-1) e^(-2 integral_mu^p dif ln(p'))$.
+Since $e^(-2 integral_mu^p dif ln(p')) = mu^2 \/ p^2$, this is eq. (7) with $cal(F)(lb(p; lambda)) = f(-1)$.
 
 #task(label: "c")[
   Argue that in the vicinity of a fixed point $lambda^*$ where $beta(lambda^*) = 0$ the two-point function scales as

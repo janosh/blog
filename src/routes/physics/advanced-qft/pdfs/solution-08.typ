@@ -85,7 +85,7 @@ resulting in a superficial degree of divergence of
 $ D = 4L - I_f - 2 I_gamma. $
 We proceed by inserting for the number of loop integrations
 $ L = I_f + I_gamma - (V - 1), $
-which again follows from the Feynman rules as they attribute one momentum integral to each internal line $I = I_f + I_gamma$ while each vertex contributes one $delta^((4))$, one of whom only enforces overall momentum integration. Thus
+which again follows from the Feynman rules as they attribute one momentum integral to each internal line $I = I_f + I_gamma$ while each vertex contributes one $delta^((4))$, one of which only enforces overall momentum conservation. Thus
 $ D = 4(I_f + I_gamma - (V - 1)) - I_f - 2 I_gamma = 4 - 4V + 3 I_f + 2 I_gamma. $
 The number of vertices can also be reexpressed by
 $ V = 2 I_gamma + E_gamma = 1/2 (2 I_f + E_f), $
@@ -94,7 +94,7 @@ $
   D & = 4 - (2 I_gamma + E_gamma) - 3 dot 1/2 (2 I_f + E_f) + 3 I_f + 2 I_gamma \
   & = 4 - E_gamma - 3/2 E_f.
 $
-_Additional note:_ Looking at $cal(L)_"QED" = -1/4 F_(mu nu) F^(mu nu) + overline(psi) (i gamma dot partial - m_0) psi - e A_mu overline(psi) gamma^mu psi$, we see that since $[psi] = 3/2$, $[A_mu] = 1$, QED's coupling has mass-dimension $[e] = 0$. From this, we conclude that QED is renormalizable in 4, i.e. has finitely many divergencies, but at every order in perturbation theory.
+_Additional note:_ Looking at $cal(L)_"QED" = -1/4 F_(mu nu) F^(mu nu) + overline(psi) (i gamma dot partial - m_0) psi - e A_mu overline(psi) gamma^mu psi$, we see that since $[psi] = 3/2$, $[A_mu] = 1$, QED's coupling has mass-dimension $[e] = 0$. From this, we conclude that QED is renormalizable in 4 dimensions, i.e. has finitely many divergencies, but at every order in perturbation theory.
 
 = Problem 8.2 (One-loop structure of QED)
 
@@ -228,7 +228,7 @@ We turn to the general case of all diagrams contributing to a photon $n$-point f
   draw.line(polar(c, r + 0.15, -195deg), polar(c, r + 0.45, -212deg), stroke: (dash: "dotted"))
 })
 $ #nloop(true) = - #nloop(false). $
-Since an $n$-point photon function receives contributions from $(n - 1)!$, and $n!$ is even for $n > 2$ (the case $n = 1$, i.e. the one-loop diagram #fd(s: 0.6, { photon((-1, 0), (0, 0)); draw.circle((0.3, 0), radius: 0.3) }), we already showed to be vanishing in the beginning) we can always arrange all contributing diagrams in pairs of two, where for the special case of $n$ odd, we may partner each diagram with its oppositely running counterpart in order to let each pair of our partition vanish individually.
+Since an $n$-point photon function receives contributions from $(n - 1)!$ diagrams, and $(n - 1)!$ is even for $n > 2$ (the case $n = 1$, i.e. the one-loop diagram #fd(s: 0.6, { photon((-1, 0), (0, 0)); draw.circle((0.3, 0), radius: 0.3) }), we already showed to be vanishing in the beginning) we can always arrange all contributing diagrams in pairs of two, where for the special case of $n$ odd, we may partner each diagram with its oppositely running counterpart in order to let each pair of our partition vanish individually.
 
 #task(label: "c")[
   The photon four-point amplitude is a sum of six diagrams. Show explicitly that the potential logarithmic divergences of these diagrams cancel.

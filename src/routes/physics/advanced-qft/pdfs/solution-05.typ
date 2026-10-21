@@ -80,7 +80,7 @@ where the last equivalence holds only up to symmetry factors.
 
 #task(label: "d")[Verify that this indeed reproduces $V_"eff" = V^"tree" + V^"1-loop"$ of last week's assignment.]
 
-In the referred-to problem 4.2, we were considering a constant background field, i.e. $phi.alt(x_i) = phi.alt_0 in CC thick forall i$. Inserting for the propagator
+In the referred-to problem 4.2, we were considering a constant background field, i.e. $phi.alt(x_i) = phi.alt_0 in RR thick forall i$. Inserting for the propagator
 $ G(x_1, x_2; 0) = integral (dd(4, p_1))/(2 pi)^4 i/(p_1^2 - m^2 + i epsilon) e^(-i p_1 (x_1 - x_2)), $
 we get
 $

@@ -63,9 +63,9 @@ $
   & quad - b(p) a(-p) + b(p) b^dagger (p) + b^dagger (p) b(p) - b^dagger (p) a^dagger (-p) - a(p) b(-p) + a(p) a^dagger (p)) \
   & = 1/2 integral (dd(3, p))/(2 pi)^3 p^i (2 a^dagger (p) a(p) + 2 b^dagger (p) b(p) + 2 dot (2 pi)^3 delta^((3)) (0)) \
   & quad - 1/2 integral (dd(3, p))/(2 pi)^3 (underbrace(p^i (a^dagger (p) b^dagger (-p) + a^dagger (-p) b^dagger (p)), "antisymmetric under" p^i -> -p^i) + underbrace(p^i (a(p) b(-p) + a(-p) b(p)), "antisymmetric under" p^i -> -p^i)) \
-  & = integral (dd(3, p))/(2 pi)^3 p^i (a^dagger (p) a(p) + b^dagger (p) b(p)) - integral dd(3, p) delta^((3)) (0).
+  & = integral (dd(3, p))/(2 pi)^3 p^i (a^dagger (p) a(p) + b^dagger (p) b(p)) + integral dd(3, p) p^i delta^((3)) (0).
 $
-We could get an overall minus sign in front of the charge, which would be no issue since we allow charges to take positive and negative values and which we call which is up to us. The last term is clearly divergent (and constant). It needs to be dropped before we can let the charge operator act on physical states.
+We could get an overall minus sign in front of the charge, which would be no issue since we allow charges to take positive and negative values and which we call which is up to us. The last term is formally divergent ($delta^((3)) (0)$ is the volume of space) but its integrand is odd in $p^i$, so it vanishes under symmetric integration. (Unlike for the energy $Q^0$, the vacuum carries no momentum.)
 
 #task(label: "c")[Consider the action of $Q^i$ on the states $a^dagger (k) |0 chevron.r$ and $b^dagger (q) |0 chevron.r$ and hence give a physical interpretation for the charges $Q^i$.]
 
@@ -74,7 +74,7 @@ $
   & = integral (dd(3, p))/(2 pi)^3 p^i (a^dagger (p) (a^dagger (k) a(p) + (2 pi)^3 delta^((3)) (p - k)) + a^dagger (k) b^dagger (p) b(p)) |0 chevron.r \
   & = integral (dd(3, p))/(2 pi)^3 p^i a^dagger (p) (2 pi)^3 delta^((3)) (p - k) |0 chevron.r = k^i a^dagger (k) |0 chevron.r, \
   Q^i b^dagger (q) |0 chevron.r & = integral (dd(3, p))/(2 pi)^3 p^i (a^dagger (p) a(p) + b^dagger (p) b(p)) b^dagger (q) |0 chevron.r \
-  & = integral (dd(3, p))/(2 pi)^3 p^i (b^dagger (q) a^dagger (p) a(p) + b^dagger (p) (b^dagger (q) b(q) + (2 pi)^3 delta^((3)) (p - q))) |0 chevron.r \
+  & = integral (dd(3, p))/(2 pi)^3 p^i (b^dagger (q) a^dagger (p) a(p) + b^dagger (p) (b^dagger (q) b(p) + (2 pi)^3 delta^((3)) (p - q))) |0 chevron.r \
   & = integral (dd(3, p))/(2 pi)^3 p^i b^dagger (p) (2 pi)^3 delta^((3)) (p - q) |0 chevron.r = q^i b^dagger (q) |0 chevron.r,
 $
 where we used that the annihilation operators $a(p)$, $b(p)$ destroy the vacuum
@@ -99,7 +99,7 @@ which yields immediately that $pi_0 = F_(00) = 0$ since $F_(mu nu)$ is antisymme
 
 #task(label: "b")[Sketch briefly how the problem can be overcome.]
 
-The above problem only cropped up because of the particular gauge we were working in. We can make use of the redundancy in the physical description of gauge fields such as $A^mu$ by imposing a gauge fix such as Lorenz gauge which alters the Lagrangian and therefore the canonically conjugate momentum density without changing the equations of motions, i.e. the physical behaviour of the fields.
+The problem stems from the gauge redundancy of $A^mu$: not all four components are physical degrees of freedom, and $A^0$ has no conjugate momentum. It can be overcome by fixing the gauge, e.g. by adding the Lorenz gauge-fixing term $-1/(2 xi) (partial_mu A^mu)^2$ to the Lagrangian. This yields $pi_0 = -1/xi partial_mu A^mu != 0$, so the canonical commutation relations can be imposed on all four components. The unphysical (timelike and longitudinal) photon states this introduces are removed from the physical Hilbert space by the Gupta-Bleuler condition $partial_mu A^(mu, +) |"phys" chevron.r = 0$, leaving all physical observables unchanged.
 
 = Problem 3 (12 points)
 
@@ -132,7 +132,7 @@ $
 $
 where we used that
 $ e^((S^(mu nu))^dagger) gamma^0 = sum_(n = 0)^oo ((S^(mu nu))^(dagger n))/n! gamma^0 attach(=, t: "a)") gamma^0 sum_(n = 0)^oo (S^(mu nu))^n/n! = gamma^0 e^(S^(mu nu)) $
-and that $Lambda^mu_(med nu) = [Lambda^(-1)]^nu_(med mu)$ in the last step.
+and in the last step the chain rule $partial_mu (Psi(Lambda^(-1) x)) = [Lambda^(-1)]^rho_(med mu) (partial_rho Psi)(Lambda^(-1) x)$ together with $Lambda^mu_(med nu) [Lambda^(-1)]^rho_(med mu) = delta^rho_nu$.
 
 #task(label: "c")[Define $Psi_plus.minus = P_plus.minus Psi$ where $P_plus.minus = 1/2 (bb(1)_4 plus.minus gamma^5)$ and $gamma^5 = i gamma^0 gamma^1 gamma^2 gamma^3$. Show that $macron(Psi_plus.minus) = macron(Psi) P_minus.plus$. Rewrite the Lagrangian density (3) in terms of $Psi_+$ and $Psi_-$. Derive the equation of motion for $Psi_+$ and $Psi_-$. _Note:_ You can use identities involving $gamma^5$ without proof.]
 
@@ -153,13 +153,13 @@ $
 $
 where we used in the last step that $macron(Psi)_plus.minus Psi_plus.minus = macron(Psi) P_minus.plus P_plus.minus Psi = 0$ and $macron(Psi)_plus.minus gamma^mu Psi_minus.plus = macron(Psi) P_minus.plus gamma^mu Psi_minus.plus = macron(Psi) gamma^mu P_plus.minus P_minus.plus Psi = 0$ because $P_plus.minus P_minus.plus = 1/4 (bb(1)_4 - (gamma^5)^2) = 1/4 (bb(1)_4 - bb(1)_4) = 0$. Applying the Euler-Lagrange equation $partial_mu (partial cal(L))/(partial(partial_mu Psi)) = (partial cal(L))/(partial Psi)$ to the new Lagrangian gives
 $
-  Psi_+ & : quad partial_mu macron(Psi)_+ i gamma^mu + m macron(Psi)_- = 0, & quad macron(Psi)_+ & : quad m Psi_- = 0, \
-  Psi_- & : quad partial_mu macron(Psi)_- i gamma^mu + m macron(Psi)_+ = 0, & quad macron(Psi)_- & : quad m Psi_+ = 0.
+  Psi_+ & : quad partial_mu macron(Psi)_+ i gamma^mu + m macron(Psi)_- = 0, & quad macron(Psi)_+ & : quad i gamma^mu partial_mu Psi_+ - m Psi_- = 0, \
+  Psi_- & : quad partial_mu macron(Psi)_- i gamma^mu + m macron(Psi)_+ = 0, & quad macron(Psi)_- & : quad i gamma^mu partial_mu Psi_- - m Psi_+ = 0.
 $
 
 #task(label: "d")[The spinors $Psi_+$ and $Psi_-$ correspond to two-component Weyl spinors. What are the properties of a particle which can be represented by a single Weyl spinor?]
 
-For a particle to be described by a single Weyl spinor, the above equations of motion would have to be decoupled. We can see that this is only the case for $m = 0$.
+For a particle to be described by a single Weyl spinor, the above equations of motion would have to be decoupled. We can see that this is only the case for $m = 0$. Such a particle is massless and has definite chirality, which for a massless particle coincides with its helicity $plus.minus 1/2$.
 
 = Problem 4 (11 points)
 
@@ -173,16 +173,32 @@ For a particle to be described by a single Weyl spinor, the above equations of m
 To compute the amplitude for a scattering process with $n$ ingoing momenta $p_1, dots, p_n$ and $r$ outgoing momenta $q_1, dots, q_r$ in this theory, we perform the following:
 - Draw all relevant fully connected amputated diagrams with $(n + r)$ external points to given order in $lambda$.
 - Assign ingoing momenta labels $p_k$, $k in {1, dots, n}$ and outgoing momenta labels $q_l$, $l in {1, dots, r}$ and label momenta of internal lines with $k_j$.
-- Each three-particle vertex gets a factor $-i lambda$, each four-particle vertex $-i lambda^2$.
+- Each three-particle vertex gets a factor $-i lambda$, each four-particle vertex $-2 i lambda^2$ (the factor 2 from the two identical $sigma$ legs).
 - To each internal line, we associate a propagator
-  $ i/(k_j^2 - m_phi^2) & quad "if it is a" phi "field", \
-  i/(k_j^2 - m_sigma^2) & quad "if it is a" sigma "field". $
+  $ i/(k_j^2 - M^2) & quad "if it is a" phi "field", \
+  i/(k_j^2 - m^2) & quad "if it is a" sigma "field". $
 - We then integrate over all undetermined internal momenta $product_j integral (dd(4, k_j))/(2 pi)^4$.
 - Sum up all diagrams divided by their symmetry factors and multiply by $sqrt(Z)^(n + r)$ to given order in $lambda$.
 
 #task(label: "b")[Draw all Feynman graphs to order $lambda^2$ for the non-trivial scattering of $phi^dagger phi -> sigma sigma$.]
 
-#align(center, feyn({
+#let exchange(crossed: false) = feyn({
+  let (a, b) = ((1.2, 1.6), (1.2, 0.2))
+  scalar((0, 1.8), a)
+  scalar((0, 0), b)
+  scalar(a, b)
+  draw.line(a, if crossed { (2.4, 0) } else { (2.4, 1.8) })
+  draw.line(b, if crossed { (2.4, 1.8) } else { (2.4, 0) })
+  vtx(a)
+  vtx(b)
+  lbl((-0.1, 1.8), $phi^dagger$, anchor: "east")
+  lbl((-0.1, 0), $phi$, anchor: "east")
+  lbl((2.5, 1.8), $q_1$, anchor: "west")
+  lbl((2.5, 0), $q_2$, anchor: "west")
+  lbl((1.0, 0.9), $phi$, anchor: "east")
+})
+
+#align(center, stack(dir: ltr, spacing: 1.2cm, feyn({
   let c = (1.2, 0.9)
   for p in ((0, 1.8), (0, 0)) { scalar(p, c) }
   for p in ((2.4, 1.8), (2.4, 0)) { draw.line(p, c) }
@@ -200,13 +216,13 @@ To compute the amplitude for a scattering process with $n$ ingoing momenta $p_1,
   lbl((2.1, 1.2), $q_1$, anchor: "north-west")
   lbl((1.9, 0), $q_2$, anchor: "north-east")
   lbl((1.2, 1.05), $lambda^2$, anchor: "south")
-}))
+}), exchange(), exchange(crossed: true)))
 
 #task(label: "c")[Now write down the matrix element $i cal(M)$ for the process $phi^dagger phi -> sigma sigma$ to order $lambda^2$. What is the matrix element $i cal(M)$ for the process $phi phi -> sigma sigma$ to order $lambda^2$?]
 
-$ i cal(M) = -i lambda^2 $
+$ i cal(M) = -2 i lambda^2 + (-i lambda)^2 (i/((p_1 - q_1)^2 - M^2) + i/((p_1 - q_2)^2 - M^2)) = -i lambda^2 (2 + 1/((p_1 - q_1)^2 - M^2) + 1/((p_1 - q_2)^2 - M^2)). $
 
-At order $lambda^2$, the given Lagrangian does not allow for the process $phi phi -> sigma sigma$ to take place. Its scattering amplitude $i cal(M)$ is zero.
+The process $phi phi -> sigma sigma$ violates the conservation of the $U(1)$ charge (both interaction terms contain $phi^dagger phi$), so its amplitude vanishes, $i cal(M) = 0$, at order $lambda^2$ and indeed to all orders.
 
 #task(label: "d")[Draw Feynman diagrams to and including order $lambda^4$ which contribute to the 1PI self energy (i.e. the 1PI contributions to the propagator) of the field $sigma$.]
 
@@ -226,7 +242,19 @@ At order $lambda^2$, the given Lagrangian does not allow for the process $phi ph
   lbl((2.25, 0.15), l, anchor: "south-west")
 })
 
-$ #bubble() quad + quad #bubble(quartic: true) $
+#let seagull = feyn({
+  draw.line((0, 0), (2.4, 0))
+  draw.circle((1.2, 0.6), radius: 0.6, stroke: (dash: "dashed", thickness: 0.7pt))
+  vtx((1.2, 0))
+  lbl((-0.1, 0), $sigma$, anchor: "east")
+  lbl((2.5, 0), $sigma$, anchor: "west")
+  lbl((1.2, 1.3), $phi$, anchor: "south")
+  lbl((1.2, -0.1), $lambda^2$, anchor: "north")
+})
+
+$ #bubble() quad + quad #seagull quad + quad #bubble(quartic: true) quad + quad dots $
+
+The first two diagrams are the complete one-loop contributions (both of order $lambda^2$). At order $lambda^4$ there are a number of two-loop diagrams, the third being one example; the others are obtained by inserting a further cubic or quartic vertex into the $phi$ loops of the first two diagrams.
 
 = Problem 5 (9 points)
 
@@ -241,7 +269,7 @@ Only the physical mass $m$ is an observable; it is the rest mass of an electron 
 
 This fact allows us to absorb the divergent quantity $delta m := m - m_0$ completely into $m_0$, making the latter a function of the measured physical mass and the cutoff $Lambda$, $m_0 = m_0 (m, Lambda)$.
 
-To order $alpha$, the electron self-energy $Sigma(cancel(p))$ is given by $Sigma(cancel(p)) = m - m_0$ and the wavefunction renormalization $Z_2$ is defined as
+The physical mass is the pole of the full propagator $i/(cancel(p) - m_0 - Sigma(cancel(p)))$, i.e. $m - m_0 = Sigma(cancel(p) = m)$, where $Sigma$ is the 1PI electron self-energy (to order $alpha$ the one-loop photon exchange diagram), and the wavefunction renormalization $Z_2$ is defined as
 $ Z_2 := lr((1 - (dif Sigma(cancel(p)))/(dif cancel(p)))^(-1) |)_(cancel(p) = m). $
 
 #task(label: "b")[Draw all Feynman diagrams in QED which contribute to vertex renormalization at order $e_0^4$ exactly.]

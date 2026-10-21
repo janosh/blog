@@ -43,20 +43,20 @@ $ "need to study irred. repres." quad attach(<-->, t: 1:1) quad "conjugacy class
       import draw: *
       set-style(stroke: 0.6pt)
       let s = 0.5
-      for (c, h) in (4, 2, 1, 1).enumerate() {
+      for (c, h) in (4, 2, 1).enumerate() {
         for r in range(h) { rect((c * s, -r * s), ((c + 1) * s, -(r + 1) * s)) }
       }
       // column heights lambda_i as square brackets: lambda_1 on the left, lambda_3 and lambda_2 right of the top row
       let t = 0.1
       line((-0.15 + t, 0), (-0.15, 0), (-0.15, -4 * s), (-0.15 + t, -4 * s))
       content((-0.42, -2 * s), $lambda_1$)
-      line((4 * s + 0.15 - t, 0), (4 * s + 0.15, 0), (4 * s + 0.15, -s), (4 * s + 0.15 - t, -s))
-      content((4 * s + 0.45, -0.5 * s), $lambda_3$)
-      line((4 * s + 0.9 - t, 0), (4 * s + 0.9, 0), (4 * s + 0.9, -2 * s), (4 * s + 0.9 - t, -2 * s))
-      content((4 * s + 1.2, -s), $lambda_2$)
+      line((3 * s + 0.15 - t, 0), (3 * s + 0.15, 0), (3 * s + 0.15, -s), (3 * s + 0.15 - t, -s))
+      content((3 * s + 0.45, -0.5 * s), $lambda_3$)
+      line((3 * s + 0.9 - t, 0), (3 * s + 0.9, 0), (3 * s + 0.9, -2 * s), (3 * s + 0.9 - t, -2 * s))
+      content((3 * s + 1.2, -s), $lambda_2$)
       // brace under the diagram
-      decorations.flat-brace((4 * s, -4 * s - 0.2), (0, -4 * s - 0.2), amplitude: 0.15)
-      content((2 * s, -4 * s - 0.75), align(center, text(size: 9pt)[$n$ boxes in columns \ of height $lambda_i$]))
+      decorations.flat-brace((3 * s, -4 * s - 0.2), (0, -4 * s - 0.2), amplitude: 0.15)
+      content((1.5 * s, -4 * s - 0.75), align(center, text(size: 9pt)[$n$ boxes in columns \ of height $lambda_i$]))
     }),
     [],
     $ (k_1, k_2, dots) \ (2, 1, 1, 0, dots) $,
@@ -107,7 +107,7 @@ _Example:_
 $
   "i)" & quad T = #young(((1, 2, 3),)) & quad c_T & = a_T = sum_(sigma in S_3) sigma = 3! thin pi_0 quad ("projector on trivial repr."), \
   "ii)" & quad T = #young(((1,), (2,), (3,))) & quad c_T & = b_T = sum_(sigma in S_3) "sgn"(sigma) dot sigma = 3! thin pi_1 quad ("projector on sign repr."), \
-  "iii)" & quad T = #young(((1, 3), (2,))) & quad c_T & = underbrace((e + (1 3)), a_T) dot (e - (1 2)) = e + (1 3) - (1 2) - (1 3 2) = 3 pi_2.
+  "iii)" & quad T = #young(((1, 3), (2,))) & quad c_T & = underbrace((e + (1 3)), a_T) dot (e - (1 2)) = e + (1 3) - (1 2) - (1 2 3) = 3 pi_2.
 $
 
 ④ With $A := CC[S_n]$,
@@ -205,7 +205,7 @@ Same for #young((4, 1), s: 0.25) $dots.c$ .
   $
     chi_lambda (C_k) = [P_((k_1 dots k_n)) (x_1 dots x_n)]_(x_1^(l_1) dots x_n^(l_n)), quad lambda = (lambda_1, dots, lambda_n), quad k = (k_1, dots, k_n),
   $
-  i.e. the coefficient of $x_1^(l_1) dots x_n^(l_n)$ in $P$, with $l_i = lambda_i + n - i$.
+  i.e. the coefficient of $x_1^(l_1) dots x_n^(l_n)$ in $P$, with $l_i = lambda_i + n - i$. Here $lambda_i$ are the row lengths of the Young diagram labelling the irreducible representation (a single row being the trivial representation).
 
 *Example:* $G = S_3$, class $(dot dot)(dot)$:
 $ P_((1, 1, 0)) (x_1, x_2, x_3) = (x_1 - x_2)(x_1 - x_3)(x_2 - x_3)(x_1 + x_2 + x_3)(x_1^2 + x_2^2 + x_3^2), $
@@ -214,8 +214,8 @@ $ P_((1, 1, 0)) (x_1, x_2, x_3) = (x_1 - x_2)(x_1 - x_3)(x_2 - x_3)(x_1 + x_2 + 
   stroke: none,
   align: left + horizon,
   inset: (x: 8pt, y: 5pt),
-  young((1, 1, 1), s: 0.2), $lambda = (3, 0, 0)$, $l = (5, 1, 0)$, [$~>$ coeff. of $x_1^5 x_2$ in $P$], $chi_lambda (C_k) = 1$,
-  young((3,), s: 0.2), $lambda = (1, 1, 1)$, $l = (3, 2, 1)$, [$~>$ coeff. of $x_1^3 x_2^2 x_3$], $chi_lambda (C_k) = -1$,
+  young((3,), s: 0.2), $lambda = (3, 0, 0)$, $l = (5, 1, 0)$, [$~>$ coeff. of $x_1^5 x_2$ in $P$], $chi_lambda (C_k) = 1$,
+  young((1, 1, 1), s: 0.2), $lambda = (1, 1, 1)$, $l = (3, 2, 1)$, [$~>$ coeff. of $x_1^3 x_2^2 x_3$], $chi_lambda (C_k) = -1$,
   young((2, 1), s: 0.2), $lambda = (2, 1, 0)$, $l = (4, 2, 0)$, [$~>$ coeff. of $x_1^4 x_2^2$], $chi_lambda (C_k) = 0$,
 ))
 $~>$ $C_2$-column of the character table of $D_3 tilde.equiv S_3$.

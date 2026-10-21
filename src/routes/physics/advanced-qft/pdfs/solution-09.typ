@@ -313,8 +313,9 @@ $
 $
 to rewrite the integral as
 $
-  floop(labels: #true) & = -4 g^2 integral_0^1 dd(x) integral (dd(d, l))/(2 pi)^d (k^2 + k p - m_psi^2)/(l^2 + Delta)^2 attach(=, t: "How?!") -4 g^2 integral_0^1 dd(x) integral (dd(d, l))/(2 pi)^d (l^2 - x(1 - x) p^2 + m_psi^2)/(l^2 + Delta)^2 \
-  & = -4 g^2 integral_0^1 dd(x) (-i)/(4 pi)^(d/2) ((d/2 Gamma(1 - d/2))/(-Delta)^(1 - d/2) + (Delta Gamma(2 - d/2))/(-Delta)^(2 - d/2)) = (4 i g^2 (d - 1))/(4 pi)^(d/2) integral_0^1 dd(x) Gamma(1 - d/2)/(-Delta)^(1 - d/2) \
+  floop(labels: #true) & = -4 g^2 integral_0^1 dd(x) integral (dd(d, l))/(2 pi)^d (k^2 + k p - m_psi^2)/(l^2 + Delta)^2 attach(=, t: k = l - x p) -4 g^2 integral_0^1 dd(x) integral (dd(d, l))/(2 pi)^d (l^2 - x(1 - x) p^2 - m_psi^2)/(l^2 + Delta)^2 \
+  & = -4 g^2 integral_0^1 dd(x) (-i)/(4 pi)^(d/2) ((d/2 Gamma(1 - d/2))/(-Delta)^(1 - d/2) + ((Delta + 2 m_psi^2) Gamma(2 - d/2))/(-Delta)^(2 - d/2)) \
+  & = (4 i g^2)/(4 pi)^(d/2) integral_0^1 dd(x) ((d - 1) Gamma(1 - d/2)/(-Delta)^(1 - d/2) + (2 m_psi^2 Gamma(2 - d/2))/(-Delta)^(2 - d/2)) \
   & = (4 i g^2 (p^2 - 2 m_psi^2))/(4 pi)^2 1/epsilon.
 $
 Since
@@ -368,8 +369,8 @@ _Note:_ We will also encounter momentum-dependent divergencies. These always nee
 
 We now tread on untarnished ground by calculating all two-loop corrections.
 $
-  circled(6) & = (-i lambda)^3/4 [integral (dd(d, k))/(2 pi)^d i/k^2 i/(p_s - k)^2]^2 = (-i lambda)^3 V^2 (p^2) = (-i lambda)^3 (-1/(2 (4 pi)^2) (2/epsilon - gamma + ln(4 pi) - ln(s)))^2 \
-  & approx (-i lambda)^3 [-1/(4 pi)^2 (1/epsilon - 1/2 ln(s))]^2 = -(i lambda^3)/(4 pi)^4 (1/epsilon^2 - 1/epsilon ln(s) + 1/4 ln^2(s)),
+  circled(6) & = (-i lambda)^3/4 [integral (dd(d, k))/(2 pi)^d i/k^2 i/(p_s - k)^2]^2 = (-i lambda)^3 (i V(s))^2 = -i lambda^3 (-Gamma(epsilon/2)/(2 (4 pi)^2) 1/s^(epsilon/2))^2 \
+  & approx -i lambda^3 [-1/(4 pi)^2 (1/epsilon - 1/2 ln(s) + epsilon/8 ln^2(s))]^2 = -(i lambda^3)/(4 pi)^4 (1/epsilon^2 - 1/epsilon ln(s) + 1/2 ln^2(s)),
 $
 $
   circled(7) = circled(8) & = (-i lambda)^3/2 integral (dd(d, k))/(2 pi)^d integral (dd(d, q))/(2 pi)^d i/k^2 i/(p_s + k)^2 i/q^2 i/(k + p_3 + q)^2 \
@@ -386,9 +387,10 @@ $
   & = -(i lambda^3)/(4 pi)^4 (1/epsilon^2 - 1/epsilon ln(s) + 1/2 ln^2(s) - underbrace(cancel(gamma/epsilon), << ln(s)) + cal(O)(epsilon)),
 $
 $
-  circled(9) = circled(10) & = (-i lambda)(-i delta_lambda^1) i V(p^2), quad "where" V(p^2) = -Gamma(epsilon/2)/(2 (4 pi)^2) 1/(p^2)^(epsilon/2) quad "and" quad delta_lambda^1 = (3 lambda)/(4 pi)^2 1/epsilon \
-  & = (3 lambda^2)/(4 pi)^2 (1/epsilon^2 - 1/(2 epsilon) + 1/8 ln^2(s)),
+  circled(9) = circled(10) & = (-i lambda)(-i delta_lambda^1) i V(p^2), quad "where" V(p^2) = -Gamma(epsilon/2)/(2 (4 pi)^2) 1/(p^2)^(epsilon/2) quad "and" quad delta_lambda^1 = (3 lambda^2)/(4 pi)^2 1/epsilon \
+  & = (3 i lambda^3)/(4 pi)^4 (1/epsilon^2 - 1/(2 epsilon) ln(s) + 1/8 ln^2(s)),
 $
 $ sum_("sum over" \ "2-loop diagrams") (s"-channel") = (i lambda^3)/(4 pi)^4 (3/epsilon^2 - 3/4 ln^2(s)). $
 
 #align(center, box(stroke: 0.6pt, inset: 8pt, $ blob4 = -i lambda - (i lambda^2)/(4 pi)^2 ln(s) - (3 i lambda^3)/(2 (4 pi)^4) ln^2(s). $))
+The $ln^2(s)$ coefficient $3/2$ falls short of the $5/2$ in eq. (3), so the two-loop diagrams evaluated above (only those in the $s$- and $u$-channel) do not capture all $ln^2(s)$ contributions.

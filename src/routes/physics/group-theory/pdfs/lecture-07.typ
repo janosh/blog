@@ -33,7 +33,7 @@ for some smooth _regular_ function $f: RR^n -> RR^k$ #aside[(regular: the deriva
 (i) $(RR, +)$ manifold:
 $ cases(reverse: #true, m(x, y) = x + y, (x)^(-1) = -x) quad "smooth maps" $
 
-(ii) $"U"(1) = {z in CC | |z|^2 = 1} = {e^(i phi) | phi in RR} tilde.equiv S^1$ (unit sphere):
+(ii) $"U"(1) = {z in CC | |z|^2 = 1} = {e^(i phi) | phi in RR} tilde.equiv S^1$ (unit circle):
 $ cases(reverse: #true, m(z, w) = z w, (z)^(-1) = overline(z)) quad "smooth maps" $
 
 (iii) _(special) unitary group_
@@ -201,7 +201,7 @@ Basis of $T_e G$: $E_((i,j))$, $i < j$, the matrix with entry $+1$ in row $i$, c
 $ E_((i,j)) = mat(0, , , dots.c, ; , dots.down, , 1, ; , , dots.down, , ; dots.v, -1, , dots.down, ; , , , , 0) #aside[$arrow.l$ row $i$ holds the $1$ (column $j$), row $j$ the $-1$ (column $i$)], $
 $ [E_((i,j)), E_((r,s))] = delta_(j r) E_((i,s)) + delta_(i s) E_((j,r)) - delta_(i r) E_((j,s)) - delta_(j s) E_((i,r)). $
 $n = 3$: with the antisymmetric tensor $epsilon_(a b c)$,
-$ E_a = epsilon_(a b c) E_((b,c)), quad [E_a, E_b] = epsilon_(a b c) E_c. $
+$ E_a = -1/2 epsilon_(a b c) E_((b,c)), quad [E_a, E_b] = epsilon_(a b c) E_c. $
 Often, Lie algebras are given in terms of a basis.
 
 *Def:* A _homomorphism of Lie algebras_ is a linear map $phi: V -> W$, s.t.

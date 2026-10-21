@@ -109,7 +109,7 @@
 
 / $D_1$: no scattering or trivial scattering
 / $D_2$: real scattering (fully connected, amputated diagram, hence needs to be computed explicitly, is not taken care of implicitly)
-/ $D_3$: charge renormalization
+/ $D_3$: electron self-energy on an external leg (mass and field-strength renormalization)
 / $D_4$: vacuum renormalization
 / $D_5$: real scattering (another fully connected, amputated diagram)
 
@@ -219,15 +219,15 @@ $
 The fermionic fields $Psi$ and $Psi^dagger$ transform in the Dirac spinor representation of $"Spin"(1,3)$.
 
 We know that as a representation of the Lorentz algebra $frak(s o)(1,3)$
-- the scalar fields $phi$ and $phi^dagger$ transform in what is called the trivial, scalar or fundamental representation
+- the scalar fields $phi$ and $phi^dagger$ transform in what is called the trivial or scalar representation
   $ R_f (Lambda) = bb(1) quad forall Lambda, $
 - the vector field $A^mu$ transforms in the vector representation defined as
   $ [R_v (Lambda)]^mu_(med nu) = Lambda^mu_(med nu) quad forall Lambda. $
 
-We can now use that there exists a group homomorphism $pi$ between the Lorentz algebra $frak(s o)(1,3)$ and $"Spin"(1,3)$. Thus, $phi$ and $A_mu$ as representations of $"Spin"(1,3)$ transform under the representation obtained by composing their $frak(s o)(1,3)$ representations with the group homomorphism $pi$, i.e.
+We can now use that there exists a group homomorphism $pi: "Spin"(1,3) -> "SO"(1,3)^+$, the double cover of the (proper orthochronous) Lorentz group. Thus, $phi$ and $A_mu$ as representations of $"Spin"(1,3)$ transform under the representation obtained by composing their Lorentz group representations with $pi$, i.e.
 $
-  pi R_f (Lambda) & : "Spin"(1,3) --> frak(s o)(1,3) --> V = RR, \
-  pi [R_v (Lambda)]^mu_(med nu) & : "Spin"(1,3) --> frak(s o)(1,3) --> V = RR^(1,3),
+  R_f compose pi & : "Spin"(1,3) --> "SO"(1,3)^+ --> "GL"(V), quad V = RR, \
+  R_v compose pi & : "Spin"(1,3) --> "SO"(1,3)^+ --> "GL"(V), quad V = RR^(1,3),
 $
 where $V$ denotes each representation's representation space.
 

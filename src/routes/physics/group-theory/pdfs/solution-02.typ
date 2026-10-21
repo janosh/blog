@@ -78,7 +78,7 @@ In the special case of $V_1 tilde.equiv V_2$, it further yields $f = lambda "id"
 
 A representation $rho: G -> "GL"(V)$ of a group $G$ is called _fully decomposable_ if it can be decomposed into a direct sum of irreducible representations, $rho = rho_1 plus.o dots.c plus.o rho_n$, where $rho_i$, $i in {1, dots, n}$ each irreducible. The above claim follows from this argument:
 
-Let $rho: G -> U(V)$ be a reducible complex (also called unitary) representation (if it were irreducible, it would be fully decomposable by definition).
+Let $rho: G -> "GL"(V)$ be a reducible complex representation (if it were irreducible, it would be fully decomposable by definition). Averaging any Hermitian inner product over the finite group, $chevron.l v, w chevron.r_G := sum_(g in G) chevron.l rho(g) v, rho(g) w chevron.r$, gives an inner product with respect to which $rho$ is unitary, $rho: G -> U(V)$.
 $ ==> exists W subset V "invariant subspace". $
 We can define $W^perp = {v in V | chevron.l v, w chevron.r = 0 quad forall w in W}$. Then, since
 $ forall g in G, forall w in W, forall v in W^perp: quad 0 = chevron.l v, w chevron.r over(=, W "invariant subspace") chevron.l v, rho(g) w chevron.r over(=, rho "unitary repr.") chevron.l rho(g^(-1)) v, w chevron.r, $
@@ -98,8 +98,8 @@ $ dim(rho_i) = 1 quad forall rho_i: G -> "GL"(V_i) "irreducible", i in {1, dots,
 
 "$==>$": Assume all irreducible representations have $d_i = dim(rho_i) = 1$. Then we have
 $ |G| attach(=, t: !) sum_(i = 1)^n d_i^2 = sum_(i = 1)^n 1 = n, quad "with" n: "number of irred. repr." $
-We also have that
-$ sum_(i = 1)^n d_i attach(=, t: !) "number of conjugacy classes of" G = n. $
+We also have that the number of irreducible representations equals the number of conjugacy classes of $G$, i.e.
+$ n attach(=, t: !) "number of conjugacy classes of" G. $
 Therefore, 'number of conjugacy classes' $= n = |G|$, i.e. every element of $G$ forms its own conjugacy class.
 $ ==> h g h^(-1) = g quad forall g, h in G quad ==> quad h g = g h quad forall g, h in G quad <==> quad G "is abelian". $
 
@@ -259,7 +259,7 @@ $
 
 The orthogonality relation of two characters is given by
 $ sum_a overline(chi_i (C_a)) chi_j (C_a) (|C_a|)/(|G|) = delta_(i j), quad "where" overline(chi(g)) = chi(g^(-1)). $
-However, using in this example the orthogonality of rows would yield the equally correct but undesired solution $alpha = -3 plus.minus sqrt(3)$, $beta = -1 plus.minus sqrt(3)$. So we apply the orthogonality relation for columns given by
+The orthogonality of rows works just as well here, but we apply the orthogonality relation for columns given by
 $ sum_i overline(chi_i (C_a)) chi_i (C_b) = (|G|)/(|C_a|) delta_(a b). $
 Multiplying the first and second (or third), and the second and third columns, we obtain the constraints
 $
@@ -284,11 +284,11 @@ we may write a new character table for $chi_(rho_2 times.o rho_2)$, $chi_(S^2 rh
   table.hline(y: 1, stroke: 0.6pt),
   table.vline(x: 1, stroke: 0.6pt),
   $D_5$, $C_0$, $C_1$, $C_2$, $C_3$,
-  $chi_(rho_2 times.o rho_2)$, $4$, $-1$, $-1$, $0$,
+  $chi_(rho_2 times.o rho_2)$, $4$, $alpha^2 = 1 - alpha$, $beta^2 = 1 - beta$, $0$,
   $chi_(S^2 rho_2)$, $3$, $-alpha$, $-beta$, $1$,
   $chi_(Lambda^2 rho_2)$, $1$, $1$, $1$, $-1$,
 ))
-Apparently, $chi_(rho_2 times.o rho_2) = chi_2 + chi_3$. Therefore, $rho_2 times.o rho_2 tilde.equiv rho_2 plus.o rho_3$. Also
+Using $alpha + beta = -1$, i.e. $1 - alpha = 2 + beta$ and $1 - beta = 2 + alpha$, we find $chi_(rho_2 times.o rho_2) = chi_0 + chi_1 + chi_3$. Therefore, $rho_2 times.o rho_2 tilde.equiv rho_0 plus.o rho_1 plus.o rho_3 = S^2 rho_2 plus.o Lambda^2 rho_2$, where
 $
   chi_(S^2 rho_2) & = chi_0 + chi_3 & quad ==> quad S^2 rho_2 & tilde.equiv rho_0 plus.o rho_3, \
   chi_(Lambda^2 rho_2) & = chi_1 & quad ==> quad Lambda^2 rho_2 & tilde.equiv rho_1.

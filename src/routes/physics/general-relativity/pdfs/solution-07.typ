@@ -22,13 +22,10 @@
   solves eq. (1) for a scale-factor-dependent $w(a)$.
 ]
 
-$ dot(rho) = rho_0 exp(-3 integral_1^a dif(ln a') [1 + w(a')]) dif/(dif t) (-3 integral_1^a dif(ln a') [1 + w(a')]), $
-where $dif(ln a') = (dif a')/a' = 1/a' (dif a')/(dif t) dif t = dot(a)'/a' dif t$. Thus
-$
-  dot(rho) & = rho (-3 integral_1^a dd(t) dif/(dif t) dot(a)'/a' [1 + w(a')]) = -3 rho (dot(a)/a [1 + w(a)] - [1 + underbrace(w(1), -1)]) \
-  & = -3 dot(a)/a rho [1 + w(a)],
-$
-where $w(1) = w(a(t_0)) = -1$ as stated above. Therefore,
+$ dot(rho) = rho_0 exp(-3 integral_1^a dif(ln a') [1 + w(a')]) dif/(dif t) (-3 integral_1^a (dif a')/a' [1 + w(a')]). $
+Since the lower integration limit is constant, the fundamental theorem of calculus and the chain rule give
+$ dot(rho) = rho (-3 [1 + w(a)]/a (dif a)/(dif t)) = -3 dot(a)/a rho [1 + w(a)]. $
+Therefore,
 $ dot(rho) + 3 dot(a)/a rho (1 + w(a)) = [-3 dot(a)/a (1 + w(a)) + 3 dot(a)/a (1 + w(a))] rho = 0. $
 
 #task(label: "b")[
@@ -75,7 +72,7 @@ $ R_(mu nu) = -(8 pi G)/c^4 (T_(mu nu) - T/2 g_(mu nu)) + Lambda g_(mu nu). $
 
 #task(label: "a")[We cannot distinguish between cosmic and Doppler redshift. How do we know that most receding objects follow the cosmic flow and are not actively moving away?]
 
-Good question.
+Through Hubble's law: redshifts grow linearly with independently measured distances (e.g. from Cepheids or type Ia supernovae) in all directions on the sky. Peculiar velocities, on the other hand, are randomly oriented and only of order a few hundred km/s, so beyond a few tens of Mpc they make up only a small scatter around the cosmic flow.
 
 = Problem 4 (Extra: CPT symmetry) [5 points]
 

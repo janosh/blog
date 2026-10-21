@@ -55,19 +55,19 @@ below: 4pt,
   - $k = 0 <-> $ no curvature $<->$ flat universe $<-> rho = rho_"crit" <-> Omega = 1$
   - $k = 1 <-> $ positive curvature $<->$ closed universe $<-> rho > rho_"crit" <-> Omega > 1$
 
-  For $k = plus.minus 1 ->$ new radial coordinate $r = sin(h) chi$, $(dif r)/(dif chi) = sqrt(1 minus.plus r^2)$; $rho_"crit" = (3 H^2)/(8 pi G)$; \
+  For $k = plus.minus 1 ->$ new radial coordinate $r = sin chi$ ($k = 1$) or $r = sinh chi$ ($k = -1$), $(dif r)/(dif chi) = sqrt(1 minus.plus r^2)$; $rho_"crit" = (3 H^2)/(8 pi G)$; \
   $Gamma^1_11 = (k r)/(1 - k r^2)$, $Gamma^0_11 = (a dot(a))/(c(1 - k r^2))$, $Gamma^0_22 = (a dot(a) r^2)/c$, $Gamma^0_33 = (a dot(a) r^2)/c sin^2 theta$, $Gamma^1_01 = Gamma^1_10 = Gamma^2_02 = Gamma^2_20 = Gamma^3_30 = Gamma^3_03 = dot(a)/(c a)$, $Gamma^1_22 = -r(1 - k r^2)$, $Gamma^1_33 = Gamma^1_22 sin^2 theta$, $Gamma^2_33 = -sin theta cos theta$, $Gamma^2_12 = Gamma^2_21 = Gamma^3_13 = Gamma^3_31 = 1/r$, $Gamma^3_32 = cot theta$; \
-  $R_00 = 3 dot.double(a)/(c^2 a)$, $R_11 = -1/c^2 (a dot.double(a) + 2 dot(a)^2 + 2 c^2 k)/(1 - k r^2)$, $R_22 = -r^2/c^2 (a dot.double(a) + 2 dot(a)^2 + 2 c^2 k)$, $R_33 = R_22 sin^2 theta$, $R = 6/(c^2 a^2) (a dot.double(a) + dot(a)^2 + c^2 k)$]
+  $R_00 = -3 dot.double(a)/(c^2 a)$, $R_11 = 1/c^2 (a dot.double(a) + 2 dot(a)^2 + 2 c^2 k)/(1 - k r^2)$, $R_22 = r^2/c^2 (a dot.double(a) + 2 dot(a)^2 + 2 c^2 k)$, $R_33 = R_22 sin^2 theta$, $R = -6/(c^2 a^2) (a dot.double(a) + dot(a)^2 + c^2 k)$]
 
 #entry[Friedmann eqs.:][$H^2 = dot(a)^2/a^2 = 8/3 pi G rho + c^2/3 Lambda - c^2/a^2 k$, $dot.double(a)/a = -(4 pi G)/3 (rho + 3/c^2 p) + c^2/3 Lambda$; eq. of state $w = p\/rho c^2$]
 
 #entry[Schwarzschild:][$dif s^2 = -(1 - (2 G M)/r) dif t^2 + (dif r^2)/(1 - (2 G M)/r) + r^2 dif Omega^2$, contains two symmetry assumptions: sphericity & static; asymptotically flat for $r -> oo$ or $M -> 0$; $g_(t t)$ and $g_(r r)$ switch sign at $r = r_s = (2 G M)/c^2$ $=>$ light cones flip and are undefined at $r_s$; \
   $Gamma^1_00 = (G M)/r^3 (r - 2 G M)$, $Gamma^1_11 = (-G M)/(r(r - 2 G M)) = -Gamma^0_01$, $Gamma^2_12 = Gamma^2_21 = Gamma^3_13 = Gamma^3_31 = 1/r$, $Gamma^1_22 = -r(1 - (2 G M)/r)$, $Gamma^1_33 = Gamma^1_22 sin^2 theta$, $Gamma^2_33 = -sin theta cos theta$, $Gamma^3_23 = cot theta$; \
-  $R^(mu nu rho sigma) R_(mu nu rho sigma) = (3 r_s^2)/r^6 = R -->$ curvature finite except at $r = 0$; in Kruskal coord. $(u, v, theta, phi)$: $dif s^2 = (4 r_s^3)/r e^(-r/(2 G M)) (dif v^2 - dif u^2) + r^2 dif Omega^2$]
+  $R^(mu nu rho sigma) R_(mu nu rho sigma) = (12 r_s^2)/r^6$ (while $R = 0$) $-->$ curvature finite except at $r = 0$; in Kruskal coord. $(u, v, theta, phi)$: $dif s^2 = (4 r_s^3)/r e^(-r/(2 G M)) (dif v^2 - dif u^2) + r^2 dif Omega^2$]
 
 #entry[Linearized gravity:][$square overline(h)^(mu nu) = -(16 pi G)/c^4 T^(mu nu)$, gauge: $partial_nu overline(h)^(mu nu) = 0$, $overline(h)^(mu nu) = h^(mu nu) - h/2 eta^(mu nu)$ (harmonic gauge condition $partial_mu overline(h)^mu_nu = 0$); in vacuum: $square overline(h)^(mu nu) = 0$ solved by plane wave $overline(h)^(mu nu) = A^(mu nu) e^(plus.minus i k_sigma x^sigma)$ with $k^2 = 0$; traceless transverse gauge fixes all gauge freedom, leaves 2 physical d.o.f., $overline(h)^"TT"_(mu nu) = h^"TT"_(mu nu)$, $A^(mu nu)_"TT" = mat(0, 0, 0, 0; 0, a, b, 0; 0, b, -a, 0; 0, 0, 0, 0)$]
 
-#entry[Lie derivative][of $V$ w.r.t. vector field $a$: $cal(L)_a V^mu = -a^nu partial^mu V_nu + V^nu partial_nu a^mu$, $cal(L)_a V_mu = a^nu partial_nu V_mu + V_nu partial_mu a^nu$; $cal(L)_a g_(mu nu) = nabla_nu a_mu + nabla_mu a_nu$ for metric compatible connection; if $cal(L)_xi g_(mu nu) = 0$, then $xi$ is Killing vector field]
+#entry[Lie derivative][of $V$ w.r.t. vector field $a$: $cal(L)_a V^mu = a^nu partial_nu V^mu - V^nu partial_nu a^mu$, $cal(L)_a V_mu = a^nu partial_nu V_mu + V_nu partial_mu a^nu$; $cal(L)_a g_(mu nu) = nabla_nu a_mu + nabla_mu a_nu$ for metric compatible connection; if $cal(L)_xi g_(mu nu) = 0$, then $xi$ is Killing vector field]
 
 #entry[][Killing vector fields are vector fields on a Riemannian manifold that preserve the metric. They are the infinitesimal generators of isometries which in turn generate symmetries.]
 
@@ -79,7 +79,7 @@ below: 4pt,
 - e.o.m. invariant under $L(q, dot(q), t) --> alpha L(q, dot(q), t) + dif/(dif t) f(q, t)$, this yields symmetries and conservation laws, $(partial L)/(partial q_i) = 0 => dif/(dif t) (partial L)/(partial dot(q)_i) = dif/(dif t) p_i = 0$
 - escape velocity follows from $T + V = m/2 v_"esc"^2 - (G m M)/r = 0 ==> v_"esc" = sqrt((2 G M)/r)$, for $v_"esc" = c$, we get $R_s = (2 G M)/c^2$
 - $eta_(mu nu) = Lambda^rho_mu Lambda^sigma_nu eta_(rho sigma)$ follows from requiring $|x'|^2 = |x|^2$
-- relativistic velocity addition: $w = (u + v)/(1 + (u v)/c^2)$; proper velocity $v = delta/tau = (1/gamma d)/tau = sqrt(1 - v^2/c^2) d/tau$, where e.g. $d/tau = c$ for $d = x$ ly and $tau = x$ years; relativistic Doppler effect: observer moving away with $v$ measures frequency $f' = sqrt((1 - beta)/(1 + beta)) f_0$; two events separated by timelike (spacelike) intervals, i.e. $Delta s^2 > (<) 0$, may have (may not have) cause-effect relationship, $exists$ frame s.t. events at same location (time)
+- relativistic velocity addition: $w = (u + v)/(1 + (u v)/c^2)$; proper velocity $v = s/tau = (1/gamma d)/tau = sqrt(1 - v^2/c^2) d/tau$, where e.g. $d/tau = c$ for $d = x$ ly and $tau = x$ years; relativistic Doppler effect: observer moving away with $v$ measures frequency $f' = sqrt((1 - beta)/(1 + beta)) f_0$; two events separated by timelike (spacelike) intervals, i.e. $Delta s^2 > (<) 0$, may have (may not have) cause-effect relationship, $exists$ frame s.t. events at same location (time)
 - weak field limit: holds for slowly moving particles ($v << c$) and weak gravitational fields $g_(mu nu) = eta_(mu nu) + h_(mu nu)$ with $|h_(mu nu)| << 1$ (that are static, i.e. $partial_0 g_(mu nu) = 0$)
 - Christoffel symbols in spherical coord.: $Gamma^1_22 = -r$, $Gamma^1_33 = -r sin^2 theta$, $Gamma^2_12 = Gamma^2_21 = 1/r$, $Gamma^2_33 = -sin theta cos theta$, $Gamma^3_13 = Gamma^3_31 = 1/r$, $Gamma^3_23 = Gamma^3_32 = cot theta$, all others zero
 - effective potential for orbiting objects $V_"eff" (r) = -(G M)/r + L^2/(2 r^2) - (G M L^2)/(c^2 r^3)$, where last term is a pure GR contribution

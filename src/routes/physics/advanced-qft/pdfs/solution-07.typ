@@ -107,7 +107,7 @@ $
   "i)" #npoint(()) quad D = 4, quad "ii)" #npoint(((0.8, 0),)) quad D = 3, quad "iii)" #npoint(((-0.8, 0), (0.8, 0))) quad D = 2, \
   "iv)" #npoint(((-0.7, 0.55), (-0.7, -0.55), (0.8, 0))) quad D = 1, quad "v)" #npoint(((-0.6, 0.6), (0.6, 0.6), (-0.6, -0.6), (0.6, -0.6))) quad D = 0.
 $
-Since the Lagrangian $cal(L)_(phi^4)$ is invariant under the parity transf. $hat(P)(phi(t, arrow(x))) = -phi(t, -arrow(x))$, all diagrams with an odd number of external lines vanish. Thus, amplitudes ii) and iv) are not actually divergent but rather zero.
+Since the Lagrangian $cal(L)_(phi^4)$ is invariant under the $ZZ_2$ symmetry $phi -> -phi$, all diagrams with an odd number of external lines vanish. Thus, amplitudes ii) and iv) are not actually divergent but rather zero.
 
 We are finally at the point, where we understand, why we are tasked with renormalizing the propagator and the vertex. The vacuum diagram can be trivially absorbed into the vacuum energy density $V_0$, an additional degree of freedom of any Lagrangian, which we did not write down explicitly, since the absolute energy scale is meaningless in a theory without gravity. Thus, propagator and vertex are the only two fundamental divergencies in $lambda phi^4$-theory. All others are due to diagrams containing these two as subdiagrams.
 

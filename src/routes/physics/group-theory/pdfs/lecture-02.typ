@@ -183,7 +183,7 @@ This is an equivalence relation: rest classes
 $ C_g = [g] = {tilde(g) g tilde(g)^(-1) | tilde(g) in G} quad "conjugacy classes" $
 
 *Example:* $D_n$:
-$ C_(R_i) = {R_(i + 2j) | j in ZZ}, quad C_(S_i) = {S_(i + 2j) | j in ZZ} $
+$ C_(R_i) = {R_i, R_(-i)}, quad C_(S_i) = {S_(i + 2j) | j in ZZ} $
 
 *Def:* A subgroup $H subset G$ is _normal_, $H lt.closed G$, if it is self-conjugate, i.e.
 $ g H g^(-1) = H quad forall g in G. $
@@ -208,13 +208,13 @@ $ g H g^(-1) = H quad forall g in G. $
   $ H lt.closed G => phi(H) lt.closed phi(G) subset G', quad phi: G -> G' $
 
 *Quotient group:* If $H lt.closed G$, then $G\/H = {g H | g in G}$ forms a group:
-$ g H g' H = g g' H underbrace(g'^(-1) g', e) H = g g' H dot H = g g' H, $
+$ g H g' H = g g' underbrace((g'^(-1) H g'), H) H = g g' H dot H = g g' H, $
 a well-defined multiplication map:
 + associative
 + identity: $H$
 + inverse: $(g H)^(-1) = g^(-1) H$
 
-*Def:* _Simple groups_ $G$ don't have normal subgroups (building blocks).
+*Def:* _Simple groups_ $G$ don't have non-trivial normal subgroups (building blocks).
 
 *Fact:* $phi: G -> G'$, $H := ker(phi) lt.closed G$
 $
@@ -236,7 +236,7 @@ $
 $ ker(pi_2) = G_1 lt.closed G_1 times G_2 quad #aside[(also true for $G_2$: $G_2 lt.closed G_1 times G_2$)] $
 
 *Fact:* $G = N_1 times N_2 <=>$
-+ $N_1 lt.closed G$
++ $N_1, N_2 lt.closed G$
 + $N_1 inter N_2 = {e}$
 + $G = N_1 N_2$
 

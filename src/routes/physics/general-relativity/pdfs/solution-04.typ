@@ -153,7 +153,7 @@ $
 For such a particle, we have $theta$ and $phi.alt$ constant. Only two geodesic eqs. remain:
 $
   x''^0 + chr(0, mu nu) dot(x)^mu dot(x)^nu & = c t'' + (a(t) dot(a)(t))/(c (1 - k r^2)) r'^2 = 0, \
-  x''^1 + chr(1, mu nu) dot(x)^mu dot(x)^nu & = r'' + (k r)/(1 - k r^2) r'^2 + 2 (dot(a)(t))/(c a(t)) r' t' = 0,
+  x''^1 + chr(1, mu nu) dot(x)^mu dot(x)^nu & = r'' + (k r)/(1 - k r^2) r'^2 + 2 (dot(a)(t))/(a(t)) r' t' = 0,
 $
 where a prime marks the derivative w.r.t. $tau$.
 

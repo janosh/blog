@@ -116,34 +116,32 @@ where we calculate $F(p^2)$ using the subst. $z = Delta/(l_E^2 - Delta)$, $l_E =
 $
   F(p^2) & = i integral_0^1 dd(x) integral (dd(d, l_E))/(2 pi)^d x/[l_E^2 - underbrace(x (1 - x) p^2, Delta)]^2 = i integral_0^1 dd(x) x integral (dif Omega_d)/(2 pi)^d integral_0^oo dd(l_E) l_E^(d-1)/(l_E^2 - Delta)^2 \
   & = i integral_0^1 dd(x) x (2 pi^(d\/2))/((2 pi)^d Gamma(d/2)) integral_1^0 dd(z) (l_E^2 - Delta)^2/(-2 Delta l_E) l_E^(d-1)/(l_E^2 - Delta)^2 \
-  & = 1/((4 pi)^(d\/2) Gamma(d/2)) integral_0^1 dd(x) x integral_0^1 dd(z) Delta^(d/2 - 2) z^(1 - d/2) (1 - z)^(d/2 - 1) \
-  & = 1/((4 pi)^(d\/2) Gamma(d/2)) (Gamma(2 - d/2) Gamma(d/2))/Gamma(2 - d/2 + d/2) integral_0^1 dd(x) x Delta^(d/2 - 2) = Gamma(epsilon/2)/(4 pi)^(d\/2) integral_0^1 dd(x) x (x (1 - x) p^2)^(d/2 - 2).
+  & = i/((4 pi)^(d\/2) Gamma(d/2)) integral_0^1 dd(x) x integral_0^1 dd(z) Delta^(d/2 - 2) z^(1 - d/2) (1 - z)^(d/2 - 1) \
+  & = i/((4 pi)^(d\/2) Gamma(d/2)) (Gamma(2 - d/2) Gamma(d/2))/Gamma(2 - d/2 + d/2) integral_0^1 dd(x) x Delta^(d/2 - 2) = (i Gamma(epsilon/2))/(4 pi)^(d\/2) integral_0^1 dd(x) x (x (1 - x) p^2)^(d/2 - 2).
 $
 To bring out the divergence, we expand the integrand,
 $
-  integral_0^1 dd(x) x (x (1 - x) p^2)^(-epsilon\/2) & = integral_0^1 dd(x) x (1 + epsilon/2 ln(x (1 - x) p^2) + cal(O)(epsilon^2)) \
-  & = 1/2 + epsilon/2 integral_0^1 dd(x) x ln(x (1 - x) p^2) + cal(O)(epsilon^2).
+  integral_0^1 dd(x) x (x (1 - x) p^2)^(-epsilon\/2) & = integral_0^1 dd(x) x (1 - epsilon/2 ln(x (1 - x) p^2) + cal(O)(epsilon^2)) \
+  & = 1/2 - epsilon/2 integral_0^1 dd(x) x ln(x (1 - x) p^2) + cal(O)(epsilon^2).
 $
 We can also expand the prefactors $Gamma(epsilon/2) = 2/epsilon - gamma + cal(O)(epsilon)$ and
 $ 1/(4 pi)^(d\/2) = 1/(4 pi)^(2 - epsilon\/2) = (4 pi)^(epsilon\/2)/(16 pi^2) = 1/(16 pi^2) (1 + epsilon/2 ln(4 pi) + cal(O)(epsilon^2)). $
 Assembling everything, we get
 $
-  F(p^2) & = i/(16 pi^2) (1 + epsilon/2 ln(4 pi) + cal(O)(epsilon^2)) (2/epsilon - gamma + cal(O)(epsilon)) (1/2 + epsilon/2 integral_0^1 dd(x) x ln(x (1 - x) p^2) + cal(O)(epsilon^2)) \
-  & = i/(32 pi^2) (2/epsilon - gamma + ln(4 pi) + integral_0^1 dd(x) x ln(x (1 - x) p^2)) + cal(O)(epsilon).
+  F(p^2) & = i/(16 pi^2) (1 + epsilon/2 ln(4 pi) + cal(O)(epsilon^2)) (2/epsilon - gamma + cal(O)(epsilon)) (1/2 - epsilon/2 integral_0^1 dd(x) x ln(x (1 - x) p^2) + cal(O)(epsilon^2)) \
+  & = i/(32 pi^2) (2/epsilon - gamma + ln(4 pi) - 2 J(p^2)) + cal(O)(epsilon), quad J(p^2) := integral_0^1 dd(x) x ln(x (1 - x) p^2).
 $
+Including the counterterm, the amputated 1PI two-point function at one loop is thus
+$ Sigma(fsl(p)) = i fsl(p) [delta_Psi + e^2/(16 pi^2) (2/epsilon - gamma + ln(4 pi) - 2 J(p^2))] - i delta_m. $
 If we choose our renormalization conditions as
 $ Sigma(fsl(p))|_(fsl(p) = mu) = 0 quad "and" quad dif/(dif fsl(p)) Sigma(fsl(p))|_(fsl(p) = mu) = 0, $
-we obtain a counterterm $delta_Psi$ of
+we obtain, using $dif J \/ dif fsl(p) = integral_0^1 dd(x) x (2 fsl(p))/p^2 = 1/fsl(p)$ and the product rule, a counterterm $delta_Psi$ of
 $
-  dif/(dif fsl(p)) Sigma(fsl(p))|_(fsl(p) = mu) & = i delta_Psi + dif/(dif fsl(p)) [2 e^2 i/(32 pi^2) (2/epsilon - gamma + ln(4 pi) + integral_0^1 dd(x) x ln(x (1 - x) p^2))]|_(fsl(p) = mu) \
-  & = i delta_Psi + (i e^2)/(16 pi^2) integral_0^1 dd(x) (2 x (1 - x) fsl(p))/(x (1 - x) p^2)|_(fsl(p) = mu) = i delta_Psi + (i e^2)/(8 pi^2 mu) = 0 quad ==> quad delta_Psi = -e^2/(8 pi^2 mu)
+  dif/(dif fsl(p)) Sigma(fsl(p))|_(fsl(p) = mu) & = i [delta_Psi + e^2/(16 pi^2) (2/epsilon - gamma + ln(4 pi) - 2 J(mu^2) - 2)] = 0 \
+  ==> delta_Psi & = -e^2/(16 pi^2) (2/epsilon - gamma + ln(4 pi) - 2 J(mu^2) - 2)
 $
 and for $delta_m$
-$
-  Sigma(fsl(p))|_(fsl(p) = mu) & = i (fsl(p) delta_Psi - delta_m) + (i e^2)/(16 pi^2) (2/epsilon - gamma + ln(4 pi) + integral_0^1 dd(x) x ln(x (1 - x) p^2))|_(fsl(p) = mu) \
-  & = -(i e^2)/(8 pi^2) - i delta_m + (i e^2)/(16 pi^2) (2/epsilon - gamma + ln(4 pi) + integral_0^1 dd(x) x ln(x (1 - x) mu^2)) = 0 \
-  ==> delta_m & = e^2/(16 pi^2) (2/epsilon - gamma + ln(4 pi) + integral_0^1 dd(x) x ln(x (1 - x) mu^2) - 2).
-$
+$ Sigma(fsl(p))|_(fsl(p) = mu) = (2 i e^2 mu)/(16 pi^2) - i delta_m = 0 quad ==> quad delta_m = (e^2 mu)/(8 pi^2). $
 
 *2.* We calculate the one-loop corrections to the photon propagator, again using the Feynman rules of renormalized perturbation theory.
 $
