@@ -14,6 +14,7 @@
 #let surface-fill = rgb("#DFE6EF")
 #let mesh-stroke = rgb("#A2AEBD") + 0.3pt
 #let edge-weight = 2.2pt
+#let ink = rgb("#4A5560") // captions, arrows and axes
 
 // === orthographic camera, shared by both 3D panels ===
 // The azimuth matters: viewed square-on, a tube's rims collapse to straight lines.
@@ -134,7 +135,7 @@
 
 #let caption(x, body) = content(
   (x, -2.6),
-  text(size: 9pt, fill: rgb("#4A5560"))[#body],
+  text(size: 9pt, fill: ink)[#body],
   anchor: "north",
 )
 
@@ -142,8 +143,8 @@
   line(
     (x, 0),
     (x + 1.45, 0),
-    stroke: rgb("#4A5560") + 0.9pt,
-    mark: (end: "stealth", fill: rgb("#4A5560"), scale: 0.55),
+    stroke: ink + 0.9pt,
+    mark: (end: "stealth", fill: ink, scale: 0.55),
   )
   content(
     (x + 0.725, 0.2),
@@ -167,8 +168,8 @@
     line(
       from,
       to,
-      stroke: rgb("#4A5560") + 0.7pt,
-      mark: (end: "stealth", fill: rgb("#4A5560"), scale: 0.5),
+      stroke: ink + 0.7pt,
+      mark: (end: "stealth", fill: ink, scale: 0.5),
     )
   }
   // shifting this cell by 2pi in either direction lands on a copy of itself
@@ -184,7 +185,7 @@
   caption(0, [plane with $2pi$ periodicity])
 
   // === 2. the fundamental domain and its two identifications ===
-  step-arrow(2.55, [one cell], rgb("#4A5560"))
+  step-arrow(2.55, [one cell], ink)
 
   let (square-x, side) = (4.75, 2.15)
   grid(

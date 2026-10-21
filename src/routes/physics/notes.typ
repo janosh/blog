@@ -1,8 +1,6 @@
 // Shared style for typeset lecture notes and exam solutions on janosh.dev/physics.
 // Compile from the blog root: typst compile --root src/routes/physics <file>.typ
 
-#let margin-x = 2.2cm
-
 // === Delimiter sizing ===
 // Annotated braces whose annotation should not count towards the height of enclosing delimiters.
 #let braces = (math.underbrace, math.overbrace, math.underbracket, math.overbracket, math.underparen, math.overparen)
@@ -48,7 +46,7 @@
 
 #let notes(title: none, subtitle: none, date: none, body) = {
   set document(title: title, author: "Janosh Riebesell")
-  set page(paper: "a4", margin: (x: margin-x, y: 2.3cm), numbering: "1")
+  set page(paper: "a4", margin: (x: 2.2cm, y: 2.3cm), numbering: "1")
   set text(font: "New Computer Modern", size: 11pt, lang: "en")
   set par(justify: true, leading: 0.62em)
   set math.equation(numbering: none)

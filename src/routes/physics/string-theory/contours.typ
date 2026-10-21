@@ -3,7 +3,6 @@
 #import "/string-theory/sheet.typ": arrow-mark, lbl
 #import "@preview/cetz:0.5.2": canvas, draw
 
-
 #let contour-deformation = canvas(length: 0.62cm, {
   import draw: *
   set-style(stroke: 0.6pt)

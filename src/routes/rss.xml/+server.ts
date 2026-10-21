@@ -1,19 +1,20 @@
+import { describe } from '#lib/server/excerpt.js'
 import { posts } from '#lib/server/posts.js'
 import { homepage } from '#root/package.json'
+import { escape_html } from 'svelte-widgets/utils'
 
 export const prerender = true
 
-const escape_xml = (text: string) =>
-  text.replaceAll(`&`, `&amp;`).replaceAll(`<`, `&lt;`).replaceAll(`>`, `&gt;`)
-
 export const GET = () => {
-  const items = posts.map(({ title, slug, date, tags }) => {
+  const items = posts.map((post) => {
+    const { title, slug, date, tags } = post
     const url = `${homepage}/posts/${slug}`
-    const categories = tags.map((tag) => `<category>${escape_xml(tag)}</category>`)
+    const categories = tags.map((tag) => `<category>${escape_html(tag)}</category>`)
     return `<item>
-      <title>${escape_xml(title)}</title>
+      <title>${escape_html(title)}</title>
       <link>${url}</link>
       <guid>${url}</guid>
+      <description>${escape_html(describe(`posts`, post))}</description>
       <pubDate>${new Date(date).toUTCString()}</pubDate>
       ${categories.join(``)}
     </item>`

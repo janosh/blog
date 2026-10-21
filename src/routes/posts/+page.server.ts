@@ -1,3 +1,4 @@
+import { describe } from '#lib/server/excerpt.js'
 import { posts } from '#lib/server/posts.js'
 
 const tag_groups = Map.groupBy(
@@ -14,4 +15,7 @@ const top_tags = [...tag_groups]
   .slice(0, 15)
   .toSorted((tag_1, tag_2) => tag_1.label.localeCompare(tag_2.label))
 
-export const load = () => ({ posts, top_tags })
+export const load = () => ({
+  posts: posts.map((post) => ({ ...post, description: describe(`posts`, post) })),
+  top_tags,
+})

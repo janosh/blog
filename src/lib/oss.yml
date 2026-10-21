@@ -1,11 +1,12 @@
 projects:
   - name: pymatgen
     url: https://pymatgen.org
-    logo: https://github.com/janosh/blog/assets/30958850/db9aa145-7281-40e9-aaa7-123f63beb7f9
+    logo: pymatgen-logo.svg
     repo: https://github.com/materialsproject/pymatgen
     paper_key: george_pymatgen_2026
     role: Maintainer
-    description: One of the largest and most popular open source materials analysis codes that defines classes for structures, molecules, slabs, etc. and interfaces seamlessly with various other materials codes. It also powers the [Materials Project](https://materialsproject.org).
+    featured: true
+    description: Widely used Python library for materials analysis, from crystal structures and symmetry to phase diagrams and I/O for most DFT codes. Powers the [Materials Project](https://materialsproject.org).
     languages:
       - Python
       - Cython
@@ -13,7 +14,7 @@ projects:
     commits: 1050
   - name: Matbench Discovery
     url: https://matbench-discovery.materialsproject.org
-    logo: https://janosh.github.io/matbench-discovery/favicon.svg
+    logo: matbench-discovery-logo.svg
     color_invert: light
     repo: https://github.com/janosh/matbench-discovery
     paper_key: riebesell_matbench_2025
@@ -35,10 +36,9 @@ projects:
   - name: CHGNet
     url: https://chgnet.lbl.gov
     repo: https://github.com/CederGroupHub/chgnet
-    logo: https://chgnet.lbl.gov/favicon.svg
+    logo: chgnet-logo.svg
     role: Maintainer
     paper_key: deng_chgnet_2023
-    featured: true
     description: Pretrained universal neural network potential for charge-informed atomistic modeling published on the Sep 2023 cover of NMI.
     languages:
       - Python
@@ -56,7 +56,7 @@ projects:
     repo: https://github.com/torchsim/torch-sim
     role: Maintainer
     logo: torch-sim-logo.svg
-    description: Torch-native, batchable, atomistic simulations.
+    description: Torch-native engine for batched atomistic simulations, running molecular dynamics, relaxations and MLIP inference on many systems at once on GPUs.
     paper_key: cohen_torchsim_2025
     featured: true
     languages:
@@ -67,15 +67,16 @@ projects:
     url: https://mace-docs.readthedocs.io/en/latest/guide/foundation_models.html#pretrained-mace-mp-models
     repo: https://github.com/ACEsuit/mace-foundations
     role: Contributor
-    paper_key: batatia_foundation_2023
+    paper_key: batatia_foundation_2025
     description: Fast and accurate machine learning interatomic potentials with higher order equivariant message passing.
-    logo: https://avatars.githubusercontent.com/u/68508620
+    logo: mace-logo.svg
     commits: 1
     languages:
       - Python
     stars: 302
   - name: MatterViz
     url: https://matterviz.janosh.dev
+    logo: matterviz-logo.svg
     repo: https://github.com/janosh/matterviz
     description: A library of [Svelte](https://svelte.dev) components for building interactive web apps with performant chemistry visualizations like periodic tables, Bohr atoms, nuclei, heatmaps, scatter plots.
     languages:
@@ -90,6 +91,7 @@ projects:
     commits: 551
   - name: pymatviz
     url: https://pymatviz.janosh.dev
+    logo: pymatviz-logo.svg
     color_invert: light
     repo: https://github.com/janosh/pymatviz
     description: A toolkit for visualizations in materials informatics to complement [pymatgen](https://pymatgen.org).
@@ -102,19 +104,9 @@ projects:
       - HTML
     stars: 333
     commits: 483
-  - name: Tensorboard Reducer
-    repo: https://github.com/janosh/tensorboard-reducer
-    logo: https://raw.githubusercontent.com/janosh/tensorboard-reducer/main/assets/tensorboard-reducer-square.svg
-    description: Reduce multiple [PyTorch](https://pytorch.org/) [TensorBoard](https://www.tensorflow.org/tensorboard) runs to new events/CSV/JSON. Good for model ensembles.
-    pypi: https://pypi.org/project/tensorboard-reducer
-    languages:
-      - Python
-      - TeX
-    stars: 78
-    commits: 104
   - name: Normalizing Flows
     repo: https://github.com/janosh/awesome-normalizing-flows
-    logo: https://api.iconify.design/logos/awesome.svg?color=%23888888
+    logo: normalizing-flows-logo.svg
     description: Curated list of resources for learning and using [normalizing flows](/posts/normalizing-flows), a powerful tool in ML for modeling probability distributions.
     languages:
       - Python
@@ -123,7 +115,7 @@ projects:
   - name: atomate2
     repo: https://github.com/materialsproject/atomate2
     role: Maintainer
-    logo: https://github.com/materialsproject/atomate2/assets/30958850/53e02adf-5bdb-4c8e-8076-cb30765ac0db
+    logo: atomate2-logo.svg
     description: |
       atomate2 is a library of computational materials science workflows used by the Materials Project and beyond.
     languages:
@@ -133,33 +125,10 @@ projects:
     stars: 347
     commits: 386
     paper_key: ganose_atomate2_2025
-    featured: true
-  - name: jobflow
-    repo: https://github.com/materialsproject/jobflow
-    role: Maintainer
-    logo: https://user-images.githubusercontent.com/30958850/275247234-0650d187-8a42-4962-a95d-ff40354baf6b.svg
-    description: |
-      jobflow is a library for writing computational workflows. It provides the plumbing underlying [atomate2](https://materialsproject.github.io/atomate2/)
-      and was adopted by several other workflow libraries.
-    languages:
-      - Python
-      - TeX
-    stars: 127
-    commits: 153
-  - name: MatCalc
-    url: https://matcalc.ai
-    logo: https://github.com/materialsvirtuallab/matcalc/assets/30958850/89486f2f-73fb-40fb-803a-dfafe510eb6d
-    repo: https://github.com/materialsvirtuallab/matcalc
-    role: Maintainer
-    description: A Python library for calculating materials properties from ML force field potential energy surfaces.
-    languages:
-      - Python
-      - Jupyter Notebook
-    stars: 151
-    commits: 77
   - name: Diagrams
     url: https://diagrams.janosh.dev
     repo: https://github.com/janosh/diagrams
+    logo: diagrams-logo.svg
     description: '[Typst](https://typst.app) and [LaTeX](https://www.latex-project.org) diagrams of concepts in physics/chemistry/ML.'
     stars: 684
     commits: 284
@@ -173,11 +142,11 @@ projects:
       - HTML
       - JavaScript
       - Shell
-  - name: Dielectrics
+  - name: Discovering Dielectrics
     url: https://janosh.github.io/dielectrics
     repo: https://github.com/janosh/dielectrics
-    description: Pushing the Pareto front of band gap and permittivity with ML-guided dielectrics discovery incl. experimental synthesis.
-    logo: https://github.com/janosh/diagrams/raw/main/assets/plate-capacitor/plate-capacitor.svg
+    description: Pushing the Pareto front of band gap and permittivity with ML-guided dielectrics discovery incl. [experimental synthesis](/posts/new-dielectric-materials).
+    logo: dielectrics-logo.svg
     paper_key: riebesell_discovery_2024
     featured: true
     stars: 14
@@ -190,7 +159,7 @@ projects:
       - Roff
   - name: Svelte Widgets
     url: https://svelte-widgets.janosh.dev
-    logo: https://raw.githubusercontent.com/janosh/svelte-widgets/main/src/site/favicon.svg
+    logo: svelte-widgets-logo.svg
     repo: https://github.com/janosh/svelte-widgets
     description: Keyboard-friendly, accessible and customizable Svelte components incl. [MultiSelect](https://svelte-widgets.janosh.dev/multiselect), [Toc](https://svelte-widgets.janosh.dev/toc), [PageSearch](https://svelte-widgets.janosh.dev/command-menu#pagesearch) and more.
     languages:
@@ -207,7 +176,7 @@ projects:
     description: A foundational DFT potential energy dataset for materials covering 89 elements and emphasizing data diversity and quality (at PBE and r2SCAN level).
     paper_key: kaplan_foundational_2025
     featured: true
-    logo: https://github.com/materialsvirtuallab/matpes/raw/refs/heads/main/assets/logo.svg
+    logo: matpes-logo.svg
     languages:
       - Jupyter Notebook
       - Python
@@ -219,7 +188,7 @@ projects:
     description: Overcoming systematic softening in universal machine learning interatomic potentials by fine-tuning
     paper_key: deng_systematic_2025
     featured: true
-    logo: https://github.com/janosh/blog/assets/30958850/b8266e7e-8e78-4ac6-8716-28cbd56d0005
+    logo: mlip-pes-softening-logo.svg
     stars: 24
     commits: 61
     languages:

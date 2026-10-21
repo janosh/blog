@@ -23,26 +23,27 @@
     "#root/*": "./*"
   },
   "scripts": {
-    "build": "vp build && node src/lib/build-search.ts",
+    "build": "vp build && node src/lib/build-search.ts && pnpm run build-cv",
+    "build-cv": "typst fonts | grep -qx Inter || { echo 'cv.typ needs the Inter font installed (apt: fonts-inter, brew: font-inter)' >&2; exit 1; } && typst compile --root . src/routes/cv/cv.typ build/cv.pdf",
     "build-notes": "node src/routes/physics/build-notes.ts",
     "update-oss": "node src/lib/update-oss.ts"
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
-    "@sveltejs/adapter-static": "^4.0.0",
-    "@sveltejs/kit": "^3.1.0",
-    "@types/node": "^26.6.5",
+    "@sveltejs/adapter-static": "^4.0.1",
+    "@sveltejs/kit": "^3.3.1",
+    "@types/node": "^26.6.6",
     "@wooorm/starry-night": "^3.11.0",
-    "matterviz": "^0.8.0",
-    "pagefind": "^1.5.2",
-    "pdfjs-dist": "^6.4.299",
+    "matterviz": "github:janosh/matterviz#main",
+    "pagefind": "^1.6.0",
+    "pdfjs-dist": "^6.5.438",
     "sharp": "^0.35.5",
-    "svelte": "^5.57.2",
-    "svelte-check": "^4.7.7",
+    "svelte": "^5.58.0",
+    "svelte-check": "^4.7.8",
     "svelte-widgets": "github:janosh/svelte-widgets#main",
     "temml": "^0.14.0",
-    "vite": "npm:@voidzero-dev/vite-plus-core@1.3.0",
-    "vite-plus": "1.3.0"
+    "vite": "npm:@voidzero-dev/vite-plus-core@8.3.8000",
+    "vite-plus": "1.7.0"
   },
-  "packageManager": "pnpm@12.14.0"
+  "packageManager": "pnpm@12.21.0"
 }

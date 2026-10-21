@@ -38,7 +38,7 @@
 </MultiSelect>
 
 <ul class="grid" style="margin: 4em auto; gap: 3ex">
-  {#each visible_posts as { cover, slug, title, tags, date } (slug)}
+  {#each visible_posts as { cover, slug, title, tags, date, description } (slug)}
     {@const href = `/posts/${slug}`}
     <li animate:flip={{ duration: 400 }}>
       <h3><a {href}>{title}</a></h3>
@@ -50,6 +50,7 @@
           decoding="async"
         />
       </a>
+      <p class="description">{description}</p>
       <small>
         <time>
           <Icon icon={Calendar} />
@@ -67,27 +68,32 @@
   ul > li {
     display: grid;
     align-content: space-between;
-    grid-row: span 4;
+    grid-row: span 5;
     grid-template-rows: subgrid;
     gap: 2pt;
-  }
-  ul > li > h3 {
-    margin: 0;
-    font-size: 14pt;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-align: center;
-    align-self: end;
-  }
-  ul > li > h3 > a {
-    color: inherit;
-  }
-  ul > li > a > img {
-    border-radius: 2pt;
-    object-fit: cover;
-    height: 10em;
-    width: 100%;
-    background: linear-gradient(-45deg, var(--card-bg), var(--nav-bg), var(--border));
+    > h3 {
+      margin: 0;
+      font-size: 14pt;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-align: center;
+      align-self: end;
+      > a {
+        color: inherit;
+      }
+    }
+    > a > img {
+      border-radius: 2pt;
+      object-fit: cover;
+      height: 10em;
+      width: 100%;
+      background: linear-gradient(-45deg, var(--card-bg), var(--nav-bg), var(--border));
+    }
+    > .description {
+      margin: 4pt 0;
+      font-size: 0.9em;
+      color: var(--text-secondary);
+    }
   }
   :global(div.multiselect) {
     max-width: 20em !important;
