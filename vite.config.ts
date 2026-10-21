@@ -45,9 +45,7 @@ const docs = markdown_vite(
 
 const svelte_config = {
   extensions: [`.svelte`, `.md`],
-
   preprocess: [docs.preprocess, asset_imports()],
-
   adapter: adapter(),
   // lets the prerender crawler follow absolute og:image URLs (e.g. PNG copies of SVG covers)
   paths: { origin: homepage },
@@ -56,10 +54,8 @@ const svelte_config = {
 export default {
   ...make_config(),
   plugins: [sveltekit(svelte_config), docs.plugin, yaml_plugin()],
-
   server: { port: 3000 },
   preview: { port: 3000 },
-
   test: {
     include: [`tests/**/*.test.ts`],
     restoreMocks: true,

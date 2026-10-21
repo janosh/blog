@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { when_visible } from '#lib'
+  import { in_view } from 'svelte-widgets/attachments'
   import type { AnyStructure } from 'matterviz/structure'
   import { slugify_heading } from 'svelte-widgets/heading-anchors'
 
@@ -7,7 +7,7 @@
   let visible = $state(false)
 </script>
 
-<section {@attach when_visible(() => (visible = true))}>
+<section {@attach in_view(() => (visible = true), { once: true, root_margin: `200px` })}>
   <h2 id={slugify_heading(title)}>{title}</h2>
   <div style="height: 500px">
     {#if visible}

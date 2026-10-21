@@ -2,6 +2,8 @@
 export type PageMeta = {
   title: string
   slug: string
+  // meta description; defaults to an excerpt of the page's first paragraph
+  description?: string
   cover: {
     img: string
     caption?: string
@@ -16,10 +18,7 @@ export type PostMeta = PageMeta & { date: string; tags: string[] }
 export type Education = {
   title: string
   uni: string
-  department?: string
   href: string
-  logo: string
-  description?: string
   thesis: {
     title: string
     url?: string
@@ -35,12 +34,6 @@ export type Experience = {
   contributions: string[]
 }
 
-export type CvProject = {
-  name: string
-  role: NonNullable<Project[`role`]>
-  contribution: string
-}
-
 export type Reference = {
   title: string
   id: string
@@ -50,14 +43,6 @@ export type Reference = {
   issued: { year: number; month?: number; day?: number }[]
   'container-title'?: string
   note?: string
-}
-
-export type Publication = Pick<Reference, 'id' | 'title' | 'DOI' | 'URL'> & {
-  authors: ({ name: string; is_me: boolean } | null)[]
-  issued: Reference['issued'][number]
-  journal?: string
-  citations: number
-  citation_database: string
 }
 
 export type Project = {
@@ -76,48 +61,6 @@ export type Project = {
   paper_key?: string // Zotero BibTeX ID
   paper_url?: string // resolved from paper_key by lib/server/oss.ts
   featured?: boolean
-}
-
-export type Skill = {
-  name: string
-  svg?: string
-  href?: string
-  site?: string
-}
-
-export type SkillGroup = {
-  name: string
-  items: Skill[]
-}
-
-export type Hobby = {
-  name: string
-  href?: string
-}
-
-export type Community = {
-  name: string
-  role?: string
-  date: string
-  href: string
-  img: string
-}
-
-export type Language = {
-  name: string
-  level: string
-  flag: string
-}
-
-export type Nationality = {
-  title: string
-  flag: string
-}
-
-export type Social = {
-  name: string
-  url: string
-  style?: string
 }
 
 export type OssSortKey = `commits` | `stars` | `name`

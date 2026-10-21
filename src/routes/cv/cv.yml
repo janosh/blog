@@ -1,31 +1,20 @@
-social:
-  - name: GitHub
-    url: https://github.com/janosh
-  - name: Google Scholar
-    url: https://scholar.google.com/citations?user=Lfw6Id0AAAAJ
-    style: 'transform: scale(1.15);'
-  - name: LinkedIn
-    url: https://linkedin.com/in/janosh-riebesell
-  # - name: X
-  #   url: https://x.com/jrib_
-  #   style: 'transform: scale(1.2);'
-  - name: Email
-    url: mailto:janosh.riebesell@gmail.com
-    style: 'transform: translateY(-2px) scale(1.25); vertical-align: middle;'
-
 experience:
   - organization: Periodic Labs
+    logo: periodic-labs-logo.svg
     href: https://periodic.com
     role: Member of Technical Staff
     dates: Sep 2025 – present
     contributions:
       - Develop high-throughput density functional theory workflows and machine-learning force fields for atomistic simulations.
   - organization: Radical AI
+    logo: radical-ai-logo.svg
     href: https://radical-ai.com
     dates: Apr 2024 – Jun 2025
     contributions:
-      - Worked on machine-learning interatomic potentials and robotic laboratories.
+      - Built Radical AI's high-throughput density functional theory pipeline.
+      - Co-created TorchSim, a PyTorch-native engine for batched atomistic simulations.
   - organization: Materials Project
+    logo: materials-project-logo.svg
     href: https://materialsproject.org
     dates: Jul 2022 – Dec 2023
     contributions:
@@ -52,145 +41,147 @@ selected_projects:
     role: Maintainer
     contribution: Implemented MatPES PBE and r2SCAN workflows generating reference data for universal interatomic potentials.
 
-selected_publications:
-  - riebesell_matbench_2025
-  - cohen_torchsim_2025
-  - deng_chgnet_2023
+# papers.yaml ids where I'm joint first author without being listed first (cv.typ marks them *)
+joint_first_author:
+  - george_pymatgen_2026
   - batatia_foundation_2023
-  - riebesell_discovery_2024
 
 education:
-  - title: PhD Student
+  - title: PhD in Physics
     uni: University of Cambridge
-    department: Physics
+    logo: cambridge-coat-of-arms.svg
     href: https://www.tcm.phy.cam.ac.uk/profiles/jr769/
     thesis:
       title: Towards Machine Learning Foundation Models for Materials Chemistry
       url: https://doi.org/10.17863/CAM.113233
       repo: https://github.com/janosh/thesis
-    logo: https://upload.wikimedia.org/wikipedia/commons/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg
   - title: MPhil in Scientific Computing
     uni: University of Cambridge
-    description: Physics
+    logo: cambridge-coat-of-arms.svg
     thesis:
       title: Probabilistic Data-Driven Discovery of Thermoelectric Materials
     href: https://www.tcm.phy.cam.ac.uk
-    logo: https://upload.wikimedia.org/wikipedia/commons/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg
   - title: MSc in Physics
     uni: ITP Heidelberg
+    logo: heidelberg-physics-logo.svg
     thesis:
       title: Functional Renormalization Group Analytically Continued to Finite Temperatures
       url: /physics/masters-thesis
     href: https://physik.uni-heidelberg.de?lang=en
-    logo: https://physik.uni-heidelberg.de/images/Logo_NEU_Fak_Phys_Astr_rot_schwarz_en.svg
   - title: BSc in Physics
     uni: Hamburg University
+    logo: hamburg-university-logo.svg
     thesis:
       title: van der Waals Corrections for Density Functional Theory - DFT+D2 applied to Graphene-hBN-Heterostructures
       url: /physics/bachelors-thesis
     href: https://physik.uni-hamburg.de/en.html
-    logo: https://upload.wikimedia.org/wikipedia/commons/9/98/UHH_Universit%C3%A4t_Hamburg_Logo.svg
 
 skills:
   - name: Scientific computing
     items:
       - name: Python
-        href: https://github.com/janosh?tab=repositories&language=python
-        site: https://python.org
+        icon: Python
       - name: Rust
-        site: https://rust-lang.org
+        icon: Rust
       - name: PyTorch
-        href: https://github.com/janosh?tab=repositories&language=python
-        site: https://pytorch.org
+        icon: PyTorch
       - name: JAX
-        svg: https://upload.wikimedia.org/wikipedia/commons/8/86/Google_JAX_logo.svg
-        site: https://docs.jax.dev
+        logo: jax-logo.svg
+      - name: HPC
+        icon: Server
+  - name: Atomistic simulation
+    items:
+      - name: VASP
+        logo: vasp-logo.svg
+      - name: Quantum ESPRESSO
+        logo: quantum-espresso-logo.svg
+      - name: ASE
+        logo: ase-logo.svg
+      - name: pymatgen
+        logo: pymatgen-logo.svg
   - name: Tooling
     items:
       - name: Git
-        site: https://git-scm.com
+        icon: Git
       - name: Slurm
-        site: https://slurm.schedmd.com
+        icon: Cluster
       - name: Node.js
-        site: https://nodejs.org
+        icon: NodeJs
       - name: Deno
-        site: https://deno.land
+        icon: Deno
       - name: Vite
-        site: https://vite.dev
-      - name: PlayWright
-        site: https://playwright.dev
+        icon: Vite
+      - name: Playwright
+        icon: Playwright
   - name: Web
     items:
       - name: TypeScript
-        href: https://github.com/janosh?tab=repositories&language=typescript
-        site: https://typescriptlang.org
+        icon: TypeScript
       - name: Svelte
-        href: https://github.com/janosh?tab=repositories&language=svelte
-        site: https://svelte.dev
+        icon: Svelte
       - name: React
-        site: https://reactjs.org
+        icon: React
       - name: REST
-        site: https://wikipedia.org/wiki/Representational_state_transfer
+        icon: API
       - name: MongoDB
-        site: https://mongodb.com
+        icon: MongoDB
 
 hobbies:
   - name: photography
+    icon: Camera
     href: https://youtube.com/@jrib
   - name: hiking
+    icon: Hiking
     href: https://komoot.com/user/179035526626
   - name: cycling
+    icon: Bike
   - name: climbing
+    icon: Climbing
 
 nationality:
   - title: Canadian
-    flag: 🇨🇦
   - title: German
-    flag: 🇩🇪
 
 languages:
   - name: English
     level: advanced
-    flag: 🇺🇸
   - name: German
-    level: advanced
-    flag: 🇩🇪
+    level: native
   - name: French
     level: intermediate
-    flag: 🇫🇷
   - name: Spanish
     level: basic
-    flag: 🇪🇸
 
 community:
   - name: Associate Editor IOP AI for Science
-    date: 2025 - present # Feb 2025
+    logo: iop-logo.svg
+    date: 2025 – present # Feb 2025
     href: https://iopscience.iop.org/journal/3050-287X/page/editorial-board
-    img: https://ioppublishing.org/wp-content/uploads/2019/02/iop_logo.png.webp
-  - name: Nature Computational Science
-    date: 2025 - present
-    role: reviewer
-    href: https://www.nature.com/natcomputsci
-    img: https://pbs.twimg.com/profile_images/1259876609533906946/ZDr36zYH_400x400.jpg
-  - name: Digital Discovery
-    date: 2024 - present
-    role: reviewer
-    href: https://pubs.rsc.org/en/journals/journalissues/dd
-    img: https://pbs.twimg.com/profile_images/1407354102586261511/znhbefSm_400x400.png
-  - name: NPJ Computational Materials
-    date: 2024 - present
-    role: reviewer
-    href: https://www.nature.com/npjcompumats
-    img: https://images.squarespace-cdn.com/content/v1/5e48a7c3d218a94af2a7c7d9/1600288102536-U6R1OGNEPGTGYQE9M4PH/npj.jpg
+  - name: Reviewer
+    icon: FileEye
+    date: 2022 – present
+    journals:
+      - name: Nature Computational Science
+        href: https://www.nature.com/natcomputsci
+      - name: npj Computational Materials
+        href: https://www.nature.com/npjcompumats
+      - name: JACS
+        href: https://pubs.acs.org/journal/jacsat
+      - name: JCTC
+        href: https://pubs.acs.org/journal/jctcce
+      - name: JMLR
+        href: https://jmlr.org
+      - name: Digital Discovery
+        href: https://pubs.rsc.org/en/journals/journalissues/dd
   - name: Cambridge Physical Society
-    date: 2020 - present
+    logo: cambridge-coat-of-arms.svg
+    date: 2020 – present
     href: http://camphysoc.co.uk
-    img: https://upload.wikimedia.org/wikipedia/commons/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg
   - name: Materials Research Society
-    date: 2023 - present
+    logo: mrs-logo.svg
+    date: 2023 – present
     href: https://mrs.org
-    img: https://www.advancedsciencenews.com/wp-content/uploads/2012/03/MRS-logo-e1332408136614.jpg
   - name: Materials Project Software Foundation
-    date: 2023 - present
+    logo: materials-project-logo.svg
+    date: 2023 – present
     href: https://github.com/materialsproject/foundation
-    img: materials-project-logo.svg

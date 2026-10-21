@@ -1,38 +1,4 @@
-@import '@wooorm/starry-night/style/light';
-
-/* starry-night dark syntax colors, applied via data-theme (set before first paint in app.html) */
-html[data-theme='dark'] {
-  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
-  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
-  --color-prettylights-syntax-carriage-return-bg: #b62324;
-  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
-  --color-prettylights-syntax-comment: #9198a1;
-  --color-prettylights-syntax-constant: #79c0ff;
-  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
-  --color-prettylights-syntax-entity: #d2a8ff;
-  --color-prettylights-syntax-entity-tag: #7ee787;
-  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
-  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
-  --color-prettylights-syntax-keyword: #ff7b72;
-  --color-prettylights-syntax-markup-bold: #f0f6fc;
-  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
-  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
-  --color-prettylights-syntax-markup-deleted-bg: #67060c;
-  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
-  --color-prettylights-syntax-markup-heading: #1f6feb;
-  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
-  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
-  --color-prettylights-syntax-markup-inserted-bg: #033a16;
-  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
-  --color-prettylights-syntax-markup-italic: #f0f6fc;
-  --color-prettylights-syntax-markup-list: #f2cc60;
-  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
-  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
-  --color-prettylights-syntax-string: #a5d6ff;
-  --color-prettylights-syntax-string-regexp: #7ee787;
-  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
-  --color-prettylights-syntax-variable: #ffa657;
-}
+@import 'svelte-widgets/highlight/theme.css';
 
 :root {
   --page-bg: light-dark(#f8f9fa, #061e25);
@@ -112,9 +78,9 @@ a {
   color: var(--link-color);
   text-decoration: none;
   transition: color 0.2s ease;
-}
-a:hover {
-  color: var(--link-hover);
+  &:hover {
+    color: var(--link-hover);
+  }
 }
 :focus-visible {
   outline: 2px solid var(--link-color);
@@ -143,9 +109,9 @@ a:hover {
   border-radius: var(--radius-pill);
   font-weight: 500;
   transition: background 0.2s ease;
-}
-.pill:hover {
-  background: var(--nav-bg);
+  &:hover {
+    background: var(--nav-bg);
+  }
 }
 .muted {
   color: var(--text-secondary);
@@ -156,11 +122,6 @@ a:hover {
   place-content: center;
   flex-wrap: wrap;
 }
-ul.grid > li.card {
-  padding: 0.8em;
-  display: grid;
-  gap: 0.6em;
-}
 .docs-grid {
   display: grid;
   /* auto-fit drops empty tracks, so grids with few cards center them instead of packing
@@ -170,9 +131,31 @@ ul.grid > li.card {
   width: 100%;
   max-width: min(96vw, 1400px);
   margin: 1.5em auto 5em;
-}
-.docs-grid > p {
-  display: contents;
+  > p {
+    display: contents;
+  }
+  a:not(.source) {
+    text-align: center;
+    display: grid;
+    justify-self: center;
+    box-sizing: border-box;
+    max-width: 360px;
+    font-weight: bold;
+    color: inherit;
+    padding: 8pt 16pt;
+    border-radius: var(--radius-lg);
+  }
+  a:has(img) {
+    padding: 4pt;
+    gap: 0.3em;
+  }
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    margin: 0;
+  }
 }
 /* original problem sheets, collapsed below the solutions that already quote them */
 .problem-sheets > summary {
@@ -180,28 +163,6 @@ ul.grid > li.card {
   margin: -3em auto 0;
   cursor: pointer;
   color: var(--text-secondary);
-}
-.docs-grid a:not(.source) {
-  text-align: center;
-  display: grid;
-  justify-self: center;
-  box-sizing: border-box;
-  max-width: 360px;
-  font-weight: bold;
-  color: inherit;
-  padding: 8pt 16pt;
-  border-radius: var(--radius-lg);
-}
-.docs-grid a:has(img) {
-  padding: 4pt;
-  gap: 0.3em;
-}
-.docs-grid img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: var(--radius-sm);
-  margin: 0;
 }
 /* invert monochrome logos so they stay visible against the page background */
 html[data-theme='light'] img[data-color-invert='light'],
@@ -256,10 +217,10 @@ pre {
   overflow-x: auto;
   padding: 6pt 8pt;
   margin: 1em auto;
-}
-pre code {
-  background-color: transparent;
-  padding: 0;
+  code {
+    background-color: transparent;
+    padding: 0;
+  }
 }
 ul.grid {
   padding: 0;
@@ -271,21 +232,26 @@ ul.grid {
   gap: 0.8em;
   list-style: none;
   container-type: inline-size;
-}
-ul.grid > li.card > h3 {
-  margin: 0;
-  font-weight: 500;
-  text-align: center;
-}
-ul.grid > li.card > h3 a {
-  display: flex;
-  place-content: center;
-  place-items: center;
-  gap: 0.4em;
-}
-ul.grid > li.card > h3 img {
-  object-fit: contain;
-  border-radius: var(--radius-sm);
+  > li.card {
+    padding: 0.8em;
+    display: grid;
+    gap: 0.6em;
+    > h3 {
+      margin: 0;
+      font-weight: 500;
+      text-align: center;
+      a {
+        display: flex;
+        place-content: center;
+        place-items: center;
+        gap: 0.4em;
+      }
+      img {
+        object-fit: contain;
+        border-radius: var(--radius-sm);
+      }
+    }
+  }
 }
 .stat-link {
   display: flex;
@@ -293,9 +259,9 @@ ul.grid > li.card > h3 img {
   place-items: center;
   padding: 0.2em 0.6em;
   color: var(--text-secondary) !important;
-}
-.stat-link:hover {
-  color: var(--text-color) !important;
+  &:hover {
+    color: var(--text-color) !important;
+  }
 }
 .card-description {
   margin: 0;
@@ -317,12 +283,12 @@ blockquote {
   margin: 1em auto;
   background-color: var(--blockquote-bg);
   font-style: italic;
-}
-blockquote p:first-child {
-  margin-top: 0;
-}
-blockquote p:last-child {
-  margin-bottom: 0;
+  p:first-child {
+    margin-top: 0;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 input {
   background-color: var(--input-bg);
@@ -359,7 +325,6 @@ small {
 strong {
   font-weight: 600;
 }
-
 ::selection {
   background-color: var(--selection);
 }

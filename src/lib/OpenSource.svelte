@@ -1,7 +1,7 @@
 <script lang="ts">
   import {
-    asset_url,
     oss_sort_keys,
+    project_logo,
     type OssSortKey,
     project_matches,
     type Project,
@@ -47,12 +47,26 @@
   class="projects grid"
   {@attach highlight_matches({ query, css_class: `highlight-match` })}
 >
-  {#each visible_projects as { url, repo, name, description, stars, logo, commits, role, color_invert, paper_url } (name)}
-    {@const logo_url = logo ? asset_url(logo) : `${url}/favicon.svg`}
+  {#each visible_projects as project (project.name)}
+    {@const {
+      url,
+      repo,
+      name,
+      description,
+      stars,
+      commits,
+      role,
+      color_invert,
+      paper_url,
+    } = project}
     <li class="card" animate:flip={{ duration: 400 }}>
       <h3>
         <a href={url ?? repo} target="_blank" rel="noreferrer">
-          <img src={logo_url} alt="{name} Logo" data-color-invert={color_invert} />
+          <img
+            src={project_logo(project)}
+            alt="{name} Logo"
+            data-color-invert={color_invert}
+          />
           {name}
         </a>
       </h3>
@@ -127,26 +141,26 @@
     border: 1px solid var(--card-border);
     font-size: 1em;
     transition: all 0.2s ease;
-  }
-  input:focus {
-    outline: none;
-    border-color: var(--card-hover-border);
-    background: var(--nav-bg);
+    &:focus {
+      outline: none;
+      border-color: var(--card-hover-border);
+      background: var(--nav-bg);
+    }
   }
   .projects {
     margin: 1.2em auto;
-  }
-  .projects > li {
-    grid-row: span 3;
-    grid-template-columns: subgrid;
-    grid-template-rows: subgrid;
+    > li {
+      grid-row: span 3;
+      grid-template-columns: subgrid;
+      grid-template-rows: subgrid;
+    }
   }
   h3 {
     font-size: 1.1rem;
-  }
-  h3 img {
-    width: 2em;
-    height: 2em;
+    img {
+      width: 2em;
+      height: 2em;
+    }
   }
   .project-stats {
     font-size: 0.8rem;

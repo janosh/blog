@@ -5,9 +5,7 @@ import { assert_ok, create_markdown } from 'svelte-widgets/markdown'
 const engine = create_markdown({ typography: true, frontmatter: false })
 export const projects = await Promise.all(
   oss.projects.map(async (project) => {
-    const paper = project.paper_key
-      ? papers.references.find(({ id }) => id === project.paper_key)
-      : undefined
+    const paper = papers.references.find(({ id }) => id === project.paper_key)
     if (project.paper_key && !paper) {
       throw new Error(`Paper ${project.paper_key} for ${project.name} not found`)
     }

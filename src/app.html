@@ -6,19 +6,6 @@
     <meta name="author" content="Janosh Riebesell" />
     <meta name="color-scheme" content="light dark" />
 
-    <!-- Theme switching (prevent flash before Svelte hydrates) -->
-    <script>
-      const mode = localStorage.theme
-      const theme =
-        mode === 'light' || mode === 'dark'
-          ? mode
-          : matchMedia('(prefers-color-scheme: dark)').matches
-            ? 'dark'
-            : 'light'
-      document.documentElement.style.colorScheme = theme
-      document.documentElement.dataset.theme = theme
-    </script>
-
     <script
       defer
       data-domain="janosh.dev"

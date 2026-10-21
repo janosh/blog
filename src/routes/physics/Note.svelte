@@ -31,9 +31,9 @@
     width: 100%;
     max-width: 360px;
     scroll-margin-top: 2em;
-  }
-  .note:target > a:first-child {
-    border-color: var(--link-color);
+    &:target > a:first-child {
+      border-color: var(--link-color);
+    }
   }
   .source {
     position: absolute;
@@ -43,8 +43,8 @@
     padding: 3pt;
     border-radius: 50%;
     color: var(--text-secondary);
-  }
-  .source:hover {
-    color: var(--link-color);
+    &:hover {
+      color: var(--link-color);
+    }
   }
 </style>

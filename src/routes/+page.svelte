@@ -1,6 +1,6 @@
 <script lang="ts">
   import { asset_url, format_issued } from '#lib'
-  import { social } from '#lib/cv-icons.js'
+  import { social } from '#lib/social.js'
   import { Icon } from 'svelte-widgets'
   import { CvSquare, Newspaper } from 'svelte-widgets/icons'
   import OpenSource from '#lib/OpenSource.svelte'
@@ -10,21 +10,29 @@
   const { data }: PageProps = $props()
 </script>
 
-<img src="./janosh.webp" alt="me" width="200" />
+<img src="./janosh.webp" alt="Janosh Riebesell" class="portrait" width="200" />
 <h1 id="janosh">Janosh</h1>
 
 <address>
   {#each social as { url, icon, style } (url)}
     <a href={url} target="_blank" rel="noreferrer"><Icon {icon} {style} /></a>
   {/each}
-  <a href="/cv"><Icon icon={CvSquare} style="transform: scale(1.1)" /></a>
+  <a href="/cv.pdf" rel="external"
+    ><Icon icon={CvSquare} style="transform: scale(1.1)" /></a
+  >
 </address>
 
 <div class="intro">
   <p style="font-size: 1.1rem">
     <strong>Computational materials scientist</strong>. I work at
-    <a href="https://periodic.com/">Periodic Labs</a> on high-throughput density functional
-    theory (DFT) and machine-learning force fields (MLFFs) for atomistic simulations.
+    <a href="https://periodic.com/"
+      ><img
+        src={asset_url(`periodic-labs-logo.svg`)}
+        alt=""
+        data-color-invert="dark"
+      />Periodic Labs</a
+    > on high-throughput density functional theory (DFT) and machine-learning force fields (MLFFs)
+    for atomistic simulations.
   </p>
 </div>
 
@@ -61,7 +69,7 @@
 <PhysicsNotes />
 
 <style>
-  img[alt='me'] {
+  .portrait {
     display: block;
     border-radius: 50%;
     object-fit: cover;
@@ -82,24 +90,33 @@
     gap: 1em;
     font-size: 16pt;
     margin: 1em auto;
-  }
-  address a {
-    transition: transform 0.2s ease;
-  }
-  address a:hover {
-    transform: scale(1.1);
+    a {
+      transition: transform 0.2s ease;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
   }
   .intro {
     max-width: min(45em, 85vw);
     margin: 1em auto;
     text-align: center;
+    img {
+      height: 0.85em;
+      width: 0.85em;
+      vertical-align: -0.05em;
+      margin: 0 0.3em 0 0.25em;
+    }
   }
   .recent > li > h3 img {
     width: 2.2em;
     height: 2.2em;
   }
-  .project-meta > a,
-  .project-meta > time {
+  .project-meta > :is(a, time) {
+    /* the smaller-font date pill gets stretched to the link pills' height by the flex row,
+       so center its text instead of leaving it top-aligned */
+    display: inline-flex;
+    align-items: center;
     padding: 1pt 6pt;
     font-size: 0.85rem;
   }
