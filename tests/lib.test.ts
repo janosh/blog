@@ -2,16 +2,17 @@ import {
   cover_url,
   date_num,
   format_issued,
+  project_logo,
   project_matches,
   site_routes,
   sort_oss_projects,
-  when_visible,
 } from '#lib'
 import { goto } from '$app/navigation'
 import { page } from '$app/state'
 import { posterior_pct } from '../src/routes/posts/geometric-bayes/bayes.js'
 import { apply_theme_mode } from 'svelte-widgets/theme'
 import { search_actions } from '#lib/search.js'
+import { excerpt, excerpts } from '#lib/server/excerpt.js'
 import { load as load_home } from '../src/routes/+page.server.js'
 import { load as load_oss } from '../src/routes/open-source/+page.server.js'
 import { load as load_posts } from '../src/routes/posts/+page.server.js'
@@ -22,8 +23,8 @@ import Posts from '../src/routes/posts/+page@.svelte'
 import PostLayout from '../src/routes/posts/+layout.svelte'
 import StructureDemo from '../src/routes/posts/new-dielectric-materials/StructureDemo.svelte'
 import Layout from '../src/routes/+layout.svelte'
-import { createRawSnippet } from 'svelte'
-import { Toc } from 'svelte-widgets'
+import { createRawSnippet, type ComponentProps } from 'svelte'
+import { theme_init_script, Toc } from 'svelte-widgets'
 import { render } from 'svelte/server'
 import { expect, it, vi } from 'vite-plus/test'
 
@@ -68,6 +69,14 @@ vi.mock(`#lib/oss.yml`, () => ({
     ],
   },
 }))
+
+const snippet = (html: string) => createRawSnippet(() => ({ render: () => html }))
+const render_layout = (html = ``) =>
+  render(Layout, { props: { data: {}, params: {}, children: snippet(html) } })
+const render_post = (data: ComponentProps<typeof PostLayout>[`data`]) =>
+  render(PostLayout, {
+    props: { data, params: {}, children: snippet(`<p>Post content</p>`) },
+  }).body
 
 it(`loads shared projects, sorted featured work, and matched post metadata`, () => {
   const { projects, recent_work } = load_home()
@@ -116,42 +125,6 @@ it.each([
   },
 )
 
-it.each([false, true])(
-  `releases the visibility observer after activation=%s`,
-  (visible) => {
-    const observe = vi.fn()
-    const disconnect = vi.fn()
-    const activate = vi.fn()
-    let intersect = (_entries: { isIntersecting: boolean }[]) => {
-      throw new Error(`Observer was not installed`)
-    }
-    vi.stubGlobal(
-      `IntersectionObserver`,
-      class {
-        observe = observe
-        disconnect = disconnect
-        constructor(callback: typeof intersect, options: IntersectionObserverInit) {
-          intersect = callback
-          expect(options.rootMargin).toBe(`200px`)
-        }
-      },
-    )
-    const node = {} as HTMLElement
-    const cleanup = when_visible(activate)(node)
-    expect(observe).toHaveBeenCalledWith(node)
-    intersect([{ isIntersecting: false }])
-    expect(activate).not.toHaveBeenCalled()
-    expect(disconnect).not.toHaveBeenCalled()
-    if (visible) {
-      intersect([{ isIntersecting: false }, { isIntersecting: true }])
-      expect(activate).toHaveBeenCalledOnce()
-      expect(disconnect).toHaveBeenCalledOnce()
-    }
-    cleanup?.()
-    expect(disconnect).toHaveBeenCalledTimes(visible ? 2 : 1)
-  },
-)
-
 it(`renders linkable structure headings before loading the 3D renderer`, () => {
   const { body } = render(StructureDemo, {
     props: { structure: { sites: [], charge: 0 }, title: `CsTaTeO6 (Fd-3m)` },
@@ -161,14 +134,10 @@ it(`renders linkable structure headings before loading the 3D renderer`, () => {
 })
 
 it(`keeps the persistent layout TOC responsive to heading changes`, () => {
-  const { body } = render(Layout, {
-    props: {
-      data: {},
-      params: {},
-      children: createRawSnippet(() => ({ render: () => `<main>Example</main>` })),
-    },
-  })
+  const { body, head } = render_layout(`<main>Example</main>`)
   expect(body).toContain(`<main>Example</main>`)
+  // theme restored in <head> before first paint, not left to hydration
+  expect(head).toContain(theme_init_script)
   expect(Toc).toHaveBeenCalledWith(
     expect.anything(),
     expect.objectContaining({ dynamic: true }),
@@ -200,13 +169,7 @@ it.each([0, 1, 2])(
       slug,
       title: `${slug} post`,
     }))
-    const { body } = render(PostLayout, {
-      props: {
-        data: { posts, frontmatter: posts[current_idx] },
-        params: {},
-        children: createRawSnippet(() => ({ render: () => `<p>Post content</p>` })),
-      },
-    })
+    const body = render_post({ posts, frontmatter: posts[current_idx] })
     for (const neighbor_idx of [(current_idx + 2) % 3, (current_idx + 1) % 3]) {
       const { slug, title } = posts[neighbor_idx]
       expect(body).toContain(`href="${slug}"`)
@@ -243,6 +206,17 @@ it.each([
   [`posts`, `hmc-intro`, `https://a.b/c`, /^https:\/\/a\.b\/c$/],
 ] as const)(`resolves cover %s/%s/%s`, (section, slug, img, expected) => {
   expect(cover_url(section, slug, img)).toMatch(expected)
+})
+it.each([
+  // bundled logos resolve to the imported asset (inlined as a data URI when small)
+  [
+    { logo: `torch-sim-logo.svg`, url: `https://x.dev` },
+    /^(?:data:image\/svg\+xml|\/.*torch-sim-logo)/,
+  ],
+  [{ logo: `https://a.b/logo.png`, url: `https://x.dev` }, /^https:\/\/a\.b\/logo\.png$/],
+  [{ url: `https://x.dev` }, /^https:\/\/x\.dev\/favicon\.svg$/],
+])(`resolves project logo %j`, (project, expected) => {
+  expect(project_logo(project)).toMatch(expected)
 })
 it(`reports a missing cover and its directory`, () => {
   expect(() => cover_url(`posts`, `hmc-intro`, `nope.png`)).toThrow(
@@ -315,19 +289,17 @@ it.each([
   },
 )
 
-const render_head = (url: string, frontmatter?: App.PageData[`frontmatter`]) => {
+const render_head = (
+  url: string,
+  frontmatter?: App.PageData[`frontmatter`],
+  data: App.PageData = {},
+) => {
   Object.assign(page, {
     url: new URL(url),
     route: { id: new URL(url).pathname },
-    data: { frontmatter },
+    data: { frontmatter, ...data },
   })
-  return render(Layout, {
-    props: {
-      data: {},
-      params: {},
-      children: createRawSnippet(() => ({ render: () => `` })),
-    },
-  }).head
+  return render_layout().head
 }
 
 it(`marks only posts as og:type article with publish date and tags`, () => {
@@ -362,6 +334,71 @@ it(`marks only posts as og:type article with publish date and tags`, () => {
 
 it.each([
   [
+    `---\ntitle: T\n---\n<script>\nlet x = 1\n</script>\n\n## Heading\n\nFirst *real* para.`,
+    `First real para.`,
+  ],
+  [
+    `import a from './a'\n\nSee [the docs](https://x.y) and \`code\`[^1] with snake_case.`,
+    `See the docs and code with snake_case.`,
+  ],
+  [
+    `- list item\n\n> quote\n\n![img](a.png)\n\n$$x$$\n\nProse $E = mc^2$ here.`,
+    `Prose E = mc^2 here.`,
+  ],
+  [`${`word `.repeat(40)}end`, `${`word `.repeat(32).trim()}…`],
+  [`# only a heading`, ``],
+  [`x`.repeat(200), `${`x`.repeat(159)}…`], // no space to cut at
+  [`{#if x}\n\nShown text.\n\n{/if}`, `Shown text.`],
+  [`---\r\ntitle: T\r\n---\r\nCRLF frontmatter.`, `CRLF frontmatter.`],
+  [`See [A](https://w.org/A_(b)) end.`, `See A end.`],
+  [`${`ab `.repeat(52)}cd, efg`, `${`ab `.repeat(52)}cd…`], // no dangling comma
+])(`excerpts the first prose paragraph of %j`, (markdown, expected) => {
+  expect(excerpt(markdown)).toBe(expected)
+})
+
+it(`gives every post and physics page a description`, () => {
+  expect(Object.keys(excerpts).length).toBeGreaterThan(20)
+  for (const [route, text] of Object.entries(excerpts)) {
+    expect(text, route).toMatch(/^[A-Z0-9].{20,159}$/u)
+    expect(text, route).not.toMatch(/import |\]\(|\[\^|[{}\\]|&\w+;|[,;:]…$/u)
+  }
+})
+
+it.each([
+  [`https://janosh.dev/`, /Periodic Labs/u, true],
+  [`https://janosh.dev/cv`, /^CV of Janosh/u, true],
+  [`https://janosh.dev/posts`, /^Posts by Janosh/u, false],
+  [`https://janosh.dev/posts/x`, /^Custom$/u, false], // frontmatter description wins
+])(
+  `describes %s and embeds schema.org Person only on home and CV`,
+  (url, desc, json_ld) => {
+    const frontmatter = url.endsWith(`/x`)
+      ? { title: `X`, slug: `x`, cover: { img: `a.svg` }, description: `Custom` }
+      : undefined
+    const head = render_head(url, frontmatter, json_ld ? load_home() : {})
+    const { description } =
+      /<meta name="description" content="(?<description>[^"]+)"/u.exec(head)?.groups ?? {}
+    expect(description).toMatch(desc)
+    expect(head).toContain(`<meta property="og:description" content="${description}"`)
+    const { json } =
+      /<script type="application\/ld\+json">(?<json>.+?)<\/script>/u.exec(head)?.groups ??
+      {}
+    expect(Boolean(json)).toBe(json_ld)
+    if (json) {
+      const person = JSON.parse(json)
+      expect(person).toMatchObject({
+        '@type': `Person`,
+        worksFor: { name: `Periodic Labs` },
+      })
+      expect(person.sameAs).toContain(`https://orcid.org/0000-0001-5233-3462`)
+      for (const link of person.sameAs) expect(link).toMatch(/^https:\/\//u)
+    }
+    render_head(`https://janosh.dev/posts`) // restore the default mock page
+  },
+)
+
+it.each([
+  [
     { origin: `Vecteezy`, url: `https://vecteezy.com/x` },
     `Cover: <a href="https://vecteezy.com/x">Vecteezy</a>`,
   ],
@@ -370,13 +407,7 @@ it.each([
 ])(`credits cover source %j`, (credit, expected) => {
   const [post] = load_posts().posts
   const cover = { img: `https://example.com/cover.svg`, ...credit }
-  const { body } = render(PostLayout, {
-    props: {
-      data: { posts: [post], frontmatter: { ...post, cover } },
-      params: {},
-      children: createRawSnippet(() => ({ render: () => `<p>Post content</p>` })),
-    },
-  })
+  const body = render_post({ posts: [post], frontmatter: { ...post, cover } })
   const html = body.replaceAll(/<!--[^>]*-->/gu, ``).replaceAll(/\s+/gu, ` `)
   if (expected) expect(html).toContain(expected)
   else expect(html).not.toContain(`Cover:`)

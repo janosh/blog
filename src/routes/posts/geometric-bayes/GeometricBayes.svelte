@@ -85,11 +85,11 @@
     box-sizing: border-box;
     background: SteelBlue;
     border: 2px solid white;
-  }
-  #result div {
-    background: DeepSkyBlue;
-    height: 100%;
-    border-right: 2px solid white;
-    position: relative;
+    div {
+      background: DeepSkyBlue;
+      height: 100%;
+      border-right: 2px solid white;
+      position: relative;
+    }
   }
 </style>

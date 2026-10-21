@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { asset_url } from '#lib'
-  import { hobbies, skill_groups, social } from '#lib/cv-icons.js'
+  import { asset_url, project_logo } from '#lib'
+  import { hobbies, skill_groups } from '#lib/cv-icons.js'
+  import { social } from '#lib/social.js'
   import { Icon, Popover, ThemeToggle } from 'svelte-widgets'
   import {
     AccountGroup,
@@ -19,7 +20,7 @@
   } from 'svelte-widgets/icons'
   import type { PageProps } from './$types'
   import cv from './cv.yml'
-  import { print_cv } from './index.js'
+  import { add_single_page_style, print_cv } from './index.js'
   import Papers from './Papers.svelte'
   import Intro from './intro.md'
 
@@ -35,11 +36,24 @@
     pdf_menu_open = false
     print_cv(cv_main, single_page)
   }
+
+  // build-pdf.ts prints /cv?single-page with headless Chrome to produce /cv.pdf; measure
+  // once fonts and images have loaded so the page height is final
+  $effect(() => {
+    const node = cv_main
+    if (!node || !new URLSearchParams(location.search).has(`single-page`)) return
+    let style: HTMLStyleElement | undefined
+    const measure = () =>
+      document.fonts.ready.then(() => (style = add_single_page_style(node)))
+    if (document.readyState === `complete`) measure()
+    else addEventListener(`load`, measure, { once: true })
+    return () => style?.remove()
+  })
 </script>
 
 <main bind:this={cv_main} data-cv>
   <section class="title">
-    <h1 id="janosh-riebesell-cv">Janosh Riebesell - CV</h1>
+    <h1 id="janosh-riebesell-cv">Janosh Riebesell – CV</h1>
 
     <address style="font-size: 1.2em">
       {#each social as { url, icon, style } (url)}
@@ -53,11 +67,17 @@
 
     <h2 id="experience"><Icon icon={Briefcase} />&nbsp; Experience</h2>
     <ul class="experience">
-      {#each cv.experience as { organization, href, role, dates, contributions } (organization)}
+      {#each cv.experience as { organization, href, logo, color_invert, role, dates, contributions } (organization)}
         <li>
           <header>
             <h3>
-              <a {href} {...links}>{organization}</a>{#if role}&nbsp;— {role}{/if}
+              <a {href} {...links}
+                ><img
+                  src={asset_url(logo)}
+                  alt=""
+                  data-color-invert={color_invert}
+                />{organization}</a
+              >{#if role}&nbsp;— {role}{/if}
             </h3>
             <small>{dates}</small>
           </header>
@@ -76,13 +96,27 @@
     </h2>
 
     <ul class="oss">
-      {#each data.projects as { url, color_invert, repo, name, contribution, role, stars, logo, languages, commits } (name)}
-        {@const logo_url = logo ? asset_url(logo) : `${url}/favicon.svg`}
+      {#each data.projects as project (project.name)}
+        {@const {
+          url,
+          color_invert,
+          repo,
+          name,
+          contribution,
+          role,
+          stars,
+          languages,
+          commits,
+        } = project}
         <li>
           <header>
             <h4>
               <a href={url ?? repo} {...links}>
-                <img src={logo_url} alt="{name} Logo" data-color-invert={color_invert} />
+                <img
+                  src={project_logo(project)}
+                  alt="{name} Logo"
+                  data-color-invert={color_invert}
+                />
                 {name}
               </a>
               <a href={repo} {...links}><Icon icon={GitHub} /></a>
@@ -120,11 +154,12 @@
 
     <h2 id="education"><Icon icon={Education} />&nbsp; Education</h2>
     <ul>
-      {#each cv.education as { title, thesis, href, uni } (title)}
+      {#each cv.education as { title, thesis, href, uni, logo } (title)}
         <li>
           <h4 style="margin: 2ex 0 1ex">
+            <img src={asset_url(logo)} alt="" class="edu-logo" />
             <a {href}>{title}</a>
-            <span style="font-weight: 200"> - {uni}</span>
+            <span style="font-weight: 200"> – {uni}</span>
           </h4>
           Thesis:&nbsp;{#if thesis.url}<a href={thesis.url}>{thesis.title}</a
             >{:else}{thesis.title}{/if}
@@ -168,11 +203,11 @@
           <dt>{group_name}</dt>
           <dd>
             <ul class="skills">
-              {#each items as { name, icon, svg, href, site } (name)}
+              {#each items as { name, icon, logo, href, site } (name)}
                 <li>
                   <a href={href ?? site}>
-                    {#if svg}
-                      <img src={svg} alt="{name} logo" class="skill-svg" />
+                    {#if logo}
+                      <img src={asset_url(logo)} alt="{name} logo" class="skill-logo" />
                     {:else if icon}
                       <Icon {icon} />
                     {/if}
@@ -284,6 +319,13 @@
       h3 {
         margin: 0;
         font-size: 1em;
+        img {
+          height: 1.2em;
+          width: 1.2em;
+          object-fit: contain;
+          vertical-align: -0.25em;
+          margin-right: 0.4em;
+        }
       }
       small {
         margin-left: auto;
@@ -369,7 +411,14 @@
       margin: 0;
     }
   }
-  .skill-svg {
+  .edu-logo {
+    height: 1.2em;
+    width: 1.2em;
+    object-fit: contain;
+    vertical-align: -0.25em;
+    margin-right: 0.3em;
+  }
+  .skill-logo {
     height: 1em;
     width: auto;
     vertical-align: -0.125em;

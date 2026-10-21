@@ -1,5 +1,6 @@
 ---
 title: Compile VASP on M1 Mac
+description: Step-by-step guide to compiling VASP on an Apple Silicon (M1) Mac, by Alex Ganose and Janosh Riebesell.
 date: 2022-03-28
 cover:
   img: compiling-vasp-m1-mac.svg

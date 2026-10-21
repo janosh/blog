@@ -1,9 +1,11 @@
 import { projects } from '#lib/server/oss.js'
 import { publications } from '#lib/server/papers.js'
+import { person_json_ld } from '#lib/server/person.js'
 import { date_num } from '#lib'
 import cv from './cv.yml'
 
 export const load = () => ({
+  person_json_ld,
   projects: cv.selected_projects.map((selection) => {
     const project = projects.find(({ name }) => name === selection.name)
     if (!project) throw new Error(`Unknown CV project: ${selection.name}`)

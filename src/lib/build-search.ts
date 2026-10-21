@@ -58,8 +58,8 @@ export function typst_text(src: string): string {
 }
 
 // Split a Typst note at its headings (`= Title` markup, `#heading(...)[Title]` calls or the
-// `#part[Title]` helper of atomic-physics/sheet.typ) into
-// the text before the first heading and one { title, text } per heading, in document order.
+// `#part[Title]` helper of atomic-physics/sheet.typ) into the text before the first heading
+// and one { title, text } per heading, in document order.
 export function typst_sections(src: string) {
   const [intro, ...chunks] = src.split(/^(?==+\s|#heading\(|#part\[)/mu)
   const sections = chunks.map((chunk) => {

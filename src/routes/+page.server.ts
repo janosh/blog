@@ -2,6 +2,7 @@ import { date_num } from '#lib'
 import oss from '#lib/oss.yml'
 import papers from '#lib/papers.yaml'
 import { projects } from '#lib/server/oss.js'
+import { person_json_ld } from '#lib/server/person.js'
 
 // featured projects and the PhD thesis as one date-sorted list for Recent Work
 const recent_work = [
@@ -26,7 +27,7 @@ const recent_work = [
   {
     name: `PhD Thesis`,
     url: `/physics/phd-thesis`,
-    logo: `https://github.com/janosh/thesis/raw/main/figs/cambridge-crest.svg`,
+    logo: `cambridge-coat-of-arms.svg`,
     color_invert: undefined,
     description: `Towards Machine Learning Foundation Models for Materials Chemistry — Matbench Discovery, ML-guided dielectric discovery and the MACE-MP foundation model.`,
     issued: { year: 2024 },
@@ -37,4 +38,4 @@ const recent_work = [
   },
 ].toSorted((card_1, card_2) => date_num(card_2.issued) - date_num(card_1.issued))
 
-export const load = () => ({ projects, recent_work })
+export const load = () => ({ projects, recent_work, person_json_ld })

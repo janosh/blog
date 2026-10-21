@@ -44,8 +44,11 @@ it(`RSS lists posts with absolute links and escaped titles`, async () => {
       `<title>${title.replaceAll(`&`, `&amp;`).replaceAll(`<`, `&lt;`)}</title>`,
     )
   }
+  expect(xml.match(/<description>[^<]{20,}<\/description>/g)).toHaveLength(
+    posts.length + 1,
+  )
   // stray unescaped ampersands would make the feed invalid XML
-  expect(xml).not.toMatch(/&(?!amp;|lt;|gt;)/)
+  expect(xml).not.toMatch(/&(?!amp;|lt;|gt;|quot;|#\d+;)/)
 })
 
 it(`sitemap lists page routes, with lastmod only on posts`, async () => {

@@ -12,6 +12,7 @@ const root = `src/routes/physics`
 const args = process.argv.slice(2)
 const sources = args.length ? args : globSync(`${root}/**/pdfs/*.typ`)
 const scratch = mkdtempSync(join(tmpdir(), `notes-`))
+const png = join(scratch, `page.png`)
 
 for (const typ of sources) {
   const compile = (out: string, ...flags: string[]) =>
@@ -20,7 +21,6 @@ for (const typ of sources) {
     })
   compile(typ.replace(/\.typ$/u, `.pdf`))
   // first page at 100 ppi (827 x 1169 px for A4), matching the existing thumbnails
-  const png = join(scratch, `page.png`)
   compile(png, `--pages`, `1`, `--ppi`, `100`)
   const thumb = typ.replace(`/pdfs/`, `/thumbnails/`).replace(/\.typ$/u, `.webp`)
   execFileSync(`magick`, [

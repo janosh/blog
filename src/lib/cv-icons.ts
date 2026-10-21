@@ -9,10 +9,7 @@ import {
   Cluster,
   Deno,
   Git,
-  GitHub,
-  GoogleScholar,
   Hiking,
-  LinkedIn,
   MongoDB,
   NodeJs,
   Playwright,
@@ -20,19 +17,15 @@ import {
   PyTorch,
   React,
   Rust,
+  Server,
   Svelte,
   TypeScript,
-  Email,
   Vite,
 } from 'svelte-widgets/icons'
 import cv from '../routes/cv/cv.yml'
 
-// keys are the YAML `name` fields of social links, skills and hobbies
+// keys are the YAML `name` fields of skills and hobbies
 const ICONS: Record<string, IconData> = {
-  GitHub,
-  'Google Scholar': GoogleScholar,
-  LinkedIn,
-  Email,
   Python,
   TypeScript,
   Svelte,
@@ -43,35 +36,28 @@ const ICONS: Record<string, IconData> = {
   PyTorch,
   Rust,
   React,
+  HPC: Server,
   'Node.js': NodeJs,
   Deno,
   Vite,
-  PlayWright: Playwright,
+  Playwright,
   photography: Camera,
   hiking: Hiking,
   cycling: Bike,
   climbing: Climbing,
 }
 
-const require_icon = (name: string): IconData => {
-  const icon: IconData | undefined = ICONS[name]
-  if (!icon) throw new Error(`No svelte-widgets glyph mapped for "${name}"`)
-  return icon
+const with_icon = <EntryT extends { name: string }>(entry: EntryT) => {
+  const icon: IconData | undefined = ICONS[entry.name]
+  if (!icon) throw new Error(`No svelte-widgets glyph mapped for "${entry.name}"`)
+  return { ...entry, icon }
 }
 
-export const social = cv.social.map((entry) => ({
-  ...entry,
-  icon: require_icon(entry.name),
-}))
-export const hobbies = cv.hobbies.map((entry) => ({
-  ...entry,
-  icon: require_icon(entry.name),
-}))
-// SVG logos skip the icon map; everything else must resolve to a glyph
+export const hobbies = cv.hobbies.map(with_icon)
+// skills with a logo file skip the icon map; everything else must resolve to a glyph
 export const skill_groups = cv.skills.map(({ name, items }) => ({
   name,
-  items: items.map((entry) => ({
-    ...entry,
-    icon: entry.svg ? undefined : require_icon(entry.name),
-  })),
+  items: items.map((entry) =>
+    entry.logo ? { ...entry, icon: undefined } : with_icon(entry),
+  ),
 }))

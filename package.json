@@ -23,7 +23,7 @@
     "#root/*": "./*"
   },
   "scripts": {
-    "build": "vp build && node src/lib/build-search.ts",
+    "build": "vp build && node src/lib/build-search.ts && node src/routes/cv/build-pdf.ts",
     "build-notes": "node src/routes/physics/build-notes.ts",
     "update-oss": "node src/lib/update-oss.ts"
   },

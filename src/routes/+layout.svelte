@@ -7,7 +7,7 @@
   import favicon_svg from '#lib/favicon.svg'
   import { search_actions } from '#lib/search.js'
   import { homepage, repository } from '#root/package.json'
-  import { CopyButton, GitHubCorner, PageSearch, Toc } from 'svelte-widgets'
+  import { CopyButton, GitHubCorner, PageSearch, ThemeScript, Toc } from 'svelte-widgets'
   import { highlight_matches } from 'svelte-widgets/attachments'
   import type { LayoutProps } from './$types'
   // oxlint-disable-next-line no-unassigned-import
@@ -19,27 +19,40 @@
   let { children }: LayoutProps = $props()
 
   let page_search_query = $state(``)
-  const section_titles: Record<string, string> = {
-    '/posts': `Posts`,
-    '/physics': `Physics`,
-    '/open-source': `Open Source`,
-    '/cv': `CV`,
+  const pitch = `Janosh Riebesell, computational materials scientist at Periodic Labs working on machine-learning force fields, high-throughput DFT and open-source atomistic software.`
+  const sections: Record<string, { title: string; description: string }> = {
+    '/posts': {
+      title: `Posts`,
+      description: `Posts by Janosh Riebesell on physics, machine learning, materials science and web development.`,
+    },
+    '/physics': {
+      title: `Physics`,
+      description: `Lecture notes, exam solutions and theses in theoretical physics by Janosh Riebesell, from quantum field theory to general relativity.`,
+    },
+    '/open-source': {
+      title: `Open Source`,
+      description: `Open-source software by Janosh Riebesell for materials science, atomistic simulation, data visualization and web development.`,
+    },
+    '/cv': { title: `CV`, description: `CV of ${pitch}` },
   }
 
-  const site_description = `I write about physics, materials science and sustainability.`
   // post or physics frontmatter of the current page (undefined on index/list pages)
   const frontmatter = $derived(page.data.frontmatter)
   // only posts have a publish date (physics pages and 404s don't)
   const post = $derived(frontmatter && `date` in frontmatter ? frontmatter : undefined)
-  const title = $derived(section_titles[page.route.id ?? ``] ?? frontmatter?.title)
+  const section_meta = $derived(sections[page.route.id ?? ``])
+  const title = $derived(section_meta?.title ?? frontmatter?.title)
+  const description = $derived(
+    section_meta?.description ?? frontmatter?.description ?? pitch,
+  )
   const page_title = $derived(title ? `${title} · janosh.dev` : `janosh.dev`)
+  const favicon_og = new URL(favicon_png, homepage).href
   const og_image = $derived.by(() => {
-    if (!frontmatter) return new URL(favicon_png, homepage).href
+    if (!frontmatter) return favicon_og
     const { slug, cover } = frontmatter
     const section = post ? `posts` : `physics`
     const { stem, ext } = /^(?<stem>.+)\.(?<ext>\w+)$/u.exec(cover.img)?.groups ?? {}
-    if (cover.img.startsWith(`http`))
-      return ext === `svg` ? new URL(favicon_png, homepage).href : cover.img
+    if (cover.img.startsWith(`http`)) return ext === `svg` ? favicon_og : cover.img
     // social sites don't render SVG (or reliably WebP/AVIF), so those covers get a
     // prerendered PNG/JPEG copy (routes/og)
     if (ext === `svg`) return `${homepage}/og/${section}/${slug}/${stem}.png`
@@ -54,16 +67,24 @@
   afterNavigate(() => (page_search_query = ``))
 </script>
 
+<ThemeScript />
+
 <svelte:head>
   <title>{page_title}</title>
   <link rel="icon" href={favicon_svg} />
   <link rel="apple-touch-icon" href={favicon_png} />
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="janosh.dev posts"
+    href="/rss.xml"
+  />
   <meta data-pagefind-meta="title[content]" content={page_title} />
-  <meta name="description" content={site_description} />
+  <meta name="description" content={description} />
   <meta property="og:site_name" content="janosh.dev" />
   <meta property="og:type" content={post ? `article` : `website`} />
   <meta property="og:title" content={page_title} />
-  <meta property="og:description" content={site_description} />
+  <meta property="og:description" content={description} />
   <meta property="og:url" content={`${homepage}${page.url.pathname}`} />
   <meta property="og:image" content={og_image} />
   <meta name="twitter:card" content={frontmatter ? `summary_large_image` : `summary`} />
@@ -72,6 +93,9 @@
     {#each post.tags as tag (tag)}
       <meta property="article:tag" content={tag} />
     {/each}
+  {/if}
+  {#if page.data.person_json_ld}
+    {@html page.data.person_json_ld}
   {/if}
 </svelte:head>
 

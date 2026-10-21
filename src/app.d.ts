@@ -6,13 +6,14 @@ namespace App {
   interface PageData {
     // set by the posts and physics layouts on /posts/[slug] and /physics/[slug]
     frontmatter?: PageMeta | PostMeta
+    // schema.org Person <script>, set by the home page and CV
+    person_json_ld?: string
   }
 }
 
 declare module '*cv.yml' {
   import type * as types from '#lib/types.js'
   const cv: {
-    social: types.Social[]
     experience: types.Experience[]
     selected_projects: types.CvProject[]
     selected_publications: string[]

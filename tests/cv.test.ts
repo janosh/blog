@@ -1,4 +1,5 @@
 import { print_cv } from '../src/routes/cv/index.js'
+import { asset_url } from '#lib'
 import {
   extract_citations,
   prepare_publication,
@@ -7,6 +8,7 @@ import {
 import type { Reference } from '#lib/types.js'
 import papers from '#lib/papers.yaml'
 import cv from '../src/routes/cv/cv.yml'
+import oss from '#lib/oss.yml'
 import { load as load_cv } from '../src/routes/cv/+page.server.js'
 import Cv from '../src/routes/cv/+page.svelte'
 import Papers from '../src/routes/cv/Papers.svelte'
@@ -15,6 +17,13 @@ import * as printing from 'svelte-widgets/print'
 import { afterEach, expect, it, vi } from 'vite-plus/test'
 
 afterEach(() => vi.useRealTimers())
+
+const reference: Reference = {
+  id: `example`,
+  title: `Example`,
+  issued: [{ year: 2025 }],
+  author: [{ given: `Janosh`, family: `Riebesell` }],
+}
 
 it(`renders curated work and keeps the remaining publications accessible without duplicates`, () => {
   const data = load_cv()
@@ -136,13 +145,6 @@ it.each([
   expect(vi.getTimerCount()).toBe(0)
 })
 
-const reference: Reference = {
-  id: `example`,
-  title: `Example`,
-  issued: [{ year: 2025 }],
-  author: [{ given: `Janosh`, family: `Riebesell` }],
-}
-
 it.each([
   [`A,B`, 1, `A,me`],
   [`A,B,C`, 0, `me,B,C`],
@@ -215,4 +217,20 @@ it.each([
   ],
 ])(`extracts maximum citations from %j`, (note, citations, citation_database) => {
   expect(extract_citations(note)).toEqual({ citations, citation_database })
+})
+
+it(`resolves every CV and open-source logo to a bundled SVG`, () => {
+  const logos = [
+    ...cv.experience.map(({ logo }) => logo),
+    ...cv.education.map(({ logo }) => logo),
+    ...oss.projects.map(({ logo }) => logo),
+    ...cv.community.map(({ img }) => img),
+    ...cv.skills.flatMap(({ items }) => items.map(({ logo }) => logo)),
+  ].filter((file) => file !== undefined)
+  expect(logos).toHaveLength(19 + oss.projects.length)
+  for (const file of logos) {
+    expect(file, file).toMatch(/^[\w-]+\.svg$/u) // vendored SVGs, no hotlinks or rasters
+    expect(asset_url(file), file).not.toBe(file)
+  }
+  expect(load_cv().person_json_ld).toContain(`"jobTitle":"Member of Technical Staff"`)
 })

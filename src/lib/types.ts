@@ -2,6 +2,8 @@
 export type PageMeta = {
   title: string
   slug: string
+  // meta description; defaults to an excerpt of the page's first paragraph
+  description?: string
   cover: {
     img: string
     caption?: string
@@ -30,6 +32,8 @@ export type Education = {
 export type Experience = {
   organization: string
   href: string
+  logo: string
+  color_invert?: Project[`color_invert`]
   role?: string
   dates: string
   contributions: string[]
@@ -52,9 +56,9 @@ export type Reference = {
   note?: string
 }
 
-export type Publication = Pick<Reference, 'id' | 'title' | 'DOI' | 'URL'> & {
+export type Publication = Pick<Reference, `id` | `title` | `DOI` | `URL`> & {
   authors: ({ name: string; is_me: boolean } | null)[]
-  issued: Reference['issued'][number]
+  issued: Reference[`issued`][number]
   journal?: string
   citations: number
   citation_database: string
@@ -80,7 +84,7 @@ export type Project = {
 
 export type Skill = {
   name: string
-  svg?: string
+  logo?: string // file in src/lib, used instead of a svelte-widgets glyph
   href?: string
   site?: string
 }
@@ -112,12 +116,6 @@ export type Language = {
 export type Nationality = {
   title: string
   flag: string
-}
-
-export type Social = {
-  name: string
-  url: string
-  style?: string
 }
 
 export type OssSortKey = `commits` | `stars` | `name`
