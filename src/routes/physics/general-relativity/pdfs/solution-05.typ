@@ -27,7 +27,7 @@ Ignoring time, the spatial components of the Riemann curvature tensor in terms o
 $ riem(i, j k m) := partial_k chr(i, j m) - partial_m chr(i, j k) + chr(i, n k) chr(n, j m) - chr(i, n m) chr(n, j k), $
 where $i, j, k, m, n in {x^1 = theta, x^2 = phi.alt}$. As mentioned in the lecture, the Riemann tensor has the symmetries
 $ R_(i j k m) = -R_(swap(j i) k m) = -R_(i j swap(m k)), quad R_(i j k m) = R_(swap(k m i j)), quad R_(i j k m) + R_(i k m j) + R_(i m j k) = 0, $
-so that it only has $d = n^2/12 (n^2 - 1) = 4^2/12 (4^2 - 1) = 20$ independent components. Using all symmetries and the restriction to a 2-sphere, the Riemann tensor can be written more compactly as $riem(i, j k m) = 1/r^2 (delta^i_k g_(j m) - delta^i_m g_(j k))$. This form makes it plain that $riem(i, j k m) != 0$ only if $i = k$ or $i = m$, so that we may expect four non-zero entries. We compute them using the lecture's definition:
+so that it only has $d = n^2/12 (n^2 - 1)$ independent components, i.e. 20 in four dimensions but only $2^2/12 (2^2 - 1) = 1$ on the 2-sphere. Using all symmetries and the restriction to a 2-sphere, the Riemann tensor can be written more compactly as $riem(i, j k m) = 1/r^2 (delta^i_k g_(j m) - delta^i_m g_(j k))$. This form makes it plain that $riem(i, j k m) != 0$ only if $i = k$ or $i = m$, so that we may expect four non-zero entries. We compute them using the lecture's definition:
 $
   riem(1, 212) & = partial_1 chr(1, 22) - partial_2 underbrace(chr(1, 21), 0) + chr(1, n 1) chr(n, 22) - chr(1, n 2) chr(n, 21) \
   & = partial_1 chr(1, 22) + chr(1, 21) underbrace(chr(2, 22), 0) - chr(1, 22) chr(2, 21) \
@@ -38,7 +38,7 @@ The other possibly non-zero independent entry of the Riemann tensor can be found
 $
   riem(2, 121) & = partial_2 underbrace(chr(2, 11), 0) - partial_1 chr(2, 12) + chr(2, n 2) underbrace(chr(n, 11), 0 thin forall n) - chr(2, n 1) chr(n, 12) \
   & = -partial_1 chr(2, 12) - chr(2, 21) chr(2, 12) = -partial_theta cot theta - cot^2 theta \
-  & = -(-sin theta)/(sin theta) - (-cos^2 theta)/(sin^2 theta) - cot^2 theta = 1 = -riem(2, 112).
+  & = (sin^2 theta + cos^2 theta)/(sin^2 theta) - cot^2 theta = 1 = -riem(2, 112).
 $
 
 #task(label: "b")[Calculate the Ricci tensor $R_(mu nu)$.]

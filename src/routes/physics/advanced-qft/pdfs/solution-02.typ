@@ -37,7 +37,7 @@ $
   & = lim_(N -> oo) integral dd(p_0) product_(k=1)^N dif p_k dif q_k q(t_1) q(t_2) product_(k=0)^N bra(q_(k+1)) e^(-i f(ph) delta t) ket(p_k) bra(p_k) e^(-i V(qh) delta t) ket(q_k) \
   & = lim_(N -> oo) integral product_(k=1)^N dif q_k q(t_1) q(t_2) product_(k=0)^N bra(q_(k+1)) e^(-i f(ph) delta t) e^(-i V(qh) delta t) #h(0.3em) ket(q_k).
 $
-Here, we insert a zero in the form of $e^(1/2 [f(ph), V(qh)] delta t^2 + cal(O)(delta t^3))$ (to the right of $e^(-i V(qh) delta t)$), which vanishes when performing the limit $lim_(N -> oo)$. We can apply the Baker-Campbell-Hausdorff formula backwards to get
+Here, we insert a one in the form of $e^(1/2 [f(ph), V(qh)] delta t^2 + cal(O)(delta t^3))$ (to the right of $e^(-i V(qh) delta t)$), which vanishes when performing the limit $lim_(N -> oo)$. We can apply the Baker-Campbell-Hausdorff formula backwards to get
 $
   integral_(q(t_I) = q_I)^(q(t_F) = q_F) Dm q(t) Dm p(t) q(t_1) q(t_2) e^(i S[p, q]) & = lim_(N -> oo) integral product_(k=1)^N dif q_k q(t_1) q(t_2) product_(k=0)^N bra(q_(k+1)) e^(-i f(ph) delta t) e^(-i V(qh) delta t) e^(1/2 [f(ph), V(qh)] delta t^2 + dots.c) ket(q_k) \
   & = lim_(N -> oo) integral product_(k=1)^N dif q_k q(t_1) q(t_2) product_(k=0)^N bra(q_(k+1)) e^(-i Hh delta t) ket(q_k).
@@ -67,11 +67,11 @@ Above, in the line where we performed all the $q$-integrals, $integral dd(q_k) k
 
 We now move on to a shorter and more elegant proof of eq. (1) that is also more intrinsic to the path integral formulation. It works via dissection of the path integral. We operate here under the assumption that $t_F > t_1 > t_2 > t_I$ or $t_F > t_2 > t_1 > t_I$, i.e. that $t_1$ is truly larger/smaller than $t_2$. If $t_1 = t_2$, time-ordering is obsolete and there is nothing to show.
 $ integral_(q(t_I) = q_I)^(q(t_F) = q_F) Dm q(t) Dm p(t) q(t_1) q(t_2) e^(i S[p, q]) := lim_(N -> oo) integral (dif p_0) / (2 pi) product_(k=1)^N (dif p_k dif q_k) / (2 pi) q(t_1) q(t_2) e^(i sum_(k=0)^N overbrace((p_k (q_(k+1) - q_k) / (delta t) - H(p_k, overline(q)_k)), = L(p_k, overline(q)_k)) delta t). $
-The product $product_(k=1)^N$ we now split up at $j$ such that $j delta t = 1/2 |t_1 - t_2|$. This ensures that $q(t_2)$ and $q(t_1)$ can each be evaluated solely in one of the two resulting integrals and that they can be evaluated separately from one another. To actually perform the path integral split-up, we may trouble Fubini's theorem and refer to the well-definedness of the path integral in quantum mechanics as demonstrated in section 7.1 of the script. To save on writing, we hence assume $t_1 > t_2$.
-$ = lim_(N -> oo) integral (dif p_0) / (2 pi) product_(k=1)^(j-1) (dif p_k dif q_k) / (2 pi) q(t_1) e^(i sum_(k=0)^N L(p_k, overline(q)_k)) integral dd(q_j) integral (dif p_j) / (2 pi) product_(k=j+1)^N (dif p_k dif q_k) / (2 pi) q(t_2) e^(i sum_(k=0)^N L(p_k, overline(q)_k)). $
-In the above line, we note that our split-up created two new path integrals and an integral over $q_(j+1)$ in between. The expression can therefore be rewritten, again using Fubini's theorem to rearrange integrals, as
+The product $product_(k=1)^N$ we now split up at $j$ such that $t_j = t_I + j delta t$ lies between $t_2$ and $t_1$, e.g. $t_j = 1/2 (t_1 + t_2)$. This ensures that $q(t_2)$ and $q(t_1)$ can each be evaluated solely in one of the two resulting integrals and that they can be evaluated separately from one another. To actually perform the path integral split-up, we may trouble Fubini's theorem and refer to the well-definedness of the path integral in quantum mechanics as demonstrated in section 7.1 of the script. To save on writing, we hence assume $t_1 > t_2$.
+$ = lim_(N -> oo) integral (dif p_0) / (2 pi) product_(k=1)^(j-1) (dif p_k dif q_k) / (2 pi) q(t_2) e^(i sum_(k=0)^N L(p_k, overline(q)_k)) integral dd(q_j) integral (dif p_j) / (2 pi) product_(k=j+1)^N (dif p_k dif q_k) / (2 pi) q(t_1) e^(i sum_(k=0)^N L(p_k, overline(q)_k)). $
+In the above line, we note that our split-up created two new path integrals and an integral over $q_j$ in between. The expression can therefore be rewritten, again using Fubini's theorem to rearrange integrals, as
 $
-  & = integral dd(q_(j+1)) integral_(q(t_I) = q_I)^(q(t_j) = q_j) Dm q(t) Dm p(t) q(t_1) e^(i S[p, q]) integral_(q(t_j) = q_j)^(q(t_F) = q_F) Dm q(t) Dm p(t) q(t_2) e^(i S[p, q]) \
+  & = integral dd(q_j) integral_(q(t_j) = q_j)^(q(t_F) = q_F) Dm q(t) Dm p(t) q(t_1) e^(i S[p, q]) integral_(q(t_I) = q_I)^(q(t_j) = q_j) Dm q(t) Dm p(t) q(t_2) e^(i S[p, q]) \
   & = integral dd(q_j) chevron.l q_F, t_F | qh_H (t_1) | q_j, t_j chevron.r chevron.l q_j, t_j | qh_H (t_2) | q_I, t_I chevron.r \
   & = integral dd(q_j) chevron.l q_F, t_F | qh_H (t_1) e^(i Hh t_j) | q_j chevron.r chevron.l q_j | e^(-i Hh t_j) qh_H (t_2) | q_I, t_I chevron.r = chevron.l q_F, t_F | qh_H (t_1) e^(i Hh t_j) e^(-i Hh t_j) qh_H (t_2) | q_I, t_I chevron.r \
   & = chevron.l q_F, t_F | qh_H (t_1) qh_H (t_2) | q_I, t_I chevron.r = chevron.l q_F, t_F | T qh_H (t_1) qh_H (t_2) | q_I, t_I chevron.r,
@@ -108,7 +108,7 @@ $
 $
   (delta S[q(t)]) / (delta q(t)) & = delta / (delta q(t)) integral_0^T dd(t') cal(L) = delta / (delta q(t)) integral_0^T dd(t') (m / 2 dot(q)^2 (q, t') - m / 2 omega^2 q^2 (t')) = integral_0^T dd(t') (m / 2 (delta dot(q)^2 (q, t')) / (delta q(t)) - m / 2 omega^2 (delta q^2 (t')) / (delta q(t))) \
   & = integral_0^T dd(t') (m dot(q)(q, t') (delta dot(q)(q, t')) / (delta q(t)) - m omega^2 q(t') underbrace((delta q(t')) / (delta q(t)), delta(t - t'))) = integral_0^T dd(t') (m dot(q)(q, t') dif / (dif t') underbrace((delta q(t')) / (delta q(t)), delta(t - t')) - m omega^2 q(t') delta(t - t')) \
-  & = underbrace(m dot(q)(q, t') (delta q(t')) / (delta q(t)) |_0^T, 0) + integral_0^T dd(t') (-m dif / (dif t') dot(q)(q, t') - m omega^2 q(t')) delta(t - t') \
+  & = underbrace(m dot(q)(q, t') lr((delta q(t')) / (delta q(t)) |)_0^T, 0) + integral_0^T dd(t') (-m dif / (dif t') dot(q)(q, t') - m omega^2 q(t')) delta(t - t') \
   & = -m dot.double(q)(q, t) - m omega^2 q(t) attach(=, t: !) 0 quad ==> quad m dot.double(q) + m omega^2 q = 0.
 $
 The boundary terms coming from the partial integration vanish, because the boundary points $q(t = 0) = q_a$ and $q(t = T) = q_b$ are held fixed, meaning their variation vanishes, i.e.
@@ -116,7 +116,7 @@ $ (delta q(t' = T)) / (delta q(t)) = (delta q(t' = 0)) / (delta q(t)) = 0. $
 
 #task(label: "b")[
   Convince yourself that the following expression for the action is exact
-  #tagged(4, $ S[q] = S[q_c] + integral_0^T dd(t) (delta S[q]) / (delta q(t)) |_(q(t) = q_c (t)) y(t) + 1/2 integral_0^T integral_0^T dd(t) dif t' (delta^2 S[q]) / (delta q(t) delta q(t')) |_(q(t) = q_c (t)) y(t) y(t'). $)
+  #tagged(4, $ S[q] = S[q_c] + integral_0^T dd(t) lr((delta S[q]) / (delta q(t)) |)_(q(t) = q_c (t)) y(t) + 1/2 integral_0^T integral_0^T dd(t) dif t' lr((delta^2 S[q]) / (delta q(t) delta q(t')) |)_(q(t) = q_c (t)) y(t) y(t'). $)
   Then show that we can write
   #tagged(5, $ (delta^2 S[q]) / (delta q(t) delta q(t')) = -m dif^2 / (dif t^2) delta(t - t') - m omega^2 delta(t - t') $)
   so that
@@ -158,7 +158,7 @@ From this result, we see that $integral Dm q e^(i S[q]) = e^(i S[q_c]) integral 
   _Hint:_ $T$ is not connected to $omega$ by a relation of the sort $T prop 1 / (2 pi omega)$.
 ]
 
-The classical trajectory, $q_c (t)$, is the one that extremizes the action $S[q]$. As shown in part a), for $(delta S[q]) / (delta q(t)) |_(q(t) = q_c (t)) attach(=, t: !) 0$, it holds that
+The classical trajectory, $q_c (t)$, is the one that extremizes the action $S[q]$. As shown in part a), for $lr((delta S[q]) / (delta q(t)) |)_(q(t) = q_c (t)) attach(=, t: !) 0$, it holds that
 $ dot.double(q)_c (t) = -omega^2 q_c (t), $
 of which the general solution is $q_c (t) = A sin(omega (t - t_0)) + B cos(omega (t - t_0))$. Since the harmonic oscillator is time-translation invariant, we may set $t_0 = 0$ and use the boundary conditions for $q(0)$ and $q(T)$ to determine $A$ and $B$:
 $
@@ -204,7 +204,7 @@ $
 The $C_n$ are constrained by the required orthonormality:
 $
   integral_0^T dd(t) y_n (t) y_m (t) & = integral_0^T dd(t) C_n sin((n pi t) / T) C_m sin((m pi t) / T) = integral_0^T dd(t) C_n C_m 1/2 (cos((n - m) (pi t) / T) - cos((n + m) (pi t) / T)) \
-  & = 1/2 C_n C_m (T / (pi (n - m)) sin((n - m) (pi t) / T) - T / (pi (n + m)) sin((n + m) (pi t) / T)) |_0^T \
+  & = 1/2 C_n C_m lr((T / (pi (n - m)) sin((n - m) (pi t) / T) - T / (pi (n + m)) sin((n + m) (pi t) / T)) |)_0^T \
   & = T / (2 pi) C_n C_m (sin((n - m) pi) / (n - m) - overbrace(sin((n + m) pi), 0) / (n + m)) = T / (2 pi) C_n C_m sin((n - m) pi) / (n - m) attach(=, t: !) delta_(n m) = cases(1 & "if" n = m, 0 & "else".)
 $
 Since $lim_(n -> m) sin((n - m) pi) / (n - m) = pi$, $C_n$ needs to fulfill $T / 2 C_n^2 = 1$ or $C_n = sqrt(2 / T)$. Therefore, our expansions of $y(t)$ and $dot.double(y)(t)$ read

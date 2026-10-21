@@ -111,14 +111,14 @@ $ (p partial / (partial p) - beta(lambda) partial / (partial lambda) + 2 (1 - ga
   Integrate this equation to find
   #tagged(7, $ G_2 (p; lambda, mu) = i / p^2 cal(F)(lb(p; lambda)) exp(2 integral_(p' = mu)^p dif[log p' / mu] gamma(lb(p'; lambda))), $)
   where $lb(p; lambda)$ is the running coupling, which is defined such that $p partial / (partial p) lb(p; lambda) = beta(lb(p; lambda))$ with the initial condition $lb(mu; lambda) = lambda$, and $cal(F)(x)$ is some a priori unknown function. _Hint:_ Compare eq. (6) with
-  #tagged(8, $ (p dif / (dif p) + 2 (1 - gamma(lambda^*))) G_2 (p; lb(mu^2 / p; lambda^*), mu) |_(lambda^* = lb(p; lambda)) = 0. $)
+  #tagged(8, $ (p dif / (dif p) + 2 (1 - gamma(lambda^*))) G_2 lr((p; lb(mu^2 / p; lambda^*), mu) |)_(lambda^* = lb(p; lambda)) = 0. $)
   Note that $lb(mu^2 \/ p; x)$ is the inverse of $lb(p; x)$, i.e. $lb(mu^2 / p; lb(p; x)) = x$.
 ]
 
 We can easily verify that eqs. (6) and (8) are completely equivalent by noting that
 $
-  p dif / (dif p) G_2 (p; lb(mu^2 / p; lambda^*), mu) |_(lambda^* = lb(p; lambda)) & = p partial / (partial p) G_2 (p; lb(mu^2 / p; lambda^*), mu) |_(lambda^* = lb(p; lambda)) \
-  & quad + p partial / (partial p) lb(mu^2 / p; lambda^*) partial / (partial lb(mu^2 \/ p; lambda^*)) G_2 (p; lb(mu^2 / p; lambda^*), mu) |_(lambda^* = lb(p; lambda)) \
+  p dif / (dif p) G_2 lr((p; lb(mu^2 / p; lambda^*), mu) |)_(lambda^* = lb(p; lambda)) & = p partial / (partial p) G_2 lr((p; lb(mu^2 / p; lambda^*), mu) |)_(lambda^* = lb(p; lambda)) \
+  & quad + p partial / (partial p) lb(mu^2 / p; lambda^*) partial / (partial lb(mu^2 \/ p; lambda^*)) G_2 lr((p; lb(mu^2 / p; lambda^*), mu) |)_(lambda^* = lb(p; lambda)) \
   & = p partial / (partial p) G_2 (p; lb(mu^2 / p; lb(p; lambda)), mu) \
   & quad + underbrace(p partial / (partial p) lb(mu^2 / p; lb(p; lambda)), beta(lb(mu^2 \/ p; lb(p; lambda)))) partial / (partial lb(mu^2 \/ p; lb(p; lambda))) G_2 (p; lb(mu^2 / p; lb(p; lambda)), mu) \
   & = p partial / (partial p) G_2 (p; lambda, mu) + beta(lambda) partial / (partial lambda) G_2 (p; lambda, mu),
@@ -127,12 +127,12 @@ where we used the hint that $lb(mu^2 / p; lb(p; lambda)) = lambda$.
 
 Inserting this equality into eq. (8), we immediately reobtain eq. (6). Thus we may integrate eq. (8) and rest assured that our result for $G_2 (p; lambda, mu)$ also fulfills eq. (6). Since it is a first-order differential equation, we may solve it by separation of variables:
 $
-  integral_mu^p (dif G(p'; lb(mu^2 \/ p'; lambda^*), mu)) / G(p'; lb(mu^2 \/ p'; lambda^*), mu) |_(lambda^* = lb(p; lambda)) = -2 (1 - gamma(lambda^*)) integral_mu^p dif ln(p') |_(lambda^* = lb(p; lambda)),
+  integral_mu^p lr((dif G(p'; lb(mu^2 \/ p'; lambda^*), mu)) / G(p'; lb(mu^2 \/ p'; lambda^*), mu) |)_(lambda^* = lb(p; lambda)) = -2 (1 - gamma(lambda^*)) integral_mu^p dif ln(p') |_(lambda^* = lb(p; lambda)),
 $
 where the left-hand side evaluates to
 $ ln(G(p'; lambda, mu)) |_mu^p = ln(G(p; lambda, mu)) - ln(i / mu^2 f(-1)) $
 $ ==> quad G(p; lambda, mu) = i / mu^2 f(-1) e^(2 integral_mu^p dif ln(p') gamma(lb(p'; lambda))) e^(-2 integral_mu^p dif ln(p')). $
-So $cal(F)(lb(p; lambda)) = f(-1) e^(-2 integral_mu^p dif ln(p'))$.
+Since $e^(-2 integral_mu^p dif ln(p')) = mu^2 \/ p^2$, this is eq. (7) with $cal(F)(lb(p; lambda)) = f(-1)$.
 
 #task(label: "c")[
   Argue that in the vicinity of a fixed point $lambda^*$ where $beta(lambda^*) = 0$ the two-point function scales as

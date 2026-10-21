@@ -147,9 +147,9 @@ The exponent can now be rewritten by completing the square
 $ -phi dot D dot phi + J dot phi = -underbrace((phi - 1/2 D^(-1) J), phi') dot D dot underbrace((phi - 1/2 D^(-1) J), phi') + 1/4 J dot D^(-1) J. $
 We can thus transform the integral from $phi -> phi' = phi - 1/2 D^(-1) J$ and $Dm phi -> Dm phi' = Dm phi$ to achieve the same Gaussian integral we calculated in part d) times an exponential of $J(x)$ unaffected by the path integration:
 $
-  I & = delta/(delta J(x_1)) delta/(delta J(x_2)) e^(1/4 J dot D^(-1) J) underbrace(integral Dm phi' e^(-phi' dot D dot phi'), sqrt(pi^n/(det D))) |_(J = 0) \
-  & = sqrt(pi^n/(det D)) delta/(delta J(x_1)) 1/4 (integral dd(4, x) integral dd(4, y) underbrace((delta J(x))/(delta J(x_2)), delta(x - x_2)) D^(-1) (x - y) J(y) + J(x) D^(-1) (x - y) underbrace((delta J(y))/(delta J(x_2)), delta(y - x_2))) e^(1/4 J dot D^(-1) J) |_(J = 0) \
-  & = sqrt(pi^n/(det D)) 1/4 ((integral dd(4, y) D^(-1) (x_2 - y) underbrace((delta J(y))/(delta J(x_1)), delta(y - x_1)) + integral dd(4, x) underbrace((delta J(x))/(delta J(x_1)), delta(x - x_1)) D^(-1) (x - x_2)) e^(1/4 J dot D^(-1) J) + #box(baseline: 40%, text(size: 8pt)[second term from \ product rule that \ vanishes when $J -> 0$])) |_(J = 0) \
+  I & = delta/(delta J(x_1)) delta/(delta J(x_2)) e^(1/4 J dot D^(-1) J) lr(underbrace(integral Dm phi' e^(-phi' dot D dot phi'), sqrt(pi^n/(det D))) |)_(J = 0) \
+  & = sqrt(pi^n/(det D)) delta/(delta J(x_1)) 1/4 lr((integral dd(4, x) integral dd(4, y) underbrace((delta J(x))/(delta J(x_2)), delta(x - x_2)) D^(-1) (x - y) J(y) + J(x) D^(-1) (x - y) underbrace((delta J(y))/(delta J(x_2)), delta(y - x_2))) e^(1/4 J dot D^(-1) J) |)_(J = 0) \
+  & = sqrt(pi^n/(det D)) 1/4 lr(((integral dd(4, y) D^(-1) (x_2 - y) underbrace((delta J(y))/(delta J(x_1)), delta(y - x_1)) + integral dd(4, x) underbrace((delta J(x))/(delta J(x_1)), delta(x - x_1)) D^(-1) (x - x_2)) e^(1/4 J dot D^(-1) J) + underbrace(dots.c, #box(align(center)[second term from product \ rule, vanishes when $J -> 0$]))) |)_(J = 0) \
   & = sqrt(pi^n/(det D)) 1/4 (D^(-1) (x_1 - x_2) + D^(-1) (x_2 - x_1)),
 $
 where $D^(-1)$ can be shown to be $2 D_F$, $D_F$ the Feynman propagator:

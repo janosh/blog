@@ -17,7 +17,7 @@ Group: algebraic structure $(G, chevron.l dot, dot chevron.r)$ consisting of
 + Closure: $forall a, b in G: chevron.l a, b chevron.r in G$
 + Associativity: $forall a, b, c in G: chevron.l chevron.l a, b chevron.r, c chevron.r = chevron.l a, chevron.l b, c chevron.r chevron.r$
 + Identity: $exists! e in G thin forall a in G: chevron.l e, a chevron.r = a$
-+ Inverse: $exists! a^(-1) in G thin forall a in G: chevron.l a^(-1), a chevron.r = e$
++ Inverse: $forall a in G thin exists! a^(-1) in G: chevron.l a^(-1), a chevron.r = e$
 
 From now on, the group operation between two elements of a group is implicit, i.e. $chevron.l a, b chevron.r -> a b$. We prove that left- and right-identity and inverse are equal and their uniqueness:
 $
@@ -38,19 +38,21 @@ $ forall z_1, z_2 in ZZ: quad [z_1 + z_2] = [z_1] + [z_2]. $
 
 #task(label: "c")[What is a subgroup? Show that the rotations form a subgroup $ZZ_n subset D_n$ of the dihedral group $D_n$.]
 
-Given two groups $(G, dot)$, $(H, dot)$, $(G, dot)$ is a subgroup of $(H, dot)$ if $forall g in G$: $g in H$.
+Given a group $(H, dot)$, a subset $G subset H$ is a subgroup if $(G, dot)$ is itself a group under the operation of $H$, i.e. $G$ contains $e$ and is closed under multiplication and inversion.
 $ D_n = {R_0, R_1, ..., R_(n-1), S_0, S_1, ..., S_(n-1)}, $
 the group of symmetries of a regular $n$-gon,
-$ ZZ_n = D_n without {S_0, S_1, ..., S_(n-1)} subset D_n. $
+$ ZZ_n = D_n without {S_0, S_1, ..., S_(n-1)} = {R_0, ..., R_(n-1)} subset D_n $
+is a subgroup: it contains $e = R_0$, is closed since $R_i R_j = R_(i + j mod n)$, and contains the inverses $R_i^(-1) = R_(n - i mod n)$.
 
 #task(label: "d")[What are conjugacy classes? Determine all conjugacy classes of $D_4$ and $D_5$. What about general $D_n$?]
 
 Conjugacy class:
 $ C_g = [g] = {g' in G | exists tilde(g) in G: tilde(g) g tilde(g)^(-1) = g'}, $
 $
-  D_4 & = {R_0, R_1, R_2, R_3, S_0, S_1, S_2, S_3}, \
-  [R_0] & = {R_0, R_1, R_2, R_3, S_0, S_1, S_2, S_3}.
+  D_4 & = {R_0, R_1, R_2, R_3, S_0, S_1, S_2, S_3}: quad {R_0}, quad {R_2}, quad {R_1, R_3}, quad {S_0, S_2}, quad {S_1, S_3}, \
+  D_5 & = {R_0, ..., R_4, S_0, ..., S_4}: quad {R_0}, quad {R_1, R_4}, quad {R_2, R_3}, quad {S_0, S_1, S_2, S_3, S_4}.
 $
+In general, conjugation by a rotation leaves rotations invariant and shifts reflections by two, $R_j S_i R_j^(-1) = S_(i + 2j)$, while conjugation by a reflection inverts rotations, $S_j R_i S_j^(-1) = R_(-i)$. Hence the classes of $D_n$ are ${R_0}$ and the pairs ${R_i, R_(-i)}$, plus for odd $n$ a single class of all reflections, and for even $n$ the additional class ${R_(n\/2)}$ and two classes of reflections, ${S_0, S_2, ...}$ and ${S_1, S_3, ...}$.
 
 = Exercise 2 (Finite groups)
 

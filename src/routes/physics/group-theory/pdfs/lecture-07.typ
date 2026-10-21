@@ -33,7 +33,7 @@ for some smooth _regular_ function $f: RR^n -> RR^k$ #aside[(regular: the deriva
 (i) $(RR, +)$ manifold:
 $ cases(reverse: #true, m(x, y) = x + y, (x)^(-1) = -x) quad "smooth maps" $
 
-(ii) $"U"(1) = {z in CC | |z|^2 = 1} = {e^(i phi) | phi in RR} tilde.equiv S^1$ (unit sphere):
+(ii) $"U"(1) = {z in CC | |z|^2 = 1} = {e^(i phi) | phi in RR} tilde.equiv S^1$ (unit circle):
 $ cases(reverse: #true, m(z, w) = z w, (z)^(-1) = overline(z)) quad "smooth maps" $
 
 (iii) _(special) unitary group_
@@ -126,17 +126,17 @@ Lie bracket: "calculates how a vector field changes along another one".
     $ [dif f X, dif f Y] = dif f([X, Y]) $],
   sketch({
     import draw: *
-    circle((0, 0), radius: 0.65)
-    content((0, 0.9), $M$)
+    circle((0, 0), radius: 0.9)
+    content((0, 1.15), $M$)
     pt((-0.15, -0.05))
     line((-0.15, -0.05), (0.3, 0.3), mark: (end: ">"))
     content((0.45, 0.42), text(size: 9pt, $X$))
     line((-0.15, -0.05), (0.2, -0.4), mark: (end: ">"))
     content((0.38, -0.45), text(size: 9pt, $Y$))
-    bezier((0.7, 0.3), (2.6, 0.3), (1.65, 0.9), mark: (end: ">"))
+    bezier((0.95, 0.4), (2.35, 0.4), (1.65, 0.9), mark: (end: ">"))
     content((1.65, 0.95), $f$)
-    circle((3.3, 0), radius: 0.65)
-    content((3.3, 0.9), $N$)
+    circle((3.3, 0), radius: 0.9)
+    content((3.3, 1.15), $N$)
     pt((3.1, 0.0))
     line((3.1, 0.0), (3.65, 0.1), mark: (end: ">"))
     content((3.6, 0.35), text(size: 9pt, $dif f_X$))
@@ -166,7 +166,7 @@ $T_e G$: smooth paths $h(t) in G$, $h(0) = e$,
 $ "Mat"(n, n) in.rev v = dot(h)(0) in T_e G, $
 $
   L_g (h) & = g h quad #aside[(matrix multiplication)], \
-  dif L_g v & = dif / (dif t)|_(t=0) L_g h(t) = dif / (dif t)|_(t=0) g h(t) = g dif / (dif t)|_(t=0) h(t) = g dot v, \
+  dif L_g v & = lr(dif / (dif t) |)_(t=0) L_g h(t) = lr(dif / (dif t) |)_(t=0) g h(t) = g lr(dif / (dif t) |)_(t=0) h(t) = g dot v, \
   X_v (g) & = g dot v.
 $
 Lie bracket: $X = sum_i X_i partial_i$, $X(f) = sum_i X_i (partial_i f)$, $X(Y f) - Y(X f) = [X, Y](f)$:
@@ -183,7 +183,7 @@ $ [v, w] = v w - w v quad #aside[(matrix multiplication)] $
 *Example:* $G = "O"(n) = {A in "Mat"(n, n, RR) | A^t A = bb(1)_n}$ is the level set
 $ G = {f(A) = 0}, quad f(A) = A^t A - bb(1)_n, quad T_e G = ker(dif f_e). $
 Take a path $A(t)$ s.t. $A(0) = bb(1)_n$, $dot(A)(0) = a$:
-$ dif f_e a = dif / (dif t)|_(t=0) f(A(t)) = dif / (dif t)|_(t=0) (A^t A - bb(1)_n) = a^t + a $
+$ dif f_e a = lr(dif / (dif t) |)_(t=0) f(A(t)) = lr(dif / (dif t) |)_(t=0) (A^t A - bb(1)_n) = a^t + a $
 #grid(
   columns: (1fr, auto),
   align: horizon,
@@ -201,7 +201,7 @@ Basis of $T_e G$: $E_((i,j))$, $i < j$, the matrix with entry $+1$ in row $i$, c
 $ E_((i,j)) = mat(0, , , dots.c, ; , dots.down, , 1, ; , , dots.down, , ; dots.v, -1, , dots.down, ; , , , , 0) #aside[$arrow.l$ row $i$ holds the $1$ (column $j$), row $j$ the $-1$ (column $i$)], $
 $ [E_((i,j)), E_((r,s))] = delta_(j r) E_((i,s)) + delta_(i s) E_((j,r)) - delta_(i r) E_((j,s)) - delta_(j s) E_((i,r)). $
 $n = 3$: with the antisymmetric tensor $epsilon_(a b c)$,
-$ E_a = epsilon_(a b c) E_((b,c)), quad [E_a, E_b] = epsilon_(a b c) E_c. $
+$ E_a = -1/2 epsilon_(a b c) E_((b,c)), quad [E_a, E_b] = epsilon_(a b c) E_c. $
 Often, Lie algebras are given in terms of a basis.
 
 *Def:* A _homomorphism of Lie algebras_ is a linear map $phi: V -> W$, s.t.

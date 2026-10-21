@@ -8,7 +8,7 @@
 )
 
 // Young diagram/tableau: each row is either a box count or an array of box entries
-#let young(rows, s: 0.3) = box(baseline: 50%, canvas(length: 1cm, {
+#let young(rows, s: 0.3) = box(baseline: 50% - 0.25em, canvas(length: 1cm, {
   import draw: *
   set-style(stroke: 0.6pt)
   for (r, row) in rows.enumerate() {

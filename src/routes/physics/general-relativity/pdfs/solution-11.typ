@@ -36,8 +36,8 @@
 The definition of the Christoffel symbols reads
 $ chr(alpha, mu nu) := g^(alpha sigma)/2 (partial_mu g_(nu sigma) + partial_nu g_(mu sigma) - partial_sigma g_(mu nu)). $
 We take $g_(mu nu)$ to be the Minkowskian metric perturbed by an expansion in $h_(mu nu) (vr)$,
-$ g_(mu nu) (vr) = eta_(mu nu) - h_(mu nu) (vr) + cal(O)(h^2) approx eta_(mu nu) - h_(mu nu) (vr), $
-which we terminate after leading order in $h_(mu nu) (vr)$. Since the Minkowskian part of $g_(mu nu) (vr)$ is spatially invariant, it drops when taking spatial derivatives, i.e. $partial_sigma g_(mu nu) (vr) = partial_sigma h_(mu nu) (vr)$. If we then multiply these derivatives with $g^(mu nu) (vr)$, only the Minkowskian part survives since all combinations of $h^(mu nu) (vr) partial_sigma h_(rho nu) (vr)$ are of order $cal(O)(h^2)$ and hence don't contribute in our approximation. Thus,
+$ g_(mu nu) (vr) = eta_(mu nu) + h_(mu nu) (vr), $
+where $h_(mu nu)$ is small. Since the Minkowskian part of $g_(mu nu) (vr)$ is spatially invariant, it drops when taking spatial derivatives, i.e. $partial_sigma g_(mu nu) (vr) = partial_sigma h_(mu nu) (vr)$. If we then multiply these derivatives with $g^(mu nu) (vr)$, only the Minkowskian part survives since all combinations of $h^(mu nu) (vr) partial_sigma h_(rho nu) (vr)$ are of order $cal(O)(h^2)$ and hence don't contribute in our approximation. Thus,
 $ chr(alpha, mu nu) = eta^(alpha sigma)/2 (partial_mu h_(nu sigma) (vr) + partial_nu h_(mu sigma) (vr) - partial_sigma h_(mu nu) (vr)). $
 
 #task(label: "b")[
@@ -88,7 +88,7 @@ With $vh(vr) = -(4 G M R^2)/(5 c^3 r^3) vw times vr$, where $vr$ points at Mercu
     circle((0, 0), radius: 0.06, fill: black)
     content((-0.1, 0), text(size: 8pt)[sun], anchor: "east")
     line((0, 0), (0, 1.5), mark: tip)
-    content((0.05, 1.5), $vw$, anchor: "west")
+    content((0, 1.5), $vw$, anchor: "south", padding: 2pt)
     arc((0.2, 1.15), start: 0deg, stop: 300deg, radius: 0.2, mark: (end: "stealth", fill: black, scale: 0.5))
     let m = (1.06, -0.53)
     line((0, 0), m, stroke: (dash: "dashed"))
@@ -175,8 +175,8 @@ $
 
 #task(label: "a")[What needs to be fulfilled for maximum displacement?]
 
-$ cos(2 phi) cos(omega t) = plus.minus 1 quad <==> quad phi = m pi, quad t = (n pi)/omega, quad m, n in ZZ. $
-Then $tR = R(1 plus.minus 2 h)$.
+$ cos(2 phi) cos(omega t) = plus.minus 1 quad <==> quad phi = (m pi)/2, quad t = (n pi)/omega, quad m, n in ZZ. $
+Then $tR = R sqrt(1 plus.minus 2 h) approx R (1 plus.minus h)$.
 
 #task(label: "b")[
   Write $tR^2$ in the form of an ellipse, i.e.

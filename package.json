@@ -23,7 +23,7 @@
     "#root/*": "./*"
   },
   "scripts": {
-    "build": "vp build && pagefind --site build --exclude-selectors \"pre, details, math\"",
+    "build": "vp build && node src/lib/build-search.ts",
     "build-notes": "node src/routes/physics/build-notes.ts",
     "update-oss": "node src/lib/update-oss.ts"
   },
@@ -35,6 +35,7 @@
     "@wooorm/starry-night": "^3.11.0",
     "matterviz": "^0.8.0",
     "pagefind": "^1.5.2",
+    "pdfjs-dist": "^6.4.299",
     "sharp": "^0.35.5",
     "svelte": "^5.57.2",
     "svelte-check": "^4.7.7",

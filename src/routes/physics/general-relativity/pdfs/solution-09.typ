@@ -130,25 +130,30 @@ $
 $
 To bring out the $vr$-dependence of $underline(U) = underline(U)(vr)$, we note that any vector $vr$ that rotates with angular velocity $omega = |vw|$ around an axis with angular speed vector $vw$ satisfies
 $ vv = vw times vr. $
-By choosing spherical coordinates such that $vr dot vr' = r r' cos theta$ and such that the origin, $vr = 0$, coincides with the sphere's center, and reminding ourselves
-$ rho(vr) = cases(rho\, & "if" vr in partial B_R (vr = 0) = {vr in RR^3 | |vr| = R}, 0\, & "otherwise",) $
-we obtain the following static gravitational fields
+We choose spherical coordinates such that $vr dot vr' = r r' cos theta$ (i.e. $vr$ points along $ez$) and such that the origin, $vr = 0$, coincides with the sphere's center. We first compute the fields of a thin shell of radius $R$ with surface mass density $sigma$, i.e.
+$ rho(vr') = sigma delta(r' - R), $
+and then superpose such shells to build up the homogeneous sphere. For the shell, we obtain the following static gravitational fields
 $
   h_(i i) (vr) & = -(4 G)/c^4 integral_(RR^3) dd(3, r') (U_(i i) (vr'))/(|vr - vr'|) = -(2 G)/c^2 integral_(RR^3) dd(3, r') (rho(vr'))/(|vr - vr'|) \
-  & = -(2 G)/c^2 integral_0^oo dd(r') integral_0^pi dd(theta) integral_0^(2 pi) dd(phi) (rho delta(r' - R) r'^2 sin theta)/(r^2 + r'^2 - 2 r r' cos theta)^(1\/2) \
-  & = -(2 G rho)/c^2 integral_0^pi dd(theta) integral_0^(2 pi) dd(phi) (R^2 sin theta)/(r^2 + R^2 - 2 r R cos theta)^(1\/2), quad u = r^2 + R^2 - 2 r R cos theta, quad dif u = 2 r R sin theta dif theta \
-  & = -(4 pi G rho)/c^2 integral_a^b (dif u)/(2 r R) R^2/sqrt(u) = -(4 pi G rho)/c^2 R/r (underbrace(sqrt(r^2 + R^2 + 2 r R), r + R) - underbrace(sqrt(r^2 + R^2 - 2 r R), |r - R|)), quad cases(b = r^2 + R^2 + 2 r R, a := r^2 + R^2 - 2 r R) \
-  & = -(4 pi G rho)/c^2 cases(display(R/r (r + R - r + R) = (2 R^2)/r)\, & "for" r >= R, display(R/r (r + R - R + r) = 2 R)\, & "for" r < R, gap: #1em), quad "where" i in {0, 1, 2, 3}.
+  & = -(2 G)/c^2 integral_0^oo dd(r') integral_0^pi dd(theta) integral_0^(2 pi) dd(phi) (sigma delta(r' - R) r'^2 sin theta)/(r^2 + r'^2 - 2 r r' cos theta)^(1\/2) \
+  & = -(2 G sigma)/c^2 integral_0^pi dd(theta) integral_0^(2 pi) dd(phi) (R^2 sin theta)/(r^2 + R^2 - 2 r R cos theta)^(1\/2), quad u = r^2 + R^2 - 2 r R cos theta, quad dif u = 2 r R sin theta dif theta \
+  & = -(4 pi G sigma)/c^2 integral_a^b (dif u)/(2 r R) R^2/sqrt(u) = -(4 pi G sigma)/c^2 R/r (underbrace(sqrt(r^2 + R^2 + 2 r R), r + R) - underbrace(sqrt(r^2 + R^2 - 2 r R), |r - R|)), quad cases(b = r^2 + R^2 + 2 r R, a := r^2 + R^2 - 2 r R) \
+  & = -(4 pi G sigma)/c^2 cases(display(R/r (r + R - r + R) = (2 R^2)/r)\, & "for" r >= R, display(R/r (r + R - R + r) = 2 R)\, & "for" r < R, gap: #1em), quad "where" i in {0, 1, 2, 3}.
 $
 $
   arrow(h)(vr) & = vec(h_(01) (vr), h_(02) (vr), h_(03) (vr)) = -(4 G)/c^4 integral_(RR^3) dd(3, r') (arrow(U)(vr'))/(|vr - vr'|) = -(4 G)/c^3 integral_(RR^3) dd(3, r') (rho(vr') vw times vr')/(|vr - vr'|) \
-  & = -(4 G)/c^3 integral_0^oo dd(r') integral_0^pi dd(theta) integral_0^(2 pi) dd(phi) (rho delta(r' - R) r'^2 sin theta)/(r^2 + r'^2 - 2 r r' cos theta)^(1\/2) vw times r' vec(cos phi sin theta, sin phi sin theta, cos theta) \
-  & = -(8 pi G rho)/c^3 integral_0^pi dd(theta) (R^2 sin theta)/(r^2 + R^2 - 2 r R cos theta)^(1\/2) vw times vec(0, 0, cos theta), quad u = r^2 + R^2 - 2 r R cos theta, quad dif u = 2 r R sin theta dif theta \
-  & = -(8 pi G rho)/c^3 vw times ez integral_a^b dd(u) 1/(4 r^2) (r^2 + R^2 - u)/sqrt(u), quad v = sqrt(u), quad dif v = 1/(2 sqrt(u)) dif u \
-  & = -(8 pi G rho)/c^3 vw times ez integral_(sqrt(a))^(sqrt(b)) dd(v) 1/(2 r^2) (r^2 + R^2 - v^2) \
-  & = -(4 pi G rho)/(c^3 r^2) vw times ez [(r^2 + R^2)(sqrt(b) - sqrt(a)) - 1/3 (b^(3\/2) - a^(3\/2))] \
-  & = -(4 pi G rho)/(c^3 r^2) vw times ez [(r^2 + R^2)(r + R - |r - R|) - 1/3 ((r + R)^3 - |r - R|^3)] \
-  & = cases(display(-(4 pi G rho)/(c^3 r^2) vw times ez 4/3 R^3 = -(16 pi G rho R^3)/(3 c^3 r^2) vw times ez)\, & "for" r >= R, display(-(4 pi G rho)/(c^3 r^2) vw times ez 4/3 r^3 = -(16 pi G rho r)/(3 c^3) vw times ez)\, & "for" r < R, gap: #1em) = (arrow(h)(vr))^T.
+  & = -(4 G)/c^3 integral_0^oo dd(r') integral_0^pi dd(theta) integral_0^(2 pi) dd(phi) (sigma delta(r' - R) r'^2 sin theta)/(r^2 + r'^2 - 2 r r' cos theta)^(1\/2) vw times r' vec(cos phi sin theta, sin phi sin theta, cos theta) \
+  & = -(8 pi G sigma)/c^3 integral_0^pi dd(theta) (R^3 sin theta)/(r^2 + R^2 - 2 r R cos theta)^(1\/2) vw times vec(0, 0, cos theta), quad u = r^2 + R^2 - 2 r R cos theta, quad dif u = 2 r R sin theta dif theta \
+  & = -(8 pi G sigma)/c^3 vw times ez integral_a^b dd(u) R/(4 r^2) (r^2 + R^2 - u)/sqrt(u), quad v = sqrt(u), quad dif v = 1/(2 sqrt(u)) dif u \
+  & = -(8 pi G sigma)/c^3 vw times ez integral_(sqrt(a))^(sqrt(b)) dd(v) R/(2 r^2) (r^2 + R^2 - v^2) \
+  & = -(4 pi G sigma R)/(c^3 r^2) vw times ez [(r^2 + R^2)(sqrt(b) - sqrt(a)) - 1/3 (b^(3\/2) - a^(3\/2))] \
+  & = -(4 pi G sigma R)/(c^3 r^2) vw times ez [(r^2 + R^2)(r + R - |r - R|) - 1/3 ((r + R)^3 - |r - R|^3)] \
+  & = cases(display(-(4 pi G sigma R)/(c^3 r^2) vw times ez 4/3 R^3 = -(16 pi G sigma R^4)/(3 c^3 r^2) vw times ez)\, & "for" r >= R, display(-(4 pi G sigma R)/(c^3 r^2) vw times ez 4/3 r^3 = -(16 pi G sigma R r)/(3 c^3) vw times ez)\, & "for" r < R, gap: #1em) = (arrow(h)(vr))^T.
+$
+The homogeneous sphere of density $rho$ is a superposition of shells of radius $s in [0, R]$ with $sigma = rho dif s$. Outside, all shells contribute their exterior field; inside, the shells with $s < r$ contribute their exterior and those with $s > r$ their interior field:
+$
+  h_(i i) (vr) & = cases(display(-(8 pi G rho)/c^2 1/r integral_0^R s^2 dif s = -(8 pi G rho R^3)/(3 c^2 r))\, & "for" r >= R, display(-(8 pi G rho)/c^2 (1/r integral_0^r s^2 dif s + integral_r^R s dif s) = -(4 pi G rho)/c^2 (R^2 - r^2/3))\, & "for" r < R, gap: #1em) \
+  arrow(h)(vr) & = cases(display(-(16 pi G rho)/(3 c^3 r^2) vw times ez integral_0^R s^4 dif s = -(16 pi G rho R^5)/(15 c^3 r^2) vw times ez)\, & "for" r >= R, display(-(16 pi G rho)/(3 c^3) vw times ez (1/r^2 integral_0^r s^4 dif s + r integral_r^R s dif s) = -(8 pi G rho r)/(3 c^3) (R^2 - 3/5 r^2) vw times ez)\, & "for" r < R, gap: #1em)
 $
 Interestingly, due to $vw times ez$, the off-diagonal elements of $underline(h)(vr)$ vanish along the axis of rotation ($vw times ez$ has no component along $vw$), so as one would expect in the case of a perfect sphere, an observer sitting on the axis of rotation cannot (based on the gravitational field) distinguish between a rotating and a non-rotating field source.
 

@@ -60,8 +60,8 @@
 - Scalar fields: path integral master formula for quantum correlation fcts.
   $ G(x_1, ..., x_n) = chevron.l Omega | T product_(i=1)^n hat(phi)_H (x_i) | Omega chevron.r = lim_(T -> oo (1 - i epsilon)) (integral cal(D) phi(x) product_(i=1)^n phi(x_i) e^(i integral_(-T)^T dd(4, x) cal(L)(phi(x))))/(integral cal(D) phi(x) e^(i integral_(-T)^T dd(4, x) cal(L)(phi(x)))) $
 - $Z[J]$ generating functional of Green's fcts.: $G(x_1, ..., x_n) = 1/Z[0] product_(i=1)^n delta/(i delta J(x_i)) Z[J]|_(J=0)$; #h(0.3em) $Z_0 [J] = integral cal(D) phi e^(-1/2 phi dot D_F^(-1) dot phi + i phi dot J)$
-- Schwinger--Dyson eq. $integral cal(D) phi ((delta S)/(delta phi(x)) + J(x)) e^(i (S[phi] + J dot phi)) = 0$, states that cl. e.o.m. holds as operator eq. in quantum theory; $((delta S)/(delta phi)|_(phi = delta/(i delta J)) + J) Z[J] = 0$
-- effective action $i W[J]$ generating fctnal of fully connected Green's fcts.; $i W[J] = ln Z[J]/Z[0]$
+- Schwinger--Dyson eq. $integral cal(D) phi ((delta S)/(delta phi(x)) + J(x)) e^(i (S[phi] + J dot phi)) = 0$, states that cl. e.o.m. holds as operator eq. in quantum theory; $(lr((delta S)/(delta phi) |)_(phi = delta/(i delta J)) + J) Z[J] = 0$
+- $i W[J] = ln Z[J]/Z[0]$ generating fctnal of fully connected Green's fcts.
 - 1PI effective action $Gamma[phi.alt]$ Legendre transform of $W[J]$, i.e. $Gamma[phi.alt] := W[J_phi.alt] - phi.alt dot J_phi.alt$; $(delta Gamma)/(delta phi.alt(x)) = -J_phi.alt (x)$, $G_2^((c)) (x_1, x_2) = -Gamma_2^(-1) (x_1, x_2)$
 - fermionic path integral: $chevron.l Psi_F (arrow(x)_F), t_F | Psi_I (arrow(x)_I), t_I chevron.r = integral cal(D) overline(Psi)(x) cal(D) Psi(x) e^(i integral_(t_I)^(t_F) dd(4, x) cal(L)(Psi, overline(Psi)))$
 - if $H(p, q) = p^2/(2m) + V(q)$, integrate $integral cal(D) p$ explicitly by analytic continuation $delta t -> delta t (1 - i epsilon)$ (so that $"Re"(a) > 0$) to get
@@ -73,13 +73,13 @@
 
 - Superficial degree of divergence $D$: $phi^n$ in $d$ dim $D_(phi^n) = d - overbrace((d - n (d-2)/2), [lambda^((n))]) V - (d-2)/2 E$ with $n V = 2 I + E$ and Euler's formula $L = I - V + 1$ or $L = sum_i I_i - sum_j V_j + 1$
 - $D >= 0$ may still be finite due to symmetries, $D < 0$ may still be divergent due to divergent subdiagram; tree-level diagrams have $D = 0$ but are finite
-- a QFT is 1. renormalizable if number of superf. diverg. ampl. is finite, but superf. divergs. appear at every order; 2. super-renormalizable if number of superf. divergent ampl. is finite; 3. non-renormalizable if infinite; #h(0.3em) 1. $hat(=) [lambda] = 0$, 2. $hat(=) [lambda] > 0$, 3. $hat(=) [lambda] < 0$
+- a QFT is 1. renormalizable if number of superf. diverg. ampl. is finite, but superf. divergs. appear at every order; 2. super-renormalizable if only finitely many diagrams are superf. divergent; 3. non-renormalizable if infinite; #h(0.3em) 1. $hat(=) [lambda] = 0$, 2. $hat(=) [lambda] > 0$, 3. $hat(=) [lambda] < 0$
 - BPHZ theorem: if a QFT is renormalizable, i.e. has finite number of divergent diagr., one can absorb divergencies order by order in counterterms
 - in a QFT with dimensionless coupling, $[lambda] = 0$, the dimension of an amplitude is equal to $D$
 - QED: $D_"QED" = 4 - E_gamma - 3/2 E_f$, QED is renormalizable since $[e] = 0$, symmetric under charge conj.!, respects Ward identity!
 - Callan--Symanzik eq.: $mu dif/(dif mu) G_n^((0)) (x; lambda_0, m_0)|_(lambda_0, m_0 "fixed") = 0 = mu dif/(dif mu) (Z^(n\/2) G_n (x; lambda, m; mu))|_(lambda_0, m_0 "fixed")$, where $G_n (x_1, ..., x_n) = chevron.l Omega | T product_(i=1)^n phi(x_i) | Omega chevron.r|_"connected"$ and $phi(x_i) = Z^(-1\/2) phi_0 (x_i)$; chain rule yields
   $ (mu partial/(partial mu) + beta_lambda partial/(partial lambda) + beta_(m^2) partial/(partial m^2) + n dot gamma_phi) G_n (x; lambda, m; mu) = 0 $
-  with $beta_lambda := mu (dif lambda)/(dif mu)|_(lambda_0, m_0)$, $beta_(m^2) = mu (dif m^2)/(dif mu)|_(lambda_0, m_0)$, $gamma_phi = 1/2 mu/Z (dif Z)/(dif mu)|_(lambda_0, m_0)$
+  with $beta_lambda := mu lr((dif lambda)/(dif mu) |)_(lambda_0, m_0)$, $beta_(m^2) = mu lr((dif m^2)/(dif mu) |)_(lambda_0, m_0)$, $gamma_phi = 1/2 mu/Z lr((dif Z)/(dif mu) |)_(lambda_0, m_0)$
 - Renormalization group (RG) flow (eq.) given by the beta function $beta(lambda) = (dif lambda(mu))/(dif ln(mu))$ describes change of $lambda(mu)$ with $mu$: $beta(lambda) > 0 thin (< 0) <==> lambda(mu)$ increases (decreases) as $mu$ increases. Landau pole: $lambda -> oo$ as $mu -> mu^*$ with $mu^*$ finite; Gaussian IR (UV) fixed point: $lambda -> 0$ as $mu -> 0 thin (oo)$; $beta = 0 thin forall mu => lambda(cancel(mu)) <-->$ theory is scale-ind. or conformal
 - RG flow of dimensionful operators: $integral dd(d, x) C_i cal(O)_(d_i)$ with $[cal(O)_(d_i)] = d_i$, $[C_i] = d - d_i$, $C_i = g_i mu^(d - d_i)$, then CS eq. reads
   $ 0 = [mu partial/(partial mu) + beta_lambda partial/(partial lambda) + n gamma_phi + underbrace((gamma_i + d_i - d) g_i, beta_i := (dif g_i)/(dif ln mu)) partial/(partial g_i)] G_n (x; lambda, g_i, mu) $

@@ -49,15 +49,16 @@ $
   dot(phi)(x) & = -i integral dk(k) E_k (a(k) e^(-i k x) - b^dagger (k) e^(i k x)), & quad dot(phi)^dagger (x) & = i integral dk(k) E_k (a^dagger (k) e^(i k x) - b(k) e^(-i k x)), \
   nabla phi(x) & = i integral dk(k) arrow(k) (a(k) e^(-i k x) - b^dagger (k) e^(i k x)), & quad nabla phi^dagger (x) & = -i integral dk(k) arrow(k) (a^dagger (k) e^(i k x) - b(k) e^(-i k x)).
 $
-Inserting them into the Hamiltonian gives
+Inserting them into the Hamiltonian, the $x$-integration sets $p = plus.minus k$ and leaves a factor $(2 pi)^3 delta^((3)) (dots) = 2 E_k (2 pi)^3 delta^((3)) (dots) \/ (2 E_k)$, i.e. a factor $1 \/ (2 E_k)$ inside $integral dk(k)$. With $E_k^2 = arrow(k)^2 + m^2$, the terms oscillating in time cancel and we get
 $
   H & = integral dd(3, x) cal(H)(x) = integral dd(3, x) (dot(phi) dot(phi)^dagger + nabla phi^dagger nabla phi + m^2 phi^dagger phi) \
   & = integral dd(3, x) integral dk(k) E_k (a(k) e^(-i k x) - b^dagger (k) e^(i k x)) integral dk(p) E_p (a^dagger (p) e^(i p x) - b(p) e^(-i p x)) \
   & quad + integral dd(3, x) integral dk(k) arrow(k) (a(k) e^(-i k x) - b^dagger (k) e^(i k x)) integral dk(p) arrow(p) (a^dagger (p) e^(i p x) - b(p) e^(-i p x)) \
   & quad + m^2 integral dd(3, x) integral dk(k) (a(k) e^(-i k x) + b^dagger (k) e^(i k x)) integral dk(p) (a^dagger (p) e^(i p x) + b(p) e^(-i p x)) \
-  & = integral dk(k) E_k^2 (a(k) a^dagger (k) - a(k) b(-k) e^(-2 i E_k t) - b^dagger (k) a^dagger (-k) e^(2 i E_k t) + b^dagger (k) b(k)) \
-  & quad + integral dk(k) arrow(k)^2 (a(k) a^dagger (k) + a(k) b(-k) e^(-2 i E_k t) + b^dagger (k) a^dagger (-k) e^(2 i E_k t) + b^dagger (k) b(k)) \
-  & quad + integral dk(k) m^2 (a(k) a^dagger (k) + a(k) b(-k) e^(-2 i E_k t) + b^dagger (k) a^dagger (-k) e^(2 i E_k t) + b^dagger (k) b(k)) \
-  & = 2 integral dk(k) E_k^2 (a(k) a^dagger (k) + b^dagger (k) b(k)) = 2 integral dk(k) E_k^2 (a^dagger (k) a(k) + (2 pi)^3 2 E_k delta^((3)) (0) + b^dagger (k) b(k)) \
-  & = 2 integral dk(k) E_k^2 (a^dagger (k) a(k) + b^dagger (k) b(k)) + 4 (2 pi)^3 integral dk(k) E_k^3 delta^((3)) (0).
+  & = integral dk(k) E_k/2 (a(k) a^dagger (k) - a(k) b(-k) e^(-2 i E_k t) - b^dagger (k) a^dagger (-k) e^(2 i E_k t) + b^dagger (k) b(k)) \
+  & quad + integral dk(k) (arrow(k)^2)/(2 E_k) (a(k) a^dagger (k) + a(k) b(-k) e^(-2 i E_k t) + b^dagger (k) a^dagger (-k) e^(2 i E_k t) + b^dagger (k) b(k)) \
+  & quad + integral dk(k) m^2/(2 E_k) (a(k) a^dagger (k) + a(k) b(-k) e^(-2 i E_k t) + b^dagger (k) a^dagger (-k) e^(2 i E_k t) + b^dagger (k) b(k)) \
+  & = integral dk(k) E_k (a(k) a^dagger (k) + b^dagger (k) b(k)) = integral dk(k) E_k (a^dagger (k) a(k) + (2 pi)^3 2 E_k delta^((3)) (0) + b^dagger (k) b(k)) \
+  & = integral dk(k) E_k (a^dagger (k) a(k) + b^dagger (k) b(k)) + 2 (2 pi)^3 integral dk(k) E_k^2 delta^((3)) (0),
 $
+The last term is the (infinite) zero-point energy, which is dropped by normal ordering.

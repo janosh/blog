@@ -9,7 +9,7 @@
 
 // One-loop diagram of phi^4 theory: a loop with a vertex at each of the given angles,
 // each vertex carrying two external legs.
-#let loop-diagram(..angles, r: 0.55, leg: 0.75) = box(baseline: 40%, canvas(length: 1cm, {
+#let loop-diagram(..angles, r: 0.55, leg: 0.75) = box(baseline: 40%, inset: (y: 3pt), canvas(length: 1cm, {
   import draw: *
   set-style(stroke: 0.7pt)
   circle((0, 0), radius: r)
@@ -60,7 +60,7 @@ Apparently, we obtain an extra term of $-i/2 n ln(2 pi)$ and thus cannot confirm
 ]
 
 The Taylor expansion to order $n$ of a function $f(x)$ at point $x = a$ is given by
-$ T_n f(x)|_(x = a) = sum_(k=0)^n 1/k! (dif^k f(x))/(dif x^k)|_(x = a) (x - a)^k. $
+$ T_n f(x)|_(x = a) = sum_(k=0)^n 1/k! lr((dif^k f(x))/(dif x^k) |)_(x = a) (x - a)^k. $
 The natural logarithm is expanded easiest by writing the argument as $x = 1 + y$, yielding
 $ ln(1 + y) = sum_(n=1)^oo (-1)^(n+1)/n y^n. $
 Thus, we find
@@ -80,7 +80,7 @@ where the last equivalence holds only up to symmetry factors.
 
 #task(label: "d")[Verify that this indeed reproduces $V_"eff" = V^"tree" + V^"1-loop"$ of last week's assignment.]
 
-In the referred-to problem 4.2, we were considering a constant background field, i.e. $phi.alt(x_i) = phi.alt_0 in CC thick forall i$. Inserting for the propagator
+In the referred-to problem 4.2, we were considering a constant background field, i.e. $phi.alt(x_i) = phi.alt_0 in RR thick forall i$. Inserting for the propagator
 $ G(x_1, x_2; 0) = integral (dd(4, p_1))/(2 pi)^4 i/(p_1^2 - m^2 + i epsilon) e^(-i p_1 (x_1 - x_2)), $
 we get
 $

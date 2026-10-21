@@ -5,6 +5,10 @@ cover:
   caption: Chalkboard with QFT and string theory equations such as the Polyakov action and Virasoro algebra, and a Feynman vertex thickening into a closed-string pair-of-pants worldsheet
 ---
 
+<script>
+  import Note from '../Note.svelte'
+</script>
+
 In May 2016, I had my oral exam on [string theory](/physics/string-theory) and [advanced quantum field theory](/physics/advanced-qft) with [Prof. Timo Weigand](https://www.thphys.uni-heidelberg.de/~weigand).
 
 Below are four transcripts of past oral exams on similar topics that I used to prepare for my own. I also uploaded a transcript of my exam with Timo and summaries of his lecture notes on string theory and advanced QFT that I wrote to help me memorize them.
@@ -13,11 +17,11 @@ Below are four transcripts of past oral exams on similar topics that I used to p
 
 <div class="docs-grid">
 
-[Transcript ![Transcript](./thumbnails/transcript.webp)](./pdfs/transcript.pdf)
+<Note file="transcript" title="Transcript" />
 
-[QFT summary ![QFT summary](./thumbnails/qft-summary.webp)](./pdfs/qft-summary.pdf)
+<Note file="qft-summary" title="QFT summary" />
 
-[String theory summary ![String theory summary](./thumbnails/string-theory-summary.webp)](./pdfs/string-theory-summary.pdf)
+<Note file="string-theory-summary" title="String theory summary" />
 
 </div>
 
@@ -25,12 +29,12 @@ Below are four transcripts of past oral exams on similar topics that I used to p
 
 <div class="docs-grid">
 
-[Berges 2015 ![Berges 2015](./thumbnails/berges-2015.webp)](./pdfs/berges-2015.pdf)
+<Note file="berges-2015" title="Berges 2015" />
 
-[Jäckel 2014 ![Jäckel 2014](./thumbnails/jaeckel-2014.webp)](./pdfs/jaeckel-2014.pdf)
+<Note file="jaeckel-2014" title="Jäckel 2014" />
 
-[Weigand 2014 ![Weigand 2014](./thumbnails/weigand-2014.webp)](./pdfs/weigand-2014.pdf)
+<Note file="weigand-2014" title="Weigand 2014" />
 
-[Weigand 2015 ![Weigand 2015](./thumbnails/weigand-2015.webp)](./pdfs/weigand-2015.pdf)
+<Note file="weigand-2015" title="Weigand 2015" />
 
 </div>

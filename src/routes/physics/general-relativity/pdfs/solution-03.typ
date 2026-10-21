@@ -72,35 +72,38 @@ respectively. There are more.
     let o = (0, 0)
     // oblique projection: y-axis drawn towards the lower left
     let p3(x, y, z) = (x - 0.5 * y, z - 0.4 * y)
-    line(o, p3(1.9, 0, 0), mark: (end: ">"))
-    line(o, p3(0, 0, 1.8), mark: (end: ">"))
-    line(o, p3(0, 2.2, 0), mark: (end: ">"))
-    content(p3(2.1, 0, 0), text(8pt)[$x$])
-    content((rel: (-0.15, 0), to: p3(0, 0, 1.9)), text(8pt)[$z$])
-    content((rel: (-0.15, -0.1), to: p3(0, 2.3, 0)), text(8pt)[$y$])
-    let (px, py, pz) = (1.1, 0.9, 1.2)
+    let lbl(pt, body, anchor: "center") = content(pt, text(8pt, body), anchor: anchor, padding: 2pt)
+    line(o, p3(2.6, 0, 0), mark: (end: ">"))
+    line(o, p3(0, 0, 2.3), mark: (end: ">"))
+    line(o, p3(0, 2.8, 0), mark: (end: ">"))
+    lbl(p3(2.6, 0, 0), $x$, anchor: "west")
+    lbl(p3(0, 0, 2.3), $z$, anchor: "south")
+    lbl(p3(0, 2.8, 0), $y$, anchor: "north-east")
+    let (px, py, pz) = (1.5, 1.3, 1.7)
     let p = p3(px, py, pz)
     let q = p3(px, py, 0)
+    // dashed lines drop the point onto the xy-plane and the three axes
+    let dashed = (dash: "dashed", thickness: 0.4pt)
+    line(p, q, stroke: dashed)
+    line(o, q, stroke: dashed)
+    line(q, p3(px, 0, 0), stroke: dashed)
+    line(q, p3(0, py, 0), stroke: dashed)
+    line(p, p3(0, 0, pz), stroke: dashed)
     line(o, p, stroke: 0.9pt)
     circle(p, radius: 0.04, fill: black)
-    line(p, q, stroke: (dash: "dashed"))
-    line(o, q, stroke: (dash: "dashed"))
-    line(q, p3(px, 0, 0), stroke: (dash: "dashed"))
-    line(q, p3(0, py, 0), stroke: (dash: "dashed"))
-    content((rel: (0.12, 0.1), to: p3(px / 2, py / 2, pz / 2)), text(8pt)[$r$])
-    // braces marking the Cartesian components of the point
-    let br = (amplitude: 0.1, stroke: 0.5pt)
-    decorations.flat-brace(o, p3(0, 0, pz), ..br)
-    content((-0.27, pz / 2), text(7pt)[$z$])
-    decorations.flat-brace(o, p3(px, 0, 0), ..br)
-    content((px / 2 + 0.3, 0.24), text(7pt)[$x$])
-    decorations.flat-brace(p3(0, py, 0), o, ..br)
-    content((-0.4, -0.02), text(7pt)[$y$])
+    lbl(p3(px / 2, py / 2, pz / 2), $r$, anchor: "north-west")
+    lbl(p3(px, 0, 0), $x$, anchor: "south")
+    lbl(p3(0, py, 0), $y$, anchor: "south-east")
+    lbl(p3(0, 0, pz), $z$, anchor: "east")
     // theta between z-axis and r, phi between x-axis and the projection of r
-    bezier(p3(0, 0, 0.55), p3(0.3, 0.25, 0.38), p3(0.12, 0.08, 0.55))
-    content(p3(0.12, 0.05, 0.75), text(7pt)[$theta$])
-    bezier(p3(0.6, 0, 0), p3(0.42, 0.36, 0), p3(0.6, 0.2, 0))
-    content((0.8, -0.1), text(7pt)[$phi$])
+    let along(to, len) = {
+      let norm = calc.sqrt(to.at(0) * to.at(0) + to.at(1) * to.at(1))
+      (to.at(0) / norm * len, to.at(1) / norm * len)
+    }
+    bezier((0, 0.6), along(p, 0.6), (0.2, 0.68), stroke: 0.4pt)
+    lbl(along((p.at(0) / 2, p.at(1) + 0.9), 0.85), $theta$)
+    bezier((0.7, 0), along(q, 0.7), (0.72, -0.25), stroke: 0.4pt)
+    lbl((0.5, -0.14), $phi$)
   })),
 )
 To calculate the metric with the above formula, we need the Jacobian $J$ of this transformation:
@@ -137,9 +140,9 @@ With this preparation, we calculate the following symbols ($*$ when limited to s
     Gamma^1_11 & = 1/2 g^(1 k) ((partial g_(1 k))/(partial x^1) + (partial g_(1 k))/(partial x^1) - (partial g_11)/(partial x^k)) = g^(1 k) underbrace((partial g_(1 k))/(partial x^1), 0 "for all" k) - 1/2 g^(1 k) underbrace((partial g_11)/(partial x^k), 0 "for all" k) = 0, \
     Gamma^1_12 & = 1/2 g^(1 k) ((partial g_(2 k))/(partial x^1) + underbrace((partial g_(1 k))/(partial x^2), 0) - underbrace((partial g_12)/(partial x^k), 0)) = 1/2 g^12 (partial g_22)/(partial x^1) = 1/2 dot 0 dot (partial r^2)/(partial r) = 0 dot r = 0 = Gamma^1_21, \
     Gamma^1_13 & = 1/2 g^(1 k) ((partial g_(3 k))/(partial x^1) + underbrace((partial g_(1 k))/(partial x^3), 0) - underbrace((partial g_13)/(partial x^k), 0)) = 1/2 g^13 (partial g_33)/(partial x^1) = 1/2 dot 0 dot (partial r^2 sin^2 theta)/(partial r) = 0 = Gamma^1_31, \
-    Gamma^1_22 & = 1/2 g^(1 k) (underbrace((partial g_(2 k))/(partial x^2), 0) + underbrace((partial g_(2 k))/(partial x^2), 0) - (partial g_22)/(partial x^k)) = 1/2 g^11 (-(partial g_22)/(partial x^1)) = -1/2 (-1) (partial r^2)/(partial r) = r quad (Gamma^1_22 seq 0), \
+    Gamma^1_22 & = 1/2 g^(1 k) (underbrace((partial g_(2 k))/(partial x^2), 0) + underbrace((partial g_(2 k))/(partial x^2), 0) - (partial g_22)/(partial x^k)) = 1/2 g^11 (-(partial g_22)/(partial x^1)) = 1/2 (-1) (-(partial (-r^2))/(partial r)) = -r quad (Gamma^1_22 seq 0), \
     Gamma^1_23 & = 1/2 g^(1 k) ((partial g_(3 k))/(partial x^2) + underbrace((partial g_(2 k))/(partial x^3), 0) - underbrace((partial g_23)/(partial x^k), 0)) = 1/2 g^13 (partial g_33)/(partial x^2) = 1/2 dot 0 dot (partial r^2 sin^2 theta)/(partial theta) = 0 = Gamma^1_32, \
-    Gamma^1_33 & = 1/2 g^(1 k) (underbrace((partial g_(3 k))/(partial x^3), 0) + underbrace((partial g_(3 k))/(partial x^3), 0) - (partial g_33)/(partial x^k)) = -1/2 (g^11 (partial g_33)/(partial x^1) + underbrace(g^12, 0) (partial g_33)/(partial x^2)) = -1/2 (-1) (partial r^2 sin^2 theta)/(partial r) = r sin^2 theta quad (Gamma^1_33 seq 0), \
+    Gamma^1_33 & = 1/2 g^(1 k) (underbrace((partial g_(3 k))/(partial x^3), 0) + underbrace((partial g_(3 k))/(partial x^3), 0) - (partial g_33)/(partial x^k)) = -1/2 (g^11 (partial g_33)/(partial x^1) + underbrace(g^12, 0) (partial g_33)/(partial x^2)) = -1/2 (-1) (partial (-r^2 sin^2 theta))/(partial r) = -r sin^2 theta quad (Gamma^1_33 seq 0), \
     Gamma^2_11 & = 1/2 g^(2 k) (underbrace((partial g_(1 k))/(partial x^1), 0) + underbrace((partial g_(1 k))/(partial x^1), 0) - underbrace((partial g_11)/(partial x^k), 0)) = 0, \
     Gamma^2_12 & = 1/2 g^(2 k) ((partial g_(2 k))/(partial x^1) + underbrace((partial g_(1 k))/(partial x^2), 0) - underbrace((partial g_12)/(partial x^k), 0)) = 1/2 g^22 (partial g_22)/(partial x^1) = 1/r = Gamma^2_21 quad (Gamma^2_12 = Gamma^2_21 seq 0), \
     Gamma^2_13 & = 1/2 g^(2 k) ((partial g_(3 k))/(partial x^1) + underbrace((partial g_(1 k))/(partial x^3), 0) - underbrace((partial g_13)/(partial x^k), 0)) = 1/2 g^23 (partial g_33)/(partial x^1) = 1/2 dot 0 dot (partial r^2 sin^2 theta)/(partial r) = 0 = Gamma^2_31, \
@@ -148,7 +151,7 @@ With this preparation, we calculate the following symbols ($*$ when limited to s
     Gamma^2_33 & = 1/2 g^(2 k) (underbrace((partial g_(3 k))/(partial x^3), 0) + underbrace((partial g_(3 k))/(partial x^3), 0) - (partial g_33)/(partial x^k)) = -1/2 (underbrace(g^21, 0) (partial g_33)/(partial x^1) + g^22 (partial g_33)/(partial x^2)) = -1/2 (-1/r^2) (partial (r^2 sin^2 theta)(-1))/(partial theta) = -sin theta cos theta, \
     Gamma^3_11 & = 1/2 g^(3 k) (underbrace((partial g_(1 k))/(partial x^1), 0) + underbrace((partial g_(1 k))/(partial x^1), 0) - underbrace((partial g_11)/(partial x^k), 0)) = 0, \
     Gamma^3_12 & = 1/2 g^(3 k) ((partial g_(2 k))/(partial x^1) + underbrace((partial g_(1 k))/(partial x^2), 0) - underbrace((partial g_12)/(partial x^k), 0)) = 1/2 underbrace(g^32, 0) (partial g_22)/(partial x^1) = 0 = Gamma^3_21, \
-    Gamma^3_13 & = 1/2 g^(3 k) ((partial g_(3 k))/(partial x^1) + underbrace((partial g_(1 k))/(partial x^3), 0) - underbrace((partial g_13)/(partial x^k), 0)) = 1/2 g^33 (partial g_33)/(partial x^1) = 1/2 (-1)/(r^2 sin^2 theta) (partial r^2 sin^2 theta)/(partial r) = -1/r = Gamma^3_31 quad (Gamma^3_13 = Gamma^3_31 seq 0), \
+    Gamma^3_13 & = 1/2 g^(3 k) ((partial g_(3 k))/(partial x^1) + underbrace((partial g_(1 k))/(partial x^3), 0) - underbrace((partial g_13)/(partial x^k), 0)) = 1/2 g^33 (partial g_33)/(partial x^1) = 1/2 (-1)/(r^2 sin^2 theta) (partial (-r^2 sin^2 theta))/(partial r) = 1/r = Gamma^3_31 quad (Gamma^3_13 = Gamma^3_31 seq 0), \
     Gamma^3_22 & = 1/2 g^(3 k) (underbrace((partial g_(2 k))/(partial x^2), 0) + underbrace((partial g_(2 k))/(partial x^2), 0) - (partial g_22)/(partial x^k)) = -1/2 underbrace(g^31, 0) (partial g_22)/(partial x^1) = 0, \
     Gamma^3_23 & = 1/2 g^(3 k) ((partial g_(3 k))/(partial x^2) + underbrace((partial g_(2 k))/(partial x^3), 0) - underbrace((partial g_23)/(partial x^k), 0)) = cot theta = Gamma^3_32, \
     Gamma^3_33 & = 1/2 g^(3 k) (underbrace((partial g_(3 k))/(partial x^3), 0) + underbrace((partial g_(3 k))/(partial x^3), 0) - (partial g_33)/(partial x^k)) = -1/2 g^33 underbrace((partial g_33)/(partial x^3), 0) = 0.
@@ -162,9 +165,9 @@ With this preparation, we calculate the following symbols ($*$ when limited to s
 
 #wide[
   $
-    x^1 = r: & quad dot.double(x)^1 + Gamma^1_(a b) dot(x)^a dot(x)^b = dot.double(x)^1 + Gamma^1_22 dot(x)^2 dot(x)^2 + Gamma^1_33 dot(x)^3 dot(x)^3 = dot.double(r) + r dot(theta)^2 + r sin^2 theta dot(phi)^2 = 0, \
+    x^1 = r: & quad dot.double(x)^1 + Gamma^1_(a b) dot(x)^a dot(x)^b = dot.double(x)^1 + Gamma^1_22 dot(x)^2 dot(x)^2 + Gamma^1_33 dot(x)^3 dot(x)^3 = dot.double(r) - r dot(theta)^2 - r sin^2 theta dot(phi)^2 = 0, \
     x^2 = theta: & quad dot.double(x)^2 + Gamma^2_(a b) dot(x)^a dot(x)^b = dot.double(x)^2 + Gamma^2_12 dot(x)^1 dot(x)^2 + Gamma^2_21 dot(x)^2 dot(x)^1 + Gamma^2_33 dot(x)^3 dot(x)^3 = dot.double(theta) + 2/r dot(r) dot(theta) - sin theta cos theta dot(phi)^2 = 0, \
-    x^3 = phi: & quad dot.double(x)^3 + Gamma^3_(a b) dot(x)^a dot(x)^b = dot.double(x)^3 + Gamma^3_13 dot(x)^1 dot(x)^3 + Gamma^3_31 dot(x)^3 dot(x)^1 + Gamma^3_23 dot(x)^2 dot(x)^3 + Gamma^3_32 dot(x)^3 dot(x)^2 = dot.double(phi) - 2/r dot(r) dot(phi) + 2 cot theta dot(theta) dot(phi) = 0.
+    x^3 = phi: & quad dot.double(x)^3 + Gamma^3_(a b) dot(x)^a dot(x)^b = dot.double(x)^3 + Gamma^3_13 dot(x)^1 dot(x)^3 + Gamma^3_31 dot(x)^3 dot(x)^1 + Gamma^3_23 dot(x)^2 dot(x)^3 + Gamma^3_32 dot(x)^3 dot(x)^2 = dot.double(phi) + 2/r dot(r) dot(phi) + 2 cot theta dot(theta) dot(phi) = 0.
   $
 ]
 When limited to the surface of a sphere, the e.o.m.s simplify to
@@ -204,7 +207,7 @@ Applying a variation to $S$, the square root gives just another scaling factor $
   $
     r: quad & dif/(dif tau) (partial L)/(partial dot(r)) - (partial L)/(partial r) = -dif/(dif tau) [2 (1 - 2 Phi(r)) dot(r)] - 2 (partial Phi(r))/(partial r) dot(t)^2 - 2 (partial Phi(r))/(partial r) (dot(r)^2 + r^2 dot(theta)^2 + r^2 sin^2 theta dot(phi)^2) \
     & #h(2em) + 2 (1 - 2 Phi(r)) r dot(theta)^2 + 2 (1 - 2 Phi(r)) r sin^2 theta dot(phi)^2 = 0 \
-    <==> quad & dot.double(r) - (Phi(r) dot(t)^2)/((1 - 2 Phi(r)) r) - Phi(r)/((1 - 2 Phi(r)) r) (dot(r)^2 + r^2 dot(theta)^2 + r^2 sin^2 theta dot(phi)^2) - r dot(theta)^2 - r sin^2 theta dot(phi)^2 - (2 Phi(r))/((1 - 2 Phi(r)) r) dot(r)^2 = 0 \
+    <==> quad & dot.double(r) - (Phi(r) dot(t)^2)/((1 - 2 Phi(r)) r) - Phi(r)/((1 - 2 Phi(r)) r) (dot(r)^2 + r^2 dot(theta)^2 + r^2 sin^2 theta dot(phi)^2) - r dot(theta)^2 - r sin^2 theta dot(phi)^2 + (2 Phi(r))/((1 - 2 Phi(r)) r) dot(r)^2 = 0 \
     <==> quad & dot.double(r) - r dot(theta)^2 - r sin^2 theta dot(phi)^2 - Phi(r)/((1 - 2 Phi(r)) r) (dot(t)^2 - dot(r)^2 + r^2 dot(theta)^2 + r^2 sin^2 theta dot(phi)^2) = 0, \
     theta: quad & dif/(dif tau) (partial L)/(partial dot(theta)) - (partial L)/(partial theta) = -2 dif/(dif tau) ((1 - 2 Phi(r)) r^2 dot(theta)) + 2 (1 - 2 Phi(r)) r^2 sin theta cos theta dot(phi)^2 = 0 \
     <==> quad & 4 (partial Phi(r))/(partial r) dot(r) r^2 dot(theta) - 4 (1 - 2 Phi(r)) r dot(r) dot(theta) - 2 (1 - 2 Phi(r)) r^2 dot.double(theta) + 2 (1 - 2 Phi(r)) r^2 sin theta cos theta dot(phi)^2 = 0 \
@@ -220,7 +223,7 @@ In the above simplifications, we used that $(partial Phi(r))/(partial r) = parti
 
 #wide[
 $
-  x^1 = r: & quad Gamma^1_00 = -Gamma^1_11 = -1/r Phi(r)/(1 + 2 Phi(r)), quad Gamma^1_22 = -r (1 + Phi(r)/(1 + 2 Phi(r))), quad Gamma^1_33 = -r sin^2 theta (1 + Phi(r)/(1 + 2 Phi(r))), \
+  x^1 = r: & quad Gamma^1_00 = -Gamma^1_11 = -1/r Phi(r)/(1 - 2 Phi(r)), quad Gamma^1_22 = -r (1 + Phi(r)/(1 - 2 Phi(r))), quad Gamma^1_33 = -r sin^2 theta (1 + Phi(r)/(1 - 2 Phi(r))), \
   x^2 = theta: & quad Gamma^2_12 = Gamma^2_21 = 1/r (1 - Phi(r))/(1 - 2 Phi(r)), quad Gamma^2_33 = -sin theta cos theta, \
   x^3 = phi: & quad Gamma^3_13 = Gamma^3_31 = 1/r (1 - Phi(r))/(1 - 2 Phi(r)), quad Gamma^3_23 = Gamma^3_32 = cot theta, quad "all other Christoffel symbols zero."
 $

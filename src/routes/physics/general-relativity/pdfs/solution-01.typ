@@ -15,7 +15,7 @@
     columns: (1fr, auto),
     gutter: 12pt,
     [In order to save CO#sub[2]-emissions from air traffic, the governments of France and New Zealand have decided, very realistically, to bore a tunnel through the center of the Earth, directly connecting their land masses with a straight tube, through which a train can travel without any friction and solely accelerated by grav. pull.],
-    align(horizon, canvas(length: 1.25cm, {
+    align(horizon, canvas(length: 1.7cm, {
       import draw: *
       set-style(stroke: 0.6pt)
       circle((0, 0), radius: 1)
@@ -24,10 +24,10 @@
       line(at(158), at(72), stroke: (dash: "dashed"))
       content((rel: (-0.12, 0.12), to: at(112)), text(8pt)[F])
       content((rel: (0.18, -0.12), to: at(-68)), text(8pt)[NZ])
-      content((rel: (-0.38, 0), to: at(158)), text(7pt)[London])
+      content(at(158), text(7pt)[London], anchor: "east", padding: 2.5pt)
       content((rel: (0.2, 0.14), to: at(72)), text(7pt)[Berlin])
-      content((0.34, 0.47), text(6.5pt)[$d_2 = 900 "km"$])
-      content((0.5, -0.2), text(6.5pt)[$d_1 = 2 R_E$])
+      content((-0.53, 0.17), text(6.5pt)[$d_2 = 900 "km"$])
+      content((0.06, 0), text(6.5pt)[$d_1 = 2 R_E$], anchor: "west", padding: 2pt)
     })),
   )
 ]
@@ -49,12 +49,12 @@ The period $P$, in this case twice the travel time $t$, of a harmonic oscillator
 $ P = (2 pi)/k = 2 t, quad t = pi/k = pi/sqrt(4/3 pi G rho_0) = sqrt((3 pi)/(4 G rho_0)) approx 2530 "s" approx 42.2 "min". $
 Interestingly, the travel time depends only on the Earth's density $rho_0$.
 
-*ii)* In this case, $M(r) = 4/3 pi r^3 rho(r) = 4/3 pi R_E rho_1 r^2$ and
-$ F_g = -G (M(r) m_"train")/r^2 = -4/3 pi R_E rho_1 G m_"train" $
-is independent of $r$. Under a constant force, the acceleration
-$ a = 4/3 pi R_E rho_1 G $
-is also constant, rendering the distance travelled easily calculable via $s = a/2 t^2$. Solving for $t$ and inserting $s = d_1$, we obtain
-$ t = sqrt((2 s)/a) = sqrt((4 R_E)/(4/3 pi R_E rho_1 G)) = sqrt(3/(pi rho_1 G)) approx 1970 "s" approx 32.8 "min". $
+*ii)* In this case, $M(r) = integral_0^r 4 pi r'^2 rho(r') dif r' = 2 pi R_E rho_1 r^2$ and
+$ F_g = -G (M(r) m_"train")/r^2 = -2 pi R_E rho_1 G m_"train" $
+is independent of $r$. Under this constant force, the magnitude of the acceleration
+$ a = 2 pi R_E rho_1 G $
+is also constant, rendering the distance travelled easily calculable via $s = a/2 t^2$. The train accelerates towards the centre over $s = R_E$ and decelerates symmetrically on the other side, so the one-way time is
+$ t = 2 sqrt((2 R_E)/a) = 2 sqrt((2 R_E)/(2 pi R_E rho_1 G)) = 2/sqrt(pi rho_1 G) approx 2270 "s" approx 37.8 "min". $
 
 #task(label: "b")[Assume there was a similar tunnel between London and Berlin. How long would that journey take?]
 
@@ -128,10 +128,10 @@ This question more likely aims at the fact that with gauge invariance, one assoc
 #task(label: "c")[Show that under the infinitesimal transformation $q -> q + dif q$, the Lagrangian gains a contribution of potential energy that can be written in the familiar form $F dif s$. This means, that in this case, we don't have homogeneity of space.]
 
 Since generalized coordinates and generalized velocities are all independent variables, transforming the Lagrangian $cal(L)(q, dot(q), t) = m/2 dot(q)^2 - V(q)$ amounts to only transforming $V(q)$. Since we apply an infinitesimal transformation, we may Taylor-expand $V(q + dif q)$ to linear order without picking up an error using the formula for the Taylor polynomial to order $n$ of $f(x)$ at $x = a$,
-$ T_n (f(x), a) = sum_(k = 0)^n 1/k! (dif^k f(x))/(dif x^k)|_(x = a) (x - a)^k, $
+$ T_n (f(x), a) = sum_(k = 0)^n 1/k! lr((dif^k f(x))/(dif x^k) |)_(x = a) (x - a)^k, $
 where in our case $n = 1$, $f(x) = V(q + dif q)$, $x = q + dif q$ and $a = q$. We obtain
 $
-  V(q + dif q) & approx 1/0! (dif^0 V(q + dif q))/(dif (q + dif q)^0)|_(q + dif q = q) (q + dif q - q)^0 + 1/1! (dif^1 V(q + dif q))/(dif (q + dif q)^1)|_(q + dif q = q) (q + dif q - q)^1 \
+  V(q + dif q) & approx 1/0! lr((dif^0 V(q + dif q))/(dif (q + dif q)^0) |)_(q + dif q = q) (q + dif q - q)^0 + 1/1! lr((dif^1 V(q + dif q))/(dif (q + dif q)^1) |)_(q + dif q = q) (q + dif q - q)^1 \
   & = V(q) + V'(q) dif q.
 $
 Hence, the Lagrangian changes as
@@ -213,9 +213,9 @@ $ E = m/2 (dot(r)^2 + r^2 dot(phi)^2) + U(r) = m/2 dot(r)^2 + p_phi^2/(2 m r^2) 
   Try to express $dif phi$ in terms of $dif r$! (Tip: $p_phi = m r^2 (dif phi)/(dif t)$.) Extra question: What condition needs to apply that $phi$ describes a closed curve?
 ]
 
-Vague wording. We assume here that $dif phi$ does not denote the complete differential since $cal(L)$ is cyclic in $phi$. Perhaps
-$ (dif phi)/(dif t) = sqrt(2/(m r^2) (E - U(r) - underbrace(1/r^2 ((dif r)/(dif t))^2, p_phi^2/(m^2 r^2)))) $
-is what is asked for. Extra answer: $dot(r) attach(=, t: !) 0$.
+Using $dif t = dif r \/ dot(r)$ with eq. (4) and $dot(phi) = p_phi \/ (m r^2)$, we get
+$ dif phi = p_phi/(m r^2) dif t = (p_phi \/ r^2)/sqrt(2 m (E - U(r)) - p_phi^2 \/ r^2) dif r. $
+Extra answer: the orbit closes if the angle $Delta phi = 2 integral_(r_min)^(r_max) (p_phi \/ r^2) \/ sqrt(2 m (E - U(r)) - p_phi^2 \/ r^2) dif r$ swept between two consecutive perihelia is a rational multiple of $2 pi$.
 
 #task(label: "e")[
   From eq. (4), we can immediately see that $dot(r) = 0$ iff
@@ -225,7 +225,7 @@ is what is asked for. Extra answer: $dot(r) attach(=, t: !) 0$.
   If done correctly, you should see a minimum at $r approx 150 dot 10^6 "km"$. Guess whose potential you just plotted!
 ]
 
-For $dot(r) = 0$, our orbit is a circle. We guess it's Jupiter's potential!
+For $dot(r) = 0$, our orbit is a circle. The minimum lies at $r^3 = G M \/ dot(phi)^2$, i.e. $r approx 1.49 dot 10^11 "m" = 1 "AU"$, so this is the effective potential of the Earth's orbit around the Sun!
 
 #align(center, canvas(length: 1cm, {
   // E(r) = G M m / r + m/2 r^2 phidot^2 in units of 1e33 J, r in units of 1e11 m

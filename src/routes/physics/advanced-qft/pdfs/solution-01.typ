@@ -19,7 +19,7 @@
 #let Th = $Theta$
 
 // Feynman diagrams
-#let fd(body, length: 0.75cm) = box(baseline: 50%, inset: (x: 2pt, y: 3pt), canvas(length: length, {
+#let fd(body, length: 0.75cm) = box(baseline: 50% - 0.25em, inset: (x: 2pt, y: 3pt), canvas(length: length, {
   import draw: *
   set-style(stroke: 0.7pt)
   body
@@ -453,7 +453,7 @@ $
   A'_mu (x) & = e^beta A_mu (T^(-1) x) = e^beta A_mu (e^beta x) = A_mu (x) + beta (A_mu (x) + x^nu partial_nu A_mu (x)) + cal(O)(beta^2), \
   Psi'(x) & = e^(3/2 beta) Psi(T^(-1) x) = e^(3/2 beta) Psi(e^beta x) = Psi(x) + beta (3/2 Psi(x) + x^nu partial_nu Psi(x)) + cal(O)(beta^2).
 $
-Therefore, $Delta^A_mu (x) = A_mu (x) + x^nu partial_nu A_mu (x) = A_mu (x) + x^nu Delta^"EMT"_(mu nu)$ and $Delta^Psi = 3/2 Psi(x) + x^nu partial_nu Psi(x) = 3/2 Psi(x) + x^nu Delta^"EMT"_nu$ (EMT: electromagnetic tensor $F^(mu nu)$).
+Therefore, $Delta^A_mu (x) = A_mu (x) + x^nu partial_nu A_mu (x) = A_mu (x) + x^nu Delta^"EMT"_(mu nu)$ and $Delta^Psi = 3/2 Psi(x) + x^nu partial_nu Psi(x) = 3/2 Psi(x) + x^nu Delta^"EMT"_nu$ (EMT: the field variations of the energy-momentum tensor from part b).
 $
   S^mu & = -F^(mu nu) (A_nu + x^rho Delta^"EMT"_(nu rho)) + i Pb gamma^mu (3/2 Psi + x^nu Delta^"EMT"_nu) - x^mu cal(L) \
   & = -F^(mu nu) A_nu + 3/2 i Pb gamma^mu Psi + x^nu (-F^(mu rho) Delta^"EMT"_(rho nu) + i Pb gamma^mu Delta^"EMT"_nu - delta^mu_nu cal(L)) = U^mu + x^nu T^mu_nu.

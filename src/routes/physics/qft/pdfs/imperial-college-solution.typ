@@ -73,9 +73,10 @@ So we find $Q^(i j)$ to be the total angular momentum of the field $phi$.
 $
   pb(Q^0, phi(x)) & = integral dd(3, x) pb(T^(00), phi) = integral dd(3, x) pb(dot(phi)^2 - 1/2 (partial phi)^2 + V(phi), phi) \
   & = 1/2 integral dd(3, x) pb(pi^2, phi) = integral dd(3, x) pi pb(pi, phi) = -integral dd(3, x) dot(phi) delta^((3)) (arrow(x) - arrow(y)) = -dot(phi), \
-  pb(Q^i, phi(x)) & = integral dd(3, x) pb(T^(0 i), phi) = -integral dd(3, x) pb(dot(phi) partial^i phi, phi) = -integral dd(3, x) partial^i phi pb(pi, phi) \
-  & = +integral dd(3, x) partial^i phi delta^((3)) (arrow(x) - arrow(y)) = partial^i phi.
+  pb(Q^i, phi(x)) & = integral dd(3, x) pb(T^(0 i), phi) = integral dd(3, x) pb(dot(phi) partial^i phi, phi) = integral dd(3, x) partial^i phi pb(pi, phi) \
+  & = -integral dd(3, x) partial^i phi delta^((3)) (arrow(x) - arrow(y)) = -partial^i phi,
 $
+i.e. $pb(Q^mu, phi(x)) = -partial^mu phi(x)$.
 This reflects the fact that $Q^mu$ are the generators of the translation symmetry group. Similarly $Q^(mu nu)$ are the generators of the Lorentz symmetry group. Collectively, ${Q^mu, Q^(mu nu)}$ form a representation of the Poincaré group under the Poisson bracket.
 
 = Problem 2 (20 points)

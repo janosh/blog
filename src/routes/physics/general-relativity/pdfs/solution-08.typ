@@ -247,33 +247,12 @@ $
 $
 where $A'/A + B'/B = ln(A)' + ln(B)' = ln(A)' + ln(A^(-1))' = ln(A)' - ln(A)' = 0$.
 
-We now use $B(r) = A^(-1)(r) = 1 - (2a)/r$ to simplify
+We now use $B(r) = A^(-1)(r) = 1 - (2a)/r$, i.e. $A B = 1$ and $A' \/ A^2 = -B'$, to simplify
 $
-  R & = -(1 - (2a)/r)'' - 2/r (1 - (2a)/r)' + 2/r (1 - (2a)/r)' + 2/r^2 (2a)/r \
-  & = (4a)/r^3 + (4a)/r^3 = (8a)/r^3 = (8 G M)/(c^2 r^3).
+  R & = -B'' - (4 B')/r + 2/r^2 (1 - B) = -(1 - (2a)/r)'' - 4/r (1 - (2a)/r)' + 2/r^2 (2a)/r \
+  & = (4a)/r^3 - (8a)/r^3 + (4a)/r^3 = 0.
 $
-
-#grid(
-  columns: (auto, 1fr),
-  column-gutter: 1cm,
-  align: (left, horizon),
-  canvas(length: 1cm, {
-    import draw: *
-    let (w, h) = (4.5, 3.6)
-    set-style(stroke: 0.6pt)
-    line((0, -0.2), (0, h + 0.2), mark: (end: "stealth", fill: black))
-    line((-0.3, 0), (w + 0.2, 0), mark: (end: "stealth", fill: black))
-    content((w + 0.35, 0), $r$, anchor: "west")
-    content((0, h + 0.35), $R$, anchor: "south")
-    line((-0.08, 1), (0.08, 1))
-    content((-0.15, 1), $1$, anchor: "east")
-    line((0.9, -0.08), (0.9, 0.08))
-    content((0.9, -0.3), $R_s = (2 G M)/c^2$, anchor: "north")
-    // R = 8a/r^3 = 1 at r = 2a = R_s (placed at x = 0.9)
-    sketch-curve(r => calc.pow(0.9 / r, 3), 0.01, 4.5, 0, 3.6, w, h, stroke: 0.9pt)
-  }),
-  [No unusual behavior at $r = R_s$.],
-)
+As expected, $R = 0$ for all $r > 0$. Nothing happens at $r = R_s$: the curvature is perfectly regular there, so the apparent singularity of the metric at the Schwarzschild radius is merely an artifact of the coordinates.
 
 = Problem 4 (Extra: Black hole detection) [5 points]
 

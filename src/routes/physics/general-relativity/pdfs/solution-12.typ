@@ -96,13 +96,12 @@ $
   xi_theta & = c_1 sin phi + c_2 cos phi, \
   xi_phi & = sin theta cos theta (c_1 cos phi - c_2 sin phi) + c_3 sin^2 theta,
 $
-with three independent constants $c_1, c_2, c_3$ yielding three linearly independent Killing vectors. Expanding the Killing vectors in an orthogonal basis of the tangent space of $S^2$, we may write them as
-$ xi = xi_theta partial_theta + xi_phi partial_phi, $
-where $partial_theta$ and $partial_phi$ span the tangent space. Then we find for a particular choice of $c_1$, $c_2$ and $c_3$ that
+with three independent constants $c_1, c_2, c_3$ yielding three linearly independent Killing vectors. Expanding these covariant components in the dual basis of the cotangent space of $S^2$, we may write them as
+$ xi = xi_theta dif theta + xi_phi dif phi. $ Then we find for a particular choice of $c_1$, $c_2$ and $c_3$ that
 $
-  xi_1 & = sin phi partial_theta + sin theta cos theta cos phi partial_phi, quad && "for" c_1 = 1, c_2 = c_3 = 0, \
-  xi_2 & = -cos phi partial_theta + sin theta cos theta sin phi partial_phi, quad && "for" c_2 = -1, c_1 = c_3 = 0, \
-  xi_3 & = -sin^2 theta partial_phi, quad && "for" c_3 = -1, c_1 = c_2 = 0.
+  xi_1 & = sin phi dif theta + sin theta cos theta cos phi dif phi, quad && "for" c_1 = 1, c_2 = c_3 = 0, \
+  xi_2 & = -cos phi dif theta + sin theta cos theta sin phi dif phi, quad && "for" c_2 = -1, c_1 = c_3 = 0, \
+  xi_3 & = -sin^2 theta dif phi, quad && "for" c_3 = -1, c_1 = c_2 = 0.
 $
 This is already a nice result. However, to see the relation to the contravariant angular momentum vector, we need to compute the contravariant form of the Killing vectors via contraction with the metric. We find
 $
@@ -122,7 +121,7 @@ we found that for our particular choice of $c_1$, $c_2$, $c_3$, the three contra
 
 $
   nabla_mu J^mu & = nabla_mu (xi_nu T^(mu nu)) = underbrace((nabla_mu xi_nu), -nabla_nu xi_mu) T^(mu nu) + xi_nu underbrace(nabla_mu T^(mu nu), 0) \
-  & = -(nabla_nu xi_mu) T^(nu mu) - xi_mu nabla_nu T^(nu mu) = -nabla_nu (xi_mu T^(nu mu)) = -nabla_nu J^nu.
+  & = -(nabla_nu xi_mu) T^(nu mu) - xi_mu nabla_nu T^(nu mu) = -nabla_nu (xi_mu T^(nu mu)) = -nabla_nu J^nu quad ==> quad nabla_mu J^mu = 0.
 $
 = Problem 4 (Extra: Torsion and cosmology) [5 points]
 
@@ -133,5 +132,5 @@ We would no longer have $nabla_mu xi_nu + nabla_nu xi_mu = 0$. The Lie derivativ
 #task(label: "b")[Is there a timelike Killing vector in FLRW cosmologies?]
 
 A metric can only admit a timelike Killing vector $partial/(partial t)$ if it is stationary, i.e. if there exist coordinates in which the metric is independent of time. (This would mean observers travelling along integral curves of $dif/(dif t)$ do not notice any change in the universe.) Since the metric of FLRW cosmologies is given by
-$ "diag"(g) = (1, -a(t), -a(t), -a(t)) $
+$ "diag"(g) = (1, -a^2 (t), -a^2 (t), -a^2 (t)) $
 in Cartesian coordinates, these do not, except for the special case of $a(t) = a$ constant, contain timelike Killing vector fields.

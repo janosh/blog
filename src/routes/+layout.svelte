@@ -79,6 +79,8 @@
   fallback_actions={search_actions}
   {load_pagefind}
   navigate={async (url, { query }) => {
+    // note PDFs (opened at a section's page) are static files, not app routes
+    if (/\.pdf(?:#|$)/u.test(url)) return location.assign(url)
     await goto(url)
     page_search_query = ``
     queueMicrotask(() => (page_search_query = query))

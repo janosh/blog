@@ -10,7 +10,7 @@
 #let O = $cal(O)$
 
 // Feynman diagrams of phi^4 theory, drawn inline in equations
-#let fd(body, s: 0.75) = box(baseline: 50%, inset: (y: 2pt), canvas(length: s * 1cm, {
+#let fd(body, s: 0.75) = box(baseline: 50% - 0.25em, inset: (y: 2pt), canvas(length: s * 1cm, {
   import draw: *
   set-style(stroke: 0.7pt)
   body
@@ -107,7 +107,7 @@ $
   "i)" #npoint(()) quad D = 4, quad "ii)" #npoint(((0.8, 0),)) quad D = 3, quad "iii)" #npoint(((-0.8, 0), (0.8, 0))) quad D = 2, \
   "iv)" #npoint(((-0.7, 0.55), (-0.7, -0.55), (0.8, 0))) quad D = 1, quad "v)" #npoint(((-0.6, 0.6), (0.6, 0.6), (-0.6, -0.6), (0.6, -0.6))) quad D = 0.
 $
-Since the Lagrangian $cal(L)_(phi^4)$ is invariant under the parity transf. $hat(P)(phi(t, arrow(x))) = -phi(t, -arrow(x))$, all diagrams with an odd number of external lines vanish. Thus, amplitudes ii) and iv) are not actually divergent but rather zero.
+Since the Lagrangian $cal(L)_(phi^4)$ is invariant under the $ZZ_2$ symmetry $phi -> -phi$, all diagrams with an odd number of external lines vanish. Thus, amplitudes ii) and iv) are not actually divergent but rather zero.
 
 We are finally at the point, where we understand, why we are tasked with renormalizing the propagator and the vertex. The vacuum diagram can be trivially absorbed into the vacuum energy density $V_0$, an additional degree of freedom of any Lagrangian, which we did not write down explicitly, since the absolute energy scale is meaningless in a theory without gravity. Thus, propagator and vertex are the only two fundamental divergencies in $lambda phi^4$-theory. All others are due to diagrams containing these two as subdiagrams.
 
@@ -240,17 +240,17 @@ $
 $
   S & = #fd(s: 0.9, {
     draw.line((-1.1, 0), (1.1, 0))
-    draw.circle((0, 0), radius: 0.5)
-    arr((-0.9, 0), (-0.7, 0))
-    arr((0.7, 0), (0.9, 0))
-    arr((-0.06, 0.5), (0.06, 0.5))
+    draw.circle((0, 0), radius: 0.62)
+    arr((-0.95, 0), (-0.75, 0))
+    arr((0.75, 0), (0.95, 0))
+    arr((-0.06, 0.62), (0.06, 0.62))
     arr((-0.06, 0), (0.06, 0))
-    arr((-0.06, -0.5), (0.06, -0.5))
+    arr((-0.06, -0.62), (0.06, -0.62))
     lbl((-1.1, 0.2), $p$)
     lbl((1.1, 0.2), $p$)
-    lbl((0, 0.7), $k_1$)
-    lbl((0.25, 0.15), $k_2$)
-    lbl((0, -0.72), $p - k_1 - k_2$)
+    lbl((0, 0.84), $k_1$)
+    lbl((0, 0.24), $k_2$)
+    lbl((0, -0.86), $p - k_1 - k_2$)
   }) = 1/3! (-i lambda)^2 integral (dd(d, k))/(2 pi)^d integral (dd(d, q))/(2 pi)^d i/(k^2 - m^2 + i epsilon) i/(q^2 - m^2 + i epsilon) i/((p - k - q)^2 - m^2 + i epsilon) \
   & = (i lambda^2)/6 integral (dd(d, k_E))/(2 pi)^d i/(k_E^2 + m^2) underbrace(integral (dd(d, q_E))/(2 pi)^d i/(q_E^2 + m^2) i/((p - k_E - q_E)^2 + m^2), 2 i V((p - k_E)^2)", for" V(p^2) "as defined in problem 7.1 b)") \
   & = (i lambda^2)/6 integral (dd(d, k_E))/(2 pi)^d i/(k_E^2 + m^2) 2 i (-Gamma(2 - d/2)/(2 (4 pi)^(d/2)) integral_0^1 (dif x)/[m^2 - x(1 - x)(p_E - k_E)^2]^(2 - d/2)) \

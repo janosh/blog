@@ -6,6 +6,7 @@ import { GET as get_sitemap } from '../src/routes/sitemap.xml/+server.js'
 import { GET as get_og } from '../src/routes/og/[section]/[slug]/[img]/+server.js'
 import { load as load_post } from '../src/routes/posts/+layout.server.js'
 import { load as load_physics } from '../src/routes/physics/+layout.server.js'
+import { typst_sections, typst_text } from '../src/lib/build-search.js'
 import { existsSync, globSync, readFileSync } from 'node:fs'
 import sharp from 'sharp'
 import { expect, it } from 'vite-plus/test'
@@ -85,6 +86,62 @@ it(`renders every local SVG cover as PNG and WebP cover as 1200x630 JPEG og:imag
       get_og(og_event({ section: `physics`, slug: `qft`, img })),
     ).rejects.toMatchObject({ status: 404 })
   }
+})
+
+it(`extracts searchable prose and math from Typst notes, dropping code and comments`, () => {
+  const src = [
+    `#import "/notes.typ": notes, task`,
+    `#show: notes.with(title: [Hidden title])`,
+    `#let bubble(x) = box(canvas({`,
+    `  line((0, 0), (1, 1))`,
+    `}))`,
+    `// a comment`,
+    `/* block`,
+    `comment */`,
+    `= Problem 1`,
+    `#task(label: "a")[Show that $E = m c^2$.] See https://janosh.dev for #emph[more].`,
+  ].join(`\n`)
+  expect(typst_text(src)).toBe(
+    `= Problem 1 Show that $E = m c^2$. See https://janosh.dev for more .`,
+  )
+})
+
+it(`splits Typst notes into sections at headings, heading calls and part helpers`, () => {
+  const src = [
+    `#show: notes.with(title: [T])`,
+    `Intro text.`,
+    `#heading(numbering: none)[Part A]`,
+    `= Problem 1 #pts(3)`,
+    `Solve $x^2 = 1$.`,
+    `== Sub problem`,
+    `#counter(heading).update(0)`,
+    `#part[Part B]`,
+    `More.`,
+  ].join(`\n`)
+  expect(typst_sections(src)).toEqual({
+    intro: `Intro text.`,
+    sections: [
+      { title: `Part A`, text: `` },
+      { title: `Problem 1`, text: `Solve $x^2 = 1$.` },
+      { title: `Sub problem`, text: `` },
+      { title: `Part B`, text: `More.` },
+    ],
+  })
+})
+
+it(`gives physics note cards PDF and thumbnail URLs and GitHub links to Typst sources`, () => {
+  const { notes } = load_physics({ route: { id: `/physics/qft` } })
+  expect(Object.keys(notes).length).toBeGreaterThan(10)
+  for (const { pdf, thumbnail } of Object.values(notes)) {
+    expect([pdf, thumbnail]).toEqual([
+      expect.stringMatching(/\.pdf$/u),
+      expect.stringMatching(/\.webp$/u),
+    ])
+  }
+  expect(notes[`berges-midterm-solution`].source).toBe(
+    `https://github.com/janosh/blog/blob/main/src/routes/physics/qft/pdfs/berges-midterm-solution.typ`,
+  )
+  expect(notes[`berges-midterm-exam`].source).toBeUndefined()
 })
 
 it(`ships a compiled PDF and card thumbnail next to every typeset physics note`, () => {

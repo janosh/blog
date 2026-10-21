@@ -14,7 +14,7 @@
 
 // arrow diagram of a permutation: bottom row = domain, arrow from i to its image in the top row.
 // `targets` maps each bottom position to a top position; `labels` are drawn under the bottom row.
-#let perm-fig(targets, labels, dx: 0.6) = box(baseline: 50%, canvas(length: 1cm, {
+#let perm-fig(targets, labels, dx: 0.6) = box(baseline: 50% - 0.25em, canvas(length: 1cm, {
   import draw: *
   set-style(stroke: 0.6pt)
   for (i, lbl) in labels.enumerate() {
@@ -35,7 +35,7 @@
 }))
 
 // Young diagram with columns of the given heights (top-aligned)
-#let young(heights, labels: none, s: 0.32) = box(baseline: 50%, canvas(length: 1cm, {
+#let young(heights, labels: none, s: 0.32) = box(baseline: 50% - 0.25em, canvas(length: 1cm, {
   import draw: *
   set-style(stroke: 0.6pt)
   let hmax = calc.max(..heights.filter(h => h != none))
@@ -162,7 +162,7 @@ $ H = {pi_e, pi_([1]), pi_([2]), pi_([3])} subset S_4, quad H tilde.equiv ZZ_4 $
     & r in S without {s_0, ..., s_(k-1)} |-> r
   $
   $ (1 3 4) in S_4: quad mat(delim: "(", 1, 2, 3, 4; 3, 2, 4, 1) $
-  There is a $k$-fold ambiguity in notation: $(s_0, s_1, ..., s_k) = (s_1, s_2, ..., s_k, s_0)$.
+  There is a $k$-fold ambiguity in notation: $(s_0, s_1, ..., s_(k-1)) = (s_1, s_2, ..., s_(k-1), s_0)$.
 
   Non-intersecting cycles commute:
   $ (s_1 ... s_k)(s'_1 ... s'_(k')) = (s'_1 ... s'_(k'))(s_1 ... s_k) quad "s.t." quad {s_1 ... s_k} inter {s'_1 ... s'_(k')} = emptyset $
@@ -194,7 +194,7 @@ The conjugacy class is determined by the length structure of the cyclic decompos
 Conjugacy classes are characterized by the _cycle structure_ $(k_1, ..., k_n)$, where $k_i >= 0$ is the number of cycles of length $i$,
 $ sum_i i k_i = n, $
 $
-  |C_((k_1, ..., k_n))| = overbrace(n!, "all permutations")/(underbrace(product_i i^(k_i), #stack(spacing: 3pt, [cyclic permutations], [in cycles])) quad underbrace(k_i !, #stack(spacing: 3pt, [permutations of cycles], [of same length]))),
+  |C_((k_1, ..., k_n))| = overbrace(n!, "all permutations")/(product_i underbrace(i^(k_i), #stack(spacing: 3pt, [cyclic permutations], [in cycles])) underbrace(k_i !, #stack(spacing: 3pt, [permutations of cycles], [of same length]))),
 $
 where e.g. $(s_1 s_2 s_3) = (s_2 s_3 s_1)$ ($i$: length of the cycle, $k_i$: number of cycles with length $i$).
 
